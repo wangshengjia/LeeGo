@@ -85,7 +85,11 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-LeeGo_Example/LeeGo.framework"
+  install_framework "Pods-LeeGo_Example/ReactiveCocoa.framework"
+  install_framework "Pods-LeeGo_Example/Result.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-LeeGo_Example/LeeGo.framework"
+  install_framework "Pods-LeeGo_Example/ReactiveCocoa.framework"
+  install_framework "Pods-LeeGo_Example/Result.framework"
 fi

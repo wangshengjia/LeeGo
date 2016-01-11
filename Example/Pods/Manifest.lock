@@ -11,6 +11,18 @@ PODS:
     - Nimble
     - Quick
   - Quick (0.8.0)
+  - ReactiveCocoa (4.0.0-alpha-3):
+    - ReactiveCocoa/UI (= 4.0.0-alpha-3)
+    - Result (~> 0.6-beta.4)
+  - ReactiveCocoa/Core (4.0.0-alpha-3):
+    - ReactiveCocoa/no-arc
+    - Result (~> 0.6-beta.4)
+  - ReactiveCocoa/no-arc (4.0.0-alpha-3):
+    - Result (~> 0.6-beta.4)
+  - ReactiveCocoa/UI (4.0.0-alpha-3):
+    - ReactiveCocoa/Core
+    - Result (~> 0.6-beta.4)
+  - Result (0.6.0-beta.6)
 
 DEPENDENCIES:
   - FBSnapshotTestCase
@@ -18,6 +30,7 @@ DEPENDENCIES:
   - Nimble (= 3.0.0)
   - Nimble-Snapshots
   - Quick (~> 0.8.0)
+  - ReactiveCocoa (= 4.0.0-alpha-3)
 
 EXTERNAL SOURCES:
   LeeGo:
@@ -25,9 +38,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 7e85180d0d141a0cf472352edda7e80d7eaeb547
-  LeeGo: a89f0e84cead8395f787d4b5c39d3c7a99babc01
+  LeeGo: c3d20b57a1f921b559af8a7a9cef1f1dcf48ee52
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   Nimble-Snapshots: ab41dd737dcd33a0b0cb005a30465fef70b7207a
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
+  ReactiveCocoa: f03dcfd385b0e4ee5b7a323f5e0b146a498e12d3
+  Result: dc390d0b58f9ec43fcd536f1ebdd130803cc6cbc
 
 COCOAPODS: 0.39.0

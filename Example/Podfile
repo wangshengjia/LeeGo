@@ -3,6 +3,8 @@ use_frameworks!
 
 target 'LeeGo_Example', :exclusive => true do
   pod "LeeGo", :path => "../"
+  
+  pod 'ReactiveCocoa', '4.0.0-alpha-3'
 end
 
 target 'LeeGo_Tests', :exclusive => true do
