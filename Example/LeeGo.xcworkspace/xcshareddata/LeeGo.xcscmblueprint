@@ -1,0 +1,29 @@
+{
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "38759F1C98262793306CA6C87C8539434664CE3B" : 0,
+    "38847B9143789ADFF4DAFC15E97FB96791AF21CA" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "494B853C-2ED9-44F2-89A7-9D43BB158FB1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "38759F1C98262793306CA6C87C8539434664CE3B" : "..\/..\/LeMonde\/workspace\/PlaygroundProject",
+    "38847B9143789ADFF4DAFC15E97FB96791AF21CA" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "LeeGo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Example\/LeeGo.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:lemonde\/ios-playground-project.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "38759F1C98262793306CA6C87C8539434664CE3B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:wangshengjia\/BearBeers.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "38847B9143789ADFF4DAFC15E97FB96791AF21CA"
+    }
+  ]
+}
