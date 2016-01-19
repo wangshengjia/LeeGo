@@ -15,13 +15,13 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
-            for reuseId in Configurations.AllCellConfigurations.keys {
-                collectionView.registerClass(ReusableCollectionViewCell.self, forCellWithReuseIdentifier: reuseId)
+            for reuseId in ConfigurationTarget.allTypes {
+                collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseId)
             }
         }
     }
 
-    private var elements: Array<Element> = []
+    private var elements = [ElementViewModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,9 +55,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             case let .Next(value):
                 if let value = value as? Dictionary<String, AnyObject>,
                     let elementDictionaries = value["elements"] as? Array<Dictionary<String, AnyObject>> {
-                        self?.elements = elementDictionaries.map{ elementDictionary -> Element in
-                            return Element(dictionary: elementDictionary)
-                        }
+                        self?.elements = ElementViewModel.elementViewModelsWithElements(Element.elementsFromDictionaries(elementDictionaries))
                         self?.collectionView.reloadData()
                 }
             case let .Failed(error):
@@ -80,19 +78,12 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        var reuseId: String
-        switch indexPath.item % 3 {
-        case 0: reuseId = Configurations.CellType.A
-        case 1: reuseId = Configurations.CellType.B
-        default: reuseId = Configurations.CellType.C
-        }
+        let configurationType = ConfigurationTarget.Article
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(configurationType.rawValue, forIndexPath: indexPath)
 
+        cell.configure(elements[indexPath.item], configuration: configurationType.configuration())
 
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseId, forIndexPath: indexPath) as? ReusableCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-
-        cell.configureWithItem(elements[indexPath.item], reuseIdentifier: reuseId)
         return cell
     }
 
@@ -100,7 +91,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     // MARK: Collection View Layout
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), 80)
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 180)
     }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {

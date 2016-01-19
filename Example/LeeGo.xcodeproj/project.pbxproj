@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350637461C4C1AAC00B5E547 /* ElementViewModel.swift */; };
+		350637491C4C4B5300B5E547 /* Illustration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350637481C4C4B5300B5E547 /* Illustration.swift */; };
 		3541CE851C44490700A3B257 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3541CE821C44490700A3B257 /* Card.swift */; };
 		3541CE861C44490700A3B257 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3541CE831C44490700A3B257 /* Element.swift */; };
 		3541CE881C44494B00A3B257 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3541CE871C44494B00A3B257 /* Main.storyboard */; };
+		3550E7611C4E5AB8002F5FB4 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3550E7601C4E5AB8002F5FB4 /* Configurations.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -35,9 +38,12 @@
 		188A8BE9D4E4C9A6D17895C8 /* Pods-LeeGo_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGo_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGo_Tests/Pods-LeeGo_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		1D18AE598BD73984976BC466 /* Pods_LeeGo_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BB2E0288C7EBFDE8BFB8E29 /* Pods-LeeGo_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGo_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGo_Tests/Pods-LeeGo_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		350637461C4C1AAC00B5E547 /* ElementViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ElementViewModel.swift; path = ../../../../workspace/LEGOLayout/LeeGo/Example/LeeGo/ElementViewModel.swift; sourceTree = "<group>"; };
+		350637481C4C4B5300B5E547 /* Illustration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Illustration.swift; sourceTree = "<group>"; };
 		3541CE821C44490700A3B257 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		3541CE831C44490700A3B257 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
 		3541CE871C44494B00A3B257 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		3550E7601C4E5AB8002F5FB4 /* Configurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
 		3A1BB02A30737AE224FEBEE6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4587B495CB0F1B0F3A5F0818 /* Pods_LeeGo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* LeeGo_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeeGo_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,8 +93,10 @@
 		3541CE841C44490700A3B257 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				350637461C4C1AAC00B5E547 /* ElementViewModel.swift */,
 				3541CE821C44490700A3B257 /* Card.swift */,
 				3541CE831C44490700A3B257 /* Element.swift */,
+				350637481C4C4B5300B5E547 /* Illustration.swift */,
 			);
 			name = Model;
 			path = ../../../../../LeMonde/workspace/PlaygroundProject/PlaygroundProject;
@@ -120,6 +128,7 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				3550E7601C4E5AB8002F5FB4 /* Configurations.swift */,
 				3541CE871C44494B00A3B257 /* Main.storyboard */,
 				3541CE841C44490700A3B257 /* Model */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -374,8 +383,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3550E7611C4E5AB8002F5FB4 /* Configurations.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				350637491C4C4B5300B5E547 /* Illustration.swift in Sources */,
 				3541CE851C44490700A3B257 /* Card.swift in Sources */,
+				350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */,
 				3541CE861C44490700A3B257 /* Element.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);

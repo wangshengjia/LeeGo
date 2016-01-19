@@ -8,15 +8,15 @@
 
 #import "CellComponentFactory.h"
 
-#import <LeeGo/LeeGo-Swift.h>
+    // #import <LeeGo/LeeGo-Swift.h>
 
 @implementation CellComponentFactory
 
-+ (UIView<CellComponentProtocol> *)createCellComponentFromClass:(Class)componentClass
-                                                   componentKey:(NSString *)componentKey;
++ (UIView *)createCellComponentFromClass:(Class)componentClass
+                            componentKey:(NSString *)componentKey;
 {
     NSString *classStr = NSStringFromClass(componentClass);
-    UIView<CellComponentProtocol> *view = [[NSClassFromString(classStr) alloc] initWithComponentKey:componentKey];
+    UIView *view = [[NSClassFromString(classStr) alloc] init];
     return view;
 }
 
