@@ -10,7 +10,7 @@ import Foundation
 import LeeGo
 
 enum ConfigurationTarget: String, ConfigurationTargetType {
-    case Zen, Article, Featured, Video, Portfolio, Alert, Footer
+    case Zen, Article, Featured, Video, Portfolio, Alert, Header, Footer
 
     static let allTypes = [Zen, Article, Featured, Video, Portfolio, Alert, Footer].map { (type) -> String in
         return type.rawValue

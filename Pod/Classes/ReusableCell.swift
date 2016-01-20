@@ -10,6 +10,18 @@ import Foundation
 
 // Cell
 
+extension UITableViewCell {
+    public func configure(item: ItemType, configuration: ConfigurationType) {
+        self.contentView.configure(item, configuration: configuration)
+    }
+
+//    public override func prepareForReuse() {
+//        super.prepareForReuse()
+//
+//        cleanUpForReuse()
+//    }
+}
+
 extension UICollectionViewCell {
     public func configure(item: ItemType, configuration: ConfigurationType) {
         self.contentView.configure(item, configuration: configuration)
