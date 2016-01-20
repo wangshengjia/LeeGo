@@ -23,11 +23,11 @@ class ComponentContainer: UIView {
 }
 
 extension ComponentTitle {
-    public func setupWithStyle(style: StyleType) {
-        super.setupWithStyle(style)
-        
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
+//    public func setupWithStyle(style: StyleType) {
+//        super.setupWithStyle(style)
+//        
+//        self.translatesAutoresizingMaskIntoConstraints = false
+//    }
 }
 
 public class Label: UILabel {

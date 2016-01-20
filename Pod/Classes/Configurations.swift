@@ -11,25 +11,6 @@ import Foundation
 // Configurations
 
 public typealias StyleType = [Appearance: AnyObject]
-//public typealias SubComponent = (ComponentTarget, ConfigurationType)
-
-public protocol ConfigurationTargetType {
-    func configuration() -> Configuration
-}
-
-public protocol ComponentTargetType {
-    func availableComponentTypes() -> [String : AnyClass]
-}
-
-extension ComponentTargetType {
-    func componentClass() -> AnyClass? {
-        return self.availableComponentTypes()[self.stringValue]
-    }
-
-    var stringValue: String {
-        return String(self)
-    }
-}
 
 public protocol ConfigurationType {
     
@@ -94,13 +75,11 @@ enum MyAppearance: String {
 
 protocol Printable {}
 
-public struct Styles {
-    public static let None = StyleType()
-    public static let H1: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.grayColor(), .textAlignment: NSNumber(integer:  NSTextAlignment.Center.rawValue)]
-    public static let H2: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.redColor(), .numberOfLines: NSNumber(integer: 0)]
-    public static let H3: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.lightGrayColor()]
-    public static let I1: StyleType = [.backgroundColor: UIColor.greenColor()]
+public protocol StringConvertible {
+
+    func rawValue() -> String
 }
+
 
 
 

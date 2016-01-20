@@ -13,19 +13,3 @@ import Foundation
 public protocol ItemType {
     func updateComponent(component: Updatable)
 }
-
-public struct ItemViewModel {
-    public init() {}
-} // should be implemented by client
-
-extension ItemViewModel: ItemType {
-
-    public func updateComponent(component: Updatable) {
-        switch component {
-        case let titleLabel as ComponentTitle:
-            titleLabel.text = ""
-        default:
-            print("")
-        }
-    }
-}

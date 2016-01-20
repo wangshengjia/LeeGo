@@ -76,6 +76,14 @@ enum ComponentTarget: String, ComponentTargetType {
     }
 }
 
+struct Styles {
+    static let None = StyleType()
+    static let H1: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.grayColor(), .textAlignment: NSNumber(integer:  NSTextAlignment.Center.rawValue)]
+    static let H2: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.redColor(), .numberOfLines: NSNumber(integer: 0)]
+    static let H3: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.lightGrayColor()]
+    static let I1: StyleType = [.backgroundColor: UIColor.greenColor()]
+}
+
 
 
 
