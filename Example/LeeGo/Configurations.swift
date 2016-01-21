@@ -57,7 +57,7 @@ enum ConfigurationTarget: String, ConfigurationTargetType {
                 Styles.None,
                 [
                     ComponentProvider.title.type(ComponentTitle): Configuration(Styles.H1),
-                    ComponentTarget(name: "subtitle", targetClass: ComponentTitle.self): Configuration(Styles.H2),
+                    ComponentTarget(name: "subtitle", targetClass: ComponentSubtitle.self): Configuration(Styles.H2),
                     // (.footer, Configurations.Footer.configuration())
                 ],
                 Layout([
@@ -92,7 +92,7 @@ enum ConfigurationTarget: String, ConfigurationTargetType {
 struct Styles {
     static let None = StyleType()
     
-    static let H1: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.grayColor(), .textAlignment: NSNumber(integer:  NSTextAlignment.Center.rawValue)]
+    static let H1: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.grayColor(), .textAlignment: NSNumber(integer:  NSTextAlignment.Center.rawValue), .numberOfLines: NSNumber(integer: 0)]
     static let H2: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.redColor(), .numberOfLines: NSNumber(integer: 0)]
     static let H3: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.lightGrayColor()]
     static let I1: StyleType = [.backgroundColor: UIColor.greenColor()]
