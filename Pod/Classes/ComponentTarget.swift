@@ -8,16 +8,67 @@
 
 import Foundation
 
-public protocol ComponentTargetType {
-    func availableComponentTypes() -> [String : AnyClass]
+//public protocol ComponentTargetType: Hashable {
+//    func availableComponentTypes() -> [String : AnyClass]
+//}
+//
+//extension ComponentTargetType {
+//    func componentClass() -> AnyClass? {
+//        return self.availableComponentTypes()[self.stringValue]
+//    }
+//
+//    var stringValue: String {
+//        return String(self)
+//    }
+//}
+
+public protocol ComponentProviderType: Hashable {
+    static var types: [Self: AnyClass] { get }
 }
 
-extension ComponentTargetType {
-    func componentClass() -> AnyClass? {
-        return self.availableComponentTypes()[self.stringValue]
+extension ComponentProviderType {
+    public func type(type: AnyObject? = nil) -> ComponentTarget {
+        if type == nil {
+            return target()
+        }
+        return ComponentTarget(name: String(self), targetClass: type.self as! AnyClass)
     }
 
-    var stringValue: String {
-        return String(self)
+    func target() -> ComponentTarget {
+        guard let targetClass = Self.types[self] else {
+            return type(UIView)
+        }
+        return type(targetClass)
     }
+}
+
+public class ComponentTarget: Hashable {
+    let name: String
+    let targetClass: AnyClass
+
+    private(set) var configuration = Configuration()
+    private(set) var width: CGFloat = 0.0
+
+    public var hashValue: Int {
+        return name.hashValue
+    }
+
+    public init(name: String, targetClass: AnyClass) {
+        self.name = name
+        self.targetClass = targetClass
+    }
+
+    public func config(config: Configuration) -> ComponentTarget {
+        self.configuration = config
+        return self
+    }
+
+    public func width(width: CGFloat) -> ComponentTarget {
+        self.width = width
+        return self
+    }
+}
+
+public func ==(lhs: ComponentTarget, rhs: ComponentTarget) -> Bool {
+    return lhs.name == rhs.name
 }

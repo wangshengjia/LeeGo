@@ -38,4 +38,26 @@ extension ElementViewModel: ItemType {
             print(component)
         }
     }
+
+    func resolveConfigurationForComponent(component: ComponentType, indexPath: NSIndexPath? = nil) -> Configuration {
+
+        return Configuration()
+    }
+}
+
+class ConfiguratorDelegate {
+    func configurationWillBeApplied(
+        defaultConfig: Configuration,
+        toComponent component: ComponentType,
+        withItem item: ItemType,
+        atIndexPath indexPath: NSIndexPath? = nil) -> Configuration {
+            return Configuration()
+    }
+
+    func didApplyConfiguration(config: Configuration,
+        toComponent component: ComponentType,
+        withItem item: ItemType,
+        atIndexPath indexPath: NSIndexPath? = nil) {}
+    
+    init(configuration: Configuration) {}
 }
