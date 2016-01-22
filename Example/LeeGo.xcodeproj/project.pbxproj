@@ -90,6 +90,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		3504CEAF1C4FCF7100724FFD /* Documentations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Documentations;
+			sourceTree = "<group>";
+		};
 		3541CE841C44490700A3B257 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,13 +133,14 @@
 		607FACD21AFB9204008FA782 /* Example for LeeGo */ = {
 			isa = PBXGroup;
 			children = (
+				3504CEAF1C4FCF7100724FFD /* Documentations */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				3550E7601C4E5AB8002F5FB4 /* Configurations.swift */,
-				3541CE871C44494B00A3B257 /* Main.storyboard */,
 				3541CE841C44490700A3B257 /* Model */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				3541CE871C44494B00A3B257 /* Main.storyboard */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for LeeGo";

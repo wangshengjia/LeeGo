@@ -68,6 +68,10 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
                 print("Interrupted event")
             }
         }
+
+        if collectionView.collectionViewLayout.respondsToSelector("estimatedItemSize") {//not available on iOS 7
+            (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(CGRectGetWidth(self.view.frame), 180)
+        }
     }
 
     // MARK: Collection View DataSource
@@ -87,12 +91,11 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         return cell
     }
 
-
     // MARK: Collection View Layout
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), 180)
-    }
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        return CGSizeMake(CGRectGetWidth(collectionView.frame), 180)
+//    }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0.5

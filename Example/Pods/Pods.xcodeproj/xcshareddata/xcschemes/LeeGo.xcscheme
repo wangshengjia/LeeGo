@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F698F6CEE97F3B473C980DDC'
+               BlueprintIdentifier = '37147F39D25CEED9D7559810'
                BlueprintName = 'LeeGo'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'LeeGo.framework'>
