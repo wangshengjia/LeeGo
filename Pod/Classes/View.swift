@@ -8,13 +8,11 @@
 
 import Foundation
 
-public protocol ComponentViewModelType {
-
-}
-
-public final class ComponentViewModel: ComponentViewModelType {
+internal final class ComponentContext {
     var componentView: UIView? = nil
     var configuration: ConfigurationType?
+    var isRoot = true
+    var delegate: ConfiguratorDelegate?
 
     init() {
 
@@ -23,17 +21,17 @@ public final class ComponentViewModel: ComponentViewModelType {
 
 extension UIView: ComponentType {
     private struct AssociatedKeys {
-        static var ComponentViewModelName = "componentViewModel_name"
+        static var ComponentContextAssociatedKey = "ComponentContext_AssociatedKey"
     }
 
-    var componentViewModel: ComponentViewModel {
+    internal var context: ComponentContext {
         get {
-            if let viewModel = objc_getAssociatedObject(self, &AssociatedKeys.ComponentViewModelName) as? ComponentViewModel {
-                return viewModel
+            if let context = objc_getAssociatedObject(self, &AssociatedKeys.ComponentContextAssociatedKey) as? ComponentContext {
+                return context
             } else {
-                let viewModel = ComponentViewModel()
-                objc_setAssociatedObject(self, &AssociatedKeys.ComponentViewModelName, viewModel as ComponentViewModel?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                return viewModel
+                let context = ComponentContext()
+                objc_setAssociatedObject(self, &AssociatedKeys.ComponentContextAssociatedKey, context as ComponentContext?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                return context
             }
         }
     }

@@ -24,7 +24,16 @@ extension UITableViewCell {
 
 extension UICollectionViewCell {
     public func configure(item: ItemType, configuration: ConfigurationType) {
-        self.contentView.configure(item, configuration: configuration)
+        
+        // will apply
+        let resolvedConfiguration = context.delegate?.configurationWillBeApplied(configuration, toComponent: self, withItem: item, atIndexPath: nil) ?? configuration
+
+        // apply resolved configuration
+        contentView.configure(item, configuration: resolvedConfiguration)
+
+
+        // did apply
+        context.delegate?.didApplyConfiguration(configuration, toComponent: self, withItem: item, atIndexPath: nil)
     }
 
     public override func prepareForReuse() {
@@ -49,6 +58,22 @@ extension UICollectionViewCell {
         attr.frame = newFrame
         return attr
     }
+}
+
+
+public protocol ConfiguratorDelegate {
+    
+    func configurationWillBeApplied(
+        defaultConfig: ConfigurationType,
+        toComponent component: ComponentType,
+        withItem item: ItemType,
+        atIndexPath indexPath: NSIndexPath?) -> ConfigurationType
+
+    func didApplyConfiguration(config: ConfigurationType,
+        toComponent component: ComponentType,
+        withItem item: ItemType,
+        atIndexPath indexPath: NSIndexPath?)
+
 }
 
 //public class ReusableCell: UICollectionViewCell {
