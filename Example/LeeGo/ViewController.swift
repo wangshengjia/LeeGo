@@ -102,3 +102,28 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     }
 }
 
+extension ViewController: ConfiguratorDelegate {
+    func configurationWillBeApplied(defaultConfig: ConfigurationType, toComponent component: ComponentType, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> ConfigurationType {
+
+        guard let config = defaultConfig as? Configuration, let indexPath = indexPath else {
+            return defaultConfig
+        }
+
+        if (component is UIView && item is ElementViewModel && indexPath.item > 5) {
+            return defaultConfig
+        }
+
+        return defaultConfig
+    }
+
+    func didApplyConfiguration(config: ConfigurationType,
+        toComponent component: ComponentType,
+        withItem item: ItemType,
+        atIndexPath indexPath: NSIndexPath?) {
+
+    }
+}
+
+
+
+

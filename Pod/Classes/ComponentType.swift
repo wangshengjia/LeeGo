@@ -37,8 +37,9 @@ extension Composable where Self: UIView {
                 self.addSubview(componentView)
 
                 // Setup each component view with style which listed in configuration
-                componentView.componentViewModel.configuration = subConfig
-                componentView.componentViewModel.componentView = componentView
+                componentView.context.configuration = subConfig
+                componentView.context.componentView = componentView
+                componentView.context.isRoot = false
             }
         }
 
@@ -99,11 +100,12 @@ extension ComponentType where Self: UIView {
     public final func configure(item: ItemType, configuration: ConfigurationType) {
 
         // resolve conf based on item?, indexPath? or others ?
-
-        if let _ = self.componentViewModel.configuration {
+        // willApply
+        
+        if let _ = self.context.configuration {
             // apply diff from config & configuration
         } else {
-            self.componentViewModel.configuration = configuration
+            self.context.configuration = configuration
         }
 
         // setup self
@@ -124,8 +126,8 @@ extension ComponentType where Self: UIView {
         }
 
         // configure sub components recursively
-        for subview in self.subviews where subview.componentViewModel.componentView == subview {
-            if let config = subview.componentViewModel.configuration {
+        for subview in self.subviews where subview.context.componentView == subview {
+            if let config = subview.context.configuration {
                 subview.configure(item, configuration: config)
             }
         }
