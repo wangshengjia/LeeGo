@@ -11,5 +11,5 @@ import Foundation
 // Model
 
 public protocol ItemType {
-    func updateComponent(component: Updatable)
+    func updateComponent<Component: UIView>(component: Component)
 }

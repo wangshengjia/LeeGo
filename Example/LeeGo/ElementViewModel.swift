@@ -27,20 +27,16 @@ extension ElementViewModel {
 }
 
 extension ElementViewModel: ItemType {
-
-    func updateComponent(component: Updatable) {
+    func updateComponent<Component: UIView>(component: Component) {
         switch component {
-        case let titleLabel as ComponentTitle:
+        case let titleLabel as UILabel where component.name() == ComponentProvider.title.rawValue:
             titleLabel.text = element.title
-        case let titleLabel as ComponentSubtitle:
-            titleLabel.text = element.description
+        case let subtitleLabel as UILabel  where component.name() == ComponentProvider.subtitle.rawValue:
+            subtitleLabel.text = element.description
+        case let avatar as UIImageView where component.name() == ComponentProvider.avatar.rawValue:
+            avatar.backgroundColor = UIColor.grayColor()
         default:
-            print(component)
+            break//print(component)
         }
-    }
-
-    func resolveConfigurationForComponent(component: ComponentType, indexPath: NSIndexPath? = nil) -> Configuration {
-
-        return Configuration()
     }
 }

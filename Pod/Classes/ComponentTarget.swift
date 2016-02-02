@@ -8,20 +8,6 @@
 
 import Foundation
 
-//public protocol ComponentTargetType: Hashable {
-//    func availableComponentTypes() -> [String : AnyClass]
-//}
-//
-//extension ComponentTargetType {
-//    func componentClass() -> AnyClass? {
-//        return self.availableComponentTypes()[self.stringValue]
-//    }
-//
-//    var stringValue: String {
-//        return String(self)
-//    }
-//}
-
 public protocol ComponentProviderType: Hashable {
     static var types: [Self: AnyClass] { get }
 }
@@ -46,6 +32,8 @@ public class ComponentTarget: Hashable {
     let name: String
     let targetClass: AnyClass
 
+    // let componentTypes: Set<String> = []
+
     private(set) var configuration = Configuration()
     private(set) var width: CGFloat = 0.0
 
@@ -67,6 +55,7 @@ public class ComponentTarget: Hashable {
         self.width = width
         return self
     }
+
 }
 
 public func ==(lhs: ComponentTarget, rhs: ComponentTarget) -> Bool {

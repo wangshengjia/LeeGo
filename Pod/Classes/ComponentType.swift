@@ -8,26 +8,30 @@
 
 import Foundation
 
-public protocol Configurable {
-    func setupWithStyle(style: StyleType)
+protocol Configurable {
+    func setupWithStyle(style: [Appearance: AnyObject])
+    func handleCustomStyle(style: [String: AnyObject])
 }
 
-public protocol Updatable {
-    func updateWithItem(item: ItemType)
+protocol Updatable {
+    func updateWithItem<Item: ItemType>(item: Item)
 }
 
-public protocol Reusable {
+protocol Reusable {
     static var reuseIdentifier: String { get }
 
     func cleanUpForReuse()
 }
 
-public protocol Composable {
-    func compositeSubcomponents(components: [ComponentTarget: ConfigurationType], layout: Layout)
+protocol Composable {
+    // typealias T: Hashable
+    // func compositeSubcomponents(components: [ComponentTarget<T>: Configuration<T>], layout: Layout) -> [UIView: Configuration<T>]
 }
 
 extension Composable where Self: UIView {
-    public func compositeSubcomponents(components: [ComponentTarget: ConfigurationType], layout: Layout) {
+    func compositeSubcomponents(components: [ComponentTarget: Configuration], layout: Layout) -> [UIView: Configuration] {
+
+        var subcomponents: [UIView: Configuration] = [:]
         // create subview
         var viewsDictionary = [String: UIView]()
         for (component, subConfig) in components ?? [:] {
@@ -37,9 +41,11 @@ extension Composable where Self: UIView {
                 self.addSubview(componentView)
 
                 // Setup each component view with style which listed in configuration
-                componentView.context.configuration = subConfig
+                // componentView.context.configuration = subConfig
+                componentView.context.name = component.name
                 componentView.context.componentView = componentView
                 componentView.context.isRoot = false
+                subcomponents[componentView] = subConfig
             }
         }
 
@@ -54,17 +60,37 @@ extension Composable where Self: UIView {
         for format in layout.formats {
             self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions.DirectionLeadingToTrailing, metrics: layout.metrics, views: viewsDictionary))
         }
+
+        return subcomponents
     }
 }
 
 extension Configurable where Self: UIView {
-    final public func setupWithStyle(style: StyleType) {
-        self.setValuesForKeysWithDictionary(style.rawStyle())
+    func handleCustomStyle(style: [String: AnyObject]) {
+        print("defaut imp")
+    }
+    
+
+    func setupWithStyle(style: [Appearance: AnyObject]) {
+
+        // may be improved by functional map
+        var dictionary = [String: AnyObject](), customDict = [String: AnyObject]()
+        for (appearance, value) in style {
+            if case let .Custom(customAppearance) = appearance {
+                customDict[customAppearance] = value
+            } else {
+                dictionary[String(appearance)] = value
+            }
+        }
+
+        // delegate?.component:self setCustomAppearance:customDict
+        self.setValuesForKeysWithDictionary(dictionary)
+        self.handleCustomStyle(customDict)
     }
 }
 
 extension Updatable where Self: UIView {
-    final public func updateWithItem(item: ItemType) {
+    func updateWithItem<Item: ItemType>(item: Item) {
         item.updateComponent(self)
 
         /*
@@ -75,13 +101,13 @@ extension Updatable where Self: UIView {
 }
 
 extension Reusable where Self: UIView {
-    public static var reuseIdentifier: String {
+    static var reuseIdentifier: String {
         // I like to use the class's name as an identifier
         // so this makes a decent default value.
         return String(Self)
     }
 
-    final public func cleanUpForReuse() {
+    final func cleanUpForReuse() {
 
         // do clean up
 
@@ -91,38 +117,58 @@ extension Reusable where Self: UIView {
     }
 }
 
+protocol ComponentType: Configurable, Composable, Updatable, Reusable {
+    // var configuration: ConfigurationType { get }
+}
+
 extension ComponentType where Self: UIView {
 
-    public func configure(item: ItemType, indexPath: NSIndexPath? = nil) {
+    func configure(item: ItemType, indexPath: NSIndexPath? = nil) {
         
     }
 
-    public final func configure(item: ItemType, configuration: ConfigurationType) {
+    final func configure<Item: ItemType>(item: Item, configuration: Configuration) {
 
         // resolve conf based on item?, indexPath? or others ?
         // willApply
-        
-        if let _ = self.context.configuration {
+
+        var shouldRebuild = false
+
+        if let config = self.context.configuration {
             // apply diff from config & configuration
+            for (key, value) in config.style {
+                guard let newValue = configuration.style[key] else {
+                    shouldRebuild = true
+                    break
+                }
+                if !newValue.isEqual(value) {
+                    shouldRebuild = true
+                    break
+                }
+            }
         } else {
+            shouldRebuild = true
             self.context.configuration = configuration
         }
 
         // setup self
-        if shouldSetup() {
-            self.removeConstraints(self.constraints)
-            self.subviews.forEach({ (subview) -> () in
-                subview.removeFromSuperview()
-            })
+        if shouldRebuild {
             setupWithStyle(configuration.style)
         }
 
         // update self
         updateWithItem(item)
 
-        // add & layout sub components
-        if let components = configuration.components, let layout = configuration.layout {
-            compositeSubcomponents(components, layout: layout)
+        if shouldRebuild {
+            // add & layout sub components
+            if let components = configuration.components, let layout = configuration.layout {
+                let subcomponents = compositeSubcomponents(components, layout: layout)
+                for (component, config) in subcomponents {
+                    component.configure(item, configuration: config)
+                }
+
+                return
+            }
         }
 
         // configure sub components recursively
@@ -131,10 +177,6 @@ extension ComponentType where Self: UIView {
                 subview.configure(item, configuration: config)
             }
         }
-    }
-
-    public final func shouldSetup() -> Bool {
-        return true
     }
 }
 

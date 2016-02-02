@@ -12,12 +12,17 @@ import Foundation
 
 public typealias StyleType = [Appearance: AnyObject]
 
-public protocol ConfigurationType {
-    
-    var style: StyleType { get }
-    var components: [ComponentTarget: ConfigurationType]? { get }
-    var layout: Layout? { get }
-}
+//public protocol ConfigurationType {
+//    var style: StyleType { get }
+//    var components: [ComponentTarget: Self]? { get }
+//    var layout: Layout? { get }
+//}
+
+//extension RawRepresentable where RawValue == String {
+//    func target(targetClass: AnyObject = UIView) -> ComponentTarget {
+//        return ComponentTarget(name: rawValue, targetClass: targetClass)
+//    }
+//}
 
 public struct Layout {
     let formats: [String]
@@ -29,24 +34,12 @@ public struct Layout {
     }
 }
 
-public extension Dictionary where Key: RawRepresentable {
-    func rawStyle() -> [String: Value] {
-        var rawStyle = [String: Value]()
-        for (appearance, value) in self {
-            if let rawValue = appearance.rawValue as? String {
-                rawStyle[rawValue] = value
-            }
-        }
-        return rawStyle
-    }
-}
-
-public struct Configuration: ConfigurationType {
+public struct Configuration {
     public let style: StyleType
-    public let components: [ComponentTarget: ConfigurationType]?
+    public let components: [ComponentTarget: Configuration]?
     public let layout: Layout?
 
-    public init(_ style: StyleType = [:], _ components: [ComponentTarget: ConfigurationType]? = nil, _ layout: Layout? = nil) {
+    public init(_ style: StyleType = [:], _ components: [ComponentTarget: Configuration]? = nil, _ layout: Layout? = nil) {
         self.style = style
         self.components = components
         self.layout = layout
@@ -59,34 +52,34 @@ public struct Configuration: ConfigurationType {
     }
 }
 
-public struct Configurator {
-    func resolveConfiguration(element: ItemType) -> Configuration {
-        
-        return Configuration()
+///// A type of dictionary that only uses strings for keys and can contain any
+///// type of object as a value.
+//public typealias JSONDictionary = [String: JSONObject]
+//
+///// A type of any object
+//public typealias JSONObject = AnyObject
+
+public enum Appearance: Hashable {
+    case font, textColor, backgroundColor, textAlignment, numberOfLines, translatesAutoresizingMaskIntoConstraints
+    case Custom(String)
+
+    public var hashValue: Int {
+        return String(self).hashValue
     }
 }
 
-/// A type of dictionary that only uses strings for keys and can contain any
-/// type of object as a value.
-public typealias JSONDictionary = [String: JSONObject]
-
-/// A type of any object
-public typealias JSONObject = AnyObject
-
-public enum Appearance: String {
-    case font, textColor, backgroundColor, textAlignment, numberOfLines
+public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
+    return String(lhs) == String(rhs)
 }
 
-enum MyAppearance: String {
-    case ThreeTwo
-}
+
+//extension ConfigurationType {
+//
+//}
 
 protocol Printable {}
-
-public protocol StringConvertible {
-
-    func rawValue() -> String
-}
+protocol Decodable {}
+protocol Encodable {}
 
 
 

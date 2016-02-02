@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350637461C4C1AAC00B5E547 /* ElementViewModel.swift */; };
 		350637491C4C4B5300B5E547 /* Illustration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350637481C4C4B5300B5E547 /* Illustration.swift */; };
+		352E50EA1C528CDC0075BDB6 /* ImageComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352E50E91C528CDC0075BDB6 /* ImageComponent.swift */; };
 		3541CE851C44490700A3B257 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3541CE821C44490700A3B257 /* Card.swift */; };
 		3541CE861C44490700A3B257 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3541CE831C44490700A3B257 /* Element.swift */; };
 		3541CE881C44494B00A3B257 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3541CE871C44494B00A3B257 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		2BB2E0288C7EBFDE8BFB8E29 /* Pods-LeeGo_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGo_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGo_Tests/Pods-LeeGo_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		350637461C4C1AAC00B5E547 /* ElementViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ElementViewModel.swift; path = ../../../../workspace/LEGOLayout/LeeGo/Example/LeeGo/ElementViewModel.swift; sourceTree = "<group>"; };
 		350637481C4C4B5300B5E547 /* Illustration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Illustration.swift; sourceTree = "<group>"; };
+		352E50E91C528CDC0075BDB6 /* ImageComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageComponent.swift; sourceTree = "<group>"; };
 		3541CE821C44490700A3B257 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		3541CE831C44490700A3B257 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
 		3541CE871C44494B00A3B257 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				3550E7601C4E5AB8002F5FB4 /* Configurations.swift */,
+				352E50E91C528CDC0075BDB6 /* ImageComponent.swift */,
 				3541CE841C44490700A3B257 /* Model */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -396,6 +399,7 @@
 				350637491C4C4B5300B5E547 /* Illustration.swift in Sources */,
 				3541CE851C44490700A3B257 /* Card.swift in Sources */,
 				350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */,
+				352E50EA1C528CDC0075BDB6 /* ImageComponent.swift in Sources */,
 				3541CE861C44490700A3B257 /* Element.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);

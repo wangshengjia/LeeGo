@@ -12,7 +12,7 @@ import LeeGo
 
 class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UISearchBarDelegate {
 
-    @IBOutlet weak var searchBar: UISearchBar!
+//    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             for reuseId in ConfigurationTarget.allTypes {
@@ -26,52 +26,23 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // a little bit hack, should not ship to production
-        guard let textField = searchBar.valueForKey("_searchField") as? UITextField else {
-            return
-        }
-
-        let searchStrings: SignalProducer = textField.rac_textSignal()
-            .toSignalProducer()
-            .throttle(2.0, onScheduler: QueueScheduler.mainQueueScheduler)
-            .map { text in text as! String }
-            .filter {text in text.characters.count > 3}
-            .flatMap(.Latest) { (query: String) -> SignalProducer<(NSData, NSURLResponse), NSError> in
-                let URLRequest =  NSURLRequest(URL: NSURL(string: "http://api-cdn.lemonde.fr/ws/5/mobile/www/ios-phone/search/index.json?keywords=holland")!)
-                return NSURLSession.sharedSession()
-                    .rac_dataWithRequest(URLRequest)
-                    .flatMapError { error in
-                        print("Network error occurred: \(error)")
-                        return SignalProducer.empty
-                }
-            }
-            .map { (data, URLResponse) -> AnyObject? in
-                return try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-            }
-            .observeOn(QueueScheduler.mainQueueScheduler)
-
-        searchStrings.start {[weak self] event in
-            switch event {
-            case let .Next(value):
-                if let value = value as? Dictionary<String, AnyObject>,
-                    let elementDictionaries = value["elements"] as? Array<Dictionary<String, AnyObject>> {
-                        self?.elements = ElementViewModel.elementViewModelsWithElements(Element.elementsFromDictionaries(elementDictionaries))
-                        self?.collectionView.reloadData()
-                }
-            case let .Failed(error):
-                print("Failed event: \(error)")
-
-            case .Completed:
-                print("Completed event")
-
-            case .Interrupted:
-                print("Interrupted event")
+        self.collectionView.reloadData()
+        let URLRequest =  NSURLRequest(URL: NSURL(string: "http://api-cdn.lemonde.fr/ws/5/mobile/www/ios-phone/en_continu/index.json")!)
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(URLRequest) {data, response, error in
+            if let data = data,
+                let optionalValue = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)) as? Dictionary<String, AnyObject>,
+                let value = optionalValue,
+                let elementDictionaries = value["elements"] as? Array<Dictionary<String, AnyObject>> {
+                    self.elements = ElementViewModel.elementViewModelsWithElements(Element.elementsFromDictionaries(elementDictionaries))
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.collectionView.reloadData()
+                    })
             }
         }
 
-        if collectionView.collectionViewLayout.respondsToSelector("estimatedItemSize") {//not available on iOS 7
-            (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(CGRectGetWidth(self.view.frame), 180)
-        }
+        task.resume()
+
+        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(CGRectGetWidth(self.view.frame), 180)
     }
 
     // MARK: Collection View DataSource
@@ -86,7 +57,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(configurationType.rawValue, forIndexPath: indexPath)
 
-        cell.configure(elements[indexPath.item], configuration: configurationType.configuration())
+        cell.configure(with: elements[indexPath.item], configuration: configurationType.configuration())
 
         return cell
     }
@@ -103,23 +74,30 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 }
 
 extension ViewController: ConfiguratorDelegate {
-    func configurationWillBeApplied(defaultConfig: ConfigurationType, toComponent component: ComponentType, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> ConfigurationType {
 
-        guard let config = defaultConfig as? Configuration, let indexPath = indexPath else {
-            return defaultConfig
-        }
+    func willApply<Component: UIView>(with style: StyleType, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> StyleType {
+        
 
-        if (component is UIView && item is ElementViewModel && indexPath.item > 5) {
-            return defaultConfig
-        }
-
-        return defaultConfig
+        return style
     }
 
-    func didApplyConfiguration(config: ConfigurationType,
-        toComponent component: ComponentType,
-        withItem item: ItemType,
-        atIndexPath indexPath: NSIndexPath?) {
+    func willComposite<Component: UIView>(with components: [ComponentTarget], toComponent component: Component, using layout: Layout, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) {
+
+    }
+
+    func willApply<Component: UIView>(with configuration: Configuration, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> Configuration {
+        guard let indexPath = indexPath else {
+            return configuration
+        }
+
+        if (item is ElementViewModel && indexPath.item > 5) {
+            return configuration
+        }
+
+        return configuration
+    }
+
+    func didApply<Component: UIView>(with configuration: Configuration, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) {
 
     }
 }

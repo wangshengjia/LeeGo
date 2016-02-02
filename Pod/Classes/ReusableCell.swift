@@ -11,9 +11,6 @@ import Foundation
 // Cell
 
 extension UITableViewCell {
-    public func configure(item: ItemType, configuration: ConfigurationType) {
-        self.contentView.configure(item, configuration: configuration)
-    }
 
 //    public override func prepareForReuse() {
 //        super.prepareForReuse()
@@ -23,19 +20,7 @@ extension UITableViewCell {
 }
 
 extension UICollectionViewCell {
-    public func configure(item: ItemType, configuration: ConfigurationType) {
-        
-        // will apply
-        let resolvedConfiguration = context.delegate?.configurationWillBeApplied(configuration, toComponent: self, withItem: item, atIndexPath: nil) ?? configuration
-
-        // apply resolved configuration
-        contentView.configure(item, configuration: resolvedConfiguration)
-
-
-        // did apply
-        context.delegate?.didApplyConfiguration(configuration, toComponent: self, withItem: item, atIndexPath: nil)
-    }
-
+    
     public override func prepareForReuse() {
         super.prepareForReuse()
 
@@ -62,27 +47,30 @@ extension UICollectionViewCell {
 
 
 public protocol ConfiguratorDelegate {
-    
-    func configurationWillBeApplied(
-        defaultConfig: ConfigurationType,
-        toComponent component: ComponentType,
-        withItem item: ItemType,
-        atIndexPath indexPath: NSIndexPath?) -> ConfigurationType
 
-    func didApplyConfiguration(config: ConfigurationType,
-        toComponent component: ComponentType,
+    func willApply<Component: UIView>(
+        with Style: StyleType,
+        toComponent component: Component,
+        withItem item: ItemType,
+        atIndexPath indexPath: NSIndexPath?) -> StyleType
+
+    func willComposite<Component: UIView>(with
+        components: [ComponentTarget],
+        toComponent component: Component,
+        using layout: Layout,
+        withItem item: ItemType,
+        atIndexPath indexPath: NSIndexPath?)
+
+    func willApply<Component: UIView>(with
+        configuration: Configuration,
+        toComponent component: Component,
+        withItem item: ItemType,
+        atIndexPath indexPath: NSIndexPath?) -> Configuration
+
+    func didApply<Component: UIView>(with configuration: Configuration,
+        toComponent component: Component,
         withItem item: ItemType,
         atIndexPath indexPath: NSIndexPath?)
 
 }
-
-//public class ReusableCell: UICollectionViewCell {
-//    public override func prepareForReuse() {
-//        super.prepareForReuse()
-//
-//    }
-//}
-
-public protocol Comparable {}
-
 
