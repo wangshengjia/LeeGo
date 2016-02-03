@@ -17,7 +17,7 @@ extension UIImageView {
     public override func handleCustomStyle(styles: [String: AnyObject]) {
         for (key, value) in styles {
             switch (key, value) {
-            case ("3to2", let ratio as CGFloat):
+            case (Styles.ratio3To2, let ratio as CGFloat):
                 self.addConstraint(NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Height, multiplier: ratio, constant: 0))
             default:
                 break

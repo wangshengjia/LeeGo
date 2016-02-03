@@ -78,6 +78,15 @@ extension Configurable where Self: UIView {
         for (appearance, value) in style {
             if case let .Custom(customAppearance) = appearance {
                 customDict[customAppearance] = value
+            } else if appearance == .attributedString {
+                if let attrList = value as? NSArray, let label = self as? UILabel {
+                    label.attributedText = attrList.flatMap({ (attribute) -> NSAttributedString? in
+                        if let attribute = attribute as? [String : AnyObject] {
+                            return NSAttributedString(string: "holder", attributes: attribute)
+                        }
+                        return nil
+                    }).combineToAttributedString()
+                }
             } else {
                 dictionary[String(appearance)] = value
             }

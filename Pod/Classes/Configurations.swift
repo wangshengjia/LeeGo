@@ -61,6 +61,7 @@ public struct Configuration {
 
 public enum Appearance: Hashable {
     case font, textColor, backgroundColor, textAlignment, numberOfLines, translatesAutoresizingMaskIntoConstraints
+    case attributedString
     case Custom(String)
 
     public var hashValue: Int {

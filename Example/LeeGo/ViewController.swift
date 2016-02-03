@@ -12,7 +12,6 @@ import LeeGo
 
 class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UISearchBarDelegate {
 
-//    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             for reuseId in ConfigurationTarget.allTypes {
@@ -26,7 +25,8 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.collectionView.reloadData()
+        collectionView.reloadData()
+
         let URLRequest =  NSURLRequest(URL: NSURL(string: "http://api-cdn.lemonde.fr/ws/5/mobile/www/ios-phone/en_continu/index.json")!)
         let task = NSURLSession.sharedSession().dataTaskWithRequest(URLRequest) {data, response, error in
             if let data = data,

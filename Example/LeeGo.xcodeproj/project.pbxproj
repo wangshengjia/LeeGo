@@ -14,6 +14,18 @@
 		3541CE861C44490700A3B257 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3541CE831C44490700A3B257 /* Element.swift */; };
 		3541CE881C44494B00A3B257 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3541CE871C44494B00A3B257 /* Main.storyboard */; };
 		3550E7611C4E5AB8002F5FB4 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3550E7601C4E5AB8002F5FB4 /* Configurations.swift */; };
+		3585078B1C622B6C006D02EF /* FetteEngschrift.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507801C622B6A006D02EF /* FetteEngschrift.otf */; };
+		3585078C1C622B6C006D02EF /* LmfrAppIcon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 358507811C622B6A006D02EF /* LmfrAppIcon.ttf */; };
+		3585078D1C622B6C006D02EF /* TheAntiquaB-W5Plain.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507821C622B6A006D02EF /* TheAntiquaB-W5Plain.otf */; };
+		3585078E1C622B6C006D02EF /* TheAntiquaB-W5PlainItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507831C622B6A006D02EF /* TheAntiquaB-W5PlainItalic.otf */; };
+		3585078F1C622B6C006D02EF /* TheAntiquaB-W6SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507841C622B6A006D02EF /* TheAntiquaB-W6SemiBold.otf */; };
+		358507901C622B6C006D02EF /* TheAntiquaB-W7Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507851C622B6A006D02EF /* TheAntiquaB-W7Bold.otf */; };
+		358507911C622B6C006D02EF /* TheAntiquaB-W8ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507861C622B6A006D02EF /* TheAntiquaB-W8ExtraBold.otf */; };
+		358507921C622B6C006D02EF /* TheSansOsF-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507871C622B6A006D02EF /* TheSansOsF-Bold.otf */; };
+		358507931C622B6C006D02EF /* TheSansOsF-Plain.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507881C622B6A006D02EF /* TheSansOsF-Plain.otf */; };
+		358507941C622B6C006D02EF /* TheSansOsF-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507891C622B6A006D02EF /* TheSansOsF-SemiBold.otf */; };
+		358507951C622B6C006D02EF /* TheSansOsF-SemiLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */; };
+		358507971C626097006D02EF /* Responsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358507961C626097006D02EF /* Responsive.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -46,6 +58,18 @@
 		3541CE831C44490700A3B257 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
 		3541CE871C44494B00A3B257 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3550E7601C4E5AB8002F5FB4 /* Configurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
+		358507801C622B6A006D02EF /* FetteEngschrift.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FetteEngschrift.otf; sourceTree = "<group>"; };
+		358507811C622B6A006D02EF /* LmfrAppIcon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LmfrAppIcon.ttf; sourceTree = "<group>"; };
+		358507821C622B6A006D02EF /* TheAntiquaB-W5Plain.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheAntiquaB-W5Plain.otf"; sourceTree = "<group>"; };
+		358507831C622B6A006D02EF /* TheAntiquaB-W5PlainItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheAntiquaB-W5PlainItalic.otf"; sourceTree = "<group>"; };
+		358507841C622B6A006D02EF /* TheAntiquaB-W6SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheAntiquaB-W6SemiBold.otf"; sourceTree = "<group>"; };
+		358507851C622B6A006D02EF /* TheAntiquaB-W7Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheAntiquaB-W7Bold.otf"; sourceTree = "<group>"; };
+		358507861C622B6A006D02EF /* TheAntiquaB-W8ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheAntiquaB-W8ExtraBold.otf"; sourceTree = "<group>"; };
+		358507871C622B6A006D02EF /* TheSansOsF-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-Bold.otf"; sourceTree = "<group>"; };
+		358507881C622B6A006D02EF /* TheSansOsF-Plain.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-Plain.otf"; sourceTree = "<group>"; };
+		358507891C622B6A006D02EF /* TheSansOsF-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-SemiBold.otf"; sourceTree = "<group>"; };
+		3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-SemiLight.otf"; sourceTree = "<group>"; };
+		358507961C626097006D02EF /* Responsive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responsive.swift; sourceTree = "<group>"; };
 		3A1BB02A30737AE224FEBEE6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4587B495CB0F1B0F3A5F0818 /* Pods_LeeGo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* LeeGo_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeeGo_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,12 +127,30 @@
 			isa = PBXGroup;
 			children = (
 				350637461C4C1AAC00B5E547 /* ElementViewModel.swift */,
-				3541CE821C44490700A3B257 /* Card.swift */,
 				3541CE831C44490700A3B257 /* Element.swift */,
+				3541CE821C44490700A3B257 /* Card.swift */,
 				350637481C4C4B5300B5E547 /* Illustration.swift */,
 			);
 			name = Model;
 			path = ../../../../../LeMonde/workspace/PlaygroundProject/PlaygroundProject;
+			sourceTree = "<group>";
+		};
+		3585077F1C622B6A006D02EF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				358507801C622B6A006D02EF /* FetteEngschrift.otf */,
+				358507811C622B6A006D02EF /* LmfrAppIcon.ttf */,
+				358507821C622B6A006D02EF /* TheAntiquaB-W5Plain.otf */,
+				358507831C622B6A006D02EF /* TheAntiquaB-W5PlainItalic.otf */,
+				358507841C622B6A006D02EF /* TheAntiquaB-W6SemiBold.otf */,
+				358507851C622B6A006D02EF /* TheAntiquaB-W7Bold.otf */,
+				358507861C622B6A006D02EF /* TheAntiquaB-W8ExtraBold.otf */,
+				358507871C622B6A006D02EF /* TheSansOsF-Bold.otf */,
+				358507881C622B6A006D02EF /* TheSansOsF-Plain.otf */,
+				358507891C622B6A006D02EF /* TheSansOsF-SemiBold.otf */,
+				3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -140,6 +182,7 @@
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				3550E7601C4E5AB8002F5FB4 /* Configurations.swift */,
 				352E50E91C528CDC0075BDB6 /* ImageComponent.swift */,
+				358507961C626097006D02EF /* Responsive.swift */,
 				3541CE841C44490700A3B257 /* Model */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -153,6 +196,7 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3585077F1C622B6A006D02EF /* Fonts */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -281,9 +325,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				358507951C622B6C006D02EF /* TheSansOsF-SemiLight.otf in Resources */,
+				3585078F1C622B6C006D02EF /* TheAntiquaB-W6SemiBold.otf in Resources */,
+				3585078C1C622B6C006D02EF /* LmfrAppIcon.ttf in Resources */,
+				358507941C622B6C006D02EF /* TheSansOsF-SemiBold.otf in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				358507901C622B6C006D02EF /* TheAntiquaB-W7Bold.otf in Resources */,
+				358507921C622B6C006D02EF /* TheSansOsF-Bold.otf in Resources */,
+				358507911C622B6C006D02EF /* TheAntiquaB-W8ExtraBold.otf in Resources */,
+				3585078D1C622B6C006D02EF /* TheAntiquaB-W5Plain.otf in Resources */,
 				3541CE881C44494B00A3B257 /* Main.storyboard in Resources */,
+				3585078B1C622B6C006D02EF /* FetteEngschrift.otf in Resources */,
+				358507931C622B6C006D02EF /* TheSansOsF-Plain.otf in Resources */,
+				3585078E1C622B6C006D02EF /* TheAntiquaB-W5PlainItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +457,7 @@
 				352E50EA1C528CDC0075BDB6 /* ImageComponent.swift in Sources */,
 				3541CE861C44490700A3B257 /* Element.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				358507971C626097006D02EF /* Responsive.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
