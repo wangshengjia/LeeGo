@@ -9,7 +9,7 @@
 import Foundation
 
 protocol Configurable {
-    func setupWithStyle(style: [Appearance: AnyObject])
+    func setupWithStyle(style: [Appearance])
     func handleCustomStyle(style: [String: AnyObject])
 }
 
@@ -25,7 +25,7 @@ protocol Reusable {
 
 protocol Composable {
     // typealias T: Hashable
-    // func compositeSubcomponents(components: [ComponentTarget<T>: Configuration<T>], layout: Layout) -> [UIView: Configuration<T>]
+    func compositeSubcomponents(components: [ComponentTarget: Configuration], layout: Layout) -> [UIView: Configuration]
 }
 
 extension Composable where Self: UIView {
@@ -58,9 +58,16 @@ extension Composable where Self: UIView {
 
         // Layout each component view with auto layout visual format language from configuration.
         for format in layout.formats {
-            self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions.DirectionLeadingToTrailing, metrics: layout.metrics, views: viewsDictionary))
+            print(format)
+            let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions.DirectionLeadingToTrailing, metrics: layout.metrics, views: viewsDictionary)
+            for constraint in constraints {
+                //constraint.priority = 990
+                //constraint.shouldBeArchived = true
+                constraint.identifier = constraint.description
+//                print(constraint)
+                self.addConstraint(constraint)
+            }
         }
-
         return subcomponents
     }
 }
@@ -71,14 +78,15 @@ extension Configurable where Self: UIView {
     }
     
 
-    func setupWithStyle(style: [Appearance: AnyObject]) {
+    func setupWithStyle(style: [Appearance]) {
 
         // may be improved by functional map
         var dictionary = [String: AnyObject](), customDict = [String: AnyObject]()
-        for (appearance, value) in style {
-            if case let .Custom(customAppearance) = appearance {
-                customDict[customAppearance] = value
-            } else if appearance == .attributedString {
+        for appearance in style {
+
+            if let (key, value) = appearance.tuple() where appearance.isCustom {
+                customDict[key] = value
+            } else if let (_, value) = appearance.tuple() where appearance.isAttributedString {
                 if let attrList = value as? NSArray, let label = self as? UILabel {
                     label.attributedText = attrList.flatMap({ (attribute) -> NSAttributedString? in
                         if let attribute = attribute as? [String : AnyObject] {
@@ -87,13 +95,18 @@ extension Configurable where Self: UIView {
                         return nil
                     }).combineToAttributedString()
                 }
-            } else {
-                dictionary[String(appearance)] = value
+            } else if let (key, value) = appearance.tuple() {
+                dictionary[key] = value
             }
         }
 
-        // delegate?.component:self setCustomAppearance:customDict
-        self.setValuesForKeysWithDictionary(dictionary)
+        for (key, value) in dictionary {
+            if self.respondsToSelector(Selector(key)) {
+                self.setValue(value, forKey: key)
+            } else {
+                print(key)
+            }
+        }
         self.handleCustomStyle(customDict)
     }
 }
@@ -144,21 +157,13 @@ extension ComponentType where Self: UIView {
         var shouldRebuild = false
 
         if let config = self.context.configuration {
-            // apply diff from config & configuration
-            for (key, value) in config.style {
-                guard let newValue = configuration.style[key] else {
-                    shouldRebuild = true
-                    break
-                }
-                if !newValue.isEqual(value) {
-                    shouldRebuild = true
-                    break
-                }
-            }
+            // TODO: apply diff from config & configuration
+            shouldRebuild = (config.style != configuration.style)
         } else {
             shouldRebuild = true
-            self.context.configuration = configuration
         }
+
+        self.context.configuration = configuration
 
         // setup self
         if shouldRebuild {

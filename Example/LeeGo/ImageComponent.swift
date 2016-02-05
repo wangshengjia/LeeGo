@@ -17,11 +17,19 @@ extension UIImageView {
     public override func handleCustomStyle(styles: [String: AnyObject]) {
         for (key, value) in styles {
             switch (key, value) {
-            case (Styles.ratio3To2, let ratio as CGFloat):
-                self.addConstraint(NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Height, multiplier: ratio, constant: 0))
+            case ("3to2"/*Style.ratio3To2*/, let ratio as CGFloat):
+                let constraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Width, multiplier: 1/ratio, constant: 0)
+                constraint.priority = 900
+                self.addConstraint(constraint)
+                self.invalidateIntrinsicContentSize()
             default:
                 break
             }
         }
+    }
+
+    override public func intrinsicContentSize() -> CGSize {
+
+        return CGSizeMake(self.frame.width, self.frame.width * 2 / 3)
     }
 }

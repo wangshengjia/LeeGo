@@ -25,6 +25,8 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(self.view.frame.width, 280)
+
         collectionView.reloadData()
 
         let URLRequest =  NSURLRequest(URL: NSURL(string: "http://api-cdn.lemonde.fr/ws/5/mobile/www/ios-phone/en_continu/index.json")!)
@@ -41,8 +43,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         }
 
         task.resume()
-
-        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(CGRectGetWidth(self.view.frame), 180)
     }
 
     // MARK: Collection View DataSource
@@ -53,9 +53,9 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let configurationType = ConfigurationTarget.Article
+        let configurationType = indexPath.row % 2 == 0 ? ConfigurationTarget.Article : .Featured
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(configurationType.rawValue, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(configurationType), forIndexPath: indexPath)
 
         cell.configure(with: elements[indexPath.item], configuration: configurationType.configuration())
 
@@ -71,11 +71,21 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0.5
     }
+
+    // MARK: size
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animateAlongsideTransition({ (context) -> Void in
+            (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(self.view.frame.width, 280)
+            self.collectionView.reloadData()
+            }, completion: nil)
+
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    }
 }
 
 extension ViewController: ConfiguratorDelegate {
 
-    func willApply<Component: UIView>(with style: StyleType, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> StyleType {
+    func willApply<Component: UIView>(with style: [Appearance], toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> [Appearance] {
         
 
         return style

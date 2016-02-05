@@ -30,15 +30,21 @@ extension UICollectionViewCell {
 
 extension UICollectionViewCell {
     override public func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        // if cached, return cached value
+        
+        // calculate manually
+
+        // calculate auto
         let attr: UICollectionViewLayoutAttributes = layoutAttributes.copy() as! UICollectionViewLayoutAttributes
 
         var newFrame = attr.frame
         self.frame = newFrame
 
+        self.invalidateIntrinsicContentSize()
         self.setNeedsLayout()
         self.layoutIfNeeded()
 
-        let desiredHeight: CGFloat = self.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        let desiredHeight = self.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
         newFrame.size.height = desiredHeight
         attr.frame = newFrame
         return attr
@@ -49,10 +55,10 @@ extension UICollectionViewCell {
 public protocol ConfiguratorDelegate {
 
     func willApply<Component: UIView>(
-        with Style: StyleType,
+        with Style: [Appearance],
         toComponent component: Component,
         withItem item: ItemType,
-        atIndexPath indexPath: NSIndexPath?) -> StyleType
+        atIndexPath indexPath: NSIndexPath?) -> [Appearance]
 
     func willComposite<Component: UIView>(with
         components: [ComponentTarget],

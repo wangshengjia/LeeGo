@@ -10,6 +10,12 @@ import Foundation
 
 public let kCustomAttributeKeyIdentifier = "kCustomAttributeKeyIdentifier"
 
+public extension Dictionary {
+    func merge(dictionary: Dictionary<Key, Value>) {
+        
+    }
+}
+
 public extension UILabel {
     func setAttributeString(with texts: [String: String]) {
         if let attributeString = self.attributedText where attributeString.length > 0 {
@@ -51,3 +57,4 @@ public extension Array where Element: NSAttributedString {
         })
     }
 }
+

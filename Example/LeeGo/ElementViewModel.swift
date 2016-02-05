@@ -29,16 +29,16 @@ extension ElementViewModel {
 extension ElementViewModel: ItemType {
     func updateComponent<Component: UIView>(component: Component) {
         switch component {
-        case let titleLabel as UILabel where component.name() == ComponentProvider.title.rawValue:
+        case let titleLabel as UILabel where component.name() == String(ComponentProvider.title):
             titleLabel.setAttributeString(with: [
-                Styles.marker: element.isRestrict ? "󰀀" : "",
-                Styles.customTitle: element.title ?? "",
-                Styles.nature: element.natureEdito ?? ""
+                Style.marker: element.isRestrict ? "󰀀" : "",
+                Style.customTitle: element.title ?? "",
+                Style.nature: element.natureEdito ?? ""
                 ])
 
-        case let subtitleLabel as UILabel  where component.name() == ComponentProvider.subtitle.rawValue:
+        case let subtitleLabel as UILabel  where component.name() == String(ComponentProvider.subtitle):
             subtitleLabel.text = element.description
-        case let avatar as UIImageView where component.name() == ComponentProvider.avatar.rawValue:
+        case let avatar as UIImageView where component.name() == String(ComponentProvider.avatar):
             avatar.backgroundColor = UIColor.grayColor()
         default:
             break
