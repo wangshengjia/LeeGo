@@ -9,7 +9,7 @@
 import Foundation
 
 internal final class ComponentContext {
-    var componentView: UIView? = nil
+    weak var componentView: UIView? = nil
     var configuration: Configuration?
     var isRoot = true
     var delegate: ConfiguratorDelegate?

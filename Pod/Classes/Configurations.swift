@@ -55,6 +55,9 @@ public struct Configuration {
     public let layout: Layout?
 
     public init(_ style: [Appearance] = [], _ components: [ComponentTarget: Configuration]? = nil, _ layout: Layout? = nil) {
+
+        // check is two components have the same name
+
         self.style = style
         self.components = components
         self.layout = layout
