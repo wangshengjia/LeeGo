@@ -10,9 +10,56 @@ import Foundation
 import LeeGo
 
 enum ComponentProvider: ComponentProviderType {
-    case title, subtitle, date, avatar, header, footer, container
+    case title, subtitle, date, avatar, header, footer, container, featured
+    case Zen, Article, Featured, Video, Portfolio, Alert, Header, Footer, AnotherView
+
+    static let allTypes = [Zen, Article, Featured, Video, Portfolio, Alert, Footer].map { (type) -> String in
+        return String(type)
+    }
 
     static let types: [ComponentProvider: AnyClass] = [title: UILabel.self]
+
+    static let defaultMetrics: MetricsValuesType = (20, 20, 20, 20, 10, 10)
+
+    func componentTarget() -> ComponentTarget? {
+        switch self {
+        case .Article:
+            return self.type().components(
+                [
+                    ComponentProvider.title.componentTarget()!,
+                    ComponentTarget(name: "subtitle", targetClass: UILabel.self).style(Style.H2.style()),
+                    ComponentProvider.avatar.type(UIImageView).style(Style.I1.style()),
+                ]
+                ).layout(
+                    Layout([
+                        H(orderedViews: "avatar", "title"),
+                        H("avatar", width: 68),
+                        H(orderedViews: "avatar", "subtitle"),
+                        V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
+                        V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
+                        ], ComponentProvider.defaultMetrics)
+            )
+        case .Featured:
+            return self.type().components(
+                [
+                    ComponentProvider.avatar.type(UIImageView).style(Style.I1.style()),
+                    ComponentProvider.title.type(UILabel).style(Style.H3.style()),
+                ]
+                ).layout(
+                    Layout([
+                        H(left:nil, orderedViews:"title", right:nil),
+                        H(left:nil, orderedViews:"avatar", right:nil),
+                        H("avatar", width: 375),
+                        V(orderedViews: ["title"]),
+                        V(top: nil, orderedViews: ["avatar"], bottom: nil),
+                        ], ComponentProvider.defaultMetrics)
+            )
+        case .title:
+            return ComponentProvider.title.type(UILabel).style(Style.H3.style())
+        default:
+            return nil
+        }
+    }
 }
 
 enum Style: String {
@@ -55,113 +102,98 @@ enum Style: String {
 }
 
 
-enum ConfigurationTarget {
-    case Zen, Article, Featured, Video, Portfolio, Alert, Header, Footer, AnotherView
-
-    static let allTypes = [Zen, Article, Featured, Video, Portfolio, Alert, Footer].map { (type) -> String in
-        return String(type)
-    }
-
-    static let layoutMetrics = [
-        "top":20,
-        "bottom":20,
-        "left":20,
-        "right":20,
-        "interspaceH": 20.responsive([.S: 21, .L: 30]),
-        "interspaceV":10]
-
-    static let defaultMetrics: MetricsValuesType = (20, 20, 20, 20, 10, 10)
-
-    func configuration() -> Configuration {
-        // ComponentProvider.title.type()
-        // ComponentTarget(name: "subtitle", targetClass: UILabel.self).width(40.0).config(Zen.configuration())
-
-        switch self {
-        case .AnotherView:
-            return Configuration(
-                Style.None.style(),
-                [
-                    ComponentTarget(name: "view", targetClass: UILabel.self): Article.configuration(),
-                ],
-                Layout([
-                    "H:|-left-[view]-right-|",
-                    "V:|-top-[view]-bottom-|",
-                    ], ConfigurationTarget.layoutMetrics)
-            )
-        case .Article:
-            return Configuration(
-                Style.None.style(),
-                [
-                    ComponentProvider.title.type(UILabel): Configuration(Style.H3.style()),
-                    ComponentTarget(name: "subtitle", targetClass: UILabel.self): Configuration(Style.H2.style()),
-                    ComponentProvider.avatar.type(UIImageView): Configuration(Style.I1.style()),
-                ],
-                Layout([
-                    H(orderedViews: "avatar", "title"),
-                    H("avatar", width: 68),
-                    H(orderedViews: "avatar", "subtitle"),
-                    V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
-                    V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
-                    ], ConfigurationTarget.defaultMetrics)
-            )
-        case .Featured:
-            return Configuration(
-                Style.None.style(),
-                [
-                    ComponentProvider.avatar.type(ImageComponent): Configuration(Style.I1.style()),
-                    //ComponentProvider.title.type(UILabel): Configuration(Styles.H3),
-                ],
-                Layout([
-                    //H(left:nil, orderedViews:"title", right:nil),
-                    H(left:nil, orderedViews:"avatar", right:nil),
-                    H("avatar", width: 375),
-//                    V("avatar", height:250),
-                    //V(orderedViews: ["title"]),
-                    V(top: nil, orderedViews: ["avatar"], bottom: nil),
-                    ], ConfigurationTarget.defaultMetrics)
-            )
-        case .Footer:
-            return Configuration(
-                go: Style.None.style(),
-                [
-                    ComponentProvider.title.type(),
-                    ComponentProvider.subtitle.type()
-                ], { (components) -> (Layout?) in
-                    return Layout(
-                        layout1(components),
-                        ConfigurationTarget.layoutMetrics)
-            })
+//enum ConfigurationTarget {
+//    case Zen, Article, Featured, Video, Portfolio, Alert, Header, Footer, AnotherView
+//
+//    static let allTypes = [Zen, Article, Featured, Video, Portfolio, Alert, Footer].map { (type) -> String in
+//        return String(type)
+//    }
+//
+//    static let layoutMetrics = [
+//        "top":20,
+//        "bottom":20,
+//        "left":20,
+//        "right":20,
+//        "interspaceH": 20.responsive([.S: 21, .L: 30]),
+//        "interspaceV":10]
+//
+//    static let defaultMetrics: MetricsValuesType = (20, 20, 20, 20, 10, 10)
+//
+//    func configuration() -> Configuration {
+//        // ComponentProvider.title.type()
+//        // ComponentTarget(name: "subtitle", targetClass: UILabel.self).width(40.0).config(Zen.configuration())
+//
+//        switch self {
+//        case .AnotherView:
 //            return Configuration(
-//                Styles.None,
+//                Style.None.style(),
 //                [
-//                    ComponentProvider.title.type(): Configuration(Styles.H1),
-//                    ComponentProvider.subtitle.type(UILabel): Configuration(Styles.H2),
+//                    ComponentTarget(name: "view", targetClass: UILabel.self): Article.configuration(),
 //                ],
 //                Layout([
-//                    "H:|-left-[avatar(50)]-interspaceH-[title]-(>=interspaceH)-[date]-right-|",
-//                    "H:[avatar]-interspaceH-[subtitle]-right-|",
-//                    "V:|-top-[title]-interspaceV-[subtitle]-(>=bottom)-|",
-//                    "V:|-top-[avatar(50)]-(>=bottom)-|",
-//                    "V:|-top-[date]-(>=bottom)-|"
+//                    "H:|-left-[view]-right-|",
+//                    "V:|-top-[view]-bottom-|",
 //                    ], ConfigurationTarget.layoutMetrics)
 //            )
-        default:
-            assertionFailure("Configuration type not found")
-            return Configuration()
-        }
-    }
-    
-}
-
-func layout1(components: [String]) -> [String]{
-    return [
-        H(orderedViews: components[2], "title"),
-        H("avatar", width: 50),
-        H(fromSuperview: false, orderedViews: "avatar", "subtitle"),
-        V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
-        V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual))
-    ]
-}
+//        case .Article:
+//            return Configuration(
+//                Style.None.style(),
+//                [
+//                    ComponentProvider.title.type(UILabel): Configuration(Style.H3.style()),
+//                    ComponentTarget(name: "subtitle", targetClass: UILabel.self): Configuration(Style.H2.style()),
+//                    ComponentProvider.avatar.type(UIImageView): Configuration(Style.I1.style()),
+//                ],
+//                Layout([
+//                    H(orderedViews: "avatar", "title"),
+//                    H("avatar", width: 68),
+//                    H(orderedViews: "avatar", "subtitle"),
+//                    V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
+//                    V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
+//                    ], ConfigurationTarget.defaultMetrics)
+//            )
+//        case .Featured:
+//            return Configuration(
+//                Style.None.style(),
+//                [
+//                    ComponentProvider.avatar.type(ImageComponent): Configuration(Style.I1.style()),
+//                    ComponentProvider.title.type(UILabel): Configuration(Styles.H3),
+//                ],
+//                Layout([
+//                    H(left:nil, orderedViews:"title", right:nil),
+//                    H(left:nil, orderedViews:"avatar", right:nil),
+//                    H("avatar", width: 375),
+//                    V(orderedViews: ["title"]),
+//                    V(top: nil, orderedViews: ["avatar"], bottom: nil),
+//                    ], ConfigurationTarget.defaultMetrics)
+//            )
+//        case .Footer:
+//            return Configuration(
+//                go: Style.None.style(),
+//                [
+//                    ComponentProvider.title.type(),
+//                    ComponentProvider.subtitle.type()
+//                ], { (components) -> (Layout?) in
+//                    return Layout(
+//                        layout1(components),
+//                        ConfigurationTarget.layoutMetrics)
+//            })
+//        default:
+//            assertionFailure("Configuration type not found")
+//            return Configuration()
+//        }
+//    }
+//    
+//}
+//
+//func layout1(components: [String]) -> [String]{
+//    return [
+//        H(orderedViews: components[2], "title"),
+//        H("avatar", width: 50),
+//        H(fromSuperview: false, orderedViews: "avatar", "subtitle"),
+//        V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
+//        V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual))
+//    ]
+//}
 
 /** chain expression */
 //            ComponentProvider.title

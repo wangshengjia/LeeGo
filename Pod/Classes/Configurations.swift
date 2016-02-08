@@ -49,35 +49,35 @@ public struct Layout {
     }
 }
 
-public struct Configuration {
-    public let style: [Appearance]
-    public let components: [ComponentTarget: Configuration]?
-    public let layout: Layout?
-
-    public init(_ style: [Appearance] = [], _ components: [ComponentTarget: Configuration]? = nil, _ layout: Layout? = nil) {
-
-        // check is two components have the same name
-
-        self.style = style
-        self.components = components
-        self.layout = layout
-    }
-
-    public init(go1 style: [Appearance] = [], _ components: [ComponentTarget]? = nil, _ layout: (c1: String, c2: String) -> (Layout?)) {
-        self.style = style
-        self.components = nil
-        self.layout = layout(c1: (components?[0].name)!, c2: (components?[1].name)!)
-    }
-
-    public init(go style1: [Appearance] = [], _ components: [ComponentTarget]? = nil, _ layout: (components: [String]) -> (Layout?)) {
-        self.style = style1
-        self.components = nil
-        self.layout = layout(components: components?.map({ (component) -> String in
-            return component.name
-        }) ?? [])
-    }
-
-}
+//public struct Configuration {
+//    public let style: [Appearance]
+//    public let components: [ComponentTarget: Configuration]?
+//    public let layout: Layout?
+//
+//    public init(_ style: [Appearance] = [], _ components: [ComponentTarget: Configuration]? = nil, _ layout: Layout? = nil) {
+//
+//        // check is two components have the same name
+//
+//        self.style = style
+//        self.components = components
+//        self.layout = layout
+//    }
+//
+//    public init(go1 style: [Appearance] = [], _ components: [ComponentTarget]? = nil, _ layout: (c1: String, c2: String) -> (Layout?)) {
+//        self.style = style
+//        self.components = nil
+//        self.layout = layout(c1: (components?[0].name)!, c2: (components?[1].name)!)
+//    }
+//
+//    public init(go style1: [Appearance] = [], _ components: [ComponentTarget]? = nil, _ layout: (components: [String]) -> (Layout?)) {
+//        self.style = style1
+//        self.components = nil
+//        self.layout = layout(components: components?.map({ (component) -> String in
+//            return component.name
+//        }) ?? [])
+//    }
+//
+//}
 
 ///// A type of dictionary that only uses strings for keys and can contain any
 ///// type of object as a value.

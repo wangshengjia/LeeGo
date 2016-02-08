@@ -14,7 +14,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
-            for reuseId in ConfigurationTarget.allTypes {
+            for reuseId in ComponentProvider.allTypes {
                 collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseId)
             }
         }
@@ -53,11 +53,11 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let configurationType = indexPath.row % 2 == 0 ? ConfigurationTarget.Article : .Featured
+        let configurationType = indexPath.row % 2 == 0 ? ComponentProvider.Article : .Featured
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(configurationType), forIndexPath: indexPath)
 
-        cell.configure(with: elements[indexPath.item], configuration: configurationType.configuration())
+        cell.configure(with: elements[indexPath.item], componentTarget: configurationType.componentTarget()!)
 
         return cell
     }
@@ -95,19 +95,19 @@ extension ViewController: ConfiguratorDelegate {
 
     }
 
-    func willApply<Component: UIView>(with configuration: Configuration, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> Configuration {
+    func willApply<Component: UIView>(with componentTarget: ComponentTarget, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> ComponentTarget {
         guard let indexPath = indexPath else {
-            return configuration
+            return componentTarget
         }
 
         if (item is ElementViewModel && indexPath.item > 5) {
-            return configuration
+            return componentTarget
         }
 
-        return configuration
+        return componentTarget
     }
 
-    func didApply<Component: UIView>(with configuration: Configuration, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) {
+    func didApply<Component: UIView>(with componentTarget: ComponentTarget, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) {
 
     }
 }

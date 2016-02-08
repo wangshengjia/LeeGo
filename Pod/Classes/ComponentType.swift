@@ -25,16 +25,16 @@ protocol Reusable {
 
 protocol Composable {
     // typealias T: Hashable
-    func compositeSubcomponents(components: [ComponentTarget: Configuration], layout: Layout) -> [UIView: Configuration]
+    func compositeSubcomponents(components: [ComponentTarget], layout: Layout) -> [UIView: ComponentTarget]
 }
 
 extension Composable where Self: UIView {
-    func compositeSubcomponents(components: [ComponentTarget: Configuration], layout: Layout) -> [UIView: Configuration] {
+    func compositeSubcomponents(components: [ComponentTarget], layout: Layout) -> [UIView: ComponentTarget] {
 
-        var subcomponents: [UIView: Configuration] = [:]
+        var subcomponents: [UIView: ComponentTarget] = [:]
         // create subview
         var viewsDictionary = [String: UIView]()
-        for (component, subConfig) in components ?? [:] {
+        for component in components {
             // It seems to me that there is no way to init an instance from class in Swift, so we made it in ObjC
             if let componentView = CellComponentFactory.createCellComponentFromClass(component.targetClass, componentKey: component.name) {
                 viewsDictionary[component.name] = componentView
@@ -42,10 +42,10 @@ extension Composable where Self: UIView {
 
                 // Setup each component view with style which listed in configuration
                 // componentView.context.configuration = subConfig
-                componentView.context.name = component.name
                 componentView.context.componentView = componentView
                 componentView.context.isRoot = false
-                subcomponents[componentView] = subConfig
+
+                subcomponents[componentView] = component
             }
         }
 
@@ -58,7 +58,6 @@ extension Composable where Self: UIView {
 
         // Layout each component view with auto layout visual format language from configuration.
         for format in layout.formats {
-            print(format)
             let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions.DirectionLeadingToTrailing, metrics: layout.metrics, views: viewsDictionary)
             for constraint in constraints {
                 //constraint.priority = 990
@@ -144,30 +143,30 @@ protocol ComponentType: Configurable, Composable, Updatable, Reusable {
 }
 
 extension ComponentType where Self: UIView {
+//
+//    func configure(item: ItemType, indexPath: NSIndexPath? = nil) {
+//        
+//    }
 
-    func configure(item: ItemType, indexPath: NSIndexPath? = nil) {
-        
-    }
-
-    final func configure<Item: ItemType>(item: Item, configuration: Configuration) {
+    final func configure<Item: ItemType>(item: Item, component: ComponentTarget) {
 
         // resolve conf based on item?, indexPath? or others ?
         // willApply
 
         var shouldRebuild = false
 
-        if let config = self.context.configuration {
+        if let ComponentTarget = self.context.component {
             // TODO: apply diff from config & configuration
-            shouldRebuild = (config.style != configuration.style)
+            shouldRebuild = (ComponentTarget.style != component.style)
         } else {
             shouldRebuild = true
         }
 
-        self.context.configuration = configuration
+        self.context.component = component
 
         // setup self
         if shouldRebuild {
-            setupWithStyle(configuration.style)
+            setupWithStyle(component.style)
         }
 
         // update self
@@ -175,10 +174,10 @@ extension ComponentType where Self: UIView {
 
         if shouldRebuild {
             // add & layout sub components
-            if let components = configuration.components, let layout = configuration.layout {
+            if let components = component.components, let layout = component.layout {
                 let subcomponents = compositeSubcomponents(components, layout: layout)
-                for (component, config) in subcomponents {
-                    component.configure(item, configuration: config)
+                for (component, componentTarget) in subcomponents {
+                    component.configure(with: item, componentTarget: componentTarget)
                 }
 
                 return
@@ -187,8 +186,8 @@ extension ComponentType where Self: UIView {
 
         // configure sub components recursively
         for subview in self.subviews where subview.context.componentView == subview {
-            if let config = subview.context.configuration {
-                subview.configure(item, configuration: config)
+            if let componentTarget = subview.context.component {
+                subview.configure(with: item, componentTarget: componentTarget)
             }
         }
     }

@@ -68,12 +68,12 @@ public protocol ConfiguratorDelegate {
         atIndexPath indexPath: NSIndexPath?)
 
     func willApply<Component: UIView>(with
-        configuration: Configuration,
+        componentTarget: ComponentTarget,
         toComponent component: Component,
         withItem item: ItemType,
-        atIndexPath indexPath: NSIndexPath?) -> Configuration
+        atIndexPath indexPath: NSIndexPath?) -> ComponentTarget
 
-    func didApply<Component: UIView>(with configuration: Configuration,
+    func didApply<Component: UIView>(with componentTarget: ComponentTarget,
         toComponent component: Component,
         withItem item: ItemType,
         atIndexPath indexPath: NSIndexPath?)

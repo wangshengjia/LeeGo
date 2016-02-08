@@ -10,10 +10,9 @@ import Foundation
 
 internal final class ComponentContext {
     weak var componentView: UIView? = nil
-    var configuration: Configuration?
+    var component: ComponentTarget?
     var isRoot = true
     var delegate: ConfiguratorDelegate?
-    var name = ""
 
     init() {
 
@@ -42,26 +41,30 @@ extension UIView: ComponentType {
         print("defaut imp 2")
     }
 
-    public func configure<Item : ItemType>(with item: Item, configuration: Configuration) {
+    public func configure<Item : ItemType>(with item: Item, componentTarget: ComponentTarget) {
+
+        if self.context.isRoot {
+            self.context.componentView = self
+        }
 
         // will apply
-        let resolvedConfiguration = context.delegate?.willApply(with: configuration, toComponent: self, withItem: item, atIndexPath: nil) ?? configuration
+        let resolvedConfiguration = context.delegate?.willApply(with: componentTarget, toComponent: self, withItem: item, atIndexPath: nil) ?? componentTarget
 
-        // apply resolved configuration
+        // apply resolved componentTarget
         if let cell = self as? UICollectionViewCell {
-            cell.contentView.configure(item, configuration: resolvedConfiguration)
+            cell.contentView.configure(item, component: resolvedConfiguration)
         } else if let cell = self as? UITableViewCell {
-            cell.contentView.configure(item, configuration: resolvedConfiguration)
+            cell.contentView.configure(item, component: resolvedConfiguration)
         } else {
-            configure(item, configuration: resolvedConfiguration)
+            configure(item, component: resolvedConfiguration)
         }
 
 
         // did apply
-        context.delegate?.didApply(with: configuration, toComponent: self, withItem: item, atIndexPath: nil)
+        context.delegate?.didApply(with: componentTarget, toComponent: self, withItem: item, atIndexPath: nil)
     }
 
     public func name() -> String {
-        return context.name
+        return context.component?.name ?? "No Name"
     }
 }

@@ -26,15 +26,23 @@ extension ComponentProviderType {
         }
         return type(targetClass)
     }
+
+    var hashValue: Int {
+        return String(self).hashValue
+    }
 }
+
+//public func ==(lhs: ComponentProviderType, rhs: ComponentProviderType) -> Bool {
+//    return String(lhs) == String(rhs)
+//}
 
 public class ComponentTarget: Hashable {
     let name: String
     let targetClass: AnyClass
 
-    // let componentTypes: Set<String> = []
-
-    private(set) var configuration = Configuration()
+    private(set) var style: [Appearance] = []
+    private(set) var components: [ComponentTarget]? = nil
+    private(set) var layout: Layout? = nil
     private(set) var width: CGFloat = 0.0
 
     public var hashValue: Int {
@@ -46,8 +54,18 @@ public class ComponentTarget: Hashable {
         self.targetClass = targetClass
     }
 
-    public func config(config: Configuration) -> ComponentTarget {
-        self.configuration = config
+    public func style(style: [Appearance] = []) -> ComponentTarget {
+        self.style = style
+        return self
+    }
+
+    public func components(components: [ComponentTarget]?) -> ComponentTarget {
+        self.components = components
+        return self
+    }
+
+    public func layout(layout: Layout?) -> ComponentTarget {
+        self.layout = layout
         return self
     }
 
