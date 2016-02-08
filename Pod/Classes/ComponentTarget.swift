@@ -65,13 +65,19 @@ public class ComponentTarget: Hashable {
         return self
     }
 
-    public func components(c1:ComponentTarget, _ c2: ComponentTarget, layout: (String, String) -> Layout) -> ComponentTarget {
+    public func components(c1: ComponentTarget, layout: (String) -> Layout) -> ComponentTarget {
+        self.components = [c1]
+        self.layout = layout(c1.name)
+        return self
+    }
+
+    public func components(c1: ComponentTarget, _ c2: ComponentTarget, layout: (String, String) -> Layout) -> ComponentTarget {
         self.components = [c1, c2]
         self.layout = layout(c1.name, c2.name)
         return self
     }
 
-    public func components(c1:ComponentTarget, c2: ComponentTarget, c3: ComponentTarget, layout: (String, String, String) -> Layout) -> ComponentTarget {
+    public func components(c1: ComponentTarget, c2: ComponentTarget, c3: ComponentTarget, layout: (String, String, String) -> Layout) -> ComponentTarget {
         self.components = [c1, c2, c3]
         self.layout = layout(c1.name, c2.name, c3.name)
         return self

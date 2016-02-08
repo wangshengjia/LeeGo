@@ -31,7 +31,7 @@ public struct Layout {
     let formats: [String]
     let metrics: [String: AnyObject]?
 
-    public init(_ formats: [String] = [], _ metrics: [String: AnyObject]? = nil) {
+    public init(_ formats: [String] = [], _ metrics: [String: AnyObject] = ["top" : 0, "left": 0, "bottom": 0, "right": 0, "interspaceH": 0, "interspaceV": 0]) {
         self.formats = formats
         self.metrics = metrics
     }

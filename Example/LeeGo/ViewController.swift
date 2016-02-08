@@ -53,7 +53,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let configurationType = indexPath.row % 2 == 0 ? ComponentProvider.Article : .Featured
+        let configurationType = indexPath.row % 2 == 0 ? ComponentProvider.article : .featured
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(configurationType), forIndexPath: indexPath)
 
@@ -80,6 +80,10 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             }, completion: nil)
 
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    }
+
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.navigationController?.pushViewController(DetailsViewController(), animated: true)
     }
 }
 

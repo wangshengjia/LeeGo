@@ -10,12 +10,14 @@ import Foundation
 import LeeGo
 
 enum ComponentProvider: ComponentProviderType {
-    case title, subtitle, date, avatar, header, footer, container, featured
-    case Zen, Article, Featured, Video, Portfolio, Alert, Header, Footer, AnotherView
+    // leaf components
+    case title, subtitle, date, avatar
 
-    static let allTypes = [Zen, Article, Featured, Video, Portfolio, Alert, Footer].map { (type) -> String in
-        return String(type)
-    }
+    // child components
+    case header, footer, container
+
+    // root components
+    case zen, article, video, portfolio, alert, detailsView, featured
 
     static let types: [ComponentProvider: AnyClass] = [title: UILabel.self, avatar: UIImageView.self]
 
@@ -23,7 +25,7 @@ enum ComponentProvider: ComponentProviderType {
 
     func componentTarget() -> ComponentTarget? {
         switch self {
-        case .Article:
+        case .article:
             return self.type().components(
                 [
                     ComponentProvider.title.componentTarget()!,
@@ -38,7 +40,7 @@ enum ComponentProvider: ComponentProviderType {
                     V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
                     ], ComponentProvider.defaultMetrics)
                 )
-        case .Featured:
+        case .featured:
             return self.type().components(
                 ComponentProvider.avatar.type().style(Style.I1.style()),
                 ComponentProvider.title.type().style(Style.H3.style())
@@ -46,21 +48,30 @@ enum ComponentProvider: ComponentProviderType {
                     return Layout([
                         H(left:nil, orderedViews: title, right:nil),
                         H(left:nil, orderedViews: avatar, right:nil),
-                        H(avatar, width: 375),
+                        H(avatar, width: 320),
                         V(orderedViews: [title]),
                         V(top: nil, orderedViews: [avatar], bottom: nil),
                         ],
                         ComponentProvider.defaultMetrics)
             }
+        case .detailsView:
+            return self.type().style([.backgroundColor(UIColor.brownColor())]).components(
+                ComponentProvider.header.componentTarget()!,
+                layout: { (header: String) -> Layout in
+                    return Layout([
+                        H(orderedViews: header),
+                        V(orderedViews: [header], bottom: .bottom(.GreaterThanOrEqual))
+                        ])
+            })
         case .header:
-            return self.type().components(
-                ComponentProvider.avatar.type(),
-                ComponentProvider.title.type()
+            return self.type().style([.translatesAutoresizingMaskIntoConstraints(false)]).components(
+                ComponentProvider.avatar.type().style(Style.I1.style()),
+                ComponentProvider.title.type().style(Style.H3.style())
                 ) { (avatar: String, title: String) -> Layout in
                     return Layout([
                         H(left:nil, orderedViews: title, right:nil),
                         H(left:nil, orderedViews: avatar, right:nil),
-                        H(avatar, width: 375),
+                        H(avatar, width: 320),
                         V(orderedViews: [title]),
                         V(top: nil, orderedViews: [avatar], bottom: nil),
                         ],
@@ -71,6 +82,12 @@ enum ComponentProvider: ComponentProviderType {
         default:
             return nil
         }
+    }
+}
+
+extension ComponentProvider {
+    static let allTypes = [zen, article, featured, video, portfolio, alert].map { (type) -> String in
+        return String(type)
     }
 }
 

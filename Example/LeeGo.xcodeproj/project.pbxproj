@@ -14,6 +14,7 @@
 		3541CE861C44490700A3B257 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3541CE831C44490700A3B257 /* Element.swift */; };
 		3541CE881C44494B00A3B257 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3541CE871C44494B00A3B257 /* Main.storyboard */; };
 		3550E7611C4E5AB8002F5FB4 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3550E7601C4E5AB8002F5FB4 /* Configurations.swift */; };
+		35543A301C694C58000AC50C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35543A2F1C694C58000AC50C /* DetailsViewController.swift */; };
 		3585078B1C622B6C006D02EF /* FetteEngschrift.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507801C622B6A006D02EF /* FetteEngschrift.otf */; };
 		3585078C1C622B6C006D02EF /* LmfrAppIcon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 358507811C622B6A006D02EF /* LmfrAppIcon.ttf */; };
 		3585078D1C622B6C006D02EF /* TheAntiquaB-W5Plain.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507821C622B6A006D02EF /* TheAntiquaB-W5Plain.otf */; };
@@ -58,6 +59,7 @@
 		3541CE831C44490700A3B257 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
 		3541CE871C44494B00A3B257 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3550E7601C4E5AB8002F5FB4 /* Configurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
+		35543A2F1C694C58000AC50C /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		358507801C622B6A006D02EF /* FetteEngschrift.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FetteEngschrift.otf; sourceTree = "<group>"; };
 		358507811C622B6A006D02EF /* LmfrAppIcon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LmfrAppIcon.ttf; sourceTree = "<group>"; };
 		358507821C622B6A006D02EF /* TheAntiquaB-W5Plain.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheAntiquaB-W5Plain.otf"; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				3504CEAF1C4FCF7100724FFD /* Documentations */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				35543A2F1C694C58000AC50C /* DetailsViewController.swift */,
 				3550E7601C4E5AB8002F5FB4 /* Configurations.swift */,
 				352E50E91C528CDC0075BDB6 /* ImageComponent.swift */,
 				358507961C626097006D02EF /* Responsive.swift */,
@@ -458,6 +461,7 @@
 				3541CE861C44490700A3B257 /* Element.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				358507971C626097006D02EF /* Responsive.swift in Sources */,
+				35543A301C694C58000AC50C /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
