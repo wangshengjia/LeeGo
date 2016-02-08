@@ -17,7 +17,7 @@ enum ComponentProvider: ComponentProviderType {
         return String(type)
     }
 
-    static let types: [ComponentProvider: AnyClass] = [title: UILabel.self]
+    static let types: [ComponentProvider: AnyClass] = [title: UILabel.self, avatar: UIImageView.self]
 
     static let defaultMetrics: MetricsValuesType = (20, 20, 20, 20, 10, 10)
 
@@ -29,31 +29,43 @@ enum ComponentProvider: ComponentProviderType {
                     ComponentProvider.title.componentTarget()!,
                     ComponentTarget(name: "subtitle", targetClass: UILabel.self).style(Style.H2.style()),
                     ComponentProvider.avatar.type(UIImageView).style(Style.I1.style()),
-                ]
-                ).layout(
-                    Layout([
-                        H(orderedViews: "avatar", "title"),
-                        H("avatar", width: 68),
-                        H(orderedViews: "avatar", "subtitle"),
-                        V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
-                        V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
-                        ], ComponentProvider.defaultMetrics)
-            )
+                ],
+                layout: Layout([
+                    H(orderedViews: "avatar", "title"),
+                    H("avatar", width: 68),
+                    H(orderedViews: "avatar", "subtitle"),
+                    V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
+                    V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
+                    ], ComponentProvider.defaultMetrics)
+                )
         case .Featured:
             return self.type().components(
-                [
-                    ComponentProvider.avatar.type(UIImageView).style(Style.I1.style()),
-                    ComponentProvider.title.type(UILabel).style(Style.H3.style()),
-                ]
-                ).layout(
-                    Layout([
-                        H(left:nil, orderedViews:"title", right:nil),
-                        H(left:nil, orderedViews:"avatar", right:nil),
-                        H("avatar", width: 375),
-                        V(orderedViews: ["title"]),
-                        V(top: nil, orderedViews: ["avatar"], bottom: nil),
-                        ], ComponentProvider.defaultMetrics)
-            )
+                ComponentProvider.avatar.type().style(Style.I1.style()),
+                ComponentProvider.title.type().style(Style.H3.style())
+                ) { (avatar: String, title: String) -> Layout in
+                    return Layout([
+                        H(left:nil, orderedViews: title, right:nil),
+                        H(left:nil, orderedViews: avatar, right:nil),
+                        H(avatar, width: 375),
+                        V(orderedViews: [title]),
+                        V(top: nil, orderedViews: [avatar], bottom: nil),
+                        ],
+                        ComponentProvider.defaultMetrics)
+            }
+        case .header:
+            return self.type().components(
+                ComponentProvider.avatar.type(),
+                ComponentProvider.title.type()
+                ) { (avatar: String, title: String) -> Layout in
+                    return Layout([
+                        H(left:nil, orderedViews: title, right:nil),
+                        H(left:nil, orderedViews: avatar, right:nil),
+                        H(avatar, width: 375),
+                        V(orderedViews: [title]),
+                        V(top: nil, orderedViews: [avatar], bottom: nil),
+                        ],
+                        ComponentProvider.defaultMetrics)
+            }
         case .title:
             return ComponentProvider.title.type(UILabel).style(Style.H3.style())
         default:
