@@ -184,11 +184,6 @@ public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
     return false
 }
 
-
-//extension ConfigurationType {
-//
-//}
-
 protocol Decodable {}
 protocol Encodable {}
 

@@ -41,7 +41,15 @@ public class ComponentTarget: Hashable {
     let targetClass: AnyClass
 
     private(set) var style: [Appearance] = []
-    private(set) var components: [ComponentTarget]? = nil
+    private(set) var components: [ComponentTarget]? = nil {
+        willSet {
+            if let names = newValue?.map({ (component) -> String in
+                return component.name
+            }) where Set(names).count != newValue?.count {
+                assertionFailure("Subcomponents share the same ancestor should have different names.")
+            }
+        }
+    }
     private(set) var layout: Layout? = nil
     private(set) var width: CGFloat = 0.0
 
@@ -80,6 +88,7 @@ public class ComponentTarget: Hashable {
     public func components(c1: ComponentTarget, c2: ComponentTarget, c3: ComponentTarget, layout: (String, String, String) -> Layout) -> ComponentTarget {
         self.components = [c1, c2, c3]
         self.layout = layout(c1.name, c2.name, c3.name)
+
         return self
     }
 

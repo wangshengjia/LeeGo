@@ -56,7 +56,6 @@ extension ComponentProvider {
                     return Layout([
                         H(left:nil, orderedViews: title, right:nil),
                         H(left:nil, orderedViews: avatar, right:nil),
-                        H(avatar, width: 320),
                         V(orderedViews: [title]),
                         V(top: nil, orderedViews: [avatar], bottom: nil),
                         ],
@@ -79,7 +78,6 @@ extension ComponentProvider {
                     return Layout([
                         H(left:nil, orderedViews: title, right:nil),
                         H(left:nil, orderedViews: avatar, right:nil),
-                        H(avatar, width: 320),
                         V(orderedViews: [title]),
                         V(top: nil, orderedViews: [avatar], bottom: nil),
                         ],
