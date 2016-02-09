@@ -12,20 +12,28 @@ import LeeGo
 enum ComponentProvider: ComponentProviderType {
     // leaf components
     case title, subtitle, date, avatar
+    case favoriteButton
+    case followButton, followTag
 
     // child components
     case header, footer, container
+    case componentFromNib
 
     // root components
     case zen, article, video, portfolio, alert, detailsView, featured
 }
 
 extension ComponentProvider {
-    static let types: [ComponentProvider: AnyClass] = [title: UILabel.self, avatar: UIImageView.self]
+    static let types: [ComponentProvider: AnyClass] = [
+        title: UILabel.self,
+        subtitle: UILabel.self,
+        avatar: UIImageView.self,
+        favoriteButton: UIButton.self,
+    ]
 
     static let defaultMetrics: MetricsValuesType = (20, 20, 20, 20, 10, 10)
 
-    static let allTypes = [zen, article, featured, video, portfolio, alert].map { (type) -> String in
+    static let cellReuseIdentifiers = [zen, article, featured, video, portfolio, alert].map { (type) -> String in
         return String(type)
     }
 }
@@ -84,7 +92,9 @@ extension ComponentProvider {
                         ComponentProvider.defaultMetrics)
             }
         case .title:
-            return ComponentProvider.title.type(UILabel).style(Style.H3.style())
+            return self.type(UILabel).style(Style.H3.style())
+        case .favoriteButton:
+            return self.type().style(Style.H3.style())
         default:
             return nil
         }
@@ -92,7 +102,16 @@ extension ComponentProvider {
 }
 
 enum Style: String {
-    case H1, H2, H3, I1, None
+    // UILabel
+    case H1, H2, H3
+
+    // UIImageView
+    case I1
+
+    // UIButton
+    case BasicButton, FavoriteButton
+
+    case None
 
     static let marker = "M"
     static let customTitle = "title"
@@ -105,7 +124,7 @@ enum Style: String {
         case H1:
             return [.font(UIFont.systemFontOfSize(18)),
                 .textColor(UIColor.darkTextColor()),
-                .textAlignment(NSTextAlignment.Center),
+                .textAlignment(.Center),
                 .numberOfLines(0),
                 .translatesAutoresizingMaskIntoConstraints(false)]
         case H2:
@@ -124,6 +143,8 @@ enum Style: String {
                 .translatesAutoresizingMaskIntoConstraints(false)]
         case I1:
             return [.backgroundColor(UIColor.greenColor()), .custom((Style.ratio3To2, 1.5)), .translatesAutoresizingMaskIntoConstraints(false)]
+        case BasicButton:
+            return [.buttonType(.Custom), .buttonTitle("OK", .Normal), .translatesAutoresizingMaskIntoConstraints(false)]
         default:
             return []
         }

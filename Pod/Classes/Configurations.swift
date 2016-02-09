@@ -84,7 +84,7 @@ public struct Layout {
 //public typealias JSONDictionary = [String: JSONObject]
 //
 ///// A type of any object
-//public typealias JSONObject = AnyObject
+public typealias Attributes = [String: AnyObject]
 
 extension Int {
     func nsObject() -> NSNumber {
@@ -99,8 +99,23 @@ extension Bool {
 }
 
 public enum Appearance: Equatable {
-    case font(UIFont), textColor(UIColor), backgroundColor(UIColor), textAlignment(NSTextAlignment), numberOfLines(Int), translatesAutoresizingMaskIntoConstraints(Bool)
-    case attributedString([[String: AnyObject]])
+    // UIView
+    case translatesAutoresizingMaskIntoConstraints(Bool), backgroundColor(UIColor), tintColor(UIColor)
+
+    // UILabel
+    case font(UIFont), textColor(UIColor), textAlignment(NSTextAlignment), numberOfLines(Int)
+    case attributedString([Attributes])
+
+    // UIButton
+    case buttonType(UIButtonType), buttonTitle(String, UIControlState), buttonTitleColor(UIColor, UIControlState), buttonTitleShadowColor(UIColor, UIControlState), buttonImage(UIImage, UIControlState), buttonBackgroundImage(UIImage, UIControlState), buttonAttributedTitle([Attributes], UIControlState), contentEdgeInsets(UIEdgeInsets), titleEdgeInsets(UIEdgeInsets), reversesTitleShadowWhenHighlighted(Bool), imageEdgeInsets(UIEdgeInsets), adjustsImageWhenHighlighted(Bool), adjustsImageWhenDisabled(Bool), showsTouchWhenHighlighted(Bool)
+
+    // UIImageView
+
+    // UITextView
+    // UITextField
+    // ...
+
+    // Custom
     case custom((String, AnyObject))
     case none
 

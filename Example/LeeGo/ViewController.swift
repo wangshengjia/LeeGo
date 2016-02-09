@@ -14,7 +14,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
-            for reuseId in ComponentProvider.allTypes {
+            for reuseId in ComponentProvider.cellReuseIdentifiers {
                 collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseId)
             }
         }
