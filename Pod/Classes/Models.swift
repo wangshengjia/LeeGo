@@ -10,6 +10,6 @@ import Foundation
 
 // Model
 
-public protocol ItemType {
-    func updateComponent(component: UIView)
-}
+//public protocol ItemType {
+//    func updateComponent(component: UIView)
+//}

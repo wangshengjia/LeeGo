@@ -51,32 +51,32 @@ extension UICollectionViewCell {
     }
 }
 
-
-public protocol ConfiguratorDelegate {
-
-    func willApply<Component: UIView>(
-        with Style: [Appearance],
-        toComponent component: Component,
-        withItem item: ItemType,
-        atIndexPath indexPath: NSIndexPath?) -> [Appearance]
-
-    func willComposite<Component: UIView>(with
-        components: [ComponentTarget],
-        toComponent component: Component,
-        using layout: Layout,
-        withItem item: ItemType,
-        atIndexPath indexPath: NSIndexPath?)
-
-    func willApply<Component: UIView>(with
-        componentTarget: ComponentTarget,
-        toComponent component: Component,
-        withItem item: ItemType,
-        atIndexPath indexPath: NSIndexPath?) -> ComponentTarget
-
-    func didApply<Component: UIView>(with componentTarget: ComponentTarget,
-        toComponent component: Component,
-        withItem item: ItemType,
-        atIndexPath indexPath: NSIndexPath?)
-
-}
+//
+//public protocol ConfiguratorDelegate {
+//
+//    func willApply<Component: UIView>(
+//        with Style: [Appearance],
+//        toComponent component: Component,
+//        withItem item: ItemType,
+//        atIndexPath indexPath: NSIndexPath?) -> [Appearance]
+//
+//    func willComposite<Component: UIView>(with
+//        components: [ComponentTarget],
+//        toComponent component: Component,
+//        using layout: Layout,
+//        withItem item: ItemType,
+//        atIndexPath indexPath: NSIndexPath?)
+//
+//    func willApply<Component: UIView>(with
+//        componentTarget: ComponentTarget,
+//        toComponent component: Component,
+//        withItem item: ItemType,
+//        atIndexPath indexPath: NSIndexPath?) -> ComponentTarget
+//
+//    func didApply<Component: UIView>(with componentTarget: ComponentTarget,
+//        toComponent component: Component,
+//        withItem item: ItemType,
+//        atIndexPath indexPath: NSIndexPath?)
+//
+//}
 

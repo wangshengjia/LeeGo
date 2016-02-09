@@ -12,11 +12,16 @@ internal final class ComponentContext {
     weak var componentView: UIView? = nil
     var component: ComponentTarget?
     var isRoot = true
-    var delegate: ConfiguratorDelegate?
+    // var delegate: ConfiguratorDelegate?
+    weak var dataSource: ComponentDataSource?
 
     init() {
 
     }
+}
+
+public protocol ComponentDataSource: class {
+    func updateComponent(componentView: UIView, with componentTarget: ComponentTarget)
 }
 
 extension UIView: ComponentType {
@@ -41,27 +46,27 @@ extension UIView: ComponentType {
         print("defaut imp 2")
     }
 
-    public func configure<Item : ItemType>(with item: Item, componentTarget: ComponentTarget) {
+    public func configure<Item: ComponentDataSource>(with dataSource: Item, componentTarget: ComponentTarget) {
 
         if self.context.isRoot {
             self.context.componentView = self
         }
 
         // will apply
-        let resolvedConfiguration = context.delegate?.willApply(with: componentTarget, toComponent: self, withItem: item, atIndexPath: nil) ?? componentTarget
+//        let resolvedConfiguration = context.delegate?.willApply(with: componentTarget, toComponent: self, withItem: item, atIndexPath: nil) ?? componentTarget
 
         // apply resolved componentTarget
         if let cell = self as? UICollectionViewCell {
-            cell.contentView.configure(item, component: resolvedConfiguration)
+            cell.contentView.configure(dataSource, component: componentTarget)
         } else if let cell = self as? UITableViewCell {
-            cell.contentView.configure(item, component: resolvedConfiguration)
+            cell.contentView.configure(dataSource, component: componentTarget)
         } else {
-            configure(item, component: resolvedConfiguration)
+            configure(dataSource, component: componentTarget)
         }
 
 
         // did apply
-        context.delegate?.didApply(with: componentTarget, toComponent: self, withItem: item, atIndexPath: nil)
+//        context.delegate?.didApply(with: componentTarget, toComponent: self, withItem: item, atIndexPath: nil)
     }
 
     public func name() -> String {

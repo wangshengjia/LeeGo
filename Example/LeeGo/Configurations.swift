@@ -18,11 +18,19 @@ enum ComponentProvider: ComponentProviderType {
 
     // root components
     case zen, article, video, portfolio, alert, detailsView, featured
+}
 
+extension ComponentProvider {
     static let types: [ComponentProvider: AnyClass] = [title: UILabel.self, avatar: UIImageView.self]
 
     static let defaultMetrics: MetricsValuesType = (20, 20, 20, 20, 10, 10)
 
+    static let allTypes = [zen, article, featured, video, portfolio, alert].map { (type) -> String in
+        return String(type)
+    }
+}
+
+extension ComponentProvider {
     func componentTarget() -> ComponentTarget? {
         switch self {
         case .article:
@@ -39,7 +47,7 @@ enum ComponentProvider: ComponentProviderType {
                     V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
                     V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
                     ], ComponentProvider.defaultMetrics)
-                )
+            )
         case .featured:
             return self.type().components(
                 ComponentProvider.avatar.type().style(Style.I1.style()),
@@ -82,12 +90,6 @@ enum ComponentProvider: ComponentProviderType {
         default:
             return nil
         }
-    }
-}
-
-extension ComponentProvider {
-    static let allTypes = [zen, article, featured, video, portfolio, alert].map { (type) -> String in
-        return String(type)
     }
 }
 

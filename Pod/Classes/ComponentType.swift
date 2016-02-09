@@ -14,7 +14,7 @@ protocol Configurable {
 }
 
 protocol Updatable {
-    func updateWithItem<Item: ItemType>(item: Item)
+    // func updateWithItem<Item: ItemType>(item: Item)
 }
 
 protocol Reusable {
@@ -110,16 +110,11 @@ extension Configurable where Self: UIView {
     }
 }
 
-extension Updatable where Self: UIView {
-    func updateWithItem<Item: ItemType>(item: Item) {
-        item.updateComponent(self)
-
-        /*
-        for case let subview as Updatable in self.subviews {
-        subview.updateWithItem(item)
-        }*/
-    }
-}
+//extension Updatable where Self: UIView {
+//    func updateWithItem<Item: ItemType>(item: Item) {
+//        item.updateComponent(self)
+//    }
+//}
 
 extension Reusable where Self: UIView {
     static var reuseIdentifier: String {
@@ -148,7 +143,7 @@ extension ComponentType where Self: UIView {
 //        
 //    }
 
-    final func configure<Item: ItemType>(item: Item, component: ComponentTarget) {
+    final func configure<Item: ComponentDataSource>(dataSource: Item, component: ComponentTarget) {
 
         // resolve conf based on item?, indexPath? or others ?
         // willApply
@@ -170,14 +165,15 @@ extension ComponentType where Self: UIView {
         }
 
         // update self
-        updateWithItem(item)
+        // updateWithItem(item)
+        dataSource.updateComponent(self, with: component)
 
         if shouldRebuild {
             // add & layout sub components
             if let components = component.components, let layout = component.layout {
                 let subcomponents = compositeSubcomponents(components, layout: layout)
                 for (component, componentTarget) in subcomponents {
-                    component.configure(with: item, componentTarget: componentTarget)
+                    component.configure(with: dataSource, componentTarget: componentTarget)
                 }
 
                 return
@@ -187,7 +183,7 @@ extension ComponentType where Self: UIView {
         // configure sub components recursively
         for subview in self.subviews where subview.context.componentView == subview {
             if let componentTarget = subview.context.component {
-                subview.configure(with: item, componentTarget: componentTarget)
+                subview.configure(with: dataSource, componentTarget: componentTarget)
             }
         }
     }

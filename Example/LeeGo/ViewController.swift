@@ -87,34 +87,34 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     }
 }
 
-extension ViewController: ConfiguratorDelegate {
-
-    func willApply<Component: UIView>(with style: [Appearance], toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> [Appearance] {
-        
-
-        return style
-    }
-
-    func willComposite<Component: UIView>(with components: [ComponentTarget], toComponent component: Component, using layout: Layout, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) {
-
-    }
-
-    func willApply<Component: UIView>(with componentTarget: ComponentTarget, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> ComponentTarget {
-        guard let indexPath = indexPath else {
-            return componentTarget
-        }
-
-        if (item is ElementViewModel && indexPath.item > 5) {
-            return componentTarget
-        }
-
-        return componentTarget
-    }
-
-    func didApply<Component: UIView>(with componentTarget: ComponentTarget, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) {
-
-    }
-}
+//extension ViewController: ConfiguratorDelegate {
+//
+//    func willApply<Component: UIView>(with style: [Appearance], toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> [Appearance] {
+//        
+//
+//        return style
+//    }
+//
+//    func willComposite<Component: UIView>(with components: [ComponentTarget], toComponent component: Component, using layout: Layout, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) {
+//
+//    }
+//
+//    func willApply<Component: UIView>(with componentTarget: ComponentTarget, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> ComponentTarget {
+//        guard let indexPath = indexPath else {
+//            return componentTarget
+//        }
+//
+//        if (item is ElementViewModel && indexPath.item > 5) {
+//            return componentTarget
+//        }
+//
+//        return componentTarget
+//    }
+//
+//    func didApply<Component: UIView>(with componentTarget: ComponentTarget, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) {
+//
+//    }
+//}
 
 
 
