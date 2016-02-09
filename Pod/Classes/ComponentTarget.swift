@@ -8,20 +8,6 @@
 
 import Foundation
 
-//public protocol ComponentTargetType: Hashable {
-//    func availableComponentTypes() -> [String : AnyClass]
-//}
-//
-//extension ComponentTargetType {
-//    func componentClass() -> AnyClass? {
-//        return self.availableComponentTypes()[self.stringValue]
-//    }
-//
-//    var stringValue: String {
-//        return String(self)
-//    }
-//}
-
 public protocol ComponentProviderType: Hashable {
     static var types: [Self: AnyClass] { get }
 }
@@ -40,13 +26,31 @@ extension ComponentProviderType {
         }
         return type(targetClass)
     }
+
+    var hashValue: Int {
+        return String(self).hashValue
+    }
 }
+
+//public func ==(lhs: ComponentProviderType, rhs: ComponentProviderType) -> Bool {
+//    return String(lhs) == String(rhs)
+//}
 
 public class ComponentTarget: Hashable {
     let name: String
     let targetClass: AnyClass
 
-    private(set) var configuration = Configuration()
+    private(set) var style: [Appearance] = []
+    private(set) var components: [ComponentTarget]? = nil {
+        willSet {
+            if let names = newValue?.map({ (component) -> String in
+                return component.name
+            }) where Set(names).count != newValue?.count {
+                assertionFailure("Subcomponents share the same ancestor should have different names.")
+            }
+        }
+    }
+    private(set) var layout: Layout? = nil
     private(set) var width: CGFloat = 0.0
 
     public var hashValue: Int {
@@ -58,8 +62,33 @@ public class ComponentTarget: Hashable {
         self.targetClass = targetClass
     }
 
-    public func config(config: Configuration) -> ComponentTarget {
-        self.configuration = config
+    public func style(style: [Appearance] = []) -> ComponentTarget {
+        self.style = style
+        return self
+    }
+
+    public func components(components: [ComponentTarget], layout: Layout) -> ComponentTarget {
+        self.components = components
+        self.layout = layout
+        return self
+    }
+
+    public func components(c1: ComponentTarget, layout: (String) -> Layout) -> ComponentTarget {
+        self.components = [c1]
+        self.layout = layout(c1.name)
+        return self
+    }
+
+    public func components(c1: ComponentTarget, _ c2: ComponentTarget, layout: (String, String) -> Layout) -> ComponentTarget {
+        self.components = [c1, c2]
+        self.layout = layout(c1.name, c2.name)
+        return self
+    }
+
+    public func components(c1: ComponentTarget, c2: ComponentTarget, c3: ComponentTarget, layout: (String, String, String) -> Layout) -> ComponentTarget {
+        self.components = [c1, c2, c3]
+        self.layout = layout(c1.name, c2.name, c3.name)
+
         return self
     }
 
@@ -67,6 +96,7 @@ public class ComponentTarget: Hashable {
         self.width = width
         return self
     }
+
 }
 
 public func ==(lhs: ComponentTarget, rhs: ComponentTarget) -> Bool {

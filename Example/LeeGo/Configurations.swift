@@ -9,38 +9,228 @@
 import Foundation
 import LeeGo
 
-enum ConfigurationTarget: String, ConfigurationTargetType {
-    case Zen, Article, Featured, Video, Portfolio, Alert, Header, Footer
+enum ComponentProvider: ComponentProviderType {
+    // leaf components
+    case title, subtitle, date, avatar
 
-    static let allTypes = [Zen, Article, Featured, Video, Portfolio, Alert, Footer].map { (type) -> String in
-        return type.rawValue
+    // child components
+    case header, footer, container
+
+    // root components
+    case zen, article, video, portfolio, alert, detailsView, featured
+}
+
+extension ComponentProvider {
+    static let types: [ComponentProvider: AnyClass] = [title: UILabel.self, avatar: UIImageView.self]
+
+    static let defaultMetrics: MetricsValuesType = (20, 20, 20, 20, 10, 10)
+
+    static let allTypes = [zen, article, featured, video, portfolio, alert].map { (type) -> String in
+        return String(type)
     }
+}
 
-    static let layoutMetrics = [
-        "top":20,
-        "bottom":20,
-        "left":20,
-        "right":20,
-        "interspaceH":10,
-        "interspaceV":10]
-
-
-    enum ComponentProvider: String, ComponentProviderType {
-        case title, subtitle, date, avatar, header, footer, container
-        
-        static let types: [ComponentProvider: AnyClass] = [title: Label.self]
-    }
-
-    func configuration() -> Configuration {
+extension ComponentProvider {
+    func componentTarget() -> ComponentTarget? {
         switch self {
-        case .Article:
-            /** chain expression */
+        case .article:
+            return self.type().components(
+                [
+                    ComponentProvider.title.componentTarget()!,
+                    ComponentTarget(name: "subtitle", targetClass: UILabel.self).style(Style.H2.style()),
+                    ComponentProvider.avatar.type(UIImageView).style(Style.I1.style()),
+                ],
+                layout: Layout([
+                    H(orderedViews: "avatar", "title"),
+                    H("avatar", width: 68),
+                    H(orderedViews: "avatar", "subtitle"),
+                    V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
+                    V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
+                    ], ComponentProvider.defaultMetrics)
+            )
+        case .featured:
+            return self.type().components(
+                ComponentProvider.avatar.type().style(Style.I1.style()),
+                ComponentProvider.title.type().style(Style.H3.style())
+                ) { (avatar: String, title: String) -> Layout in
+                    return Layout([
+                        H(left:nil, orderedViews: title, right:nil),
+                        H(left:nil, orderedViews: avatar, right:nil),
+                        V(orderedViews: [title]),
+                        V(top: nil, orderedViews: [avatar], bottom: nil),
+                        ],
+                        ComponentProvider.defaultMetrics)
+            }
+        case .detailsView:
+            return self.type().style([.backgroundColor(UIColor.brownColor())]).components(
+                ComponentProvider.header.componentTarget()!,
+                layout: { (header: String) -> Layout in
+                    return Layout([
+                        H(orderedViews: header),
+                        V(orderedViews: [header], bottom: .bottom(.GreaterThanOrEqual))
+                        ])
+            })
+        case .header:
+            return self.type().style([.translatesAutoresizingMaskIntoConstraints(false)]).components(
+                ComponentProvider.avatar.type().style(Style.I1.style()),
+                ComponentProvider.title.type().style(Style.H3.style())
+                ) { (avatar: String, title: String) -> Layout in
+                    return Layout([
+                        H(left:nil, orderedViews: title, right:nil),
+                        H(left:nil, orderedViews: avatar, right:nil),
+                        V(orderedViews: [title]),
+                        V(top: nil, orderedViews: [avatar], bottom: nil),
+                        ],
+                        ComponentProvider.defaultMetrics)
+            }
+        case .title:
+            return ComponentProvider.title.type(UILabel).style(Style.H3.style())
+        default:
+            return nil
+        }
+    }
+}
+
+enum Style: String {
+    case H1, H2, H3, I1, None
+
+    static let marker = "M"
+    static let customTitle = "title"
+    static let nature = "Nature"
+
+    static let ratio3To2: String = "3to2"
+
+    func style() -> [Appearance] {
+        switch self {
+        case H1:
+            return [.font(UIFont.systemFontOfSize(18)),
+                .textColor(UIColor.darkTextColor()),
+                .textAlignment(NSTextAlignment.Center),
+                .numberOfLines(0),
+                .translatesAutoresizingMaskIntoConstraints(false)]
+        case H2:
+            return [.font(UIFont.systemFontOfSize(12)),
+                .textColor(UIColor.lightGrayColor()),
+                .numberOfLines(0),
+                .translatesAutoresizingMaskIntoConstraints(false)]
+        case H3:
+            return [
+                .attributedString([
+                    [kCustomAttributeKeyIdentifier: Style.marker, NSFontAttributeName: UIFont(name: "LmfrAppIcon", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
+                    [kCustomAttributeKeyIdentifier: Style.customTitle, NSFontAttributeName: UIFont(name: "TheAntiquaB-W7Bold", size: CGFloat(20.responsive([.S: 21, .L: 30])))!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
+                    [kCustomAttributeKeyIdentifier: Style.nature, NSFontAttributeName: UIFont(name: "FetteEngschrift", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
+                    ]),
+                .numberOfLines(0),
+                .translatesAutoresizingMaskIntoConstraints(false)]
+        case I1:
+            return [.backgroundColor(UIColor.greenColor()), .custom((Style.ratio3To2, 1.5)), .translatesAutoresizingMaskIntoConstraints(false)]
+        default:
+            return []
+        }
+    }
+}
+
+
+//enum ConfigurationTarget {
+//    case Zen, Article, Featured, Video, Portfolio, Alert, Header, Footer, AnotherView
+//
+//    static let allTypes = [Zen, Article, Featured, Video, Portfolio, Alert, Footer].map { (type) -> String in
+//        return String(type)
+//    }
+//
+//    static let layoutMetrics = [
+//        "top":20,
+//        "bottom":20,
+//        "left":20,
+//        "right":20,
+//        "interspaceH": 20.responsive([.S: 21, .L: 30]),
+//        "interspaceV":10]
+//
+//    static let defaultMetrics: MetricsValuesType = (20, 20, 20, 20, 10, 10)
+//
+//    func configuration() -> Configuration {
+//        // ComponentProvider.title.type()
+//        // ComponentTarget(name: "subtitle", targetClass: UILabel.self).width(40.0).config(Zen.configuration())
+//
+//        switch self {
+//        case .AnotherView:
+//            return Configuration(
+//                Style.None.style(),
+//                [
+//                    ComponentTarget(name: "view", targetClass: UILabel.self): Article.configuration(),
+//                ],
+//                Layout([
+//                    "H:|-left-[view]-right-|",
+//                    "V:|-top-[view]-bottom-|",
+//                    ], ConfigurationTarget.layoutMetrics)
+//            )
+//        case .Article:
+//            return Configuration(
+//                Style.None.style(),
+//                [
+//                    ComponentProvider.title.type(UILabel): Configuration(Style.H3.style()),
+//                    ComponentTarget(name: "subtitle", targetClass: UILabel.self): Configuration(Style.H2.style()),
+//                    ComponentProvider.avatar.type(UIImageView): Configuration(Style.I1.style()),
+//                ],
+//                Layout([
+//                    H(orderedViews: "avatar", "title"),
+//                    H("avatar", width: 68),
+//                    H(orderedViews: "avatar", "subtitle"),
+//                    V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
+//                    V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
+//                    ], ConfigurationTarget.defaultMetrics)
+//            )
+//        case .Featured:
+//            return Configuration(
+//                Style.None.style(),
+//                [
+//                    ComponentProvider.avatar.type(ImageComponent): Configuration(Style.I1.style()),
+//                    ComponentProvider.title.type(UILabel): Configuration(Styles.H3),
+//                ],
+//                Layout([
+//                    H(left:nil, orderedViews:"title", right:nil),
+//                    H(left:nil, orderedViews:"avatar", right:nil),
+//                    H("avatar", width: 375),
+//                    V(orderedViews: ["title"]),
+//                    V(top: nil, orderedViews: ["avatar"], bottom: nil),
+//                    ], ConfigurationTarget.defaultMetrics)
+//            )
+//        case .Footer:
+//            return Configuration(
+//                go: Style.None.style(),
+//                [
+//                    ComponentProvider.title.type(),
+//                    ComponentProvider.subtitle.type()
+//                ], { (components) -> (Layout?) in
+//                    return Layout(
+//                        layout1(components),
+//                        ConfigurationTarget.layoutMetrics)
+//            })
+//        default:
+//            assertionFailure("Configuration type not found")
+//            return Configuration()
+//        }
+//    }
+//    
+//}
+//
+//func layout1(components: [String]) -> [String]{
+//    return [
+//        H(orderedViews: components[2], "title"),
+//        H("avatar", width: 50),
+//        H(fromSuperview: false, orderedViews: "avatar", "subtitle"),
+//        V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
+//        V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual))
+//    ]
+//}
+
+/** chain expression */
 //            ComponentProvider.title
 //                .type(ComponentTitle)
 //                .width(40.0)
 //                .config(Configuration(style: Styles.H1))
 
-            /** give exact components used with closure */
+/** give exact components used with closure */
 //            Configuration( Styles.None, [
 //                ComponentProvider.title.type(ComponentTitle),
 //                ComponentProvider.subtitle.type(ComponentTitle),
@@ -53,54 +243,6 @@ enum ConfigurationTarget: String, ConfigurationTargetType {
 //                        "V:|-top-[date]-(>=bottom)-|"
 //                        ], ConfigurationTarget.layoutMetrics)
 //            }
-            return Configuration(
-                Styles.None,
-                [
-                    ComponentProvider.title.type(ComponentTitle): Configuration(Styles.H1),
-                    ComponentTarget(name: "subtitle", targetClass: ComponentSubtitle.self): Configuration(Styles.H2),
-                    // (.footer, Configurations.Footer.configuration())
-                ],
-                Layout([
-                    "H:|-left-[title]-right-|",
-                    "H:|-left-[subtitle]-right-|",
-                    "V:|-top-[title]-interspaceV-[subtitle]-(>=bottom)-|",
-                    ], ConfigurationTarget.layoutMetrics)
-            )
-        case .Footer:
-            return Configuration(
-                Styles.None,
-                [
-                    ComponentProvider.title.type(): Configuration(Styles.H1),
-                    ComponentProvider.subtitle.type(ComponentSubtitle): Configuration(Styles.H2),
-                ],
-                Layout([
-                    "H:|-left-[avatar(50)]-interspaceH-[title]-(>=interspaceH)-[date]-right-|",
-                    "H:[avatar]-interspaceH-[subtitle]-right-|",
-                    "V:|-top-[title]-interspaceV-[subtitle]-(>=bottom)-|",
-                    "V:|-top-[avatar(50)]-(>=bottom)-|",
-                    "V:|-top-[date]-(>=bottom)-|"
-                    ], ConfigurationTarget.layoutMetrics)
-            )
-        default:
-            assertionFailure("Configuration type not found")
-            return Configuration()
-        }
-    }
-    
-}
-
-struct Styles {
-    static let None = StyleType()
-    
-    static let H1: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.grayColor(), .textAlignment: NSNumber(integer:  NSTextAlignment.Center.rawValue), .numberOfLines: NSNumber(integer: 0)]
-    static let H2: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.redColor(), .numberOfLines: NSNumber(integer: 0)]
-    static let H3: StyleType = [.font: UIFont.systemFontOfSize(15), .textColor: UIColor.lightGrayColor()]
-    static let I1: StyleType = [.backgroundColor: UIColor.greenColor()]
-}
-
-
-
-
 
 
 

@@ -40,5 +40,19 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FetteEngschrift.otf</string>
+		<string>LmfrAppIcon.ttf</string>
+		<string>TheSansOsF-SemiLight.otf</string>
+		<string>TheSansOsF-SemiBold.otf</string>
+		<string>TheSansOsF-Plain.otf</string>
+		<string>TheSansOsF-Bold.otf</string>
+		<string>TheAntiquaB-W5PlainItalic.otf</string>
+		<string>TheAntiquaB-W5Plain.otf</string>
+		<string>TheAntiquaB-W6SemiBold.otf</string>
+		<string>TheAntiquaB-W8ExtraBold.otf</string>
+		<string>TheAntiquaB-W7Bold.otf</string>
+	</array>
 </dict>
 </plist>
