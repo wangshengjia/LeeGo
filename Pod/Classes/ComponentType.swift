@@ -110,7 +110,7 @@ extension ComponentType where Self: UIView {
 //        
 //    }
 
-    final func configure<Item: ComponentDataSource>(dataSource: Item, component: ComponentTarget) {
+    final func configure(dataSource: ComponentDataSource?, component: ComponentTarget) {
 
         // resolve conf based on item?, indexPath? or others ?
         // willApply
@@ -133,7 +133,7 @@ extension ComponentType where Self: UIView {
 
         // update self
         // updateWithItem(item)
-        dataSource.updateComponent(self, with: component)
+        dataSource?.updateComponent(self, with: component)
 
         if shouldRebuild {
             // add & layout sub components

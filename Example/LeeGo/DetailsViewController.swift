@@ -10,18 +10,12 @@ import Foundation
 import UIKit
 import LeeGo
 
-class DetailsViewController: UIViewController, ComponentDataSource {
+class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.configure(with: self, componentTarget: ComponentProvider.detailsView.componentTarget()!)
-        
-    }
-
-    // MARK: ComponentDataSource
-
-    func updateComponent(componentView: UIView, with componentTarget: ComponentTarget) {
+        self.view.configure(componentTarget: ComponentProvider.detailsView.componentTarget()!)
         
     }
 }
