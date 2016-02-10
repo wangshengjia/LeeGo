@@ -72,4 +72,10 @@ extension UIView: ComponentType {
     public func name() -> String {
         return context.component?.name ?? "No Name"
     }
+
+    func setValueSafely(value: AnyObject?, forKey key: String) {
+        if self.respondsToSelector(Selector(key)) {
+            self.setValue(value, forKey: key)
+        }
+    }
 }

@@ -81,12 +81,16 @@ extension ComponentProvider {
         case .header:
             return self.type().style([.translatesAutoresizingMaskIntoConstraints(false)]).components(
                 ComponentProvider.avatar.type().style(Style.I1.style()),
-                ComponentProvider.title.type().style(Style.H3.style())
-                ) { (avatar: String, title: String) -> Layout in
+                ComponentProvider.title.type().style(Style.H3.style()),
+                (ComponentProvider.favoriteButton.componentTarget())!
+                ) { (avatar, title, favoriteButton) -> Layout in
                     return Layout([
+                        H(favoriteButton, width: 50),
+                        V(favoriteButton, height: 50),
                         H(left:nil, orderedViews: title, right:nil),
                         H(left:nil, orderedViews: avatar, right:nil),
-                        V(orderedViews: [title]),
+                        H(left: .left(.GreaterThanOrEqual), orderedViews: favoriteButton),
+                        V(orderedViews: [title, favoriteButton]),
                         V(top: nil, orderedViews: [avatar], bottom: nil),
                         ],
                         ComponentProvider.defaultMetrics)
@@ -94,7 +98,7 @@ extension ComponentProvider {
         case .title:
             return self.type(UILabel).style(Style.H3.style())
         case .favoriteButton:
-            return self.type().style(Style.H3.style())
+            return self.type().style(Style.BasicButton.style())
         default:
             return nil
         }
@@ -136,13 +140,13 @@ enum Style: String {
             return [
                 .attributedString([
                     [kCustomAttributeKeyIdentifier: Style.marker, NSFontAttributeName: UIFont(name: "LmfrAppIcon", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
-                    [kCustomAttributeKeyIdentifier: Style.customTitle, NSFontAttributeName: UIFont(name: "TheAntiquaB-W7Bold", size: CGFloat(20.responsive([.S: 21, .L: 30])))!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
+                    [kCustomAttributeKeyIdentifier: Style.customTitle, kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "TheAntiquaB-W7Bold", size: CGFloat(20.responsive([.S: 21, .L: 30])))!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
                     [kCustomAttributeKeyIdentifier: Style.nature, NSFontAttributeName: UIFont(name: "FetteEngschrift", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
                     ]),
                 .numberOfLines(0),
                 .translatesAutoresizingMaskIntoConstraints(false)]
         case I1:
-            return [.backgroundColor(UIColor.greenColor()), .custom((Style.ratio3To2, 1.5)), .translatesAutoresizingMaskIntoConstraints(false)]
+            return [.backgroundColor(UIColor.greenColor()), .custom([Style.ratio3To2: 1.5]), .translatesAutoresizingMaskIntoConstraints(false)]
         case BasicButton:
             return [.buttonType(.Custom), .buttonTitle("OK", .Normal), .translatesAutoresizingMaskIntoConstraints(false)]
         default:

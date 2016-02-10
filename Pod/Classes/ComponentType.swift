@@ -76,45 +76,12 @@ extension Configurable where Self: UIView {
         print("defaut imp")
     }
     
-
     func setupWithStyle(style: [Appearance]) {
-
-        // may be improved by functional map
-        var dictionary = [String: AnyObject](), customDict = [String: AnyObject]()
         for appearance in style {
-
-            if let (key, value) = appearance.tuple() where appearance.isCustom {
-                customDict[key] = value
-            } else if let (_, value) = appearance.tuple() where appearance.isAttributedString {
-                if let attrList = value as? NSArray, let label = self as? UILabel {
-                    label.attributedText = attrList.flatMap({ (attribute) -> NSAttributedString? in
-                        if let attribute = attribute as? [String : AnyObject] {
-                            return NSAttributedString(string: "holder", attributes: attribute)
-                        }
-                        return nil
-                    }).combineToAttributedString()
-                }
-            } else if let (key, value) = appearance.tuple() {
-                dictionary[key] = value
-            }
+            appearance.apply(to: self)
         }
-
-        for (key, value) in dictionary {
-            if self.respondsToSelector(Selector(key)) {
-                self.setValue(value, forKey: key)
-            } else {
-                print(key)
-            }
-        }
-        self.handleCustomStyle(customDict)
     }
 }
-
-//extension Updatable where Self: UIView {
-//    func updateWithItem<Item: ItemType>(item: Item) {
-//        item.updateComponent(self)
-//    }
-//}
 
 extension Reusable where Self: UIView {
     static var reuseIdentifier: String {

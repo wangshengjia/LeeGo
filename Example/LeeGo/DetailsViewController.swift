@@ -22,15 +22,6 @@ class DetailsViewController: UIViewController, ComponentDataSource {
     // MARK: ComponentDataSource
 
     func updateComponent(componentView: UIView, with componentTarget: ComponentTarget) {
-        switch componentView {
-        case let titleLabel as UILabel where componentView.name() == String(ComponentProvider.title):
-            titleLabel.setAttributeString(with: [
-                Style.customTitle: "test",
-                ])
-        case let avatar as UIImageView where componentView.name() == String(ComponentProvider.avatar):
-            avatar.backgroundColor = UIColor.grayColor()
-        default:
-            break
-        }
+        
     }
 }

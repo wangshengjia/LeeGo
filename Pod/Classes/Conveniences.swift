@@ -9,6 +9,7 @@
 import Foundation
 
 public let kCustomAttributeKeyIdentifier = "kCustomAttributeKeyIdentifier"
+public let kCustomAttributeDefaultText = "kCustomAttributeDefaultText"
 
 public extension Dictionary {
     func merge(dictionary: Dictionary<Key, Value>) {

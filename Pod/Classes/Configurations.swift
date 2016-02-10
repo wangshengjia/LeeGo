@@ -8,22 +8,6 @@
 
 import Foundation
 
-// Configurations
-
-// public typealias StyleType = [Appearance: AnyObject]
-
-//public protocol ConfigurationType {
-//    var style: StyleType { get }
-//    var components: [ComponentTarget: Self]? { get }
-//    var layout: Layout? { get }
-//}
-
-//extension RawRepresentable where RawValue == String {
-//    func target(targetClass: AnyObject = UIView) -> ComponentTarget {
-//        return ComponentTarget(name: rawValue, targetClass: targetClass)
-//    }
-//}
-
 public typealias MetricsValuesType = (AnyObject, AnyObject, AnyObject, AnyObject, AnyObject, AnyObject)
 
 public struct Layout {
@@ -49,41 +33,6 @@ public struct Layout {
     }
 }
 
-//public struct Configuration {
-//    public let style: [Appearance]
-//    public let components: [ComponentTarget: Configuration]?
-//    public let layout: Layout?
-//
-//    public init(_ style: [Appearance] = [], _ components: [ComponentTarget: Configuration]? = nil, _ layout: Layout? = nil) {
-//
-//        // check is two components have the same name
-//
-//        self.style = style
-//        self.components = components
-//        self.layout = layout
-//    }
-//
-//    public init(go1 style: [Appearance] = [], _ components: [ComponentTarget]? = nil, _ layout: (c1: String, c2: String) -> (Layout?)) {
-//        self.style = style
-//        self.components = nil
-//        self.layout = layout(c1: (components?[0].name)!, c2: (components?[1].name)!)
-//    }
-//
-//    public init(go style1: [Appearance] = [], _ components: [ComponentTarget]? = nil, _ layout: (components: [String]) -> (Layout?)) {
-//        self.style = style1
-//        self.components = nil
-//        self.layout = layout(components: components?.map({ (component) -> String in
-//            return component.name
-//        }) ?? [])
-//    }
-//
-//}
-
-///// A type of dictionary that only uses strings for keys and can contain any
-///// type of object as a value.
-//public typealias JSONDictionary = [String: JSONObject]
-//
-///// A type of any object
 public typealias Attributes = [String: AnyObject]
 
 extension Int {
@@ -103,8 +52,8 @@ public enum Appearance: Equatable {
     case translatesAutoresizingMaskIntoConstraints(Bool), backgroundColor(UIColor), tintColor(UIColor)
 
     // UILabel
-    case font(UIFont), textColor(UIColor), textAlignment(NSTextAlignment), numberOfLines(Int)
-    case attributedString([Attributes])
+    case font(UIFont), textColor(UIColor), textAlignment(NSTextAlignment), numberOfLines(Int), defaultLabelText(String)
+    case attributedString([Attributes]) // TODO: handle also NSParagrapheStyle
 
     // UIButton
     case buttonType(UIButtonType), buttonTitle(String, UIControlState), buttonTitleColor(UIColor, UIControlState), buttonTitleShadowColor(UIColor, UIControlState), buttonImage(UIImage, UIControlState), buttonBackgroundImage(UIImage, UIControlState), buttonAttributedTitle([Attributes], UIControlState), contentEdgeInsets(UIEdgeInsets), titleEdgeInsets(UIEdgeInsets), reversesTitleShadowWhenHighlighted(Bool), imageEdgeInsets(UIEdgeInsets), adjustsImageWhenHighlighted(Bool), adjustsImageWhenDisabled(Bool), showsTouchWhenHighlighted(Bool)
@@ -116,7 +65,7 @@ public enum Appearance: Equatable {
     // ...
 
     // Custom
-    case custom((String, AnyObject))
+    case custom([String: AnyObject])
     case none
 
     func toString() -> String {
@@ -127,76 +76,148 @@ public enum Appearance: Equatable {
         return strSelf
     }
 
-    func tuple() -> (key: String, value: AnyObject)? {
+    func apply<Component: UIView>(to component: Component) {
 
-        switch self {
-        case let .font(font):
-            return (key: toString(), value: font)
-        case let .textColor(color):
-            return (key: toString(), value: color)
-        case let .backgroundColor(color):
-            return (key: toString(), value: color)
-        case let .textAlignment(align):
-            return (key: toString(), value: align.rawValue.nsObject())
-        case let .numberOfLines(number):
-            return (key: toString(), value: number.nsObject())
-        case let .translatesAutoresizingMaskIntoConstraints(should):
-            return (key: toString(), value: should.nsObject())
-        case let .attributedString(attrList):
-            return (key: toString(), value: attrList)
-        case let .custom(dictionary):
-            return dictionary
+        switch (self, component) {
+        // UIView
+        case (let .backgroundColor(color), _):
+            component.setValue(color, forKey: toString())
+        case (let .translatesAutoresizingMaskIntoConstraints(should), _):
+            component.setValue(should.nsObject(), forKey: toString())
+
+        // UILabel
+        case (let .font(font), let label as UILabel):
+            label.setValue(font, forKey: toString())
+        case (let .textColor(color), let label as UILabel):
+            label.setValue(color, forKey: toString())
+        case (let .textAlignment(align), let label as UILabel):
+            label.setValue(align.rawValue.nsObject(), forKey: toString())
+        case (let .numberOfLines(number), let label as UILabel):
+            label.setValue(number.nsObject(), forKey: toString())
+        case (let .defaultLabelText(text), let label as UILabel):
+            label.text = text
+        case (let .attributedString(attributes), let label as UILabel):
+            label.attributedText = attributedStringFromList(attributes)
+
+        // UIButton
+        case (let .buttonType(type), let button as UIButton):
+            print(type) //TODO:  button.buttonType = type
+        case (let .buttonTitle(title, state), let button as UIButton):
+            button.setTitle(title, forState: state)
+        case (let .buttonTitleColor(color, state), let button as UIButton):
+            button.setTitleColor(color, forState: state)
+        case (let .buttonTitleShadowColor(color, state), let button as UIButton):
+            button.setTitleShadowColor(color, forState: state)
+        case (let .buttonImage(image, state), let button as UIButton):
+            button.setImage(image, forState: state)
+        case (let .buttonBackgroundImage(image, state), let button as UIButton):
+            button.setBackgroundImage(image, forState: state)
+        case (let .buttonAttributedTitle(attributes, state), let button as UIButton):
+            button.setAttributedTitle(attributedStringFromList(attributes), forState: state)
+        case (let .contentEdgeInsets(insets), let button as UIButton):
+            button.contentEdgeInsets = insets
+        case (let .titleEdgeInsets(insets), let button as UIButton):
+            button.titleEdgeInsets = insets
+        case (let .imageEdgeInsets(insets), let button as UIButton):
+            button.imageEdgeInsets = insets
+        case (let .reversesTitleShadowWhenHighlighted(should), let button as UIButton):
+            button.reversesTitleShadowWhenHighlighted = should
+        case (let .adjustsImageWhenHighlighted(should), let button as UIButton):
+            button.adjustsImageWhenHighlighted = should
+        case (let .adjustsImageWhenDisabled(should), let button as UIButton):
+            button.adjustsImageWhenDisabled = should
+        case (let .showsTouchWhenHighlighted(should), let button as UIButton):
+            button.showsTouchWhenHighlighted = should
+
+        // Custom
+        case (let .custom(dictionary), _):
+            component.handleCustomStyle(dictionary)
         default:
+            assertionFailure("Unknown appearance \(self) for component \(component)")
             break
         }
-
-        return nil
     }
 
-    static func tuples(styles: [Appearance]) -> [(key: String, value: AnyObject)] {
-        return styles.flatMap({ (appearance) -> (key: String, value: AnyObject)? in
-            return appearance.tuple()
-        })
-    }
 
-    static func dictionary(styles: [Appearance]) -> [String: AnyObject] {
-        var result = [String: AnyObject]()
-        for appearance in styles {
-            switch appearance {
-            case let .font(font):
-                result[""] = font
-            default:
-                break
-            }
-        }
-        
-        return result
-    }
+//    func value() -> AnyObject? {
+//
+//        switch self {
+//        // UIView
+//        case let .backgroundColor(color):
+//            return color
+//        case let .translatesAutoresizingMaskIntoConstraints(should):
+//            return should
+//
+//        // UILabel
+//        case let .font(font):
+//            return font
+//        case let .textColor(color):
+//            return color
+//        case let .textAlignment(align):
+//            return String(align)
+//        case let .numberOfLines(number):
+//            return number
+//        case let .defaultLabelText(text):
+//            return text
+//        case let .attributedString(attrList):
+//            return attrList
+//
+//        // UIButton
+//        case let .buttonTitle(title, state):
+//            return title + "\(state)"
+//        case let .buttonTitleColor(color, state):
+//            return (color)
+//        case (let .buttonTitleShadowColor(color, state), let button as UIButton):
+//            button.setTitleShadowColor(color, forState: state)
+//        case (let .buttonImage(image, state), let button as UIButton):
+//            button.setImage(image, forState: state)
+//        case (let .buttonBackgroundImage(image, state), let button as UIButton):
+//            button.setBackgroundImage(image, forState: state)
+//        case (let .buttonAttributedTitle(attributes, state), let button as UIButton):
+//            button.setAttributedTitle(attributedStringFromList(attributes), forState: state)
+//        case (let .contentEdgeInsets(insets), let button as UIButton):
+//            button.contentEdgeInsets = insets
+//        case (let .titleEdgeInsets(insets), let button as UIButton):
+//            button.titleEdgeInsets = insets
+//        case (let .imageEdgeInsets(insets), let button as UIButton):
+//            button.imageEdgeInsets = insets
+//        case (let .reversesTitleShadowWhenHighlighted(should), let button as UIButton):
+//            button.reversesTitleShadowWhenHighlighted = should
+//        case (let .adjustsImageWhenHighlighted(should), let button as UIButton):
+//            button.adjustsImageWhenHighlighted = should
+//        case (let .adjustsImageWhenDisabled(should), let button as UIButton):
+//            button.adjustsImageWhenDisabled = should
+//        case (let .showsTouchWhenHighlighted(should), let button as UIButton):
+//            button.showsTouchWhenHighlighted = should
+//
+//        // Custom
+//        case let .custom(dictionary):
+//            return dictionary
+//        default:
+//            assertionFailure("Unknown appearance \(self)")
+//            return nil
+//        }
+//    }
 
-    var isCustom: Bool {
-        if case .custom(_) = self {
-            return true
-        }
-        return false
-    }
-
-    var isAttributedString: Bool {
-        if case .attributedString(_) = self {
-            return true
-        }
-        return false
-    }
 //    public var hashValue: Int {
 //        return String(self).hashValue
 //    }
+
+    func attributedStringFromList(attrList: [Attributes]) -> NSAttributedString? {
+        return attrList.flatMap({ (attribute) -> NSAttributedString? in
+            // TODO: is that possible to take care this default "space" ??
+            return NSAttributedString(string: (attribute[kCustomAttributeDefaultText] as? String) ?? " ", attributes: attribute)
+        }).combineToAttributedString()
+    }
 }
 
 public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
-    if let result1 = lhs.tuple(), let result2 = rhs.tuple() {
-        return result1.key == result2.key && result1.value.isEqual(result2.value)
-    }
+    // TODO: 
 
-    return false
+//    if let result1 = lhs.value(), let result2 = rhs.value() {
+//        return lhs.toString() == rhs.toString() && result1.isEqual(result2)
+//    }
+    return lhs.toString() == rhs.toString()
 }
 
 protocol Decodable {}
