@@ -13,18 +13,7 @@ protocol Configurable {
     func handleCustomStyle(style: [String: AnyObject])
 }
 
-protocol Updatable {
-    // func updateWithItem<Item: ItemType>(item: Item)
-}
-
-protocol Reusable {
-    static var reuseIdentifier: String { get }
-
-    func cleanUpForReuse()
-}
-
 protocol Composable {
-    // typealias T: Hashable
     func compositeSubcomponents(components: [ComponentTarget], layout: Layout) -> [UIView: ComponentTarget]
 }
 
@@ -41,7 +30,6 @@ extension Composable where Self: UIView {
                 self.addSubview(componentView)
 
                 // Setup each component view with style which listed in configuration
-                // componentView.context.configuration = subConfig
                 componentView.context.componentView = componentView
                 componentView.context.isRoot = false
 
@@ -63,7 +51,6 @@ extension Composable where Self: UIView {
                 //constraint.priority = 990
                 //constraint.shouldBeArchived = true
                 constraint.identifier = constraint.description
-//                print(constraint)
                 self.addConstraint(constraint)
             }
         }
@@ -73,7 +60,7 @@ extension Composable where Self: UIView {
 
 extension Configurable where Self: UIView {
     func handleCustomStyle(style: [String: AnyObject]) {
-        print("defaut imp")
+        assertionFailure("Unknown custom style \(style), should implement `handleCustomStyle:` in extension of UIView or its subclass.")
     }
     
     func setupWithStyle(style: [Appearance]) {
@@ -83,25 +70,8 @@ extension Configurable where Self: UIView {
     }
 }
 
-extension Reusable where Self: UIView {
-    static var reuseIdentifier: String {
-        // I like to use the class's name as an identifier
-        // so this makes a decent default value.
-        return String(Self)
-    }
+protocol ComponentType: Configurable, Composable {
 
-    final func cleanUpForReuse() {
-
-        // do clean up
-
-        for case let subview as Reusable in self.subviews {
-            subview.cleanUpForReuse()
-        }
-    }
-}
-
-protocol ComponentType: Configurable, Composable, Updatable, Reusable {
-    // var configuration: ConfigurationType { get }
 }
 
 extension ComponentType where Self: UIView {
@@ -109,6 +79,14 @@ extension ComponentType where Self: UIView {
 //    func configure(item: ItemType, indexPath: NSIndexPath? = nil) {
 //        
 //    }
+
+    final func cleanUpForReuse() {
+
+        // do clean up
+        for case let subview in self.subviews {
+            subview.cleanUpForReuse()
+        }
+    }
 
     final func configure(dataSource: ComponentDataSource?, component: ComponentTarget) {
 

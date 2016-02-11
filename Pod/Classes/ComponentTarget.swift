@@ -32,10 +32,6 @@ extension ComponentProviderType {
     }
 }
 
-//public func ==(lhs: ComponentProviderType, rhs: ComponentProviderType) -> Bool {
-//    return String(lhs) == String(rhs)
-//}
-
 public class ComponentTarget: Hashable {
     let name: String
     let targetClass: AnyClass

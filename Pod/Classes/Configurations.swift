@@ -212,7 +212,7 @@ public enum Appearance: Equatable {
 }
 
 public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
-    // TODO: 
+    // TODO: how to implement the real equatable
 
 //    if let result1 = lhs.value(), let result2 = rhs.value() {
 //        return lhs.toString() == rhs.toString() && result1.isEqual(result2)

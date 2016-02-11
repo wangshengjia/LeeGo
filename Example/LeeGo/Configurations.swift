@@ -42,58 +42,63 @@ extension ComponentProvider {
     func componentTarget() -> ComponentTarget? {
         switch self {
         case .article:
-            return self.type().components(
-                [
+            return self.type()
+                .components([
                     ComponentProvider.title.componentTarget()!,
                     ComponentTarget(name: "subtitle", targetClass: UILabel.self).style(Style.H2.style()),
                     ComponentProvider.avatar.type(UIImageView).style(Style.I1.style()),
-                ],
-                layout: Layout([
-                    H(orderedViews: "avatar", "title"),
-                    H("avatar", width: 68),
-                    H(orderedViews: "avatar", "subtitle"),
-                    V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
-                    V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
-                    ], ComponentProvider.defaultMetrics)
+                    ],
+                    layout: Layout([
+                        H(orderedViews: "avatar", "title"),
+                        H("avatar", width: 68),
+                        H(orderedViews: "avatar", "subtitle"),
+                        V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
+                        V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
+                        ], ComponentProvider.defaultMetrics)
             )
         case .featured:
-            return self.type().components(
-                ComponentProvider.avatar.type().style(Style.I1.style()),
-                ComponentProvider.title.type().style(Style.H3.style())
-                ) { (avatar: String, title: String) -> Layout in
-                    return Layout([
-                        H(left:nil, orderedViews: title, right:nil),
-                        H(left:nil, orderedViews: avatar, right:nil),
-                        V(orderedViews: [title]),
-                        V(top: nil, orderedViews: [avatar], bottom: nil),
-                        ],
-                        ComponentProvider.defaultMetrics)
+            return self.type()
+                .components(
+                    ComponentProvider.avatar.type().style(Style.I1.style()),
+                    ComponentProvider.title.type().style(Style.H3.style())
+                    ) { (avatar, title) -> Layout in
+                        return Layout([
+                            H(left:nil, orderedViews: title, right:nil),
+                            H(left:nil, orderedViews: avatar, right:nil),
+                            V(orderedViews: [title]),
+                            V(top: nil, orderedViews: [avatar], bottom: nil),
+                            ],
+                            ComponentProvider.defaultMetrics)
             }
         case .detailsView:
-            return self.type().style([.backgroundColor(UIColor.brownColor())]).components(
-                ComponentProvider.header.componentTarget()!,
-                layout: { (header: String) -> Layout in
-                    return Layout([
-                        H(orderedViews: header),
-                        V(orderedViews: [header], bottom: .bottom(.GreaterThanOrEqual))
-                        ])
-            })
+            return self.type()
+                .style([.backgroundColor(UIColor.brownColor())])
+                .components(
+                    ComponentProvider.header.componentTarget()!,
+                    layout: { (header: String) -> Layout in
+                        return Layout([
+                            H(orderedViews: header),
+                            V(orderedViews: [header], bottom: .bottom(.GreaterThanOrEqual))
+                            ])
+                })
         case .header:
-            return self.type().style([.translatesAutoresizingMaskIntoConstraints(false)]).components(
-                ComponentProvider.avatar.type().style(Style.I1.style()),
-                ComponentProvider.title.type().style(Style.H3.style()),
-                (ComponentProvider.favoriteButton.componentTarget())!
-                ) { (avatar, title, favoriteButton) -> Layout in
-                    return Layout([
-                        H(favoriteButton, width: 50),
-                        V(favoriteButton, height: 50),
-                        H(left:nil, orderedViews: title, right:nil),
-                        H(left:nil, orderedViews: avatar, right:nil),
-                        H(left: .left(.GreaterThanOrEqual), orderedViews: favoriteButton),
-                        V(orderedViews: [title, favoriteButton]),
-                        V(top: nil, orderedViews: [avatar], bottom: nil),
-                        ],
-                        ComponentProvider.defaultMetrics)
+            return self.type()
+                .style([.translatesAutoresizingMaskIntoConstraints(false)])
+                .components(
+                    ComponentProvider.avatar.type().style(Style.I1.style()),
+                    ComponentProvider.title.type().style(Style.H3.style()),
+                    (ComponentProvider.favoriteButton.componentTarget())!
+                    ) { (avatar, title, favoriteButton) -> Layout in
+                        return Layout([
+                            H(favoriteButton, width: 50),
+                            V(favoriteButton, height: 50),
+                            H(left:nil, orderedViews: title, right:nil),
+                            H(left:nil, orderedViews: avatar, right:nil),
+                            H(left: .left(.GreaterThanOrEqual), orderedViews: favoriteButton),
+                            V(orderedViews: [title, favoriteButton]),
+                            V(top: nil, orderedViews: [avatar], bottom: nil),
+                            ],
+                            ComponentProvider.defaultMetrics)
             }
         case .title:
             return self.type(UILabel).style(Style.H3.style())

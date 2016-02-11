@@ -12,8 +12,8 @@ public let kCustomAttributeKeyIdentifier = "kCustomAttributeKeyIdentifier"
 public let kCustomAttributeDefaultText = "kCustomAttributeDefaultText"
 
 public extension Dictionary {
-    func merge(dictionary: Dictionary<Key, Value>) {
-        
+    func merge(dictionary: [Key: Value]) -> [Key: Value] {
+        return [:]
     }
 }
 
