@@ -16,6 +16,5 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.configure(componentTarget: ComponentProvider.detailsView.componentTarget()!)
-        
     }
 }

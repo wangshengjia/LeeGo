@@ -12,6 +12,7 @@ import LeeGo
 
 class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UISearchBarDelegate {
 
+
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             for reuseId in ComponentProvider.cellReuseIdentifiers {
@@ -29,20 +30,22 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 
         collectionView.reloadData()
 
-        let URLRequest =  NSURLRequest(URL: NSURL(string: "http://api-cdn.lemonde.fr/ws/5/mobile/www/ios-phone/en_continu/index.json")!)
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(URLRequest) {data, response, error in
-            if let data = data,
-                let optionalValue = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)) as? Dictionary<String, AnyObject>,
-                let value = optionalValue,
-                let elementDictionaries = value["elements"] as? Array<Dictionary<String, AnyObject>> {
-                    self.elements = ElementViewModel.elementViewModelsWithElements(Element.elementsFromDictionaries(elementDictionaries))
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.collectionView.reloadData()
-                    })
+        if elements.isEmpty {
+            let URLRequest =  NSURLRequest(URL: NSURL(string: "http://api-cdn.lemonde.fr/ws/5/mobile/www/ios-phone/en_continu/index.json")!)
+            let task = NSURLSession.sharedSession().dataTaskWithRequest(URLRequest) {data, response, error in
+                if let data = data,
+                    let optionalValue = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)) as? Dictionary<String, AnyObject>,
+                    let value = optionalValue,
+                    let elementDictionaries = value["elements"] as? Array<Dictionary<String, AnyObject>> {
+                        self.elements = ElementViewModel.elementViewModelsWithElements(Element.elementsFromDictionaries(elementDictionaries))
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.collectionView.reloadData()
+                        })
+                }
             }
+            
+            task.resume()
         }
-
-        task.resume()
     }
 
     // MARK: Collection View DataSource
@@ -83,7 +86,17 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        self.navigationController?.pushViewController(DetailsViewController(), animated: true)
+
+        if indexPath.item % 2 == 0 {
+            if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainViewController") as? ViewController {
+                detailsViewController.elements = self.elements
+                self.navigationController?.pushViewController(detailsViewController, animated: true)
+            }
+        } else {
+            if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailsViewController") as? DetailsViewController {
+                self.navigationController?.pushViewController(detailsViewController, animated: true)
+            }
+        }
     }
 }
 

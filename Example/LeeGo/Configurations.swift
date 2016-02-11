@@ -85,7 +85,7 @@ extension ComponentProvider {
             return self.type()
                 .style([.translatesAutoresizingMaskIntoConstraints(false)])
                 .components(
-                    ComponentProvider.avatar.type().style(Style.I1.style()),
+                    ComponentProvider.avatar.type(Icon).style(Style.I1.style()),
                     ComponentProvider.title.type().style(Style.H3.style()),
                     (ComponentProvider.favoriteButton.componentTarget())!
                     ) { (avatar, title, favoriteButton) -> Layout in
