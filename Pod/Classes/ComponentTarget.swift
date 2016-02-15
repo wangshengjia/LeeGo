@@ -13,7 +13,7 @@ public protocol ComponentProviderType: Hashable {
 }
 
 extension ComponentProviderType {
-    public func type(type: AnyObject? = nil) -> ComponentTarget {
+    public func build(type: AnyObject? = nil) -> ComponentTarget {
         if type == nil {
             return target()
         }
@@ -22,9 +22,9 @@ extension ComponentProviderType {
 
     func target() -> ComponentTarget {
         guard let targetClass = Self.types[self] else {
-            return type(UIView)
+            return build(UIView)
         }
-        return type(targetClass)
+        return build(targetClass)
     }
 
     var hashValue: Int {

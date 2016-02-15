@@ -43,11 +43,11 @@ extension ComponentProvider {
     func componentTarget() -> ComponentTarget {
         switch self {
         case .article:
-            return self.type()
+            return self.build()
                 .components([
                     title.componentTarget(),
                     ComponentTarget(name: "subtitle", targetClass: UILabel.self).style(Style.H2.style()),
-                    avatar.type(UIImageView).style(Style.I1.style()),
+                    avatar.build(UIImageView).style(Style.I1.style()),
                     ],
                     layout: Layout([
                         H(orderedViews: "avatar", "title"),
@@ -58,10 +58,10 @@ extension ComponentProvider {
                         ], ComponentProvider.defaultMetrics)
             )
         case .featured:
-            return self.type()
+            return self.build()
                 .components(
-                    avatar.type().style(Style.I1.style()),
-                    title.type().style(Style.H3.style())
+                    avatar.build().style(Style.I1.style()),
+                    title.build().style(Style.H3.style())
                     ) { (avatar, title) -> Layout in
                         return Layout([
                             H(orderedViews: title),
@@ -72,7 +72,7 @@ extension ComponentProvider {
                             (0, 0, 0, 0, 0, 0))
             }
         case .detailsView:
-            return self.type()
+            return self.build()
                 .style([.backgroundColor(UIColor.brownColor())])
                 .components(
                     header.componentTarget(),
@@ -83,11 +83,11 @@ extension ComponentProvider {
                             ])
                 })
         case .header:
-            return self.type()
+            return self.build()
                 .style([.translatesAutoresizingMaskIntoConstraints(false)])
                 .components(
-                    avatar.type(Icon).style(Style.I1.style()),
-                    title.type().style(Style.H3.style()),
+                    avatar.build(Icon).style(Style.I1.style()),
+                    title.build().style(Style.H3.style()),
                     favoriteButton.componentTarget()
                     ) { (avatar, title, favoriteButton) -> Layout in
                         return Layout([
@@ -102,12 +102,12 @@ extension ComponentProvider {
                             ComponentProvider.defaultMetrics)
             }
         case .title:
-            return self.type(UILabel).style(Style.H3.style())
+            return self.build(UILabel).style(Style.H3.style())
         case .favoriteButton:
-            return self.type().style(Style.BasicButton.style())
+            return self.build().style(Style.BasicButton.style())
         default:
             assertionFailure("Unknown component: \(self)")
-            return self.type()
+            return self.build()
         }
     }
 }
