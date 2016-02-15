@@ -10,7 +10,7 @@ import Foundation
 import LeeGo
 
 
-enum ComponentProvider: ComponentProviderType {
+enum ComponentBuilder: ComponentBuilderType {
     // leaf components
     case title, subtitle, date, avatar
     case favoriteButton
@@ -24,8 +24,8 @@ enum ComponentProvider: ComponentProviderType {
     case zen, article, video, portfolio, alert, detailsView, featured
 }
 
-extension ComponentProvider {
-    static let types: [ComponentProvider: AnyClass] = [
+extension ComponentBuilder {
+    static let types: [ComponentBuilder: AnyClass] = [
         title: UILabel.self,
         subtitle: UILabel.self,
         avatar: UIImageView.self,
@@ -39,7 +39,7 @@ extension ComponentProvider {
     }
 }
 
-extension ComponentProvider {
+extension ComponentBuilder {
     func componentTarget() -> ComponentTarget {
         switch self {
         case .article:
@@ -55,7 +55,7 @@ extension ComponentProvider {
                         H(orderedViews: "avatar", "subtitle"),
                         V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
                         V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
-                        ], ComponentProvider.defaultMetrics)
+                        ], ComponentBuilder.defaultMetrics)
             )
         case .featured:
             return self.build()
@@ -68,8 +68,7 @@ extension ComponentProvider {
                             H(orderedViews: avatar),
                             V(orderedViews: [title]),
                             V(orderedViews: [avatar]),
-                            ],
-                            (0, 0, 0, 0, 0, 0))
+                            ])
             }
         case .detailsView:
             return self.build()
@@ -99,7 +98,7 @@ extension ComponentProvider {
                             V(orderedViews: [title, favoriteButton]),
                             V(top: nil, orderedViews: [avatar], bottom: nil),
                             ],
-                            ComponentProvider.defaultMetrics)
+                            ComponentBuilder.defaultMetrics)
             }
         case .title:
             return self.build(UILabel).style(Style.H3.style())

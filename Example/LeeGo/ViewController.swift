@@ -15,7 +15,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
-            for reuseId in ComponentProvider.cellReuseIdentifiers {
+            for reuseId in ComponentBuilder.cellReuseIdentifiers {
                 collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseId)
             }
         }
@@ -56,7 +56,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let configurationType = indexPath.row % 2 == 0 ? ComponentProvider.article : .featured
+        let configurationType = indexPath.row % 2 == 0 ? ComponentBuilder.article : .featured
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(configurationType), forIndexPath: indexPath)
 

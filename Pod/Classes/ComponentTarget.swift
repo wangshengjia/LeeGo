@@ -8,11 +8,11 @@
 
 import Foundation
 
-public protocol ComponentProviderType: Hashable {
+public protocol ComponentBuilderType: Hashable {
     static var types: [Self: AnyClass] { get }
 }
 
-extension ComponentProviderType {
+extension ComponentBuilderType {
     public func build(type: AnyObject? = nil) -> ComponentTarget {
         if type == nil {
             return target()
