@@ -116,7 +116,7 @@ extension ComponentType where Self: UIView {
         }
     }
 
-    final func configure(dataSource: ComponentDataSource?, newConfiguration: ComponentTarget) {
+    final func bind(newConfiguration: ComponentTarget, dataSource: ComponentDataSource?) {
 
         // resolve conf based on item?, indexPath? or others ?
         // willApply

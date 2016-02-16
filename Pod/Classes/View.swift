@@ -12,28 +12,30 @@ public protocol ComponentDataSource: class {
     func updateComponent(componentView: UIView, with componentTarget: ComponentTarget)
 }
 
+public enum ConfigurationUpdatingStrategy {
+    case OnlyFristTime
+    case WhenComponentChanged
+    case Always
+}
+
 extension UIView: ComponentType {
 
     public func handleCustomStyle(style: [String: AnyObject]) {
         print("Should override and implement handleCustomStyle: ")
     }
 
-    public func configure(with dataSource: ComponentDataSource? = nil, componentTarget: ComponentTarget) {
-
-//        if context.isRoot {
-//            setOwner(self)
-//        }
+    public func configure(componentTarget: ComponentTarget, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
 
         // will apply
 //        let resolvedConfiguration = context.delegate?.willApply(with: componentTarget, toComponent: self, withItem: item, atIndexPath: nil) ?? componentTarget
 
         // apply resolved componentTarget
         if let cell = self as? UICollectionViewCell {
-            cell.contentView.configure(dataSource, newConfiguration: componentTarget)
+            cell.contentView.bind(componentTarget, dataSource: dataSource)
         } else if let cell = self as? UITableViewCell {
-            cell.contentView.configure(dataSource, newConfiguration: componentTarget)
+            cell.contentView.bind(componentTarget, dataSource: dataSource)
         } else {
-            configure(dataSource, newConfiguration: componentTarget)
+            bind(componentTarget, dataSource: dataSource)
         }
 
 
@@ -44,7 +46,7 @@ extension UIView: ComponentType {
         // for subview in self.subviews where subview.context.componentView == subview {
         for subview in self.subviews {
             if let componentTarget = subview.configuration {
-                subview.configure(with: dataSource, componentTarget: componentTarget)
+                subview.configure(componentTarget, dataSource: dataSource)
             }
         }
     }
