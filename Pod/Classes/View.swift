@@ -13,7 +13,6 @@ public protocol ComponentDataSource: class {
 }
 
 public enum ConfigurationUpdatingStrategy {
-    case OnlyFristTime
     case WhenComponentChanged
     case Always
 }
@@ -31,11 +30,11 @@ extension UIView: ComponentType {
 
         // apply resolved componentTarget
         if let cell = self as? UICollectionViewCell {
-            cell.contentView.bind(componentTarget, dataSource: dataSource)
+            cell.contentView.bind(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else if let cell = self as? UITableViewCell {
-            cell.contentView.bind(componentTarget, dataSource: dataSource)
+            cell.contentView.bind(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else {
-            bind(componentTarget, dataSource: dataSource)
+            bind(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
         }
 
 
@@ -46,7 +45,7 @@ extension UIView: ComponentType {
         // for subview in self.subviews where subview.context.componentView == subview {
         for subview in self.subviews {
             if let componentTarget = subview.configuration {
-                subview.configure(componentTarget, dataSource: dataSource)
+                subview.configure(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
             }
         }
     }

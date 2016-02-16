@@ -15,6 +15,6 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.configure(componentTarget: ComponentBuilder.detailsView.componentTarget())
+        self.view.configure(ComponentBuilder.detailsView.componentTarget())
     }
 }

@@ -26,9 +26,9 @@ extension Composable where Self: UIView {
         // filter components already exist
         let filteredComponents = components.filter { (component) -> Bool in
             if let subcomponents = self.configuration?.components where !subcomponents.contains(component) {
-                return true
+                return false
             }
-            return false
+            return true
         }
 
         let views = filteredComponents.flatMap { (component) -> UIView? in
@@ -57,8 +57,8 @@ extension Composable where Self: UIView {
             }
         }
 
-        // TODO: apply diff of layout
-        var shouldApplyLayout = false
+        // TODO: apply diff of layout instead of removing all constraints
+        self.removeConstraints(self.constraints)
 
         // Layout each component view with auto layout visual format language from configuration.
         for format in layout.formats {
@@ -116,23 +116,51 @@ extension ComponentType where Self: UIView {
         }
     }
 
-    final func bind(newConfiguration: ComponentTarget, dataSource: ComponentDataSource?) {
+    final func bind(newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
 
         // resolve conf based on item?, indexPath? or others ?
         // willApply
 
+        // TODO: should rebuild only layout or all?
+        var shouldRebuild = (self.configuration == nil)
+
         self.configuration = newConfiguration
 
+        switch updatingStrategy {
+        case .WhenComponentChanged:
+            if let current = self.configuration where current.name != newConfiguration.name {
+                shouldRebuild = true
+            }
+        case .Always:
+            shouldRebuild = true
+        }
+
         // setup self
-        setupWithStyle(newConfiguration.style)
+        if shouldRebuild {
+            setupWithStyle(newConfiguration.style)
+        }
 
         // update self
         dataSource?.updateComponent(self, with: newConfiguration)
 
-        // add & layout sub components
-        if let components = newConfiguration.components, let layout = newConfiguration.layout {
-            compositeSubcomponents(components, layout: layout)
+        if shouldRebuild {
+            // add & layout sub components
+            if let components = newConfiguration.components where !components.isEmpty, let layout = newConfiguration.layout {
+                compositeSubcomponents(components, layout: layout)
+            }
         }
+    }
+}
+
+extension UILabel {
+    func cleanUpForReuse() {
+        self.text = nil
+    }
+}
+
+extension UIImageView {
+    func cleanUpForReuse() {
+        self.image = nil
     }
 }
 
