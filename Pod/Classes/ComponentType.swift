@@ -24,8 +24,19 @@ extension Composable where Self: UIView {
         // create subview
         var viewsDictionary = [String: UIView]()
         for component in components {
+            if let nibName = component.nibName,
+                let componentView = NSBundle.mainBundle().loadNibNamed(nibName, owner: nil, options: nil).first as? UIView {
+                    viewsDictionary[component.name] = componentView
+                    self.addSubview(componentView)
+
+                    // Setup each component view with style which listed in configuration
+                    componentView.context.componentView = componentView
+                    componentView.context.isRoot = false
+
+                    subcomponents[componentView] = component
+            }
             // It seems to me that there is no way to init an instance from class in Swift, so we made it in ObjC
-            if let componentView = CellComponentFactory.createCellComponentFromClass(component.targetClass, componentKey: component.name) {
+            else if let componentView = ComponentFactory.componentViewFromClass(component.targetClass) {
                 viewsDictionary[component.name] = componentView
                 self.addSubview(componentView)
 

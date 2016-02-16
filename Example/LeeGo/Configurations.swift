@@ -15,6 +15,7 @@ enum ComponentBuilder: ComponentBuilderType {
     case title, subtitle, date, avatar
     case favoriteButton
     case followButton, followTag
+    case adView
 
     // child components
     case header, footer, container
@@ -75,10 +76,13 @@ extension ComponentBuilder {
                 .style([.backgroundColor(UIColor.brownColor())])
                 .components(
                     header.componentTarget(),
-                    layout: { (header: String) -> Layout in
+                    adView.buildFromNib(AdView.self, name: "AdView").style([.translatesAutoresizingMaskIntoConstraints(false)]),
+                    layout: { (header, adView) -> Layout in
                         return Layout([
                             H(orderedViews: header),
-                            V(orderedViews: [header], bottom: .bottom(.GreaterThanOrEqual))
+                            H(orderedViews: adView),
+                            V(adView, height: 80),
+                            V(orderedViews: [header, adView], bottom: .bottom(.GreaterThanOrEqual))
                             ])
                 })
         case .header:
@@ -120,6 +124,9 @@ enum Style: String {
 
     // UIButton
     case BasicButton, FavoriteButton
+
+    // Ad View
+    case AdView
 
     case None
 

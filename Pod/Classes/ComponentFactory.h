@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CellComponentFactory : NSObject
+@interface ComponentFactory : NSObject
 
-+ (UIView *)createCellComponentFromClass:(Class)componentClass
-                            componentKey:(NSString *)componentKey;
++ (UIView *)componentViewFromClass:(Class)componentClass;
 
 @end

@@ -12,6 +12,6 @@ import UIKit
 class AdView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        print("awake")
     }
 }

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -78,27 +77,7 @@
                     <view key="view" contentMode="scaleToFill" id="hQ6-Ea-p6a">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dh0-09-hPF" customClass="AdView" customModule="LeeGo_Example" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="472" width="600" height="128"/>
-                                <color key="backgroundColor" red="1" green="0.77647058820000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="gtl-Cj-tE5"/>
-                                </constraints>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="dh0-09-hPF" firstAttribute="bottom" secondItem="hQ6-Ea-p6a" secondAttribute="bottomMargin" id="br7-2J-JGd"/>
-                            <constraint firstAttribute="trailing" secondItem="dh0-09-hPF" secondAttribute="trailing" id="e6q-y2-4Fy"/>
-                            <constraint firstItem="dh0-09-hPF" firstAttribute="leading" secondItem="hQ6-Ea-p6a" secondAttribute="leading" id="k1W-e0-CGl"/>
-                            <constraint firstItem="N60-5a-aVO" firstAttribute="top" secondItem="dh0-09-hPF" secondAttribute="bottom" id="rtD-yY-cQV"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="rtD-yY-cQV"/>
-                            </mask>
-                        </variation>
                     </view>
                     <keyCommands>
                         <keyCommand/>

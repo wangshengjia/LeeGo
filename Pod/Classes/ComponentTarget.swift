@@ -13,6 +13,12 @@ public protocol ComponentBuilderType: Hashable {
 }
 
 extension ComponentBuilderType {
+
+    public func buildFromNib(type: AnyObject? = nil, name: String) -> ComponentTarget {
+        // TODO: check
+        return ComponentTarget(name: String(self), targetClass: type.self as! AnyClass, nibName: name)
+    }
+
     public func build(type: AnyObject? = nil) -> ComponentTarget {
         if type == nil {
             return target()
@@ -35,6 +41,7 @@ extension ComponentBuilderType {
 public class ComponentTarget: Hashable {
     let name: String
     let targetClass: AnyClass
+    let nibName: String?
 
     private(set) var style: [Appearance] = []
     private(set) var components: [ComponentTarget]? = nil {
@@ -53,9 +60,10 @@ public class ComponentTarget: Hashable {
         return name.hashValue
     }
 
-    public init(name: String, targetClass: AnyClass) {
+    public init(name: String, targetClass: AnyClass, nibName: String? = nil) {
         self.name = name
         self.targetClass = targetClass
+        self.nibName = nibName
     }
 
     public func style(style: [Appearance] = []) -> ComponentTarget {
