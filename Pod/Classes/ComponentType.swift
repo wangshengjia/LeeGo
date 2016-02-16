@@ -69,12 +69,24 @@ extension Composable where Self: UIView {
     }
 }
 
+protocol Configurable {
+    func setupWithStyle(style: [Appearance])
+    func handleCustomStyle(style: [String: AnyObject])
+}
+
+
 extension Configurable where Self: UIView {
     func handleCustomStyle(style: [String: AnyObject]) {
         assertionFailure("Unknown custom style \(style), should implement `handleCustomStyle:` in extension of UIView or its subclass.")
     }
     
     func setupWithStyle(style: [Appearance]) {
+        if let oldStyle = self.configuration?.style {
+            for old in oldStyle where !style.contains(old) {
+                old.apply(to: self, useDefaultValue: true)
+            }
+        }
+
         for appearance in style {
             appearance.apply(to: self)
         }
@@ -99,48 +111,22 @@ extension ComponentType where Self: UIView {
         }
     }
 
-    final func configure(dataSource: ComponentDataSource?, component: ComponentTarget) {
+    final func configure(dataSource: ComponentDataSource?, newConfiguration: ComponentTarget) {
 
         // resolve conf based on item?, indexPath? or others ?
         // willApply
 
-        var shouldRebuild = false
-
-        if let ComponentTarget = self.context.component {
-            // TODO: apply diff from config & configuration
-            shouldRebuild = (ComponentTarget.style != component.style)
-        } else {
-            shouldRebuild = true
-        }
-
-        self.context.component = component
+        self.configuration = newConfiguration
 
         // setup self
-        if shouldRebuild {
-            setupWithStyle(component.style)
-        }
+        setupWithStyle(newConfiguration.style)
 
         // update self
-        // updateWithItem(item)
-        dataSource?.updateComponent(self, with: component)
+        dataSource?.updateComponent(self, with: newConfiguration)
 
-        if shouldRebuild {
-            // add & layout sub components
-            if let components = component.components, let layout = component.layout {
-                let subcomponents = compositeSubcomponents(components, layout: layout)
-                for (component, componentTarget) in subcomponents {
-                    component.configure(with: dataSource, componentTarget: componentTarget)
-                }
-
-                return
-            }
-        }
-
-        // configure sub components recursively
-        for subview in self.subviews where subview.context.componentView == subview {
-            if let componentTarget = subview.context.component {
-                subview.configure(with: dataSource, componentTarget: componentTarget)
-            }
+        // add & layout sub components
+        if let components = newConfiguration.components, let layout = newConfiguration.layout {
+            compositeSubcomponents(components, layout: layout)
         }
     }
 }

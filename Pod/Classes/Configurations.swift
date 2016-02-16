@@ -76,12 +76,12 @@ public enum Appearance: Hashable, Equatable {
         return strSelf
     }
 
-    func apply<Component: UIView>(to component: Component) {
+    func apply<Component: UIView>(to component: Component, useDefaultValue: Bool = false) {
 
         switch (self, component) {
         // UIView
         case (let .backgroundColor(color), _):
-            component.setValue(color, forKey: toString())
+            component.setValue(useDefaultValue ? color : UIColor.whiteColor(), forKey: toString())
         case (let .translatesAutoresizingMaskIntoConstraints(should), _):
             component.setValue(should.nsObject(), forKey: toString())
 
