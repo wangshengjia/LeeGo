@@ -46,7 +46,7 @@ extension UIView: ComponentType {
         print("defaut imp 2")
     }
 
-    public func configure<Item: ComponentDataSource>(with dataSource: Item, componentTarget: ComponentTarget) {
+    public func configure(with dataSource: ComponentDataSource? = nil, componentTarget: ComponentTarget) {
 
         if self.context.isRoot {
             self.context.componentView = self
@@ -71,5 +71,11 @@ extension UIView: ComponentType {
 
     public func name() -> String {
         return context.component?.name ?? "No Name"
+    }
+
+    func setValueSafely(value: AnyObject?, forKey key: String) {
+        if self.respondsToSelector(Selector(key)) {
+            self.setValue(value, forKey: key)
+        }
     }
 }

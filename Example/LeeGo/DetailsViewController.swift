@@ -10,27 +10,11 @@ import Foundation
 import UIKit
 import LeeGo
 
-class DetailsViewController: UIViewController, ComponentDataSource {
+class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.configure(with: self, componentTarget: ComponentProvider.detailsView.componentTarget()!)
-        
-    }
-
-    // MARK: ComponentDataSource
-
-    func updateComponent(componentView: UIView, with componentTarget: ComponentTarget) {
-        switch componentView {
-        case let titleLabel as UILabel where componentView.name() == String(ComponentProvider.title):
-            titleLabel.setAttributeString(with: [
-                Style.customTitle: "test",
-                ])
-        case let avatar as UIImageView where componentView.name() == String(ComponentProvider.avatar):
-            avatar.backgroundColor = UIColor.grayColor()
-        default:
-            break
-        }
+        self.view.configure(componentTarget: ComponentBuilder.detailsView.componentTarget())
     }
 }

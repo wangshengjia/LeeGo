@@ -8,12 +8,18 @@
 
 import Foundation
 
-public protocol ComponentProviderType: Hashable {
+public protocol ComponentBuilderType: Hashable {
     static var types: [Self: AnyClass] { get }
 }
 
-extension ComponentProviderType {
-    public func type(type: AnyObject? = nil) -> ComponentTarget {
+extension ComponentBuilderType {
+
+    public func buildFromNib(type: AnyObject? = nil, name: String) -> ComponentTarget {
+        // TODO: check
+        return ComponentTarget(name: String(self), targetClass: type.self as! AnyClass, nibName: name)
+    }
+
+    public func build(type: AnyObject? = nil) -> ComponentTarget {
         if type == nil {
             return target()
         }
@@ -22,9 +28,9 @@ extension ComponentProviderType {
 
     func target() -> ComponentTarget {
         guard let targetClass = Self.types[self] else {
-            return type(UIView)
+            return build(UIView)
         }
-        return type(targetClass)
+        return build(targetClass)
     }
 
     var hashValue: Int {
@@ -32,13 +38,10 @@ extension ComponentProviderType {
     }
 }
 
-//public func ==(lhs: ComponentProviderType, rhs: ComponentProviderType) -> Bool {
-//    return String(lhs) == String(rhs)
-//}
-
 public class ComponentTarget: Hashable {
     let name: String
     let targetClass: AnyClass
+    let nibName: String?
 
     private(set) var style: [Appearance] = []
     private(set) var components: [ComponentTarget]? = nil {
@@ -57,9 +60,10 @@ public class ComponentTarget: Hashable {
         return name.hashValue
     }
 
-    public init(name: String, targetClass: AnyClass) {
+    public init(name: String, targetClass: AnyClass, nibName: String? = nil) {
         self.name = name
         self.targetClass = targetClass
+        self.nibName = nibName
     }
 
     public func style(style: [Appearance] = []) -> ComponentTarget {
@@ -85,7 +89,7 @@ public class ComponentTarget: Hashable {
         return self
     }
 
-    public func components(c1: ComponentTarget, c2: ComponentTarget, c3: ComponentTarget, layout: (String, String, String) -> Layout) -> ComponentTarget {
+    public func components(c1: ComponentTarget, _ c2: ComponentTarget, _ c3: ComponentTarget, layout: (String, String, String) -> Layout) -> ComponentTarget {
         self.components = [c1, c2, c3]
         self.layout = layout(c1.name, c2.name, c3.name)
 

@@ -27,6 +27,9 @@
 		358507941C622B6C006D02EF /* TheSansOsF-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507891C622B6A006D02EF /* TheSansOsF-SemiBold.otf */; };
 		358507951C622B6C006D02EF /* TheSansOsF-SemiLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */; };
 		358507971C626097006D02EF /* Responsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358507961C626097006D02EF /* Responsive.swift */; };
+		3589D4531C7260C00031A890 /* AdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3589D4521C7260C00031A890 /* AdView.xib */; };
+		35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CC5EAA1C6CDC39005C87C8 /* Icon.swift */; };
+		35CC5EAD1C6CE756005C87C8 /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CC5EAC1C6CE756005C87C8 /* AdView.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -72,6 +75,9 @@
 		358507891C622B6A006D02EF /* TheSansOsF-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-SemiBold.otf"; sourceTree = "<group>"; };
 		3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-SemiLight.otf"; sourceTree = "<group>"; };
 		358507961C626097006D02EF /* Responsive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responsive.swift; sourceTree = "<group>"; };
+		3589D4521C7260C00031A890 /* AdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdView.xib; sourceTree = "<group>"; };
+		35CC5EAA1C6CDC39005C87C8 /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		35CC5EAC1C6CE756005C87C8 /* AdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		3A1BB02A30737AE224FEBEE6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4587B495CB0F1B0F3A5F0818 /* Pods_LeeGo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* LeeGo_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeeGo_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +143,16 @@
 			path = ../../../../../LeMonde/workspace/PlaygroundProject/PlaygroundProject;
 			sourceTree = "<group>";
 		};
+		35543A311C6A4B56000AC50C /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				358507961C626097006D02EF /* Responsive.swift */,
+				352E50E91C528CDC0075BDB6 /* ImageComponent.swift */,
+				3550E7601C4E5AB8002F5FB4 /* Configurations.swift */,
+			);
+			name = Configurations;
+			sourceTree = "<group>";
+		};
 		3585077F1C622B6A006D02EF /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +169,16 @@
 				3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		35CC5EA91C6CD942005C87C8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35CC5EAA1C6CDC39005C87C8 /* Icon.swift */,
+				35CC5EAC1C6CE756005C87C8 /* AdView.swift */,
+				3589D4521C7260C00031A890 /* AdView.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -183,9 +209,8 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				35543A2F1C694C58000AC50C /* DetailsViewController.swift */,
-				3550E7601C4E5AB8002F5FB4 /* Configurations.swift */,
-				352E50E91C528CDC0075BDB6 /* ImageComponent.swift */,
-				358507961C626097006D02EF /* Responsive.swift */,
+				35CC5EA91C6CD942005C87C8 /* Views */,
+				35543A311C6A4B56000AC50C /* Configurations */,
 				3541CE841C44490700A3B257 /* Model */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -333,6 +358,7 @@
 				3585078C1C622B6C006D02EF /* LmfrAppIcon.ttf in Resources */,
 				358507941C622B6C006D02EF /* TheSansOsF-SemiBold.otf in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				3589D4531C7260C00031A890 /* AdView.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				358507901C622B6C006D02EF /* TheAntiquaB-W7Bold.otf in Resources */,
 				358507921C622B6C006D02EF /* TheSansOsF-Bold.otf in Resources */,
@@ -455,6 +481,7 @@
 				3550E7611C4E5AB8002F5FB4 /* Configurations.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				350637491C4C4B5300B5E547 /* Illustration.swift in Sources */,
+				35CC5EAD1C6CE756005C87C8 /* AdView.swift in Sources */,
 				3541CE851C44490700A3B257 /* Card.swift in Sources */,
 				350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */,
 				352E50EA1C528CDC0075BDB6 /* ImageComponent.swift in Sources */,
@@ -462,6 +489,7 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				358507971C626097006D02EF /* Responsive.swift in Sources */,
 				35543A301C694C58000AC50C /* DetailsViewController.swift in Sources */,
+				35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

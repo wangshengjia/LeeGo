@@ -13,18 +13,7 @@ protocol Configurable {
     func handleCustomStyle(style: [String: AnyObject])
 }
 
-protocol Updatable {
-    // func updateWithItem<Item: ItemType>(item: Item)
-}
-
-protocol Reusable {
-    static var reuseIdentifier: String { get }
-
-    func cleanUpForReuse()
-}
-
 protocol Composable {
-    // typealias T: Hashable
     func compositeSubcomponents(components: [ComponentTarget], layout: Layout) -> [UIView: ComponentTarget]
 }
 
@@ -35,13 +24,23 @@ extension Composable where Self: UIView {
         // create subview
         var viewsDictionary = [String: UIView]()
         for component in components {
+            if let nibName = component.nibName,
+                let componentView = NSBundle.mainBundle().loadNibNamed(nibName, owner: nil, options: nil).first as? UIView {
+                    viewsDictionary[component.name] = componentView
+                    self.addSubview(componentView)
+
+                    // Setup each component view with style which listed in configuration
+                    componentView.context.componentView = componentView
+                    componentView.context.isRoot = false
+
+                    subcomponents[componentView] = component
+            }
             // It seems to me that there is no way to init an instance from class in Swift, so we made it in ObjC
-            if let componentView = CellComponentFactory.createCellComponentFromClass(component.targetClass, componentKey: component.name) {
+            else if let componentView = ComponentFactory.componentViewFromClass(component.targetClass) {
                 viewsDictionary[component.name] = componentView
                 self.addSubview(componentView)
 
                 // Setup each component view with style which listed in configuration
-                // componentView.context.configuration = subConfig
                 componentView.context.componentView = componentView
                 componentView.context.isRoot = false
 
@@ -63,7 +62,6 @@ extension Composable where Self: UIView {
                 //constraint.priority = 990
                 //constraint.shouldBeArchived = true
                 constraint.identifier = constraint.description
-//                print(constraint)
                 self.addConstraint(constraint)
             }
         }
@@ -73,68 +71,18 @@ extension Composable where Self: UIView {
 
 extension Configurable where Self: UIView {
     func handleCustomStyle(style: [String: AnyObject]) {
-        print("defaut imp")
+        assertionFailure("Unknown custom style \(style), should implement `handleCustomStyle:` in extension of UIView or its subclass.")
     }
     
-
     func setupWithStyle(style: [Appearance]) {
-
-        // may be improved by functional map
-        var dictionary = [String: AnyObject](), customDict = [String: AnyObject]()
         for appearance in style {
-
-            if let (key, value) = appearance.tuple() where appearance.isCustom {
-                customDict[key] = value
-            } else if let (_, value) = appearance.tuple() where appearance.isAttributedString {
-                if let attrList = value as? NSArray, let label = self as? UILabel {
-                    label.attributedText = attrList.flatMap({ (attribute) -> NSAttributedString? in
-                        if let attribute = attribute as? [String : AnyObject] {
-                            return NSAttributedString(string: "holder", attributes: attribute)
-                        }
-                        return nil
-                    }).combineToAttributedString()
-                }
-            } else if let (key, value) = appearance.tuple() {
-                dictionary[key] = value
-            }
-        }
-
-        for (key, value) in dictionary {
-            if self.respondsToSelector(Selector(key)) {
-                self.setValue(value, forKey: key)
-            } else {
-                print(key)
-            }
-        }
-        self.handleCustomStyle(customDict)
-    }
-}
-
-//extension Updatable where Self: UIView {
-//    func updateWithItem<Item: ItemType>(item: Item) {
-//        item.updateComponent(self)
-//    }
-//}
-
-extension Reusable where Self: UIView {
-    static var reuseIdentifier: String {
-        // I like to use the class's name as an identifier
-        // so this makes a decent default value.
-        return String(Self)
-    }
-
-    final func cleanUpForReuse() {
-
-        // do clean up
-
-        for case let subview as Reusable in self.subviews {
-            subview.cleanUpForReuse()
+            appearance.apply(to: self)
         }
     }
 }
 
-protocol ComponentType: Configurable, Composable, Updatable, Reusable {
-    // var configuration: ConfigurationType { get }
+protocol ComponentType: Configurable, Composable {
+
 }
 
 extension ComponentType where Self: UIView {
@@ -143,7 +91,15 @@ extension ComponentType where Self: UIView {
 //        
 //    }
 
-    final func configure<Item: ComponentDataSource>(dataSource: Item, component: ComponentTarget) {
+    final func cleanUpForReuse() {
+
+        // do clean up
+        for case let subview in self.subviews {
+            subview.cleanUpForReuse()
+        }
+    }
+
+    final func configure(dataSource: ComponentDataSource?, component: ComponentTarget) {
 
         // resolve conf based on item?, indexPath? or others ?
         // willApply
@@ -166,7 +122,7 @@ extension ComponentType where Self: UIView {
 
         // update self
         // updateWithItem(item)
-        dataSource.updateComponent(self, with: component)
+        dataSource?.updateComponent(self, with: component)
 
         if shouldRebuild {
             // add & layout sub components

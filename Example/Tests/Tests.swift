@@ -6,6 +6,11 @@ import LeeGo
 
 class TableOfContentsSpec: QuickSpec {
     override func spec() {
+
+        describe("") { () -> Void in
+            
+        }
+
         describe("these will fail") {
 
             it("can do maths") {
