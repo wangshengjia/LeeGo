@@ -60,7 +60,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(configurationType), forIndexPath: indexPath)
 
-        cell.configure(with: elements[indexPath.item], componentTarget: configurationType.componentTarget())
+        cell.configure(configurationType.componentTarget(), dataSource: elements[indexPath.item])
 
         return cell
     }

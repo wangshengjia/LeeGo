@@ -47,7 +47,7 @@ extension Bool {
     }
 }
 
-public enum Appearance: Equatable {
+public enum Appearance: Hashable, Equatable {
     // UIView
     case translatesAutoresizingMaskIntoConstraints(Bool), backgroundColor(UIColor), tintColor(UIColor)
 
@@ -76,12 +76,12 @@ public enum Appearance: Equatable {
         return strSelf
     }
 
-    func apply<Component: UIView>(to component: Component) {
+    func apply<Component: UIView>(to component: Component, useDefaultValue: Bool = false) {
 
         switch (self, component) {
         // UIView
         case (let .backgroundColor(color), _):
-            component.setValue(color, forKey: toString())
+            component.setValue(useDefaultValue ? UIColor.whiteColor() : color, forKey: toString())
         case (let .translatesAutoresizingMaskIntoConstraints(should), _):
             component.setValue(should.nsObject(), forKey: toString())
 
@@ -199,11 +199,11 @@ public enum Appearance: Equatable {
 //        }
 //    }
 
-//    public var hashValue: Int {
-//        return String(self).hashValue
-//    }
+    public var hashValue: Int {
+        return self.toString().hashValue
+    }
 
-    func attributedStringFromList(attrList: [Attributes]) -> NSAttributedString? {
+    private func attributedStringFromList(attrList: [Attributes]) -> NSAttributedString? {
         return attrList.flatMap({ (attribute) -> NSAttributedString? in
             // TODO: is that possible to take care this default "space" ??
             return NSAttributedString(string: (attribute[kCustomAttributeDefaultText] as? String) ?? " ", attributes: attribute)

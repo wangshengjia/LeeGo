@@ -8,52 +8,57 @@
 
 import Foundation
 
-protocol Configurable {
-    func setupWithStyle(style: [Appearance])
-    func handleCustomStyle(style: [String: AnyObject])
-}
-
 protocol Composable {
-    func compositeSubcomponents(components: [ComponentTarget], layout: Layout) -> [UIView: ComponentTarget]
+    func compositeSubcomponents(components: [ComponentTarget], layout: Layout)
 }
 
 extension Composable where Self: UIView {
-    func compositeSubcomponents(components: [ComponentTarget], layout: Layout) -> [UIView: ComponentTarget] {
+    func compositeSubcomponents(components: [ComponentTarget], layout: Layout) {
 
-        var subcomponents: [UIView: ComponentTarget] = [:]
-        // create subview
-        var viewsDictionary = [String: UIView]()
-        for component in components {
+        // remove components which do not exist anymore
+        for subview in self.subviews {
+            if let oldComponent = subview.configuration where !components.contains(oldComponent) {
+                subview.cleanUpForReuse() // TODO: clean layout maybe
+                subview.removeFromSuperview()
+            }
+        }
+
+        // filter components already exist
+        let filteredComponents = components.filter { (component) -> Bool in
+            if let subcomponents = self.configuration?.components where !subcomponents.contains(component) {
+                return false
+            }
+            return true
+        }
+
+        let views = filteredComponents.flatMap { (component) -> UIView? in
+            var view: UIView? = nil;
+
             if let nibName = component.nibName,
                 let componentView = NSBundle.mainBundle().loadNibNamed(nibName, owner: nil, options: nil).first as? UIView {
-                    viewsDictionary[component.name] = componentView
-                    self.addSubview(componentView)
-
-                    // Setup each component view with style which listed in configuration
-                    componentView.context.componentView = componentView
-                    componentView.context.isRoot = false
-
-                    subcomponents[componentView] = component
+                    view = componentView
+            } else if let componentView = ComponentFactory.componentViewFromClass(component.targetClass) {
+                view = componentView
             }
-            // It seems to me that there is no way to init an instance from class in Swift, so we made it in ObjC
-            else if let componentView = ComponentFactory.componentViewFromClass(component.targetClass) {
-                viewsDictionary[component.name] = componentView
-                self.addSubview(componentView)
 
-                // Setup each component view with style which listed in configuration
-                componentView.context.componentView = componentView
-                componentView.context.isRoot = false
+            if let view = view {
+                view.isRoot = false
+                view.viewName = component.name
+                self.addSubview(view)
+            }
 
-                subcomponents[componentView] = component
+            return view
+        }
+
+        var viewsDictionary = [String: UIView]()
+        for subview in self.subviews {
+            if let name = subview.name {
+                viewsDictionary[name] = subview
             }
         }
 
-        // apply diff, update the part only if changed
-        /*
-        for case let subview as Configurable in self.subviews {
-        subview.setupWithConfiguration(configuration)
-        }
-        */
+        // TODO: apply diff of layout instead of removing all constraints
+        self.removeConstraints(self.constraints)
 
         // Layout each component view with auto layout visual format language from configuration.
         for format in layout.formats {
@@ -65,9 +70,14 @@ extension Composable where Self: UIView {
                 self.addConstraint(constraint)
             }
         }
-        return subcomponents
     }
 }
+
+protocol Configurable {
+    func setupWithStyle(style: [Appearance])
+    func handleCustomStyle(style: [String: AnyObject])
+}
+
 
 extension Configurable where Self: UIView {
     func handleCustomStyle(style: [String: AnyObject]) {
@@ -75,6 +85,12 @@ extension Configurable where Self: UIView {
     }
     
     func setupWithStyle(style: [Appearance]) {
+        if let oldStyle = self.configuration?.style {
+            for old in oldStyle where !style.contains(old) {
+                old.apply(to: self, useDefaultValue: true)
+            }
+        }
+
         for appearance in style {
             appearance.apply(to: self)
         }
@@ -91,6 +107,7 @@ extension ComponentType where Self: UIView {
 //        
 //    }
 
+    // TODO: how to handle clean up for reuse
     final func cleanUpForReuse() {
 
         // do clean up
@@ -99,49 +116,51 @@ extension ComponentType where Self: UIView {
         }
     }
 
-    final func configure(dataSource: ComponentDataSource?, component: ComponentTarget) {
+    final func bind(newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
 
         // resolve conf based on item?, indexPath? or others ?
         // willApply
 
-        var shouldRebuild = false
+        // TODO: should rebuild only layout or all?
+        var shouldRebuild = (self.configuration == nil)
 
-        if let ComponentTarget = self.context.component {
-            // TODO: apply diff from config & configuration
-            shouldRebuild = (ComponentTarget.style != component.style)
-        } else {
+        self.configuration = newConfiguration
+
+        switch updatingStrategy {
+        case .WhenComponentChanged:
+            if let current = self.configuration where current.name != newConfiguration.name {
+                shouldRebuild = true
+            }
+        case .Always:
             shouldRebuild = true
         }
 
-        self.context.component = component
-
         // setup self
         if shouldRebuild {
-            setupWithStyle(component.style)
+            setupWithStyle(newConfiguration.style)
         }
 
         // update self
-        // updateWithItem(item)
-        dataSource?.updateComponent(self, with: component)
+        dataSource?.updateComponent(self, with: newConfiguration)
 
         if shouldRebuild {
             // add & layout sub components
-            if let components = component.components, let layout = component.layout {
-                let subcomponents = compositeSubcomponents(components, layout: layout)
-                for (component, componentTarget) in subcomponents {
-                    component.configure(with: dataSource, componentTarget: componentTarget)
-                }
-
-                return
+            if let components = newConfiguration.components where !components.isEmpty, let layout = newConfiguration.layout {
+                compositeSubcomponents(components, layout: layout)
             }
         }
+    }
+}
 
-        // configure sub components recursively
-        for subview in self.subviews where subview.context.componentView == subview {
-            if let componentTarget = subview.context.component {
-                subview.configure(with: dataSource, componentTarget: componentTarget)
-            }
-        }
+extension UILabel {
+    func cleanUpForReuse() {
+        self.text = nil
+    }
+}
+
+extension UIImageView {
+    func cleanUpForReuse() {
+        self.image = nil
     }
 }
 
