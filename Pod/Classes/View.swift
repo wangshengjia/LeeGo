@@ -24,37 +24,30 @@ extension UIView: ComponentType {
     }
 
     public func configure(componentTarget: ComponentTarget, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
-
-        // will apply
-//        let resolvedConfiguration = context.delegate?.willApply(with: componentTarget, toComponent: self, withItem: item, atIndexPath: nil) ?? componentTarget
-
-        // apply resolved componentTarget
         if let cell = self as? UICollectionViewCell {
-            cell.contentView.bind(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            cell.contentView._configure(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else if let cell = self as? UITableViewCell {
-            cell.contentView.bind(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            cell.contentView._configure(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else {
-            bind(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
-        }
-
-
-        // did apply
-//        context.delegate?.didApply(with: componentTarget, toComponent: self, withItem: item, atIndexPath: nil)
-
-        // configure sub components recursively
-        // for subview in self.subviews where subview.context.componentView == subview {
-        for subview in self.subviews {
-            if let componentTarget = subview.configuration {
-                subview.configure(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
-            }
+            _configure(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
         }
     }
 
+    private func _configure(componentTarget: ComponentTarget, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
 
-    // not used
-    func setValueSafely(value: AnyObject?, forKey key: String) {
-        if self.respondsToSelector(Selector(key)) {
-            self.setValue(value, forKey: key)
+        // apply componentTarget
+        bind(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+
+        // TODO: improve this ugly implementation
+        // configure sub components recursively
+        for subview in self.subviews {
+            if let viewName = subview.viewName {
+                if let components = componentTarget.components {
+                    for component in components where component.name == viewName {
+                        subview.configure(component, dataSource: dataSource, updatingStrategy: updatingStrategy)
+                    }
+                }
+            }
         }
     }
 }
@@ -64,6 +57,7 @@ extension UIView: ComponentType {
 
 private final class ComponentContext {
     weak var owner: UIView?
+    var viewName: String?
     var component: ComponentTarget?
     var isRoot = true
 
@@ -121,7 +115,22 @@ extension UIView {
         }
     }
 
-    public func name() -> String? {
-        return context.component?.name
+    public  var name: String? {
+        get {
+            if let name = context.component?.name {
+                return name
+            } else {
+                return context.viewName
+            }
+        }
+    }
+
+    internal var viewName: String? {
+        get {
+            return context.viewName
+        }
+        set {
+            context.viewName = newValue
+        }
     }
 }

@@ -43,7 +43,7 @@ extension Composable where Self: UIView {
 
             if let view = view {
                 view.isRoot = false
-                view.configuration = component
+                view.viewName = component.name
                 self.addSubview(view)
             }
 
@@ -52,7 +52,7 @@ extension Composable where Self: UIView {
 
         var viewsDictionary = [String: UIView]()
         for subview in self.subviews {
-            if let name = subview.name() {
+            if let name = subview.name {
                 viewsDictionary[name] = subview
             }
         }
