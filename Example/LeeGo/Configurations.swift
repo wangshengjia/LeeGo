@@ -51,9 +51,9 @@ extension ComponentBuilder {
                     avatar.build(UIImageView).style(Style.I1.style()),
                     ],
                     layout: Layout([
-                        H(orderedViews: "avatar", "title"),
+                        H(orderedViews: ["avatar", "title"]),
                         H("avatar", width: 68),
-                        H(orderedViews: "avatar", "subtitle"),
+                        H(orderedViews: ["avatar", "subtitle"]),
                         V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
                         V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
                         ], ComponentBuilder.defaultMetrics)
@@ -65,8 +65,8 @@ extension ComponentBuilder {
                     title.build().style(Style.H3.style())
                     ) { (avatar, title) -> Layout in
                         return Layout([
-                            H(orderedViews: title),
-                            H(orderedViews: avatar),
+                            H(orderedViews: [title]),
+                            H(orderedViews: [avatar]),
                             V(orderedViews: [title]),
                             V(orderedViews: [avatar]),
                             ])
@@ -79,8 +79,8 @@ extension ComponentBuilder {
                     adView.buildFromNib(AdView.self, name: "AdView").style([.translatesAutoresizingMaskIntoConstraints(false)]),
                     layout: { (header, adView) -> Layout in
                         return Layout([
-                            H(orderedViews: header),
-                            H(orderedViews: adView),
+                            H(orderedViews: [header]),
+                            H(orderedViews: [adView]),
                             V(adView, height: 80),
                             V(orderedViews: [header, adView], bottom: .bottom(.GreaterThanOrEqual))
                             ])
@@ -96,9 +96,9 @@ extension ComponentBuilder {
                         return Layout([
                             H(favoriteButton, width: 50),
                             V(favoriteButton, height: 50),
-                            H(left:nil, orderedViews: title, right:nil),
-                            H(left:nil, orderedViews: avatar, right:nil),
-                            H(left: .left(.GreaterThanOrEqual), orderedViews: favoriteButton),
+                            H(left:nil, orderedViews: [title], right:nil),
+                            H(left:nil, orderedViews: [avatar], right:nil),
+                            H(left: .left(.GreaterThanOrEqual), orderedViews: [favoriteButton]),
                             V(orderedViews: [title, favoriteButton]),
                             V(top: nil, orderedViews: [avatar], bottom: nil),
                             ],
@@ -169,7 +169,17 @@ enum Style: String {
     }
 }
 
+//func someLayout() -> [String] {
+//    return stackLayoutH(<#T##components: [String]##[String]#>)
+//}
 
+func stackLayoutH(components: [String]) -> [String] {
+    return [H(orderedViews: components)]
+}
+
+func stackLayoutV(components: [String]) -> [String] {
+    return [V(orderedViews: components, bottom: .bottom(.GreaterThanOrEqual))]
+}
 
 //
 //func layout1(components: [String]) -> [String]{

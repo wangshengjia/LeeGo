@@ -45,9 +45,7 @@ public enum Metrics: CustomStringConvertible {
         return ""
     }
 }
-
-public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.Equal), orderedViews: String..., interspace: Metrics? = .interspaceH(.Equal), right: Metrics? = .right(.Equal), toSuperview: Bool = true) -> String {
-
+public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.Equal), orderedViews: [String] = [], interspace: Metrics? = .interspaceH(.Equal), right: Metrics? = .right(.Equal), toSuperview: Bool = true) -> String {
     guard !orderedViews.isEmpty else {
         assertionFailure("Should at least with 1 view name")
         return ""
@@ -55,6 +53,11 @@ public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.
 
     return "H:" + distribute(fromSuperview: fromSuperview, metric1: left, views: orderedViews, interspace: interspace, metric2: right, toSuperview: toSuperview)
 }
+
+//public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.Equal), orderedViews: String..., interspace: Metrics? = .interspaceH(.Equal), right: Metrics? = .right(.Equal), toSuperview: Bool = true) -> String {
+//
+//    return H(fromSuperview: fromSuperview, left: left, orderedViews: orderedViews, interspace: interspace, right: right, toSuperview: toSuperview)
+//}
 
 public func V(fromSuperview fromSuperview: Bool = true, top: Metrics? = .top(.Equal), orderedViews: [String] = [], interspace: Metrics? = .interspaceV(.Equal), bottom: Metrics? = .bottom(.Equal), toSuperview: Bool = true) -> String {
     guard !orderedViews.isEmpty else {
