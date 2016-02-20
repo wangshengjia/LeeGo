@@ -13,7 +13,7 @@ import Nimble
 class ConfigurationSpec: QuickSpec {
     override func spec() {
 
-        describe("Configuration tests") {
+        describe("Layout tests") {
             it("should create a empty layout") {
                 let layout = Layout()
                 expect(layout.formats) == []
@@ -47,6 +47,10 @@ class ConfigurationSpec: QuickSpec {
                 
                 expect(layout1) == layout2
             }
+        }
+
+        describe("Appearacne tests") {
+            
         }
     }
 }
