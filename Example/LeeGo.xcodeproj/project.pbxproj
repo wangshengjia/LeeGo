@@ -31,6 +31,10 @@
 		35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CC5EAA1C6CDC39005C87C8 /* Icon.swift */; };
 		35CC5EAD1C6CE756005C87C8 /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CC5EAC1C6CE756005C87C8 /* AdView.swift */; };
 		35D28C421C789458006BF152 /* ComponentTypeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D28C401C789454006BF152 /* ComponentTypeSpec.swift */; };
+		35D28C451C78959F006BF152 /* ViewExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D28C431C78959A006BF152 /* ViewExtensionSpec.swift */; };
+		35D28C481C7895D4006BF152 /* ConvenienceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D28C461C7895C9006BF152 /* ConvenienceSpec.swift */; };
+		35D28C4B1C7896B4006BF152 /* ConfigurationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D28C491C7896AF006BF152 /* ConfigurationSpec.swift */; };
+		35D28C4E1C789704006BF152 /* AutoLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D28C4C1C7896FD006BF152 /* AutoLayoutSpec.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -80,6 +84,10 @@
 		35CC5EAA1C6CDC39005C87C8 /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		35CC5EAC1C6CE756005C87C8 /* AdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		35D28C401C789454006BF152 /* ComponentTypeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentTypeSpec.swift; sourceTree = "<group>"; };
+		35D28C431C78959A006BF152 /* ViewExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensionSpec.swift; sourceTree = "<group>"; };
+		35D28C461C7895C9006BF152 /* ConvenienceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvenienceSpec.swift; sourceTree = "<group>"; };
+		35D28C491C7896AF006BF152 /* ConfigurationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSpec.swift; sourceTree = "<group>"; };
+		35D28C4C1C7896FD006BF152 /* AutoLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutSpec.swift; sourceTree = "<group>"; };
 		3A1BB02A30737AE224FEBEE6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		4587B495CB0F1B0F3A5F0818 /* Pods_LeeGo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* LeeGo_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeeGo_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,7 +244,11 @@
 			isa = PBXGroup;
 			children = (
 				607FACEB1AFB9204008FA782 /* ComponentTargetSpec.swift */,
+				35D28C491C7896AF006BF152 /* ConfigurationSpec.swift */,
 				35D28C401C789454006BF152 /* ComponentTypeSpec.swift */,
+				35D28C431C78959A006BF152 /* ViewExtensionSpec.swift */,
+				35D28C461C7895C9006BF152 /* ConvenienceSpec.swift */,
+				35D28C4C1C7896FD006BF152 /* AutoLayoutSpec.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -500,8 +512,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35D28C481C7895D4006BF152 /* ConvenienceSpec.swift in Sources */,
+				35D28C4E1C789704006BF152 /* AutoLayoutSpec.swift in Sources */,
+				35D28C4B1C7896B4006BF152 /* ConfigurationSpec.swift in Sources */,
 				35D28C421C789458006BF152 /* ComponentTypeSpec.swift in Sources */,
 				607FACEC1AFB9204008FA782 /* ComponentTargetSpec.swift in Sources */,
+				35D28C451C78959F006BF152 /* ViewExtensionSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
