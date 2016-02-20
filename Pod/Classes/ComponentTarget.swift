@@ -96,6 +96,20 @@ public class ComponentTarget: Hashable {
         return self
     }
 
+    public func components(c1: ComponentTarget, _ c2: ComponentTarget, _ c3: ComponentTarget, _ c4: ComponentTarget, layout: (String, String, String, String) -> Layout) -> ComponentTarget {
+        self.components = [c1, c2, c3, c4]
+        self.layout = layout(c1.name, c2.name, c3.name, c4.name)
+
+        return self
+    }
+
+    public func components(c1: ComponentTarget, _ c2: ComponentTarget, _ c3: ComponentTarget, _ c4: ComponentTarget, _ c5: ComponentTarget, layout: (String, String, String, String, String) -> Layout) -> ComponentTarget {
+        self.components = [c1, c2, c3, c4, c5]
+        self.layout = layout(c1.name, c2.name, c3.name, c4.name, c5.name)
+
+        return self
+    }
+
     public func width(width: CGFloat) -> ComponentTarget {
         self.width = width
         return self
