@@ -1,10 +1,9 @@
-// https://github.com/Quick/Quick
 
 import Quick
 import Nimble
 @testable import LeeGo
 
-class TableOfContentsSpec: QuickSpec {
+class ComponentTargetSpec: QuickSpec {
     override func spec() {
 
         describe("ComponentTarget tests") {
