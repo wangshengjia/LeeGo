@@ -47,6 +47,32 @@ class TableOfContentsSpec: QuickSpec {
             })
         }
 
+        describe("Configuration tests") {
+            it("should create a empty layout") {
+                let layout = Layout()
+                expect(layout.formats) == []
+            }
+            it("should create layout with formats") {
+                let mockFormat = ["format1", "format2"]
+                let layout = Layout(mockFormat)
+
+                expect(layout.formats) == mockFormat
+                expect(layout.formats) != ["format2", "format2"]
+
+                expect(layout.metrics!["top"]!.isEqual(0))
+                expect(layout.metrics!["left"]!.isEqual(0))
+                expect(layout.metrics!["bottom"]!.isEqual(0))
+                expect(layout.metrics!["right"]!.isEqual(0))
+                expect(layout.metrics!["interspaceH"]!.isEqual(0))
+                expect(layout.metrics!["interspaceV"]!.isEqual(0))
+            }
+
+            it("should create layout with formats") {
+                let layout = Layout([], ["metrics": 10 ])
+
+                expect(layout.metrics!["metrics"]!.isEqual(10))
+            }
+        }
     }
 }
 
