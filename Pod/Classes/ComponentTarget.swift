@@ -9,6 +9,7 @@
 import Foundation
 
 public protocol ComponentBuilderType: Hashable {
+    // FIXME: do we really need Hashable?
     static var types: [Self: AnyClass] { get }
 }
 
@@ -16,7 +17,7 @@ extension ComponentBuilderType {
 
     public func buildFromNib(type: AnyObject? = nil, name: String) -> ComponentTarget {
         // TODO: check
-        return ComponentTarget(name: String(self), targetClass: type.self as! AnyClass, nibName: name)
+        return ComponentTarget(name: String(self), targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: name)
     }
 
     public func build(type: AnyObject? = nil) -> ComponentTarget {
@@ -26,7 +27,7 @@ extension ComponentBuilderType {
         return ComponentTarget(name: String(self), targetClass: type.self as! AnyClass)
     }
 
-    func target() -> ComponentTarget {
+    private func target() -> ComponentTarget {
         guard let targetClass = Self.types[self] else {
             return build(UIView)
         }
