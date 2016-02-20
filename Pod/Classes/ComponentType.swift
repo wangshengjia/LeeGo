@@ -122,18 +122,9 @@ extension ComponentType where Self: UIView {
         // willApply
 
         // TODO: should rebuild only layout or all?
-        var shouldRebuild = (self.configuration == nil)
+        let shouldRebuild = self.shouldRebuild(with: self.configuration, newConfiguration: newConfiguration, updatingStrategy: updatingStrategy)
 
         self.configuration = newConfiguration
-
-        switch updatingStrategy {
-        case .WhenComponentChanged:
-            if let current = self.configuration where current.name != newConfiguration.name {
-                shouldRebuild = true
-            }
-        case .Always:
-            shouldRebuild = true
-        }
 
         // setup self
         if shouldRebuild {
@@ -149,6 +140,24 @@ extension ComponentType where Self: UIView {
                 compositeSubcomponents(components, layout: layout)
             }
         }
+    }
+
+    private func shouldRebuild(with currentConfiguration: ComponentTarget?, newConfiguration: ComponentTarget, updatingStrategy: ConfigurationUpdatingStrategy) -> Bool {
+
+        // TODO: when screen size changed ? (rotation ?)
+
+        var shouldRebuild = (currentConfiguration == nil)
+
+        switch updatingStrategy {
+        case .WhenComponentChanged:
+            if let current = currentConfiguration where current.name != newConfiguration.name {
+                shouldRebuild = true
+            }
+        case .Always:
+            shouldRebuild = true
+        }
+
+        return shouldRebuild
     }
 }
 
