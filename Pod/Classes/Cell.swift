@@ -24,7 +24,7 @@ extension UICollectionViewCell {
     public override func prepareForReuse() {
         super.prepareForReuse()
 
-        // cleanUpForReuse()
+        cleanUpForReuse()
     }
 }
 

@@ -299,7 +299,7 @@
 		D7C8157F419F92C6A81450CF0203BE5F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB6B65E22E779E0215A99357EA85D653 /* XCTest.framework */; };
 		D854A35B21CAFC8393C7A569CDDD9328 /* RACReturnSignal.h in Headers */ = {isa = PBXBuildFile; fileRef = BEE4DEC01220226A01199624B04C1C31 /* RACReturnSignal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8E20D04B488EE18929186CF5668386C /* RACSubscriptionScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C241B3ED5FC80D3FA0E379DA86E7B56 /* RACSubscriptionScheduler.m */; };
-		DA4CC0591E1569CFF5834DFFB33D7C0C /* ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16610F2BA5DB55E267079B0F640295B /* ReusableCell.swift */; };
+		DA4CC0591E1569CFF5834DFFB33D7C0C /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16610F2BA5DB55E267079B0F640295B /* Cell.swift */; };
 		DA9BA4F97543A6EEEFB6A6466F7F9883 /* RACArraySequence.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4DEC3382CBD6B7975F2B950FE57DED /* RACArraySequence.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DAAC324891274180BCC978A6D6729A82 /* Callsite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4019B4668DE9C93900E7A8C704F5D419 /* Callsite.swift */; };
 		DB54599038CF8F3309D6D77A2CFF89F9 /* UIImagePickerController+RACSignalSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = F790F5AABA77FBB2E74243E796C3F1F3 /* UIImagePickerController+RACSignalSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -783,7 +783,7 @@
 		E0B888FEEEA050BBD688ED9D5A98BC69 /* DSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DSL.swift; path = Quick/DSL/DSL.swift; sourceTree = "<group>"; };
 		E12C11AB2D0AC7C2F32E4885394F71FA /* Pods-LeeGo_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LeeGo_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		E157118581FA63DBA61CDEA3F27D2833 /* Pods_LeeGo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E16610F2BA5DB55E267079B0F640295B /* ReusableCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReusableCell.swift; sourceTree = "<group>"; };
+		E16610F2BA5DB55E267079B0F640295B /* Cell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		E1AA9108ECBEFCEDB831CC6B1C6DA7D1 /* RACSubscriptingAssignmentTrampoline.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RACSubscriptingAssignmentTrampoline.h; path = "ReactiveCocoa/Objective-C/RACSubscriptingAssignmentTrampoline.h"; sourceTree = "<group>"; };
 		E1CF8564942C9A774109664E5058338A /* Pods-LeeGo_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LeeGo_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		E32031CE659A2DED165F1B08C56B48FF /* MatcherProtocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MatcherProtocols.swift; path = Nimble/Matchers/MatcherProtocols.swift; sourceTree = "<group>"; };
@@ -1014,7 +1014,7 @@
 				FBA66F21AFB609608FFDCE4AEF94148D /* Configurations.swift */,
 				8A3AB07633AEE5DE23793E8038484F65 /* Conveniences.swift */,
 				30748C624018D9F035C4FDC63B35F7B7 /* Errors.swift */,
-				E16610F2BA5DB55E267079B0F640295B /* ReusableCell.swift */,
+				E16610F2BA5DB55E267079B0F640295B /* Cell.swift */,
 				0E83FF8135AF7D51F505178C637DA747 /* View.swift */,
 			);
 			path = Classes;
@@ -2040,7 +2040,7 @@
 				E87DF5D2310ACD6F06AB6C800BC7B9D1 /* Conveniences.swift in Sources */,
 				DE3AEEAEA008ECC1B821EFAC2BCC0041 /* Errors.swift in Sources */,
 				C374792DF2CF64DFE9A8A456AF286F0F /* LeeGo-dummy.m in Sources */,
-				DA4CC0591E1569CFF5834DFFB33D7C0C /* ReusableCell.swift in Sources */,
+				DA4CC0591E1569CFF5834DFFB33D7C0C /* Cell.swift in Sources */,
 				41C90C742979F915DD5A95C90B095100 /* View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
