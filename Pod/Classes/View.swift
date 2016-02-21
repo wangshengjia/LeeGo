@@ -22,7 +22,17 @@ extension UIView: ComponentType {
     public func handleCustomStyle(style: [String: AnyObject]) {
         print("Should override and implement handleCustomStyle: ")
     }
+}
 
+extension UIView {
+    
+    /**
+     * Configure component with configuration
+     *
+     - parameter componentTarget:  configuration
+     - parameter dataSource:       data source
+     - parameter updatingStrategy: the strategy used to decide if should rebuild a component
+     */
     public func configure(componentTarget: ComponentTarget, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
         if let cell = self as? UICollectionViewCell {
             cell.contentView._configure(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
@@ -36,7 +46,7 @@ extension UIView: ComponentType {
     private func _configure(componentTarget: ComponentTarget, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
 
         // apply componentTarget
-        bind(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+        bind(self.configuration, newConfiguration:componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
 
         // TODO: improve this ugly implementation
         // configure sub components recursively
@@ -48,6 +58,21 @@ extension UIView: ComponentType {
                     }
                 }
             }
+        }
+    }
+}
+
+extension UIView {
+    func setupWithStyle(style: [Appearance]) {
+        setup(self, currentStyle: self.configuration?.style ?? [], newStyle: style)
+    }
+
+    // TODO: how to handle clean up for reuse
+    func cleanUpForReuse() {
+
+        // do clean up
+        for case let subview in self.subviews {
+            subview.cleanUpForReuse()
         }
     }
 }

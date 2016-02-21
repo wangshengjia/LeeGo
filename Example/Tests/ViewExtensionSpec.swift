@@ -15,7 +15,11 @@ import Nimble
 
 class ViewExtensionSpec: QuickSpec {
     override func spec() {
-
+        describe("View extensions") {
+            it("Should configure a component correctly.") {
+                
+            }
+        }
     }
 }
 

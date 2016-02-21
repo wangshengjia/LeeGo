@@ -31,7 +31,7 @@ extension Composable where Self: UIView {
             return true
         }
 
-        let views = filteredComponents.flatMap { (component) -> UIView? in
+        filteredComponents.forEach { component in
             var view: UIView? = nil;
 
             if let nibName = component.nibName,
@@ -46,8 +46,6 @@ extension Composable where Self: UIView {
                 view.viewName = component.name
                 self.addSubview(view)
             }
-
-            return view
         }
 
         var viewsDictionary = [String: UIView]()
@@ -79,20 +77,20 @@ protocol Configurable {
 }
 
 
-extension Configurable where Self: UIView {
+extension Configurable {
     func handleCustomStyle(style: [String: AnyObject]) {
         assertionFailure("Unknown custom style \(style), should implement `handleCustomStyle:` in extension of UIView or its subclass.")
     }
     
-    func setupWithStyle(style: [Appearance]) {
-        if let oldStyle = self.configuration?.style {
-            for old in oldStyle where !style.contains(old) {
-                old.apply(to: self, useDefaultValue: true)
-            }
+    func setup<Component: UIView>(component: Component, currentStyle: [Appearance] = [], newStyle: [Appearance]) {
+
+        // if current appearance not appeared in new style, then set them to default value
+        for old in currentStyle where !newStyle.contains(old) {
+            old.apply(to: component, useDefaultValue: true)
         }
 
-        for appearance in style {
-            appearance.apply(to: self)
+        for appearance in newStyle {
+            appearance.apply(to: component)
         }
     }
 }
@@ -107,22 +105,13 @@ extension ComponentType where Self: UIView {
 //        
 //    }
 
-    // TODO: how to handle clean up for reuse
-    final func cleanUpForReuse() {
-
-        // do clean up
-        for case let subview in self.subviews {
-            subview.cleanUpForReuse()
-        }
-    }
-
-    final func bind(newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
+    final func bind(currentConfiguration: ComponentTarget?, newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
 
         // resolve conf based on item?, indexPath? or others ?
         // willApply
 
         // TODO: should rebuild only layout or all?
-        let shouldRebuild = self.shouldRebuild(with: self.configuration, newConfiguration: newConfiguration, updatingStrategy: updatingStrategy)
+        let shouldRebuild = self.shouldRebuild(with: currentConfiguration, newConfiguration: newConfiguration, updatingStrategy: updatingStrategy)
 
         self.configuration = newConfiguration
 
@@ -162,13 +151,17 @@ extension ComponentType where Self: UIView {
 }
 
 extension UILabel {
-    func cleanUpForReuse() {
+    override func cleanUpForReuse() {
+        super.cleanUpForReuse()
+
         self.text = nil
     }
 }
 
 extension UIImageView {
-    func cleanUpForReuse() {
+    override func cleanUpForReuse() {
+        super.cleanUpForReuse()
+
         self.image = nil
     }
 }

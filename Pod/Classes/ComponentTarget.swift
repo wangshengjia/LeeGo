@@ -61,7 +61,7 @@ public class ComponentTarget: Hashable {
         return name.hashValue
     }
 
-    public init(name: String, targetClass: AnyClass, nibName: String? = nil) {
+    public init(name: String, targetClass: AnyClass = UIView.self, nibName: String? = nil) {
         self.name = name
         self.targetClass = targetClass
         self.nibName = nibName
