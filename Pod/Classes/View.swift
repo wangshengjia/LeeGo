@@ -45,117 +45,71 @@ extension UIView {
 
     private func _configure(componentTarget: ComponentTarget, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
 
+        // resolve conf based on item?, indexPath? or others ?
+
+        // call willApply delegate method
+
         // apply componentTarget
-        bind(self.configuration, newConfiguration:componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+        applyDiffTo(self, newConfiguration:componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+
+        // if no error, then:
+        self.configuration = componentTarget
+
+        // call didApply delegate method
 
         // TODO: improve this ugly implementation
         // configure sub components recursively
         for subview in self.subviews {
-            if let viewName = subview.viewName {
-                if let components = componentTarget.components {
+            if let viewName = subview.viewName,
+                let components = componentTarget.components{
                     for component in components where component.name == viewName {
                         subview.configure(component, dataSource: dataSource, updatingStrategy: updatingStrategy)
                     }
-                }
             }
         }
     }
 }
 
 extension UIView {
-    func setupWithStyle(style: [Appearance]) {
-        setup(self, currentStyle: self.configuration?.style ?? [], newStyle: style)
-    }
 
     // TODO: how to handle clean up for reuse
     func cleanUpForReuse() {
+        switch self {
+        case let label as UILabel:
+            label.text = nil
+        case let imageView as UIImageView:
+            imageView.image = nil
+        default:
+            break
+        }
 
         // do clean up
         for case let subview in self.subviews {
             subview.cleanUpForReuse()
         }
     }
-}
 
-
-// MARK: Component Context
-
-private final class ComponentContext {
-    weak var owner: UIView?
-    var viewName: String?
-    var component: ComponentTarget?
-    var isRoot = true
-
-    // var delegate: ConfiguratorDelegate?
-    // weak var dataSource: ComponentDataSource?
-}
-
-extension UIView {
-    private struct AssociatedKeys {
-        static var ComponentContextAssociatedKey = "ComponentContext_AssociatedKey"
-    }
-
-    private var context: ComponentContext {
+    public var name: String? {
         get {
-            if let context = objc_getAssociatedObject(self, &AssociatedKeys.ComponentContextAssociatedKey) as? ComponentContext {
-                return context
-            } else {
-                let context = ComponentContext()
-                objc_setAssociatedObject(self, &AssociatedKeys.ComponentContextAssociatedKey, context as ComponentContext?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                return context
-            }
-        }
-    }
-
-    internal var configuration: ComponentTarget? {
-        get {
-            return context.component
-        }
-        set {
-            context.component = newValue
-        }
-    }
-
-
-//    internal func owner() -> UIView {
-//        context.owner = self
-//        return context.owner
-//    }
-
-//    internal var dataSource: ComponentDataSource? {
-//        get {
-//            return context.dataSource
-//        }
-//        set {
-//            context.dataSource = newValue
-//        }
-//    }
-
-    internal var isRoot: Bool {
-        get {
-            return context.isRoot
-        }
-        set {
-            context.isRoot = newValue
-        }
-    }
-
-    public  var name: String? {
-        get {
-            if let name = context.component?.name {
+            if let name = self.componentName {
                 return name
             } else {
-                return context.viewName
+                return self.viewName
             }
         }
     }
-
-    internal var viewName: String? {
-        get {
-            return context.viewName
-        }
-        set {
-            context.viewName = newValue
-        }
-    }
 }
+
+
+//extension UILabel {
+//    override func cleanUpForReuse() {
+//        self.text = nil
+//    }
+//}
+//
+//extension UIImageView {
+//    override func cleanUpForReuse() {
+//        self.image = nil
+//    }
+//}
+

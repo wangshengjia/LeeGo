@@ -8,126 +8,30 @@
 
 import Foundation
 
-protocol Composable {
-    func compositeSubcomponents(components: [ComponentTarget], layout: Layout)
+protocol ComponentType: class, Configurable, Composable {
+    func applyDiffTo<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy)
 }
 
-extension Composable where Self: UIView {
-    func compositeSubcomponents(components: [ComponentTarget], layout: Layout) {
+extension ComponentType {
 
-        // remove components which do not exist anymore
-        for subview in self.subviews {
-            if let oldComponent = subview.configuration where !components.contains(oldComponent) {
-                subview.cleanUpForReuse() // TODO: clean layout maybe
-                subview.removeFromSuperview()
-            }
-        }
-
-        // filter components already exist
-        let filteredComponents = components.filter { (component) -> Bool in
-            if let subcomponents = self.configuration?.components where !subcomponents.contains(component) {
-                return false
-            }
-            return true
-        }
-
-        filteredComponents.forEach { component in
-            var view: UIView? = nil;
-
-            if let nibName = component.nibName,
-                let componentView = NSBundle.mainBundle().loadNibNamed(nibName, owner: nil, options: nil).first as? UIView {
-                    view = componentView
-            } else if let componentView = ComponentFactory.componentViewFromClass(component.targetClass) {
-                view = componentView
-            }
-
-            if let view = view {
-                view.isRoot = false
-                view.viewName = component.name
-                self.addSubview(view)
-            }
-        }
-
-        var viewsDictionary = [String: UIView]()
-        for subview in self.subviews {
-            if let name = subview.name {
-                viewsDictionary[name] = subview
-            }
-        }
-
-        // TODO: apply diff of layout instead of removing all constraints
-        self.removeConstraints(self.constraints)
-
-        // Layout each component view with auto layout visual format language from configuration.
-        for format in layout.formats {
-            let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions.DirectionLeadingToTrailing, metrics: layout.metrics, views: viewsDictionary)
-            for constraint in constraints {
-                //constraint.priority = 990
-                //constraint.shouldBeArchived = true
-                constraint.identifier = constraint.description
-                self.addConstraint(constraint)
-            }
-        }
-    }
-}
-
-protocol Configurable {
-    func setupWithStyle(style: [Appearance])
-    func handleCustomStyle(style: [String: AnyObject])
-}
-
-
-extension Configurable {
-    func handleCustomStyle(style: [String: AnyObject]) {
-        assertionFailure("Unknown custom style \(style), should implement `handleCustomStyle:` in extension of UIView or its subclass.")
-    }
-    
-    func setup<Component: UIView>(component: Component, currentStyle: [Appearance] = [], newStyle: [Appearance]) {
-
-        // if current appearance not appeared in new style, then set them to default value
-        for old in currentStyle where !newStyle.contains(old) {
-            old.apply(to: component, useDefaultValue: true)
-        }
-
-        for appearance in newStyle {
-            appearance.apply(to: component)
-        }
-    }
-}
-
-protocol ComponentType: Configurable, Composable {
-
-}
-
-extension ComponentType where Self: UIView {
-//
-//    func configure(item: ItemType, indexPath: NSIndexPath? = nil) {
-//        
-//    }
-
-    final func bind(currentConfiguration: ComponentTarget?, newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
-
-        // resolve conf based on item?, indexPath? or others ?
-        // willApply
+    func applyDiffTo<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
 
         // TODO: should rebuild only layout or all?
-        let shouldRebuild = self.shouldRebuild(with: currentConfiguration, newConfiguration: newConfiguration, updatingStrategy: updatingStrategy)
-
-        self.configuration = newConfiguration
-
-        // setup self
-        if shouldRebuild {
-            setupWithStyle(newConfiguration.style)
+        if shouldRebuild(with: component.configuration, newConfiguration: newConfiguration, updatingStrategy: updatingStrategy) {
+            apply(newConfiguration, to: component)
         }
 
-        // update self
-        dataSource?.updateComponent(self, with: newConfiguration)
+        // update component's value
+        dataSource?.updateComponent(component, with: newConfiguration)
+    }
 
-        if shouldRebuild {
-            // add & layout sub components
-            if let components = newConfiguration.components where !components.isEmpty, let layout = newConfiguration.layout {
-                compositeSubcomponents(components, layout: layout)
-            }
+    private func apply<Component where Component: UIView, Component: ComponentType>(newConfiguration: ComponentTarget, to component: Component) {
+        // setup self
+        setup(component, currentStyle: component.configuration?.style ?? [], newStyle: newConfiguration.style)
+
+        // add & layout sub components
+        if let components = newConfiguration.components where !components.isEmpty, let layout = newConfiguration.layout {
+            compositeSubcomponents(component, components: components, layout: layout)
         }
     }
 
@@ -150,19 +54,80 @@ extension ComponentType where Self: UIView {
     }
 }
 
-extension UILabel {
-    override func cleanUpForReuse() {
-        super.cleanUpForReuse()
+// MARK: Component Context
 
-        self.text = nil
-    }
+private final class ComponentContext {
+    weak var owner: UIView?
+    var viewName: String?
+    var component: ComponentTarget?
+    var isRoot = true
+
+    // var delegate: ConfiguratorDelegate?
+    // weak var dataSource: ComponentDataSource?
 }
 
-extension UIImageView {
-    override func cleanUpForReuse() {
-        super.cleanUpForReuse()
+private struct AssociatedKeys {
+    static var ComponentContextAssociatedKey = "ComponentContext_AssociatedKey"
+}
 
-        self.image = nil
+extension ComponentType where Self: UIView {
+
+    private var context: ComponentContext {
+        get {
+            if let context = objc_getAssociatedObject(self, &AssociatedKeys.ComponentContextAssociatedKey) as? ComponentContext {
+                return context
+            } else {
+                let context = ComponentContext()
+                objc_setAssociatedObject(self, &AssociatedKeys.ComponentContextAssociatedKey, context as ComponentContext?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                return context
+            }
+        }
+    }
+
+    internal var configuration: ComponentTarget? {
+        get {
+            return context.component
+        }
+        set {
+            context.component = newValue
+        }
+    }
+
+
+    //    internal func owner() -> UIView {
+    //        context.owner = self
+    //        return context.owner
+    //    }
+
+    //    internal var dataSource: ComponentDataSource? {
+    //        get {
+    //            return context.dataSource
+    //        }
+    //        set {
+    //            context.dataSource = newValue
+    //        }
+    //    }
+
+    internal var componentName: String? {
+        return context.component?.name
+    }
+
+    internal var isRoot: Bool {
+        get {
+            return context.isRoot
+        }
+        set {
+            context.isRoot = newValue
+        }
+    }
+
+    internal var viewName: String? {
+        get {
+            return context.viewName
+        }
+        set {
+            context.viewName = newValue
+        }
     }
 }
 
