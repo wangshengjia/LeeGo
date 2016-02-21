@@ -18,9 +18,11 @@ public enum ConfigurationUpdatingStrategy {
 }
 
 extension UIView: ComponentType {
-
-    public func handleCustomStyle(style: [String: AnyObject]) {
-        print("Should override and implement handleCustomStyle: ")
+    public func setupCustomStyle(style: [String: AnyObject]) {
+        assertionFailure("Unknown style \(style), should implement `handleCustomStyle:` in extension of UIView or its subclass.")
+    }
+    public func removeCustomStyle(style: [String: AnyObject]) {
+        assertionFailure("Unknown style \(style), should implement `removeCustomStyle:` in extension of UIView or its subclass.")
     }
 }
 
