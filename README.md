@@ -1,6 +1,7 @@
 # LeeGo
 
 [![CI Status](http://img.shields.io/travis/wangshengjia/LeeGo.svg?style=flat)](https://travis-ci.org/wangshengjia/LeeGo)
+[![Coverage](https://img.shields.io/codecov/c/github/wangshengjia/LeeGo.svg)](https://codecov.io/github/wangshengjia/LeeGo?branch=develop)
 [![Version](https://img.shields.io/cocoapods/v/LeeGo.svg?style=flat)](http://cocoapods.org/pods/LeeGo)
 [![License](https://img.shields.io/cocoapods/l/LeeGo.svg?style=flat)](http://cocoapods.org/pods/LeeGo)
 [![Platform](https://img.shields.io/cocoapods/p/LeeGo.svg?style=flat)](http://cocoapods.org/pods/LeeGo)
