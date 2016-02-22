@@ -33,6 +33,7 @@
 		35D28C4B1C7896B4006BF152 /* ConfigurationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D28C491C7896AF006BF152 /* ConfigurationSpec.swift */; };
 		35D28C4E1C789704006BF152 /* AutoLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D28C4C1C7896FD006BF152 /* AutoLayoutSpec.swift */; };
 		35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FFB6A71C7A8C070035EC52 /* Element.swift */; };
+		35FFBC7C1C7BD2690035EC52 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 35FFBC7B1C7BD2690035EC52 /* README.md */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -84,7 +85,7 @@
 		35D28C491C7896AF006BF152 /* ConfigurationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSpec.swift; sourceTree = "<group>"; };
 		35D28C4C1C7896FD006BF152 /* AutoLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutSpec.swift; sourceTree = "<group>"; };
 		35FFB6A71C7A8C070035EC52 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
-		3A1BB02A30737AE224FEBEE6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../../LICENSE; sourceTree = "<group>"; };
+		35FFBC7B1C7BD2690035EC52 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4587B495CB0F1B0F3A5F0818 /* Pods_LeeGo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* LeeGo-Demo.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LeeGo-Demo.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,7 +97,6 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* ComponentTargetSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentTargetSpec.swift; sourceTree = "<group>"; };
 		807AF003AAA24A749695542D /* Pods-LeeGo_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGo_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGo_Example/Pods-LeeGo_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		F0878B5A285AD41664255F4F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,16 +128,6 @@
 				2BB2E0288C7EBFDE8BFB8E29 /* Pods-LeeGo_Tests.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		3504CEAF1C4FCF7100724FFD /* Documentations */ = {
-			isa = PBXGroup;
-			children = (
-				3A1BB02A30737AE224FEBEE6 /* LICENSE */,
-				F0878B5A285AD41664255F4F /* README.md */,
-			);
-			name = Documentations;
-			path = LeeGo;
 			sourceTree = "<group>";
 		};
 		35543A311C6A4B56000AC50C /* Configurations */ = {
@@ -185,6 +175,15 @@
 				350637461C4C1AAC00B5E547 /* ElementViewModel.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		35FFBC7A1C7BD2690035EC52 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				35FFBC7B1C7BD2690035EC52 /* README.md */,
+			);
+			name = Documentation;
+			path = ../Docs;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -261,7 +260,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				3504CEAF1C4FCF7100724FFD /* Documentations */,
+				35FFBC7A1C7BD2690035EC52 /* Documentation */,
 				1524E6FF067F0774C3E1EE21 /* LeeGo.podspec */,
 			);
 			name = "Podspec Metadata";
@@ -497,6 +496,7 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				358507971C626097006D02EF /* Responsive.swift in Sources */,
 				35543A301C694C58000AC50C /* DetailsViewController.swift in Sources */,
+				35FFBC7C1C7BD2690035EC52 /* README.md in Sources */,
 				35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
