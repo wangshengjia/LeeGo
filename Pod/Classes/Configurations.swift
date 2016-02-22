@@ -10,7 +10,7 @@ import Foundation
 
 public typealias MetricsValuesType = (AnyObject, AnyObject, AnyObject, AnyObject, AnyObject, AnyObject)
 
-public struct Layout {
+public struct Layout: Equatable {
 
     let formats: [String]
     let metrics: [String: AnyObject]?
@@ -31,6 +31,25 @@ public struct Layout {
             "interspaceV": metrics.5,
         ]
     }
+}
+
+// implement Layout equatable protocol, naive version
+public func ==(lhs: Layout, rhs: Layout) -> Bool {
+    var sameMetrics = false
+    if let lhsMetrics = lhs.metrics, let rhsMetrics = rhs.metrics where lhsMetrics.count == rhsMetrics.count {
+        sameMetrics = true
+        for (key, value) in lhsMetrics {
+            if let rhsValue = rhsMetrics[key] where !rhsValue.isEqual(value) {
+                sameMetrics = false
+            }
+        }
+    } else if (lhs.metrics == nil && rhs.metrics == nil) {
+        sameMetrics = true
+    } else {
+        sameMetrics = false
+    }
+
+    return lhs.formats == rhs.formats && sameMetrics
 }
 
 public typealias Attributes = [String: AnyObject]
@@ -131,7 +150,7 @@ public enum Appearance: Hashable, Equatable {
 
         // Custom
         case (let .custom(dictionary), _):
-            component.handleCustomStyle(dictionary)
+            useDefaultValue ? component.setupCustomStyle(dictionary) : component.removeCustomStyle(dictionary)
         default:
             assertionFailure("Unknown appearance \(self) for component \(component)")
             break

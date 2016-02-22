@@ -17,12 +17,15 @@ enum ComponentBuilder: ComponentBuilderType {
     case followButton, followTag
     case adView
 
+    case likeButton, shareButton, moreButton
+    case username
+
     // child components
-    case header, footer, container
-    case componentFromNib
+    case header, footer
+    case instaHeader, instaToolbar, likesNumber, descriptionArea, comments
 
     // root components
-    case zen, article, video, portfolio, alert, detailsView, featured
+    case zen, article, video, portfolio, alert, detailsView, featured, instagram
 }
 
 extension ComponentBuilder {
@@ -43,6 +46,30 @@ extension ComponentBuilder {
 extension ComponentBuilder {
     func componentTarget() -> ComponentTarget {
         switch self {
+        case .instaHeader:
+            return self.build().components(
+                ComponentBuilder.avatar.componentTarget(),
+                ComponentBuilder.username.build(),
+                ComponentBuilder.date.componentTarget(),
+                layout: { (avatar, username, date) -> Layout in
+                    return Layout()
+            })
+        case .instaToolbar:
+            return self.build().components(
+                ComponentBuilder.likeButton.componentTarget(),
+                ComponentBuilder.shareButton.componentTarget(),
+                ComponentBuilder.moreButton.componentTarget(),
+                layout: { (like, share, more) -> Layout in
+                    return Layout()
+            })
+        case .likesNumber:
+            return self.build()
+        case .descriptionArea:
+            return self.build()
+        case .comments:
+            return self.build()
+
+
         case .article:
             return self.build()
                 .components([
@@ -51,9 +78,9 @@ extension ComponentBuilder {
                     avatar.build(UIImageView).style(Style.I1.style()),
                     ],
                     layout: Layout([
-                        H(orderedViews: "avatar", "title"),
+                        H(orderedViews: ["avatar", "title"]),
                         H("avatar", width: 68),
-                        H(orderedViews: "avatar", "subtitle"),
+                        H(orderedViews: ["avatar", "subtitle"]),
                         V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
                         V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
                         ], ComponentBuilder.defaultMetrics)
@@ -65,42 +92,46 @@ extension ComponentBuilder {
                     title.build().style(Style.H3.style())
                     ) { (avatar, title) -> Layout in
                         return Layout([
-                            H(orderedViews: title),
-                            H(orderedViews: avatar),
+                            H(orderedViews: [title]),
+                            H(orderedViews: [avatar]),
                             V(orderedViews: [title]),
                             V(orderedViews: [avatar]),
                             ])
             }
         case .detailsView:
-            return self.build()
-                .style([.backgroundColor(UIColor.brownColor())])
-                .components(
-                    header.componentTarget(),
-                    adView.buildFromNib(AdView.self, name: "AdView").style([.translatesAutoresizingMaskIntoConstraints(false)]),
-                    layout: { (header, adView) -> Layout in
-                        return Layout([
-                            H(orderedViews: header),
-                            H(orderedViews: adView),
-                            V(adView, height: 80),
-                            V(orderedViews: [header, adView], bottom: .bottom(.GreaterThanOrEqual))
-                            ])
-                })
+            return
+                self.build()
+                    .style([.translatesAutoresizingMaskIntoConstraints(false)])
+                    .components(
+                        ComponentTarget(name: "content", targetClass: UIView.self)
+                            .style([.backgroundColor(UIColor.brownColor()), .translatesAutoresizingMaskIntoConstraints(false)])
+                            .components(
+                                header.componentTarget(),
+                                adView.buildFromNib(AdView.self, name: "AdView").style([.translatesAutoresizingMaskIntoConstraints(false)]),
+                                layout: { (header, adView) -> Layout in
+                                    return Layout([
+                                        H(orderedViews: [header]),
+                                        H(orderedViews: [adView]),
+                                        V(adView, height: 80),
+                                        "V:|[header]-80-[adView]-(>=bottom)-|"
+                                        ])
+                            }), layout: { content -> Layout in
+                                Layout(["H:|[content]|", "V:|[content]|"])
+                    })
+            
         case .header:
             return self.build()
-                .style([.translatesAutoresizingMaskIntoConstraints(false)])
+                .style([.backgroundColor(UIColor.yellowColor()), .translatesAutoresizingMaskIntoConstraints(false)])
                 .components(
                     avatar.build(Icon).style(Style.I1.style()),
                     title.build().style(Style.H3.style()),
                     favoriteButton.componentTarget()
-                    ) { (avatar, title, favoriteButton) -> Layout in
-                        return Layout([
-                            H(favoriteButton, width: 50),
-                            V(favoriteButton, height: 50),
-                            H(left:nil, orderedViews: title, right:nil),
-                            H(left:nil, orderedViews: avatar, right:nil),
-                            H(left: .left(.GreaterThanOrEqual), orderedViews: favoriteButton),
-                            V(orderedViews: [title, favoriteButton]),
-                            V(top: nil, orderedViews: [avatar], bottom: nil),
+                    ) { avatar, title, favoriteButton -> Layout in
+                        Layout([
+                            H("|-left-[\(avatar)][title]-(>=interspaceH)-[\(favoriteButton)]-right-|"),
+                            V("|-top-[\(avatar)]-bottom-|"),
+                            V("|-top-[\(title)]-bottom-|"),
+                            V("|-top-[\(favoriteButton)]-bottom-|"),
                             ],
                             ComponentBuilder.defaultMetrics)
             }
@@ -169,7 +200,17 @@ enum Style: String {
     }
 }
 
+//func someLayout() -> [String] {
+//    return stackLayoutH(<#T##components: [String]##[String]#>)
+//}
 
+func stackLayoutH(components: [String]) -> [String] {
+    return [H(orderedViews: components)]
+}
+
+func stackLayoutV(components: [String]) -> [String] {
+    return [V(orderedViews: components, bottom: .bottom(.GreaterThanOrEqual))]
+}
 
 //
 //func layout1(components: [String]) -> [String]{
