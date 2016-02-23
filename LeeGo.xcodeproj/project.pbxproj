@@ -30,6 +30,7 @@
 		35F520461C7C762E0089FF41 /* ConfigurationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520401C7C762E0089FF41 /* ConfigurationSpec.swift */; };
 		35F520471C7C762E0089FF41 /* ConvenienceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520411C7C762E0089FF41 /* ConvenienceSpec.swift */; };
 		35F520481C7C762E0089FF41 /* ViewExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520421C7C762E0089FF41 /* ViewExtensionSpec.swift */; };
+		C8B3E5A116623D363DB779A1 /* Pods_LeeGoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 903FBB7EF8E0836DCE973186 /* Pods_LeeGoTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,9 @@
 		35F520401C7C762E0089FF41 /* ConfigurationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSpec.swift; sourceTree = "<group>"; };
 		35F520411C7C762E0089FF41 /* ConvenienceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvenienceSpec.swift; sourceTree = "<group>"; };
 		35F520421C7C762E0089FF41 /* ViewExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensionSpec.swift; sourceTree = "<group>"; };
+		903FBB7EF8E0836DCE973186 /* Pods_LeeGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0AA4AD8C3B6A28562DBC65B /* Pods-LeeGoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGoTests/Pods-LeeGoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F5BB60E616EFC8D1DA779E5B /* Pods-LeeGoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGoTests/Pods-LeeGoTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35F5200C1C7C73D40089FF41 /* LeeGo.framework in Frameworks */,
+				C8B3E5A116623D363DB779A1 /* Pods_LeeGoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +100,8 @@
 				35F520031C7C73D40089FF41 /* LeeGo */,
 				35F5200F1C7C73D40089FF41 /* LeeGoTests */,
 				35F520021C7C73D40089FF41 /* Products */,
+				8843694F7277C5AFEC4D02EF /* Pods */,
+				760ECE35B930D39D861D56EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,6 +183,23 @@
 			path = "ObjC-Support";
 			sourceTree = "<group>";
 		};
+		760ECE35B930D39D861D56EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				903FBB7EF8E0836DCE973186 /* Pods_LeeGoTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8843694F7277C5AFEC4D02EF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D0AA4AD8C3B6A28562DBC65B /* Pods-LeeGoTests.debug.xcconfig */,
+				F5BB60E616EFC8D1DA779E5B /* Pods-LeeGoTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -213,9 +237,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 35F520181C7C73D40089FF41 /* Build configuration list for PBXNativeTarget "LeeGoTests" */;
 			buildPhases = (
+				AC2347CC59E2DFB23DF7EE2A /* Check Pods Manifest.lock */,
 				35F520071C7C73D40089FF41 /* Sources */,
 				35F520081C7C73D40089FF41 /* Frameworks */,
 				35F520091C7C73D40089FF41 /* Resources */,
+				B3DF1FA123C1906E6F91F59A /* Embed Pods Frameworks */,
+				EA482C32DF0EF37DFAC4B281 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -280,6 +307,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AC2347CC59E2DFB23DF7EE2A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B3DF1FA123C1906E6F91F59A /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeeGoTests/Pods-LeeGoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA482C32DF0EF37DFAC4B281 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeeGoTests/Pods-LeeGoTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		35F51FFC1C7C73D40089FF41 /* Sources */ = {
@@ -449,6 +524,7 @@
 		};
 		35F520191C7C73D40089FF41 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0AA4AD8C3B6A28562DBC65B /* Pods-LeeGoTests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = LeeGoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -459,6 +535,7 @@
 		};
 		35F5201A1C7C73D40089FF41 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F5BB60E616EFC8D1DA779E5B /* Pods-LeeGoTests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = LeeGoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
