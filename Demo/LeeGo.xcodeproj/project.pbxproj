@@ -639,7 +639,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LeeGo-Demo.xctest/LeeGo-Demo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LeeGo-Demo.app/LeeGo-Demo";
 			};
 			name = Debug;
 		};
@@ -653,7 +653,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LeeGo-Demo.xctest/LeeGo-Demo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LeeGo-Demo.app/LeeGo-Demo";
 			};
 			name = Release;
 		};

@@ -69,6 +69,7 @@
 		35F520401C7C762E0089FF41 /* ConfigurationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSpec.swift; sourceTree = "<group>"; };
 		35F520411C7C762E0089FF41 /* ConvenienceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvenienceSpec.swift; sourceTree = "<group>"; };
 		35F520421C7C762E0089FF41 /* ViewExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensionSpec.swift; sourceTree = "<group>"; };
+		35FD097D1C7C973200423B0F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		903FBB7EF8E0836DCE973186 /* Pods_LeeGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0AA4AD8C3B6A28562DBC65B /* Pods-LeeGoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGoTests/Pods-LeeGoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F5BB60E616EFC8D1DA779E5B /* Pods-LeeGoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGoTests/Pods-LeeGoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +118,7 @@
 		35F520031C7C73D40089FF41 /* LeeGo */ = {
 			isa = PBXGroup;
 			children = (
+				35FD097C1C7C972700423B0F /* Docs */,
 				35F520201C7C74510089FF41 /* Sources */,
 				35F5201B1C7C74400089FF41 /* Supporting Files */,
 			);
@@ -182,6 +184,14 @@
 			);
 			path = "ObjC-Support";
 			sourceTree = "<group>";
+		};
+		35FD097C1C7C972700423B0F /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				35FD097D1C7C973200423B0F /* README.md */,
+			);
+			path = Docs;
+			sourceTree = SOURCE_ROOT;
 		};
 		760ECE35B930D39D861D56EF /* Frameworks */ = {
 			isa = PBXGroup;
