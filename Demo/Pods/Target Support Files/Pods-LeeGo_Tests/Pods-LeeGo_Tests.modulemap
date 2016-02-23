@@ -1,6 +1,0 @@
-framework module Pods_LeeGo_Tests {
-  umbrella header "Pods-LeeGo_Tests-umbrella.h"
-
-  export *
-  module * { export * }
-}
