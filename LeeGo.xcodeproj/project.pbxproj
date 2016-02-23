@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3530E87D1C7CBC6300ABC8D1 /* Layout.md in Sources */ = {isa = PBXBuildFile; fileRef = 3530E87C1C7CBC6300ABC8D1 /* Layout.md */; };
 		35F5200C1C7C73D40089FF41 /* LeeGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F520011C7C73D40089FF41 /* LeeGo.framework */; };
 		35F520111C7C73D40089FF41 /* LeeGoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520101C7C73D40089FF41 /* LeeGoTests.swift */; };
-		35F5201E1C7C74400089FF41 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35F5201C1C7C74400089FF41 /* Info.plist */; };
 		35F5201F1C7C74400089FF41 /* LeeGo.h in Headers */ = {isa = PBXBuildFile; fileRef = 35F5201D1C7C74400089FF41 /* LeeGo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		35F520301C7C74510089FF41 /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520211C7C74510089FF41 /* AutoLayout.swift */; };
 		35F520311C7C74510089FF41 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520221C7C74510089FF41 /* Cell.swift */; };
@@ -306,7 +304,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35F5201E1C7C74400089FF41 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,7 +369,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3530E87D1C7CBC6300ABC8D1 /* Layout.md in Sources */,
 				35F520341C7C74510089FF41 /* ComponentTarget.swift in Sources */,
 				35F520361C7C74510089FF41 /* Composable.swift in Sources */,
 				35F520301C7C74510089FF41 /* AutoLayout.swift in Sources */,
@@ -450,7 +446,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -492,7 +488,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -512,7 +508,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.allblue-technology.LeeGo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -530,7 +526,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.allblue-technology.LeeGo";
 				PRODUCT_NAME = "$(TARGET_NAME)";

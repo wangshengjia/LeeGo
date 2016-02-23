@@ -22,7 +22,9 @@ after_success:
 # before_install:
 # - gem install cocoapods # Since Travis is not always on latest version
 # - pod install --project-directory=Example
+before_install:
+  - gem install xcpretty -N --no-ri --no-rdoc
 
 script:
-- set -o pipefail && xcodebuild test -workspace LeeGo.xcworkspace -scheme LeeGo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest' -enableCodeCoverage YES | xcpretty
+- set -o pipefail && xcodebuild clean test -workspace LeeGo.xcworkspace -scheme LeeGo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest' -enableCodeCoverage YES -configuration Debug ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint --allow-warnings
