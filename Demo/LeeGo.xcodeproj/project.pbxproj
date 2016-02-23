@@ -33,7 +33,6 @@
 		35D28C4B1C7896B4006BF152 /* ConfigurationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D28C491C7896AF006BF152 /* ConfigurationSpec.swift */; };
 		35D28C4E1C789704006BF152 /* AutoLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D28C4C1C7896FD006BF152 /* AutoLayoutSpec.swift */; };
 		35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FFB6A71C7A8C070035EC52 /* Element.swift */; };
-		35FFBC7C1C7BD2690035EC52 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 35FFBC7B1C7BD2690035EC52 /* README.md */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -84,8 +83,8 @@
 		35D28C461C7895C9006BF152 /* ConvenienceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvenienceSpec.swift; sourceTree = "<group>"; };
 		35D28C491C7896AF006BF152 /* ConfigurationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSpec.swift; sourceTree = "<group>"; };
 		35D28C4C1C7896FD006BF152 /* AutoLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutSpec.swift; sourceTree = "<group>"; };
+		35F51FBA1C7C61A40089FF41 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		35FFB6A71C7A8C070035EC52 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
-		35FFBC7B1C7BD2690035EC52 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4587B495CB0F1B0F3A5F0818 /* Pods_LeeGo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* LeeGo-Demo.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LeeGo-Demo.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -180,7 +179,7 @@
 		35FFBC7A1C7BD2690035EC52 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				35FFBC7B1C7BD2690035EC52 /* README.md */,
+				35F51FBA1C7C61A40089FF41 /* README.md */,
 			);
 			name = Documentation;
 			path = ../Docs;
@@ -496,7 +495,6 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				358507971C626097006D02EF /* Responsive.swift in Sources */,
 				35543A301C694C58000AC50C /* DetailsViewController.swift in Sources */,
-				35FFBC7C1C7BD2690035EC52 /* README.md in Sources */,
 				35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
