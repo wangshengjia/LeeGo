@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-               BuildableName = "LeeGo-Demo.app"
+               BuildableName = "LeeGo-Demo.xctest"
                BlueprintName = "LeeGo-Demo"
                ReferencedContainer = "container:LeeGo.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "LeeGo-Demo.app"
+            BuildableName = "LeeGo-Demo.xctest"
             BlueprintName = "LeeGo-Demo"
             ReferencedContainer = "container:LeeGo.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "LeeGo-Demo.app"
+            BuildableName = "LeeGo-Demo.xctest"
             BlueprintName = "LeeGo-Demo"
             ReferencedContainer = "container:LeeGo.xcodeproj">
          </BuildableReference>
@@ -99,7 +99,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "LeeGo-Demo.app"
+            BuildableName = "LeeGo-Demo.xctest"
             BlueprintName = "LeeGo-Demo"
             ReferencedContainer = "container:LeeGo.xcodeproj">
          </BuildableReference>

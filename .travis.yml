@@ -24,6 +24,7 @@ after_success:
 # - pod install --project-directory=Example
 before_install:
   - gem install xcpretty -N --no-ri --no-rdoc
+
 script:
 - set -o pipefail && xcodebuild clean test -workspace LeeGo.xcworkspace -scheme LeeGo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest' -enableCodeCoverage YES | xcpretty
 - pod lib lint --allow-warnings
