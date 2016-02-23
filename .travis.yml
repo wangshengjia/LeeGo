@@ -24,5 +24,5 @@ after_success:
 # - pod install --project-directory=Example
 
 script:
-- set -o pipefail && xcodebuild clean test -workspace LeeGo.xcworkspace -scheme LeeGo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest' -enableCodeCoverage YES | xcpretty
+- set -o pipefail && xcodebuild test -workspace LeeGo.xcworkspace -scheme LeeGo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest' -enableCodeCoverage YES | xcpretty
 - pod lib lint --allow-warnings
