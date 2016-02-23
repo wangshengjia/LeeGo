@@ -84,12 +84,8 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-LeeGo_Tests/LeeGo.framework"
-  install_framework "Pods-LeeGo_Tests/Nimble.framework"
-  install_framework "Pods-LeeGo_Tests/Quick.framework"
+  install_framework "Pods-LeeGo-Demo/LeeGo.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-LeeGo_Tests/LeeGo.framework"
-  install_framework "Pods-LeeGo_Tests/Nimble.framework"
-  install_framework "Pods-LeeGo_Tests/Quick.framework"
+  install_framework "Pods-LeeGo-Demo/LeeGo.framework"
 fi
