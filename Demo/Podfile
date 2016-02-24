@@ -1,0 +1,10 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'LeeGo-Demo', :exclusive => true do
+  pod "LeeGo", :path => "../"
+end
+
+target 'LeeGo-Tests', :exclusive => true do
+    pod "LeeGo", :path => "../"
+end
