@@ -25,8 +25,12 @@ extension Composable {
 
         // filter components already exist
         let filteredComponents = components.filter { (subComponent) -> Bool in
-            if let subcomponents = component.configuration?.components where !subcomponents.contains(subComponent) {
-                return false
+            if let subcomponents = component.configuration?.components where subcomponents.contains(subComponent) {
+                for subview in component.subviews {
+                    if let subcomponent2 = subview.configuration where subcomponent2 == subComponent {
+                        return false
+                    }
+                }
             }
             return true
         }
