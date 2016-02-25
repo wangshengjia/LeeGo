@@ -1,15 +1,14 @@
 //
-//  LeeGoTests.swift
-//  LeeGoTests
+//  Test.swift
+//  LeeGo
 //
-//  Created by Victor WANG on 23/02/16.
+//  Created by Victor WANG on 24/02/16.
 //  Copyright © 2016 Victor Wang. All rights reserved.
 //
 
 import XCTest
-@testable import LeeGo
 
-class LeeGoTests: XCTestCase {
+class Test: XCTestCase {
     
     override func setUp() {
         super.setUp()

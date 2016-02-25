@@ -6,6 +6,8 @@
 //  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
+import Foundation
+import UIKit
 
 import Quick
 import Nimble
@@ -26,7 +28,7 @@ class ComponentTypeSpec: QuickSpec {
                 view.setup(view, newStyle: [.backgroundColor(UIColor.greenColor())])
                 expect(view.backgroundColor) == UIColor.greenColor()
                 view.setup(view, currentStyle:[.backgroundColor(UIColor.greenColor())], newStyle: [])
-                expect(view.backgroundColor) == UIColor.whiteColor()
+                expect(view.backgroundColor).to(beNil())
             }
         }
 
