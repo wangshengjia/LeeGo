@@ -100,7 +100,7 @@ public enum Appearance: Hashable, Equatable {
         switch (self, component) {
         // UIView
         case (let .backgroundColor(color), _):
-            component.setValue(useDefaultValue ? UIColor.whiteColor() : color, forKey: toString())
+            component.setValue(useDefaultValue ? nil : color, forKey: toString())
         case (let .translatesAutoresizingMaskIntoConstraints(should), _):
             component.setValue(should.nsObject(), forKey: toString())
 
