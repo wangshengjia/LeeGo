@@ -1,4 +1,8 @@
 
+
+import Foundation
+import UIKit
+
 import Quick
 import Nimble
 @testable import LeeGo
@@ -47,14 +51,6 @@ class ComponentTargetSpec: QuickSpec {
         }
     }
 }
-
-enum ComponentBuilder: ComponentBuilderType {
-
-    case header, title
-
-    static let types: [ComponentBuilder: AnyClass] = [title: UILabel.self]
-}
-
 
 
 

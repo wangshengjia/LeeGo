@@ -6,6 +6,9 @@
 //  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
+import Foundation
+import UIKit
+
 import Quick
 import Nimble
 @testable import LeeGo

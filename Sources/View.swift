@@ -63,7 +63,7 @@ extension UIView {
         // configure sub components recursively
         for subview in self.subviews {
             if let viewName = subview.viewName,
-                let components = componentTarget.components{
+                let components = componentTarget.components {
                     for component in components where component.name == viewName {
                         subview.configure(component, dataSource: dataSource, updatingStrategy: updatingStrategy)
                     }
