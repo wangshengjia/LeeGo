@@ -52,7 +52,7 @@ extension Composable {
             }
         }
 
-        
+        //TODO: sort component's subviews
 
         var viewsDictionary = [String: UIView]()
         for subview in component.subviews {
