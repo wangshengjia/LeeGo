@@ -53,7 +53,91 @@ class ConfigurationSpec: QuickSpec {
         }
 
         describe("Appearacne tests") {
-            
+            it("should convert Appearance to String `none`") {
+                expect(Appearance.none.toString()) == "none"
+            }
+
+            it("should apply appearances correctly to given UIView") {
+                // Given
+                let view = UIView()
+                let appearances: [Appearance] = [
+                    .backgroundColor(UIColor.greenColor()),
+                    .translatesAutoresizingMaskIntoConstraints(false)
+                ]
+
+                // When
+                for appearance in appearances {
+                    appearance.apply(to: view)
+                }
+
+                // Then
+                expect(view.backgroundColor) == UIColor.greenColor()
+                expect(view.translatesAutoresizingMaskIntoConstraints) == false
+            }
+
+            it("should apply appearance correctly to given UILabel") {
+                // Given
+                let label = UILabel()
+                let appearances: [Appearance] = [
+                    .font(UIFont(name: "Helvetica", size: 16)!),
+                    .textColor(UIColor.greenColor()),
+                    .textAlignment(.Center),
+                    .numberOfLines(3),
+                    .defaultLabelText("labelText"),
+                ]
+
+                // When
+                for appearance in appearances {
+                    appearance.apply(to: label)
+                }
+
+                // Then
+                expect(label.font) == UIFont(name: "Helvetica", size: 16)
+                expect(label.textColor) == UIColor.greenColor()
+                expect(label.textAlignment) == NSTextAlignment.Center
+                expect(label.numberOfLines) == 3
+                expect(label.text) == "labelText"
+
+                Appearance.attributedString([[NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]]).apply(to: label)
+                expect(label.attributedText) == NSAttributedString(string: " ", attributes: [NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!])
+            }
+
+            it("should apply appearance correctly to given UIButton") {
+                // Given
+                let insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+                let button = UIButton()
+                let appearances: [Appearance] = [
+                    .buttonTitle("button", .Normal),
+                    .buttonTitleColor(UIColor.redColor(), .Normal),
+                    .buttonTitleShadowColor(UIColor.grayColor(), .Highlighted),
+//                    .buttonImage(UIImage(named: "lego")!, .Highlighted),
+//                    .buttonBackgroundImage(UIImage(named: "lego")!, .Normal),
+                    .contentEdgeInsets(insets),
+                    .titleEdgeInsets(insets),
+                    .imageEdgeInsets(insets),
+                    .reversesTitleShadowWhenHighlighted(false),
+                    .adjustsImageWhenHighlighted(true),
+                    .adjustsImageWhenDisabled(true),
+                    .showsTouchWhenHighlighted(true)
+                ]
+
+                // When
+                for appearance in appearances {
+                    appearance.apply(to: button)
+                }
+
+                // Then
+                expect(button.titleForState(.Normal)) == "button"
+                expect(button.titleColorForState(.Normal)) == UIColor.redColor()
+                expect(button.titleShadowColorForState(.Highlighted)) == UIColor.grayColor()
+                expect(button.contentEdgeInsets) == insets
+                expect(button.titleEdgeInsets) == insets
+                expect(button.imageEdgeInsets) == insets
+                expect(button.reversesTitleShadowWhenHighlighted) == false
+                expect(button.adjustsImageWhenHighlighted) == true
+                expect(button.adjustsImageWhenDisabled) == true
+                expect(button.showsTouchWhenHighlighted) == true
+            }
         }
     }
 }
