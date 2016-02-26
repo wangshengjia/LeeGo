@@ -70,6 +70,8 @@ public enum Appearance: Hashable, Equatable {
     // UIView
     case translatesAutoresizingMaskIntoConstraints(Bool), backgroundColor(UIColor), tintColor(UIColor)
 
+    // UIControl
+
     // UILabel
     case font(UIFont), textColor(UIColor), textAlignment(NSTextAlignment), numberOfLines(Int), defaultLabelText(String)
     case attributedString([Attributes]) // TODO: handle also NSParagrapheStyle

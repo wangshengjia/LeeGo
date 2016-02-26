@@ -75,6 +75,7 @@ extension UIView {
 extension UIView {
 
     // TODO: how to handle clean up for reuse
+    /*
     func cleanUpForReuse() {
         switch self {
         case let label as UILabel:
@@ -89,7 +90,7 @@ extension UIView {
         for case let subview in self.subviews {
             subview.cleanUpForReuse()
         }
-    }
+    }*/
 
     public var name: String? {
         get {
