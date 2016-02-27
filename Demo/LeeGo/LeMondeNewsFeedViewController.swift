@@ -1,17 +1,16 @@
 //
-//  ViewController.swift
-//  PlaygroundProject
+//  LeMondeNewsFeedViewController.swift
+//  LeeGo
 //
-//  Created by Victor WANG on 12/11/15.
-//  Copyright © 2015 Le Monde. All rights reserved.
+//  Created by Victor WANG on 27/02/16.
+//  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
+import Foundation
 import UIKit
-import LeeGo
 
-class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UISearchBarDelegate {
-
-
+class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             for reuseId in ComponentBuilder.cellReuseIdentifiers {
@@ -42,7 +41,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
                         })
                 }
             }
-            
+
             task.resume()
         }
     }
@@ -56,7 +55,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         let configurationType = indexPath.row % 2 == 0 ? ComponentBuilder.article : .featured
-        
+
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(configurationType), forIndexPath: indexPath)
 
         cell.configure(configurationType.componentTarget(), dataSource: elements[indexPath.item])
@@ -66,9 +65,9 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 
     // MARK: Collection View Layout
 
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        return CGSizeMake(CGRectGetWidth(collectionView.frame), 180)
-//    }
+    //    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    //        return CGSizeMake(CGRectGetWidth(collectionView.frame), 180)
+    //    }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0.5
@@ -87,7 +86,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
         if indexPath.item % 2 == 0 {
-            if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainViewController") as? ViewController {
+            if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LeMondeNewsFeedViewController") as? LeMondeNewsFeedViewController {
                 detailsViewController.elements = self.elements
                 self.navigationController?.pushViewController(detailsViewController, animated: true)
             }
@@ -97,37 +96,5 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             }
         }
     }
+
 }
-
-//extension ViewController: ConfiguratorDelegate {
-//
-//    func willApply<Component: UIView>(with style: [Appearance], toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> [Appearance] {
-//        
-//
-//        return style
-//    }
-//
-//    func willComposite<Component: UIView>(with components: [ComponentTarget], toComponent component: Component, using layout: Layout, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) {
-//
-//    }
-//
-//    func willApply<Component: UIView>(with componentTarget: ComponentTarget, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> ComponentTarget {
-//        guard let indexPath = indexPath else {
-//            return componentTarget
-//        }
-//
-//        if (item is ElementViewModel && indexPath.item > 5) {
-//            return componentTarget
-//        }
-//
-//        return componentTarget
-//    }
-//
-//    func didApply<Component: UIView>(with componentTarget: ComponentTarget, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) {
-//
-//    }
-//}
-
-
-
-

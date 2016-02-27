@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350637461C4C1AAC00B5E547 /* ElementViewModel.swift */; };
+		350E0DF01C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */; };
 		352E50EA1C528CDC0075BDB6 /* ImageComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352E50E91C528CDC0075BDB6 /* ImageComponent.swift */; };
 		3541CE881C44494B00A3B257 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3541CE871C44494B00A3B257 /* Main.storyboard */; };
 		3550E7611C4E5AB8002F5FB4 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3550E7601C4E5AB8002F5FB4 /* Configurations.swift */; };
@@ -31,7 +32,7 @@
 		35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FFB6A71C7A8C070035EC52 /* Element.swift */; };
 		3B3BE96C4117CB80F9144250 /* Pods_LeeGo_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88078757DDD337BDFDD543E1 /* Pods_LeeGo_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		607FACD81AFB9204008FA782 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* MainViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		8BB65EBEFE3C9BD9CDD42C04 /* Pods_LeeGo_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414F27C911D7E43D8077BCC6 /* Pods_LeeGo_Demo.framework */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		1524E6FF067F0774C3E1EE21 /* LeeGo.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LeeGo.podspec; path = ../LeeGo.podspec; sourceTree = "<group>"; };
 		350637461C4C1AAC00B5E547 /* ElementViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementViewModel.swift; sourceTree = "<group>"; };
+		350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeMondeNewsFeedViewController.swift; sourceTree = "<group>"; };
 		352E50E91C528CDC0075BDB6 /* ImageComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageComponent.swift; sourceTree = "<group>"; };
 		3541CE871C44494B00A3B257 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3550E7601C4E5AB8002F5FB4 /* Configurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
@@ -76,7 +78,7 @@
 		607FACD01AFB9204008FA782 /* LeeGo-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LeeGo-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		607FACD71AFB9204008FA782 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* LeeGo-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LeeGo-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,24 @@
 				615CF4A254DE172FAED17E17 /* Pods-LeeGo-Tests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		350E0DED1C81F08400DB78FC /* LeMonde */ = {
+			isa = PBXGroup;
+			children = (
+				350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */,
+				35FFB6A61C7A8BF30035EC52 /* Models */,
+				35CC5EA91C6CD942005C87C8 /* Views */,
+				35543A311C6A4B56000AC50C /* Configurations */,
+			);
+			name = LeMonde;
+			sourceTree = "<group>";
+		};
+		350E0DEE1C81F08B00DB78FC /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Twitter;
 			sourceTree = "<group>";
 		};
 		35543A311C6A4B56000AC50C /* Configurations */ = {
@@ -200,11 +220,10 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				607FACD71AFB9204008FA782 /* MainViewController.swift */,
+				350E0DEE1C81F08B00DB78FC /* Twitter */,
+				350E0DED1C81F08400DB78FC /* LeMonde */,
 				35543A2F1C694C58000AC50C /* DetailsViewController.swift */,
-				35FFB6A61C7A8BF30035EC52 /* Models */,
-				35CC5EA91C6CD942005C87C8 /* Views */,
-				35543A311C6A4B56000AC50C /* Configurations */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				3541CE871C44494B00A3B257 /* Main.storyboard */,
@@ -472,7 +491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3550E7611C4E5AB8002F5FB4 /* Configurations.swift in Sources */,
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				607FACD81AFB9204008FA782 /* MainViewController.swift in Sources */,
 				35CC5EAD1C6CE756005C87C8 /* AdView.swift in Sources */,
 				350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */,
 				35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */,
@@ -481,6 +500,7 @@
 				358507971C626097006D02EF /* Responsive.swift in Sources */,
 				35543A301C694C58000AC50C /* DetailsViewController.swift in Sources */,
 				35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */,
+				350E0DF01C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
