@@ -20,8 +20,8 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oRx-Us-dS9">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4CH-Wu-gN9">
+                                <color key="backgroundColor" red="0.82352941180000006" green="0.83921568629999999" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="4CH-Wu-gN9">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -39,12 +39,20 @@
                             <constraint firstItem="oRx-Us-dS9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="09T-QV-gfH"/>
                             <constraint firstItem="oRx-Us-dS9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="9Mi-ou-e4E"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oRx-Us-dS9" secondAttribute="bottom" id="Guf-XQ-PVV"/>
+                            <constraint firstItem="oRx-Us-dS9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="LPc-Zd-JTn"/>
+                            <constraint firstItem="oRx-Us-dS9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="RcI-fH-sw6"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oRx-Us-dS9" secondAttribute="bottom" id="T11-Kh-pEz"/>
                             <constraint firstItem="oRx-Us-dS9" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="cct-Fp-oTA"/>
+                            <constraint firstItem="oRx-Us-dS9" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottomMargin" id="uvf-9R-6SH"/>
                             <constraint firstAttribute="trailing" secondItem="oRx-Us-dS9" secondAttribute="trailing" id="xuM-KU-Jek"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="9Mi-ou-e4E"/>
+                                <exclude reference="LPc-Zd-JTn"/>
+                                <exclude reference="cct-Fp-oTA"/>
+                                <exclude reference="Guf-XQ-PVV"/>
+                                <exclude reference="T11-Kh-pEz"/>
                             </mask>
                         </variation>
                     </view>

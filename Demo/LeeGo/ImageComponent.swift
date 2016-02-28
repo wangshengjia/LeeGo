@@ -18,7 +18,7 @@ extension UIImageView {
         for (key, value) in styles {
             switch (key, value) {
             case ("3to2"/*Style.ratio3To2*/, let ratio as CGFloat):
-                let constraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Width, multiplier: 1/ratio, constant: 0)
+                let constraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Height, multiplier: ratio, constant: 0)
                 constraint.priority = 900
                 constraint.identifier = key
                 self.addConstraint(constraint)

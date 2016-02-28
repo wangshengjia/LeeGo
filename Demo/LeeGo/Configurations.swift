@@ -71,7 +71,7 @@ extension ComponentBuilder {
 
 
         case .article:
-            return self.build()
+            return self.build().style([.backgroundColor(UIColor.whiteColor())])
                 .components([
                     title.componentTarget(),
                     ComponentTarget(name: "subtitle", targetClass: UILabel.self).style(Style.H2.style()),

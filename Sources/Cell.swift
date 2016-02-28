@@ -30,6 +30,8 @@ extension UICollectionViewCell {
 
 extension UICollectionViewCell {
     override public func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        // return layoutAttributes
+
         // if cached, return cached value
         
         // calculate manually

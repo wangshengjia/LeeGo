@@ -152,7 +152,7 @@ public enum Appearance: Hashable, Equatable {
 
         // Custom
         case (let .custom(dictionary), _):
-            useDefaultValue ? component.setupCustomStyle(dictionary) : component.removeCustomStyle(dictionary)
+            useDefaultValue ? component.removeCustomStyle(dictionary) : component.setupCustomStyle(dictionary)
         default:
             assertionFailure("Unknown appearance \(self) for component \(component)")
             break
