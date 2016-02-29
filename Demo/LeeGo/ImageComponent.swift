@@ -3,7 +3,7 @@
 //  LeeGo
 //
 //  Created by Victor WANG on 22/01/16.
-//  Copyright © 2016 CocoaPods. All rights reserved.
+//  Copyright © 2016 LeeGo. All rights reserved.
 //
 
 import Foundation
