@@ -40,6 +40,10 @@ class MainViewController: UITableViewController {
             if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("LeMondeNewsFeedViewController") as? LeMondeNewsFeedViewController {
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
+        case 1:
+            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("TwitterFeedViewController") as? TwitterFeedViewController {
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
         default:
             break
         }

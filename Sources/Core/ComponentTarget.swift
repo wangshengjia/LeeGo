@@ -40,7 +40,7 @@ extension ComponentBuilderType {
 }
 
 public class ComponentTarget: Hashable {
-    let name: String
+    public let name: String
     let targetClass: AnyClass
     let nibName: String?
 

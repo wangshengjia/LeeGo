@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 // Cell
 
 extension UITableViewCell {
@@ -30,6 +30,7 @@ extension UICollectionViewCell {
 
 extension UICollectionViewCell {
     override public func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+
         // return layoutAttributes
 
         // if cached, return cached value
@@ -37,8 +38,9 @@ extension UICollectionViewCell {
         // calculate manually
 
         // calculate auto
-        let attr: UICollectionViewLayoutAttributes = layoutAttributes.copy() as! UICollectionViewLayoutAttributes
+        let attr = super.preferredLayoutAttributesFittingAttributes(layoutAttributes)
 
+        attr.frame = layoutAttributes.frame
         var newFrame = attr.frame
         self.frame = newFrame
 
@@ -49,7 +51,16 @@ extension UICollectionViewCell {
         let desiredHeight = self.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
         newFrame.size.height = desiredHeight
         attr.frame = newFrame
+
+        // this function get called 4 times everytime
         return attr
+    }
+}
+
+extension UITextView {
+    public override func intrinsicContentSize() -> CGSize {
+        print("c: \(self)")
+        return CGSize(width: UIViewNoIntrinsicMetric, height: self.sizeThatFits(CGSize(width: self.frame.width, height: CGFloat.max)).height)
     }
 }
 

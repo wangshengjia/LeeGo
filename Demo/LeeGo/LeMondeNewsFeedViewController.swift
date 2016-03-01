@@ -24,10 +24,6 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(self.view.frame.width, 280)
-
-        collectionView.reloadData()
-
         if elements.isEmpty {
             let URLRequest =  NSURLRequest(URL: NSURL(string: "http://api-cdn.lemonde.fr/ws/5/mobile/www/ios-phone/en_continu/index.json")!)
             let task = NSURLSession.sharedSession().dataTaskWithRequest(URLRequest) {data, response, error in
@@ -44,6 +40,8 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 
             task.resume()
         }
+
+        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(self.view.frame.width, 180)
     }
 
     // MARK: Collection View DataSource
@@ -65,9 +63,9 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 
     // MARK: Collection View Layout
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), 180)
-    }
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        return CGSizeMake(CGRectGetWidth(collectionView.frame), 180)
+//    }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0.5
@@ -76,7 +74,7 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
     // MARK: size
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animateAlongsideTransition({ (context) -> Void in
-            (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(self.view.frame.width, 280)
+            (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(self.view.frame.width, 180)
             self.collectionView.reloadData()
             }, completion: nil)
 

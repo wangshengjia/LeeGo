@@ -59,6 +59,7 @@ extension Composable {
             if let name = subview.name {
                 viewsDictionary[name] = subview
             }
+            subview.translatesAutoresizingMaskIntoConstraints = false
         }
 
         // TODO: apply diff of layout instead of removing all constraints
