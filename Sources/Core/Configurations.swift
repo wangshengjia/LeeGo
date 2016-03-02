@@ -203,7 +203,7 @@ public enum Appearance {
 
         // UIImageView
         case (let .ratio(ratioValue), let image as UIImageView):
-            let id = "ratio(\(ratio))"
+            let id = "ratio(width == height * \(ratioValue))"
             if !useDefaultValue {
                 let constraint = NSLayoutConstraint(item: image, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: image, attribute: NSLayoutAttribute.Height, multiplier: ratioValue, constant: 0)
                 constraint.identifier = id

@@ -48,7 +48,7 @@ extension UICollectionViewCell {
         self.setNeedsLayout()
         self.layoutIfNeeded()
 
-        let desiredHeight = self.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        let desiredHeight = self.contentView.systemLayoutSizeFittingSize(CGSize(width: newFrame.width, height: 0), withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityFittingSizeLevel).height
         newFrame.size.height = desiredHeight
         attr.frame = newFrame
 
