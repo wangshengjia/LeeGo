@@ -15,8 +15,9 @@ enum Twitter: ComponentBuilderType {
     case name, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount
     case retweetView, likeView
     case accountHeader, toolbarFooter, retweetHeader
+    case tweet
 
-    static let reuseIdentifiers = [name, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount, retweetView, likeView, accountHeader, toolbarFooter, retweetHeader].map { (component) -> String in
+    static let reuseIdentifiers = [name, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount, retweetView, likeView, accountHeader, toolbarFooter, retweetHeader, tweet].map { (component) -> String in
         return String(component)
     }
 
@@ -30,6 +31,8 @@ enum Twitter: ComponentBuilderType {
         replyButton: UIButton.self,
         retweetButton: UIButton.self,
         likeButton: UIButton.self,
+        retweetCount: UILabel.self,
+        likeCount: UILabel.self,
     ]
 }
 
@@ -58,11 +61,11 @@ extension Twitter {
         case .date:
             return build().style([.font(UIFont.systemFontOfSize(14))])
         case .replyButton:
-            return build().style([.buttonImage(UIImage(named: "")!, .Normal)])
+            return build().style([.buttonImage(UIImage(named: "twitter_reply")!, .Normal)])
         case .retweetButton:
-            return build().style([.buttonImage(UIImage(named: "")!, .Normal)])
+            return build().style([.buttonImage(UIImage(named: "twitter_retweet")!, .Normal)])
         case .likeButton:
-            return build().style([.buttonImage(UIImage(named: "")!, .Normal)])
+            return build().style([.buttonImage(UIImage(named: "twitter_favorite")!, .Normal)])
         case .retweetCount:
             return build().style([.font(UIFont.systemFontOfSize(14))])
         case .likeCount:
@@ -93,12 +96,43 @@ extension Twitter {
                 retweetView.configuration(),
                 likeView.configuration()) { (reply, retweet, like) in
                     Layout([
-                        "H:|[\(reply)]-interspaceH-[\(retweet)-interspaceH-[\(like)]|",
+                        "H:|[\(reply)]-50-[\(retweet)]-50-[\(like)]-(>=0)-|",
                         "V:|[\(reply)]|", "V:|[\(retweet)]|", "V:|[\(like)]|"
                         ])
+            }
+        case .tweet:
+            return build()
+                .style([.backgroundColor(UIColor.whiteColor())])
+                .components(
+                    avatar.configuration(),
+                    tweetText.configuration(),
+                    toolbarFooter.configuration()) { (avatar, tweetText, toolbarFooter) in
+                        Layout(["H:|-10-[\(avatar)(50)]-10-[\(tweetText)]-10-|",
+                            "H:[\(avatar)]-10-[\(toolbarFooter)]-10-|",
+                            "V:|-10-[\(avatar)]-(>=10)-|",
+                            "V:|-10-[\(tweetText)]-10-[\(toolbarFooter)]-(>=10)-|"])
             }
         default:
             return build()
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
