@@ -66,22 +66,23 @@ extension Bool {
     }
 }
 
-public enum Appearance: Hashable, Equatable {
+public enum Appearance {
     // UIView
-    case translatesAutoresizingMaskIntoConstraints(Bool), backgroundColor(UIColor), tintColor(UIColor)
+    case userInteractionEnabled(Bool), translatesAutoresizingMaskIntoConstraints(Bool), backgroundColor(UIColor), tintColor(UIColor), tintAdjustmentMode(UIViewTintAdjustmentMode), cornerRadius(CGFloat), borderWidth(CGFloat), borderColor(UIColor), multipleTouchEnabled(Bool), exclusiveTouch(Bool), clipsToBounds(Bool), alpha(CGFloat), opaque(Bool), clearsContextBeforeDrawing(Bool), hidden(Bool), contentMode(UIViewContentMode)
 
     // UIControl
+    case enabled(Bool), selected(Bool), highlighted(Bool), contentVerticalAlignment(UIControlContentVerticalAlignment), contentHorizontalAlignment(UIControlContentHorizontalAlignment)
 
-    // UILabel
-    case font(UIFont), textColor(UIColor), textAlignment(NSTextAlignment), numberOfLines(Int), defaultLabelText(String)
-    case attributedString([Attributes]) // TODO: handle also NSParagrapheStyle
+    // UILabel & UITextView
+    case font(UIFont), textColor(UIColor), textAlignment(NSTextAlignment), numberOfLines(Int), lineBreakMode(NSLineBreakMode), defaultLabelText(String), selectedRange(NSRange), editable(Bool), selectable(Bool), dataDetectorTypes(UIDataDetectorTypes), allowsEditingTextAttributes(Bool), clearsOnInsertion(Bool), textContainerInset(UIEdgeInsets), linkTextAttributes(Attributes)
+    case attributedText([Attributes]) // TODO: handle also NSParagrapheStyle
 
     // UIButton
     case buttonType(UIButtonType), buttonTitle(String, UIControlState), buttonTitleColor(UIColor, UIControlState), buttonTitleShadowColor(UIColor, UIControlState), buttonImage(UIImage, UIControlState), buttonBackgroundImage(UIImage, UIControlState), buttonAttributedTitle([Attributes], UIControlState), contentEdgeInsets(UIEdgeInsets), titleEdgeInsets(UIEdgeInsets), reversesTitleShadowWhenHighlighted(Bool), imageEdgeInsets(UIEdgeInsets), adjustsImageWhenHighlighted(Bool), adjustsImageWhenDisabled(Bool), showsTouchWhenHighlighted(Bool)
 
     // UIImageView
+    case ratio(CGFloat)
 
-    // UITextView
     // UITextField
     // ...
 
@@ -89,36 +90,86 @@ public enum Appearance: Hashable, Equatable {
     case custom([String: AnyObject])
     case none
 
-    func toString() -> String {
-        let strSelf = String(self)
-        if let index = strSelf.characters.indexOf("(") {
-            return String(self).substringToIndex(index)
-        }
-        return strSelf
-    }
-
     func apply<Component: UIView>(to component: Component, useDefaultValue: Bool = false) {
 
         switch (self, component) {
         // UIView
         case (let .backgroundColor(color), _):
-            component.setValue(useDefaultValue ? nil : color, forKey: toString())
+            component.backgroundColor = useDefaultValue ? nil : color
+        case (let .userInteractionEnabled(userInteractionEnabled), _):
+            component.userInteractionEnabled = userInteractionEnabled
         case (let .translatesAutoresizingMaskIntoConstraints(should), _):
-            component.setValue(should.nsObject(), forKey: toString())
+            component.translatesAutoresizingMaskIntoConstraints = should
+        case (let .tintColor(color), _):
+            component.tintColor = color
+        case (let .tintAdjustmentMode(mode), _):
+            component.tintAdjustmentMode = mode
+        case (let .cornerRadius(radius), _):
+            component.layer.cornerRadius = radius
+        case (let .borderWidth(borderWidth), _):
+            component.layer.borderWidth = borderWidth
+        case (let .borderColor(borderColor), _):
+            component.layer.borderColor = borderColor.CGColor
+        case (let .multipleTouchEnabled(multipleTouchEnabled), _):
+            component.multipleTouchEnabled = multipleTouchEnabled
+        case (let .exclusiveTouch(exclusiveTouch), _):
+            component.exclusiveTouch = exclusiveTouch
+        case (let .clipsToBounds(clipsToBounds), _):
+            component.clipsToBounds = clipsToBounds
+        case (let .alpha(alpha), _):
+            component.alpha = alpha
+        case (let .opaque(opaque), _):
+            component.opaque = opaque
+        case (let .hidden(hidden), _):
+            component.hidden = hidden
+        case (let .clearsContextBeforeDrawing(clearsContextBeforeDrawing), _):
+            component.clearsContextBeforeDrawing = clearsContextBeforeDrawing
+        case (let .contentMode(contentMode), _):
+            component.contentMode = contentMode
+
+        // UIControl
+        case (let .enabled(enabled), let control as UIControl):
+            control.enabled = enabled
+        case (let .selected(selected), let control as UIControl):
+            control.selected = selected
+        case (let .highlighted(highlighted), let control as UIControl):
+            control.highlighted = highlighted
+        case (let .contentVerticalAlignment(contentVerticalAlignment), let control as UIControl):
+            control.contentVerticalAlignment = contentVerticalAlignment
+        case (let .contentHorizontalAlignment(contentHorizontalAlignment), let control as UIControl):
+            control.contentHorizontalAlignment = contentHorizontalAlignment
 
         // UILabel
         case (let .font(font), let label as UILabel):
-            label.setValue(font, forKey: toString())
+            label.font = font
         case (let .textColor(color), let label as UILabel):
-            label.setValue(color, forKey: toString())
+            label.textColor = color
         case (let .textAlignment(align), let label as UILabel):
-            label.setValue(align.rawValue.nsObject(), forKey: toString())
+            label.textAlignment = align
         case (let .numberOfLines(number), let label as UILabel):
-            label.setValue(number.nsObject(), forKey: toString())
+            label.numberOfLines = number
         case (let .defaultLabelText(text), let label as UILabel):
             label.text = text
-        case (let .attributedString(attributes), let label as UILabel):
+        case (let .attributedText(attributes), let label as UILabel):
             label.attributedText = attributedStringFromList(attributes)
+
+        // UITextView
+        case (let .selectedRange(range), let textView as UITextView):
+            textView.selectedRange = range
+        case (let .editable(editable), let textView as UITextView):
+            textView.editable = editable
+        case (let .selectable(selectable), let textView as UITextView):
+            textView.selectable = selectable
+        case (let .dataDetectorTypes(types), let textView as UITextView):
+            textView.dataDetectorTypes = types
+        case (let .allowsEditingTextAttributes(allows), let textView as UITextView):
+            textView.allowsEditingTextAttributes = allows
+        case (let .clearsOnInsertion(clearsOnInsertion), let textView as UITextView):
+            textView.clearsOnInsertion = clearsOnInsertion
+        case (let .textContainerInset(inset), let textView as UITextView):
+            textView.textContainerInset = inset
+        case (let .linkTextAttributes(attrs), let textView as UITextView):
+            textView.linkTextAttributes = attrs
 
         // UIButton
         case (let .buttonType(type), let button as UIButton):
@@ -162,6 +213,15 @@ public enum Appearance: Hashable, Equatable {
                     return constraint.identifier == id
                 }))
             }
+
+        // Multiple
+        case (let .lineBreakMode(mode), _):
+            if component.respondsToSelector("setLineBreakMode:") {
+                component.setValue(mode.rawValue.nsObject(), forKey: toString())
+            } else {
+                assertionFailure("Unknown appearance \(self) for component \(component)")
+            }
+            
         // Custom
         case (let .custom(dictionary), _):
             useDefaultValue ? component.removeCustomStyle(dictionary) : component.setupCustomStyle(dictionary)
@@ -232,8 +292,13 @@ public enum Appearance: Hashable, Equatable {
 //        }
 //    }
 
-    public var hashValue: Int {
-        return self.toString().hashValue
+
+    func toString() -> String {
+        let strSelf = String(self)
+        if let index = strSelf.characters.indexOf("(") {
+            return String(self).substringToIndex(index)
+        }
+        return strSelf
     }
 
     private func attributedStringFromList(attrList: [Attributes]) -> NSAttributedString? {
@@ -241,6 +306,12 @@ public enum Appearance: Hashable, Equatable {
             // TODO: is that possible to take care this default "space" ??
             return NSAttributedString(string: (attribute[kCustomAttributeDefaultText] as? String) ?? " ", attributes: attribute)
         }).combineToAttributedString()
+    }
+}
+
+extension Appearance: Hashable, Equatable {
+    public var hashValue: Int {
+        return self.toString().hashValue
     }
 }
 
