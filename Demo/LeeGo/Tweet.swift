@@ -29,7 +29,7 @@ class Tweet {
         hashTags = json["hashtags"] as? [[String: AnyObject]] ?? []
         text = json["text"] as? String ?? ""
         retweetCount = json["retweet_count"] as? Int ?? 0
-        favouritesCount = json["favourites_count"] as? Int ?? 0
+        favouritesCount = json["user"]!["favourites_count"] as? Int ?? 0
         createdAt = NSDate() // todo: json["created_at"] as? String
         userName = json["user"]!["name"] as? String ?? ""
         screenName = json["user"]!["screen_name"] as? String ?? ""
@@ -52,6 +52,10 @@ extension Tweet: ComponentDataSource {
             textView.text = text
         case let label as UILabel where componentTarget.name == "name":
             label.text = userName
+        case let label as UILabel where componentTarget.name == "retweetCount":
+            label.text = "\(retweetCount)"
+        case let label as UILabel where componentTarget.name == "likeCount":
+            label.text = "\(favouritesCount)"
         default:
             break
         }

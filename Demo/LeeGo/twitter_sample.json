@@ -26,7 +26,7 @@
                  "iso_language_code": "en",
                  "result_type": "recent"
                  },
-                 "retweet_count": 0,
+                 "retweet_count": 123,
                  "in_reply_to_status_id_str": null,
                  "id": 250075927172759550,
                  "geo": null,
@@ -64,7 +64,7 @@
                  },
                  "default_profile": true,
                  "contributors_enabled": false,
-                 "favourites_count": 0,
+                 "favourites_count": 10,
                  "url": null,
                  "profile_image_url_https": "https://si0.twimg.com/profile_images/2359746665/1v6zfgqo8g0d3mk7ii5s_normal.jpeg",
                  "utc_offset": -28800,
@@ -120,7 +120,7 @@
                  "iso_language_code": "pl",
                  "result_type": "recent"
                  },
-                 "retweet_count": 0,
+                 "retweet_count": 234,
                  "in_reply_to_status_id_str": null,
                  "id": 249292149810667520,
                  "geo": null,
@@ -214,7 +214,7 @@
                  "iso_language_code": "en",
                  "result_type": "recent"
                  },
-                 "retweet_count": 0,
+                 "retweet_count": 12,
                  "in_reply_to_status_id_str": null,
                  "id": 249289491129438200,
                  "geo": null,
@@ -308,7 +308,7 @@
                  "iso_language_code": "en",
                  "result_type": "recent"
                  },
-                 "retweet_count": 0,
+                 "retweet_count": 1004,
                  "in_reply_to_status_id_str": null,
                  "id": 249279667666817020,
                  "geo": null,
