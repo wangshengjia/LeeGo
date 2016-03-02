@@ -14,30 +14,5 @@ class ImageComponent: UIImageView {
 }
 
 extension UIImageView {
-    public override func setupCustomStyle(styles: [String: AnyObject]) {
-        for (key, value) in styles {
-            switch (key, value) {
-            case ("3to2"/*Style.ratio3To2*/, let ratio as CGFloat):
-                let constraint = NSLayoutConstraint(item: self, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Height, multiplier: ratio, constant: 0)
-                constraint.priority = 900
-                constraint.identifier = key
-                self.addConstraint(constraint)
-            default:
-                break
-            }
-        }
-    }
 
-    public override func removeCustomStyle(styles: [String: AnyObject]) {
-        for (key, value) in styles {
-            switch (key, value) {
-            case ("3to2"/*Style.ratio3To2*/, _):
-                self.removeConstraints(self.constraints.filter({ (constraint) -> Bool in
-                    return constraint.identifier == key
-                }))
-            default:
-                break
-            }
-        }
-    }
 }

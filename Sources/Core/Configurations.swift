@@ -150,6 +150,18 @@ public enum Appearance: Hashable, Equatable {
         case (let .showsTouchWhenHighlighted(should), let button as UIButton):
             button.showsTouchWhenHighlighted = should
 
+        // UIImageView
+        case (let .ratio(ratioValue), let image as UIImageView):
+            let id = "ratio(\(ratio))"
+            if !useDefaultValue {
+                let constraint = NSLayoutConstraint(item: image, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: image, attribute: NSLayoutAttribute.Height, multiplier: ratioValue, constant: 0)
+                constraint.identifier = id
+                image.addConstraint(constraint)
+            } else {
+                image.removeConstraints(image.constraints.filter({ (constraint) -> Bool in
+                    return constraint.identifier == id
+                }))
+            }
         // Custom
         case (let .custom(dictionary), _):
             useDefaultValue ? component.removeCustomStyle(dictionary) : component.setupCustomStyle(dictionary)

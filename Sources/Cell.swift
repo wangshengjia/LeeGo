@@ -59,7 +59,6 @@ extension UICollectionViewCell {
 
 extension UITextView {
     public override func intrinsicContentSize() -> CGSize {
-        print("c: \(self)")
         return CGSize(width: UIViewNoIntrinsicMetric, height: self.sizeThatFits(CGSize(width: self.frame.width, height: CGFloat.max)).height)
     }
 }

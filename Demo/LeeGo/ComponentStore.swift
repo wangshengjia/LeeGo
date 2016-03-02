@@ -42,11 +42,11 @@ extension Twitter {
         case .account:
             return build().style([.font(UIFont.systemFontOfSize(14))])
         case .avatar:
-            return build().style([.custom(["ratio": 1])])
+            return build().style([.ratio(1), .backgroundColor(UIColor.lightGrayColor())])
         case .tweetText:
             return build()
         case .tweetImage:
-            return build().style([.custom(["ratio": 0.5])])
+            return build().style([.ratio(0.5)])
         case .date:
             return build().style([.font(UIFont.systemFontOfSize(14))])
         case .replyButton:

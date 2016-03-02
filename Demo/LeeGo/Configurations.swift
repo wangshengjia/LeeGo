@@ -165,7 +165,7 @@ enum Style: String {
     static let customTitle = "title"
     static let nature = "Nature"
 
-    static let ratio3To2: String = "3to2"
+    static let ratio: String = "ratio"
 
     func style() -> [Appearance] {
         switch self {
@@ -183,7 +183,7 @@ enum Style: String {
                 .translatesAutoresizingMaskIntoConstraints(false)]
         case H3:
             return [
-                .attributedString([
+                .attributedText([
                     [kCustomAttributeKeyIdentifier: Style.marker, NSFontAttributeName: UIFont(name: "LmfrAppIcon", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
                     [kCustomAttributeKeyIdentifier: Style.customTitle, kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "TheAntiquaB-W7Bold", size: CGFloat(20.responsive([.S: 21, .L: 30])))!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
                     [kCustomAttributeKeyIdentifier: Style.nature, NSFontAttributeName: UIFont(name: "FetteEngschrift", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
@@ -191,7 +191,7 @@ enum Style: String {
                 .numberOfLines(0),
                 .translatesAutoresizingMaskIntoConstraints(false)]
         case I1:
-            return [.backgroundColor(UIColor.greenColor()), .custom([Style.ratio3To2: 1.5]), .translatesAutoresizingMaskIntoConstraints(false)]
+            return [.backgroundColor(UIColor.greenColor()), .ratio(1.5), .translatesAutoresizingMaskIntoConstraints(false)]
         case BasicButton:
             return [.buttonType(.Custom), .buttonTitle("OK", .Normal), .translatesAutoresizingMaskIntoConstraints(false)]
         default:
