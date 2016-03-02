@@ -52,6 +52,10 @@ extension Tweet: ComponentDataSource {
             textView.text = text
         case let label as UILabel where componentTarget.name == "name":
             label.text = userName
+        case let label as UILabel where componentTarget.name == "account":
+            label.text = "@" + screenName
+        case let label as UILabel where componentTarget.name == "date":
+            label.text = "2d"
         case let label as UILabel where componentTarget.name == "retweetCount":
             label.text = "\(retweetCount)"
         case let label as UILabel where componentTarget.name == "likeCount":

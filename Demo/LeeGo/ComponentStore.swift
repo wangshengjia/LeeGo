@@ -49,15 +49,15 @@ extension Twitter {
     func configuration() -> ComponentTarget {
         switch self {
         case .name:
-            return build().style([.font(UIFont.boldSystemFontOfSize(16))])
+            return build().style([.font(UIFont.boldSystemFontOfSize(14))])
         case .account:
             return build().style([.font(UIFont.systemFontOfSize(14))])
         case .avatar:
-            return build().style([.ratio(1), .backgroundColor(UIColor.lightGrayColor())])
+            return build().style([.ratio(1), .backgroundColor(UIColor.lightGrayColor()), .cornerRadius(3)])
         case .tweetText:
-            return build()
+            return build().style([.scrollEnabled(false)])
         case .tweetImage:
-            return build().style([.ratio(0.5)])
+            return build().style([.ratio(2), .backgroundColor(UIColor.blueColor())])
         case .date:
             return build().style([.font(UIFont.systemFontOfSize(14))])
         case .replyButton:
@@ -100,17 +100,29 @@ extension Twitter {
                         "V:|[\(reply)]|", "V:|[\(retweet)]|", "V:|[\(like)]|"
                         ])
             }
+        case .accountHeader:
+            return build().components(
+                name.configuration(),
+                account.configuration(),
+                date.configuration()) { name, account, date in
+                    Layout(["H:|[\(name)]-10-[\(account)]-(>=10)-[\(date)]|",
+                        "V:|[\(name)]|", "V:|[\(account)]|", "V:|[\(date)]|"])
+            }
         case .tweet:
             return build()
                 .style([.backgroundColor(UIColor.whiteColor())])
                 .components(
                     avatar.configuration(),
+                    accountHeader.configuration(),
                     tweetText.configuration(),
-                    toolbarFooter.configuration()) { (avatar, tweetText, toolbarFooter) in
+                    tweetImage.configuration(),
+                    toolbarFooter.configuration()) { (avatar, accountHeader, tweetText, image, toolbarFooter) in
                         Layout(["H:|-10-[\(avatar)(50)]-10-[\(tweetText)]-10-|",
+                            "H:[\(avatar)]-10-[\(accountHeader)]-10-|",
+                            "H:[\(avatar)]-10-[\(image)]-10-|",
                             "H:[\(avatar)]-10-[\(toolbarFooter)]-10-|",
                             "V:|-10-[\(avatar)]-(>=10)-|",
-                            "V:|-10-[\(tweetText)]-10-[\(toolbarFooter)]-(>=10)-|"])
+                            "V:|-10-[\(accountHeader)]-10-[\(tweetText)]-10-[\(image)]-10-[\(toolbarFooter)]-(>=10)-|"])
             }
         default:
             return build()

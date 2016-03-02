@@ -83,6 +83,9 @@ public enum Appearance {
     // UIImageView
     case ratio(CGFloat)
 
+    // UIScrollView
+    case scrollEnabled(Bool)
+
     // UITextField
     // ...
 
@@ -207,12 +210,17 @@ public enum Appearance {
             if !useDefaultValue {
                 let constraint = NSLayoutConstraint(item: image, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: image, attribute: NSLayoutAttribute.Height, multiplier: ratioValue, constant: 0)
                 constraint.identifier = id
+                constraint.priority = 990
                 image.addConstraint(constraint)
             } else {
                 image.removeConstraints(image.constraints.filter({ (constraint) -> Bool in
                     return constraint.identifier == id
                 }))
             }
+
+        // UIScrollView
+        case (let .scrollEnabled(scrollEnabled), let scrollView as UIScrollView):
+            scrollView.scrollEnabled = scrollEnabled
 
         // Multiple
         case (let .lineBreakMode(mode), _):
