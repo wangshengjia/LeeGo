@@ -35,6 +35,14 @@ enum Twitter: ComponentBuilderType {
 
 extension Twitter {
 
+    func container() -> ComponentTarget {
+        return ComponentTarget(name: String(self))
+            .style([.backgroundColor(UIColor.whiteColor())])
+            .components(configuration()) { (component) -> Layout in
+                Layout(["H:|[\(component)]|", "V:|[\(component)]|"])
+        }
+    }
+
     func configuration() -> ComponentTarget {
         switch self {
         case .name:

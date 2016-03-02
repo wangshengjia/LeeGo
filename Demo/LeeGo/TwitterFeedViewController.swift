@@ -44,13 +44,11 @@ class TwitterFeedViewController: UICollectionViewController, UICollectionViewDel
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let configurationType = indexPath.row % 2 == 0 ? Twitter.tweetText : Twitter.name
+        let configuration = Twitter.tweet.configuration()//indexPath.row % 2 == 0 ? Twitter.tweetText.container() : Twitter.toolbarFooter.configuration()
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(configurationType), forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(configuration.name, forIndexPath: indexPath)
 
-        cell.configure(ComponentTarget(name: cell.reuseIdentifier!).style([.backgroundColor(UIColor.whiteColor())]).components(configurationType.configuration(), layout: { (component) -> Layout in
-            Layout(["H:|[\(component)]|", "V:|[\(component)]|"])
-        }), dataSource: elements[indexPath.item])
+        cell.configure(configuration, dataSource: elements[indexPath.item])
 
         return cell
     }
