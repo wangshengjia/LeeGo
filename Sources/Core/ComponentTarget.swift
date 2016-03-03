@@ -63,8 +63,15 @@ public class ComponentTarget: Hashable {
 
     public init(name: String, targetClass: AnyClass = UIView.self, nibName: String? = nil) {
         self.name = name
-        self.targetClass = targetClass
+        if targetClass is UIView.Type {
+            self.targetClass = targetClass
+        } else {
+            assertionFailure("Can not handle type: \(targetClass), should be one of UIView's subclass")
+            self.targetClass = UIView.self
+        }
         self.nibName = nibName
+
+
     }
 
     public func style(style: [Appearance] = []) -> ComponentTarget {
