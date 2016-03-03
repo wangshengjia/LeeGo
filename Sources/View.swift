@@ -47,7 +47,7 @@ extension UIView {
 
     private func _configure(componentTarget: ComponentTarget, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
 
-        guard self.dynamicType == componentTarget.targetClass else {
+        guard self.dynamicType.isSubclassOfClass(componentTarget.targetClass) else {
             assertionFailure("Component type: \(self.dynamicType) is not compatible with configuration type: \(componentTarget.targetClass)")
             return
         }
