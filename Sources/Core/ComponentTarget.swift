@@ -50,7 +50,7 @@ public class ComponentTarget: Hashable {
             if let names = newValue?.map({ (component) -> String in
                 return component.name
             }) where Set(names).count != newValue?.count {
-                assertionFailure("Subcomponents share the same ancestor should have different names.")
+                preconditionFailure("Subcomponents share the same ancestor should have different names.")
             }
         }
     }
@@ -66,8 +66,7 @@ public class ComponentTarget: Hashable {
         if targetClass is UIView.Type {
             self.targetClass = targetClass
         } else {
-            assertionFailure("Can not handle type: \(targetClass), should be one of UIView's subclass")
-            self.targetClass = UIView.self
+            preconditionFailure("Can not handle type: \(targetClass), should be one of UIView's subclass")
         }
         self.nibName = nibName
 
