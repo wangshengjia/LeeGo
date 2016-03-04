@@ -98,7 +98,7 @@ class ConfigurationSpec: QuickSpec {
                 expect(label.numberOfLines) == 3
                 expect(label.text) == "labelText"
 
-                Appearance.attributedString([[NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]]).apply(to: label)
+                Appearance.attributedText([[NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]]).apply(to: label)
                 expect(label.attributedText) == NSAttributedString(string: " ", attributes: [NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!])
             }
 

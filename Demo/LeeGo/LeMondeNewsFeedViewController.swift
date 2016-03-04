@@ -1,17 +1,16 @@
 //
-//  ViewController.swift
-//  PlaygroundProject
+//  LeMondeNewsFeedViewController.swift
+//  LeeGo
 //
-//  Created by Victor WANG on 12/11/15.
-//  Copyright © 2015 Le Monde. All rights reserved.
+//  Created by Victor WANG on 27/02/16.
+//  Copyright © 2016 LeeGo. All rights reserved.
 //
 
+import Foundation
 import UIKit
-import LeeGo
 
-class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UISearchBarDelegate {
-
-
+class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             for reuseId in ComponentBuilder.cellReuseIdentifiers {
@@ -24,10 +23,6 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(self.view.frame.width, 280)
-
-        collectionView.reloadData()
 
         if elements.isEmpty {
             let URLRequest =  NSURLRequest(URL: NSURL(string: "http://api-cdn.lemonde.fr/ws/5/mobile/www/ios-phone/en_continu/index.json")!)
@@ -42,9 +37,11 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
                         })
                 }
             }
-            
+
             task.resume()
         }
+
+        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(self.view.frame.width, 180)
     }
 
     // MARK: Collection View DataSource
@@ -56,7 +53,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         let configurationType = indexPath.row % 2 == 0 ? ComponentBuilder.article : .featured
-        
+
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(configurationType), forIndexPath: indexPath)
 
         cell.configure(configurationType.componentTarget(), dataSource: elements[indexPath.item])
@@ -77,7 +74,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     // MARK: size
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         coordinator.animateAlongsideTransition({ (context) -> Void in
-            (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(self.view.frame.width, 280)
+            (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(self.view.frame.width, 180)
             self.collectionView.reloadData()
             }, completion: nil)
 
@@ -87,7 +84,7 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
         if indexPath.item % 2 == 0 {
-            if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MainViewController") as? ViewController {
+            if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LeMondeNewsFeedViewController") as? LeMondeNewsFeedViewController {
                 detailsViewController.elements = self.elements
                 self.navigationController?.pushViewController(detailsViewController, animated: true)
             }
@@ -97,37 +94,5 @@ class ViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICo
             }
         }
     }
+
 }
-
-//extension ViewController: ConfiguratorDelegate {
-//
-//    func willApply<Component: UIView>(with style: [Appearance], toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> [Appearance] {
-//        
-//
-//        return style
-//    }
-//
-//    func willComposite<Component: UIView>(with components: [ComponentTarget], toComponent component: Component, using layout: Layout, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) {
-//
-//    }
-//
-//    func willApply<Component: UIView>(with componentTarget: ComponentTarget, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) -> ComponentTarget {
-//        guard let indexPath = indexPath else {
-//            return componentTarget
-//        }
-//
-//        if (item is ElementViewModel && indexPath.item > 5) {
-//            return componentTarget
-//        }
-//
-//        return componentTarget
-//    }
-//
-//    func didApply<Component: UIView>(with componentTarget: ComponentTarget, toComponent component: Component, withItem item: ItemType, atIndexPath indexPath: NSIndexPath?) {
-//
-//    }
-//}
-
-
-
-

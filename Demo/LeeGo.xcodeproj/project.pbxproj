@@ -3,11 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350637461C4C1AAC00B5E547 /* ElementViewModel.swift */; };
+		350E0DF01C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */; };
+		350E0DF21C84B0C500DB78FC /* ComponentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DF11C84B0C500DB78FC /* ComponentStore.swift */; };
+		350E0DF41C84C2FF00DB78FC /* TwitterFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DF31C84C2FF00DB78FC /* TwitterFeedViewController.swift */; };
+		350E0DF61C84DD3700DB78FC /* twitter_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 350E0DF51C84DD3700DB78FC /* twitter_sample.json */; };
 		352E50EA1C528CDC0075BDB6 /* ImageComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352E50E91C528CDC0075BDB6 /* ImageComponent.swift */; };
 		3541CE881C44494B00A3B257 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3541CE871C44494B00A3B257 /* Main.storyboard */; };
 		3550E7611C4E5AB8002F5FB4 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3550E7601C4E5AB8002F5FB4 /* Configurations.swift */; };
@@ -25,13 +29,14 @@
 		358507951C622B6C006D02EF /* TheSansOsF-SemiLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */; };
 		358507971C626097006D02EF /* Responsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358507961C626097006D02EF /* Responsive.swift */; };
 		3589D4531C7260C00031A890 /* AdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3589D4521C7260C00031A890 /* AdView.xib */; };
+		35B44E361C84E4E60049553F /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B44E351C84E4E60049553F /* Tweet.swift */; };
 		35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CC5EAA1C6CDC39005C87C8 /* Icon.swift */; };
 		35CC5EAD1C6CE756005C87C8 /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CC5EAC1C6CE756005C87C8 /* AdView.swift */; };
 		35F5204A1C7C7BEF0089FF41 /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520491C7C7BEF0089FF41 /* DemoTests.swift */; };
 		35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FFB6A71C7A8C070035EC52 /* Element.swift */; };
 		3B3BE96C4117CB80F9144250 /* Pods_LeeGo_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88078757DDD337BDFDD543E1 /* Pods_LeeGo_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		607FACD81AFB9204008FA782 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* MainViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		8BB65EBEFE3C9BD9CDD42C04 /* Pods_LeeGo_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414F27C911D7E43D8077BCC6 /* Pods_LeeGo_Demo.framework */; };
@@ -50,6 +55,10 @@
 /* Begin PBXFileReference section */
 		1524E6FF067F0774C3E1EE21 /* LeeGo.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LeeGo.podspec; path = ../LeeGo.podspec; sourceTree = "<group>"; };
 		350637461C4C1AAC00B5E547 /* ElementViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementViewModel.swift; sourceTree = "<group>"; };
+		350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeMondeNewsFeedViewController.swift; sourceTree = "<group>"; };
+		350E0DF11C84B0C500DB78FC /* ComponentStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentStore.swift; sourceTree = "<group>"; };
+		350E0DF31C84C2FF00DB78FC /* TwitterFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterFeedViewController.swift; sourceTree = "<group>"; };
+		350E0DF51C84DD3700DB78FC /* twitter_sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twitter_sample.json; sourceTree = "<group>"; };
 		352E50E91C528CDC0075BDB6 /* ImageComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageComponent.swift; sourceTree = "<group>"; };
 		3541CE871C44494B00A3B257 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3550E7601C4E5AB8002F5FB4 /* Configurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
@@ -67,6 +76,7 @@
 		3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-SemiLight.otf"; sourceTree = "<group>"; };
 		358507961C626097006D02EF /* Responsive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responsive.swift; sourceTree = "<group>"; };
 		3589D4521C7260C00031A890 /* AdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdView.xib; sourceTree = "<group>"; };
+		35B44E351C84E4E60049553F /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		35CC5EAA1C6CDC39005C87C8 /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		35CC5EAC1C6CE756005C87C8 /* AdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		35F51FBA1C7C61A40089FF41 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -76,7 +86,7 @@
 		607FACD01AFB9204008FA782 /* LeeGo-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LeeGo-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		607FACD71AFB9204008FA782 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* LeeGo-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LeeGo-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +127,27 @@
 				615CF4A254DE172FAED17E17 /* Pods-LeeGo-Tests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		350E0DED1C81F08400DB78FC /* LeMonde */ = {
+			isa = PBXGroup;
+			children = (
+				350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */,
+				35FFB6A61C7A8BF30035EC52 /* Models */,
+				35CC5EA91C6CD942005C87C8 /* Views */,
+				35543A311C6A4B56000AC50C /* Configurations */,
+			);
+			name = LeMonde;
+			sourceTree = "<group>";
+		};
+		350E0DEE1C81F08B00DB78FC /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				350E0DF31C84C2FF00DB78FC /* TwitterFeedViewController.swift */,
+				350E0DF51C84DD3700DB78FC /* twitter_sample.json */,
+				35B44E351C84E4E60049553F /* Tweet.swift */,
+			);
+			name = Twitter;
 			sourceTree = "<group>";
 		};
 		35543A311C6A4B56000AC50C /* Configurations */ = {
@@ -200,11 +231,11 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				607FACD71AFB9204008FA782 /* MainViewController.swift */,
+				350E0DF11C84B0C500DB78FC /* ComponentStore.swift */,
+				350E0DEE1C81F08B00DB78FC /* Twitter */,
+				350E0DED1C81F08400DB78FC /* LeMonde */,
 				35543A2F1C694C58000AC50C /* DetailsViewController.swift */,
-				35FFB6A61C7A8BF30035EC52 /* Models */,
-				35CC5EA91C6CD942005C87C8 /* Views */,
-				35543A311C6A4B56000AC50C /* Configurations */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				3541CE871C44494B00A3B257 /* Main.storyboard */,
@@ -311,7 +342,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = CocoaPods;
+				ORGANIZATIONNAME = LeeGo;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -323,7 +354,7 @@
 				};
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "LeeGo" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -361,6 +392,7 @@
 				3585078B1C622B6C006D02EF /* FetteEngschrift.otf in Resources */,
 				358507931C622B6C006D02EF /* TheSansOsF-Plain.otf in Resources */,
 				3585078E1C622B6C006D02EF /* TheAntiquaB-W5PlainItalic.otf in Resources */,
+				350E0DF61C84DD3700DB78FC /* twitter_sample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,15 +504,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				3550E7611C4E5AB8002F5FB4 /* Configurations.swift in Sources */,
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				607FACD81AFB9204008FA782 /* MainViewController.swift in Sources */,
 				35CC5EAD1C6CE756005C87C8 /* AdView.swift in Sources */,
+				35B44E361C84E4E60049553F /* Tweet.swift in Sources */,
 				350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */,
 				35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */,
 				352E50EA1C528CDC0075BDB6 /* ImageComponent.swift in Sources */,
+				350E0DF41C84C2FF00DB78FC /* TwitterFeedViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				358507971C626097006D02EF /* Responsive.swift in Sources */,
 				35543A301C694C58000AC50C /* DetailsViewController.swift in Sources */,
 				35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */,
+				350E0DF01C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift in Sources */,
+				350E0DF21C84B0C500DB78FC /* ComponentStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
