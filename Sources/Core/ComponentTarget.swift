@@ -71,7 +71,6 @@ public class ComponentTarget: Hashable {
         }
         self.nibName = nibName
 
-
     }
 
     public func style(style: [Appearance] = []) -> ComponentTarget {

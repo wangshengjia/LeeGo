@@ -105,15 +105,4 @@ extension UIView {
 }
 
 
-//extension UILabel {
-//    override func cleanUpForReuse() {
-//        self.text = nil
-//    }
-//}
-//
-//extension UIImageView {
-//    override func cleanUpForReuse() {
-//        self.image = nil
-//    }
-//}
 

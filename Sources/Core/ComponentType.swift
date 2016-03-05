@@ -61,9 +61,6 @@ extension ComponentType {
 private final class ComponentContext {
     var component: ComponentTarget?
     var isRoot = true
-
-    // var delegate: ConfiguratorDelegate?
-    // weak var dataSource: ComponentDataSource?
 }
 
 private struct AssociatedKeys {
@@ -92,8 +89,6 @@ extension ComponentType where Self: UIView {
             context.component = newValue
         }
     }
-
-
 
     internal var isRoot: Bool {
         get {
