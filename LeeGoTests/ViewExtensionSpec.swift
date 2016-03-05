@@ -26,7 +26,7 @@ class ViewExtensionSpec: QuickSpec {
 
                 // Then
                 expect(view.configuration) != nil
-                expect(view.name) == "article"
+                expect(view.componentName) == "article"
                 expect(view.isRoot) == true
             }
 
@@ -40,17 +40,17 @@ class ViewExtensionSpec: QuickSpec {
                 // Then
                 expect(view.configuration) != nil
                 XCTAssertTrue(view.dynamicType == UIView.self)
-                expect(view.name) == "header"
+                expect(view.componentName) == "header"
                 expect(view.isRoot) == true
                 expect(view.configuration) == TestData.header1
                 expect(view.configuration!.layout!.formats) == ["H:|[title][avatar]|"]
                 expect(view.backgroundColor) == UIColor.redColor()
                 expect(view.subviews.count) == 2
                 expect((view.subviews[0] as! UILabel).configuration) == TestData.title1
-                expect((view.subviews[0] as! UILabel).name) == "title"
+                expect((view.subviews[0] as! UILabel).componentName) == "title"
                 expect((view.subviews[0] as! UILabel).font) == UIFont(name: "Helvetica", size: 18)
                 expect((view.subviews[1] as! UIImageView).configuration) == TestData.avatar1
-                expect((view.subviews[1] as! UIImageView).name) == "avatar"
+                expect((view.subviews[1] as! UIImageView).componentName) == "avatar"
             }
 
             it("should re-configure a component correctly with .WhenComponentChanged strategy -> component changed") {
@@ -64,16 +64,16 @@ class ViewExtensionSpec: QuickSpec {
 
                 // Then
                 expect(cell.contentView.configuration) != nil
-                expect(cell.contentView.name) == "header3"
+                expect(cell.contentView.componentName) == "header3"
                 expect(cell.contentView.isRoot) == true
                 expect(cell.contentView.configuration) == TestData.header3
                 expect(cell.contentView.configuration!.layout!.formats) == ["H:|[title3]|", "V:|[view]|"]
                 expect(cell.contentView.subviews.count) == 2
                 expect((cell.contentView.subviews[1] as! UILabel).configuration) == TestData.title3
-                expect((cell.contentView.subviews[1] as! UILabel).name) == "title3"
+                expect((cell.contentView.subviews[1] as! UILabel).componentName) == "title3"
                 expect((cell.contentView.subviews[1] as! UILabel).font) == UIFont(name: "Arial", size: 14)
                 expect((cell.contentView.subviews[0] as UIView).configuration) == TestData.view
-                expect((cell.contentView.subviews[0] as UIView).name) == "view"
+                expect((cell.contentView.subviews[0] as UIView).componentName) == "view"
             }
 
             it("should re-configure a component correctly with .WhenComponentChanged strategy -> component did not change") {
@@ -92,16 +92,16 @@ class ViewExtensionSpec: QuickSpec {
                 // Then
                 expect(view.configuration) != nil
                 XCTAssertTrue(view.dynamicType == UIView.self)
-                expect(view.name) == "header"
+                expect(view.componentName) == "header"
                 expect(view.isRoot) == true
                 expect(view.configuration) == emptyHeader
                 expect(view.backgroundColor) == UIColor.redColor()
                 expect(view.subviews.count) == 2
                 expect((view.subviews[0] as! UILabel).configuration) == TestData.title1
-                expect((view.subviews[0] as! UILabel).name) == "title"
+                expect((view.subviews[0] as! UILabel).componentName) == "title"
                 expect((view.subviews[0] as! UILabel).font) == UIFont(name: "Avenir", size: 12)
                 expect((view.subviews[1] as! UIImageView).configuration) == TestData.avatar1
-                expect((view.subviews[1] as! UIImageView).name) == "avatar"
+                expect((view.subviews[1] as! UIImageView).componentName) == "avatar"
             }
 
             it("should re-configure a component correctly with .Always strategy.") {
@@ -115,18 +115,18 @@ class ViewExtensionSpec: QuickSpec {
                 // Then
                 expect(cell.contentView.configuration) != nil
                 expect(cell.contentView.configuration) == TestData.header2
-                expect(cell.contentView.name) == "header2"
+                expect(cell.contentView.componentName) == "header2"
                 expect(cell.contentView.configuration!.layout!.formats) == ["H:|[title][avatar]|", "V:|[view]|"]
                 expect(cell.contentView.backgroundColor).to(beNil())
                 expect(cell.contentView.subviews.count) == 3
                 expect((cell.contentView.subviews[0] as! UILabel).configuration) == TestData.title2
-                expect((cell.contentView.subviews[0] as! UILabel).name) == "title"
+                expect((cell.contentView.subviews[0] as! UILabel).componentName) == "title"
                 expect((cell.contentView.subviews[0] as! UILabel).font) == UIFont(name: "Avenir", size: 12)
                 expect((cell.contentView.subviews[1] as! UIImageView).configuration) == TestData.avatar2
-                expect((cell.contentView.subviews[1] as! UIImageView).name) == "avatar"
+                expect((cell.contentView.subviews[1] as! UIImageView).componentName) == "avatar"
                 expect((cell.contentView.subviews[1] as! UIImageView).backgroundColor) == UIColor.greenColor()
                 expect((cell.contentView.subviews[2] as UIView).configuration) == TestData.view
-                expect((cell.contentView.subviews[2] as UIView).name) == "view"
+                expect((cell.contentView.subviews[2] as UIView).componentName) == "view"
             }
         }
     }
