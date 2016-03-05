@@ -43,7 +43,9 @@ extension ComponentType {
 
         switch updatingStrategy {
         case .WhenComponentChanged:
-            if let current = currentConfiguration where current.name != newConfiguration.name {
+            if let current = currentConfiguration
+                where current.name != newConfiguration.name
+                    || (current.style == [] && current.components == nil && current.layout == nil) {
                 shouldRebuild = true
             }
         case .Always:
@@ -57,8 +59,6 @@ extension ComponentType {
 // MARK: Component Context
 
 private final class ComponentContext {
-    weak var owner: UIView?
-    var viewName: String?
     var component: ComponentTarget?
     var isRoot = true
 
@@ -94,23 +94,6 @@ extension ComponentType where Self: UIView {
     }
 
 
-    //    internal func owner() -> UIView {
-    //        context.owner = self
-    //        return context.owner
-    //    }
-
-    //    internal var dataSource: ComponentDataSource? {
-    //        get {
-    //            return context.dataSource
-    //        }
-    //        set {
-    //            context.dataSource = newValue
-    //        }
-    //    }
-
-    internal var componentName: String? {
-        return context.component?.name
-    }
 
     internal var isRoot: Bool {
         get {
@@ -121,14 +104,6 @@ extension ComponentType where Self: UIView {
         }
     }
 
-    internal var viewName: String? {
-        get {
-            return context.viewName
-        }
-        set {
-            context.viewName = newValue
-        }
-    }
 }
 
 

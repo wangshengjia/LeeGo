@@ -46,23 +46,23 @@ extension Composable {
             }
 
             view?.isRoot = false
-            view?.viewName = componentTarget.name
+            view?.configuration = ComponentTarget(name: componentTarget.name, targetClass: componentTarget.targetClass, nibName: componentTarget.nibName)
             if let view = view {
                 component.addSubview(view)
             }
         }
 
-        //TODO: sort component's subviews
+        //TODO: sort component's subviews to have as same order as components
 
         var viewsDictionary = [String: UIView]()
         for subview in component.subviews {
-            if let name = subview.name {
+            if let name = subview.configuration?.name {
+                subview.translatesAutoresizingMaskIntoConstraints = false
                 viewsDictionary[name] = subview
             }
-            subview.translatesAutoresizingMaskIntoConstraints = false
         }
 
-        // TODO: apply diff of layout instead of removing all constraints
+        // TODO: apply diff of layout instead of removing all constraints (not sure if possible)
         component.removeConstraints(component.constraints)
 
         // Layout each component view with auto layout visual format language from configuration.

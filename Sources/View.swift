@@ -62,16 +62,18 @@ extension UIView {
         // if no error, then:
         self.configuration = componentTarget
 
+//        // update component's value
+//        dataSource?.updateComponent(self, with: componentTarget)
+
         // call didApply delegate method
 
-        // TODO: improve this ugly implementation
+        // TODO: need to imporve this algo, too expensive and too fragile which based only on name.
         // configure sub components recursively
         for subview in self.subviews {
-            if let viewName = subview.viewName,
-                let components = componentTarget.components {
-                    for component in components where component.name == viewName {
-                        subview.configure(component, dataSource: dataSource, updatingStrategy: updatingStrategy)
-                    }
+            if let name = subview.configuration?.name, let components = componentTarget.components {
+                for child in components where child.name == name {
+                    subview.configure(child, dataSource: dataSource, updatingStrategy: updatingStrategy)
+                }
             }
         }
     }
@@ -97,14 +99,8 @@ extension UIView {
         }
     }*/
 
-    public var name: String? {
-        get {
-            if let name = self.componentName {
-                return name
-            } else {
-                return self.viewName
-            }
-        }
+    public var componentName: String? {
+        return configuration?.name
     }
 }
 

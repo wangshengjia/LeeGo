@@ -31,6 +31,7 @@ extension UICollectionViewCell {
 extension UICollectionViewCell {
     override public func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
 
+        // TODO: improve scroll performance
         // return layoutAttributes
 
         // if cached, return cached value
