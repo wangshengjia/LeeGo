@@ -31,6 +31,7 @@ extension Animatable where Self: UIView {
 class Icon: UIImageView, Animatable {
     let duration = 1.0
 
+    // TODO: awake from config?
     init() {
         super.init(frame: CGRectZero)
 

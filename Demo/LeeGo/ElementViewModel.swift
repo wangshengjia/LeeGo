@@ -30,10 +30,11 @@ extension ElementViewModel: ComponentDataSource {
     func updateComponent(componentView: UIView, with componentTarget: ComponentTarget) {
         switch componentView {
         case let titleLabel as UILabel where componentView.componentName == String(ComponentBuilder.title): // TODO: Add isComponent:
+            // FIXME: NSAttributedString reuse bug
             titleLabel.setAttributeString(with: [
-                Style.marker: element.isRestrict ? "󰀀" : "",
+                Style.marker: element.isRestrict ? "󰀀" : " ",
                 Style.customTitle: element.title ?? "",
-                Style.nature: element.natureEdito ?? ""
+                Style.nature: element.natureEdito ?? " "
                 ])
 
         case let subtitleLabel as UILabel  where componentView.componentName == String(ComponentBuilder.subtitle):
