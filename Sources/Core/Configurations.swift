@@ -227,14 +227,15 @@ public enum Appearance {
             if component.respondsToSelector("setLineBreakMode:") {
                 component.setValue(mode.rawValue.nsObject(), forKey: toString())
             } else {
-                preconditionFailure("Unknown appearance \(self) for component \(component)")
+                assertionFailure("Unknown appearance \(self) for component \(component)")
             }
             
         // Custom
         case (let .custom(dictionary), _):
             useDefaultValue ? component.removeCustomStyle(dictionary) : component.setupCustomStyle(dictionary)
         default:
-            preconditionFailure("Unknown appearance \(self) for component \(component)")
+            assertionFailure("Unknown appearance \(self) for component \(component)")
+            break
         }
     }
 

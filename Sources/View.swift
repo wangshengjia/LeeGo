@@ -19,10 +19,10 @@ public enum ConfigurationUpdatingStrategy {
 
 extension UIView: ComponentType {
     public func setupCustomStyle(style: [String: AnyObject]) {
-        preconditionFailure("Unknown style \(style), should implement `handleCustomStyle:` in extension of UIView or its subclass.")
+        assertionFailure("Unknown style \(style), should implement `handleCustomStyle:` in extension of UIView or its subclass.")
     }
     public func removeCustomStyle(style: [String: AnyObject]) {
-        preconditionFailure("Unknown style \(style), should implement `removeCustomStyle:` in extension of UIView or its subclass.")
+        assertionFailure("Unknown style \(style), should implement `removeCustomStyle:` in extension of UIView or its subclass.")
     }
 }
 
@@ -48,7 +48,8 @@ extension UIView {
     private func _configure(componentTarget: ComponentTarget, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
 
         guard self.dynamicType.isSubclassOfClass(componentTarget.targetClass) else {
-            preconditionFailure("Component type: \(self.dynamicType) is not compatible with configuration type: \(componentTarget.targetClass)")
+            assertionFailure("Component type: \(self.dynamicType) is not compatible with configuration type: \(componentTarget.targetClass)")
+            return
         }
 
         // resolve conf based on item?, indexPath? or others ?
