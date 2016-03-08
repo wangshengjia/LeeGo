@@ -42,7 +42,7 @@ extension Composable {
                 let componentView = NSBundle.mainBundle().loadNibNamed(nibName, owner: nil, options: nil).first as? UIView {
                     view = componentView
             } else {
-                view = (componentTarget.targetClass as! UIView.Type).init(frame: CGRectZero)
+                view = (componentTarget.targetClass as! UIView.Type).init()
             }
 
             view?.isRoot = false
@@ -50,6 +50,8 @@ extension Composable {
             if let view = view {
                 component.addSubview(view)
             }
+
+            // TODO: add & expose componentAwakeFrom...
         }
 
         //TODO: sort component's subviews to have as same order as components
