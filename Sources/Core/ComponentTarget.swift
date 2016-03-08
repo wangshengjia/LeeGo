@@ -56,6 +56,7 @@ public class ComponentTarget: Hashable {
     }
     private(set) var layout: Layout? = nil
     private(set) var width: CGFloat = 0.0
+    private(set) var heightResolver: ((childrenHeights: [CGFloat]) -> CGFloat)?
 
     public var hashValue: Int {
         return name.hashValue
@@ -75,6 +76,11 @@ public class ComponentTarget: Hashable {
 
     public func style(style: [Appearance] = []) -> ComponentTarget {
         self.style = style
+        return self
+    }
+
+    public func heightResolver(heightResolver: ((childrenHeights: [CGFloat]) -> CGFloat)?) -> ComponentTarget {
+        self.heightResolver = heightResolver
         return self
     }
 
