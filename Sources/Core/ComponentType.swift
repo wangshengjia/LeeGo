@@ -26,8 +26,11 @@ extension ComponentType {
     }
 
     private func apply<Component where Component: UIView, Component: ComponentType>(newConfiguration: ComponentTarget, to component: Component) {
-        // setup self
-        setup(component, currentStyle: component.configuration?.style ?? [], newStyle: newConfiguration.style)
+
+        // setup self, only if component is not initialized from a nib file
+        if component.configuration?.nibName == nil {
+            setup(component, currentStyle: component.configuration?.style ?? [], newStyle: newConfiguration.style)
+        }
 
         // add & layout sub components
         if let components = newConfiguration.components where !components.isEmpty, let layout = newConfiguration.layout {
