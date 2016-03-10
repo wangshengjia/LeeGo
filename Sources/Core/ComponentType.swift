@@ -33,6 +33,37 @@ extension ComponentType {
         if let components = newConfiguration.components where !components.isEmpty, let layout = newConfiguration.layout {
             compositeSubcomponents(component, components: components, layout: layout)
         }
+
+
+
+        // handle component's width & height
+        // should go through all constraints, if there is already one, then update. Otherwise, add one.
+        var widthUpdated = false, heightUpdated = false
+        for constraint in component.constraints {
+            if constraint.firstAttribute == .Width {
+                if let width = newConfiguration.width {
+                    constraint.constant = width
+                } else {
+                    // component.removeConstraint(constraint)
+                }
+                widthUpdated = true
+            } else if constraint.firstAttribute == .Height {
+                if let height = newConfiguration.height {
+                    constraint.constant = height
+                } else {
+                    // component.removeConstraint(constraint)
+                }
+                heightUpdated = true
+            }
+        }
+
+        if let width = newConfiguration.width where !widthUpdated {
+            component.addConstraint(NSLayoutConstraint(item: component, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: width))
+        }
+
+        if let height = newConfiguration.height where !heightUpdated {
+            component.addConstraint(NSLayoutConstraint(item: component, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: height))
+        }
     }
 
     private func shouldRebuild(with currentConfiguration: ComponentTarget?, newConfiguration: ComponentTarget, updatingStrategy: ConfigurationUpdatingStrategy) -> Bool {

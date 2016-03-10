@@ -77,22 +77,17 @@ extension ComponentBuilder {
         case .detailsView:
             return
                 self.build()
-                    .style([.translatesAutoresizingMaskIntoConstraints(false)])
                     .components(
                         ComponentTarget(name: "content", targetClass: UIView.self)
-                            .style([.backgroundColor(UIColor.brownColor()), .translatesAutoresizingMaskIntoConstraints(false)])
+                            .style([.backgroundColor(UIColor.brownColor())])
                             .components(
-                                header.componentTarget(),
-                                adView.buildFromNib(AdView.self, name: "AdView").style([.translatesAutoresizingMaskIntoConstraints(false)]),
-                                layout: { (header, adView) -> Layout in
-                                    return Layout([
-                                        H(orderedViews: [header]),
-                                        H(orderedViews: [adView]),
-                                        V(adView, height: 80),
-                                        "V:|[header]-80-[adView]-(>=bottom)-|"
-                                        ])
+                                avatar.build(Icon).style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
+                                favoriteButton.componentTarget(),
+                                adView.buildFromNib(AdView.self, name: "AdView").height(80),
+                                layout: { (avatar, favoriteButton, adView) -> Layout in
+                                    layoutHorizontal([avatar, favoriteButton, adView], align: .Top, distribution: .Fill, metrics: (120, 20, 20, 20, 10, 10))
                             }), layout: { content -> Layout in
-                                Layout(["H:|[content]|", "V:|[content]|"])
+                                Layout(["H:|[content]|", "V:|[content]"])
                     })
             
         case .header:
@@ -114,7 +109,7 @@ extension ComponentBuilder {
         case .title:
             return self.build(UILabel).style(Style.H3.style())
         case .favoriteButton:
-            return self.build().style(Style.BasicButton.style())
+            return self.build().style(Style.BasicButton.style() + [.backgroundColor(UIColor.greenColor())])
         default:
             assertionFailure("Unknown component: \(self)")
             return self.build()

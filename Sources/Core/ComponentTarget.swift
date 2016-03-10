@@ -55,7 +55,13 @@ public class ComponentTarget: Hashable {
         }
     }
     private(set) var layout: Layout? = nil
-    private(set) var width: CGFloat = 0.0
+
+    // component's width and height
+    private(set) var width: CGFloat? = nil
+    private(set) var height: CGFloat? = nil
+
+    // TODO: need to make this API more clearly
+    // used when calculate cell's height
     private(set) var heightResolver: ((childrenHeights: [CGFloat]) -> CGFloat)?
 
     public var hashValue: Int {
@@ -128,6 +134,10 @@ public class ComponentTarget: Hashable {
         return self
     }
 
+    public func height(height: CGFloat) -> ComponentTarget {
+        self.height = height
+        return self
+    }
 }
 
 public func ==(lhs: ComponentTarget, rhs: ComponentTarget) -> Bool {
