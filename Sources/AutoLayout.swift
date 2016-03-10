@@ -45,6 +45,97 @@ public enum Metrics: CustomStringConvertible {
         return ""
     }
 }
+
+enum Axis {
+    case Horizontal, Vertical
+}
+
+enum Alignment {
+    case Top, Left, Bottom, Right, Center, Fill
+}
+
+enum Distribution {
+    case Fill, FillEqually, Flow(UInt)
+}
+
+func layoutHorizontal(components: [String], align: Alignment = .Top, distribution: Distribution, metrics: MetricsValuesType) -> Layout {
+    guard !components.isEmpty else {
+        assertionFailure("Components should not be empty")
+        return Layout()
+    }
+
+    switch distribution {
+    case .Fill:
+        let formatH = H(orderedViews:components)
+        switch align {
+        case .Top:
+            return Layout([formatH] + components.map { (component) -> String in
+                V(orderedViews:[component], bottom:.bottom(.GreaterThanOrEqual))
+                }, metrics)
+        case .Bottom:
+            return Layout([formatH] + components.map { (component) -> String in
+                V(top:.top(.GreaterThanOrEqual), orderedViews:[component])
+                }, metrics)
+        case .Fill:
+            return Layout([formatH] + components.map { (component) -> String in
+                V(orderedViews:[component])
+                }, metrics)
+        default:
+            assertionFailure("")
+            break
+        }
+        break
+    case .FillEqually:
+        break
+    case let .Flow(index):
+        break
+    }
+
+    return Layout()
+}
+
+func HFlowLayout(left:[String] = [], right:[String] = []) -> [String] {
+    if left.isEmpty && right.isEmpty {
+        assertionFailure("Should not be empty")
+        return []
+    }
+
+    var formatH = ""
+
+    if left.isEmpty {
+        formatH = H(left: .left(.GreaterThanOrEqual), orderedViews:right)
+    } else if right.isEmpty {
+        formatH = H(orderedViews:left, right: .right(.GreaterThanOrEqual))
+    } else {
+        formatH = H(orderedViews:left, toSuperview: false) + Metrics.interspaceH(.GreaterThanOrEqual).description + H(fromSuperview: false, orderedViews:right)
+    }
+
+    return [formatH] + (left + right).map { (component) -> String in
+        V(orderedViews:[component])
+    }
+}
+
+func VFlowLayout(top:[String] = [], bottom:[String] = []) -> [String] {
+    if top.isEmpty && bottom.isEmpty {
+        assertionFailure("")
+        return []
+    }
+
+    var formatV = ""
+
+    if top.isEmpty {
+        formatV = V(top: .top(.GreaterThanOrEqual), orderedViews:bottom)
+    } else if bottom.isEmpty {
+        formatV = V(orderedViews:top, bottom: .bottom(.GreaterThanOrEqual))
+    } else {
+        formatV = V(orderedViews:top, toSuperview: false) + Metrics.interspaceV(.GreaterThanOrEqual).description + V(fromSuperview: false, orderedViews:bottom)
+    }
+
+    return [formatV] + (top + bottom).map { (component) -> String in
+        H(orderedViews:[component])
+    }
+}
+
 public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.Equal), orderedViews: [String] = [], interspace: Metrics? = .interspaceH(.Equal), right: Metrics? = .right(.Equal), toSuperview: Bool = true) -> String {
     guard !orderedViews.isEmpty else {
         assertionFailure("Should at least with 1 view name")
