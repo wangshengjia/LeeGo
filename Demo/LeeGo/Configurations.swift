@@ -46,7 +46,7 @@ extension ComponentBuilder {
                 .components([
                     title.componentTarget(),
                     ComponentTarget(name: "subtitle", targetClass: UILabel.self).style(Style.H2.style()),
-                    avatar.build(UIImageView).style(Style.I1.style()).cellHeightResolver({ (childrenHeights) -> CGFloat in
+                    avatar.build(UIImageView).style(Style.I1.style()).heightResolver({ (childrenHeights) -> CGFloat in
                         return 68 * 2 / 3
                     }),
                     ],
@@ -57,22 +57,21 @@ extension ComponentBuilder {
                         V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
                         V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
                         ], ComponentBuilder.defaultMetrics)
-                ).cellHeightResolver({ (childrenHeights) -> CGFloat in
+                ).heightResolver({ (childrenHeights) -> CGFloat in
                     return childrenHeights[0] + childrenHeights[1] + 20 + 20 + 10
                 })
         case .featured:
             return self.build()
                 .components(
-                    avatar.build().style(Style.I1.style()).cellHeightResolver({ (childrenHeights) -> CGFloat in
+                    avatar.build().style(Style.I1.style()).heightResolver({ (childrenHeights) -> CGFloat in
                         return 375 * 2 / 3
                     }),
                     title.build().style(Style.H3.style())
                     ) { (avatar, title) -> Layout in
-                        return Layout([
-                            H(orderedViews: [title]),
+                        Layout([
+                            H("|-20-[\(title)]-20-|"),
                             H(orderedViews: [avatar]),
-                            V(orderedViews: [title]),
-                            V(orderedViews: [avatar]),
+                            V("|[\(avatar)]-10-[\(title)]-10-|"),
                             ])
                 }
         case .detailsView:
