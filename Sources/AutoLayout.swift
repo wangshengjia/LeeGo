@@ -46,19 +46,19 @@ public enum Metrics: CustomStringConvertible {
     }
 }
 
-enum Axis {
+public enum Axis {
     case Horizontal, Vertical
 }
 
-enum Alignment {
+public enum Alignment {
     case Top, Left, Bottom, Right, Center, Fill
 }
 
-enum Distribution {
+public enum Distribution {
     case Fill, FillEqually, Flow(UInt)
 }
 
-func layoutHorizontal(components: [String], align: Alignment = .Top, distribution: Distribution, metrics: MetricsValuesType) -> Layout {
+public func layoutHorizontal(components: [String], align: Alignment = .Top, distribution: Distribution, metrics: MetricsValuesType) -> Layout {
     guard !components.isEmpty else {
         assertionFailure("Components should not be empty")
         return Layout()
@@ -80,6 +80,11 @@ func layoutHorizontal(components: [String], align: Alignment = .Top, distributio
             return Layout([formatH] + components.map { (component) -> String in
                 V(orderedViews:[component])
                 }, metrics)
+        case .Center:
+            // TODO: center also with superview
+            return Layout([formatH] + components.map { (component) -> String in
+                V(top:.top(.GreaterThanOrEqual), orderedViews:[component], bottom:.bottom(.GreaterThanOrEqual))
+                }, options: .AlignAllCenterY, metrics)
         default:
             assertionFailure("")
             break
