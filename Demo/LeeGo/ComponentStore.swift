@@ -131,7 +131,46 @@ extension Twitter {
 }
 
 
+enum Instagram: ComponentBuilderType {
+    case title, subtitle, date, avatar
+    case likeButton, shareButton, moreButton
+    case username
+    case followButton, followTag
+    case instaHeader, instaToolbar, likesNumber, descriptionArea, comments
 
+    static let types: [Instagram: AnyClass] = [:]
+}
+
+extension Instagram {
+    func configuration() -> ComponentTarget {
+        switch self {
+        case .instaHeader:
+            return self.build().components(
+                avatar.configuration(),
+                username.build(),
+                date.configuration(),
+                layout: { (avatar, username, date) -> Layout in
+                    return Layout()
+            })
+        case .instaToolbar:
+            return self.build().components(
+                likeButton.configuration(),
+                shareButton.configuration(),
+                moreButton.configuration(),
+                layout: { (like, share, more) -> Layout in
+                    return Layout()
+            })
+        case .likesNumber:
+            return self.build()
+        case .descriptionArea:
+            return self.build()
+        case .comments:
+            return self.build()
+        default:
+            return self.build()
+        }
+    }
+}
 
 
 

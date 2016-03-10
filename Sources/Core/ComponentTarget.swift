@@ -16,7 +16,7 @@ public protocol ComponentBuilderType: Hashable {
 extension ComponentBuilderType {
 
     public func buildFromNib(type: AnyObject? = nil, name: String) -> ComponentTarget {
-        // TODO: check
+        // TODO: check type
         return ComponentTarget(name: String(self), targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: name)
     }
 

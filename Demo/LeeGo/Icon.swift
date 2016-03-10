@@ -17,8 +17,6 @@ protocol Animatable {
 extension Animatable where Self: UIView {
 
     func fadeInFadeOut(duration: Double) {
-
-
         self.alpha = 1.0
         UIView.animateWithDuration(duration, delay: 0, options: .Autoreverse, animations: { () -> Void in
             self.alpha = 0.0

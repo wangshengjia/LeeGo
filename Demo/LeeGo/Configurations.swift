@@ -14,18 +14,13 @@ enum ComponentBuilder: ComponentBuilderType {
     // leaf components
     case title, subtitle, date, avatar
     case favoriteButton
-    case followButton, followTag
     case adView
-
-    case likeButton, shareButton, moreButton
-    case username
 
     // child components
     case header, footer
-    case instaHeader, instaToolbar, likesNumber, descriptionArea, comments
 
     // root components
-    case zen, article, video, portfolio, alert, detailsView, featured, instagram
+    case zen, article, video, portfolio, alert, detailsView, featured
 }
 
 extension ComponentBuilder {
@@ -46,30 +41,6 @@ extension ComponentBuilder {
 extension ComponentBuilder {
     func componentTarget() -> ComponentTarget {
         switch self {
-        case .instaHeader:
-            return self.build().components(
-                ComponentBuilder.avatar.componentTarget(),
-                ComponentBuilder.username.build(),
-                ComponentBuilder.date.componentTarget(),
-                layout: { (avatar, username, date) -> Layout in
-                    return Layout()
-            })
-        case .instaToolbar:
-            return self.build().components(
-                ComponentBuilder.likeButton.componentTarget(),
-                ComponentBuilder.shareButton.componentTarget(),
-                ComponentBuilder.moreButton.componentTarget(),
-                layout: { (like, share, more) -> Layout in
-                    return Layout()
-            })
-        case .likesNumber:
-            return self.build()
-        case .descriptionArea:
-            return self.build()
-        case .comments:
-            return self.build()
-
-
         case .article:
             return self.build().style([.backgroundColor(UIColor.whiteColor())])
                 .components([
