@@ -53,7 +53,7 @@ extension Twitter {
         case .account:
             return build().style([.font(UIFont.systemFontOfSize(14))])
         case .avatar:
-            return build().style([.ratio(1), .backgroundColor(UIColor.lightGrayColor()), .cornerRadius(3)])
+            return build().style([.ratio(1), .backgroundColor(UIColor.lightGrayColor()), .cornerRadius(3)]).width(50)
         case .tweetText:
             return build().style([.scrollEnabled(false)])
         case .tweetImage:
@@ -117,7 +117,7 @@ extension Twitter {
                     tweetText.configuration(),
                     tweetImage.configuration(),
                     toolbarFooter.configuration()) { (avatar, accountHeader, tweetText, image, toolbarFooter) in
-                        Layout(["H:|-10-[\(avatar)(50)]-10-[\(tweetText)]-10-|",
+                        Layout(["H:|-10-[\(avatar)]-10-[\(tweetText)]-10-|",
                             "H:[\(avatar)]-10-[\(accountHeader)]-10-|",
                             "H:[\(avatar)]-10-[\(image)]-10-|",
                             "H:[\(avatar)]-10-[\(toolbarFooter)]-10-|",

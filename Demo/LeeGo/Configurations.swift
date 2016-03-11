@@ -46,13 +46,12 @@ extension ComponentBuilder {
                 .components([
                     title.componentTarget(),
                     ComponentTarget(name: "subtitle", targetClass: UILabel.self).style(Style.H2.style()),
-                    avatar.build(UIImageView).style(Style.I1.style()).heightResolver({ (childrenHeights) -> CGFloat in
+                    avatar.build(UIImageView).style(Style.I1.style()).width(68).heightResolver({ (childrenHeights) -> CGFloat in
                         return 68 * 2 / 3
                     }),
                     ],
                     layout: Layout([
                         H(orderedViews: ["avatar", "title"]),
-                        H("avatar", width: 68),
                         H(orderedViews: ["avatar", "subtitle"]),
                         V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
                         V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
@@ -83,7 +82,7 @@ extension ComponentBuilder {
                             .components(
                                 avatar.build(Icon).style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
                                 favoriteButton.componentTarget(),
-                                adView.buildFromNib(AdView.self, name: "AdView").height(80),
+                                adView.buildFromNib(AdView.self, name: "AdView").width(150).height(80),
                                 layout: { (avatar, favoriteButton, adView) -> Layout in
                                     layoutHorizontal([avatar, favoriteButton, adView], align: .Top, distribution: .Fill, metrics: (120, 20, 20, 20, 10, 10))
                             }), layout: { content -> Layout in
@@ -144,14 +143,12 @@ enum Style: String {
             return [.font(UIFont.systemFontOfSize(18)),
                 .textColor(UIColor.darkTextColor()),
                 .textAlignment(.Center),
-                .numberOfLines(0),
-                .translatesAutoresizingMaskIntoConstraints(false)]
+                .numberOfLines(0)]
         case H2:
             return [.font(UIFont.systemFontOfSize(12)),
                 .textColor(UIColor.lightGrayColor()),
                 .numberOfLines(0),
-                .defaultLabelText("Default text"),
-                .translatesAutoresizingMaskIntoConstraints(false)]
+                .defaultLabelText("Default text")]
         case H3:
             return [
                 .attributedText([
@@ -162,9 +159,9 @@ enum Style: String {
                 .numberOfLines(0),
                 .translatesAutoresizingMaskIntoConstraints(false)]
         case I1:
-            return [.backgroundColor(UIColor.greenColor()), .ratio(1.5), .translatesAutoresizingMaskIntoConstraints(false)]
+            return [.backgroundColor(UIColor.greenColor()), .ratio(1.5)]
         case BasicButton:
-            return [.buttonType(.Custom), .buttonTitle("OK", .Normal), .translatesAutoresizingMaskIntoConstraints(false)]
+            return [.buttonType(.Custom), .buttonTitle("OK", .Normal)]
         default:
             return []
         }

@@ -43,18 +43,20 @@ extension ComponentType {
         // should go through all constraints, if there is already one, then update. Otherwise, add one.
         var widthUpdated = false, heightUpdated = false
         for constraint in component.constraints {
-            if constraint.firstAttribute == .Width {
+            if constraint.firstAttribute == .Width
+                && constraint.firstItem === component && constraint.secondItem === nil {
                 if let width = newConfiguration.width {
                     constraint.constant = width
                 } else {
-                    // component.removeConstraint(constraint)
+                    component.removeConstraint(constraint)
                 }
                 widthUpdated = true
-            } else if constraint.firstAttribute == .Height {
+            } else if constraint.firstAttribute == .Height
+                && constraint.firstItem === component && constraint.secondItem === nil {
                 if let height = newConfiguration.height {
                     constraint.constant = height
                 } else {
-                    // component.removeConstraint(constraint)
+                    component.removeConstraint(constraint)
                 }
                 heightUpdated = true
             }

@@ -73,9 +73,12 @@ extension Composable {
             for constraint in constraints {
                 //constraint.priority = 990
                 //constraint.shouldBeArchived = true
-                constraint.identifier = constraint.description
+                //constraint.identifier = constraint.description
                 component.addConstraint(constraint)
+
+                // print("first: \(constraint.firstItem), second: \(constraint.secondItem), identifier: \(constraint.description) \n\n")
             }
         }
     }
 }
+
