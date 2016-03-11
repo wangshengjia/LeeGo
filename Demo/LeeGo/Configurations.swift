@@ -84,7 +84,7 @@ extension ComponentBuilder {
                                 favoriteButton.componentTarget(),
                                 adView.buildFromNib(AdView.self, name: "AdView").width(150).height(80),
                                 layout: { (avatar, favoriteButton, adView) -> Layout in
-                                    layoutHorizontal([avatar, favoriteButton, adView], align: .Top, distribution: .Fill, metrics: (120, 20, 20, 20, 10, 10))
+                                    layout([avatar, favoriteButton, adView], axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: (120, 20, 20, 20, 10, 10))
                             }), layout: { content -> Layout in
                                 Layout(["H:|[content]|", "V:|[content]"])
                     })

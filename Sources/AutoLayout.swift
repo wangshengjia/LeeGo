@@ -55,90 +55,21 @@ public enum Alignment {
 }
 
 public enum Distribution {
-    case Fill, FillEqually, Flow(UInt)
+    case Fill, FillEqually, Flow(Int)
 }
 
-public func layoutHorizontal(components: [String], align: Alignment = .Top, distribution: Distribution, metrics: MetricsValuesType) -> Layout {
+extension Layout {
+
+}
+
+public func layout(components: [String], axis: Axis, align: Alignment = .Top, distribution: Distribution, metrics: MetricsValuesType) -> Layout {
     guard !components.isEmpty else {
         assertionFailure("Components should not be empty")
         return Layout()
     }
 
-    switch distribution {
-    case .Fill:
-        let formatH = H(orderedViews:components)
-        switch align {
-        case .Top:
-            return Layout([formatH] + components.map { (component) -> String in
-                V(orderedViews:[component], bottom:.bottom(.GreaterThanOrEqual))
-                }, metrics)
-        case .Bottom:
-            return Layout([formatH] + components.map { (component) -> String in
-                V(top:.top(.GreaterThanOrEqual), orderedViews:[component])
-                }, metrics)
-        case .Fill:
-            return Layout([formatH] + components.map { (component) -> String in
-                V(orderedViews:[component])
-                }, metrics)
-        case .Center:
-            // TODO: center also with superview
-            return Layout([formatH] + components.map { (component) -> String in
-                V(top:.top(.GreaterThanOrEqual), orderedViews:[component], bottom:.bottom(.GreaterThanOrEqual))
-                }, options: .AlignAllCenterY, metrics)
-        default:
-            assertionFailure("")
-            break
-        }
-        break
-    case .FillEqually:
-        break
-    case let .Flow(index):
-        break
-    }
-
-    return Layout()
-}
-
-func HFlowLayout(left:[String] = [], right:[String] = []) -> [String] {
-    if left.isEmpty && right.isEmpty {
-        assertionFailure("Should not be empty")
-        return []
-    }
-
-    var formatH = ""
-
-    if left.isEmpty {
-        formatH = H(left: .left(.GreaterThanOrEqual), orderedViews:right)
-    } else if right.isEmpty {
-        formatH = H(orderedViews:left, right: .right(.GreaterThanOrEqual))
-    } else {
-        formatH = H(orderedViews:left, toSuperview: false) + Metrics.interspaceH(.GreaterThanOrEqual).description + H(fromSuperview: false, orderedViews:right)
-    }
-
-    return [formatH] + (left + right).map { (component) -> String in
-        V(orderedViews:[component])
-    }
-}
-
-func VFlowLayout(top:[String] = [], bottom:[String] = []) -> [String] {
-    if top.isEmpty && bottom.isEmpty {
-        assertionFailure("")
-        return []
-    }
-
-    var formatV = ""
-
-    if top.isEmpty {
-        formatV = V(top: .top(.GreaterThanOrEqual), orderedViews:bottom)
-    } else if bottom.isEmpty {
-        formatV = V(orderedViews:top, bottom: .bottom(.GreaterThanOrEqual))
-    } else {
-        formatV = V(orderedViews:top, toSuperview: false) + Metrics.interspaceV(.GreaterThanOrEqual).description + V(fromSuperview: false, orderedViews:bottom)
-    }
-
-    return [formatV] + (top + bottom).map { (component) -> String in
-        H(orderedViews:[component])
-    }
+    let formats = formatHorizontal(components, axis: axis, align: align, distribution: distribution) + formatVertical(components, axis: axis, align: align, distribution: distribution)
+    return Layout(formats, metrics)
 }
 
 public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.Equal), orderedViews: [String] = [], interspace: Metrics? = .interspaceH(.Equal), right: Metrics? = .right(.Equal), toSuperview: Bool = true) -> String {
@@ -181,6 +112,114 @@ public func V(customVFL: String) -> String {
 }
 
 // MARK: Private
+
+private func formatHorizontal(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
+    guard !components.isEmpty else {
+        assertionFailure("Components should not be empty")
+        return []
+    }
+
+    if axis == .Horizontal {
+        switch distribution {
+        case .Fill:
+            return [H(orderedViews:components)]
+        case .FillEqually:
+            return [H(orderedViews: components)] + equallyLayoutFormats(components, axis: .Horizontal)
+        case let .Flow(index):
+            let left = Array(components.prefix(min(max(index, 0), components.count)))
+            let right = Array(components.suffix(min(max(components.count - index, 0), components.count)))
+
+            if left.isEmpty {
+                return [H(left: .left(.GreaterThanOrEqual), orderedViews:right)]
+            } else if right.isEmpty {
+                return [H(orderedViews:left, right: .right(.GreaterThanOrEqual))]
+            } else {
+                let str = H(fromSuperview: false, orderedViews:right)
+                let index = str.startIndex.advancedBy(2)
+                return [H(orderedViews:left, toSuperview: false) + Metrics.interspaceH(.GreaterThanOrEqual).description + str.substringFromIndex(index)]
+            }
+        }
+    } else {
+        return components.flatMap { (component) -> String? in
+
+            switch align {
+            case .Left:
+                return H(orderedViews:[component], right:.right(.GreaterThanOrEqual))
+            case .Right:
+                return H(left:.left(.GreaterThanOrEqual), orderedViews:[component])
+            case .Fill:
+                return H(orderedViews:[component])
+            case .Center:
+                // TODO: center also with superview
+                return H(left:.left(.GreaterThanOrEqual), orderedViews:[component], right:.right(.GreaterThanOrEqual))
+            default:
+                assertionFailure("")
+                return nil
+            }
+        }
+    }
+}
+
+private func formatVertical(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
+    guard !components.isEmpty else {
+        assertionFailure("Components should not be empty")
+        return []
+    }
+
+    if axis == .Horizontal {
+        return components.flatMap { (component) -> String? in
+
+            switch align {
+            case .Top:
+                return V(orderedViews:[component], bottom:.bottom(.GreaterThanOrEqual))
+            case .Bottom:
+                return V(top:.top(.GreaterThanOrEqual), orderedViews:[component])
+            case .Fill:
+                return V(orderedViews:[component])
+            case .Center:
+                // TODO: center also with superview
+                return V(top:.top(.GreaterThanOrEqual), orderedViews:[component], bottom:.bottom(.GreaterThanOrEqual))
+            default:
+                assertionFailure("")
+                return nil
+            }
+        }
+    } else {
+        switch distribution {
+        case .Fill:
+            return [V(orderedViews:components)]
+        case .FillEqually:
+            return [V(orderedViews: components)] + equallyLayoutFormats(components, axis: .Vertical)
+        case let .Flow(index):
+            let top = Array(components.prefix(min(max(index, 0), components.count)))
+            let bottom = Array(components.suffix(min(max(components.count - index, 0), components.count)))
+
+            if top.isEmpty {
+                return [V(top: .top(.GreaterThanOrEqual), orderedViews:bottom)]
+            } else if bottom.isEmpty {
+                return [V(orderedViews: top, bottom: .bottom(.GreaterThanOrEqual))]
+            } else {
+                let str = V(fromSuperview: false, orderedViews:bottom)
+                let index = str.startIndex.advancedBy(2)
+                return [V(orderedViews: top, toSuperview: false) + Metrics.interspaceV(.GreaterThanOrEqual).description + str.substringFromIndex(index)]
+            }
+        }
+    }
+}
+
+private func equallyLayoutFormats(views: [String], axis: Axis) -> [String] {
+    guard views.count >= 2 else {
+        assertionFailure("Should almost have two views to do a equally layout")
+        return []
+    }
+
+    return views.enumerate().flatMap { (index: Int, element: String) -> String? in
+        if index < views.count - 1 {
+            return "\(axis == .Horizontal ? "H" : "V"):[\(element)(\(views[index + 1]))]"
+        }
+        return nil
+    }
+}
 
 private func distribute(fromSuperview fromSuperview: Bool, metric1: Metrics?, views: [String], interspace: Metrics?, metric2: Metrics?, toSuperview: Bool) -> String{
 
