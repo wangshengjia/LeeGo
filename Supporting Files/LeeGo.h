@@ -15,5 +15,3 @@ FOUNDATION_EXPORT double LeeGoVersionNumber;
 FOUNDATION_EXPORT const unsigned char LeeGoVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <LeeGo/PublicHeader.h>
-
-#import <LeeGo/ComponentFactory.h>
