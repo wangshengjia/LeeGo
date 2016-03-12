@@ -32,19 +32,66 @@ class ComponentTypeSpec: QuickSpec {
             }
         }
 
-        describe("Composable extension tests") {
-            it("") {
-                let view = UIView()
-                view.configuration = ComponentTarget(name: "")
-                // TODO: finish test
-            }
-        }
-
         describe("ComponentType") {
-            it("apply diff") {
+            it("should apply diff to view correctly.") {
+                // Given
+                let superview = UIView()
+                superview.translatesAutoresizingMaskIntoConstraints = false
                 let view = UIView()
-                
+                view.translatesAutoresizingMaskIntoConstraints = false
+
+                // When
+                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+
+                superview.addSubview(view)
+                view.setNeedsLayout()
+                view.layoutIfNeeded()
+
+                // Then
+                expect(view.frame.width) == 50
+                expect(view.frame.height) == 80
+            }
+
+            it("should apply diff to view correctly.") {
+                // Given
+                let superview = UIView()
+                superview.translatesAutoresizingMaskIntoConstraints = false
+                let view = UIView()
+                view.translatesAutoresizingMaskIntoConstraints = false
+
+                // When
+                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+
+                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(60).height(20), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+
+                superview.addSubview(view)
+                view.setNeedsLayout()
+                view.layoutIfNeeded()
+
+                // Then
+                expect(view.frame.width) == 60
+                expect(view.frame.height) == 20
+            }
+
+            it("should apply diff to view correctly.") {
+                // Given
+                let superview = UIView()
+                superview.translatesAutoresizingMaskIntoConstraints = false
+                let view = UIView()
+                view.translatesAutoresizingMaskIntoConstraints = false
+
+                // When
+                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+
                 view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name"), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+
+                superview.addSubview(view)
+                view.setNeedsLayout()
+                view.layoutIfNeeded()
+
+                // Then
+                expect(view.frame.width) == 0
+                expect(view.frame.height) == 0
             }
         }
     }
