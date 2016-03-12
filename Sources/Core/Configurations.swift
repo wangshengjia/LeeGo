@@ -52,7 +52,7 @@ public func ==(lhs: Layout, rhs: Layout) -> Bool {
         sameMetrics = false
     }
 
-    return lhs.formats == rhs.formats && sameMetrics
+    return lhs.formats == rhs.formats && sameMetrics && lhs.options == rhs.options
 }
 
 public typealias Attributes = [String: AnyObject]

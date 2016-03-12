@@ -62,14 +62,15 @@ extension Layout {
 
 }
 
-public func layout(components: [String], axis: Axis, align: Alignment = .Top, distribution: Distribution, metrics: MetricsValuesType) -> Layout {
+public func layout(components: [String], axis: Axis, align: Alignment, distribution: Distribution, metrics: MetricsValuesType = (0, 0, 0, 0, 0, 0)) -> Layout {
     guard !components.isEmpty else {
         assertionFailure("Components should not be empty")
         return Layout()
     }
 
     let formats = formatHorizontal(components, axis: axis, align: align, distribution: distribution) + formatVertical(components, axis: axis, align: align, distribution: distribution)
-    return Layout(formats, metrics)
+    let options = layoutOptions(components, axis: axis, align: align, distribution: distribution)
+    return Layout(formats, options: options, metrics)
 }
 
 public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.Equal), orderedViews: [String] = [], interspace: Metrics? = .interspaceH(.Equal), right: Metrics? = .right(.Equal), toSuperview: Bool = true) -> String {
@@ -205,6 +206,19 @@ private func formatVertical(components: [String], axis: Axis, align: Alignment, 
             }
         }
     }
+}
+
+private func layoutOptions(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> NSLayoutFormatOptions {
+    if axis == .Horizontal && align == .Center {
+        return [.AlignAllCenterY, .DirectionLeadingToTrailing]
+    }
+
+    if axis == .Vertical && align == .Center {
+        return [.AlignAllCenterX, .DirectionLeadingToTrailing]
+    }
+
+    // Default
+    return .DirectionLeadingToTrailing
 }
 
 private func equallyLayoutFormats(views: [String], axis: Axis) -> [String] {
