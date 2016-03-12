@@ -96,14 +96,6 @@ public func V(fromSuperview fromSuperview: Bool = true, top: Metrics? = .top(.Eq
     return "V:" + distribute(fromSuperview: fromSuperview, metric1: top, views: orderedViews, interspace: interspace, metric2: bottom, toSuperview: toSuperview)
 }
 
-public func H(view: String, width: Double) -> String {
-    return "H:[\(view)(\(width))]"
-}
-
-public func V(view: String, height: Double) -> String{
-    return "V:[\(view)(\(height))]"
-}
-
 public func H(customVFL: String) -> String {
     return "H:\(customVFL)"
 }
@@ -154,7 +146,7 @@ private func formatHorizontal(components: [String], axis: Axis, align: Alignment
                 // TODO: center also with superview
                 return H(left:.left(.GreaterThanOrEqual), orderedViews:[component], right:.right(.GreaterThanOrEqual))
             default:
-                assertionFailure("")
+                assertionFailure("Unexpected alignment value \(align) for axis \(axis) and distribution \(distribution)")
                 return nil
             }
         }
@@ -181,7 +173,7 @@ private func formatVertical(components: [String], axis: Axis, align: Alignment, 
                 // TODO: center also with superview
                 return V(top:.top(.GreaterThanOrEqual), orderedViews:[component], bottom:.bottom(.GreaterThanOrEqual))
             default:
-                assertionFailure("")
+                assertionFailure("Unexpected alignment value \(align) for axis \(axis) and distribution \(distribution)")
                 return nil
             }
         }
