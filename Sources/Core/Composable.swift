@@ -69,13 +69,16 @@ extension Composable {
 
         // Layout each component view with auto layout visual format language from configuration.
         for format in layout.formats {
-            let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions.DirectionLeadingToTrailing, metrics: layout.metrics, views: viewsDictionary)
+            let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: layout.options, metrics: layout.metrics, views: viewsDictionary)
             for constraint in constraints {
                 //constraint.priority = 990
                 //constraint.shouldBeArchived = true
-                constraint.identifier = constraint.description
+                //constraint.identifier = constraint.description
                 component.addConstraint(constraint)
+
+                // print("first: \(constraint.firstItem), second: \(constraint.secondItem), identifier: \(constraint.description) \n\n")
             }
         }
     }
 }
+

@@ -106,7 +106,7 @@ extension UIView {
     public func fittingHeight() -> CGFloat {
 
         // if height resolver is found
-        if let computeClosure = configuration?.cellHeightResolver {
+        if let computeClosure = configuration?.heightResolver {
             //TODO:  should use children component instead of subview ?
             return computeClosure(childrenHeights: subviews.map { (subview) -> CGFloat in
                     return subview.fittingHeight()

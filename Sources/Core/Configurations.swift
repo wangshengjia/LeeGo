@@ -13,14 +13,16 @@ public typealias MetricsValuesType = (AnyObject, AnyObject, AnyObject, AnyObject
 public struct Layout: Equatable {
 
     let formats: [String]
+    let options: NSLayoutFormatOptions
     let metrics: [String: AnyObject]?
 
-    public init(_ formats: [String] = [], _ metrics: [String: AnyObject] = ["top" : 0, "left": 0, "bottom": 0, "right": 0, "interspaceH": 0, "interspaceV": 0]) {
+    public init(_ formats: [String] = [], options: NSLayoutFormatOptions = .DirectionLeadingToTrailing, _ metrics: [String: AnyObject] = ["top" : 0, "left": 0, "bottom": 0, "right": 0, "interspaceH": 0, "interspaceV": 0]) {
         self.formats = formats
         self.metrics = metrics
+        self.options = options
     }
 
-    public init(_ formats: [String] = [], _ metrics: MetricsValuesType) {
+    public init(_ formats: [String] = [], options: NSLayoutFormatOptions = .DirectionLeadingToTrailing, _ metrics: MetricsValuesType) {
         self.formats = formats
         self.metrics = [
             "top" : metrics.0,
@@ -30,6 +32,7 @@ public struct Layout: Equatable {
             "interspaceH": metrics.4,
             "interspaceV": metrics.5,
         ]
+        self.options = options
     }
 }
 
@@ -49,7 +52,7 @@ public func ==(lhs: Layout, rhs: Layout) -> Bool {
         sameMetrics = false
     }
 
-    return lhs.formats == rhs.formats && sameMetrics
+    return lhs.formats == rhs.formats && sameMetrics && lhs.options == rhs.options
 }
 
 public typealias Attributes = [String: AnyObject]

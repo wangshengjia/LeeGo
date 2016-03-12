@@ -16,7 +16,7 @@ public protocol ComponentBuilderType: Hashable {
 extension ComponentBuilderType {
 
     public func buildFromNib(type: AnyObject? = nil, name: String) -> ComponentTarget {
-        // TODO: check
+        // TODO: check type
         return ComponentTarget(name: String(self), targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: name)
     }
 
@@ -55,8 +55,14 @@ public class ComponentTarget: Hashable {
         }
     }
     private(set) var layout: Layout? = nil
-    private(set) var width: CGFloat = 0.0
-    private(set) var cellHeightResolver: ((childrenHeights: [CGFloat]) -> CGFloat)?
+
+    // component's width and height
+    private(set) var width: CGFloat? = nil
+    private(set) var height: CGFloat? = nil
+
+    // TODO: need to make this API more clearly
+    // used when calculate cell's height
+    private(set) var heightResolver: ((childrenHeights: [CGFloat]) -> CGFloat)?
 
     public var hashValue: Int {
         return name.hashValue
@@ -79,8 +85,8 @@ public class ComponentTarget: Hashable {
         return self
     }
 
-    public func cellHeightResolver(cellHeightResolver: ((childrenHeights: [CGFloat]) -> CGFloat)?) -> ComponentTarget {
-        self.cellHeightResolver = cellHeightResolver
+    public func heightResolver(heightResolver: ((childrenHeights: [CGFloat]) -> CGFloat)?) -> ComponentTarget {
+        self.heightResolver = heightResolver
         return self
     }
 
@@ -128,6 +134,10 @@ public class ComponentTarget: Hashable {
         return self
     }
 
+    public func height(height: CGFloat) -> ComponentTarget {
+        self.height = height
+        return self
+    }
 }
 
 public func ==(lhs: ComponentTarget, rhs: ComponentTarget) -> Bool {

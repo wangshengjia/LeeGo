@@ -63,10 +63,6 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 
     // MARK: Collection View Layout
 
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        return CGSizeMake(CGRectGetWidth(collectionView.frame), 180)
-//    }
-
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0.5
     }

@@ -43,7 +43,7 @@ class ViewExtensionSpec: QuickSpec {
                 expect(view.componentName) == "header"
                 expect(view.isRoot) == true
                 expect(view.configuration) == TestData.header1
-                expect(view.configuration!.layout!.formats) == ["H:|[title][avatar]|"]
+                expect(view.configuration!.layout!.formats) == ["H:|-left-[title]-(>=right)-|", "H:|-left-[avatar]-(>=right)-|", "V:|-top-[title]-interspaceV-[avatar]-bottom-|"]
                 expect(view.backgroundColor) == UIColor.redColor()
                 expect(view.subviews.count) == 2
                 expect((view.subviews[0] as! UILabel).configuration) == TestData.title1
@@ -116,7 +116,7 @@ class ViewExtensionSpec: QuickSpec {
                 expect(cell.contentView.configuration) != nil
                 expect(cell.contentView.configuration) == TestData.header2
                 expect(cell.contentView.componentName) == "header2"
-                expect(cell.contentView.configuration!.layout!.formats) == ["H:|[title][avatar]|", "V:|[view]|"]
+                expect(cell.contentView.configuration!.layout!.formats) == ["H:|-left-[title]-interspaceH-[avatar]-interspaceH-[view]-(>=right)-|", "V:|-top-[title]-(>=bottom)-|", "V:|-top-[avatar]-(>=bottom)-|", "V:|-top-[view]-(>=bottom)-|"]
                 expect(cell.contentView.backgroundColor).to(beNil())
                 expect(cell.contentView.subviews.count) == 3
                 expect((cell.contentView.subviews[0] as! UILabel).configuration) == TestData.title2
@@ -127,6 +127,30 @@ class ViewExtensionSpec: QuickSpec {
                 expect((cell.contentView.subviews[1] as! UIImageView).backgroundColor) == UIColor.greenColor()
                 expect((cell.contentView.subviews[2] as UIView).configuration) == TestData.view
                 expect((cell.contentView.subviews[2] as UIView).componentName) == "view"
+            }
+
+            it("cell should have dynamic fitting height correctly") {
+                // Given
+                let cell = UICollectionViewCell()
+                cell.configure(TestData.header1)
+
+                // When
+                let attributes = cell.preferredLayoutAttributesFittingAttributes(UICollectionViewLayoutAttributes())
+
+                // Then
+                expect(attributes.frame.height) == 71
+            }
+
+            it("cell should have dynamic fitting height correctly") {
+                // Given
+                let cell = UICollectionViewCell(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+                cell.configure(TestData.header2)
+
+                // When
+                let attributes = cell.preferredLayoutAttributesFittingAttributes(UICollectionViewLayoutAttributes())
+
+                // Then
+                expect(attributes.frame.height) == 130
             }
         }
     }

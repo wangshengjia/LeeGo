@@ -21,8 +21,6 @@
 		35F520371C7C74510089FF41 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520291C7C74510089FF41 /* Configurable.swift */; };
 		35F520381C7C74510089FF41 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5202A1C7C74510089FF41 /* Configurations.swift */; };
 		35F520391C7C74510089FF41 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5202B1C7C74510089FF41 /* Errors.swift */; };
-		35F5203A1C7C74510089FF41 /* ComponentFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 35F5202D1C7C74510089FF41 /* ComponentFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		35F5203B1C7C74510089FF41 /* ComponentFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 35F5202E1C7C74510089FF41 /* ComponentFactory.m */; };
 		35F5203C1C7C74510089FF41 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5202F1C7C74510089FF41 /* View.swift */; };
 		35F520431C7C762E0089FF41 /* AutoLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5203D1C7C762E0089FF41 /* AutoLayoutSpec.swift */; };
 		35F520441C7C762E0089FF41 /* ComponentTargetSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5203E1C7C762E0089FF41 /* ComponentTargetSpec.swift */; };
@@ -62,8 +60,6 @@
 		35F520291C7C74510089FF41 /* Configurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		35F5202A1C7C74510089FF41 /* Configurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
 		35F5202B1C7C74510089FF41 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		35F5202D1C7C74510089FF41 /* ComponentFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentFactory.h; sourceTree = "<group>"; };
-		35F5202E1C7C74510089FF41 /* ComponentFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentFactory.m; sourceTree = "<group>"; };
 		35F5202F1C7C74510089FF41 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		35F5203D1C7C762E0089FF41 /* AutoLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutSpec.swift; sourceTree = "<group>"; };
 		35F5203E1C7C762E0089FF41 /* ComponentTargetSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentTargetSpec.swift; sourceTree = "<group>"; };
@@ -163,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				35F520241C7C74510089FF41 /* Core */,
-				35F5202C1C7C74510089FF41 /* ObjC-Support */,
 				35F520211C7C74510089FF41 /* AutoLayout.swift */,
 				35F520221C7C74510089FF41 /* Cell.swift */,
 				35F520231C7C74510089FF41 /* Conveniences.swift */,
@@ -184,15 +179,6 @@
 				35F5202A1C7C74510089FF41 /* Configurations.swift */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		35F5202C1C7C74510089FF41 /* ObjC-Support */ = {
-			isa = PBXGroup;
-			children = (
-				35F5202D1C7C74510089FF41 /* ComponentFactory.h */,
-				35F5202E1C7C74510089FF41 /* ComponentFactory.m */,
-			);
-			path = "ObjC-Support";
 			sourceTree = "<group>";
 		};
 		760ECE35B930D39D861D56EF /* Frameworks */ = {
@@ -220,7 +206,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				35F5201F1C7C74400089FF41 /* LeeGo.h in Headers */,
-				35F5203A1C7C74510089FF41 /* ComponentFactory.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,7 +362,6 @@
 				35F520301C7C74510089FF41 /* AutoLayout.swift in Sources */,
 				35F520331C7C74510089FF41 /* Component.swift in Sources */,
 				35F520351C7C74510089FF41 /* ComponentType.swift in Sources */,
-				35F5203B1C7C74510089FF41 /* ComponentFactory.m in Sources */,
 				35F520381C7C74510089FF41 /* Configurations.swift in Sources */,
 				35F520391C7C74510089FF41 /* Errors.swift in Sources */,
 				35F5203C1C7C74510089FF41 /* View.swift in Sources */,

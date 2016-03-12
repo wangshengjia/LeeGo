@@ -13,10 +13,12 @@ class ComponentTargetSpec: QuickSpec {
         describe("ComponentTarget tests") {
 
             it("should create a new component target instance correctly") {
-                let component = ComponentTarget(name: "title", targetClass: UILabel.self).width(40).style([.backgroundColor(UIColor.greenColor())])
+                let component = ComponentTarget(name: "title", targetClass: UILabel.self).width(40).height(60).style([.backgroundColor(UIColor.greenColor())])
                 expect(component.name) == "title"
                 expect(component.targetClass == UILabel.self)
                 expect(component.width) == 40
+                expect(component.height) == 60
+                expect(component.hashValue) == "title".hashValue
                 if case let .backgroundColor(color) = component.style.first! {
                     expect(color) == UIColor.greenColor()
                 }
@@ -113,6 +115,15 @@ class ComponentTargetSpec: QuickSpec {
                 expect(component.name) == "title"
                 expect(component.targetClass == UILabel.self)
                 expect(component.nibName) == "nibname"
+            })
+
+            it("should build component with cell height resolver", closure: { () -> () in
+                let component = ComponentBuilder.header.build().heightResolver { childrenHeights in
+                    return childrenHeights[0] + childrenHeights[1]
+                }
+                expect(component.name) == "header"
+                expect(component.targetClass == UIView.self)
+                expect(component.heightResolver!(childrenHeights: [10, 20])) == 30
             })
         }
     }

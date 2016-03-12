@@ -14,18 +14,13 @@ enum ComponentBuilder: ComponentBuilderType {
     // leaf components
     case title, subtitle, date, avatar
     case favoriteButton
-    case followButton, followTag
     case adView
-
-    case likeButton, shareButton, moreButton
-    case username
 
     // child components
     case header, footer
-    case instaHeader, instaToolbar, likesNumber, descriptionArea, comments
 
     // root components
-    case zen, article, video, portfolio, alert, detailsView, featured, instagram
+    case zen, article, video, portfolio, alert, detailsView, featured
 }
 
 extension ComponentBuilder {
@@ -46,83 +41,52 @@ extension ComponentBuilder {
 extension ComponentBuilder {
     func componentTarget() -> ComponentTarget {
         switch self {
-        case .instaHeader:
-            return self.build().components(
-                ComponentBuilder.avatar.componentTarget(),
-                ComponentBuilder.username.build(),
-                ComponentBuilder.date.componentTarget(),
-                layout: { (avatar, username, date) -> Layout in
-                    return Layout()
-            })
-        case .instaToolbar:
-            return self.build().components(
-                ComponentBuilder.likeButton.componentTarget(),
-                ComponentBuilder.shareButton.componentTarget(),
-                ComponentBuilder.moreButton.componentTarget(),
-                layout: { (like, share, more) -> Layout in
-                    return Layout()
-            })
-        case .likesNumber:
-            return self.build()
-        case .descriptionArea:
-            return self.build()
-        case .comments:
-            return self.build()
-
-
         case .article:
             return self.build().style([.backgroundColor(UIColor.whiteColor())])
                 .components([
                     title.componentTarget(),
                     ComponentTarget(name: "subtitle", targetClass: UILabel.self).style(Style.H2.style()),
-                    avatar.build(UIImageView).style(Style.I1.style()).cellHeightResolver({ (childrenHeights) -> CGFloat in
+                    avatar.build(UIImageView).style(Style.I1.style()).width(68).heightResolver({ (childrenHeights) -> CGFloat in
                         return 68 * 2 / 3
                     }),
                     ],
                     layout: Layout([
                         H(orderedViews: ["avatar", "title"]),
-                        H("avatar", width: 68),
                         H(orderedViews: ["avatar", "subtitle"]),
                         V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
                         V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
                         ], ComponentBuilder.defaultMetrics)
-                ).cellHeightResolver({ (childrenHeights) -> CGFloat in
+                ).heightResolver({ (childrenHeights) -> CGFloat in
                     return childrenHeights[0] + childrenHeights[1] + 20 + 20 + 10
                 })
         case .featured:
             return self.build()
                 .components(
-                    avatar.build().style(Style.I1.style()).cellHeightResolver({ (childrenHeights) -> CGFloat in
+                    avatar.build().style(Style.I1.style()).heightResolver({ (childrenHeights) -> CGFloat in
                         return 375 * 2 / 3
                     }),
                     title.build().style(Style.H3.style())
                     ) { (avatar, title) -> Layout in
-                        return Layout([
-                            H(orderedViews: [title]),
+                        Layout([
+                            H("|-20-[\(title)]-20-|"),
                             H(orderedViews: [avatar]),
-                            V(orderedViews: [title]),
-                            V(orderedViews: [avatar]),
+                            V("|[\(avatar)]-10-[\(title)]-10-|"),
                             ])
                 }
         case .detailsView:
             return
                 self.build()
-                    .style([.translatesAutoresizingMaskIntoConstraints(false)])
                     .components(
                         ComponentTarget(name: "content", targetClass: UIView.self)
-                            .style([.backgroundColor(UIColor.brownColor()), .translatesAutoresizingMaskIntoConstraints(false)])
+                            .style([.backgroundColor(UIColor.brownColor())])
                             .components(
-                                header.componentTarget(),
-                                adView.buildFromNib(AdView.self, name: "AdView").style([.translatesAutoresizingMaskIntoConstraints(false)]),
-                                layout: { (header, adView) -> Layout in
-                                    return Layout([
-                                        H(orderedViews: [header]),
-                                        H(orderedViews: [adView]),
-                                        V(adView, height: 80),
-                                        "V:|[header]-80-[adView]-(>=bottom)-|"
-                                        ])
+                                avatar.build(Icon).style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
+                                favoriteButton.componentTarget(),
+                                adView.buildFromNib(AdView.self, name: "AdView").width(150).height(80),
+                                layout: { (avatar, favoriteButton, adView) -> Layout in
+                                    layout([avatar, favoriteButton, adView], axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: (120, 20, 20, 20, 10, 10))
                             }), layout: { content -> Layout in
-                                Layout(["H:|[content]|", "V:|[content]|"])
+                                Layout(["H:|[content]|", "V:|[content]"])
                     })
             
         case .header:
@@ -144,7 +108,7 @@ extension ComponentBuilder {
         case .title:
             return self.build(UILabel).style(Style.H3.style())
         case .favoriteButton:
-            return self.build().style(Style.BasicButton.style())
+            return self.build().style(Style.BasicButton.style() + [.backgroundColor(UIColor.greenColor())])
         default:
             assertionFailure("Unknown component: \(self)")
             return self.build()
@@ -179,14 +143,12 @@ enum Style: String {
             return [.font(UIFont.systemFontOfSize(18)),
                 .textColor(UIColor.darkTextColor()),
                 .textAlignment(.Center),
-                .numberOfLines(0),
-                .translatesAutoresizingMaskIntoConstraints(false)]
+                .numberOfLines(0)]
         case H2:
             return [.font(UIFont.systemFontOfSize(12)),
                 .textColor(UIColor.lightGrayColor()),
                 .numberOfLines(0),
-                .defaultLabelText("Default text"),
-                .translatesAutoresizingMaskIntoConstraints(false)]
+                .defaultLabelText("Default text")]
         case H3:
             return [
                 .attributedText([
@@ -197,9 +159,9 @@ enum Style: String {
                 .numberOfLines(0),
                 .translatesAutoresizingMaskIntoConstraints(false)]
         case I1:
-            return [.backgroundColor(UIColor.greenColor()), .ratio(1.5), .translatesAutoresizingMaskIntoConstraints(false)]
+            return [.backgroundColor(UIColor.greenColor()), .ratio(1.5)]
         case BasicButton:
-            return [.buttonType(.Custom), .buttonTitle("OK", .Normal), .translatesAutoresizingMaskIntoConstraints(false)]
+            return [.buttonType(.Custom), .buttonTitle("OK", .Normal)]
         default:
             return []
         }

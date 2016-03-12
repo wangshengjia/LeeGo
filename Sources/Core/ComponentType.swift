@@ -26,12 +26,48 @@ extension ComponentType {
     }
 
     private func apply<Component where Component: UIView, Component: ComponentType>(newConfiguration: ComponentTarget, to component: Component) {
-        // setup self
-        setup(component, currentStyle: component.configuration?.style ?? [], newStyle: newConfiguration.style)
+
+        // setup self, only if component is not initialized from a nib file
+        if component.configuration?.nibName == nil {
+            setup(component, currentStyle: component.configuration?.style ?? [], newStyle: newConfiguration.style)
+        }
 
         // add & layout sub components
         if let components = newConfiguration.components where !components.isEmpty, let layout = newConfiguration.layout {
             compositeSubcomponents(component, components: components, layout: layout)
+        }
+
+
+
+        // handle component's width & height
+        // should go through all constraints, if there is already one, then update. Otherwise, add one.
+        var widthUpdated = false, heightUpdated = false
+        for constraint in component.constraints {
+            if constraint.firstAttribute == .Width
+                && constraint.firstItem === component && constraint.secondItem === nil {
+                if let width = newConfiguration.width {
+                    constraint.constant = width
+                } else {
+                    component.removeConstraint(constraint)
+                }
+                widthUpdated = true
+            } else if constraint.firstAttribute == .Height
+                && constraint.firstItem === component && constraint.secondItem === nil {
+                if let height = newConfiguration.height {
+                    constraint.constant = height
+                } else {
+                    component.removeConstraint(constraint)
+                }
+                heightUpdated = true
+            }
+        }
+
+        if let width = newConfiguration.width where !widthUpdated {
+            component.addConstraint(NSLayoutConstraint(item: component, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: width))
+        }
+
+        if let height = newConfiguration.height where !heightUpdated {
+            component.addConstraint(NSLayoutConstraint(item: component, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: height))
         }
     }
 
