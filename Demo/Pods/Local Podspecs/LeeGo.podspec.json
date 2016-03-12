@@ -16,6 +16,5 @@
     "ios": "8.0"
   },
   "requires_arc": true,
-  "source_files": "Sources/**/*",
-  "public_header_files": "Sources/**/*.h"
+  "source_files": "Sources/**/*"
 }
