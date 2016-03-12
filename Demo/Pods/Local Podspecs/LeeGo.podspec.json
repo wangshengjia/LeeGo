@@ -1,6 +1,6 @@
 {
   "name": "LeeGo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "summary": "A short description of LeeGo.",
   "description": "LeeGo",
   "homepage": "https://github.com/<GITHUB_USERNAME>/LeeGo",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/<GITHUB_USERNAME>/LeeGo.git",
-    "tag": "0.1.0"
+    "tag": "0.2.0"
   },
   "platforms": {
     "ios": "8.0"
