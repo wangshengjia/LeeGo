@@ -39,8 +39,11 @@ extension ComponentBuilderType {
     }
 }
 
+public typealias ManuallyFittingHeightResolver = (fittingWidth: CGFloat, childrenHeights: [CGFloat], metrics: LayoutMetrics) -> CGFloat
+
 public class ComponentTarget: Hashable {
     public let name: String
+
     let targetClass: AnyClass
     let nibName: String?
 
@@ -61,8 +64,8 @@ public class ComponentTarget: Hashable {
     private(set) var height: CGFloat? = nil
 
     // TODO: need to make this API more clearly
-    // used when calculate cell's height
-    private(set) var heightResolver: ((childrenHeights: [CGFloat]) -> CGFloat)?
+    // used only for calculating cell's height manually
+    private(set) var heightResolver: ManuallyFittingHeightResolver?
 
     public var hashValue: Int {
         return name.hashValue
@@ -85,7 +88,7 @@ public class ComponentTarget: Hashable {
         return self
     }
 
-    public func heightResolver(heightResolver: ((childrenHeights: [CGFloat]) -> CGFloat)?) -> ComponentTarget {
+    public func heightResolver(heightResolver: ManuallyFittingHeightResolver?) -> ComponentTarget {
         self.heightResolver = heightResolver
         return self
     }

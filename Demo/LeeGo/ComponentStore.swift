@@ -76,7 +76,7 @@ extension Twitter {
                 retweetCount.configuration()
                 ) { (rtButton, rtNumber) -> Layout in
                     Layout([
-                        "H:|[\(rtButton)]-interspaceH-[\(rtNumber)]|",
+                        "H:|[\(rtButton)]-spaceH-[\(rtNumber)]|",
                         "V:|[\(rtButton)]|", "V:|[\(rtNumber)]|"
                         ])
             }
@@ -86,7 +86,7 @@ extension Twitter {
                 likeCount.configuration()
                 ) { (likeButton, likeNumber) -> Layout in
                     Layout([
-                        "H:|[\(likeButton)]-interspaceH-[\(likeNumber)]|",
+                        "H:|[\(likeButton)]-spaceH-[\(likeNumber)]|",
                         "V:|[\(likeButton)]|", "V:|[\(likeNumber)]|"
                         ])
             }

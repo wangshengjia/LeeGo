@@ -108,9 +108,13 @@ extension UIView {
         // if height resolver is found
         if let computeClosure = configuration?.heightResolver {
             //TODO:  should use children component instead of subview ?
-            return computeClosure(childrenHeights: subviews.map { (subview) -> CGFloat in
-                    return subview.fittingHeight()
-                })
+            let fittingWidth = self.frame.width
+            let childrenHeights = subviews.map { (subview) -> CGFloat in
+                return subview.fittingHeight()
+            }
+            let metrics = configuration?.layout?.metrics ?? LayoutMetrics()
+
+            return computeClosure(fittingWidth: fittingWidth, childrenHeights: childrenHeights, metrics: metrics)
         } else if subviews.isEmpty {
             // leaf component -> dynamic height
             return self.sizeThatFits(CGSize(width: self.frame.width, height: CGFloat.max)).height
