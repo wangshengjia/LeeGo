@@ -20,7 +20,13 @@ extension UICollectionViewCell {
         // if cached, return cached value
 
         // super.preferredLayoutAttributesFittingAttributes()
+
         self.frame = layoutAttributes.frame
+
+        // Need a layout action right now (based on current cell's height) to have correct width
+        // TODO: is this cost expensive? is this necessary?
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
 
         // calculate manually
         // calculate auto

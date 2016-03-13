@@ -118,12 +118,12 @@ class ComponentTargetSpec: QuickSpec {
             })
 
             it("should build component with cell height resolver", closure: { () -> () in
-                let component = ComponentBuilder.header.build().heightResolver { childrenHeights in
+                let component = ComponentBuilder.header.build().heightResolver { _, childrenHeights, _ in
                     return childrenHeights[0] + childrenHeights[1]
                 }
                 expect(component.name) == "header"
                 expect(component.targetClass == UIView.self)
-                expect(component.heightResolver!(childrenHeights: [10, 20])) == 30
+                expect(component.heightResolver!(fittingWidth:0, childrenHeights: [10, 20], metrics: LayoutMetrics())) == 30
             })
         }
     }

@@ -43,7 +43,7 @@ class ViewExtensionSpec: QuickSpec {
                 expect(view.componentName) == "header"
                 expect(view.isRoot) == true
                 expect(view.configuration) == TestData.header1
-                expect(view.configuration!.layout!.formats) == ["H:|-left-[title]-(>=right)-|", "H:|-left-[avatar]-(>=right)-|", "V:|-top-[title]-interspaceV-[avatar]-bottom-|"]
+                expect(view.configuration!.layout!.formats) == ["H:|-left-[title]-(>=right)-|", "H:|-left-[avatar]-(>=right)-|", "V:|-top-[title]-spaceV-[avatar]-bottom-|"]
                 expect(view.backgroundColor) == UIColor.redColor()
                 expect(view.subviews.count) == 2
                 expect((view.subviews[0] as! UILabel).configuration) == TestData.title1
@@ -116,7 +116,7 @@ class ViewExtensionSpec: QuickSpec {
                 expect(cell.contentView.configuration) != nil
                 expect(cell.contentView.configuration) == TestData.header2
                 expect(cell.contentView.componentName) == "header2"
-                expect(cell.contentView.configuration!.layout!.formats) == ["H:|-left-[title]-interspaceH-[avatar]-interspaceH-[view]-(>=right)-|", "V:|-top-[title]-(>=bottom)-|", "V:|-top-[avatar]-(>=bottom)-|", "V:|-top-[view]-(>=bottom)-|"]
+                expect(cell.contentView.configuration!.layout!.formats) == ["H:|-left-[title]-spaceH-[avatar]-spaceH-[view]-(>=right)-|", "V:|-top-[title]-(>=bottom)-|", "V:|-top-[avatar]-(>=bottom)-|", "V:|-top-[view]-(>=bottom)-|"]
                 expect(cell.contentView.backgroundColor).to(beNil())
                 expect(cell.contentView.subviews.count) == 3
                 expect((cell.contentView.subviews[0] as! UILabel).configuration) == TestData.title2

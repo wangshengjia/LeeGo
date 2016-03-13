@@ -32,42 +32,12 @@ extension ComponentType {
             setup(component, currentStyle: component.configuration?.style ?? [], newStyle: newConfiguration.style)
         }
 
+        // handle component's width & height constraint
+        applySize(newConfiguration, to: component)
+
         // add & layout sub components
         if let components = newConfiguration.components where !components.isEmpty, let layout = newConfiguration.layout {
             compositeSubcomponents(component, components: components, layout: layout)
-        }
-
-
-
-        // handle component's width & height
-        // should go through all constraints, if there is already one, then update. Otherwise, add one.
-        var widthUpdated = false, heightUpdated = false
-        for constraint in component.constraints {
-            if constraint.firstAttribute == .Width
-                && constraint.firstItem === component && constraint.secondItem === nil {
-                if let width = newConfiguration.width {
-                    constraint.constant = width
-                } else {
-                    component.removeConstraint(constraint)
-                }
-                widthUpdated = true
-            } else if constraint.firstAttribute == .Height
-                && constraint.firstItem === component && constraint.secondItem === nil {
-                if let height = newConfiguration.height {
-                    constraint.constant = height
-                } else {
-                    component.removeConstraint(constraint)
-                }
-                heightUpdated = true
-            }
-        }
-
-        if let width = newConfiguration.width where !widthUpdated {
-            component.addConstraint(NSLayoutConstraint(item: component, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: width))
-        }
-
-        if let height = newConfiguration.height where !heightUpdated {
-            component.addConstraint(NSLayoutConstraint(item: component, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: height))
         }
     }
 
@@ -89,6 +59,65 @@ extension ComponentType {
         }
 
         return shouldRebuild
+    }
+
+    private func applySize<Component where Component: UIView, Component: ComponentType>(newConfiguration: ComponentTarget, to component: Component) {
+        if let width = newConfiguration.width {
+            component.applyConstraint(.Width, constant: width)
+        } else {
+            component.unapplyConstraint(.Width)
+        }
+
+        if let height = newConfiguration.height {
+            component.applyConstraint(.Height, constant: height)
+        } else {
+            component.unapplyConstraint(.Height)
+        }
+    }
+}
+
+extension UIView {
+
+    // TODO: improve later
+    enum Constraint {
+        case Width, Height
+
+        var attribute: NSLayoutAttribute {
+            switch self {
+            case .Width:
+                return .Width
+            case .Height:
+                return .Height
+            }
+        }
+    }
+
+    func constraint(type: Constraint) -> NSLayoutConstraint? {
+        switch type {
+        case .Width, .Height:
+            for constraint in self.constraints {
+                if constraint.firstAttribute == type.attribute
+                    && constraint.firstItem === self && constraint.secondItem === nil {
+                        return constraint
+                }
+            }
+        }
+
+        return nil
+    }
+
+    func applyConstraint(type: Constraint, constant: CGFloat) {
+        if let constraint = self.constraint(type) {
+            constraint.constant = constant
+        } else {
+            self.addConstraint(NSLayoutConstraint(item: self, attribute: type.attribute, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant))
+        }
+    }
+
+    func unapplyConstraint(type: Constraint) {
+        if let constraint = self.constraint(type) {
+            self.removeConstraint(constraint)
+        }
     }
 }
 

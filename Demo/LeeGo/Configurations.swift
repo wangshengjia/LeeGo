@@ -31,7 +31,7 @@ extension ComponentBuilder {
         favoriteButton: UIButton.self,
     ]
 
-    static let defaultMetrics: MetricsValuesType = (20, 20, 20, 20, 10, 10)
+    static let defaultMetrics = LayoutMetrics(20, 20, 20, 20, 10, 10)
 
     static let cellReuseIdentifiers = [zen, article, featured, video, portfolio, alert].map { (type) -> String in
         return String(type)
@@ -43,36 +43,33 @@ extension ComponentBuilder {
         switch self {
         case .article:
             return self.build().style([.backgroundColor(UIColor.whiteColor())])
-                .components([
+                .components(
                     title.componentTarget(),
-                    ComponentTarget(name: "subtitle", targetClass: UILabel.self).style(Style.H2.style()),
-                    avatar.build(UIImageView).style(Style.I1.style()).width(68).heightResolver({ (childrenHeights) -> CGFloat in
-                        return 68 * 2 / 3
-                    }),
-                    ],
-                    layout: Layout([
-                        H(orderedViews: ["avatar", "title"]),
-                        H(orderedViews: ["avatar", "subtitle"]),
-                        V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
-                        V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
-                        ], ComponentBuilder.defaultMetrics)
-                ).heightResolver({ (childrenHeights) -> CGFloat in
-                    return childrenHeights[0] + childrenHeights[1] + 20 + 20 + 10
-                })
+                    subtitle.build().style(Style.H2.style()),
+                    avatar.build().style(Style.I1.style()).width(68).heightResolver({ (fittingWidth, _, _) -> CGFloat in
+                        return fittingWidth * 2 / 3
+                    })) { title, subtitle, avatar in
+                        Layout([
+                            H(orderedViews: ["avatar", "title"]),
+                            H(orderedViews: ["avatar", "subtitle"]),
+                            V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
+                            V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
+                            ], metrics: ComponentBuilder.defaultMetrics)
+                }.heightResolver { (_, childrenHeights, metrics) -> CGFloat in
+                    return childrenHeights[0] + childrenHeights[1] + metrics.top + metrics.bottom + metrics.spaceV
+            }
         case .featured:
             return self.build()
                 .components(
-                    avatar.build().style(Style.I1.style()).heightResolver({ (childrenHeights) -> CGFloat in
-                        return 375 * 2 / 3
+                    avatar.build().style(Style.I1.style()).heightResolver({ (fittingWidth, _, _) -> CGFloat in
+                        return fittingWidth * 2 / 3
                     }),
                     title.build().style(Style.H3.style())
                     ) { (avatar, title) -> Layout in
-                        Layout([
-                            H("|-20-[\(title)]-20-|"),
-                            H(orderedViews: [avatar]),
-                            V("|[\(avatar)]-10-[\(title)]-10-|"),
-                            ])
-                }
+                        Layout(components: [avatar, title], axis: .Vertical, align: .Fill, distribution: .Fill)
+                }.heightResolver { (_, childrenHeights, _) -> CGFloat in
+                    return childrenHeights[0] + childrenHeights[1]
+            }
         case .detailsView:
             return
                 self.build()
@@ -84,7 +81,7 @@ extension ComponentBuilder {
                                 favoriteButton.componentTarget(),
                                 adView.buildFromNib(AdView.self, name: "AdView").width(150).height(80),
                                 layout: { (avatar, favoriteButton, adView) -> Layout in
-                                    layout([avatar, favoriteButton, adView], axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: (120, 20, 20, 20, 10, 10))
+                                    Layout(components: [avatar, favoriteButton, adView], axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: LayoutMetrics(120, 20, 20, 20, 10, 10))
                             }), layout: { content -> Layout in
                                 Layout(["H:|[content]|", "V:|[content]"])
                     })
@@ -98,12 +95,12 @@ extension ComponentBuilder {
                     favoriteButton.componentTarget()
                     ) { avatar, title, favoriteButton -> Layout in
                         Layout([
-                            H("|-left-[\(avatar)][title]-(>=interspaceH)-[\(favoriteButton)]-right-|"),
+                            H("|-left-[\(avatar)][title]-(>=spaceH)-[\(favoriteButton)]-right-|"),
                             V("|-top-[\(avatar)]-bottom-|"),
                             V("|-top-[\(title)]-bottom-|"),
                             V("|-top-[\(favoriteButton)]-bottom-|"),
                             ],
-                            ComponentBuilder.defaultMetrics)
+                            metrics: ComponentBuilder.defaultMetrics)
             }
         case .title:
             return self.build(UILabel).style(Style.H3.style())
@@ -203,9 +200,9 @@ func stackLayoutV(components: [String]) -> [String] {
 //                ComponentProvider.subtitle.type(ComponentTitle),
 //                ]) { title, subtitle in return
 //                    Layout([
-//                        "H:|-left-[avatar(50)]-interspaceH-[\(title)]-(>=interspaceH)-[date]-right-|",
-//                        "H:[avatar]-interspaceH-[subtitle]-right-|",
-//                        "V:|-top-[title]-interspaceV-[subtitle]-(>=bottom)-|",
+//                        "H:|-left-[avatar(50)]-spaceH-[\(title)]-(>=spaceH)-[date]-right-|",
+//                        "H:[avatar]-spaceH-[subtitle]-right-|",
+//                        "V:|-top-[title]-spaceV-[subtitle]-(>=bottom)-|",
 //                        "V:|-top-[avatar(50)]-(>=bottom)-|",
 //                        "V:|-top-[date]-(>=bottom)-|"
 //                        ], ConfigurationTarget.layoutMetrics)

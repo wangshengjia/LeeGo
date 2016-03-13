@@ -31,15 +31,15 @@ struct TestData {
         .components(
             title1, avatar1
             ) { title, avatar in
-                layout([title, avatar], axis: .Vertical, align: .Left, distribution: .Fill, metrics: (20, 20, 20, 20, 10 ,10))
-        }.heightResolver { childrenHeights in
+                Layout(components: [title, avatar], axis: .Vertical, align: .Left, distribution: .Fill, metrics: LayoutMetrics(20, 20, 20, 20, 10 ,10))
+        }.heightResolver { (_, childrenHeights, _) in
             return childrenHeights[0] + childrenHeights[1]
     }
 
     static let header2 = ComponentTarget(name: "header2").components(
         title2, avatar2, view
         ) { title, avatar, view in
-            layout([title, avatar, view], axis: .Horizontal, align: .Top, distribution: .Flow(3), metrics: (20, 20, 20, 20, 10 ,10))
+            Layout(components: [title, avatar, view], axis: .Horizontal, align: .Top, distribution: .Flow(3), metrics: LayoutMetrics(20, 20, 20, 20, 10 ,10))
     }
 
     static let header3 = ComponentTarget(name: "header3").components(

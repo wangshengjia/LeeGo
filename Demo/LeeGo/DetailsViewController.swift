@@ -33,31 +33,4 @@ extension String {
     }
 }
 
-extension ComponentTarget {
-    func article() {
-        UIView().configure(
-            ComponentBuilder.title.componentTarget()
-                .flowH(ComponentBuilder.subtitle.componentTarget(), metrics: ComponentBuilder.defaultMetrics)
-                .flowV(ComponentBuilder.avatar.componentTarget(), metrics: ComponentBuilder.defaultMetrics)
-        )
-
-    }
-
-    func flowH(c1: ComponentTarget, metrics: MetricsValuesType) -> ComponentTarget {
-        return ComponentTarget(name: "inlineview", targetClass: UIView.self).style([.translatesAutoresizingMaskIntoConstraints(false), .backgroundColor(UIColor.clearColor())]).components(self, c1, layout: { (name1, name2) -> Layout in
-            return Layout([
-                "H:|-left-[\(name1)]-interspaceH-[\(name2)]-right-|",
-                "V:|[\(name1)]-interspaceV-[\(name2)]|"], metrics)
-        })
-    }
-
-    func flowV(c1: ComponentTarget, metrics: MetricsValuesType) -> ComponentTarget {
-        return ComponentTarget(name: "inlineview", targetClass: UIView.self).style([.translatesAutoresizingMaskIntoConstraints(false), .backgroundColor(UIColor.clearColor())]).components(self, c1, layout: { (name1, name2) -> Layout in
-            return Layout([
-                "H:|[\(name1)]-interspaceH-[\(name2)]|",
-                "V:|-top-[\(name1)]-interspaceV-[\(name2)]-bottom-|"], metrics)
-        })
-    }
-}
-
 // print("a".f1("b").f2("c", "d").f1("e"))

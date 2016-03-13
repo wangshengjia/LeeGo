@@ -130,6 +130,7 @@
 		350E0DED1C81F08400DB78FC /* LeMonde */ = {
 			isa = PBXGroup;
 			children = (
+				35543A2F1C694C58000AC50C /* DetailsViewController.swift */,
 				350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */,
 				35FFB6A61C7A8BF30035EC52 /* Models */,
 				35CC5EA91C6CD942005C87C8 /* Views */,
@@ -232,7 +233,6 @@
 				350E0DF11C84B0C500DB78FC /* ComponentStore.swift */,
 				350E0DEE1C81F08B00DB78FC /* Twitter */,
 				350E0DED1C81F08400DB78FC /* LeMonde */,
-				35543A2F1C694C58000AC50C /* DetailsViewController.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				3541CE871C44494B00A3B257 /* Main.storyboard */,
