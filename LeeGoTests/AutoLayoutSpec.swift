@@ -15,16 +15,18 @@ import Nimble
 
 class AutoLayoutSpec: QuickSpec {
     override func spec() {
+        let metrics = LayoutMetrics(20, 20 ,20, 20, 10 ,10)
+
         it("Horizontal, Top, Fill") {
             // Given
-            let result = layout(["avatar", "title", "subtitle"], axis: .Horizontal, align: .Top, distribution: .Fill, metrics: (20, 20 ,20, 20, 10 ,10))
+            let result = layout(["avatar", "title", "subtitle"], axis: .Horizontal, align: .Top, distribution: .Fill, metrics: metrics)
 
             // Then
             expect(result) == Layout([
-                "H:|-left-[avatar]-interspaceH-[title]-interspaceH-[subtitle]-right-|",
+                "H:|-left-[avatar]-spaceH-[title]-spaceH-[subtitle]-right-|",
                 "V:|-top-[avatar]-(>=bottom)-|",
                 "V:|-top-[title]-(>=bottom)-|",
-                "V:|-top-[subtitle]-(>=bottom)-|"], (20, 20 ,20, 20, 10 ,10))
+                "V:|-top-[subtitle]-(>=bottom)-|"], metrics: metrics)
             
         }
 
@@ -35,10 +37,10 @@ class AutoLayoutSpec: QuickSpec {
 
             // Then
             expect(result) == Layout([
-                "H:|-left-[avatar]-interspaceH-[title]-interspaceH-[subtitle]-right-|",
+                "H:|-left-[avatar]-spaceH-[title]-spaceH-[subtitle]-right-|",
                 "V:|-(>=top)-[avatar]-bottom-|",
                 "V:|-(>=top)-[title]-bottom-|",
-                "V:|-(>=top)-[subtitle]-bottom-|"], (0, 0 ,0, 0, 0 ,0))
+                "V:|-(>=top)-[subtitle]-bottom-|"], metrics: LayoutMetrics())
 
         }
 
@@ -49,7 +51,7 @@ class AutoLayoutSpec: QuickSpec {
 
             // Then
             expect(result) == Layout([
-                "H:|-left-[avatar]-interspaceH-[title]-interspaceH-[subtitle]-right-|",
+                "H:|-left-[avatar]-spaceH-[title]-spaceH-[subtitle]-right-|",
                 "V:|-top-[avatar]-bottom-|",
                 "V:|-top-[title]-bottom-|",
                 "V:|-top-[subtitle]-bottom-|"])
@@ -63,7 +65,7 @@ class AutoLayoutSpec: QuickSpec {
 
             // Then
             expect(result) == Layout([
-                "H:|-left-[avatar]-interspaceH-[title]-interspaceH-[subtitle]-right-|",
+                "H:|-left-[avatar]-spaceH-[title]-spaceH-[subtitle]-right-|",
                 "V:|-(>=top)-[avatar]-(>=bottom)-|",
                 "V:|-(>=top)-[title]-(>=bottom)-|",
                 "V:|-(>=top)-[subtitle]-(>=bottom)-|"], options: [.AlignAllCenterY, .DirectionLeadingToTrailing])
@@ -77,12 +79,12 @@ class AutoLayoutSpec: QuickSpec {
 
             // Then
             expect(result) == Layout([
-                "H:|-left-[avatar]-interspaceH-[title]-interspaceH-[subtitle]-right-|",
+                "H:|-left-[avatar]-spaceH-[title]-spaceH-[subtitle]-right-|",
                 "H:[avatar(title)]",
                 "H:[title(subtitle)]",
                 "V:|-top-[avatar]-(>=bottom)-|",
                 "V:|-top-[title]-(>=bottom)-|",
-                "V:|-top-[subtitle]-(>=bottom)-|"], (0, 0 ,0, 0, 0 ,0))
+                "V:|-top-[subtitle]-(>=bottom)-|"])
 
         }
 
@@ -95,20 +97,19 @@ class AutoLayoutSpec: QuickSpec {
 
             // Then
             expect(result1) == Layout([
-                "H:|-(>=left)-[avatar]-interspaceH-[title]-interspaceH-[subtitle]-right-|",
+                "H:|-(>=left)-[avatar]-spaceH-[title]-spaceH-[subtitle]-right-|",
                 "V:|-(>=top)-[avatar]-bottom-|",
                 "V:|-(>=top)-[title]-bottom-|",
-                "V:|-(>=top)-[subtitle]-bottom-|"],
-                (0, 0 ,0, 0, 0 ,0))
+                "V:|-(>=top)-[subtitle]-bottom-|"])
 
             expect(result2) == Layout([
-                "H:|-left-[avatar]-(>=interspaceH)-[title]-interspaceH-[subtitle]-right-|",
+                "H:|-left-[avatar]-(>=spaceH)-[title]-spaceH-[subtitle]-right-|",
                 "V:|-(>=top)-[avatar]-bottom-|",
                 "V:|-(>=top)-[title]-bottom-|",
                 "V:|-(>=top)-[subtitle]-bottom-|"])
 
             expect(result3) == Layout([
-                "H:|-left-[avatar]-interspaceH-[title]-interspaceH-[subtitle]-(>=right)-|",
+                "H:|-left-[avatar]-spaceH-[title]-spaceH-[subtitle]-(>=right)-|",
                 "V:|-(>=top)-[avatar]-bottom-|",
                 "V:|-(>=top)-[title]-bottom-|",
                 "V:|-(>=top)-[subtitle]-bottom-|"])
@@ -118,15 +119,15 @@ class AutoLayoutSpec: QuickSpec {
         it("Vertical, Left, Fill") {
 
             // Given
-            let result = layout(["avatar", "title", "subtitle"], axis: .Vertical, align: .Left, distribution: .Fill, metrics: (20, 20 ,20, 20, 10 ,10))
+            let result = layout(["avatar", "title", "subtitle"], axis: .Vertical, align: .Left, distribution: .Fill, metrics: metrics)
 
             // Then
             expect(result) == Layout([
                 "H:|-left-[avatar]-(>=right)-|",
                 "H:|-left-[title]-(>=right)-|",
                 "H:|-left-[subtitle]-(>=right)-|",
-                "V:|-top-[avatar]-interspaceV-[title]-interspaceV-[subtitle]-bottom-|"],
-                (20, 20 ,20, 20, 10 ,10))
+                "V:|-top-[avatar]-spaceV-[title]-spaceV-[subtitle]-bottom-|"],
+                metrics: metrics)
 
         }
 
@@ -140,8 +141,7 @@ class AutoLayoutSpec: QuickSpec {
                 "H:|-(>=left)-[avatar]-right-|",
                 "H:|-(>=left)-[title]-right-|",
                 "H:|-(>=left)-[subtitle]-right-|",
-                "V:|-top-[avatar]-interspaceV-[title]-interspaceV-[subtitle]-bottom-|"],
-                (0, 0 ,0, 0, 0 ,0))
+                "V:|-top-[avatar]-spaceV-[title]-spaceV-[subtitle]-bottom-|"])
             
         }
 
@@ -154,8 +154,7 @@ class AutoLayoutSpec: QuickSpec {
             expect(result) == Layout([
                 "H:|-left-[avatar]-right-|",
                 "H:|-left-[title]-right-|", "H:|-left-[subtitle]-right-|",
-                "V:|-top-[avatar]-interspaceV-[title]-interspaceV-[subtitle]-bottom-|"],
-                (0, 0 ,0, 0, 0 ,0))
+                "V:|-top-[avatar]-spaceV-[title]-spaceV-[subtitle]-bottom-|"])
 
         }
 
@@ -169,26 +168,25 @@ class AutoLayoutSpec: QuickSpec {
                 "H:|-(>=left)-[avatar]-(>=right)-|",
                 "H:|-(>=left)-[title]-(>=right)-|",
                 "H:|-(>=left)-[subtitle]-(>=right)-|",
-                "V:|-top-[avatar]-interspaceV-[title]-interspaceV-[subtitle]-bottom-|"],
-                options: [.AlignAllCenterX, .DirectionLeadingToTrailing],
-                (0, 0 ,0, 0, 0 ,0))
+                "V:|-top-[avatar]-spaceV-[title]-spaceV-[subtitle]-bottom-|"],
+                options: [.AlignAllCenterX, .DirectionLeadingToTrailing])
 
         }
 
         it("Vertical, Left, FillEqually") {
 
             // Given
-            let result = layout(["avatar", "title", "subtitle"], axis: .Vertical, align: .Left, distribution: .FillEqually, metrics: (20, 20 ,20, 20, 10 ,10))
+            let result = layout(["avatar", "title", "subtitle"], axis: .Vertical, align: .Left, distribution: .FillEqually, metrics: metrics)
 
             // Then
             expect(result) == Layout([
                 "H:|-left-[avatar]-(>=right)-|",
                 "H:|-left-[title]-(>=right)-|",
                 "H:|-left-[subtitle]-(>=right)-|",
-                "V:|-top-[avatar]-interspaceV-[title]-interspaceV-[subtitle]-bottom-|",
+                "V:|-top-[avatar]-spaceV-[title]-spaceV-[subtitle]-bottom-|",
                 "V:[avatar(title)]",
                 "V:[title(subtitle)]"],
-                (20, 20 ,20, 20, 10 ,10))
+                metrics: metrics)
             
         }
 
@@ -204,20 +202,20 @@ class AutoLayoutSpec: QuickSpec {
                 "H:|-(>=left)-[avatar]-(>=right)-|",
                 "H:|-(>=left)-[title]-(>=right)-|",
                 "H:|-(>=left)-[subtitle]-(>=right)-|",
-                "V:|-(>=top)-[avatar]-interspaceV-[title]-interspaceV-[subtitle]-bottom-|"],
+                "V:|-(>=top)-[avatar]-spaceV-[title]-spaceV-[subtitle]-bottom-|"],
                 options: [.AlignAllCenterX, .DirectionLeadingToTrailing])
 
             expect(result2) == Layout([
                 "H:|-(>=left)-[avatar]-(>=right)-|", "H:|-(>=left)-[title]-(>=right)-|",
                 "H:|-(>=left)-[subtitle]-(>=right)-|",
-                "V:|-top-[avatar]-interspaceV-[title]-(>=interspaceV)-[subtitle]-bottom-|"],
+                "V:|-top-[avatar]-spaceV-[title]-(>=spaceV)-[subtitle]-bottom-|"],
                 options: [.AlignAllCenterX, .DirectionLeadingToTrailing])
 
             expect(result3) == Layout([
                 "H:|-(>=left)-[avatar]-(>=right)-|",
                 "H:|-(>=left)-[title]-(>=right)-|",
                 "H:|-(>=left)-[subtitle]-(>=right)-|",
-                "V:|-top-[avatar]-interspaceV-[title]-interspaceV-[subtitle]-(>=bottom)-|"],
+                "V:|-top-[avatar]-spaceV-[title]-spaceV-[subtitle]-(>=bottom)-|"],
                 options: [.AlignAllCenterX, .DirectionLeadingToTrailing])
             
         }
