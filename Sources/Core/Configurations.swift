@@ -12,14 +12,14 @@ import Foundation
 
 public struct LayoutMetrics: Equatable {
 
-    private let top: CGFloat
-    private let left: CGFloat
-    private let bottom: CGFloat
-    private let right: CGFloat
-    private let spaceH: CGFloat
-    private let spaceV: CGFloat
+    public let top: CGFloat
+    public let left: CGFloat
+    public let bottom: CGFloat
+    public let right: CGFloat
+    public let spaceH: CGFloat
+    public let spaceV: CGFloat
 
-    private let customMetrics: [String: CGFloat]
+    public let customMetrics: [String: CGFloat]
 
     public init(_ top: CGFloat, _ left: CGFloat, _ bottom: CGFloat, _ right: CGFloat, _ spaceH: CGFloat, _ spaceV: CGFloat) {
         self.init(top:top, left: left, bottom: bottom, right: right, spaceH: spaceH, spaceV: spaceV)
