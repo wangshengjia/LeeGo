@@ -66,7 +66,7 @@ extension ComponentBuilder {
                     }),
                     title.build().style(Style.H3.style())
                     ) { (avatar, title) -> Layout in
-                        layout([avatar, title], axis: .Vertical, align: .Fill, distribution: .Fill)
+                        Layout(components: [avatar, title], axis: .Vertical, align: .Fill, distribution: .Fill)
                 }.heightResolver { (_, childrenHeights, _) -> CGFloat in
                     return childrenHeights[0] + childrenHeights[1]
             }
@@ -81,7 +81,7 @@ extension ComponentBuilder {
                                 favoriteButton.componentTarget(),
                                 adView.buildFromNib(AdView.self, name: "AdView").width(150).height(80),
                                 layout: { (avatar, favoriteButton, adView) -> Layout in
-                                    layout([avatar, favoriteButton, adView], axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: LayoutMetrics(120, 20, 20, 20, 10, 10))
+                                    Layout(components: [avatar, favoriteButton, adView], axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: LayoutMetrics(120, 20, 20, 20, 10, 10))
                             }), layout: { content -> Layout in
                                 Layout(["H:|[content]|", "V:|[content]"])
                     })
