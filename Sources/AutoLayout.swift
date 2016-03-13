@@ -46,34 +46,6 @@ public enum Metrics: CustomStringConvertible {
     }
 }
 
-public enum Axis {
-    case Horizontal, Vertical
-}
-
-public enum Alignment {
-    case Top, Left, Bottom, Right, Center, Fill
-}
-
-public enum Distribution {
-    case Fill, FillEqually, Flow(Int)
-}
-
-extension Layout {
-
-}
-
-public func layout(components: [String], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) -> Layout {
-    guard !components.isEmpty else {
-        assertionFailure("Components should not be empty")
-        return Layout()
-    }
-
-    let formats = formatHorizontal(components, axis: axis, align: align, distribution: distribution) + formatVertical(components, axis: axis, align: align, distribution: distribution)
-    let options = layoutOptions(components, axis: axis, align: align, distribution: distribution)
-    
-    return Layout(formats, options: options, metrics: metrics)
-}
-
 public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.Equal), orderedViews: [String] = [], interspace: Metrics? = .spaceH(.Equal), right: Metrics? = .right(.Equal), toSuperview: Bool = true) -> String {
     guard !orderedViews.isEmpty else {
         assertionFailure("Should at least with 1 view name")
@@ -105,9 +77,9 @@ public func V(customVFL: String) -> String {
     return "V:\(customVFL)"
 }
 
-// MARK: Private
+// MARK: Internal
 
-private func formatHorizontal(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
+internal func formatHorizontal(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
     guard !components.isEmpty else {
         assertionFailure("Components should not be empty")
         return []
@@ -154,7 +126,7 @@ private func formatHorizontal(components: [String], axis: Axis, align: Alignment
     }
 }
 
-private func formatVertical(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
+internal func formatVertical(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
     guard !components.isEmpty else {
         assertionFailure("Components should not be empty")
         return []
@@ -201,7 +173,7 @@ private func formatVertical(components: [String], axis: Axis, align: Alignment, 
     }
 }
 
-private func layoutOptions(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> NSLayoutFormatOptions {
+internal func layoutOptions(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> NSLayoutFormatOptions {
     if axis == .Horizontal && align == .Center {
         return [.AlignAllCenterY, .DirectionLeadingToTrailing]
     }
@@ -213,6 +185,8 @@ private func layoutOptions(components: [String], axis: Axis, align: Alignment, d
     // Default
     return .DirectionLeadingToTrailing
 }
+
+// MARK: Private
 
 private func equallyLayoutFormats(views: [String], axis: Axis) -> [String] {
     guard views.count >= 2 else {

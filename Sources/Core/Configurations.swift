@@ -51,6 +51,18 @@ public func ==(lhs: LayoutMetrics, rhs: LayoutMetrics) -> Bool {
     && lhs.customMetrics == rhs.customMetrics
 }
 
+public enum Axis {
+    case Horizontal, Vertical
+}
+
+public enum Alignment {
+    case Top, Left, Bottom, Right, Center, Fill
+}
+
+public enum Distribution {
+    case Fill, FillEqually, Flow(Int)
+}
+
 public struct Layout: Equatable {
 
     let formats: [String]
@@ -62,6 +74,21 @@ public struct Layout: Equatable {
         self.metrics = metrics
         self.options = options
     }
+
+
+    public init(components: [String], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) {
+        guard !components.isEmpty else {
+            assertionFailure("Components should not be empty")
+            self.init()
+            return
+        }
+
+        let formats = formatHorizontal(components, axis: axis, align: align, distribution: distribution) + formatVertical(components, axis: axis, align: align, distribution: distribution)
+        let options = layoutOptions(components, axis: axis, align: align, distribution: distribution)
+
+        self.init(formats, options: options, metrics: metrics)
+    }
+
 }
 
 public func ==(lhs: Layout, rhs: Layout) -> Bool {
@@ -69,18 +96,6 @@ public func ==(lhs: Layout, rhs: Layout) -> Bool {
 }
 
 public typealias Attributes = [String: AnyObject]
-
-extension Int {
-    func nsObject() -> NSNumber {
-        return NSNumber(integer: self)
-    }
-}
-
-extension Bool {
-    func nsObject() -> NSNumber {
-        return NSNumber(bool: self)
-    }
-}
 
 public enum Appearance {
     // UIView
@@ -241,7 +256,7 @@ public enum Appearance {
         // Multiple
         case (let .lineBreakMode(mode), _):
             if component.respondsToSelector("setLineBreakMode:") {
-                component.setValue(mode.rawValue.nsObject(), forKey: toString())
+                component.setValue(NSNumber(integer: mode.rawValue), forKey: toString())
             } else {
                 assertionFailure("Unknown appearance \(self) for component \(component)")
             }
