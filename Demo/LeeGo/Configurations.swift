@@ -31,7 +31,7 @@ extension ComponentBuilder {
         favoriteButton: UIButton.self,
     ]
 
-    static let defaultMetrics: MetricsValuesType = (20, 20, 20, 20, 10, 10)
+    static let defaultMetrics = LayoutMetrics(20, 20, 20, 20, 10, 10)
 
     static let cellReuseIdentifiers = [zen, article, featured, video, portfolio, alert].map { (type) -> String in
         return String(type)
@@ -55,8 +55,8 @@ extension ComponentBuilder {
                         H(orderedViews: ["avatar", "subtitle"]),
                         V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
                         V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
-                        ], ComponentBuilder.defaultMetrics)
                 ).heightResolver({ (childrenHeights) -> CGFloat in
+                            ], metrics: ComponentBuilder.defaultMetrics)
                     return childrenHeights[0] + childrenHeights[1] + 20 + 20 + 10
                 })
         case .featured:
@@ -84,7 +84,7 @@ extension ComponentBuilder {
                                 favoriteButton.componentTarget(),
                                 adView.buildFromNib(AdView.self, name: "AdView").width(150).height(80),
                                 layout: { (avatar, favoriteButton, adView) -> Layout in
-                                    layout([avatar, favoriteButton, adView], axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: (120, 20, 20, 20, 10, 10))
+                                    layout([avatar, favoriteButton, adView], axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: LayoutMetrics(120, 20, 20, 20, 10, 10))
                             }), layout: { content -> Layout in
                                 Layout(["H:|[content]|", "V:|[content]"])
                     })
@@ -103,7 +103,7 @@ extension ComponentBuilder {
                             V("|-top-[\(title)]-bottom-|"),
                             V("|-top-[\(favoriteButton)]-bottom-|"),
                             ],
-                            ComponentBuilder.defaultMetrics)
+                            metrics: ComponentBuilder.defaultMetrics)
             }
         case .title:
             return self.build(UILabel).style(Style.H3.style())

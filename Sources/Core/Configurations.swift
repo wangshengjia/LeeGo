@@ -8,51 +8,64 @@
 
 import Foundation
 
-public typealias MetricsValuesType = (AnyObject, AnyObject, AnyObject, AnyObject, AnyObject, AnyObject)
+// public typealias MetricsValuesType = (AnyObject, AnyObject, AnyObject, AnyObject, AnyObject, AnyObject)
+
+public struct LayoutMetrics: Equatable {
+
+    private let top: CGFloat
+    private let left: CGFloat
+    private let bottom: CGFloat
+    private let right: CGFloat
+    private let spaceH: CGFloat
+    private let spaceV: CGFloat
+
+    private let customMetrics: [String: CGFloat]
+
+    public init(_ top: CGFloat, _ left: CGFloat, _ bottom: CGFloat, _ right: CGFloat, _ spaceH: CGFloat, _ spaceV: CGFloat) {
+        self.init(top:top, left: left, bottom: bottom, right: right, spaceH: spaceH, spaceV: spaceV)
+    }
+
+    public init(top: CGFloat = 0, left: CGFloat = 0, bottom: CGFloat = 0, right: CGFloat = 0, spaceH: CGFloat = 0, spaceV: CGFloat = 0, customMetrics: [String: CGFloat] = [:]) {
+        self.top = top
+        self.left = left
+        self.bottom = bottom
+        self.right = right
+        self.spaceH = spaceH
+        self.spaceV = spaceV
+
+        self.customMetrics = customMetrics
+    }
+
+    func metrics() -> [String: CGFloat] {
+        return ["top": top, "left": left, "bottom": bottom, "right": right, "spaceH": spaceH, "spaceV": spaceV] + customMetrics
+    }
+}
+
+public func ==(lhs: LayoutMetrics, rhs: LayoutMetrics) -> Bool {
+    return lhs.top == rhs.top
+    && lhs.left == rhs.left
+    && lhs.bottom == rhs.bottom
+    && lhs.right == rhs.right
+    && lhs.spaceH == rhs.spaceH
+    && lhs.spaceV == rhs.spaceV
+    && lhs.customMetrics == rhs.customMetrics
+}
 
 public struct Layout: Equatable {
 
     let formats: [String]
     let options: NSLayoutFormatOptions
-    let metrics: [String: AnyObject]?
+    let metrics: LayoutMetrics
 
-    public init(_ formats: [String] = [], options: NSLayoutFormatOptions = .DirectionLeadingToTrailing, _ metrics: [String: AnyObject] = ["top" : 0, "left": 0, "bottom": 0, "right": 0, "interspaceH": 0, "interspaceV": 0]) {
+    public init(_ formats: [String] = [], options: NSLayoutFormatOptions = .DirectionLeadingToTrailing, metrics: LayoutMetrics = LayoutMetrics()) {
         self.formats = formats
         self.metrics = metrics
         self.options = options
     }
-
-    public init(_ formats: [String] = [], options: NSLayoutFormatOptions = .DirectionLeadingToTrailing, _ metrics: MetricsValuesType) {
-        self.formats = formats
-        self.metrics = [
-            "top" : metrics.0,
-            "left": metrics.1,
-            "bottom": metrics.2,
-            "right": metrics.3,
-            "interspaceH": metrics.4,
-            "interspaceV": metrics.5,
-        ]
-        self.options = options
-    }
 }
 
-// implement Layout equatable protocol, naive version
 public func ==(lhs: Layout, rhs: Layout) -> Bool {
-    var sameMetrics = false
-    if let lhsMetrics = lhs.metrics, let rhsMetrics = rhs.metrics where lhsMetrics.count == rhsMetrics.count {
-        sameMetrics = true
-        for (key, value) in lhsMetrics {
-            if let rhsValue = rhsMetrics[key] where !rhsValue.isEqual(value) {
-                sameMetrics = false
-            }
-        }
-    } else if (lhs.metrics == nil && rhs.metrics == nil) {
-        sameMetrics = true
-    } else {
-        sameMetrics = false
-    }
-
-    return lhs.formats == rhs.formats && sameMetrics && lhs.options == rhs.options
+    return lhs.formats == rhs.formats && lhs.metrics == rhs.metrics && lhs.options == rhs.options
 }
 
 public typealias Attributes = [String: AnyObject]
