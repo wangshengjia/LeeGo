@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3513F70F1C95EC96003B211F /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3513F70E1C95EC96003B211F /* Appearance.swift */; };
+		3513F7111C95ECA0003B211F /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3513F7101C95ECA0003B211F /* Layout.swift */; };
 		3540C4C51C7EFC21005CA104 /* DataForTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3540C4C41C7EFC21005CA104 /* DataForTests.swift */; };
 		354A347A1C7DE9A60081FF89 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A34791C7DE9A60081FF89 /* Test.swift */; };
 		35F5200C1C7C73D40089FF41 /* LeeGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F520011C7C73D40089FF41 /* LeeGo.framework */; };
@@ -19,7 +21,6 @@
 		35F520351C7C74510089FF41 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520271C7C74510089FF41 /* ComponentType.swift */; };
 		35F520361C7C74510089FF41 /* Composable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520281C7C74510089FF41 /* Composable.swift */; };
 		35F520371C7C74510089FF41 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520291C7C74510089FF41 /* Configurable.swift */; };
-		35F520381C7C74510089FF41 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5202A1C7C74510089FF41 /* Configurations.swift */; };
 		35F520391C7C74510089FF41 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5202B1C7C74510089FF41 /* Errors.swift */; };
 		35F5203C1C7C74510089FF41 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5202F1C7C74510089FF41 /* View.swift */; };
 		35F520431C7C762E0089FF41 /* AutoLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5203D1C7C762E0089FF41 /* AutoLayoutSpec.swift */; };
@@ -42,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3513F70E1C95EC96003B211F /* Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		3513F7101C95ECA0003B211F /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		3530E87C1C7CBC6300ABC8D1 /* Layout.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Layout.md; sourceTree = "<group>"; };
 		3540C4C41C7EFC21005CA104 /* DataForTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataForTests.swift; sourceTree = "<group>"; };
 		354A34791C7DE9A60081FF89 /* Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
@@ -58,7 +61,6 @@
 		35F520271C7C74510089FF41 /* ComponentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
 		35F520281C7C74510089FF41 /* Composable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Composable.swift; sourceTree = "<group>"; };
 		35F520291C7C74510089FF41 /* Configurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
-		35F5202A1C7C74510089FF41 /* Configurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
 		35F5202B1C7C74510089FF41 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		35F5202F1C7C74510089FF41 /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		35F5203D1C7C762E0089FF41 /* AutoLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutSpec.swift; sourceTree = "<group>"; };
@@ -92,6 +94,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3513F70D1C95EC82003B211F /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				3513F70E1C95EC96003B211F /* Appearance.swift */,
+				3513F7101C95ECA0003B211F /* Layout.swift */,
+			);
+			name = Configurations;
+			sourceTree = "<group>";
+		};
 		3530E87B1C7CBBEE00ABC8D1 /* Docs */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,7 +187,7 @@
 				35F520271C7C74510089FF41 /* ComponentType.swift */,
 				35F520281C7C74510089FF41 /* Composable.swift */,
 				35F520291C7C74510089FF41 /* Configurable.swift */,
-				35F5202A1C7C74510089FF41 /* Configurations.swift */,
+				3513F70D1C95EC82003B211F /* Configurations */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -362,8 +373,9 @@
 				35F520301C7C74510089FF41 /* AutoLayout.swift in Sources */,
 				35F520331C7C74510089FF41 /* Component.swift in Sources */,
 				35F520351C7C74510089FF41 /* ComponentType.swift in Sources */,
-				35F520381C7C74510089FF41 /* Configurations.swift in Sources */,
+				3513F7111C95ECA0003B211F /* Layout.swift in Sources */,
 				35F520391C7C74510089FF41 /* Errors.swift in Sources */,
+				3513F70F1C95EC96003B211F /* Appearance.swift in Sources */,
 				35F5203C1C7C74510089FF41 /* View.swift in Sources */,
 				35F520311C7C74510089FF41 /* Cell.swift in Sources */,
 				35F520371C7C74510089FF41 /* Configurable.swift in Sources */,

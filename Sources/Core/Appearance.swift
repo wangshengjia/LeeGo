@@ -1,99 +1,15 @@
 //
-//  Configurations.swift
-//  Pods
+//  Appearance.swift
+//  LeeGo
 //
-//  Created by Victor WANG on 10/01/16.
-//
+//  Created by Victor WANG on 13/03/16.
+//  Copyright © 2016 Victor Wang. All rights reserved.
 //
 
 import Foundation
 
-// public typealias MetricsValuesType = (AnyObject, AnyObject, AnyObject, AnyObject, AnyObject, AnyObject)
-
-public struct LayoutMetrics: Equatable {
-
-    public let top: CGFloat
-    public let left: CGFloat
-    public let bottom: CGFloat
-    public let right: CGFloat
-    public let spaceH: CGFloat
-    public let spaceV: CGFloat
-
-    public let customMetrics: [String: CGFloat]
-
-    public init(_ top: CGFloat, _ left: CGFloat, _ bottom: CGFloat, _ right: CGFloat, _ spaceH: CGFloat, _ spaceV: CGFloat) {
-        self.init(top:top, left: left, bottom: bottom, right: right, spaceH: spaceH, spaceV: spaceV)
-    }
-
-    public init(top: CGFloat = 0, left: CGFloat = 0, bottom: CGFloat = 0, right: CGFloat = 0, spaceH: CGFloat = 0, spaceV: CGFloat = 0, customMetrics: [String: CGFloat] = [:]) {
-        self.top = top
-        self.left = left
-        self.bottom = bottom
-        self.right = right
-        self.spaceH = spaceH
-        self.spaceV = spaceV
-
-        self.customMetrics = customMetrics
-    }
-
-    func metrics() -> [String: CGFloat] {
-        return ["top": top, "left": left, "bottom": bottom, "right": right, "spaceH": spaceH, "spaceV": spaceV] + customMetrics
-    }
-}
-
-public func ==(lhs: LayoutMetrics, rhs: LayoutMetrics) -> Bool {
-    return lhs.top == rhs.top
-    && lhs.left == rhs.left
-    && lhs.bottom == rhs.bottom
-    && lhs.right == rhs.right
-    && lhs.spaceH == rhs.spaceH
-    && lhs.spaceV == rhs.spaceV
-    && lhs.customMetrics == rhs.customMetrics
-}
-
-public enum Axis {
-    case Horizontal, Vertical
-}
-
-public enum Alignment {
-    case Top, Left, Bottom, Right, Center, Fill
-}
-
-public enum Distribution {
-    case Fill, FillEqually, Flow(Int)
-}
-
-public struct Layout: Equatable {
-
-    let formats: [String]
-    let options: NSLayoutFormatOptions
-    let metrics: LayoutMetrics
-
-    public init(_ formats: [String] = [], options: NSLayoutFormatOptions = .DirectionLeadingToTrailing, metrics: LayoutMetrics = LayoutMetrics()) {
-        self.formats = formats
-        self.metrics = metrics
-        self.options = options
-    }
-
-
-    public init(components: [String], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) {
-        guard !components.isEmpty else {
-            assertionFailure("Components should not be empty")
-            self.init()
-            return
-        }
-
-        let formats = formatHorizontal(components, axis: axis, align: align, distribution: distribution) + formatVertical(components, axis: axis, align: align, distribution: distribution)
-        let options = layoutOptions(components, axis: axis, align: align, distribution: distribution)
-
-        self.init(formats, options: options, metrics: metrics)
-    }
-
-}
-
-public func ==(lhs: Layout, rhs: Layout) -> Bool {
-    return lhs.formats == rhs.formats && lhs.metrics == rhs.metrics && lhs.options == rhs.options
-}
+protocol Decodable {}
+protocol Encodable {}
 
 public typealias Attributes = [String: AnyObject]
 
@@ -127,7 +43,7 @@ public enum Appearance {
     func apply<Component: UIView>(to component: Component, useDefaultValue: Bool = false) {
 
         switch (self, component) {
-        // UIView
+            // UIView
         case (let .backgroundColor(color), _):
             component.backgroundColor = useDefaultValue ? nil : color
         case (let .userInteractionEnabled(userInteractionEnabled), _):
@@ -161,7 +77,7 @@ public enum Appearance {
         case (let .contentMode(contentMode), _):
             component.contentMode = contentMode
 
-        // UIControl
+            // UIControl
         case (let .enabled(enabled), let control as UIControl):
             control.enabled = enabled
         case (let .selected(selected), let control as UIControl):
@@ -173,7 +89,7 @@ public enum Appearance {
         case (let .contentHorizontalAlignment(contentHorizontalAlignment), let control as UIControl):
             control.contentHorizontalAlignment = contentHorizontalAlignment
 
-        // UILabel
+            // UILabel
         case (let .font(font), let label as UILabel):
             label.font = font
         case (let .textColor(color), let label as UILabel):
@@ -187,7 +103,7 @@ public enum Appearance {
         case (let .attributedText(attributes), let label as UILabel):
             label.attributedText = attributedStringFromList(attributes)
 
-        // UITextView
+            // UITextView
         case (let .selectedRange(range), let textView as UITextView):
             textView.selectedRange = range
         case (let .editable(editable), let textView as UITextView):
@@ -205,8 +121,8 @@ public enum Appearance {
         case (let .linkTextAttributes(attrs), let textView as UITextView):
             textView.linkTextAttributes = attrs
 
-        // UIButton
-        case (let .buttonType(type), let button as UIButton):
+            // UIButton
+        case (let .buttonType(type), _ as UIButton):
             print(type) //TODO:  button.buttonType = type
         case (let .buttonTitle(title, state), let button as UIButton):
             button.setTitle(title, forState: state)
@@ -235,7 +151,7 @@ public enum Appearance {
         case (let .showsTouchWhenHighlighted(should), let button as UIButton):
             button.showsTouchWhenHighlighted = should
 
-        // UIImageView
+            // UIImageView
         case (let .ratio(ratioValue), let image as UIImageView):
             let id = "ratio(width == height * \(ratioValue))"
             if !useDefaultValue {
@@ -249,19 +165,19 @@ public enum Appearance {
                 }))
             }
 
-        // UIScrollView
+            // UIScrollView
         case (let .scrollEnabled(scrollEnabled), let scrollView as UIScrollView):
             scrollView.scrollEnabled = scrollEnabled
 
-        // Multiple
+            // Multiple
         case (let .lineBreakMode(mode), _):
             if component.respondsToSelector("setLineBreakMode:") {
                 component.setValue(NSNumber(integer: mode.rawValue), forKey: toString())
             } else {
                 assertionFailure("Unknown appearance \(self) for component \(component)")
             }
-            
-        // Custom
+
+            // Custom
         case (let .custom(dictionary), _):
             useDefaultValue ? component.removeCustomStyle(dictionary) : component.setupCustomStyle(dictionary)
         default:
@@ -271,65 +187,65 @@ public enum Appearance {
     }
 
 
-//    func value() -> AnyObject? {
-//
-//        switch self {
-//        // UIView
-//        case let .backgroundColor(color):
-//            return color
-//        case let .translatesAutoresizingMaskIntoConstraints(should):
-//            return should
-//
-//        // UILabel
-//        case let .font(font):
-//            return font
-//        case let .textColor(color):
-//            return color
-//        case let .textAlignment(align):
-//            return String(align)
-//        case let .numberOfLines(number):
-//            return number
-//        case let .defaultLabelText(text):
-//            return text
-//        case let .attributedString(attrList):
-//            return attrList
-//
-//        // UIButton
-//        case let .buttonTitle(title, state):
-//            return title + "\(state)"
-//        case let .buttonTitleColor(color, state):
-//            return (color)
-//        case (let .buttonTitleShadowColor(color, state), let button as UIButton):
-//            button.setTitleShadowColor(color, forState: state)
-//        case (let .buttonImage(image, state), let button as UIButton):
-//            button.setImage(image, forState: state)
-//        case (let .buttonBackgroundImage(image, state), let button as UIButton):
-//            button.setBackgroundImage(image, forState: state)
-//        case (let .buttonAttributedTitle(attributes, state), let button as UIButton):
-//            button.setAttributedTitle(attributedStringFromList(attributes), forState: state)
-//        case (let .contentEdgeInsets(insets), let button as UIButton):
-//            button.contentEdgeInsets = insets
-//        case (let .titleEdgeInsets(insets), let button as UIButton):
-//            button.titleEdgeInsets = insets
-//        case (let .imageEdgeInsets(insets), let button as UIButton):
-//            button.imageEdgeInsets = insets
-//        case (let .reversesTitleShadowWhenHighlighted(should), let button as UIButton):
-//            button.reversesTitleShadowWhenHighlighted = should
-//        case (let .adjustsImageWhenHighlighted(should), let button as UIButton):
-//            button.adjustsImageWhenHighlighted = should
-//        case (let .adjustsImageWhenDisabled(should), let button as UIButton):
-//            button.adjustsImageWhenDisabled = should
-//        case (let .showsTouchWhenHighlighted(should), let button as UIButton):
-//            button.showsTouchWhenHighlighted = should
-//
-//        // Custom
-//        case let .custom(dictionary):
-//            return dictionary
-//        default:
-//            assertionFailure("Unknown appearance \(self)")
-//            return nil
-//        }
-//    }
+    //    func value() -> AnyObject? {
+    //
+    //        switch self {
+    //        // UIView
+    //        case let .backgroundColor(color):
+    //            return color
+    //        case let .translatesAutoresizingMaskIntoConstraints(should):
+    //            return should
+    //
+    //        // UILabel
+    //        case let .font(font):
+    //            return font
+    //        case let .textColor(color):
+    //            return color
+    //        case let .textAlignment(align):
+    //            return String(align)
+    //        case let .numberOfLines(number):
+    //            return number
+    //        case let .defaultLabelText(text):
+    //            return text
+    //        case let .attributedString(attrList):
+    //            return attrList
+    //
+    //        // UIButton
+    //        case let .buttonTitle(title, state):
+    //            return title + "\(state)"
+    //        case let .buttonTitleColor(color, state):
+    //            return (color)
+    //        case (let .buttonTitleShadowColor(color, state), let button as UIButton):
+    //            button.setTitleShadowColor(color, forState: state)
+    //        case (let .buttonImage(image, state), let button as UIButton):
+    //            button.setImage(image, forState: state)
+    //        case (let .buttonBackgroundImage(image, state), let button as UIButton):
+    //            button.setBackgroundImage(image, forState: state)
+    //        case (let .buttonAttributedTitle(attributes, state), let button as UIButton):
+    //            button.setAttributedTitle(attributedStringFromList(attributes), forState: state)
+    //        case (let .contentEdgeInsets(insets), let button as UIButton):
+    //            button.contentEdgeInsets = insets
+    //        case (let .titleEdgeInsets(insets), let button as UIButton):
+    //            button.titleEdgeInsets = insets
+    //        case (let .imageEdgeInsets(insets), let button as UIButton):
+    //            button.imageEdgeInsets = insets
+    //        case (let .reversesTitleShadowWhenHighlighted(should), let button as UIButton):
+    //            button.reversesTitleShadowWhenHighlighted = should
+    //        case (let .adjustsImageWhenHighlighted(should), let button as UIButton):
+    //            button.adjustsImageWhenHighlighted = should
+    //        case (let .adjustsImageWhenDisabled(should), let button as UIButton):
+    //            button.adjustsImageWhenDisabled = should
+    //        case (let .showsTouchWhenHighlighted(should), let button as UIButton):
+    //            button.showsTouchWhenHighlighted = should
+    //
+    //        // Custom
+    //        case let .custom(dictionary):
+    //            return dictionary
+    //        default:
+    //            assertionFailure("Unknown appearance \(self)")
+    //            return nil
+    //        }
+    //    }
 
 
     func toString() -> String {
@@ -356,18 +272,9 @@ extension Appearance: Hashable, Equatable {
 
 public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
     // TODO: how to implement the real equatable
-
-//    if let result1 = lhs.value(), let result2 = rhs.value() {
-//        return lhs.toString() == rhs.toString() && result1.isEqual(result2)
-//    }
+    
+    //    if let result1 = lhs.value(), let result2 = rhs.value() {
+    //        return lhs.toString() == rhs.toString() && result1.isEqual(result2)
+    //    }
     return lhs.toString() == rhs.toString()
 }
-
-protocol Decodable {}
-protocol Encodable {}
-
-
-
-
-
-
