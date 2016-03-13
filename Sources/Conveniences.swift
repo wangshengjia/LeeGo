@@ -11,14 +11,16 @@ import Foundation
 public let kCustomAttributeKeyIdentifier = "kCustomAttributeKeyIdentifier"
 public let kCustomAttributeDefaultText = "kCustomAttributeDefaultText"
 
-/*
-// TODO:
-public extension Dictionary {
-    func merge(dictionary: [Key: Value]) -> [Key: Value] {
-        return [:]
+func + <K,V>(left: [K: V], right: [K: V]) -> [K: V] {
+    var result = [K: V]()
+    for (k, v) in left {
+        result[k] = v
     }
+    for (k, v) in right {
+        result[k] = v
+    }
+    return result
 }
-*/
 
 public extension UILabel {
     func setAttributeString(with texts: [String: String]) {
