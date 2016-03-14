@@ -6,6 +6,8 @@
 [![License](https://img.shields.io/cocoapods/l/LeeGo.svg?style=flat)](http://cocoapods.org/pods/LeeGo)
 [![Platform](https://img.shields.io/cocoapods/p/LeeGo.svg?style=flat)](http://cocoapods.org/pods/LeeGo)
 
+## Under construction...
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
