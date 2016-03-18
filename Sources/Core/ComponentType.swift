@@ -110,7 +110,9 @@ extension UIView {
         if let constraint = self.constraint(type) {
             constraint.constant = constant
         } else {
-            self.addConstraint(NSLayoutConstraint(item: self, attribute: type.attribute, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant))
+            let constraint = NSLayoutConstraint(item: self, attribute: type.attribute, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant)
+            constraint.identifier = constraint.description
+            self.addConstraint(constraint)
         }
     }
 
