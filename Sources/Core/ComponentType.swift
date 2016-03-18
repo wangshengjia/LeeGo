@@ -33,7 +33,7 @@ extension ComponentType {
         }
 
         // handle component's width & height constraint
-        applySize(newConfiguration, to: component)
+        applyDimension(newConfiguration, to: component)
 
         // add & layout sub components
         if let components = newConfiguration.components where !components.isEmpty, let layout = newConfiguration.layout {
@@ -61,7 +61,7 @@ extension ComponentType {
         return shouldRebuild
     }
 
-    private func applySize<Component where Component: UIView, Component: ComponentType>(newConfiguration: ComponentTarget, to component: Component) {
+    private func applyDimension<Component where Component: UIView, Component: ComponentType>(newConfiguration: ComponentTarget, to component: Component) {
         if let width = newConfiguration.width {
             component.applyConstraint(.Width, constant: width)
         } else {
