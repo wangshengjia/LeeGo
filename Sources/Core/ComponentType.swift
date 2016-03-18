@@ -115,7 +115,7 @@ extension UIView {
     }
 
     func unapplyConstraint(type: Constraint) {
-        if let constraint = self.constraint(type) {
+        if let constraint = self.constraint(type) where constraint.identifier != nil {
             self.removeConstraint(constraint)
         }
     }

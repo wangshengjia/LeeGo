@@ -65,7 +65,10 @@ extension Composable {
         }
 
         // TODO: apply diff of layout instead of removing all constraints (not sure if possible)
-        component.removeConstraints(component.constraints)
+        // Remove constraint with identifier (which means not created by system)
+        component.removeConstraints(component.constraints.filter({ (constraint) -> Bool in
+            return constraint.identifier != nil
+        }))
 
         // Layout each component view with auto layout visual format language from configuration.
         for format in layout.formats {

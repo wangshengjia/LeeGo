@@ -56,7 +56,7 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(configurationType), forIndexPath: indexPath)
 
-        cell.configure(configurationType.componentTarget(), dataSource: elements[indexPath.item])
+        cell.configure(configurationType.componentTarget(), dataSource: elements[indexPath.item], updatingStrategy: .Always)
 
         return cell
     }

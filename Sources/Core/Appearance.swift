@@ -151,8 +151,9 @@ public enum Appearance {
         case (let .showsTouchWhenHighlighted(should), let button as UIButton):
             button.showsTouchWhenHighlighted = should
 
-            // UIImageView
+        // UIImageView
         case (let .ratio(ratioValue), let image as UIImageView):
+            // TODO: If there is already ratio constraint, should update instead of adding
             let id = "ratio(width == height * \(ratioValue))"
             if !useDefaultValue {
                 let constraint = NSLayoutConstraint(item: image, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: image, attribute: NSLayoutAttribute.Height, multiplier: ratioValue, constant: 0)
@@ -165,11 +166,11 @@ public enum Appearance {
                 }))
             }
 
-            // UIScrollView
+        // UIScrollView
         case (let .scrollEnabled(scrollEnabled), let scrollView as UIScrollView):
             scrollView.scrollEnabled = scrollEnabled
 
-            // Multiple
+        // Multiple
         case (let .lineBreakMode(mode), _):
             if component.respondsToSelector("setLineBreakMode:") {
                 component.setValue(NSNumber(integer: mode.rawValue), forKey: toString())
@@ -177,7 +178,7 @@ public enum Appearance {
                 assertionFailure("Unknown appearance \(self) for component \(component)")
             }
 
-            // Custom
+        // Custom
         case (let .custom(dictionary), _):
             useDefaultValue ? component.removeCustomStyle(dictionary) : component.setupCustomStyle(dictionary)
         default:
