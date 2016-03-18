@@ -33,7 +33,7 @@ extension ComponentType {
         }
 
         // handle component's width & height constraint
-        applySize(newConfiguration, to: component)
+        applyDimension(newConfiguration, to: component)
 
         // add & layout sub components
         if let components = newConfiguration.components where !components.isEmpty, let layout = newConfiguration.layout {
@@ -61,7 +61,7 @@ extension ComponentType {
         return shouldRebuild
     }
 
-    private func applySize<Component where Component: UIView, Component: ComponentType>(newConfiguration: ComponentTarget, to component: Component) {
+    private func applyDimension<Component where Component: UIView, Component: ComponentType>(newConfiguration: ComponentTarget, to component: Component) {
         if let width = newConfiguration.width {
             component.applyConstraint(.Width, constant: width)
         } else {
@@ -110,12 +110,14 @@ extension UIView {
         if let constraint = self.constraint(type) {
             constraint.constant = constant
         } else {
-            self.addConstraint(NSLayoutConstraint(item: self, attribute: type.attribute, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant))
+            let constraint = NSLayoutConstraint(item: self, attribute: type.attribute, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant)
+            constraint.identifier = constraint.description
+            self.addConstraint(constraint)
         }
     }
 
     func unapplyConstraint(type: Constraint) {
-        if let constraint = self.constraint(type) {
+        if let constraint = self.constraint(type) where constraint.identifier != nil {
             self.removeConstraint(constraint)
         }
     }

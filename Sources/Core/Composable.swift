@@ -65,7 +65,10 @@ extension Composable {
         }
 
         // TODO: apply diff of layout instead of removing all constraints (not sure if possible)
-        component.removeConstraints(component.constraints)
+        // Remove constraint with identifier (which means not created by system)
+        component.removeConstraints(component.constraints.filter({ (constraint) -> Bool in
+            return constraint.identifier != nil
+        }))
 
         // Layout each component view with auto layout visual format language from configuration.
         for format in layout.formats {
@@ -73,7 +76,8 @@ extension Composable {
             for constraint in constraints {
                 //constraint.priority = 990
                 //constraint.shouldBeArchived = true
-                //constraint.identifier = constraint.description
+                // TODO: need a better constraint identifier solution
+                constraint.identifier = constraint.description
                 component.addConstraint(constraint)
 
                 // print("first: \(constraint.firstItem), second: \(constraint.secondItem), identifier: \(constraint.description) \n\n")

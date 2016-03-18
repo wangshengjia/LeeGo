@@ -62,7 +62,7 @@ class ComponentTypeSpec: QuickSpec {
                 // When
                 view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
 
-                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(60).height(20), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(60).height(20), dataSource: nil, updatingStrategy: .Always)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()
@@ -71,6 +71,7 @@ class ComponentTypeSpec: QuickSpec {
                 // Then
                 expect(view.frame.width) == 60
                 expect(view.frame.height) == 20
+                expect(view.constraints.count) == 2
             }
 
             it("should apply diff to view correctly.") {
@@ -92,6 +93,7 @@ class ComponentTypeSpec: QuickSpec {
                 // Then
                 expect(view.frame.width) == 0
                 expect(view.frame.height) == 0
+                expect(view.constraints) == []
             }
         }
     }
