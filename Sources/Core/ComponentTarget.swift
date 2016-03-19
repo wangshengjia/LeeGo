@@ -17,13 +17,20 @@ public protocol ComponentBuilderType: Hashable, Equatable {
 
 extension ComponentBuilderType {
 
-    public func buildFromNib(type: AnyObject? = nil, name: String) -> ComponentTarget {
-        // TODO: check type
-        return ComponentTarget(name: self.name, targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: name)
+    public func buildFromNib(type: AnyObject? = nil, nibName: String) -> ComponentTarget {
+        guard nibName != "" else {
+            assertionFailure("Failed to build component with an empty nibName")
+            return target()
+        }
+
+        guard type != nil && nibName != "" else {
+            return target()
+        }
+        return ComponentTarget(name: self.name, targetClass: type.self as! AnyClass, nibName: nibName)
     }
 
     public func build(type: AnyObject? = nil) -> ComponentTarget {
-        if type == nil {
+        guard type != nil else {
             return target()
         }
         return ComponentTarget(name: self.name, targetClass: type.self as! AnyClass)

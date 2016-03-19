@@ -76,7 +76,7 @@ extension ComponentBuilder {
                     ComponentTarget.union(components: [
                         avatar.build(Icon).style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
                         favoriteButton.componentTarget(),
-                        adView.buildFromNib(AdView.self, name: "AdView").width(150).height(80)
+                        adView.buildFromNib(AdView.self, nibName: "AdView").width(150).height(80)
                         ],
                         axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: LayoutMetrics(120, 20, 20, 20, 10, 10)
                     ).style([.backgroundColor(UIColor.brownColor())])
