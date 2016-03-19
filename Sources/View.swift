@@ -18,6 +18,10 @@ public enum ConfigurationUpdatingStrategy {
 }
 
 extension UIView: ComponentType {
+    public func componentDidAwake() {
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+
     public func setupCustomStyle(style: [String: AnyObject]) {
         assertionFailure("Unknown style \(style), should implement `handleCustomStyle:` in extension of UIView or its subclass.")
     }

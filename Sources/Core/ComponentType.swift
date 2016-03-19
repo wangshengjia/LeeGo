@@ -9,6 +9,8 @@
 import Foundation
 
 protocol ComponentType: class, Configurable, Composable {
+    func componentDidAwake()
+
     func applyDiffTo<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy)
 }
 

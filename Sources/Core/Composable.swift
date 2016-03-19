@@ -49,6 +49,7 @@ extension Composable {
             view?.configuration = ComponentTarget(name: componentTarget.name, targetClass: componentTarget.targetClass, nibName: componentTarget.nibName)
             if let view = view {
                 component.addSubview(view)
+                view.componentDidAwake()
             }
 
             // TODO: add & expose componentAwakeFrom...
@@ -59,7 +60,6 @@ extension Composable {
         var viewsDictionary = [String: UIView]()
         for subview in component.subviews {
             if let name = subview.configuration?.name {
-                subview.translatesAutoresizingMaskIntoConstraints = false
                 viewsDictionary[name] = subview
             }
         }
