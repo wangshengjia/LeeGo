@@ -72,20 +72,16 @@ extension ComponentBuilder {
             }
         case .detailsView:
             return
-                self.build()
-                    .components(
-                        ComponentTarget(name: "content", targetClass: UIView.self)
-                            .style([.backgroundColor(UIColor.brownColor())])
-                            .components(
-                                avatar.build(Icon).style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
-                                favoriteButton.componentTarget(),
-                                adView.buildFromNib(AdView.self, name: "AdView").width(150).height(80),
-                                layout: { (avatar, favoriteButton, adView) -> Layout in
-                                    Layout(components: [avatar, favoriteButton, adView], axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: LayoutMetrics(120, 20, 20, 20, 10, 10))
-                            }), layout: { content -> Layout in
-                                Layout(["H:|[content]|", "V:|[content]"])
-                    })
-            
+                ComponentTarget.container(self.name, within:
+                    ComponentTarget.union(components: [
+                        avatar.build(Icon).style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
+                        favoriteButton.componentTarget(),
+                        adView.buildFromNib(AdView.self, name: "AdView").width(150).height(80)
+                        ],
+                        axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: LayoutMetrics(120, 20, 20, 20, 10, 10)
+                    ).style([.backgroundColor(UIColor.brownColor())])
+            )
+
         case .header:
             return self.build()
                 .style([.backgroundColor(UIColor.yellowColor()), .translatesAutoresizingMaskIntoConstraints(false)])

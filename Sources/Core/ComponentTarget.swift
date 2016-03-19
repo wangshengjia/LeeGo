@@ -164,15 +164,11 @@ extension ComponentTarget {
 
     }*/
 
-    public static func container(within component: ComponentTarget) -> ComponentTarget {
-        return union("container", components: [component], axis: Axis.Horizontal, align: Alignment.Fill, distribution: Distribution.Fill, metrics: LayoutMetrics())
+    public static func container(name: String = "container", within component: ComponentTarget) -> ComponentTarget {
+        return union(name, components: [component], axis: Axis.Horizontal, align: Alignment.Fill, distribution: Distribution.Fill, metrics: LayoutMetrics())
     }
 
-    public static func union(components: ComponentTarget...) -> ComponentTarget {
-        return union("container", components: components, axis: Axis.Horizontal, align: Alignment.Fill, distribution: Distribution.Fill, metrics: LayoutMetrics())
-    }
-
-    public static func union(name: String, components: [ComponentTarget], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics) -> ComponentTarget {
+    public static func union(name: String = "default_component", components: [ComponentTarget], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics) -> ComponentTarget {
         let layout = Layout(components: components, axis: axis, align: align, distribution: distribution, metrics: metrics)
 
         return ComponentTarget(name: name).components(components, layout: layout)
