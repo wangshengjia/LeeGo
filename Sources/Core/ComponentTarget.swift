@@ -17,14 +17,14 @@ extension ComponentBuilderType {
 
     public func buildFromNib(type: AnyObject? = nil, name: String) -> ComponentTarget {
         // TODO: check type
-        return ComponentTarget(name: String(self), targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: name)
+        return ComponentTarget(name: self.name, targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: name)
     }
 
     public func build(type: AnyObject? = nil) -> ComponentTarget {
         if type == nil {
             return target()
         }
-        return ComponentTarget(name: String(self), targetClass: type.self as! AnyClass)
+        return ComponentTarget(name: self.name, targetClass: type.self as! AnyClass)
     }
 
     private func target() -> ComponentTarget {
@@ -35,7 +35,11 @@ extension ComponentBuilderType {
     }
 
     var hashValue: Int {
-        return String(self).hashValue
+        return self.name.hashValue
+    }
+
+    public var name: String {
+        return String(self)
     }
 }
 
