@@ -29,7 +29,7 @@ extension ElementViewModel {
 extension ElementViewModel: ComponentDataSource {
     func updateComponent(componentView: UIView, with componentTarget: ComponentTarget) {
         switch componentView {
-        case let titleLabel as UILabel where componentView.componentName == String(ComponentBuilder.title): // TODO: Add isComponent:
+        case let titleLabel as UILabel where componentTarget == ComponentBuilder.title:
             // FIXME: NSAttributedString reuse bug
             titleLabel.setAttributeString(with: [
                 Style.marker: element.isRestrict ? "󰀀" : " ",
@@ -37,9 +37,9 @@ extension ElementViewModel: ComponentDataSource {
                 Style.nature: element.natureEdito ?? " "
                 ])
 
-        case let subtitleLabel as UILabel  where componentView.componentName == String(ComponentBuilder.subtitle):
+        case let subtitleLabel as UILabel  where componentTarget == ComponentBuilder.subtitle:
             subtitleLabel.text = element.description
-        case let avatar as UIImageView where componentView.componentName == String(ComponentBuilder.avatar):
+        case let avatar as UIImageView where componentTarget == ComponentBuilder.avatar:
             avatar.backgroundColor = UIColor.grayColor()
         default:
             break

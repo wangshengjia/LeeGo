@@ -18,7 +18,7 @@ enum Twitter: ComponentBuilderType {
     case tweet
 
     static let reuseIdentifiers = [name, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount, retweetView, likeView, accountHeader, toolbarFooter, retweetHeader, tweet].map { (component) -> String in
-        return String(component)
+        return component.name
     }
 
     static let types: [Twitter: AnyClass] = [
@@ -39,7 +39,7 @@ enum Twitter: ComponentBuilderType {
 extension Twitter {
 
     func container() -> ComponentTarget {
-        return ComponentTarget(name: String(self))
+        return ComponentTarget(name: self.name)
             .style([.backgroundColor(UIColor.whiteColor())])
             .components(configuration()) { (component) -> Layout in
                 Layout(["H:|[\(component)]|", "V:|[\(component)]|"])

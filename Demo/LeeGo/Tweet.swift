@@ -48,17 +48,17 @@ extension Tweet {
 extension Tweet: ComponentDataSource {
     func updateComponent(componentView: UIView, with componentTarget: ComponentTarget) {
         switch componentView {
-        case let textView as UITextView where componentTarget.name == "tweetText":
+        case let textView as UITextView where componentTarget == Twitter.tweetText:
             textView.text = text
-        case let label as UILabel where componentTarget.name == "name":
+        case let label as UILabel where componentTarget == Twitter.username:
             label.text = userName
-        case let label as UILabel where componentTarget.name == "account":
+        case let label as UILabel where componentTarget == Twitter.account:
             label.text = "@" + screenName
-        case let label as UILabel where componentTarget.name == "date":
+        case let label as UILabel where componentTarget == Twitter.date:
             label.text = "2d"
-        case let label as UILabel where componentTarget.name == "retweetCount":
+        case let label as UILabel where componentTarget == Twitter.retweetCount:
             label.text = "\(retweetCount)"
-        case let label as UILabel where componentTarget.name == "likeCount":
+        case let label as UILabel where componentTarget == Twitter.likeCount:
             label.text = "\(favouritesCount)"
         default:
             break
