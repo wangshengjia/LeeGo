@@ -8,7 +8,9 @@
 
 import Foundation
 
-public protocol ComponentBuilderType: Hashable {
+// MARK: Component Builder
+
+public protocol ComponentBuilderType: Hashable, Equatable {
     // FIXME: do we really need Hashable?
     static var types: [Self: AnyClass] { get }
 }
@@ -43,9 +45,15 @@ extension ComponentBuilderType {
     }
 }
 
+public func ==<Builder: ComponentBuilderType>(lhs: Builder, rhs: Builder) -> Bool {
+    return lhs.name == rhs.name
+}
+
+// MARK: Component Target
+
 public typealias ManuallyFittingHeightResolver = (fittingWidth: CGFloat, childrenHeights: [CGFloat], metrics: LayoutMetrics) -> CGFloat
 
-public class ComponentTarget: Hashable {
+public class ComponentTarget {
     public let name: String
 
     let targetClass: AnyClass
@@ -70,10 +78,6 @@ public class ComponentTarget: Hashable {
     // TODO: need to make this API more clearly
     // used only for calculating cell's height manually
     private(set) var heightResolver: ManuallyFittingHeightResolver?
-
-    public var hashValue: Int {
-        return name.hashValue
-    }
 
     public init(name: String, targetClass: AnyClass = UIView.self, nibName: String? = nil) {
         self.name = name
@@ -147,6 +151,27 @@ public class ComponentTarget: Hashable {
     }
 }
 
+// MARK: Helpers
+
+public func ==<Builder: ComponentBuilderType>(lhs: ComponentTarget, rhs: Builder) -> Bool {
+    return lhs.name == rhs.name
+}
+
+public func ==<Builder: ComponentBuilderType>(lhs: Builder, rhs: ComponentTarget) -> Bool {
+    return lhs.name == rhs.name
+}
+
+// MARK: Adapt protocols
+
+extension ComponentTarget: Equatable {}
+
 public func ==(lhs: ComponentTarget, rhs: ComponentTarget) -> Bool {
     return lhs.name == rhs.name
 }
+
+extension ComponentTarget: Hashable {
+    public var hashValue: Int {
+        return name.hashValue
+    }
+}
+
