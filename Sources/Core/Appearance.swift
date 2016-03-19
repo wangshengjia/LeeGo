@@ -34,6 +34,8 @@ public enum Appearance {
     case scrollEnabled(Bool)
 
     // UITextField
+    
+
     // ...
 
     // Custom
@@ -43,7 +45,7 @@ public enum Appearance {
     func apply<Component: UIView>(to component: Component, useDefaultValue: Bool = false) {
 
         switch (self, component) {
-            // UIView
+        // UIView
         case (let .backgroundColor(color), _):
             component.backgroundColor = useDefaultValue ? nil : color
         case (let .userInteractionEnabled(userInteractionEnabled), _):
@@ -77,7 +79,7 @@ public enum Appearance {
         case (let .contentMode(contentMode), _):
             component.contentMode = contentMode
 
-            // UIControl
+        // UIControl
         case (let .enabled(enabled), let control as UIControl):
             control.enabled = enabled
         case (let .selected(selected), let control as UIControl):
@@ -89,7 +91,7 @@ public enum Appearance {
         case (let .contentHorizontalAlignment(contentHorizontalAlignment), let control as UIControl):
             control.contentHorizontalAlignment = contentHorizontalAlignment
 
-            // UILabel
+        // UILabel
         case (let .font(font), let label as UILabel):
             label.font = font
         case (let .textColor(color), let label as UILabel):
@@ -103,7 +105,7 @@ public enum Appearance {
         case (let .attributedText(attributes), let label as UILabel):
             label.attributedText = attributedStringFromList(attributes)
 
-            // UITextView
+        // UITextView
         case (let .selectedRange(range), let textView as UITextView):
             textView.selectedRange = range
         case (let .editable(editable), let textView as UITextView):
@@ -121,7 +123,7 @@ public enum Appearance {
         case (let .linkTextAttributes(attrs), let textView as UITextView):
             textView.linkTextAttributes = attrs
 
-            // UIButton
+        // UIButton
         case (let .buttonType(type), _ as UIButton):
             print(type) //TODO:  button.buttonType = type
         case (let .buttonTitle(title, state), let button as UIButton):

@@ -66,9 +66,6 @@ extension UIView {
         // if no error, then:
         self.configuration = componentTarget
 
-//        // update component's value
-//        dataSource?.updateComponent(self, with: componentTarget)
-
         // call didApply delegate method
 
         // TODO: need to imporve this algo, too expensive and too fragile which based only on name.

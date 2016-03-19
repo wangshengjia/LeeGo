@@ -18,7 +18,6 @@ extension Composable {
         // remove components which do not exist anymore
         for subview in component.subviews {
             if let oldComponent = subview.configuration where !components.contains(oldComponent) {
-                // subview.cleanUpForReuse() // TODO: clean layout maybe
                 subview.removeFromSuperview()
             }
         }
@@ -74,13 +73,9 @@ extension Composable {
         for format in layout.formats {
             let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: layout.options, metrics: layout.metrics.metrics(), views: viewsDictionary)
             for constraint in constraints {
-                //constraint.priority = 990
-                //constraint.shouldBeArchived = true
                 // TODO: need a better constraint identifier solution
                 constraint.identifier = constraint.description
                 component.addConstraint(constraint)
-
-                // print("first: \(constraint.firstItem), second: \(constraint.secondItem), identifier: \(constraint.description) \n\n")
             }
         }
     }
