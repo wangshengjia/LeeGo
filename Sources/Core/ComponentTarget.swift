@@ -153,6 +153,32 @@ public class ComponentTarget {
 
 // MARK: Helpers
 
+extension ComponentTarget {
+    /*
+    // TODO: complete these methods
+    func replace(targetChild name: String, by newChild:ComponentTarget) -> ComponentTarget {
+
+    }
+
+    func replace(targetChild index: Int, by newChild:ComponentTarget) -> ComponentTarget {
+
+    }*/
+
+    public static func container(within component: ComponentTarget) -> ComponentTarget {
+        return union("container", components: [component], axis: Axis.Horizontal, align: Alignment.Fill, distribution: Distribution.Fill, metrics: LayoutMetrics())
+    }
+
+    public static func union(components: ComponentTarget...) -> ComponentTarget {
+        return union("container", components: components, axis: Axis.Horizontal, align: Alignment.Fill, distribution: Distribution.Fill, metrics: LayoutMetrics())
+    }
+
+    public static func union(name: String, components: [ComponentTarget], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics) -> ComponentTarget {
+        let layout = Layout(components: components, axis: axis, align: align, distribution: distribution, metrics: metrics)
+
+        return ComponentTarget(name: name).components(components, layout: layout)
+    }
+}
+
 public func ==<Builder: ComponentBuilderType>(lhs: ComponentTarget, rhs: Builder) -> Bool {
     return lhs.name == rhs.name
 }
