@@ -40,8 +40,8 @@ extension Composable {
             if let nibName = componentTarget.nibName,
                 let componentView = NSBundle.mainBundle().loadNibNamed(nibName, owner: nil, options: nil).first as? UIView {
                     view = componentView
-            } else {
-                view = (componentTarget.targetClass as! UIView.Type).init()
+            } else if let targetClass = componentTarget.targetClass as? UIView.Type {
+                view = targetClass.init()
             }
 
             view?.isRoot = false
