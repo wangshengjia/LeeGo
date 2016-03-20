@@ -24,12 +24,12 @@ public struct LayoutMetrics: Equatable {
     }
 
     public init(top: CGFloat = 0, left: CGFloat = 0, bottom: CGFloat = 0, right: CGFloat = 0, spaceH: CGFloat = 0, spaceV: CGFloat = 0, customMetrics: [String: CGFloat] = [:]) {
-        self.top = top
-        self.left = left
-        self.bottom = bottom
-        self.right = right
-        self.spaceH = spaceH
-        self.spaceV = spaceV
+        self.top = customMetrics["top"] ?? top
+        self.left = customMetrics["left"] ?? left
+        self.bottom = customMetrics["bottom"] ?? bottom
+        self.right = customMetrics["right"] ?? right
+        self.spaceH = customMetrics["spaceH"] ?? spaceH
+        self.spaceV = customMetrics["spaceV"] ?? spaceV
 
         self.customMetrics = customMetrics
     }

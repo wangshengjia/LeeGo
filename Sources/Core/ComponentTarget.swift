@@ -57,7 +57,7 @@ public func ==<Builder: ComponentBuilderType>(lhs: Builder, rhs: Builder) -> Boo
 
 public typealias ManuallyFittingHeightResolver = (fittingWidth: CGFloat, childrenHeights: [CGFloat], metrics: LayoutMetrics) -> CGFloat
 
-public class ComponentTarget {
+public final class ComponentTarget {
     public let name: String
 
     let targetClass: AnyClass

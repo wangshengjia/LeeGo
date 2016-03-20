@@ -8,9 +8,6 @@
 
 import Foundation
 
-protocol Decodable {}
-protocol Encodable {}
-
 public typealias Attributes = [String: AnyObject]
 
 public enum Appearance {
