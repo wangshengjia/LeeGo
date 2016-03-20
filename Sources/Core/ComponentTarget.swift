@@ -79,6 +79,8 @@ public class ComponentTarget {
     private(set) var width: CGFloat? = nil
     private(set) var height: CGFloat? = nil
 
+    private(set) var LGOutletKey: String? = nil
+
     // TODO: need to make this API more clearly
     // used only for calculating cell's height manually
     private(set) var heightResolver: ManuallyFittingHeightResolver?
@@ -151,6 +153,11 @@ public class ComponentTarget {
 
     public func height(height: CGFloat) -> ComponentTarget {
         self.height = height
+        return self
+    }
+
+    public func LGOutlet(key: String) -> ComponentTarget {
+        self.LGOutletKey = key
         return self
     }
 }
