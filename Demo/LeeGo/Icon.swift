@@ -29,14 +29,9 @@ extension Animatable where Self: UIView {
 class Icon: UIImageView, Animatable {
     let duration = 1.0
 
-    // TODO: awake from config?
-    init() {
-        super.init(frame: CGRectZero)
-
-        self.fadeInFadeOut(duration)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func componentDidAwake() {
+        super.componentDidAwake()
+        
+        fadeInFadeOut(duration)
     }
 }

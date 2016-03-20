@@ -67,10 +67,12 @@ public struct Layout: Equatable {
     let options: NSLayoutFormatOptions
     let metrics: LayoutMetrics
 
-    public init(_ formats: [String] = [], options: NSLayoutFormatOptions = .DirectionLeadingToTrailing, metrics: LayoutMetrics = LayoutMetrics()) {
-        self.formats = formats
-        self.metrics = metrics
-        self.options = options
+    public init(components: [ComponentTarget], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) {
+        let names: [String] = components.map { (component) -> String in
+            return component.name
+        }
+
+        self.init(components: names, axis: axis, align: align, distribution: distribution, metrics: metrics)
     }
 
     public init(components: [String], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) {
@@ -86,6 +88,11 @@ public struct Layout: Equatable {
         self.init(formats, options: options, metrics: metrics)
     }
 
+    public init(_ formats: [String] = [], options: NSLayoutFormatOptions = .DirectionLeadingToTrailing, metrics: LayoutMetrics = LayoutMetrics()) {
+        self.formats = formats
+        self.metrics = metrics
+        self.options = options
+    }
 }
 
 public func ==(lhs: Layout, rhs: Layout) -> Bool {

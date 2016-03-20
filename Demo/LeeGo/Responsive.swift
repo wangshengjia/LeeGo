@@ -7,17 +7,14 @@
 //
 
 import Foundation
-
-protocol SizeClassesType: Hashable {
-    static func sizeClass(width: Double) -> Self
-}
+import UIKit
 
 enum SizeClasses: SizeClassesType {
     case XXS, XS, S, M, L, XL, XXL
 }
 
 extension SizeClasses {
-    static func sizeClass(width: Double) -> SizeClasses {
+    static func sizeClass(width: CGFloat) -> SizeClasses {
         switch width {
         case 1..<300:
             return .XXS
@@ -40,26 +37,39 @@ extension SizeClasses {
     }
 }
 
+protocol SizeClassesType: Hashable {
+    static func sizeClass(width: CGFloat) -> Self
+}
+
 protocol Responsive {
-    //    func responsive<S: SizeClassesType>(value: [S: Self]) -> Self
+    typealias R: SizeClassesType
+    func register(type: R)
+    func responsive(value: [R: Self]) -> Self
 }
 
 extension Responsive {
-    func responsive(value: [SizeClasses: Self]) -> Self {
-        if let responsiveValue = value[SizeClasses.sizeClass(currentWindowSize())] {
+    func register(type: R) {
+
+    }
+
+    func responsive(value: [R: Self]) -> Self {
+        if let responsiveValue = value[R.sizeClass(currentWindowSize())] {
             return responsiveValue
         }
         return self
     }
-    func currentWindowSize() -> Double {
+
+    func currentWindowSize() -> CGFloat {
         return 1
     }
 }
 
 extension Int: Responsive {
+    func register(type: SizeClasses) {}
 }
-extension Float: Responsive {
-}
-extension Double: Responsive {
+//extension Float: Responsive {}
+//extension Double: Responsive {}
+extension CGFloat: Responsive {
+    func register(type: SizeClasses) {}
 }
 

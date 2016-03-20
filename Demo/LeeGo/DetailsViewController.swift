@@ -14,11 +14,8 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.configure(ComponentTarget(name: "details", targetClass: UIView.self)
-            .components(ComponentBuilder.detailsView.componentTarget(), layout: { details -> Layout in
-                Layout(["H:|[detailsView]|", "V:|[detailsView]|"])
-            }))
+
+        self.view.configure(ComponentTarget.container(within: ComponentBuilder.detailsView.componentTarget()))
     }
 
 }

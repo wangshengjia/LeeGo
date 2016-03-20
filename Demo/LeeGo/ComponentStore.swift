@@ -12,17 +12,17 @@ import LeeGo
 
 enum Twitter: ComponentBuilderType {
 
-    case name, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount
+    case username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount
     case retweetView, likeView
     case accountHeader, toolbarFooter, retweetHeader
     case tweet
 
-    static let reuseIdentifiers = [name, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount, retweetView, likeView, accountHeader, toolbarFooter, retweetHeader, tweet].map { (component) -> String in
-        return String(component)
+    static let reuseIdentifiers = [username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount, retweetView, likeView, accountHeader, toolbarFooter, retweetHeader, tweet].map { (component) -> String in
+        return component.name
     }
 
     static let types: [Twitter: AnyClass] = [
-        name: UILabel.self,
+        username: UILabel.self,
         account: UILabel.self,
         avatar: UIImageView.self,
         tweetText: UITextView.self,
@@ -38,17 +38,9 @@ enum Twitter: ComponentBuilderType {
 
 extension Twitter {
 
-    func container() -> ComponentTarget {
-        return ComponentTarget(name: String(self))
-            .style([.backgroundColor(UIColor.whiteColor())])
-            .components(configuration()) { (component) -> Layout in
-                Layout(["H:|[\(component)]|", "V:|[\(component)]|"])
-        }
-    }
-
     func configuration() -> ComponentTarget {
         switch self {
-        case .name:
+        case .username:
             return build().style([.font(UIFont.boldSystemFontOfSize(14))])
         case .account:
             return build().style([.font(UIFont.systemFontOfSize(14))])
@@ -102,7 +94,7 @@ extension Twitter {
             }
         case .accountHeader:
             return build().components(
-                name.configuration(),
+                username.configuration(),
                 account.configuration(),
                 date.configuration()) { name, account, date in
                     Layout(["H:|[\(name)]-10-[\(account)]-(>=10)-[\(date)]|",

@@ -8,23 +8,29 @@
 
 import Foundation
 
-public protocol ComponentBuilderType: Hashable {
+// MARK: Component Builder
+
+public protocol ComponentBuilderType: Hashable, Equatable {
     // FIXME: do we really need Hashable?
     static var types: [Self: AnyClass] { get }
 }
 
 extension ComponentBuilderType {
 
-    public func buildFromNib(type: AnyObject? = nil, name: String) -> ComponentTarget {
-        // TODO: check type
-        return ComponentTarget(name: String(self), targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: name)
+    public func buildFromNib(type: AnyObject? = nil, nibName: String) -> ComponentTarget {
+        guard nibName != "" else {
+            assertionFailure("Failed to build component with an empty nibName")
+            return target()
+        }
+
+        return ComponentTarget(name: self.name, targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: nibName)
     }
 
     public func build(type: AnyObject? = nil) -> ComponentTarget {
-        if type == nil {
+        guard type != nil else {
             return target()
         }
-        return ComponentTarget(name: String(self), targetClass: type.self as! AnyClass)
+        return ComponentTarget(name: self.name, targetClass: type.self as! AnyClass)
     }
 
     private func target() -> ComponentTarget {
@@ -35,13 +41,23 @@ extension ComponentBuilderType {
     }
 
     var hashValue: Int {
-        return String(self).hashValue
+        return self.name.hashValue
+    }
+
+    public var name: String {
+        return String(self)
     }
 }
 
+public func ==<Builder: ComponentBuilderType>(lhs: Builder, rhs: Builder) -> Bool {
+    return lhs.name == rhs.name
+}
+
+// MARK: Component Target
+
 public typealias ManuallyFittingHeightResolver = (fittingWidth: CGFloat, childrenHeights: [CGFloat], metrics: LayoutMetrics) -> CGFloat
 
-public class ComponentTarget: Hashable {
+public class ComponentTarget {
     public let name: String
 
     let targetClass: AnyClass
@@ -66,10 +82,6 @@ public class ComponentTarget: Hashable {
     // TODO: need to make this API more clearly
     // used only for calculating cell's height manually
     private(set) var heightResolver: ManuallyFittingHeightResolver?
-
-    public var hashValue: Int {
-        return name.hashValue
-    }
 
     public init(name: String, targetClass: AnyClass = UIView.self, nibName: String? = nil) {
         self.name = name
@@ -143,6 +155,49 @@ public class ComponentTarget: Hashable {
     }
 }
 
+// MARK: Helpers
+
+extension ComponentTarget {
+    /*
+    // TODO: complete these methods
+    func replace(targetChild name: String, by newChild:ComponentTarget) -> ComponentTarget {
+
+    }
+
+    func replace(targetChild index: Int, by newChild:ComponentTarget) -> ComponentTarget {
+
+    }*/
+
+    public static func container(name: String = "container", within component: ComponentTarget) -> ComponentTarget {
+        return union(name, components: [component], axis: Axis.Horizontal, align: Alignment.Fill, distribution: Distribution.Fill, metrics: LayoutMetrics())
+    }
+
+    public static func union(name: String = "default_component", components: [ComponentTarget], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics) -> ComponentTarget {
+        let layout = Layout(components: components, axis: axis, align: align, distribution: distribution, metrics: metrics)
+
+        return ComponentTarget(name: name).components(components, layout: layout)
+    }
+}
+
+public func ==<Builder: ComponentBuilderType>(lhs: ComponentTarget, rhs: Builder) -> Bool {
+    return lhs.name == rhs.name
+}
+
+public func ==<Builder: ComponentBuilderType>(lhs: Builder, rhs: ComponentTarget) -> Bool {
+    return lhs.name == rhs.name
+}
+
+// MARK: Adapt protocols
+
+extension ComponentTarget: Equatable {}
+
 public func ==(lhs: ComponentTarget, rhs: ComponentTarget) -> Bool {
     return lhs.name == rhs.name
 }
+
+extension ComponentTarget: Hashable {
+    public var hashValue: Int {
+        return name.hashValue
+    }
+}
+

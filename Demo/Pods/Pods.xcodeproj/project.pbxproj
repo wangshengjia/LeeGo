@@ -12,6 +12,7 @@
 		28DBDFB342AE42A8546CCC59F5C7AEF2 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA9D80A370009386F4CF3CD25C061D4 /* Layout.swift */; };
 		2C73AD72A97CC8C935A57491040C0D40 /* Conveniences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BCB80F1E33D528E8F716BB96E42222 /* Conveniences.swift */; };
 		2D6BC63451C4C61FDBD1299C90ACFEC7 /* Pods-LeeGo-Demo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC880A635F0CB9DF04E7F08DF17AB65 /* Pods-LeeGo-Demo-dummy.m */; };
+		353F7C7B1C9D8BF40016227D /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353F7C7A1C9D8BF40016227D /* Constraint.swift */; };
 		510CA96870A6C4E4E50E547127A4FCEC /* ComponentTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE00CA2F68C70DD930C5EE2331071B4 /* ComponentTarget.swift */; };
 		54A442219D7433A818ECA6880EA9190B /* LeeGo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB8669B7D05E085F11B7A0E3F8B4F9F /* LeeGo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		671C0B03C79672C51CD1E88500B7CC61 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3B19EB373F2C84D723444C0046448E /* Appearance.swift */; };
@@ -59,6 +60,7 @@
 		2E3B19EB373F2C84D723444C0046448E /* Appearance.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		2F3387EC1B26F15BDEA6CE8013EC8A94 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30ACF059C7DDFEC632F5C6BA88A0FAEC /* LeeGo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = LeeGo.modulemap; sourceTree = "<group>"; };
+		353F7C7A1C9D8BF40016227D /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		458982613EB488ACFD5999A8243342BD /* Pods_LeeGo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B16C4422B7336FAE5CECD35D6154D17 /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				B5BCB80F1E33D528E8F716BB96E42222 /* Conveniences.swift */,
 				6B16C4422B7336FAE5CECD35D6154D17 /* Errors.swift */,
 				00EA5D914234994874B7E14A6DAA5F9C /* View.swift */,
+				353F7C7A1C9D8BF40016227D /* Constraint.swift */,
 				319543E3A28BC95AD3A5BC7607EE5DF4 /* Core */,
 			);
 			path = Sources;
@@ -388,6 +391,7 @@
 			files = (
 				671C0B03C79672C51CD1E88500B7CC61 /* Appearance.swift in Sources */,
 				7B1A0FD072B9AEC20D1523491BCAB0C2 /* AutoLayout.swift in Sources */,
+				353F7C7B1C9D8BF40016227D /* Constraint.swift in Sources */,
 				92C2E7EF6CA83C8AB63803A10709DDA2 /* Cell.swift in Sources */,
 				AA6E918220DA65D8FC53666CB489AE96 /* Component.swift in Sources */,
 				510CA96870A6C4E4E50E547127A4FCEC /* ComponentTarget.swift in Sources */,
