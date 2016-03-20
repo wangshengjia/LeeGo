@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+enum JSONParseError: ErrorType {
+    case UnexpectedKeyError, MismatchedTypeError
+}
+
+
+enum NetworkingError: ErrorType {
+    case JsonSerializationError
+}
