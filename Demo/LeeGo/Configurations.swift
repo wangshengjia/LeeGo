@@ -75,7 +75,7 @@ extension ComponentBuilder {
                 ComponentTarget.container(self.name, within:
                     ComponentTarget.union(components: [
                         avatar.build(Icon).style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
-                        favoriteButton.componentTarget(),
+                        favoriteButton.componentTarget().LGOutlet("favoriteButton"),
                         adView.buildFromNib(AdView.self, nibName: "AdView").width(150).height(80)
                         ],
                         axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: LayoutMetrics(120, 20, 20, 20, 10, 10)

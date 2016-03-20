@@ -11,13 +11,22 @@ import UIKit
 import LeeGo
 
 class DetailsViewController: UIViewController {
-    
+
+    weak var button: UIButton?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.configure(ComponentTarget.container(within: ComponentBuilder.detailsView.componentTarget()))
+
+        self.button = self.view.viewForOutletKey("favoriteButton") as? UIButton
+        self.button?.addTarget(self, action: "tap:", forControlEvents: .TouchUpInside)
+
     }
 
+    func tap(button: UIButton) {
+        print("tap")
+    }
 }
 
 extension String {

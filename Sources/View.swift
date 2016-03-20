@@ -100,6 +100,20 @@ extension UIView {
         }
     }*/
 
+    public func viewForOutletKey(key: String) -> UIView? {
+        if let currentKey = self.configuration?.LGOutletKey where currentKey == key {
+            return self
+        }
+
+        for subview in self.subviews {
+            if let view = subview.viewForOutletKey(key) {
+                return view
+            }
+        }
+        
+        return nil
+    }
+
     public var componentName: String? {
         return configuration?.name
     }
