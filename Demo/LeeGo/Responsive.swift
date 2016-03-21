@@ -42,7 +42,7 @@ protocol SizeClassesType: Hashable {
 }
 
 protocol Responsive {
-    typealias R: SizeClassesType
+    associatedtype R: SizeClassesType
     func register(type: R)
     func responsive(value: [R: Self]) -> Self
 }

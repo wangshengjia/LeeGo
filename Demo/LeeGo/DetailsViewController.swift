@@ -20,7 +20,7 @@ class DetailsViewController: UIViewController {
         self.view.configure(ComponentTarget.container(within: ComponentBuilder.detailsView.componentTarget()))
 
         self.button = self.view.viewForOutletKey("favoriteButton") as? UIButton
-        self.button?.addTarget(self, action: "tap:", forControlEvents: .TouchUpInside)
+        self.button?.addTarget(self, action: #selector(DetailsViewController.tap(_:)), forControlEvents: .TouchUpInside)
 
     }
 
