@@ -174,7 +174,7 @@ public enum Appearance {
 
         // Multiple
         case (let .lineBreakMode(mode), _):
-            if component.respondsToSelector("setLineBreakMode:") {
+            if component.respondsToSelector(Selector("setLineBreakMode:")) {
                 component.setValue(NSNumber(integer: mode.rawValue), forKey: toString())
             } else {
                 assertionFailure("Unknown appearance \(self) for component \(component)")

@@ -18,7 +18,7 @@ class ComponentTargetSpec: QuickSpec {
 
                 // Then
                 expect(component.name) == "title"
-                expect(component.targetClass == UILabel.self)
+                expect(component.targetClass) === UILabel.self
                 expect(component.width) == 40
                 expect(component.height) == 60
                 expect(component.hashValue) == "title".hashValue
@@ -139,17 +139,17 @@ class ComponentTargetSpec: QuickSpec {
 
                 // Then
                 expect(component.name) == "header"
-                expect(component.targetClass == UIView.self)
+                expect(component.targetClass) === UIView.self
             })
 
             it("should build component target instance from nib", closure: { () -> () in
 
                 // Given
-                let component = ComponentBuilder.title.buildFromNib(nibName: "nibname")
+                let component = ComponentBuilder.title.buildFromNib(UILabel.self, nibName: "nibname")
 
                 // Then
                 expect(component.name) == "title"
-                expect(component.targetClass == UILabel.self)
+                expect(component.targetClass) === UILabel.self
                 expect(component.nibName) == "nibname"
             })
 
@@ -162,7 +162,7 @@ class ComponentTargetSpec: QuickSpec {
 
                 // Then
                 expect(component.name) == "header"
-                expect(component.targetClass == UIView.self)
+                expect(component.targetClass) === UIView.self
                 expect(component.heightResolver!(fittingWidth:0, childrenHeights: [10, 20], metrics: LayoutMetrics())) == 30
             })
         }
