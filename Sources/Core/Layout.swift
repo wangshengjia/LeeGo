@@ -10,6 +10,10 @@ import Foundation
 
 public struct LayoutMetrics: Equatable {
 
+    private enum JSONKey: JSONKeyType {
+        case top, left, bottom, right, spaceH, spaceV
+    }
+
     public let top: CGFloat
     public let left: CGFloat
     public let bottom: CGFloat
@@ -24,18 +28,37 @@ public struct LayoutMetrics: Equatable {
     }
 
     public init(top: CGFloat = 0, left: CGFloat = 0, bottom: CGFloat = 0, right: CGFloat = 0, spaceH: CGFloat = 0, spaceV: CGFloat = 0, customMetrics: [String: CGFloat] = [:]) {
-        self.top = customMetrics["top"] ?? top
-        self.left = customMetrics["left"] ?? left
-        self.bottom = customMetrics["bottom"] ?? bottom
-        self.right = customMetrics["right"] ?? right
-        self.spaceH = customMetrics["spaceH"] ?? spaceH
-        self.spaceV = customMetrics["spaceV"] ?? spaceV
 
-        self.customMetrics = customMetrics
+        self.top = customMetrics[JSONKey.top.asString] ?? top
+        self.left = customMetrics[JSONKey.left.asString] ?? left
+        self.bottom = customMetrics[JSONKey.bottom.asString] ?? bottom
+        self.right = customMetrics[JSONKey.right.asString] ?? right
+        self.spaceH = customMetrics[JSONKey.spaceH.asString] ?? spaceH
+        self.spaceV = customMetrics[JSONKey.spaceV.asString] ?? spaceV
+
+
+        self.customMetrics = customMetrics.filter({ (key, value) -> Bool in
+            let top = key != JSONKey.top.asString
+            let left = key != JSONKey.left.asString
+            let bottom = key != JSONKey.bottom.asString
+            let right = key != JSONKey.right.asString
+            let spaceH = key != JSONKey.spaceH.asString
+            let spaceV = key != JSONKey.spaceV.asString
+            return top && left && bottom && right && spaceH && spaceV
+        })
     }
 
     func metrics() -> [String: CGFloat] {
-        return ["top": top, "left": left, "bottom": bottom, "right": right, "spaceH": spaceH, "spaceV": spaceV] + customMetrics
+        let standardMetrics = [JSONKey.top.asString: top,
+                               JSONKey.left.asString: left,
+                               JSONKey.bottom.asString: bottom,
+                               JSONKey.right.asString: right,
+                               JSONKey.spaceH.asString: spaceH,
+                               JSONKey.spaceV.asString: spaceV].filter { (key, value) -> Bool in
+                                return value != 0.0
+        }
+
+        return customMetrics + standardMetrics
     }
 }
 
@@ -92,6 +115,31 @@ public struct Layout: Equatable {
         self.formats = formats
         self.metrics = metrics
         self.options = options
+    }
+}
+
+
+extension Layout: Encodable, Decodable {
+
+    private enum JSONKey: JSONKeyType {
+        case formats, options, metrics
+    }
+
+    public init?(json: JSONDictionary) {
+        let formats: [String] = (try? json.parse(JSONKey.formats)) ?? []
+
+        var options: NSLayoutFormatOptions?
+        if let optionsStr: [String] = (try? json.parse(JSONKey.options)) {
+            options = NSLayoutFormatOptions(options: optionsStr)
+        }
+
+        let metrics: [String: CGFloat] = (try? json.parse(JSONKey.metrics)) ?? [:]
+
+        self.init(formats, options: options ?? .DirectionLeadingToTrailing, metrics: LayoutMetrics(customMetrics: metrics))
+    }
+
+    public func encode() -> JSONDictionary? {
+        return [JSONKey.formats.asString: formats, JSONKey.options.asString: options.encode(), JSONKey.metrics.asString: metrics.metrics()]
     }
 }
 
