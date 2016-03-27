@@ -20,6 +20,7 @@ extension Configurable {
     func setup<Component: UIView>(component: Component, currentStyle: [Appearance] = [], newStyle: [Appearance]) {
 
         // if current appearance not appeared in new style, then set them to default value
+        // TODO: change style from Array to Set to gain some performance
         for old in currentStyle where !newStyle.contains(old) {
             old.apply(to: component, useDefaultValue: true)
         }

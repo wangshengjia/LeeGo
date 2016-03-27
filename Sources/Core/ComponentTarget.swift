@@ -8,6 +8,20 @@
 
 import Foundation
 
+//public protocol JSONPrintable {
+//    var descriptionInJSONFormat: String { get }
+//}
+
+func printJSON(json: JSONDictionary) {
+    do {
+        let data = try NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
+        let jsonStr = String(data: data, encoding: NSUTF8StringEncoding)!
+        print(jsonStr)
+    } catch {
+        print(error)
+    }
+}
+
 // MARK: Component Builder
 
 public protocol ComponentBuilderType: Hashable, Equatable {
@@ -57,7 +71,7 @@ public func ==<Builder: ComponentBuilderType>(lhs: Builder, rhs: Builder) -> Boo
 
 public typealias ManuallyFittingHeightResolver = (fittingWidth: CGFloat, childrenHeights: [CGFloat], metrics: LayoutMetrics) -> CGFloat
 
-public class ComponentTarget {
+public final class ComponentTarget {
     public let name: String
 
     let targetClass: AnyClass
@@ -159,6 +173,82 @@ public class ComponentTarget {
     public func LGOutlet(key: String) -> ComponentTarget {
         self.LGOutletKey = key
         return self
+    }
+}
+
+extension ComponentTarget: Encodable, Decodable {
+
+    private enum JSONKey: JSONKeyType {
+        case name, type, nibName, width, height, style, layout, components, outlet
+    }
+
+    public convenience init?(json: JSONDictionary) {
+        do {
+            let targetClass: AnyClass = ((try? NSClassFromString(json.parse(JSONKey.name))) ?? nil) ?? UIView.self
+            let nibName: String? = try? json.parse(JSONKey.nibName)
+            try self.init(name: json.parse(JSONKey.name), targetClass: targetClass, nibName: nibName)
+        } catch {
+            return nil
+        }
+
+        if let styleJsons: JSONDictionary = try? json.parse(JSONKey.style) {
+            self.style = Appearance.appearancesWithJSON(styleJsons)
+        }
+
+        if let componentJsons: [JSONDictionary] = try? json.parse(JSONKey.components) {
+            self.components = componentJsons.flatMap({ (json) -> ComponentTarget? in
+                return ComponentTarget(json: json)
+            })
+        }
+
+        if let layoutJson: JSONDictionary = try? json.parse(JSONKey.layout) {
+            self.layout = Layout(json: layoutJson)
+        }
+
+        self.width = try? json.parse(JSONKey.width)
+        self.height = try? json.parse(JSONKey.height)
+        self.LGOutletKey = try? json.parse(JSONKey.outlet)
+    }
+
+    // TODO: decode/encode with custom error handling
+    public func encode() -> JSONDictionary? {
+        var json: JSONDictionary = [JSONKey.name.asString: self.name, JSONKey.type.asString: String(self.targetClass)]
+
+        if let nibName = self.nibName {
+            json[JSONKey.nibName.asString] = nibName
+        }
+
+        if let width = self.width {
+            json[JSONKey.width.asString] = width
+        }
+
+        if let height = self.height {
+            json[JSONKey.height.asString] = height
+        }
+
+        if let layout = self.layout, let layoutJson = layout.encode() {
+            json[JSONKey.layout.asString] = layoutJson
+        }
+
+        if !self.style.isEmpty {
+            json[JSONKey.style.asString] = Appearance.JSONWithAppearances(self.style)
+        }
+
+        if let components = self.components {
+            let componentsJson = components.flatMap({ (component) -> JSONDictionary? in
+                return component.encode()
+            })
+
+            if !componentsJson.isEmpty {
+                json[JSONKey.components.asString] = componentsJson
+            }
+        }
+
+        if let outlet = self.LGOutletKey {
+            json[JSONKey.outlet.asString] = outlet
+        }
+
+        return json
     }
 }
 

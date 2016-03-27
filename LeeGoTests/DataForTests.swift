@@ -9,16 +9,16 @@
 import Foundation
 @testable import LeeGo
 
-enum ComponentBuilder: ComponentBuilderType {
-
-    case header, title, avatar
-
-    static let types: [ComponentBuilder: AnyClass] = [title: UILabel.self]
-}
+//enum ComponentBuilder: ComponentBuilderType {
+//
+//    case header, title, avatar
+//
+//    static let types: [ComponentBuilder: AnyClass] = [title: UILabel.self]
+//}
 
 struct TestData {
-    static let title1 = ComponentBuilder.title.build().style([.font(UIFont(name: "Helvetica", size: 18)!), .defaultLabelText("Text")])
-    static let title2 = ComponentBuilder.title.build().style([.font(UIFont(name: "Avenir", size: 12)!), .defaultLabelText("Text")])
+    static let title1 = ComponentBuilder.title.build().style([.font(UIFont(name: "Helvetica", size: 18)!), .text("Text")])
+    static let title2 = ComponentBuilder.title.build().style([.font(UIFont(name: "Avenir", size: 12)!), .text("Text")])
     static let title3 = ComponentTarget(name: "title3", targetClass: UILabel.self).style([.font(UIFont(name: "Arial", size: 14)!)])
 
     static let avatar1 = ComponentBuilder.avatar.build(UIImageView).width(50).height(50).heightResolver {childrenHeights in 50}
@@ -46,6 +46,154 @@ struct TestData {
         title3, view
         ) { title, view in
             Layout(["H:|[\(title)]|", "V:|[\(view)]|"])
+    }
+}
+
+enum ComponentBuilder: ComponentBuilderType {
+    // leaf components
+    case title, subtitle, date, avatar
+    case favoriteButton
+    case adView
+
+    // child components
+    case header, footer
+
+    // root components
+    case zen, article, video, portfolio, alert, detailsView, featured
+}
+
+extension ComponentBuilder {
+    static let types: [ComponentBuilder: AnyClass] = [
+        title: UILabel.self,
+        subtitle: UILabel.self,
+        avatar: UIImageView.self,
+        favoriteButton: UIButton.self,
+        ]
+
+    static let defaultMetrics = LayoutMetrics(20, 20, 20, 20, 10, 10)
+
+}
+
+extension ComponentBuilder {
+    func componentTarget() -> ComponentTarget {
+        switch self {
+        case .article:
+            return self.build().style([.backgroundColor(UIColor.whiteColor())])
+                .components(
+                    title.componentTarget(),
+                    subtitle.build().style(Style.H2.style()),
+                    avatar.build().style(Style.I1.style()).width(68).heightResolver({ (fittingWidth, _, _) -> CGFloat in
+                        return fittingWidth * 2 / 3
+                    })) { title, subtitle, avatar in
+                        Layout([
+                            H(orderedViews: ["avatar", "title"]),
+                            H(orderedViews: ["avatar", "subtitle"]),
+                            V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
+                            V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
+                            ], metrics: ComponentBuilder.defaultMetrics)
+                }.heightResolver { (_, childrenHeights, metrics) -> CGFloat in
+                    return childrenHeights[0] + childrenHeights[1] + metrics.top + metrics.bottom + metrics.spaceV
+            }
+        case .featured:
+            return self.build()
+                .components(
+                    avatar.build().style(Style.I1.style()).heightResolver({ (fittingWidth, _, _) -> CGFloat in
+                        return fittingWidth * 2 / 3
+                    }),
+                    title.build().style(Style.H3.style())
+                ) { (avatar, title) -> Layout in
+                    Layout(components: [avatar, title], axis: .Vertical, align: .Fill, distribution: .Fill)
+                }.heightResolver { (_, childrenHeights, _) -> CGFloat in
+                    return childrenHeights[0] + childrenHeights[1]
+            }
+        case .detailsView:
+            return
+                ComponentTarget.container(self.name, within:
+                    ComponentTarget.union(components: [
+                        avatar.build().style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
+                        favoriteButton.componentTarget().LGOutlet("favoriteButton"),
+                        adView.build().width(150).height(80)
+                        ],
+                        axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: LayoutMetrics(120, 20, 20, 20, 10, 10)
+                        ).style([.backgroundColor(UIColor.brownColor())])
+            )
+
+        case .header:
+            return self.build()
+                .style([.backgroundColor(UIColor.yellowColor()), .translatesAutoresizingMaskIntoConstraints(false)])
+                .components(
+                    avatar.build().style(Style.I1.style()),
+                    title.build().style(Style.H3.style()),
+                    favoriteButton.componentTarget()
+                ) { avatar, title, favoriteButton -> Layout in
+                    Layout([
+                        H("|-left-[\(avatar)][title]-(>=spaceH)-[\(favoriteButton)]-right-|"),
+                        V("|-top-[\(avatar)]-bottom-|"),
+                        V("|-top-[\(title)]-bottom-|"),
+                        V("|-top-[\(favoriteButton)]-bottom-|"),
+                        ],
+                           metrics: ComponentBuilder.defaultMetrics)
+            }
+        case .title:
+            return self.build(UILabel).style(Style.H3.style())
+        case .favoriteButton:
+            return self.build().style(Style.BasicButton.style() + [.backgroundColor(UIColor.greenColor())])
+        default:
+            assertionFailure("Unknown component: \(self)")
+            return self.build()
+        }
+    }
+}
+
+enum Style: String {
+    // UILabel
+    case H1, H2, H3
+
+    // UIImageView
+    case I1
+
+    // UIButton
+    case BasicButton, FavoriteButton
+
+    // Ad View
+    case AdView
+
+    case None
+
+    static let marker = "M"
+    static let customTitle = "title"
+    static let nature = "Nature"
+
+    static let ratio: String = "ratio"
+
+    func style() -> [Appearance] {
+        switch self {
+        case H1:
+            return [.font(UIFont.systemFontOfSize(18)),
+                    .textColor(UIColor.darkTextColor()),
+                    .textAlignment(.Center),
+                    .numberOfLines(0)]
+        case H2:
+            return [.font(UIFont.systemFontOfSize(12)),
+                    .textColor(UIColor.lightGrayColor()),
+                    .numberOfLines(0),
+                    .text("Default text")]
+        case H3:
+            return [
+                .attributedText([
+                    [kCustomAttributeKeyIdentifier: Style.marker, NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
+                    [kCustomAttributeKeyIdentifier: Style.customTitle, kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "Avenir", size: 20)!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
+                    [kCustomAttributeKeyIdentifier: Style.nature, NSFontAttributeName: UIFont(name: "Avenir", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
+                    ]),
+                .numberOfLines(0),
+                .translatesAutoresizingMaskIntoConstraints(false)]
+        case I1:
+            return [.backgroundColor(UIColor.greenColor()), .ratio(1.5)]
+        case BasicButton:
+            return [.buttonType(.Custom), .buttonTitle("OK", .Normal)]
+        default:
+            return []
+        }
     }
 }
 

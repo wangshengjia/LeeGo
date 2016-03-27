@@ -17,7 +17,7 @@ class Element {
     let date: String?
     let isRestrict: Bool
 
-    // An naive implementation about json to model object
+    // A naive implementation about json to model object
     // Waiting for improving
     init?(dictionary: [String: AnyObject]) {
         self.elementId = dictionary["id"] as? Int

@@ -22,6 +22,50 @@ func + <K,V>(left: [K: V], right: [K: V]) -> [K: V] {
     return result
 }
 
+extension Dictionary {
+
+    func filter(@noescape includeElement: (Key, Value) throws -> Bool) rethrows -> Dictionary {
+        var result = self
+        for (key, value) in result {
+            if try !includeElement(key, value) {
+                result.removeValueForKey(key)
+            }
+        }
+        return result
+    }
+}
+
+extension Dictionary {
+
+    func parse<T>(key: JSONKeyType) throws -> T {
+        return try parse(key.asString)
+    }
+
+    func parse<T>(key: String) throws -> T {
+        if let value = self[key as! Key] {
+            if let valueWithExpectedType = value as? T {
+                return valueWithExpectedType
+            } else {
+                throw JSONParseError.MismatchedTypeError
+            }
+        } else {
+            throw JSONParseError.UnexpectedKeyError
+        }
+    }
+
+    func parse<T>(key: JSONKeyType, defaultValue: T) -> T {
+        return parse(key.asString, defaultValue: defaultValue)
+    }
+
+    func parse<T>(key: String, defaultValue: T) -> T {
+        if let value = self[key as! Key] as? T {
+            return value
+        }
+
+        return defaultValue
+    }
+}
+
 public extension UILabel {
     func setAttributeString(with texts: [String: String]) {
         if let attributeString = self.attributedText where attributeString.length > 0 {
