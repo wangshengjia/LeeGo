@@ -91,10 +91,10 @@ extension ComponentBuilder {
                     favoriteButton.componentTarget()
                     ) { avatar, title, favoriteButton -> Layout in
                         Layout([
-                            H("|-left-[\(avatar)][title]-(>=spaceH)-[\(favoriteButton)]-right-|"),
-                            V("|-top-[\(avatar)]-bottom-|"),
-                            V("|-top-[\(title)]-bottom-|"),
-                            V("|-top-[\(favoriteButton)]-bottom-|"),
+                            "H:|-left-[\(avatar)][title]-(>=spaceH)-[\(favoriteButton)]-right-|",
+                            "V:|-top-[\(avatar)]-bottom-|",
+                            "V:|-top-[\(title)]-bottom-|",
+                            "V:|-top-[\(favoriteButton)]-bottom-|",
                             ],
                             metrics: ComponentBuilder.defaultMetrics)
             }
