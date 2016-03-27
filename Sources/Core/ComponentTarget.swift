@@ -165,7 +165,7 @@ public final class ComponentTarget {
 extension ComponentTarget: JSONConvertible {
 
     private enum JSONKey: JSONKeyType {
-        case name, type, nibName, width, height, style, layout, components, outlet
+        case name, targetClass, nibName, width, height, style, layout, components, outlet
     }
 
     public convenience init(rawValue json: JSONDictionary) throws {
@@ -197,7 +197,7 @@ extension ComponentTarget: JSONConvertible {
     }
 
     public func encode() -> JSONDictionary {
-        var json: JSONDictionary = [JSONKey.name.asString: self.name, JSONKey.type.asString: String(self.targetClass)]
+        var json: JSONDictionary = [JSONKey.name.asString: self.name, JSONKey.targetClass.asString: String(self.targetClass)]
 
         if let nibName = self.nibName {
             json[JSONKey.nibName.asString] = nibName

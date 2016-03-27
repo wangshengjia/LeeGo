@@ -178,7 +178,7 @@ class ComponentTargetSpec: QuickSpec {
 
                 // Then
                 expect(json["name"] as? String) == "title"
-                expect(json["type"] as? String) == "UILabel"
+                expect(json["targetClass"] as? String) == "UILabel"
             }
         }
     }

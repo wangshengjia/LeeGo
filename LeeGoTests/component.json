@@ -24,7 +24,7 @@
     },
     "components" : [
                     {
-                    "type" : "UILabel",
+                    "targetClass" : "UILabel",
                     "style" : {
                     "attributedText" : [
                                         {
@@ -55,7 +55,7 @@
                     "name" : "title"
                     },
                     {
-                    "type" : "UILabel",
+                    "targetClass" : "UILabel",
                     "style" : {
                     "numberOfLines" : 0,
                     "textColor" : "#AAAAAAFF",
@@ -74,8 +74,8 @@
                     "ratio" : 1.5
                     },
                     "width" : 68.0,
-                    "type" : "UIImageView"
+                    "targetClass" : "UIImageView"
                     }
                     ],
-    "type" : "UIView"
+    "targetClass" : "UIView"
 }
