@@ -111,6 +111,7 @@
 		3513F70D1C95EC82003B211F /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
+				35F520261C7C74510089FF41 /* ComponentTarget.swift */,
 				3513F70E1C95EC96003B211F /* Appearance.swift */,
 				3513F7101C95ECA0003B211F /* Layout.swift */,
 			);
@@ -204,7 +205,6 @@
 		35F520241C7C74510089FF41 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				35F520261C7C74510089FF41 /* ComponentTarget.swift */,
 				35F520271C7C74510089FF41 /* ComponentType.swift */,
 				35F520281C7C74510089FF41 /* Composable.swift */,
 				35F520291C7C74510089FF41 /* Configurable.swift */,
