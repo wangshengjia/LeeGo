@@ -162,6 +162,53 @@ public final class ComponentTarget {
     }
 }
 
+extension ComponentTarget: Encodable, Decodable {
+
+    private enum JSONKey: JSONKeyType {
+        case name, type, nibName, width, height, style, layout, components, outlet
+    }
+
+    public convenience init?(json: JSONDictionary) {
+        do {
+            let targetClass: AnyClass = ((try? NSClassFromString(json.parse(JSONKey.name))) ?? nil) ?? UIView.self
+            let nibName: String? = try? json.parse(JSONKey.nibName)
+            try self.init(name: json.parse(JSONKey.name), targetClass: targetClass, nibName: nibName)
+        } catch {
+            return nil
+        }
+
+        if let styleJsons: [JSONDictionary] = try? json.parse(JSONKey.style) {
+            self.style = styleJsons.flatMap({ (json) -> Appearance? in
+                return Appearance(json: json)
+            })
+        }
+
+        self.width = try? json.parse(JSONKey.width)
+        self.height = try? json.parse(JSONKey.height)
+
+        if let componentJsons: [JSONDictionary] = try? json.parse(JSONKey.components) {
+            self.components = componentJsons.flatMap({ (json) -> ComponentTarget? in
+                return ComponentTarget(json: json)
+            })
+        }
+
+        if let layoutJson: JSONDictionary = try? json.parse(JSONKey.layout) {
+            self.layout = Layout(json: layoutJson)
+        }
+    }
+
+    public func encode() -> JSONDictionary? {
+        let name = [JSONKey.name.asString: self.name]
+        let type = [JSONKey.type.asString: String(self.targetClass)]
+        let nibName = [JSONKey.nibName.asString: String(self.nibName)]
+        let width = [JSONKey.width.asString: String(self.width)]
+        let height = [JSONKey.height.asString: String(self.height)]
+        let layout = [JSONKey.layout.asString: self.layout?.encode() ?? [:]]
+
+        return name + type + nibName + width + height + layout
+    }
+}
+
 // MARK: Helpers
 
 extension ComponentTarget {
