@@ -1,0 +1,19 @@
+{
+    "options" : [
+                 "AlignAllCenterX"
+                 ],
+    "formats" : [
+                 "H:|-left-[title]-spaceH-[image]-right",
+                 "V:|-top-[title]-(>=bottom)|",
+                 "V:|-top-[image]-(>=bottom)|"
+                 ],
+    "metrics" : {
+        "left" : 20,
+        "bottom" : 20,
+        "right" : 20,
+        "spaceH" : 10,
+        "custom_metrics" : 13,
+        "top" : 20,
+        "spaceV" : 10
+    }
+}
