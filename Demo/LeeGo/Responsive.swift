@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// Client
+
 enum SizeClasses: SizeClassesType {
     case XXS, XS, S, M, L, XL, XXL
 }
@@ -37,6 +39,21 @@ extension SizeClasses {
     }
 }
 
+extension Int: Responsive {
+    func register(type: SizeClasses) {}
+}
+
+//extension Float: Responsive {}
+//extension Double: Responsive {}
+
+extension CGFloat: Responsive {
+    func register(type: SizeClasses) {
+        12.responsive([.XS: 10])
+    }
+}
+
+// API
+
 protocol SizeClassesType: Hashable {
     static func sizeClass(width: CGFloat) -> Self
 }
@@ -62,14 +79,5 @@ extension Responsive {
     func currentWindowSize() -> CGFloat {
         return 1
     }
-}
-
-extension Int: Responsive {
-    func register(type: SizeClasses) {}
-}
-//extension Float: Responsive {}
-//extension Double: Responsive {}
-extension CGFloat: Responsive {
-    func register(type: SizeClasses) {}
 }
 
