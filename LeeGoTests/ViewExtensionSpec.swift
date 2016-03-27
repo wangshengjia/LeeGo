@@ -135,7 +135,7 @@ class ViewExtensionSpec: QuickSpec {
                 cell.configure(TestData.header1)
 
                 // When
-                let attributes = cell.preferredLayoutAttributesFittingAttributes(UICollectionViewLayoutAttributes())
+                let attributes = cell.fittingHeightLayoutAttributes(UICollectionViewLayoutAttributes())
 
                 // Then
                 expect(attributes.frame.height) == 71

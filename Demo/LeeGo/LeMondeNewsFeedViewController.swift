@@ -90,5 +90,11 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
             }
         }
     }
+}
 
+extension UICollectionViewCell {
+    override public func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+
+        return fittingHeightLayoutAttributes(layoutAttributes)
+    }
 }
