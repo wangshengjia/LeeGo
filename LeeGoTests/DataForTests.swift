@@ -181,9 +181,9 @@ enum Style: String {
         case H3:
             return [
                 .attributedText([
-                    [kCustomAttributeKeyIdentifier: Style.marker, NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
-                    [kCustomAttributeKeyIdentifier: Style.customTitle, kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "Avenir", size: 20)!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
-                    [kCustomAttributeKeyIdentifier: Style.nature, NSFontAttributeName: UIFont(name: "Avenir", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
+                    [NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
+                    [kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "Avenir", size: 20)!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
+                    [NSFontAttributeName: UIFont(name: "Avenir", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
                     ]),
                 .numberOfLines(0),
                 .translatesAutoresizingMaskIntoConstraints(false)]

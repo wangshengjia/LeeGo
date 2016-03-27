@@ -67,9 +67,9 @@ class ConvertibleSpec: QuickSpec {
                                        .shadowOffset(CGSize(width: 10, height: 20)),
                                        .highlightedTextColor(UIColor.clearColor()),
                                        .attributedText([
-                                        [kCustomAttributeKeyIdentifier: "M", NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
-                                        [kCustomAttributeKeyIdentifier: "title", kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 20)!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
-                                        [kCustomAttributeKeyIdentifier: "nature", NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
+                                        [NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
+                                        [kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 20)!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
+                                        [NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
                                         ]),
                                        .text("Default Text"),
                                        .borderStyle(.Bezel),

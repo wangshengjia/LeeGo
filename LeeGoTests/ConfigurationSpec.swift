@@ -116,7 +116,7 @@ class ConfigurationSpec: QuickSpec {
                 expect(label.text) == "labelText"
 
                 Appearance.attributedText([[NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]]).apply(to: label)
-                expect(label.attributedText) == NSAttributedString(string: " ", attributes: [NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!])
+                expect(label.attributedText) == NSAttributedString(string: "", attributes: [NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!])
             }
 
             it("should apply appearance correctly to given UIButton") {
