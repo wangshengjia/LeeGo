@@ -152,11 +152,11 @@ public enum Appearance {
             }
         case (let .attributedText(attributes), let view):
             if let label = view as? UILabel {
-                label.attributedText = attributedStringFromList(attributes)
+                label.setAttributedString(with: attributes)
             } else if let textField = view as? UITextField {
-                textField.attributedText = attributedStringFromList(attributes)
+                textField.setAttributedString(with: attributes)
             } else if let textView = view as? UITextView {
-                textView.attributedText = attributedStringFromList(attributes)
+                textView.setAttributedString(with: attributes)
             }
         case (let .lineBreakMode(mode), let view):
             if let label = view as? UILabel {
@@ -201,7 +201,7 @@ public enum Appearance {
         case (let .placeholder(text), let textField as UITextField):
             textField.placeholder = text
         case (let .attributedPlaceholder(attributes), let textField as UITextField):
-            textField.attributedPlaceholder = attributedStringFromList(attributes)
+            textField.setAttributedPlaceholder(with: attributes)
         case (let .clearsOnBeginEditing(should), let textField as UITextField):
             textField.clearsOnBeginEditing = should
         case (let .background(image), let textField as UITextField):
@@ -227,7 +227,7 @@ public enum Appearance {
         case (let .buttonBackgroundImage(image, state), let button as UIButton):
             button.setBackgroundImage(image, forState: state)
         case (let .buttonAttributedTitle(attributes, state), let button as UIButton):
-            button.setAttributedTitle(attributedStringFromList(attributes), forState: state)
+            button.setAttributedButtonTitle(with: attributes, state: state)
         case (let .contentEdgeInsets(insets), let button as UIButton):
             button.contentEdgeInsets = insets
         case (let .titleEdgeInsets(insets), let button as UIButton):
@@ -322,12 +322,7 @@ public enum Appearance {
         return strSelf
     }
 
-    private func attributedStringFromList(attrList: [Attributes]) -> NSAttributedString? {
-        return attrList.flatMap({ (attribute) -> NSAttributedString? in
-            // TODO: is that possible to take care this default "space" ??
-            return NSAttributedString(string: (attribute[kCustomAttributeDefaultText] as? String) ?? " ", attributes: attribute)
-        }).combineToAttributedString()
-    }
+    
 }
 
 extension Appearance: Hashable {
