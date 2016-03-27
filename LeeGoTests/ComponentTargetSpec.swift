@@ -166,6 +166,21 @@ class ComponentTargetSpec: QuickSpec {
                 expect(component.heightResolver!(fittingWidth:0, childrenHeights: [10, 20], metrics: LayoutMetrics())) == 30
             })
         }
+
+        describe("ComponentTarget encodable tests") {
+            it("should") {
+
+                // Given
+                let component = ComponentBuilder.title.build(UILabel)
+
+                // When
+                let json = component.encode()
+
+                // Then
+                expect(json["name"] as? String) == "title"
+                expect(json["type"] as? String) == "UILabel"
+            }
+        }
     }
 }
 

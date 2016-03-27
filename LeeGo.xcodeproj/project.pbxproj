@@ -11,6 +11,7 @@
 		3513F7111C95ECA0003B211F /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3513F7101C95ECA0003B211F /* Layout.swift */; };
 		3540C4C51C7EFC21005CA104 /* DataForTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3540C4C41C7EFC21005CA104 /* DataForTests.swift */; };
 		354A347A1C7DE9A60081FF89 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A34791C7DE9A60081FF89 /* Test.swift */; };
+		3560FEE11CA358F100A400C2 /* ConvertibleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3560FEE01CA358F100A400C2 /* ConvertibleSpec.swift */; };
 		35F5200C1C7C73D40089FF41 /* LeeGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F520011C7C73D40089FF41 /* LeeGo.framework */; };
 		35F5201F1C7C74400089FF41 /* LeeGo.h in Headers */ = {isa = PBXBuildFile; fileRef = 35F5201D1C7C74400089FF41 /* LeeGo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		35F520301C7C74510089FF41 /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520211C7C74510089FF41 /* AutoLayout.swift */; };
@@ -48,6 +49,7 @@
 		3530E87C1C7CBC6300ABC8D1 /* Layout.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Layout.md; sourceTree = "<group>"; };
 		3540C4C41C7EFC21005CA104 /* DataForTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataForTests.swift; sourceTree = "<group>"; };
 		354A34791C7DE9A60081FF89 /* Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		3560FEE01CA358F100A400C2 /* ConvertibleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertibleSpec.swift; sourceTree = "<group>"; };
 		35F520011C7C73D40089FF41 /* LeeGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LeeGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35F5200B1C7C73D40089FF41 /* LeeGoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeeGoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		35F520121C7C73D40089FF41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				35F520401C7C762E0089FF41 /* ConfigurationSpec.swift */,
 				35F520411C7C762E0089FF41 /* ConvenienceSpec.swift */,
 				35F520421C7C762E0089FF41 /* ViewExtensionSpec.swift */,
+				3560FEE01CA358F100A400C2 /* ConvertibleSpec.swift */,
 				354A34791C7DE9A60081FF89 /* Test.swift */,
 				35F520121C7C73D40089FF41 /* Info.plist */,
 			);
@@ -389,6 +392,7 @@
 			files = (
 				35F520471C7C762E0089FF41 /* ConvenienceSpec.swift in Sources */,
 				3540C4C51C7EFC21005CA104 /* DataForTests.swift in Sources */,
+				3560FEE11CA358F100A400C2 /* ConvertibleSpec.swift in Sources */,
 				35F520441C7C762E0089FF41 /* ComponentTargetSpec.swift in Sources */,
 				35F520481C7C762E0089FF41 /* ViewExtensionSpec.swift in Sources */,
 				354A347A1C7DE9A60081FF89 /* Test.swift in Sources */,
