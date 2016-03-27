@@ -219,23 +219,5 @@ class AutoLayoutSpec: QuickSpec {
                 options: [.AlignAllCenterX, .DirectionLeadingToTrailing])
             
         }
-
-        it("H(customVFL: String) -> String") {
-
-            // Given
-            let format = H("[view(10.0)]")
-
-            // Then
-            expect(format) == "H:[view(10.0)]"
-        }
-
-        it("V(customVFL: String) -> String") {
-
-            // Given
-            let format = V("[view(10.0)]")
-
-            // Then
-            expect(format) == "V:[view(10.0)]"
-        }
     }
 }

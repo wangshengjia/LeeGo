@@ -82,24 +82,6 @@ extension UIView {
 
 extension UIView {
 
-    // TODO: how to handle clean up for reuse
-    /*
-    func cleanUpForReuse() {
-        switch self {
-        case let label as UILabel:
-            label.text = nil
-        case let imageView as UIImageView:
-            imageView.image = nil
-        default:
-            break
-        }
-
-        // do clean up
-        for case let subview in self.subviews {
-            subview.cleanUpForReuse()
-        }
-    }*/
-
     public func viewForOutletKey(key: String) -> UIView? {
         if let currentKey = self.configuration?.LGOutletKey where currentKey == key {
             return self
@@ -114,11 +96,11 @@ extension UIView {
         return nil
     }
 
-    public var componentName: String? {
+    internal var componentName: String? {
         return configuration?.name
     }
 
-    public func fittingHeight() -> CGFloat {
+    internal func fittingHeight() -> CGFloat {
 
         // if height resolver is found
         if let computeClosure = configuration?.heightResolver {

@@ -332,7 +332,6 @@ extension Appearance: Hashable {
 }
 
 public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
-    // TODO: how to implement the real equatable
     return lhs.toString() == rhs.toString()
 }
 
