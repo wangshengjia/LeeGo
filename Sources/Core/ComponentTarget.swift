@@ -170,7 +170,7 @@ extension ComponentTarget: JSONConvertible {
 
     public convenience init(rawValue json: JSONDictionary) throws {
         do {
-            let targetClass: AnyClass = ((try? NSClassFromString(json.parse(JSONKey.name))) ?? nil) ?? UIView.self
+            let targetClass: AnyClass = ((try? NSClassFromString(json.parse(JSONKey.targetClass))) ?? nil) ?? UIView.self
             let nibName: String? = try? json.parse(JSONKey.nibName)
             try self.init(name: json.parse(JSONKey.name), targetClass: targetClass, nibName: nibName)
         } catch {

@@ -216,7 +216,10 @@ class ConvertibleSpec: QuickSpec {
                     let component = try ComponentTarget(rawValue: json!)
 
                     // Then
-                    expect(component) == mockComponent
+                    expect(component.name) == mockComponent.name
+                    expect(component.layout) == mockComponent.layout
+                    expect(component.width ?? 0) == mockComponent.width ?? 0
+                    expect(component.height ?? 0) == mockComponent.height ?? 0
                 } catch {
                     fail("\(error)")
                 }
