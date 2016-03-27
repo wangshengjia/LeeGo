@@ -23,6 +23,15 @@ public struct LayoutMetrics: Equatable {
 
     public let customMetrics: [String: CGFloat]
 
+    private var standardMetrics: [String: CGFloat] {
+        return [JSONKey.top.asString: top,
+                JSONKey.left.asString: left,
+                JSONKey.bottom.asString: bottom,
+                JSONKey.right.asString: right,
+                JSONKey.spaceH.asString: spaceH,
+                JSONKey.spaceV.asString: spaceV]
+    }
+
     public init(_ top: CGFloat, _ left: CGFloat, _ bottom: CGFloat, _ right: CGFloat, _ spaceH: CGFloat, _ spaceV: CGFloat) {
         self.init(top:top, left: left, bottom: bottom, right: right, spaceH: spaceH, spaceV: spaceV)
     }
@@ -48,16 +57,13 @@ public struct LayoutMetrics: Equatable {
         })
     }
 
-    func metrics() -> [String: CGFloat] {
-        let standardMetrics = [JSONKey.top.asString: top,
-                               JSONKey.left.asString: left,
-                               JSONKey.bottom.asString: bottom,
-                               JSONKey.right.asString: right,
-                               JSONKey.spaceH.asString: spaceH,
-                               JSONKey.spaceV.asString: spaceV].filter { (key, value) -> Bool in
-                                return value != 0.0
+    func encode() -> JSONDictionary {
+        return customMetrics + standardMetrics.filter { (key, value) -> Bool in
+            return value != 0.0
         }
+    }
 
+    func metrics() -> [String: CGFloat] {
         return customMetrics + standardMetrics
     }
 }
@@ -139,7 +145,7 @@ extension Layout: Encodable, Decodable {
     }
 
     public func encode() -> JSONDictionary? {
-        return [JSONKey.formats.asString: formats, JSONKey.options.asString: options.encode(), JSONKey.metrics.asString: metrics.metrics()]
+        return [JSONKey.formats.asString: formats, JSONKey.options.asString: options.encode(), JSONKey.metrics.asString: metrics.encode()]
     }
 }
 

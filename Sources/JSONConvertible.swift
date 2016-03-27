@@ -220,7 +220,7 @@ extension UIControlState {
             case JSONKey.Selected.asString:
                 return .Selected
             case JSONKey.Focused.asString:
-                if #available(iOSApplicationExtension 9.0, *) {
+                if #available(iOS 9.0, *) {
                     return .Focused
                 } else {
                     fallthrough
@@ -251,7 +251,7 @@ extension UIControlState {
             states.append(JSONKey.Application.asString)
         } else if self.contains(UIControlState.Reserved) {
             states.append(JSONKey.Reserved.asString)
-        } else if #available(iOSApplicationExtension 9.0, *) {
+        } else if #available(iOS 9.0, *) {
             if self.contains(UIControlState.Focused) {
                 states.append(JSONKey.Focused.asString)
             }
