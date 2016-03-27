@@ -141,7 +141,7 @@ enum Style: String {
             return [.font(UIFont.systemFontOfSize(12)),
                 .textColor(UIColor.lightGrayColor()),
                 .numberOfLines(0),
-                .defaultLabelText("Default text")]
+                .text("Default text")]
         case H3:
             return [
                 .attributedText([

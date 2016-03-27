@@ -15,11 +15,14 @@ public enum Appearance {
     case userInteractionEnabled(Bool), translatesAutoresizingMaskIntoConstraints(Bool), backgroundColor(UIColor), tintColor(UIColor), tintAdjustmentMode(UIViewTintAdjustmentMode), cornerRadius(CGFloat), borderWidth(CGFloat), borderColor(UIColor), multipleTouchEnabled(Bool), exclusiveTouch(Bool), clipsToBounds(Bool), alpha(CGFloat), opaque(Bool), clearsContextBeforeDrawing(Bool), hidden(Bool), contentMode(UIViewContentMode)
 
     // UIControl
-    case enabled(Bool), selected(Bool), highlighted(Bool), contentVerticalAlignment(UIControlContentVerticalAlignment), contentHorizontalAlignment(UIControlContentHorizontalAlignment)
+    case enabled(Bool), selected(Bool), highlighted(Bool)
 
-    // UILabel & UITextView
-    case font(UIFont), textColor(UIColor), textAlignment(NSTextAlignment), numberOfLines(Int), lineBreakMode(NSLineBreakMode), defaultLabelText(String), selectedRange(NSRange), editable(Bool), selectable(Bool), dataDetectorTypes(UIDataDetectorTypes), allowsEditingTextAttributes(Bool), clearsOnInsertion(Bool), textContainerInset(UIEdgeInsets), linkTextAttributes(Attributes)
+    // UILabel & UITextView & UITextField
+    case font(UIFont), textColor(UIColor), textAlignment(NSTextAlignment), numberOfLines(Int), lineBreakMode(NSLineBreakMode), selectedRange(NSRange), editable(Bool), selectable(Bool), dataDetectorTypes(UIDataDetectorTypes), allowsEditingTextAttributes(Bool), clearsOnInsertion(Bool), textContainerInset(UIEdgeInsets), linkTextAttributes(Attributes), lineFragmentPadding(CGFloat), minimumScaleFactor(CGFloat), adjustsFontSizeToFitWidth(Bool), baselineAdjustment(UIBaselineAdjustment), shadowColor(UIColor), shadowOffset(CGSize), highlightedTextColor(UIColor)
+
     case attributedText([Attributes]) // TODO: handle also NSParagrapheStyle
+
+    case text(String), borderStyle(UITextBorderStyle), defaultTextAttributes(Attributes), placeholder(String), attributedPlaceholder([Attributes]), clearsOnBeginEditing(Bool), background(UIImage), disabledBackground(UIImage), typingAttributes(Attributes), clearButtonMode(UITextFieldViewMode)
 
     // UIButton
     case buttonType(UIButtonType), buttonTitle(String, UIControlState), buttonTitleColor(UIColor, UIControlState), buttonTitleShadowColor(UIColor, UIControlState), buttonImage(UIImage, UIControlState), buttonBackgroundImage(UIImage, UIControlState), buttonAttributedTitle([Attributes], UIControlState), contentEdgeInsets(UIEdgeInsets), titleEdgeInsets(UIEdgeInsets), reversesTitleShadowWhenHighlighted(Bool), imageEdgeInsets(UIEdgeInsets), adjustsImageWhenHighlighted(Bool), adjustsImageWhenDisabled(Bool), showsTouchWhenHighlighted(Bool)
@@ -42,6 +45,7 @@ public enum Appearance {
     func apply<Component: UIView>(to component: Component, useDefaultValue: Bool = false) {
 
         switch (self, component) {
+
         // UIView
         case (let .backgroundColor(color), _):
             component.backgroundColor = useDefaultValue ? nil : color
