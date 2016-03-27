@@ -177,8 +177,8 @@ class ComponentTargetSpec: QuickSpec {
                 let json = component.encode()
 
                 // Then
-                expect(json["name"] as? String) == "title"
-                expect(json["type"] as? String) == "UILabel"
+                expect(json!["name"] as? String) == "title"
+                expect(json!["type"] as? String) == "UILabel"
             }
         }
     }

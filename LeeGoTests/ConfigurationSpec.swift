@@ -100,7 +100,7 @@ class ConfigurationSpec: QuickSpec {
                     .textColor(UIColor.greenColor()),
                     .textAlignment(.Center),
                     .numberOfLines(3),
-                    .defaultLabelText("labelText"),
+                    .text("labelText"),
                 ]
 
                 // When
