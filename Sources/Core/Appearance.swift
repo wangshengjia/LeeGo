@@ -31,10 +31,7 @@ public enum Appearance {
     case ratio(CGFloat)
 
     // UIScrollView
-    case scrollEnabled(Bool)
-
-    // UITextField
-    
+    case scrollEnabled(Bool), contentOffset(CGPoint), contentSize(CGSize), contentInset(UIEdgeInsets), directionalLockEnabled(Bool), bounces(Bool), alwaysBounceVertical(Bool), alwaysBounceHorizontal(Bool), pagingEnabled(Bool), showsHorizontalScrollIndicator(Bool), showsVerticalScrollIndicator(Bool), scrollIndicatorInsets(UIEdgeInsets), indicatorStyle(UIScrollViewIndicatorStyle), decelerationRate(CGFloat), delaysContentTouches(Bool), canCancelContentTouches(Bool), minimumZoomScale(CGFloat), maximumZoomScale(CGFloat), zoomScale(CGFloat), bouncesZoom(Bool), scrollsToTop(Bool), keyboardDismissMode(UIScrollViewKeyboardDismissMode)
 
     // ...
 
@@ -81,30 +78,104 @@ public enum Appearance {
             component.contentMode = contentMode
 
         // UIControl
-        case (let .enabled(enabled), let control as UIControl):
-            control.enabled = enabled
         case (let .selected(selected), let control as UIControl):
             control.selected = selected
-        case (let .highlighted(highlighted), let control as UIControl):
-            control.highlighted = highlighted
-        case (let .contentVerticalAlignment(contentVerticalAlignment), let control as UIControl):
-            control.contentVerticalAlignment = contentVerticalAlignment
-        case (let .contentHorizontalAlignment(contentHorizontalAlignment), let control as UIControl):
-            control.contentHorizontalAlignment = contentHorizontalAlignment
 
         // UILabel
-        case (let .font(font), let label as UILabel):
-            label.font = font
-        case (let .textColor(color), let label as UILabel):
-            label.textColor = color
-        case (let .textAlignment(align), let label as UILabel):
-            label.textAlignment = align
-        case (let .numberOfLines(number), let label as UILabel):
-            label.numberOfLines = number
-        case (let .defaultLabelText(text), let label as UILabel):
-            label.text = text
-        case (let .attributedText(attributes), let label as UILabel):
-            label.attributedText = attributedStringFromList(attributes)
+        case (let .shadowColor(color), let label as UILabel):
+            label.shadowColor = color
+        case (let .shadowOffset(size), let label as UILabel):
+            label.shadowOffset = size
+        case (let .highlightedTextColor(color), let label as UILabel):
+            label.highlightedTextColor = color
+        case (let .minimumScaleFactor(factor), let label as UILabel):
+            label.minimumScaleFactor = factor
+        case (let .baselineAdjustment(adjustment), let label as UILabel):
+            label.baselineAdjustment = adjustment
+
+        // UILabel & UITextField & UITextView
+        case (let .enabled(enabled), let view):
+            if let label = view as? UILabel {
+                label.enabled = enabled
+            } else if let control = view as? UIControl {
+                control.enabled = enabled
+            }
+        case (let .highlighted(highlighted), let view):
+            if let label = view as? UILabel {
+                label.highlighted = highlighted
+            } else if let control = view as? UIControl {
+                control.highlighted = highlighted
+            }
+        case (let .adjustsFontSizeToFitWidth(should), let view):
+            if let label = view as? UILabel {
+                label.adjustsFontSizeToFitWidth = should
+            } else if let textField = view as? UITextField {
+                textField.adjustsFontSizeToFitWidth = should
+            }
+        case (let .font(font), let view):
+            if let label = view as? UILabel {
+                label.font = font
+            } else if let textField = view as? UITextField {
+                textField.font = font
+            } else if let textView = view as? UITextView {
+                textView.font = font
+            }
+        case (let .textColor(color), let view):
+            if let label = view as? UILabel {
+                label.textColor = color
+            } else if let textField = view as? UITextField {
+                textField.textColor = color
+            } else if let textView = view as? UITextView {
+                textView.textColor = color
+            }
+        case (let .textAlignment(align), let view):
+            if let label = view as? UILabel {
+                label.textAlignment = align
+            } else if let textField = view as? UITextField {
+                textField.textAlignment = align
+            } else if let textView = view as? UITextView {
+                textView.textAlignment = align
+            }
+        case (let .numberOfLines(number), let view):
+            if let label = view as? UILabel {
+                label.numberOfLines = number
+            } else if let textView = view as? UITextView {
+                textView.textContainer.maximumNumberOfLines = number
+            }
+        case (let .text(text), let view):
+            if let label = view as? UILabel {
+                label.text = text
+            } else if let textField = view as? UITextField {
+                textField.text = text
+            } else if let textView = view as? UITextView {
+                textView.text = text
+            }
+        case (let .attributedText(attributes), let view):
+            if let label = view as? UILabel {
+                label.attributedText = attributedStringFromList(attributes)
+            } else if let textField = view as? UITextField {
+                textField.attributedText = attributedStringFromList(attributes)
+            } else if let textView = view as? UITextView {
+                textView.attributedText = attributedStringFromList(attributes)
+            }
+        case (let .lineBreakMode(mode), let view):
+            if let label = view as? UILabel {
+                label.lineBreakMode = mode
+            } else if let textView = view as? UITextView {
+                textView.textContainer.lineBreakMode = mode
+            }
+        case (let .allowsEditingTextAttributes(allows), let view):
+            if let textField = view as? UITextField {
+                textField.allowsEditingTextAttributes = allows
+            } else if let textView = view as? UITextView {
+                textView.allowsEditingTextAttributes = allows
+            }
+        case (let .clearsOnInsertion(clearsOnInsertion), let view):
+            if let textField = view as? UITextField {
+                textField.clearsOnInsertion = clearsOnInsertion
+            } else if let textView = view as? UITextView {
+                textView.clearsOnInsertion = clearsOnInsertion
+            }
 
         // UITextView
         case (let .selectedRange(range), let textView as UITextView):
@@ -115,14 +186,32 @@ public enum Appearance {
             textView.selectable = selectable
         case (let .dataDetectorTypes(types), let textView as UITextView):
             textView.dataDetectorTypes = types
-        case (let .allowsEditingTextAttributes(allows), let textView as UITextView):
-            textView.allowsEditingTextAttributes = allows
-        case (let .clearsOnInsertion(clearsOnInsertion), let textView as UITextView):
-            textView.clearsOnInsertion = clearsOnInsertion
         case (let .textContainerInset(inset), let textView as UITextView):
             textView.textContainerInset = inset
         case (let .linkTextAttributes(attrs), let textView as UITextView):
             textView.linkTextAttributes = attrs
+        case (let .lineFragmentPadding(padding), let textView as UITextView):
+            textView.textContainer.lineFragmentPadding = padding
+
+            // UITextField
+        case (let .borderStyle(style), let textField as UITextField):
+            textField.borderStyle = style
+        case (let .defaultTextAttributes(attributes), let textField as UITextField):
+            textField.defaultTextAttributes = attributes
+        case (let .placeholder(text), let textField as UITextField):
+            textField.placeholder = text
+        case (let .attributedPlaceholder(attributes), let textField as UITextField):
+            textField.attributedPlaceholder = attributedStringFromList(attributes)
+        case (let .clearsOnBeginEditing(should), let textField as UITextField):
+            textField.clearsOnBeginEditing = should
+        case (let .background(image), let textField as UITextField):
+            textField.background = image
+        case (let .disabledBackground(image), let textField as UITextField):
+            textField.disabledBackground = image
+        case (let .typingAttributes(attributes), let textField as UITextField):
+            textField.typingAttributes = attributes
+        case (let .clearButtonMode(mode), let textField as UITextField):
+            textField.clearButtonMode = mode
 
         // UIButton
         case (let .buttonType(type), _ as UIButton):
@@ -172,85 +261,58 @@ public enum Appearance {
         // UIScrollView
         case (let .scrollEnabled(scrollEnabled), let scrollView as UIScrollView):
             scrollView.scrollEnabled = scrollEnabled
-
-        // Multiple
-        case (let .lineBreakMode(mode), _):
-            if component.respondsToSelector(Selector("setLineBreakMode:")) {
-                component.setValue(NSNumber(integer: mode.rawValue), forKey: toString())
-            } else {
-                assertionFailure("Unknown appearance \(self) for component \(component)")
-            }
+        case (let .contentOffset(offset), let scrollView as UIScrollView):
+            scrollView.contentOffset = offset
+        case (let .contentSize(size), let scrollView as UIScrollView):
+            scrollView.contentSize = size
+        case (let .contentInset(inset), let scrollView as UIScrollView):
+            scrollView.contentInset = inset
+        case (let .directionalLockEnabled(enabled), let scrollView as UIScrollView):
+            scrollView.directionalLockEnabled = enabled
+        case (let .bounces(bounces), let scrollView as UIScrollView):
+            scrollView.bounces = bounces
+        case (let .alwaysBounceVertical(alwaysBounceVertical), let scrollView as UIScrollView):
+            scrollView.alwaysBounceVertical = alwaysBounceVertical
+        case (let .alwaysBounceHorizontal(alwaysBounceHorizontal), let scrollView as UIScrollView):
+            scrollView.alwaysBounceHorizontal = alwaysBounceHorizontal
+        case (let .pagingEnabled(pagingEnabled), let scrollView as UIScrollView):
+            scrollView.pagingEnabled = pagingEnabled
+        case (let .showsHorizontalScrollIndicator(show), let scrollView as UIScrollView):
+            scrollView.showsHorizontalScrollIndicator = show
+        case (let .showsVerticalScrollIndicator(show), let scrollView as UIScrollView):
+            scrollView.showsVerticalScrollIndicator = show
+        case (let .scrollIndicatorInsets(insets), let scrollView as UIScrollView):
+            scrollView.scrollIndicatorInsets = insets
+        case (let .indicatorStyle(style), let scrollView as UIScrollView):
+            scrollView.indicatorStyle = style
+        case (let .decelerationRate(rate), let scrollView as UIScrollView):
+            scrollView.decelerationRate = rate
+        case (let .delaysContentTouches(delaysContentTouches), let scrollView as UIScrollView):
+            scrollView.delaysContentTouches = delaysContentTouches
+        case (let .canCancelContentTouches(canCancelContentTouches), let scrollView as UIScrollView):
+            scrollView.canCancelContentTouches = canCancelContentTouches
+        case (let .minimumZoomScale(minimumZoomScale), let scrollView as UIScrollView):
+            scrollView.minimumZoomScale = minimumZoomScale
+        case (let .maximumZoomScale(maximumZoomScale), let scrollView as UIScrollView):
+            scrollView.maximumZoomScale = maximumZoomScale
+        case (let .zoomScale(zoomScale), let scrollView as UIScrollView):
+            scrollView.zoomScale = zoomScale
+        case (let .bouncesZoom(bouncesZoom), let scrollView as UIScrollView):
+            scrollView.bouncesZoom = bouncesZoom
+        case (let .scrollsToTop(scrollsToTop), let scrollView as UIScrollView):
+            scrollView.scrollsToTop = scrollsToTop
+        case (let .keyboardDismissMode(keyboardDismissMode), let scrollView as UIScrollView):
+            scrollView.keyboardDismissMode = keyboardDismissMode
 
         // Custom
         case (let .custom(dictionary), _):
             useDefaultValue ? component.removeCustomStyle(dictionary) : component.setupCustomStyle(dictionary)
+
         default:
             assertionFailure("Unknown appearance \(self) for component \(component)")
             break
         }
     }
-
-
-    //    func value() -> AnyObject? {
-    //
-    //        switch self {
-    //        // UIView
-    //        case let .backgroundColor(color):
-    //            return color
-    //        case let .translatesAutoresizingMaskIntoConstraints(should):
-    //            return should
-    //
-    //        // UILabel
-    //        case let .font(font):
-    //            return font
-    //        case let .textColor(color):
-    //            return color
-    //        case let .textAlignment(align):
-    //            return String(align)
-    //        case let .numberOfLines(number):
-    //            return number
-    //        case let .defaultLabelText(text):
-    //            return text
-    //        case let .attributedString(attrList):
-    //            return attrList
-    //
-    //        // UIButton
-    //        case let .buttonTitle(title, state):
-    //            return title + "\(state)"
-    //        case let .buttonTitleColor(color, state):
-    //            return (color)
-    //        case (let .buttonTitleShadowColor(color, state), let button as UIButton):
-    //            button.setTitleShadowColor(color, forState: state)
-    //        case (let .buttonImage(image, state), let button as UIButton):
-    //            button.setImage(image, forState: state)
-    //        case (let .buttonBackgroundImage(image, state), let button as UIButton):
-    //            button.setBackgroundImage(image, forState: state)
-    //        case (let .buttonAttributedTitle(attributes, state), let button as UIButton):
-    //            button.setAttributedTitle(attributedStringFromList(attributes), forState: state)
-    //        case (let .contentEdgeInsets(insets), let button as UIButton):
-    //            button.contentEdgeInsets = insets
-    //        case (let .titleEdgeInsets(insets), let button as UIButton):
-    //            button.titleEdgeInsets = insets
-    //        case (let .imageEdgeInsets(insets), let button as UIButton):
-    //            button.imageEdgeInsets = insets
-    //        case (let .reversesTitleShadowWhenHighlighted(should), let button as UIButton):
-    //            button.reversesTitleShadowWhenHighlighted = should
-    //        case (let .adjustsImageWhenHighlighted(should), let button as UIButton):
-    //            button.adjustsImageWhenHighlighted = should
-    //        case (let .adjustsImageWhenDisabled(should), let button as UIButton):
-    //            button.adjustsImageWhenDisabled = should
-    //        case (let .showsTouchWhenHighlighted(should), let button as UIButton):
-    //            button.showsTouchWhenHighlighted = should
-    //
-    //        // Custom
-    //        case let .custom(dictionary):
-    //            return dictionary
-    //        default:
-    //            assertionFailure("Unknown appearance \(self)")
-    //            return nil
-    //        }
-    //    }
-
 
     func toString() -> String {
         let strSelf = String(self)
@@ -268,7 +330,7 @@ public enum Appearance {
     }
 }
 
-extension Appearance: Hashable, Equatable {
+extension Appearance: Hashable {
     public var hashValue: Int {
         return self.toString().hashValue
     }
@@ -276,9 +338,6 @@ extension Appearance: Hashable, Equatable {
 
 public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
     // TODO: how to implement the real equatable
-    
-    //    if let result1 = lhs.value(), let result2 = rhs.value() {
-    //        return lhs.toString() == rhs.toString() && result1.isEqual(result2)
-    //    }
     return lhs.toString() == rhs.toString()
 }
+
