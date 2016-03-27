@@ -8,6 +8,16 @@
 
 import Foundation
 
+protocol JSONConvertible {
+    associatedtype Serializable
+
+    /// Encode serializable target instance to JSON
+    func encode() throws -> Serializable
+
+    /// Decode json to serializable target instance
+    init(rawValue: Serializable) throws
+}
+
 public typealias JSONObject = AnyObject
 public typealias JSONDictionary = [String: AnyObject]
 
@@ -21,15 +31,7 @@ extension JSONKeyType {
     }
 }
 
-protocol Encodable {
-    func encode() -> JSONDictionary?
-}
-
-protocol Decodable {
-    init?(json: [String: AnyObject])
-}
-
-extension NSLayoutFormatOptions {
+extension NSLayoutFormatOptions: JSONConvertible {
     private enum JSONKey: JSONKeyType {
         case AlignAllLeft
         case AlignAllRight
@@ -49,7 +51,7 @@ extension NSLayoutFormatOptions {
         case DirectionMask
     }
 
-    init(options: [String]) {
+    init(rawValue options: [String]) {
         self.init(options.flatMap { (option) -> NSLayoutFormatOptions? in
             switch option {
             case JSONKey.AlignAllLeft.asString:
@@ -132,14 +134,14 @@ extension NSLayoutFormatOptions {
     }
 }
 
-extension UIScrollViewKeyboardDismissMode {
+extension UIScrollViewKeyboardDismissMode: JSONConvertible {
     private enum JSONKey: JSONKeyType {
         case None
         case OnDrag // dismisses the keyboard when a drag begins
         case Interactive // the keyboard follows the dragging touch off screen, and may be pulled upward again to cancel the dismiss
     }
 
-    init(mode: String) {
+    init(rawValue mode: String) {
         switch mode {
         case JSONKey.None.asString:
             self = .None
@@ -152,7 +154,11 @@ extension UIScrollViewKeyboardDismissMode {
         }
     }
 
-    var asString: String {
+    func encode() -> String {
+        return self.asString
+    }
+
+    private var asString: String {
         switch self {
         case .None:
             return JSONKey.None.asString
@@ -164,14 +170,14 @@ extension UIScrollViewKeyboardDismissMode {
     }
 }
 
-extension UIScrollViewIndicatorStyle {
+extension UIScrollViewIndicatorStyle: JSONConvertible {
     private enum JSONKey: JSONKeyType {
         case Default // black with white border. good against any background
         case Black // black only. smaller. good against a white background
         case White // white only. smaller. good against a black background
     }
 
-    init(style: String) {
+    init(rawValue style: String) {
         switch style {
         case JSONKey.Default.asString:
             self = .Default
@@ -184,7 +190,11 @@ extension UIScrollViewIndicatorStyle {
         }
     }
 
-    var asString: String {
+    func encode() -> String {
+        return self.asString
+    }
+
+    private var asString: String {
         switch self {
         case .Default:
             return JSONKey.Default.asString
@@ -197,7 +207,7 @@ extension UIScrollViewIndicatorStyle {
 
 }
 
-extension UIControlState {
+extension UIControlState: JSONConvertible {
     private enum JSONKey: JSONKeyType {
         case Normal
         case Highlighted
@@ -208,7 +218,7 @@ extension UIControlState {
         case Reserved
     }
 
-    init(states: [String]) {
+    init(rawValue states: [String]) {
         self.init(states.flatMap { (state) -> UIControlState? in
             switch state {
             case JSONKey.Normal.asString:
@@ -261,7 +271,7 @@ extension UIControlState {
     }
 }
 
-extension UITextFieldViewMode {
+extension UITextFieldViewMode: JSONConvertible {
     private enum JSONKey: JSONKeyType {
         case Never
         case WhileEditing
@@ -269,7 +279,7 @@ extension UITextFieldViewMode {
         case Always
     }
 
-    init(mode: String) {
+    init(rawValue mode: String) {
         switch mode {
         case JSONKey.Never.asString:
             self = .Never
@@ -284,7 +294,11 @@ extension UITextFieldViewMode {
         }
     }
 
-    var asString: String {
+    func encode() -> String {
+        return self.asString
+    }
+
+    private var asString: String {
         switch self {
         case .Never:
             return JSONKey.Never.asString
@@ -298,7 +312,7 @@ extension UITextFieldViewMode {
     }
 }
 
-extension UIDataDetectorTypes {
+extension UIDataDetectorTypes: JSONConvertible {
     private enum JSONKey: JSONKeyType {
         case PhoneNumber
         case Link
@@ -308,7 +322,7 @@ extension UIDataDetectorTypes {
         case All
     }
 
-    init(types: [String]) {
+    init(rawValue types: [String]) {
         self.init(types.flatMap { (type) -> UIDataDetectorTypes? in
             switch type {
             case JSONKey.PhoneNumber.asString:
@@ -351,14 +365,14 @@ extension UIDataDetectorTypes {
     }
 }
 
-extension UIBaselineAdjustment {
+extension UIBaselineAdjustment: JSONConvertible {
     private enum JSONKey: JSONKeyType {
         case AlignBaselines // default. used when shrinking text to position based on the original baseline
         case AlignCenters
         case None
     }
 
-    init(mode: String) {
+    init(rawValue mode: String) {
         switch mode {
         case JSONKey.AlignBaselines.asString:
             self = .AlignBaselines
@@ -371,7 +385,11 @@ extension UIBaselineAdjustment {
         }
     }
 
-    var asString: String {
+    func encode() -> String {
+        return self.asString
+    }
+
+    private var asString: String {
         switch self {
         case .AlignBaselines:
             return JSONKey.AlignBaselines.asString
@@ -383,7 +401,7 @@ extension UIBaselineAdjustment {
     }
 }
 
-extension UITextBorderStyle {
+extension UITextBorderStyle: JSONConvertible {
     private enum JSONKey: JSONKeyType {
         case None
         case Line
@@ -391,7 +409,7 @@ extension UITextBorderStyle {
         case RoundedRect
     }
 
-    init(style: String) {
+    init(rawValue style: String) {
         switch style {
         case JSONKey.Bezel.asString:
             self = .Bezel
@@ -406,7 +424,11 @@ extension UITextBorderStyle {
         }
     }
 
-    var asString: String {
+    func encode() -> String {
+        return self.asString
+    }
+
+    private var asString: String {
         switch self {
         case .Bezel:
             return JSONKey.Bezel.asString
@@ -420,7 +442,7 @@ extension UITextBorderStyle {
     }
 }
 
-extension NSLineBreakMode {
+extension NSLineBreakMode: JSONConvertible {
     private enum JSONKey: JSONKeyType {
         case ByWordWrapping // Wrap at word boundaries, default
         case ByCharWrapping // Wrap at character boundaries
@@ -430,7 +452,7 @@ extension NSLineBreakMode {
         case ByTruncatingMiddle // Truncate middle of line:  "ab...yz"
     }
 
-    init(mode: String) {
+    init(rawValue mode: String) {
         switch mode {
         case JSONKey.ByWordWrapping.asString:
             self = .ByWordWrapping
@@ -449,7 +471,11 @@ extension NSLineBreakMode {
         }
     }
 
-    var asString: String {
+    func encode() -> String {
+        return self.asString
+    }
+
+    private var asString: String {
         switch self {
         case .ByWordWrapping:
             return JSONKey.ByWordWrapping.asString
@@ -468,7 +494,7 @@ extension NSLineBreakMode {
 
 }
 
-extension NSTextAlignment {
+extension NSTextAlignment: JSONConvertible {
     private enum JSONKey: JSONKeyType {
         case Left // Visually left aligned
 
@@ -478,7 +504,7 @@ extension NSTextAlignment {
         case Natural // Indicates the default alignment for script
     }
 
-    init(align: String) {
+    init(rawValue align: String) {
         switch align {
         case JSONKey.Left.asString:
             self = .Left
@@ -495,7 +521,11 @@ extension NSTextAlignment {
         }
     }
 
-    var asString: String {
+    func encode() -> String {
+        return self.asString
+    }
+
+    private var asString: String {
         switch self {
         case .Left:
             return JSONKey.Left.asString
@@ -511,7 +541,7 @@ extension NSTextAlignment {
     }
 }
 
-extension UIViewContentMode {
+extension UIViewContentMode: JSONConvertible {
 
     private enum JSONKey: JSONKeyType {
         case ScaleToFill
@@ -529,7 +559,7 @@ extension UIViewContentMode {
         case BottomRight
     }
 
-    init(mode: String) {
+    init(rawValue mode: String) {
         switch mode {
         case JSONKey.Bottom.asString:
             self = .Bottom
@@ -562,7 +592,11 @@ extension UIViewContentMode {
         }
     }
 
-    var asString: String {
+    func encode() -> String {
+        return self.asString
+    }
+
+    private var asString: String {
         switch self {
         case .Bottom:
             return JSONKey.Bottom.asString
@@ -595,7 +629,7 @@ extension UIViewContentMode {
 
 }
 
-extension UIViewTintAdjustmentMode {
+extension UIViewTintAdjustmentMode: JSONConvertible {
 
     enum JSONKey: JSONKeyType {
         case Automatic
@@ -604,7 +638,7 @@ extension UIViewTintAdjustmentMode {
         case Dimmed
     }
 
-    init(mode: String) {
+    init(rawValue mode: String) {
         switch mode {
         case JSONKey.Automatic.asString:
             self = .Automatic
@@ -617,7 +651,11 @@ extension UIViewTintAdjustmentMode {
         }
     }
 
-    var asString: String {
+    func encode() -> String {
+        return self.asString
+    }
+
+    private var asString: String {
         switch self {
         case .Automatic:
             return JSONKey.Automatic.asString
@@ -630,9 +668,9 @@ extension UIViewTintAdjustmentMode {
 }
 
 
-extension NSRange {
+extension NSRange: JSONConvertible {
 
-    init(range: [Int]) {
+    init(rawValue range: [Int]) {
         guard range.count == 2 else {
             self.init(location: 0, length: 0)
             return
@@ -641,14 +679,14 @@ extension NSRange {
         self.init(location: range[0], length: range[1])
     }
 
-    public func encode() -> [Int] {
+    func encode() -> [Int] {
         return [location, length]
     }
 }
 
-extension CGSize {
+extension CGSize: JSONConvertible {
 
-    init(size: [CGFloat]) {
+    init(rawValue size: [CGFloat]) {
         guard size.count == 2 else {
             self.init(width: 0, height: 0)
             return
@@ -657,14 +695,14 @@ extension CGSize {
         self.init(width: size[0], height: size[1])
     }
 
-    public func encode() -> [CGFloat] {
+    func encode() -> [CGFloat] {
         return [width, height]
     }
 }
 
-extension CGPoint {
+extension CGPoint: JSONConvertible {
 
-    init(point: [CGFloat]) {
+    init(rawValue point: [CGFloat]) {
         guard point.count == 2 else {
             self.init(x: 0, y: 0)
             return
@@ -678,9 +716,9 @@ extension CGPoint {
     }
 }
 
-extension UIEdgeInsets {
+extension UIEdgeInsets: JSONConvertible {
 
-    init(insets: [CGFloat]) {
+    init(rawValue insets: [CGFloat]) {
         guard insets.count == 4 else {
             self.init(top: 0, left: 0, bottom: 0, right: 0)
             return
@@ -689,7 +727,7 @@ extension UIEdgeInsets {
         self.init(top: insets[0], left: insets[1], bottom: insets[2], right: insets[3])
     }
 
-    public func encode() -> [CGFloat] {
+    func encode() -> [CGFloat] {
         return [top, left, bottom, right]
     }
 }
@@ -699,7 +737,7 @@ extension NSURL {
         case url
     }
 
-    convenience init?(json: [String: AnyObject]) {
+    convenience init?(rawValue json: JSONDictionary) {
         do {
             let urlStr: String = try json.parse(JSONKey.url)
             self.init(string: urlStr)
@@ -708,7 +746,7 @@ extension NSURL {
         }
     }
 
-    public func encode() -> JSONDictionary {
+    func encode() -> JSONDictionary {
         return [JSONKey.url.asString: self.absoluteString]
     }
 }
@@ -719,7 +757,7 @@ extension UIFont {
         case name, size
     }
 
-    convenience init?(json: [String: AnyObject]) {
+    convenience init?(json: JSONDictionary) {
         do {
             let fontName: String = try json.parse(JSONKey.name)
             let size: CGFloat = try json.parse(JSONKey.size)
@@ -729,14 +767,14 @@ extension UIFont {
         }
     }
 
-    public func encode() -> JSONDictionary {
+    func encode() -> JSONDictionary {
         return [JSONKey.name.asString: self.fontName, JSONKey.size.asString: self.pointSize]
     }
 }
 
 extension UIColor {
 
-    convenience init(hexString: String) {
+    convenience init(rawValue hexString: String) {
         let hex = hexString.stringByTrimmingCharactersInSet(NSCharacterSet.alphanumericCharacterSet().invertedSet)
         var int = UInt32()
         NSScanner(string: hex).scanHexInt(&int)
@@ -754,7 +792,7 @@ extension UIColor {
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
 
-    public func hexString() -> String {
+    func encode() -> String {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
@@ -770,7 +808,9 @@ extension UIImage {
         case name, data
     }
 
-    convenience init?(json: JSONDictionary) {
+    convenience init?(json: JSONDictionary?) {
+        guard let json = json else { return nil }
+
         if let imageName: String = try? json.parse(JSONKey.name) {
             self.init(named: imageName)
         } else if let base64String: String = try? json.parse(JSONKey.data),
@@ -781,7 +821,7 @@ extension UIImage {
         }
     }
 
-    public func encode() -> JSONDictionary? {
+    func encode() -> JSONDictionary? {
         if let data = UIImagePNGRepresentation(self) {
             return [JSONKey.data.asString: data.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)]
         }

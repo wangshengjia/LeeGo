@@ -8,20 +8,6 @@
 
 import Foundation
 
-//public protocol JSONPrintable {
-//    var descriptionInJSONFormat: String { get }
-//}
-
-func printJSON(json: JSONDictionary) {
-    do {
-        let data = try NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
-        let jsonStr = String(data: data, encoding: NSUTF8StringEncoding)!
-        print(jsonStr)
-    } catch {
-        print(error)
-    }
-}
-
 // MARK: Component Builder
 
 public protocol ComponentBuilderType: Hashable, Equatable {
@@ -176,19 +162,19 @@ public final class ComponentTarget {
     }
 }
 
-extension ComponentTarget: Encodable, Decodable {
+extension ComponentTarget: JSONConvertible {
 
     private enum JSONKey: JSONKeyType {
         case name, type, nibName, width, height, style, layout, components, outlet
     }
 
-    public convenience init?(json: JSONDictionary) {
+    public convenience init(rawValue json: JSONDictionary) throws {
         do {
             let targetClass: AnyClass = ((try? NSClassFromString(json.parse(JSONKey.name))) ?? nil) ?? UIView.self
             let nibName: String? = try? json.parse(JSONKey.nibName)
             try self.init(name: json.parse(JSONKey.name), targetClass: targetClass, nibName: nibName)
         } catch {
-            return nil
+            throw JSONConvertibleError.UnexpectedComponentNameError(json)
         }
 
         if let styleJsons: JSONDictionary = try? json.parse(JSONKey.style) {
@@ -197,12 +183,12 @@ extension ComponentTarget: Encodable, Decodable {
 
         if let componentJsons: [JSONDictionary] = try? json.parse(JSONKey.components) {
             self.components = componentJsons.flatMap({ (json) -> ComponentTarget? in
-                return ComponentTarget(json: json)
+                return try? ComponentTarget(rawValue: json)
             })
         }
 
         if let layoutJson: JSONDictionary = try? json.parse(JSONKey.layout) {
-            self.layout = Layout(json: layoutJson)
+            self.layout = Layout(rawValue: layoutJson)
         }
 
         self.width = try? json.parse(JSONKey.width)
@@ -210,8 +196,7 @@ extension ComponentTarget: Encodable, Decodable {
         self.LGOutletKey = try? json.parse(JSONKey.outlet)
     }
 
-    // TODO: decode/encode with custom error handling
-    public func encode() -> JSONDictionary? {
+    public func encode() -> JSONDictionary {
         var json: JSONDictionary = [JSONKey.name.asString: self.name, JSONKey.type.asString: String(self.targetClass)]
 
         if let nibName = self.nibName {
@@ -226,8 +211,8 @@ extension ComponentTarget: Encodable, Decodable {
             json[JSONKey.height.asString] = height
         }
 
-        if let layout = self.layout, let layoutJson = layout.encode() {
-            json[JSONKey.layout.asString] = layoutJson
+        if let layout = self.layout {
+            json[JSONKey.layout.asString] = layout.encode()
         }
 
         if !self.style.isEmpty {

@@ -12,7 +12,6 @@ enum JSONParseError: ErrorType {
     case UnexpectedKeyError, MismatchedTypeError
 }
 
-
-enum NetworkingError: ErrorType {
-    case JsonSerializationError
+enum JSONConvertibleError: ErrorType {
+    case UnexpectedComponentNameError(JSONDictionary)
 }

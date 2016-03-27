@@ -172,7 +172,7 @@ class ConvertibleSpec: QuickSpec {
                     let json = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as? JSONDictionary
 
                     // When
-                    let layout = Layout(json: json!)
+                    let layout = Layout(rawValue: json!)
 
                     // Then
                     expect(layout) == mockLayout
@@ -193,7 +193,7 @@ class ConvertibleSpec: QuickSpec {
                     let mockJson = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as! JSONDictionary
 
                     // When
-                    let json = layout.encode()!
+                    let json = layout.encode()
 
                     // Then
                     expect(NSDictionary(dictionary: json)) == mockJson
@@ -213,7 +213,7 @@ class ConvertibleSpec: QuickSpec {
                     let json = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as? JSONDictionary
 
                     // When
-                    let component = ComponentTarget(json: json!)
+                    let component = try ComponentTarget(rawValue: json!)
 
                     // Then
                     expect(component) == mockComponent
@@ -228,7 +228,7 @@ class ConvertibleSpec: QuickSpec {
                 let component = ComponentBuilder.article.componentTarget()
 
                 // When
-                let json = component.encode()!
+                let json = component.encode()
 
                 // Then
                 do {

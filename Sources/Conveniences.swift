@@ -108,3 +108,13 @@ public extension Array where Element: NSAttributedString {
     }
 }
 
+
+func printJSON(json: JSONDictionary) {
+    do {
+        let data = try NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
+        let jsonStr = String(data: data, encoding: NSUTF8StringEncoding)
+        print(jsonStr)
+    } catch {
+        print(error)
+    }
+}
