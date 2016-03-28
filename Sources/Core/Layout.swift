@@ -125,18 +125,18 @@ public struct Layout: Equatable {
 }
 
 
-extension Layout: Encodable, Decodable {
+extension Layout: JSONConvertible {
 
     private enum JSONKey: JSONKeyType {
         case formats, options, metrics
     }
 
-    public init?(json: JSONDictionary) {
+    public init(rawValue json: JSONDictionary) {
         let formats: [String] = (try? json.parse(JSONKey.formats)) ?? []
 
         var options: NSLayoutFormatOptions?
         if let optionsStr: [String] = (try? json.parse(JSONKey.options)) {
-            options = NSLayoutFormatOptions(options: optionsStr)
+            options = NSLayoutFormatOptions(rawValue: optionsStr)
         }
 
         let metrics: [String: CGFloat] = (try? json.parse(JSONKey.metrics)) ?? [:]
@@ -144,7 +144,7 @@ extension Layout: Encodable, Decodable {
         self.init(formats, options: options ?? .DirectionLeadingToTrailing, metrics: LayoutMetrics(customMetrics: metrics))
     }
 
-    public func encode() -> JSONDictionary? {
+    public func encode() -> JSONDictionary {
         return [JSONKey.formats.asString: formats, JSONKey.options.asString: options.encode(), JSONKey.metrics.asString: metrics.encode()]
     }
 }

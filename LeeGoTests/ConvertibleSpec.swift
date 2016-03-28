@@ -67,9 +67,9 @@ class ConvertibleSpec: QuickSpec {
                                        .shadowOffset(CGSize(width: 10, height: 20)),
                                        .highlightedTextColor(UIColor.clearColor()),
                                        .attributedText([
-                                        [kCustomAttributeKeyIdentifier: "M", NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
-                                        [kCustomAttributeKeyIdentifier: "title", kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 20)!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
-                                        [kCustomAttributeKeyIdentifier: "nature", NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
+                                        [NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
+                                        [kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 20)!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
+                                        [NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
                                         ]),
                                        .text("Default Text"),
                                        .borderStyle(.Bezel),
@@ -172,7 +172,7 @@ class ConvertibleSpec: QuickSpec {
                     let json = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as? JSONDictionary
 
                     // When
-                    let layout = Layout(json: json!)
+                    let layout = Layout(rawValue: json!)
 
                     // Then
                     expect(layout) == mockLayout
@@ -193,7 +193,7 @@ class ConvertibleSpec: QuickSpec {
                     let mockJson = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as! JSONDictionary
 
                     // When
-                    let json = layout.encode()!
+                    let json = layout.encode()
 
                     // Then
                     expect(NSDictionary(dictionary: json)) == mockJson
@@ -213,10 +213,13 @@ class ConvertibleSpec: QuickSpec {
                     let json = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as? JSONDictionary
 
                     // When
-                    let component = ComponentTarget(json: json!)
+                    let component = try ComponentTarget(rawValue: json!)
 
                     // Then
-                    expect(component) == mockComponent
+                    expect(component.name) == mockComponent.name
+                    expect(component.layout) == mockComponent.layout
+                    expect(component.width ?? 0) == mockComponent.width ?? 0
+                    expect(component.height ?? 0) == mockComponent.height ?? 0
                 } catch {
                     fail("\(error)")
                 }
@@ -228,7 +231,7 @@ class ConvertibleSpec: QuickSpec {
                 let component = ComponentBuilder.article.componentTarget()
 
                 // When
-                let json = component.encode()!
+                let json = component.encode()
 
                 // Then
                 do {

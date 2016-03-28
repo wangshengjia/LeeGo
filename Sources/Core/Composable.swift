@@ -50,8 +50,6 @@ extension Composable {
                 component.addSubview(view)
                 view.componentDidAwake()
             }
-
-            // TODO: add & expose componentAwakeFrom...
         }
 
         //TODO: sort component's subviews to have as same order as components

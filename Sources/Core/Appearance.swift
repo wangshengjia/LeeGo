@@ -152,11 +152,11 @@ public enum Appearance {
             }
         case (let .attributedText(attributes), let view):
             if let label = view as? UILabel {
-                label.attributedText = attributedStringFromList(attributes)
+                label.setAttributedString(with: attributes)
             } else if let textField = view as? UITextField {
-                textField.attributedText = attributedStringFromList(attributes)
+                textField.setAttributedString(with: attributes)
             } else if let textView = view as? UITextView {
-                textView.attributedText = attributedStringFromList(attributes)
+                textView.setAttributedString(with: attributes)
             }
         case (let .lineBreakMode(mode), let view):
             if let label = view as? UILabel {
@@ -201,7 +201,7 @@ public enum Appearance {
         case (let .placeholder(text), let textField as UITextField):
             textField.placeholder = text
         case (let .attributedPlaceholder(attributes), let textField as UITextField):
-            textField.attributedPlaceholder = attributedStringFromList(attributes)
+            textField.setAttributedPlaceholder(with: attributes)
         case (let .clearsOnBeginEditing(should), let textField as UITextField):
             textField.clearsOnBeginEditing = should
         case (let .background(image), let textField as UITextField):
@@ -227,7 +227,7 @@ public enum Appearance {
         case (let .buttonBackgroundImage(image, state), let button as UIButton):
             button.setBackgroundImage(image, forState: state)
         case (let .buttonAttributedTitle(attributes, state), let button as UIButton):
-            button.setAttributedTitle(attributedStringFromList(attributes), forState: state)
+            button.setAttributedButtonTitle(with: attributes, state: state)
         case (let .contentEdgeInsets(insets), let button as UIButton):
             button.contentEdgeInsets = insets
         case (let .titleEdgeInsets(insets), let button as UIButton):
@@ -322,12 +322,7 @@ public enum Appearance {
         return strSelf
     }
 
-    private func attributedStringFromList(attrList: [Attributes]) -> NSAttributedString? {
-        return attrList.flatMap({ (attribute) -> NSAttributedString? in
-            // TODO: is that possible to take care this default "space" ??
-            return NSAttributedString(string: (attribute[kCustomAttributeDefaultText] as? String) ?? " ", attributes: attribute)
-        }).combineToAttributedString()
-    }
+    
 }
 
 extension Appearance: Hashable {
@@ -337,11 +332,10 @@ extension Appearance: Hashable {
 }
 
 public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
-    // TODO: how to implement the real equatable
     return lhs.toString() == rhs.toString()
 }
 
-extension Appearance: Encodable, Decodable {
+extension Appearance: JSONConvertible {
 
     private enum JSONKey: JSONKeyType {
         case userInteractionEnabled, translatesAutoresizingMaskIntoConstraints, backgroundColor, tintColor, tintAdjustmentMode, cornerRadius, borderWidth, borderColor, multipleTouchEnabled, exclusiveTouch, clipsToBounds, alpha, opaque, clearsContextBeforeDrawing, hidden, contentMode
@@ -382,17 +376,17 @@ extension Appearance: Encodable, Decodable {
             return [key: value]
         }).map({
             json -> Appearance in
-            return Appearance(json: json)!
+            return Appearance(rawValue: json)
         })
     }
 
-    public init?(json: JSONDictionary) {
-
-        guard let tuple = json.first else {
-            return nil
-        }
+    init(rawValue json: JSONDictionary?) {
 
         self = .none
+
+        guard let tuple = json?.first else {
+            return
+        }
 
         switch tuple {
         case let (JSONKey.userInteractionEnabled.asString, value as Bool):
@@ -400,17 +394,17 @@ extension Appearance: Encodable, Decodable {
         case let (JSONKey.translatesAutoresizingMaskIntoConstraints.asString, value as Bool):
             self = .translatesAutoresizingMaskIntoConstraints(value)
         case let (JSONKey.backgroundColor.asString, value as String):
-            self = .backgroundColor(UIColor(hexString: value))
+            self = .backgroundColor(UIColor(rawValue: value))
         case let (JSONKey.tintColor.asString, value as String):
-            self = .tintColor(UIColor(hexString: value))
+            self = .tintColor(UIColor(rawValue: value))
         case let (JSONKey.tintAdjustmentMode.asString, value as String):
-            self = .tintAdjustmentMode(UIViewTintAdjustmentMode(mode: value))
+            self = .tintAdjustmentMode(UIViewTintAdjustmentMode(rawValue: value))
         case let (JSONKey.cornerRadius.asString, value as CGFloat):
             self = .cornerRadius(value)
         case let (JSONKey.borderWidth.asString, value as CGFloat):
             self = .borderWidth(value)
         case let (JSONKey.borderColor.asString, value as String):
-            self = .borderColor(UIColor(hexString: value))
+            self = .borderColor(UIColor(rawValue: value))
         case let (JSONKey.multipleTouchEnabled.asString, value as Bool):
             self = .multipleTouchEnabled(value)
         case let (JSONKey.exclusiveTouch.asString, value as Bool):
@@ -426,7 +420,7 @@ extension Appearance: Encodable, Decodable {
         case let (JSONKey.hidden.asString, value as Bool):
             self = .hidden(value)
         case let (JSONKey.contentMode.asString, value as String):
-            self = .contentMode(UIViewContentMode(mode: value))
+            self = .contentMode(UIViewContentMode(rawValue: value))
 
         case let (JSONKey.enabled.asString, value as Bool):
             self = .enabled(value)
@@ -440,27 +434,27 @@ extension Appearance: Encodable, Decodable {
                 self = .font(font)
             }
         case let (JSONKey.textColor.asString, value as String):
-            self = .textColor(UIColor(hexString: value))
+            self = .textColor(UIColor(rawValue: value))
         case let (JSONKey.textAlignment.asString, value as String):
-            self = .textAlignment(NSTextAlignment(align: value))
+            self = .textAlignment(NSTextAlignment(rawValue: value))
         case let (JSONKey.numberOfLines.asString, value as Int):
             self = .numberOfLines(value)
         case let (JSONKey.lineBreakMode.asString, value as String):
-            self = .lineBreakMode(NSLineBreakMode(mode: value))
+            self = .lineBreakMode(NSLineBreakMode(rawValue: value))
         case let (JSONKey.selectedRange.asString, value as [Int]):
-            self = .selectedRange(NSRange(range: value))
+            self = .selectedRange(NSRange(rawValue: value))
         case let (JSONKey.editable.asString, value as Bool):
             self = .editable(value)
         case let (JSONKey.selectable.asString, value as Bool):
             self = .selectable(value)
         case let (JSONKey.dataDetectorTypes.asString, value as [String]):
-            self = .dataDetectorTypes(UIDataDetectorTypes(types: value))
+            self = .dataDetectorTypes(UIDataDetectorTypes(rawValue: value))
         case let (JSONKey.allowsEditingTextAttributes.asString, value as Bool):
             self = .allowsEditingTextAttributes(value)
         case let (JSONKey.clearsOnInsertion.asString, value as Bool):
             self = .clearsOnInsertion(value)
         case let (JSONKey.textContainerInset.asString, value as [CGFloat]):
-            self = .textContainerInset(UIEdgeInsets(insets: value))
+            self = .textContainerInset(UIEdgeInsets(rawValue: value))
         case let (JSONKey.linkTextAttributes.asString, value as Attributes):
             self = .linkTextAttributes(Appearance.decodeAttributes(value))
         case let (JSONKey.lineFragmentPadding.asString, value as CGFloat):
@@ -470,22 +464,22 @@ extension Appearance: Encodable, Decodable {
         case let (JSONKey.adjustsFontSizeToFitWidth.asString, value as Bool):
             self = .adjustsFontSizeToFitWidth(value)
         case let (JSONKey.baselineAdjustment.asString, value as String):
-            self = .baselineAdjustment(UIBaselineAdjustment(mode: value))
+            self = .baselineAdjustment(UIBaselineAdjustment(rawValue: value))
         case let (JSONKey.shadowColor.asString, value as String):
-            self = .shadowColor(UIColor(hexString: value))
+            self = .shadowColor(UIColor(rawValue: value))
         case let (JSONKey.shadowColor.asString, value as String):
-            self = .shadowColor(UIColor(hexString: value))
+            self = .shadowColor(UIColor(rawValue: value))
         case let (JSONKey.shadowOffset.asString, value as [CGFloat]):
-            self = .shadowOffset(CGSize(size: value))
+            self = .shadowOffset(CGSize(rawValue: value))
         case let (JSONKey.highlightedTextColor.asString, value as String):
-            self = .highlightedTextColor(UIColor(hexString: value))
+            self = .highlightedTextColor(UIColor(rawValue: value))
         case let (JSONKey.attributedText.asString, value as [Attributes]):
             self = .attributedText(Appearance.decodeAttributes(value))
 
         case let (JSONKey.text.asString, value as String):
             self = .text(value)
         case let (JSONKey.borderStyle.asString, value as String):
-            self = .borderStyle(UITextBorderStyle(style: value))
+            self = .borderStyle(UITextBorderStyle(rawValue: value))
         case let (JSONKey.defaultTextAttributes.asString, value as Attributes):
             self = .defaultTextAttributes(Appearance.decodeAttributes(value))
         case let (JSONKey.placeholder.asString, value as String):
@@ -505,48 +499,48 @@ extension Appearance: Encodable, Decodable {
         case let (JSONKey.typingAttributes.asString, value as Attributes):
             self = .typingAttributes(Appearance.decodeAttributes(value))
         case let (JSONKey.clearButtonMode.asString, value as String):
-            self = .clearButtonMode(UITextFieldViewMode(mode: value))
+            self = .clearButtonMode(UITextFieldViewMode(rawValue: value))
 
         case let (JSONKey.buttonTitle.asString, value as JSONDictionary):
             if let title:String = try? value.parse("title"),
                 let states: [String] = try? value.parse("state") {
-                self = .buttonTitle(title, UIControlState(states: states))
+                self = .buttonTitle(title, UIControlState(rawValue: states))
             }
         case let (JSONKey.buttonTitleColor.asString, value as JSONDictionary):
             if let titleColor:String = try? value.parse("color"),
                 let states: [String] = try? value.parse("state") {
-                self = .buttonTitleColor(UIColor(hexString: titleColor), UIControlState(states: states))
+                self = .buttonTitleColor(UIColor(rawValue: titleColor), UIControlState(rawValue: states))
             }
         case let (JSONKey.buttonTitleShadowColor.asString, value as JSONDictionary):
             if let titleShadowColor:String = try? value.parse("color"),
                 let states: [String] = try? value.parse("state") {
-                self = .buttonTitleShadowColor(UIColor(hexString: titleShadowColor), UIControlState(states: states))
+                self = .buttonTitleShadowColor(UIColor(rawValue: titleShadowColor), UIControlState(rawValue: states))
             }
         case let (JSONKey.buttonImage.asString, value as JSONDictionary):
             if let imageJson: JSONDictionary = try? value.parse("image"),
                 let states: [String] = try? value.parse("state"),
                 let image = UIImage(json: imageJson) {
-                self = .buttonImage(image, UIControlState(states: states))
+                self = .buttonImage(image, UIControlState(rawValue: states))
             }
         case let (JSONKey.buttonBackgroundImage.asString, value as JSONDictionary):
             if let imageJson: JSONDictionary = try? value.parse("image"),
                 let states: [String] = try? value.parse("state"),
                 let image = UIImage(json: imageJson) {
-                self = .buttonBackgroundImage(image, UIControlState(states: states))
+                self = .buttonBackgroundImage(image, UIControlState(rawValue: states))
             }
         case let (JSONKey.buttonAttributedTitle.asString, value as JSONDictionary):
             if let titleAttributes: [Attributes] = try? value.parse("titleAttributes"),
                 let states: [String] = try? value.parse("state") {
-                self = .buttonAttributedTitle(Appearance.decodeAttributes(titleAttributes), UIControlState(states: states))
+                self = .buttonAttributedTitle(Appearance.decodeAttributes(titleAttributes), UIControlState(rawValue: states))
             }
         case let (JSONKey.contentEdgeInsets.asString, value as [CGFloat]):
-            self = .contentEdgeInsets(UIEdgeInsets(insets: value))
+            self = .contentEdgeInsets(UIEdgeInsets(rawValue: value))
         case let (JSONKey.titleEdgeInsets.asString, value as [CGFloat]):
-            self = .titleEdgeInsets(UIEdgeInsets(insets: value))
+            self = .titleEdgeInsets(UIEdgeInsets(rawValue: value))
         case let (JSONKey.reversesTitleShadowWhenHighlighted.asString, value as Bool):
             self = .reversesTitleShadowWhenHighlighted(value)
         case let (JSONKey.imageEdgeInsets.asString, value as [CGFloat]):
-            self = .imageEdgeInsets(UIEdgeInsets(insets: value))
+            self = .imageEdgeInsets(UIEdgeInsets(rawValue: value))
         case let (JSONKey.adjustsImageWhenHighlighted.asString, value as Bool):
             self = .adjustsImageWhenHighlighted(value)
         case let (JSONKey.adjustsImageWhenDisabled.asString, value as Bool):
@@ -560,11 +554,11 @@ extension Appearance: Encodable, Decodable {
         case let (JSONKey.scrollEnabled.asString, value as Bool):
             self = .scrollEnabled(value)
         case let (JSONKey.contentOffset.asString, value as [CGFloat]):
-            self = .contentOffset(CGPoint(point: value))
+            self = .contentOffset(CGPoint(rawValue: value))
         case let (JSONKey.contentSize.asString, value as [CGFloat]):
-            self = .contentSize(CGSize(size: value))
+            self = .contentSize(CGSize(rawValue: value))
         case let (JSONKey.contentInset.asString, value as [CGFloat]):
-            self = .contentInset(UIEdgeInsets(insets: value))
+            self = .contentInset(UIEdgeInsets(rawValue: value))
         case let (JSONKey.directionalLockEnabled.asString, value as Bool):
             self = .directionalLockEnabled(value)
         case let (JSONKey.bounces.asString, value as Bool):
@@ -580,9 +574,9 @@ extension Appearance: Encodable, Decodable {
         case let (JSONKey.showsVerticalScrollIndicator.asString, value as Bool):
             self = .showsVerticalScrollIndicator(value)
         case let (JSONKey.scrollIndicatorInsets.asString, value as [CGFloat]):
-            self = .scrollIndicatorInsets(UIEdgeInsets(insets: value))
+            self = .scrollIndicatorInsets(UIEdgeInsets(rawValue: value))
         case let (JSONKey.indicatorStyle.asString, value as String):
-            self = .indicatorStyle(UIScrollViewIndicatorStyle(style: value))
+            self = .indicatorStyle(UIScrollViewIndicatorStyle(rawValue: value))
         case let (JSONKey.decelerationRate.asString, value as CGFloat):
             self = .decelerationRate(value)
         case let (JSONKey.delaysContentTouches.asString, value as Bool):
@@ -600,7 +594,7 @@ extension Appearance: Encodable, Decodable {
         case let (JSONKey.scrollsToTop.asString, value as Bool):
             self = .scrollsToTop(value)
         case let (JSONKey.keyboardDismissMode.asString, value as String):
-            self = .keyboardDismissMode(UIScrollViewKeyboardDismissMode(mode: value))
+            self = .keyboardDismissMode(UIScrollViewKeyboardDismissMode(rawValue: value))
 
         default:
             assertionFailure("Can't decode json \(json) to Appearance")
@@ -614,17 +608,17 @@ extension Appearance: Encodable, Decodable {
         case let .translatesAutoresizingMaskIntoConstraints(value):
             return [JSONKey.translatesAutoresizingMaskIntoConstraints.asString: value]
         case let .backgroundColor(value):
-            return [JSONKey.backgroundColor.asString: value.hexString()]
+            return [JSONKey.backgroundColor.asString: value.encode()]
         case let .tintColor(value):
-            return [JSONKey.tintColor.asString: value.hexString()]
+            return [JSONKey.tintColor.asString: value.encode()]
         case let .tintAdjustmentMode(value):
-            return [JSONKey.tintAdjustmentMode.asString: value.asString]
+            return [JSONKey.tintAdjustmentMode.asString: value.encode()]
         case let .cornerRadius(value):
             return [JSONKey.cornerRadius.asString: value]
         case let .borderWidth(value):
             return [JSONKey.borderWidth.asString: value]
         case let .borderColor(value):
-            return [JSONKey.borderColor.asString: value.hexString()]
+            return [JSONKey.borderColor.asString: value.encode()]
         case let .multipleTouchEnabled(value):
             return [JSONKey.multipleTouchEnabled.asString: value]
         case let .exclusiveTouch(value):
@@ -640,7 +634,7 @@ extension Appearance: Encodable, Decodable {
         case let .hidden(value):
             return [JSONKey.hidden.asString: value]
         case let .contentMode(value):
-            return [JSONKey.contentMode.asString: value.asString]
+            return [JSONKey.contentMode.asString: value.encode()]
         case let .enabled(value):
             return [JSONKey.enabled.asString: value]
         case let .selected(value):
@@ -650,13 +644,13 @@ extension Appearance: Encodable, Decodable {
         case let .font(value):
             return [JSONKey.font.asString: value.encode()]
         case let .textColor(value):
-            return [JSONKey.textColor.asString: value.hexString()]
+            return [JSONKey.textColor.asString: value.encode()]
         case let .textAlignment(value):
-            return [JSONKey.textAlignment.asString: value.asString]
+            return [JSONKey.textAlignment.asString: value.encode()]
         case let .numberOfLines(value):
             return [JSONKey.numberOfLines.asString: value]
         case let .lineBreakMode(value):
-            return [JSONKey.lineBreakMode.asString: value.asString]
+            return [JSONKey.lineBreakMode.asString: value.encode()]
         case let .selectedRange(value):
             return [JSONKey.selectedRange.asString: value.encode()]
         case let .editable(value):
@@ -680,19 +674,19 @@ extension Appearance: Encodable, Decodable {
         case let .adjustsFontSizeToFitWidth(value):
             return [JSONKey.adjustsFontSizeToFitWidth.asString: value]
         case let .baselineAdjustment(value):
-            return [JSONKey.baselineAdjustment.asString: value.asString]
+            return [JSONKey.baselineAdjustment.asString: value.encode()]
         case let .shadowColor(value):
-            return [JSONKey.shadowColor.asString: value.hexString()]
+            return [JSONKey.shadowColor.asString: value.encode()]
         case let .shadowOffset(value):
             return [JSONKey.shadowOffset.asString: value.encode()]
         case let .highlightedTextColor(value):
-            return [JSONKey.highlightedTextColor.asString: value.hexString()]
+            return [JSONKey.highlightedTextColor.asString: value.encode()]
         case let .attributedText(value):
             return [JSONKey.attributedText.asString: Appearance.encodeAttributes(value)]
         case let .text(value):
             return [JSONKey.text.asString: value]
         case let .borderStyle(value):
-            return [JSONKey.borderStyle.asString: value.asString]
+            return [JSONKey.borderStyle.asString: value.encode()]
         case let .defaultTextAttributes(value):
             return [JSONKey.defaultTextAttributes.asString: Appearance.encodeAttributes(value)]
         case let .placeholder(value):
@@ -712,13 +706,13 @@ extension Appearance: Encodable, Decodable {
         case let .typingAttributes(value):
             return [JSONKey.typingAttributes.asString: Appearance.encodeAttributes(value)]
         case let .clearButtonMode(value):
-            return [JSONKey.clearButtonMode.asString: value.asString]
+            return [JSONKey.clearButtonMode.asString: value.encode()]
         case let .buttonTitle(title, state):
             return [JSONKey.buttonTitle.asString: ["title": title, "state": state.encode()]]
         case let .buttonTitleColor(color, state):
-            return [JSONKey.buttonTitleColor.asString: ["color": color.hexString(), "state": state.encode()]]
+            return [JSONKey.buttonTitleColor.asString: ["color": color.encode(), "state": state.encode()]]
         case let .buttonTitleShadowColor(color, state):
-            return [JSONKey.buttonTitleShadowColor.asString: ["color": color.hexString(), "state": state.encode()]]
+            return [JSONKey.buttonTitleShadowColor.asString: ["color": color.encode(), "state": state.encode()]]
         case let .buttonImage(image, state):
             if let image = image.encode() {
                 return [JSONKey.buttonImage.asString: ["image": image, "state": state.encode()]]
@@ -772,7 +766,7 @@ extension Appearance: Encodable, Decodable {
         case let .scrollIndicatorInsets(value):
             return [JSONKey.scrollIndicatorInsets.asString: value.encode()]
         case let .indicatorStyle(value):
-            return [JSONKey.indicatorStyle.asString: value.asString]
+            return [JSONKey.indicatorStyle.asString: value.encode()]
         case let .decelerationRate(value):
             return [JSONKey.decelerationRate.asString: value]
         case let .delaysContentTouches(value):
@@ -790,12 +784,12 @@ extension Appearance: Encodable, Decodable {
         case let .scrollsToTop(value):
             return [JSONKey.scrollsToTop.asString: value]
         case let .keyboardDismissMode(value):
-            return [JSONKey.keyboardDismissMode.asString: value.asString]
+            return [JSONKey.keyboardDismissMode.asString: value.encode()]
         default:
             break
         }
 
-        assertionFailure("")
+        assertionFailure("Can't encode appearance \(self) to JSON")
         return nil
     }
 }
@@ -824,7 +818,7 @@ extension Appearance {
             if let font = value.element.1 as? UIFont where value.element.0 == NSFontAttributeName {
                 attributesEncoded.updateValue(font.encode(), forKey: value.element.0)
             } else if let color = value.element.1 as? UIColor {
-                attributesEncoded.updateValue(color.hexString(), forKey: value.element.0)
+                attributesEncoded.updateValue(color.encode(), forKey: value.element.0)
             } else if let url = value.element.1 as? NSURL {
                 attributesEncoded.updateValue(url.encode(), forKey: value.element.0)
             }
@@ -842,7 +836,7 @@ extension Appearance {
                 let font = UIFont(json: json) {
                 attributesDecoded.updateValue(font, forKey: value.element.0)
             } else if let hexString = value.element.1 as? String where value.element.0 == NSForegroundColorAttributeName || value.element.0 == NSBackgroundColorAttributeName {
-                attributesDecoded.updateValue(UIColor(hexString: hexString), forKey: value.element.0)
+                attributesDecoded.updateValue(UIColor(rawValue: hexString), forKey: value.element.0)
             } else if let urlPath = value.element.1 as? String where value.element.0 == NSLinkAttributeName, let url = NSURL(string: urlPath) {
                 attributesDecoded.updateValue(url, forKey: value.element.0)
             }

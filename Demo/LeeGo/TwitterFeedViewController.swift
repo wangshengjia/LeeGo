@@ -72,5 +72,4 @@ class TwitterFeedViewController: UICollectionViewController, UICollectionViewDel
 
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
     }
-    
 }

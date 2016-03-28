@@ -30,7 +30,7 @@ class Tweet {
         text = json["text"] as? String ?? ""
         retweetCount = json["retweet_count"] as? Int ?? 0
         favouritesCount = json["user"]!["favourites_count"] as? Int ?? 0
-        createdAt = NSDate() // todo: json["created_at"] as? String
+        createdAt = NSDate()
         userName = json["user"]!["name"] as? String ?? ""
         screenName = json["user"]!["screen_name"] as? String ?? ""
         avatarUrl = NSURL(string: (json["profile_image_url_https"] as? String) ?? "")

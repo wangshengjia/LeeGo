@@ -1,1859 +1,731 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>47</string>
-	<key>objects</key>
-	<dict>
-		<key>0310AF23843A144F35E42161D362C5E0</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Tests.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>031A8E7B0FE9BB960165EA55D98F597B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3E4E89230EF59BC255123B67864ACF77</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>036B06FE8645010685DF7F791EEAF057</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8579D5C6DF635DD3A17EC230711F6080</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>086FE782F24BAD864479059DE066B8B3</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>D331F76551342921CF3FE269732213A0</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/Pods-LeeGo-Demo/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.3</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/Pods-LeeGo-Demo/Pods-LeeGo-Demo.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>Pods_LeeGo_Demo</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>09AD19EEB80A7C22E4F4DB95354FF3E8</key>
-		<dict>
-			<key>fileRef</key>
-			<string>10155A592E2A340BDFDC58EC0C77CF4C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>0B664FED7A3472558804B6CD86FF42FB</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>E01917EF13C4B1CCE5E45F81ED54353C</string>
-			<key>buildPhases</key>
-			<array>
-				<string>317BAD2B359D8C07D34A39C1A8A24745</string>
-				<string>0D02B8CE6F1068F4B5B539A1B46532B3</string>
-				<string>A1811972ADF5DA7D6CC4CE616003C9E6</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>AE0813EC5BC41D4638C747CB09A9B866</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-LeeGo-Tests</string>
-			<key>productName</key>
-			<string>Pods-LeeGo-Tests</string>
-			<key>productReference</key>
-			<string>458982613EB488ACFD5999A8243342BD</string>
-			<key>productType</key>
-			<string>com.apple.product-type.framework</string>
-		</dict>
-		<key>0CFE6BF66D567B12FF82372A78405F29</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0D02B8CE6F1068F4B5B539A1B46532B3</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>B21BA0243D1960220B34DFE9659A7FCD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>10155A592E2A340BDFDC58EC0C77CF4C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Composable.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>10DE1947DAC0ED28F6C0A9F9BD75D546</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>RELEASE=1</string>
-				</array>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.3</string>
-				<key>STRIP_INSTALLED_PRODUCT</key>
-				<string>NO</string>
-				<key>SYMROOT</key>
-				<string>${SRCROOT}/../build</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>14460E7AC7C0BA9BBDA3E04627382A82</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Errors.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>16184A6FF08B352608A4CDE61DF70922</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Conveniences.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1A8EDB233BF505225F65B6EC1C09EC38</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Demo-resources.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2297991A0BDCE679E2026763A61C167A</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>6B9B5F50E3E44EB7877B251F7D37882F</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/Pods-LeeGo-Demo/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.3</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/Pods-LeeGo-Demo/Pods-LeeGo-Demo.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>Pods_LeeGo_Demo</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Onone</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>22C193B081114FD7914717C448580DA7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>16184A6FF08B352608A4CDE61DF70922</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>24B4B51F15FB78D96903078C9F74B6BE</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>0310AF23843A144F35E42161D362C5E0</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/Pods-LeeGo-Tests/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.3</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/Pods-LeeGo-Tests/Pods-LeeGo-Tests.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>Pods_LeeGo_Tests</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Onone</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>26E96127666FB19904B5A7D81709C292</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>ComponentTarget.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>28AA0691CCF325C3CD5E7CCC353CBFCC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Configurable.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2A8D4BA7133C37FEF5DDF18C5FA9FC82</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Component.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2C315F1B22C5E611FC4AF329FA384EC9</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>A39C80B3B6D464C936E78752FB906AEA</string>
-				<string>2A8D4BA7133C37FEF5DDF18C5FA9FC82</string>
-				<string>26E96127666FB19904B5A7D81709C292</string>
-				<string>A57CF57C0EFEC2ABDFDDA50DF21E7E52</string>
-				<string>10155A592E2A340BDFDC58EC0C77CF4C</string>
-				<string>28AA0691CCF325C3CD5E7CCC353CBFCC</string>
-				<string>D994F16F2877B291F7ACC2B9DB9CAD8E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Core</string>
-			<key>path</key>
-			<string>Core</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2C7EECA597CEA2E7EA268609B2130239</key>
-		<dict>
-			<key>fileRef</key>
-			<string>26E96127666FB19904B5A7D81709C292</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>2D6BC63451C4C61FDBD1299C90ACFEC7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EEC880A635F0CB9DF04E7F08DF17AB65</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>2D8E8EC45A3A1A1D94AE762CB5028504</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>552D02D5BA751AC2E8790D2811D496CA</string>
-				<string>10DE1947DAC0ED28F6C0A9F9BD75D546</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>2E1A8B8AB3696C9C17A3E1C92F855213</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>46766AEA2ECD1090C180C5B80A053504</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/LeeGo/LeeGo-prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/LeeGo/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.3</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/LeeGo/LeeGo.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>PRODUCT_NAME</key>
-				<string>LeeGo</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>2E33C7178EB8F33BB052AC529B2A1890</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>3BFD81029BA6A19EFB30391ABD067EDB</string>
-				<string>32EF7DFAFDEFEB0ED3D09A3EAF29FC75</string>
-				<string>B854AB8DB9D6C09112DDFE5DAA9E8E99</string>
-				<string>16184A6FF08B352608A4CDE61DF70922</string>
-				<string>14460E7AC7C0BA9BBDA3E04627382A82</string>
-				<string>8E400EE07976E3A2CF065F3EA0BA7A8D</string>
-				<string>8579D5C6DF635DD3A17EC230711F6080</string>
-				<string>2C315F1B22C5E611FC4AF329FA384EC9</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Sources</string>
-			<key>path</key>
-			<string>Sources</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>2F3387EC1B26F15BDEA6CE8013EC8A94</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>317BAD2B359D8C07D34A39C1A8A24745</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>9C48CC0582C601F8A2D3226E65FB5581</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>328FB4A18F6335B46C32450FEC44E792</key>
-		<dict>
-			<key>fileRef</key>
-			<string>28AA0691CCF325C3CD5E7CCC353CBFCC</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>32EF7DFAFDEFEB0ED3D09A3EAF29FC75</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Cell.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>34A5DBA56C1D7D66C33C06414CF490C2</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BA17BA1930D8A0602957F52E4CA11E3E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Development Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>384BB9AB2BC1B7F3E71B15335C8CABA1</key>
-		<dict>
-			<key>fileRef</key>
-			<string>B854AB8DB9D6C09112DDFE5DAA9E8E99</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>3AECB580E1DE1D86E13798A2C75E8F6A</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>LeeGo</string>
-			<key>target</key>
-			<string>5987B10EAAFBCA402D36B9155FDF0039</string>
-			<key>targetProxy</key>
-			<string>9A5393B1D3928A1C7EE27313B94AD992</string>
-		</dict>
-		<key>3B06D1F4E6C83C10C6CBA9A0342A6846</key>
-		<dict>
-			<key>fileRef</key>
-			<string>2A8D4BA7133C37FEF5DDF18C5FA9FC82</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>3BFD81029BA6A19EFB30391ABD067EDB</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>AutoLayout.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3E4E89230EF59BC255123B67864ACF77</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>3E7D41BCE1E154E78344C0747938C05A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>3E7F05890FC6EF2F3715506B1C9F8138</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>LeeGo-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>458982613EB488ACFD5999A8243342BD</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Pods_LeeGo_Tests.framework</string>
-			<key>path</key>
-			<string>Pods_LeeGo_Tests.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>46766AEA2ECD1090C180C5B80A053504</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>LeeGo.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>4BC20C37FE8A3A457406D1CEB81EA173</key>
-		<dict>
-			<key>fileRef</key>
-			<string>14460E7AC7C0BA9BBDA3E04627382A82</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>4DC15E603FDA3614ACAEE27D1E04F854</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>E7FEFA7F4C098EE0E572BEE9341264B6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>4E19B991A2AF9C56910287017577B82A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>AAE8F1C2C73542F5B5A298440E4F9F09</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>530C0C4BEDD04866092D470D69B164EF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>0CFE6BF66D567B12FF82372A78405F29</string>
-				<string>900736952C69A83CD5D7CFD2DAEA2B3E</string>
-				<string>93094AA8F6AEE8EDD7F02425AAB7DD9C</string>
-				<string>974ACBE0B15827CCD7406FBF06C861C6</string>
-				<string>7F594467F158EEFC6469A26AABAA621A</string>
-				<string>AFE9D8F4FB39907E16CF4AE77D473366</string>
-				<string>C914B873974DFFEE32C55ED8402248A1</string>
-				<string>CB1077DEA632B6CF5993E5DB5D8EF5E5</string>
-				<string>0310AF23843A144F35E42161D362C5E0</string>
-				<string>AE6294335E02490F173199FA822415A4</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods-LeeGo-Tests</string>
-			<key>path</key>
-			<string>Target Support Files/Pods-LeeGo-Tests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>552D02D5BA751AC2E8790D2811D496CA</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.3</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>STRIP_INSTALLED_PRODUCT</key>
-				<string>NO</string>
-				<key>SYMROOT</key>
-				<string>${SRCROOT}/../build</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>56E2223E80041B16F3ABB73A539D8D37</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>AE6294335E02490F173199FA822415A4</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/Pods-LeeGo-Tests/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.3</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/Pods-LeeGo-Tests/Pods-LeeGo-Tests.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_NAME</key>
-				<string>Pods_LeeGo_Tests</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>586FCA652779AD0B2FA2B21461B335E9</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>F88AB72FA8821A15B94DDD9330D211D8</string>
-			<key>buildPhases</key>
-			<array>
-				<string>E1202330962C45171201313A1C2706DF</string>
-				<string>C3748F54369377DCD857F1665F01EFD8</string>
-				<string>4DC15E603FDA3614ACAEE27D1E04F854</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>3AECB580E1DE1D86E13798A2C75E8F6A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-LeeGo-Demo</string>
-			<key>productName</key>
-			<string>Pods-LeeGo-Demo</string>
-			<key>productReference</key>
-			<string>9A748C38F3EF093E2A8B077D26C9D381</string>
-			<key>productType</key>
-			<string>com.apple.product-type.framework</string>
-		</dict>
-		<key>5987B10EAAFBCA402D36B9155FDF0039</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>5BE61E5BB7E42BB976EAE15DBD392C21</string>
-			<key>buildPhases</key>
-			<array>
-				<string>E6FD15C544B97FC9B36C3DBA6CF4C325</string>
-				<string>9F990F8AA48DB48EBDAA2E42B9E944DD</string>
-				<string>A7799CD0A041599B4BD32E3DDB5F43A9</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>LeeGo</string>
-			<key>productName</key>
-			<string>LeeGo</string>
-			<key>productReference</key>
-			<string>95938A16DFB37C2C7A6DDF8A037122E8</string>
-			<key>productType</key>
-			<string>com.apple.product-type.framework</string>
-		</dict>
-		<key>5BE61E5BB7E42BB976EAE15DBD392C21</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>E9A8A247B8AB08C85583C761A572794C</string>
-				<string>2E1A8B8AB3696C9C17A3E1C92F855213</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>5EBE74FA8E194AF9897E04EB8191657A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>LeeGo.modulemap</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>67D8E296C9E1714119149787243D37FF</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3E4E89230EF59BC255123B67864ACF77</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>6A48E2C0646E10D4530987968E1C7F53</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>D00F3D2C2E7039D9A0576C65AA21C357</string>
-				<string>530C0C4BEDD04866092D470D69B164EF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Targets Support Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6B9B5F50E3E44EB7877B251F7D37882F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Demo.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7DB346D0F39D3F0E887471402A8071AB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BA6428E9F66FD5A23C0A2E06ED26CD2F</string>
-				<string>34A5DBA56C1D7D66C33C06414CF490C2</string>
-				<string>BC3CA7F9E30CC8F7E2DD044DD34432FC</string>
-				<string>8AFF915077417FB63653DB1094CBC365</string>
-				<string>6A48E2C0646E10D4530987968E1C7F53</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>7F594467F158EEFC6469A26AABAA621A</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Tests-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>81BC0EEB5FEA5F86958F208527ABCBFB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CB1077DEA632B6CF5993E5DB5D8EF5E5</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>84BC4293703B7D3CE9F057765F8B0965</key>
-		<dict>
-			<key>fileRef</key>
-			<string>A57CF57C0EFEC2ABDFDDA50DF21E7E52</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8579D5C6DF635DD3A17EC230711F6080</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>View.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>87FB6BE69182D41FAEF0244D0659DB8A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3E7F05890FC6EF2F3715506B1C9F8138</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8AFF915077417FB63653DB1094CBC365</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>95938A16DFB37C2C7A6DDF8A037122E8</string>
-				<string>9A748C38F3EF093E2A8B077D26C9D381</string>
-				<string>458982613EB488ACFD5999A8243342BD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8E400EE07976E3A2CF065F3EA0BA7A8D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>JSONConvertible.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8FB4AA3E212AF2F0AF0D5552EF4F94DD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D994F16F2877B291F7ACC2B9DB9CAD8E</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>900736952C69A83CD5D7CFD2DAEA2B3E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Tests.modulemap</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>93094AA8F6AEE8EDD7F02425AAB7DD9C</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Tests-acknowledgements.markdown</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>95938A16DFB37C2C7A6DDF8A037122E8</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>LeeGo.framework</string>
-			<key>path</key>
-			<string>LeeGo.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>974ACBE0B15827CCD7406FBF06C861C6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Tests-acknowledgements.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>97B8F2AA4FA21CE594D3E6CA8D5E01A6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3BFD81029BA6A19EFB30391ABD067EDB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>9A5393B1D3928A1C7EE27313B94AD992</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>D41D8CD98F00B204E9800998ECF8427E</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>5987B10EAAFBCA402D36B9155FDF0039</string>
-			<key>remoteInfo</key>
-			<string>LeeGo</string>
-		</dict>
-		<key>9A748C38F3EF093E2A8B077D26C9D381</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Pods_LeeGo_Demo.framework</string>
-			<key>path</key>
-			<string>Pods_LeeGo_Demo.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>9C48CC0582C601F8A2D3226E65FB5581</key>
-		<dict>
-			<key>fileRef</key>
-			<string>7F594467F158EEFC6469A26AABAA621A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>9F990F8AA48DB48EBDAA2E42B9E944DD</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>67D8E296C9E1714119149787243D37FF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>9FB14E78C62FE823B3EDFAC6648682E4</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Demo-frameworks.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A1811972ADF5DA7D6CC4CE616003C9E6</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>81BC0EEB5FEA5F86958F208527ABCBFB</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>A1E0CA24F4421AB6221CED0B8BFCDB87</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>D41D8CD98F00B204E9800998ECF8427E</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>5987B10EAAFBCA402D36B9155FDF0039</string>
-			<key>remoteInfo</key>
-			<string>LeeGo</string>
-		</dict>
-		<key>A2921BDB0C7FD4726653B182E8EC3967</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Demo-acknowledgements.markdown</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A39C80B3B6D464C936E78752FB906AEA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Appearance.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A57CF57C0EFEC2ABDFDDA50DF21E7E52</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>ComponentType.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A7799CD0A041599B4BD32E3DDB5F43A9</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>4E19B991A2AF9C56910287017577B82A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>A94192C6BFE9CDCA5975FA6002E42CE9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Demo.modulemap</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AAE8F1C2C73542F5B5A298440E4F9F09</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>LeeGo-umbrella.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AE0813EC5BC41D4638C747CB09A9B866</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>LeeGo</string>
-			<key>target</key>
-			<string>5987B10EAAFBCA402D36B9155FDF0039</string>
-			<key>targetProxy</key>
-			<string>A1E0CA24F4421AB6221CED0B8BFCDB87</string>
-		</dict>
-		<key>AE6294335E02490F173199FA822415A4</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Tests.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AFE9D8F4FB39907E16CF4AE77D473366</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Tests-frameworks.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>B21BA0243D1960220B34DFE9659A7FCD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3E4E89230EF59BC255123B67864ACF77</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>B449F3E444ACD08033B00DC6BD14FE2B</key>
-		<dict>
-			<key>fileRef</key>
-			<string>32EF7DFAFDEFEB0ED3D09A3EAF29FC75</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>B854AB8DB9D6C09112DDFE5DAA9E8E99</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Constraint.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA17BA1930D8A0602957F52E4CA11E3E</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>2E33C7178EB8F33BB052AC529B2A1890</string>
-				<string>EA35F708849522E37204899404F0AF9A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>LeeGo</string>
-			<key>path</key>
-			<string>../..</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BA6428E9F66FD5A23C0A2E06ED26CD2F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>name</key>
-			<string>Podfile</string>
-			<key>path</key>
-			<string>../Podfile</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-			<key>xcLanguageSpecificationIdentifier</key>
-			<string>xcode.lang.ruby</string>
-		</dict>
-		<key>BC3CA7F9E30CC8F7E2DD044DD34432FC</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>BF6342C8B29F4CEEA088EFF7AB4DE362</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>BF6342C8B29F4CEEA088EFF7AB4DE362</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>3E4E89230EF59BC255123B67864ACF77</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>iOS</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C3748F54369377DCD857F1665F01EFD8</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>031A8E7B0FE9BB960165EA55D98F597B</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>C914B873974DFFEE32C55ED8402248A1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Tests-resources.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CB1077DEA632B6CF5993E5DB5D8EF5E5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Tests-umbrella.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D00F3D2C2E7039D9A0576C65AA21C357</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>2F3387EC1B26F15BDEA6CE8013EC8A94</string>
-				<string>A94192C6BFE9CDCA5975FA6002E42CE9</string>
-				<string>A2921BDB0C7FD4726653B182E8EC3967</string>
-				<string>D8A92790D9C94C9409E48ED093ABF3AA</string>
-				<string>EEC880A635F0CB9DF04E7F08DF17AB65</string>
-				<string>9FB14E78C62FE823B3EDFAC6648682E4</string>
-				<string>1A8EDB233BF505225F65B6EC1C09EC38</string>
-				<string>FFE201D338EBBF312B3749A204D33CB9</string>
-				<string>6B9B5F50E3E44EB7877B251F7D37882F</string>
-				<string>D331F76551342921CF3FE269732213A0</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods-LeeGo-Demo</string>
-			<key>path</key>
-			<string>Target Support Files/Pods-LeeGo-Demo</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D22B08A96390A55FC22118C5A70AD885</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>LeeGo-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D331F76551342921CF3FE269732213A0</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Demo.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D41D8CD98F00B204E9800998ECF8427E</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastSwiftUpdateCheck</key>
-				<string>0700</string>
-				<key>LastUpgradeCheck</key>
-				<string>0700</string>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>2D8E8EC45A3A1A1D94AE762CB5028504</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-			</array>
-			<key>mainGroup</key>
-			<string>7DB346D0F39D3F0E887471402A8071AB</string>
-			<key>productRefGroup</key>
-			<string>8AFF915077417FB63653DB1094CBC365</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>5987B10EAAFBCA402D36B9155FDF0039</string>
-				<string>586FCA652779AD0B2FA2B21461B335E9</string>
-				<string>0B664FED7A3472558804B6CD86FF42FB</string>
-			</array>
-		</dict>
-		<key>D8A92790D9C94C9409E48ED093ABF3AA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Demo-acknowledgements.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D994F16F2877B291F7ACC2B9DB9CAD8E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>Layout.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DDD60EA7283A88122F5D3F507030035C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>8E400EE07976E3A2CF065F3EA0BA7A8D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E01917EF13C4B1CCE5E45F81ED54353C</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>24B4B51F15FB78D96903078C9F74B6BE</string>
-				<string>56E2223E80041B16F3ABB73A539D8D37</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>E1202330962C45171201313A1C2706DF</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>2D6BC63451C4C61FDBD1299C90ACFEC7</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>E254194837A0BA0668886F28BB4ACAF7</key>
-		<dict>
-			<key>fileRef</key>
-			<string>A39C80B3B6D464C936E78752FB906AEA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>E6FD15C544B97FC9B36C3DBA6CF4C325</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>E254194837A0BA0668886F28BB4ACAF7</string>
-				<string>97B8F2AA4FA21CE594D3E6CA8D5E01A6</string>
-				<string>B449F3E444ACD08033B00DC6BD14FE2B</string>
-				<string>3B06D1F4E6C83C10C6CBA9A0342A6846</string>
-				<string>2C7EECA597CEA2E7EA268609B2130239</string>
-				<string>84BC4293703B7D3CE9F057765F8B0965</string>
-				<string>09AD19EEB80A7C22E4F4DB95354FF3E8</string>
-				<string>328FB4A18F6335B46C32450FEC44E792</string>
-				<string>384BB9AB2BC1B7F3E71B15335C8CABA1</string>
-				<string>22C193B081114FD7914717C448580DA7</string>
-				<string>4BC20C37FE8A3A457406D1CEB81EA173</string>
-				<string>DDD60EA7283A88122F5D3F507030035C</string>
-				<string>8FB4AA3E212AF2F0AF0D5552EF4F94DD</string>
-				<string>87FB6BE69182D41FAEF0244D0659DB8A</string>
-				<string>036B06FE8645010685DF7F791EEAF057</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>E7FEFA7F4C098EE0E572BEE9341264B6</key>
-		<dict>
-			<key>fileRef</key>
-			<string>FFE201D338EBBF312B3749A204D33CB9</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>E9A8A247B8AB08C85583C761A572794C</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>46766AEA2ECD1090C180C5B80A053504</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/LeeGo/LeeGo-prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/LeeGo/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.3</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/LeeGo/LeeGo.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>PRODUCT_NAME</key>
-				<string>LeeGo</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Onone</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>EA35F708849522E37204899404F0AF9A</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>3E7D41BCE1E154E78344C0747938C05A</string>
-				<string>5EBE74FA8E194AF9897E04EB8191657A</string>
-				<string>46766AEA2ECD1090C180C5B80A053504</string>
-				<string>3E7F05890FC6EF2F3715506B1C9F8138</string>
-				<string>D22B08A96390A55FC22118C5A70AD885</string>
-				<string>AAE8F1C2C73542F5B5A298440E4F9F09</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Support Files</string>
-			<key>path</key>
-			<string>Demo/Pods/Target Support Files/LeeGo</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EEC880A635F0CB9DF04E7F08DF17AB65</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Demo-dummy.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>F88AB72FA8821A15B94DDD9330D211D8</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>2297991A0BDCE679E2026763A61C167A</string>
-				<string>086FE782F24BAD864479059DE066B8B3</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>FFE201D338EBBF312B3749A204D33CB9</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>Pods-LeeGo-Demo-umbrella.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>D41D8CD98F00B204E9800998ECF8427E</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		031A8E7B0FE9BB960165EA55D98F597B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		036B06FE8645010685DF7F791EEAF057 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8579D5C6DF635DD3A17EC230711F6080 /* View.swift */; };
+		09AD19EEB80A7C22E4F4DB95354FF3E8 /* Composable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10155A592E2A340BDFDC58EC0C77CF4C /* Composable.swift */; };
+		22C193B081114FD7914717C448580DA7 /* Conveniences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16184A6FF08B352608A4CDE61DF70922 /* Conveniences.swift */; };
+		2C7EECA597CEA2E7EA268609B2130239 /* ComponentTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E96127666FB19904B5A7D81709C292 /* ComponentTarget.swift */; };
+		2D6BC63451C4C61FDBD1299C90ACFEC7 /* Pods-LeeGo-Demo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC880A635F0CB9DF04E7F08DF17AB65 /* Pods-LeeGo-Demo-dummy.m */; };
+		328FB4A18F6335B46C32450FEC44E792 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AA0691CCF325C3CD5E7CCC353CBFCC /* Configurable.swift */; };
+		35D7945F1CA8949300DAC1A4 /* Responsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7945E1CA8949300DAC1A4 /* Responsive.swift */; };
+		384BB9AB2BC1B7F3E71B15335C8CABA1 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854AB8DB9D6C09112DDFE5DAA9E8E99 /* Constraint.swift */; };
+		4BC20C37FE8A3A457406D1CEB81EA173 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14460E7AC7C0BA9BBDA3E04627382A82 /* Errors.swift */; };
+		4E19B991A2AF9C56910287017577B82A /* LeeGo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE8F1C2C73542F5B5A298440E4F9F09 /* LeeGo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		67D8E296C9E1714119149787243D37FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		81BC0EEB5FEA5F86958F208527ABCBFB /* Pods-LeeGo-Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CB1077DEA632B6CF5993E5DB5D8EF5E5 /* Pods-LeeGo-Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84BC4293703B7D3CE9F057765F8B0965 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CF57C0EFEC2ABDFDDA50DF21E7E52 /* ComponentType.swift */; };
+		87FB6BE69182D41FAEF0244D0659DB8A /* LeeGo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7F05890FC6EF2F3715506B1C9F8138 /* LeeGo-dummy.m */; };
+		8FB4AA3E212AF2F0AF0D5552EF4F94DD /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D994F16F2877B291F7ACC2B9DB9CAD8E /* Layout.swift */; };
+		97B8F2AA4FA21CE594D3E6CA8D5E01A6 /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFD81029BA6A19EFB30391ABD067EDB /* AutoLayout.swift */; };
+		9C48CC0582C601F8A2D3226E65FB5581 /* Pods-LeeGo-Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F594467F158EEFC6469A26AABAA621A /* Pods-LeeGo-Tests-dummy.m */; };
+		B21BA0243D1960220B34DFE9659A7FCD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		B449F3E444ACD08033B00DC6BD14FE2B /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EF7DFAFDEFEB0ED3D09A3EAF29FC75 /* Cell.swift */; };
+		DDD60EA7283A88122F5D3F507030035C /* JSONConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400EE07976E3A2CF065F3EA0BA7A8D /* JSONConvertible.swift */; };
+		E254194837A0BA0668886F28BB4ACAF7 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39C80B3B6D464C936E78752FB906AEA /* Appearance.swift */; };
+		E7FEFA7F4C098EE0E572BEE9341264B6 /* Pods-LeeGo-Demo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FFE201D338EBBF312B3749A204D33CB9 /* Pods-LeeGo-Demo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9A5393B1D3928A1C7EE27313B94AD992 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5987B10EAAFBCA402D36B9155FDF0039;
+			remoteInfo = LeeGo;
+		};
+		A1E0CA24F4421AB6221CED0B8BFCDB87 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5987B10EAAFBCA402D36B9155FDF0039;
+			remoteInfo = LeeGo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0310AF23843A144F35E42161D362C5E0 /* Pods-LeeGo-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LeeGo-Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		0CFE6BF66D567B12FF82372A78405F29 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10155A592E2A340BDFDC58EC0C77CF4C /* Composable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Composable.swift; sourceTree = "<group>"; };
+		14460E7AC7C0BA9BBDA3E04627382A82 /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		16184A6FF08B352608A4CDE61DF70922 /* Conveniences.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Conveniences.swift; sourceTree = "<group>"; };
+		1A8EDB233BF505225F65B6EC1C09EC38 /* Pods-LeeGo-Demo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LeeGo-Demo-resources.sh"; sourceTree = "<group>"; };
+		26E96127666FB19904B5A7D81709C292 /* ComponentTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ComponentTarget.swift; sourceTree = "<group>"; };
+		28AA0691CCF325C3CD5E7CCC353CBFCC /* Configurable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
+		2F3387EC1B26F15BDEA6CE8013EC8A94 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32EF7DFAFDEFEB0ED3D09A3EAF29FC75 /* Cell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
+		35D7945E1CA8949300DAC1A4 /* Responsive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responsive.swift; sourceTree = "<group>"; };
+		3BFD81029BA6A19EFB30391ABD067EDB /* AutoLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
+		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		3E7D41BCE1E154E78344C0747938C05A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E7F05890FC6EF2F3715506B1C9F8138 /* LeeGo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LeeGo-dummy.m"; sourceTree = "<group>"; };
+		458982613EB488ACFD5999A8243342BD /* Pods_LeeGo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46766AEA2ECD1090C180C5B80A053504 /* LeeGo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LeeGo.xcconfig; sourceTree = "<group>"; };
+		5EBE74FA8E194AF9897E04EB8191657A /* LeeGo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = LeeGo.modulemap; sourceTree = "<group>"; };
+		6B9B5F50E3E44EB7877B251F7D37882F /* Pods-LeeGo-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LeeGo-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		7F594467F158EEFC6469A26AABAA621A /* Pods-LeeGo-Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LeeGo-Tests-dummy.m"; sourceTree = "<group>"; };
+		8579D5C6DF635DD3A17EC230711F6080 /* View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		8E400EE07976E3A2CF065F3EA0BA7A8D /* JSONConvertible.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JSONConvertible.swift; sourceTree = "<group>"; };
+		900736952C69A83CD5D7CFD2DAEA2B3E /* Pods-LeeGo-Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-LeeGo-Tests.modulemap"; sourceTree = "<group>"; };
+		93094AA8F6AEE8EDD7F02425AAB7DD9C /* Pods-LeeGo-Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LeeGo-Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		95938A16DFB37C2C7A6DDF8A037122E8 /* LeeGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LeeGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		974ACBE0B15827CCD7406FBF06C861C6 /* Pods-LeeGo-Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LeeGo-Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		9A748C38F3EF093E2A8B077D26C9D381 /* Pods_LeeGo_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FB14E78C62FE823B3EDFAC6648682E4 /* Pods-LeeGo-Demo-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LeeGo-Demo-frameworks.sh"; sourceTree = "<group>"; };
+		A2921BDB0C7FD4726653B182E8EC3967 /* Pods-LeeGo-Demo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LeeGo-Demo-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A39C80B3B6D464C936E78752FB906AEA /* Appearance.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		A57CF57C0EFEC2ABDFDDA50DF21E7E52 /* ComponentType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
+		A94192C6BFE9CDCA5975FA6002E42CE9 /* Pods-LeeGo-Demo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-LeeGo-Demo.modulemap"; sourceTree = "<group>"; };
+		AAE8F1C2C73542F5B5A298440E4F9F09 /* LeeGo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LeeGo-umbrella.h"; sourceTree = "<group>"; };
+		AE6294335E02490F173199FA822415A4 /* Pods-LeeGo-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LeeGo-Tests.release.xcconfig"; sourceTree = "<group>"; };
+		AFE9D8F4FB39907E16CF4AE77D473366 /* Pods-LeeGo-Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LeeGo-Tests-frameworks.sh"; sourceTree = "<group>"; };
+		B854AB8DB9D6C09112DDFE5DAA9E8E99 /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C914B873974DFFEE32C55ED8402248A1 /* Pods-LeeGo-Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LeeGo-Tests-resources.sh"; sourceTree = "<group>"; };
+		CB1077DEA632B6CF5993E5DB5D8EF5E5 /* Pods-LeeGo-Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LeeGo-Tests-umbrella.h"; sourceTree = "<group>"; };
+		D22B08A96390A55FC22118C5A70AD885 /* LeeGo-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LeeGo-prefix.pch"; sourceTree = "<group>"; };
+		D331F76551342921CF3FE269732213A0 /* Pods-LeeGo-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LeeGo-Demo.release.xcconfig"; sourceTree = "<group>"; };
+		D8A92790D9C94C9409E48ED093ABF3AA /* Pods-LeeGo-Demo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LeeGo-Demo-acknowledgements.plist"; sourceTree = "<group>"; };
+		D994F16F2877B291F7ACC2B9DB9CAD8E /* Layout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		EEC880A635F0CB9DF04E7F08DF17AB65 /* Pods-LeeGo-Demo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LeeGo-Demo-dummy.m"; sourceTree = "<group>"; };
+		FFE201D338EBBF312B3749A204D33CB9 /* Pods-LeeGo-Demo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LeeGo-Demo-umbrella.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0D02B8CE6F1068F4B5B539A1B46532B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B21BA0243D1960220B34DFE9659A7FCD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F990F8AA48DB48EBDAA2E42B9E944DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67D8E296C9E1714119149787243D37FF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C3748F54369377DCD857F1665F01EFD8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				031A8E7B0FE9BB960165EA55D98F597B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2C315F1B22C5E611FC4AF329FA384EC9 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				A39C80B3B6D464C936E78752FB906AEA /* Appearance.swift */,
+				26E96127666FB19904B5A7D81709C292 /* ComponentTarget.swift */,
+				A57CF57C0EFEC2ABDFDDA50DF21E7E52 /* ComponentType.swift */,
+				10155A592E2A340BDFDC58EC0C77CF4C /* Composable.swift */,
+				28AA0691CCF325C3CD5E7CCC353CBFCC /* Configurable.swift */,
+				D994F16F2877B291F7ACC2B9DB9CAD8E /* Layout.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		2E33C7178EB8F33BB052AC529B2A1890 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				3BFD81029BA6A19EFB30391ABD067EDB /* AutoLayout.swift */,
+				32EF7DFAFDEFEB0ED3D09A3EAF29FC75 /* Cell.swift */,
+				B854AB8DB9D6C09112DDFE5DAA9E8E99 /* Constraint.swift */,
+				16184A6FF08B352608A4CDE61DF70922 /* Conveniences.swift */,
+				14460E7AC7C0BA9BBDA3E04627382A82 /* Errors.swift */,
+				8E400EE07976E3A2CF065F3EA0BA7A8D /* JSONConvertible.swift */,
+				8579D5C6DF635DD3A17EC230711F6080 /* View.swift */,
+				35D7945E1CA8949300DAC1A4 /* Responsive.swift */,
+				2C315F1B22C5E611FC4AF329FA384EC9 /* Core */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		34A5DBA56C1D7D66C33C06414CF490C2 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BA17BA1930D8A0602957F52E4CA11E3E /* LeeGo */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		530C0C4BEDD04866092D470D69B164EF /* Pods-LeeGo-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				0CFE6BF66D567B12FF82372A78405F29 /* Info.plist */,
+				900736952C69A83CD5D7CFD2DAEA2B3E /* Pods-LeeGo-Tests.modulemap */,
+				93094AA8F6AEE8EDD7F02425AAB7DD9C /* Pods-LeeGo-Tests-acknowledgements.markdown */,
+				974ACBE0B15827CCD7406FBF06C861C6 /* Pods-LeeGo-Tests-acknowledgements.plist */,
+				7F594467F158EEFC6469A26AABAA621A /* Pods-LeeGo-Tests-dummy.m */,
+				AFE9D8F4FB39907E16CF4AE77D473366 /* Pods-LeeGo-Tests-frameworks.sh */,
+				C914B873974DFFEE32C55ED8402248A1 /* Pods-LeeGo-Tests-resources.sh */,
+				CB1077DEA632B6CF5993E5DB5D8EF5E5 /* Pods-LeeGo-Tests-umbrella.h */,
+				0310AF23843A144F35E42161D362C5E0 /* Pods-LeeGo-Tests.debug.xcconfig */,
+				AE6294335E02490F173199FA822415A4 /* Pods-LeeGo-Tests.release.xcconfig */,
+			);
+			name = "Pods-LeeGo-Tests";
+			path = "Target Support Files/Pods-LeeGo-Tests";
+			sourceTree = "<group>";
+		};
+		6A48E2C0646E10D4530987968E1C7F53 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D00F3D2C2E7039D9A0576C65AA21C357 /* Pods-LeeGo-Demo */,
+				530C0C4BEDD04866092D470D69B164EF /* Pods-LeeGo-Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				34A5DBA56C1D7D66C33C06414CF490C2 /* Development Pods */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				8AFF915077417FB63653DB1094CBC365 /* Products */,
+				6A48E2C0646E10D4530987968E1C7F53 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8AFF915077417FB63653DB1094CBC365 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				95938A16DFB37C2C7A6DDF8A037122E8 /* LeeGo.framework */,
+				9A748C38F3EF093E2A8B077D26C9D381 /* Pods_LeeGo_Demo.framework */,
+				458982613EB488ACFD5999A8243342BD /* Pods_LeeGo_Tests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BA17BA1930D8A0602957F52E4CA11E3E /* LeeGo */ = {
+			isa = PBXGroup;
+			children = (
+				2E33C7178EB8F33BB052AC529B2A1890 /* Sources */,
+				EA35F708849522E37204899404F0AF9A /* Support Files */,
+			);
+			name = LeeGo;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D00F3D2C2E7039D9A0576C65AA21C357 /* Pods-LeeGo-Demo */ = {
+			isa = PBXGroup;
+			children = (
+				2F3387EC1B26F15BDEA6CE8013EC8A94 /* Info.plist */,
+				A94192C6BFE9CDCA5975FA6002E42CE9 /* Pods-LeeGo-Demo.modulemap */,
+				A2921BDB0C7FD4726653B182E8EC3967 /* Pods-LeeGo-Demo-acknowledgements.markdown */,
+				D8A92790D9C94C9409E48ED093ABF3AA /* Pods-LeeGo-Demo-acknowledgements.plist */,
+				EEC880A635F0CB9DF04E7F08DF17AB65 /* Pods-LeeGo-Demo-dummy.m */,
+				9FB14E78C62FE823B3EDFAC6648682E4 /* Pods-LeeGo-Demo-frameworks.sh */,
+				1A8EDB233BF505225F65B6EC1C09EC38 /* Pods-LeeGo-Demo-resources.sh */,
+				FFE201D338EBBF312B3749A204D33CB9 /* Pods-LeeGo-Demo-umbrella.h */,
+				6B9B5F50E3E44EB7877B251F7D37882F /* Pods-LeeGo-Demo.debug.xcconfig */,
+				D331F76551342921CF3FE269732213A0 /* Pods-LeeGo-Demo.release.xcconfig */,
+			);
+			name = "Pods-LeeGo-Demo";
+			path = "Target Support Files/Pods-LeeGo-Demo";
+			sourceTree = "<group>";
+		};
+		EA35F708849522E37204899404F0AF9A /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				3E7D41BCE1E154E78344C0747938C05A /* Info.plist */,
+				5EBE74FA8E194AF9897E04EB8191657A /* LeeGo.modulemap */,
+				46766AEA2ECD1090C180C5B80A053504 /* LeeGo.xcconfig */,
+				3E7F05890FC6EF2F3715506B1C9F8138 /* LeeGo-dummy.m */,
+				D22B08A96390A55FC22118C5A70AD885 /* LeeGo-prefix.pch */,
+				AAE8F1C2C73542F5B5A298440E4F9F09 /* LeeGo-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Demo/Pods/Target Support Files/LeeGo";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4DC15E603FDA3614ACAEE27D1E04F854 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7FEFA7F4C098EE0E572BEE9341264B6 /* Pods-LeeGo-Demo-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1811972ADF5DA7D6CC4CE616003C9E6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81BC0EEB5FEA5F86958F208527ABCBFB /* Pods-LeeGo-Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7799CD0A041599B4BD32E3DDB5F43A9 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E19B991A2AF9C56910287017577B82A /* LeeGo-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0B664FED7A3472558804B6CD86FF42FB /* Pods-LeeGo-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E01917EF13C4B1CCE5E45F81ED54353C /* Build configuration list for PBXNativeTarget "Pods-LeeGo-Tests" */;
+			buildPhases = (
+				317BAD2B359D8C07D34A39C1A8A24745 /* Sources */,
+				0D02B8CE6F1068F4B5B539A1B46532B3 /* Frameworks */,
+				A1811972ADF5DA7D6CC4CE616003C9E6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AE0813EC5BC41D4638C747CB09A9B866 /* PBXTargetDependency */,
+			);
+			name = "Pods-LeeGo-Tests";
+			productName = "Pods-LeeGo-Tests";
+			productReference = 458982613EB488ACFD5999A8243342BD /* Pods_LeeGo_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		586FCA652779AD0B2FA2B21461B335E9 /* Pods-LeeGo-Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F88AB72FA8821A15B94DDD9330D211D8 /* Build configuration list for PBXNativeTarget "Pods-LeeGo-Demo" */;
+			buildPhases = (
+				E1202330962C45171201313A1C2706DF /* Sources */,
+				C3748F54369377DCD857F1665F01EFD8 /* Frameworks */,
+				4DC15E603FDA3614ACAEE27D1E04F854 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3AECB580E1DE1D86E13798A2C75E8F6A /* PBXTargetDependency */,
+			);
+			name = "Pods-LeeGo-Demo";
+			productName = "Pods-LeeGo-Demo";
+			productReference = 9A748C38F3EF093E2A8B077D26C9D381 /* Pods_LeeGo_Demo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5987B10EAAFBCA402D36B9155FDF0039 /* LeeGo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5BE61E5BB7E42BB976EAE15DBD392C21 /* Build configuration list for PBXNativeTarget "LeeGo" */;
+			buildPhases = (
+				E6FD15C544B97FC9B36C3DBA6CF4C325 /* Sources */,
+				9F990F8AA48DB48EBDAA2E42B9E944DD /* Frameworks */,
+				A7799CD0A041599B4BD32E3DDB5F43A9 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LeeGo;
+			productName = LeeGo;
+			productReference = 95938A16DFB37C2C7A6DDF8A037122E8 /* LeeGo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = 8AFF915077417FB63653DB1094CBC365 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5987B10EAAFBCA402D36B9155FDF0039 /* LeeGo */,
+				586FCA652779AD0B2FA2B21461B335E9 /* Pods-LeeGo-Demo */,
+				0B664FED7A3472558804B6CD86FF42FB /* Pods-LeeGo-Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		317BAD2B359D8C07D34A39C1A8A24745 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C48CC0582C601F8A2D3226E65FB5581 /* Pods-LeeGo-Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1202330962C45171201313A1C2706DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D6BC63451C4C61FDBD1299C90ACFEC7 /* Pods-LeeGo-Demo-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6FD15C544B97FC9B36C3DBA6CF4C325 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E254194837A0BA0668886F28BB4ACAF7 /* Appearance.swift in Sources */,
+				97B8F2AA4FA21CE594D3E6CA8D5E01A6 /* AutoLayout.swift in Sources */,
+				B449F3E444ACD08033B00DC6BD14FE2B /* Cell.swift in Sources */,
+				2C7EECA597CEA2E7EA268609B2130239 /* ComponentTarget.swift in Sources */,
+				84BC4293703B7D3CE9F057765F8B0965 /* ComponentType.swift in Sources */,
+				09AD19EEB80A7C22E4F4DB95354FF3E8 /* Composable.swift in Sources */,
+				328FB4A18F6335B46C32450FEC44E792 /* Configurable.swift in Sources */,
+				384BB9AB2BC1B7F3E71B15335C8CABA1 /* Constraint.swift in Sources */,
+				35D7945F1CA8949300DAC1A4 /* Responsive.swift in Sources */,
+				22C193B081114FD7914717C448580DA7 /* Conveniences.swift in Sources */,
+				4BC20C37FE8A3A457406D1CEB81EA173 /* Errors.swift in Sources */,
+				DDD60EA7283A88122F5D3F507030035C /* JSONConvertible.swift in Sources */,
+				8FB4AA3E212AF2F0AF0D5552EF4F94DD /* Layout.swift in Sources */,
+				87FB6BE69182D41FAEF0244D0659DB8A /* LeeGo-dummy.m in Sources */,
+				036B06FE8645010685DF7F791EEAF057 /* View.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3AECB580E1DE1D86E13798A2C75E8F6A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LeeGo;
+			target = 5987B10EAAFBCA402D36B9155FDF0039 /* LeeGo */;
+			targetProxy = 9A5393B1D3928A1C7EE27313B94AD992 /* PBXContainerItemProxy */;
+		};
+		AE0813EC5BC41D4638C747CB09A9B866 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LeeGo;
+			target = 5987B10EAAFBCA402D36B9155FDF0039 /* LeeGo */;
+			targetProxy = A1E0CA24F4421AB6221CED0B8BFCDB87 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		086FE782F24BAD864479059DE066B8B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D331F76551342921CF3FE269732213A0 /* Pods-LeeGo-Demo.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-LeeGo-Demo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-LeeGo-Demo/Pods-LeeGo-Demo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_LeeGo_Demo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		10DE1947DAC0ED28F6C0A9F9BD75D546 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2297991A0BDCE679E2026763A61C167A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B9B5F50E3E44EB7877B251F7D37882F /* Pods-LeeGo-Demo.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-LeeGo-Demo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-LeeGo-Demo/Pods-LeeGo-Demo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_LeeGo_Demo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		24B4B51F15FB78D96903078C9F74B6BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0310AF23843A144F35E42161D362C5E0 /* Pods-LeeGo-Tests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-LeeGo-Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-LeeGo-Tests/Pods-LeeGo-Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_LeeGo_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2E1A8B8AB3696C9C17A3E1C92F855213 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46766AEA2ECD1090C180C5B80A053504 /* LeeGo.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/LeeGo/LeeGo-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LeeGo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/LeeGo/LeeGo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = LeeGo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		552D02D5BA751AC2E8790D2811D496CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		56E2223E80041B16F3ABB73A539D8D37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE6294335E02490F173199FA822415A4 /* Pods-LeeGo-Tests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-LeeGo-Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-LeeGo-Tests/Pods-LeeGo-Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_LeeGo_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		E9A8A247B8AB08C85583C761A572794C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46766AEA2ECD1090C180C5B80A053504 /* LeeGo.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/LeeGo/LeeGo-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LeeGo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/LeeGo/LeeGo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = LeeGo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				552D02D5BA751AC2E8790D2811D496CA /* Debug */,
+				10DE1947DAC0ED28F6C0A9F9BD75D546 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5BE61E5BB7E42BB976EAE15DBD392C21 /* Build configuration list for PBXNativeTarget "LeeGo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9A8A247B8AB08C85583C761A572794C /* Debug */,
+				2E1A8B8AB3696C9C17A3E1C92F855213 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E01917EF13C4B1CCE5E45F81ED54353C /* Build configuration list for PBXNativeTarget "Pods-LeeGo-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24B4B51F15FB78D96903078C9F74B6BE /* Debug */,
+				56E2223E80041B16F3ABB73A539D8D37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F88AB72FA8821A15B94DDD9330D211D8 /* Build configuration list for PBXNativeTarget "Pods-LeeGo-Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2297991A0BDCE679E2026763A61C167A /* Debug */,
+				086FE782F24BAD864479059DE066B8B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

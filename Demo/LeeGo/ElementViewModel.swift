@@ -30,13 +30,7 @@ extension ElementViewModel: ComponentDataSource {
     func updateComponent(componentView: UIView, with componentTarget: ComponentTarget) {
         switch componentView {
         case let titleLabel as UILabel where componentTarget == ComponentBuilder.title:
-            // FIXME: NSAttributedString reuse bug
-            titleLabel.setAttributeString(with: [
-                Style.marker: element.isRestrict ? "󰀀" : " ",
-                Style.customTitle: element.title ?? "",
-                Style.nature: element.natureEdito ?? " "
-                ])
-
+            titleLabel.attributedText = titleLabel.updatedAttributedString(with: [element.isRestrict ? "󰀀" : nil, element.title, element.natureEdito])
         case let subtitleLabel as UILabel  where componentTarget == ComponentBuilder.subtitle:
             subtitleLabel.text = element.description
         case let avatar as UIImageView where componentTarget == ComponentBuilder.avatar:
