@@ -152,6 +152,20 @@ class ViewExtensionSpec: QuickSpec {
                 // Then
                 expect(attributes.frame.height) == 130
             }
+
+            it("should find view with outlet key correctly.") {
+                // Given
+                let cell = UICollectionViewCell(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+                cell.configure(ComponentBuilder.detailsView.componentTarget())
+
+                // When
+                let view = cell.viewForOutletKey("favoriteButton")
+
+                // Then
+                expect(view).notTo(beNil())
+                XCTAssertTrue(view?.dynamicType == UIButton.self)
+                expect(view?.backgroundColor) == UIColor.greenColor()
+            }
         }
     }
 }

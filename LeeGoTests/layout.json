@@ -1,6 +1,7 @@
 {
     "options" : [
-                 "AlignAllCenterX"
+                 "AlignAllCenterX",
+                 "DirectionLeadingToTrailing"
                  ],
     "formats" : [
                  "H:|-left-[title]-spaceH-[image]-right",

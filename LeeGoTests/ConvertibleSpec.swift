@@ -75,7 +75,6 @@ class ConvertibleSpec: QuickSpec {
                                        .borderStyle(.Bezel),
                                        .defaultTextAttributes([:]),
                                        .placeholder("place holder"),
-                                       .attributedPlaceholder([[:]]),
                                        .clearsOnBeginEditing(false),
                                        .background(image),
                                        .disabledBackground(image),
@@ -130,7 +129,7 @@ class ConvertibleSpec: QuickSpec {
                     let json = Appearance.JSONWithAppearances(appearances)
 
                     // Then
-                    expect(appearances.count) == 86
+                    expect(appearances.count) == 85
                     expect(NSDictionary(dictionary: json)) == mockJson
 
                 } catch {
@@ -148,12 +147,8 @@ class ConvertibleSpec: QuickSpec {
                     let json = Appearance.JSONWithAppearances(style)
 
                     // Then
-                    expect(json.values.count) == 86
+                    expect(json.values.count) == 85
                     expect(NSDictionary(dictionary: json)) == mockJson
-
-                    //                    let data = try NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
-                    //                    let jsonStr = String(data: data, encoding: NSUTF8StringEncoding)!
-                    //                    print(jsonStr)
                 } catch {
                     fail("\(error)")
                 }
@@ -207,7 +202,6 @@ class ConvertibleSpec: QuickSpec {
             it("should convert a JSONDictionary to an ComponentTarget instance correctly.") {
                 do {
                     // Given
-                    let mockComponent = ComponentBuilder.article.componentTarget()
 
                     let path = NSBundle(forClass: self.dynamicType).pathForResource("component", ofType: "json")!
                     let json = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as? JSONDictionary
@@ -216,6 +210,7 @@ class ConvertibleSpec: QuickSpec {
                     let component = try ComponentTarget(rawValue: json!)
 
                     // Then
+                    let mockComponent = ComponentBuilder.article.componentTarget().height(60).LGOutlet("button")
                     expect(component.name) == mockComponent.name
                     expect(component.layout) == mockComponent.layout
                     expect(component.width ?? 0) == mockComponent.width ?? 0
@@ -228,12 +223,11 @@ class ConvertibleSpec: QuickSpec {
             it("should convert an ComponentTarget instance to JSON correctly.") {
 
                 // Given
-                let component = ComponentBuilder.article.componentTarget()
+                let component = ComponentBuilder.article.componentTarget().height(60).LGOutlet("button")
 
                 // When
                 let json = component.encode()
 
-                // Then
                 do {
                     let path = NSBundle(forClass: self.dynamicType).pathForResource("component", ofType: "json")!
                     let mockJson = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as! JSONDictionary
@@ -244,6 +238,316 @@ class ConvertibleSpec: QuickSpec {
                     fail("\(error)")
                 }
             }
+        }
+
+        it("is convertible with NSLayoutFormatOptions") {
+            // Given
+            let rawOptions = ["AlignAllLeft", "AlignAllRight", "AlignAllTop", "AlignAllBottom", "AlignAllLeading", "AlignAllTrailing", "AlignAllCenterX", "AlignAllCenterY", "AlignAllBaseline", "AlignAllLastBaseline", "AlignAllFirstBaseline", "AlignmentMask", "DirectionLeadingToTrailing", "DirectionLeftToRight", "DirectionRightToLeft", "DirectionMask"]
+            let options: NSLayoutFormatOptions = [.AlignAllLeft, .AlignAllRight, .AlignAllTop, .AlignAllBottom, .AlignAllLeading, .AlignAllTrailing, .AlignAllCenterX, .AlignAllCenterY, .AlignAllBaseline, .AlignAllLastBaseline, .AlignAllFirstBaseline, .AlignmentMask, .DirectionLeadingToTrailing, .DirectionLeftToRight, .DirectionRightToLeft, .DirectionMask]
+
+            // When
+            let convertedOptions = NSLayoutFormatOptions(rawValue: rawOptions)
+            let encodedOptions = convertedOptions.encode()
+
+            // Then
+            expect(convertedOptions) == options
+            expect(encodedOptions) == rawOptions
+        }
+
+        it("is convertible with UIControlState") {
+            // Given
+            let rawValues = ["Normal", "Highlighted", "Disabled", "Selected", "Application", "Reserved"]
+            let values: UIControlState = [.Normal, .Highlighted, .Disabled, .Selected, .Application, .Reserved]
+
+            // When
+            let convertedValues = UIControlState(rawValue: rawValues)
+            let encodedValues = convertedValues.encode()
+
+            // Then
+            expect(convertedValues) == values
+            expect(encodedValues) == rawValues
+        }
+
+        it("is convertible with UIDataDetectorTypes") {
+            // Given
+            let rawValues = ["PhoneNumber", "Link", "Address", "CalendarEvent", "None", "All"]
+            let values: UIDataDetectorTypes = [.PhoneNumber, .Link, .Address, .CalendarEvent, .None, .All]
+
+            // When
+            let convertedValues = UIDataDetectorTypes(rawValue: rawValues)
+            let encodedValues = convertedValues.encode()
+
+            // Then
+            expect(convertedValues) == values
+            expect(encodedValues) == rawValues
+        }
+
+
+        it("is convertible with UIScrollViewKeyboardDismissMode") {
+            // Given
+            let rawValues = ["None", "OnDrag", "Interactive"]
+            let values: [UIScrollViewKeyboardDismissMode] = [.None, .OnDrag, .Interactive]
+
+            // When
+            let convertedValues = rawValues.map({ (value) -> UIScrollViewKeyboardDismissMode in
+                UIScrollViewKeyboardDismissMode(rawValue: value)
+            })
+            let encodedValues = convertedValues.map({ (value) -> String in
+                value.encode()
+            })
+
+            // Then
+            expect(convertedValues) == values
+            expect(encodedValues) == rawValues
+        }
+
+        it("is convertible with UIScrollViewIndicatorStyle") {
+            // Given
+            let rawValues = ["Default", "Black", "White"]
+            let values: [UIScrollViewIndicatorStyle] = [.Default, .Black, .White]
+
+            // When
+            let convertedValues = rawValues.map({ (value) -> UIScrollViewIndicatorStyle in
+                UIScrollViewIndicatorStyle(rawValue: value)
+            })
+            let encodedValues = convertedValues.map({ (value) -> String in
+                value.encode()
+            })
+
+            // Then
+            expect(convertedValues) == values
+            expect(encodedValues) == rawValues
+        }
+
+        it("is convertible with UITextFieldViewMode") {
+            // Given
+            let rawValues = ["Never", "WhileEditing", "UnlessEditing", "Always"]
+            let values: [UITextFieldViewMode] = [.Never, .WhileEditing, .UnlessEditing, .Always]
+
+            // When
+            let convertedValues = rawValues.map({ (value) -> UITextFieldViewMode in
+                UITextFieldViewMode(rawValue: value)
+            })
+            let encodedValues = convertedValues.map({ (value) -> String in
+                value.encode()
+            })
+
+            // Then
+            expect(convertedValues) == values
+            expect(encodedValues) == rawValues
+        }
+
+        it("is convertible with UIBaselineAdjustment") {
+            // Given
+            let rawValues = ["AlignBaselines", "AlignCenters", "None"]
+            let values: [UIBaselineAdjustment] = [.AlignBaselines, .AlignCenters, .None]
+
+            // When
+            let convertedValues = rawValues.map({ (value) -> UIBaselineAdjustment in
+                UIBaselineAdjustment(rawValue: value)
+            })
+            let encodedValues = convertedValues.map({ (value) -> String in
+                value.encode()
+            })
+
+            // Then
+            expect(convertedValues) == values
+            expect(encodedValues) == rawValues
+        }
+
+        it("is convertible with UITextBorderStyle") {
+            // Given
+            let rawValues = ["None", "Line", "Bezel", "RoundedRect"]
+            let values: [UITextBorderStyle] = [.None, .Line, .Bezel, .RoundedRect]
+
+            // When
+            let convertedValues = rawValues.map({ (value) -> UITextBorderStyle in
+                UITextBorderStyle(rawValue: value)
+            })
+            let encodedValues = convertedValues.map({ (value) -> String in
+                value.encode()
+            })
+
+            // Then
+            expect(convertedValues) == values
+            expect(encodedValues) == rawValues
+        }
+
+        it("is convertible with NSLineBreakMode") {
+            // Given
+            let rawValues = ["ByWordWrapping", "ByCharWrapping", "ByClipping", "ByTruncatingHead", "ByTruncatingTail", "ByTruncatingMiddle"]
+            let values: [NSLineBreakMode] = [.ByWordWrapping, .ByCharWrapping, .ByClipping, .ByTruncatingHead, .ByTruncatingTail, .ByTruncatingMiddle]
+
+            // When
+            let convertedValues = rawValues.map({ (value) -> NSLineBreakMode in
+                NSLineBreakMode(rawValue: value)
+            })
+            let encodedValues = convertedValues.map({ (value) -> String in
+                value.encode()
+            })
+
+            // Then
+            expect(convertedValues) == values
+            expect(encodedValues) == rawValues
+        }
+
+        it("is convertible with NSTextAlignment") {
+            // Given
+            let rawValues = ["Left", "Center", "Right", "Justified", "Natural"]
+            let values: [NSTextAlignment] = [.Left, .Center, .Right, .Justified, .Natural]
+
+            // When
+            let convertedValues = rawValues.map({ (value) -> NSTextAlignment in
+                NSTextAlignment(rawValue: value)
+            })
+            let encodedValues = convertedValues.map({ (value) -> String in
+                value.encode()
+            })
+
+            // Then
+            expect(convertedValues) == values
+            expect(encodedValues) == rawValues
+        }
+
+        it("is convertible with UIViewContentMode") {
+            // Given
+            let rawValues = ["ScaleToFill", "ScaleAspectFit", "ScaleAspectFill", "Redraw", "Center", "Top", "Bottom", "Left", "Right", "TopLeft", "TopRight", "BottomLeft", "BottomRight"]
+            let values: [UIViewContentMode] = [.ScaleToFill, .ScaleAspectFit, .ScaleAspectFill, .Redraw, .Center, .Top, .Bottom, .Left, .Right, .TopLeft, .TopRight, .BottomLeft, .BottomRight]
+
+            // When
+            let convertedValues = rawValues.map({ (value) -> UIViewContentMode in
+                UIViewContentMode(rawValue: value)
+            })
+            let encodedValues = convertedValues.map({ (value) -> String in
+                value.encode()
+            })
+
+            // Then
+            expect(convertedValues) == values
+            expect(encodedValues) == rawValues
+        }
+
+        it("is convertible with UIViewTintAdjustmentMode") {
+            // Given
+            let rawValues = ["Automatic", "Normal", "Dimmed"]
+            let values: [UIViewTintAdjustmentMode] = [.Automatic, .Normal, .Dimmed]
+
+            // When
+            let convertedValues = rawValues.map({ (value) -> UIViewTintAdjustmentMode in
+                UIViewTintAdjustmentMode(rawValue: value)
+            })
+            let encodedValues = convertedValues.map({ (value) -> String in
+                value.encode()
+            })
+
+            // Then
+            expect(convertedValues) == values
+            expect(encodedValues) == rawValues
+        }
+
+        it("is convertible with NSRange") {
+            // Given
+            let rawValues = [2, 10]
+            let values: NSRange = NSRange(location: 2, length: 10)
+
+            // When
+            let convertedValues = NSRange(rawValue: rawValues)
+            let encodedValues = convertedValues.encode()
+
+            // Then
+            expect(NSEqualRanges(convertedValues, values)) == true
+            expect(encodedValues) == rawValues
+
+            expect(NSEqualRanges(NSRange(rawValue: [2, 10, 10]), NSRange(location: 0, length: 0))) == true
+        }
+
+        it("is convertible with CGSize") {
+            // Given
+            let rawValues: [CGFloat] = [10, 10]
+            let values = CGSize(width: 10, height: 10)
+
+            // When
+            let convertedValues = CGSize(rawValue: rawValues)
+            let encodedValues = convertedValues.encode()
+
+            // Then
+            expect(CGSizeEqualToSize(convertedValues, values)) == true
+            expect(encodedValues) == rawValues
+
+            expect(CGSizeEqualToSize(CGSize(rawValue: [2, 10, 10]), CGSizeZero)) == true
+        }
+
+        it("is convertible with CGPoint") {
+            // Given
+            let rawValues: [CGFloat] = [2, 10]
+            let values = CGPoint(x: 2, y: 10)
+
+            // When
+            let convertedValues = CGPoint(rawValue: rawValues)
+            let encodedValues = convertedValues.encode()
+
+            // Then
+            expect(CGPointEqualToPoint(convertedValues, values)) == true
+            expect(encodedValues) == rawValues
+
+            expect(CGPointEqualToPoint(CGPoint(rawValue: [2, 10, 10]), CGPointZero)) == true
+        }
+
+        it("is convertible with UIEdgeInsets") {
+            // Given
+            let rawValues: [CGFloat] = [2, 10, 2, 10]
+            let values = UIEdgeInsets(top: 2, left: 10, bottom: 2, right: 10)
+
+            // When
+            let convertedValues = UIEdgeInsets(rawValue: rawValues)
+            let encodedValues = convertedValues.encode()
+
+            // Then
+            expect(UIEdgeInsetsEqualToEdgeInsets(convertedValues, values)) == true
+            expect(encodedValues) == rawValues
+
+            expect(UIEdgeInsetsEqualToEdgeInsets(UIEdgeInsets(rawValue: [2, 10, 10]), UIEdgeInsetsZero)) == true
+        }
+
+        it("is convertible with NSURL") {
+            // Given
+            let rawValues: JSONDictionary = ["url": "www.apple.com"]
+            let values = NSURL(string: "www.apple.com")
+
+            // When
+            let convertedValues = NSURL(rawValue: rawValues)!
+            let encodedValues = convertedValues.encode()
+
+            // Then
+            expect(convertedValues) == values
+            expect(NSDictionary(dictionary: encodedValues)) == rawValues
+        }
+
+        it("is convertible with UIColor") {
+            // Given
+            let rawValues = "#0000FF"
+            let values = UIColor.blueColor()
+
+            // When
+            let convertedValues = UIColor(rawValue: rawValues)
+            let encodedValues = convertedValues.encode()
+
+            // Then
+            expect(convertedValues) == values
+            expect(encodedValues) == "#0000FF"
+        }
+
+        it("is convertible with UIImage") {
+            // Given
+            let values = UIImage(named: "twitter_favorite", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
+
+            // When
+            // let convertedValues: UIImage? = UIImage(json: nil)
+            let encodedValues = values.encode()!
+
+            // Then
+            // expect(convertedValues) == nil
+            expect((encodedValues["data"] as! String).hasPrefix("iVBORw0KGgoAAAANSUhEUgAAABsAAAAaCAYAAABGiCfwAAAAAXNSR0IArs4c6QAA")) == true
         }
     }
 }

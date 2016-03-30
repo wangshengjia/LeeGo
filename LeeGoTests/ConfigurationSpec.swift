@@ -127,8 +127,6 @@ class ConfigurationSpec: QuickSpec {
                     .buttonTitle("button", .Normal),
                     .buttonTitleColor(UIColor.redColor(), .Normal),
                     .buttonTitleShadowColor(UIColor.grayColor(), .Highlighted),
-//                    .buttonImage(UIImage(named: "lego")!, .Highlighted),
-//                    .buttonBackgroundImage(UIImage(named: "lego")!, .Normal),
                     .contentEdgeInsets(insets),
                     .titleEdgeInsets(insets),
                     .imageEdgeInsets(insets),

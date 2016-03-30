@@ -19,8 +19,10 @@
         }
     },
     "name" : "article",
+    "height" : 60.0,
+    "outlet" : "button",
     "style" : {
-        "backgroundColor" : "#FFFFFFFF"
+        "backgroundColor" : "#FFFFFF"
     },
     "components" : [
                     {
@@ -32,21 +34,21 @@
                                         "size" : 16,
                                         "name" : "Helvetica"
                                         },
-                                        "NSColor" : "#FF0000FF"
+                                        "NSColor" : "#FF0000"
                                         },
                                         {
                                         "NSFont" : {
                                         "size" : 20,
                                         "name" : "Avenir-Book"
                                         },
-                                        "NSColor" : "#000000FF"
+                                        "NSColor" : "#000000"
                                         },
                                         {
                                         "NSFont" : {
                                         "size" : 16,
                                         "name" : "Avenir-Book"
                                         },
-                                        "NSColor" : "#AAAAAAFF"
+                                        "NSColor" : "#AAAAAA"
                                         }
                                         ],
                     "translatesAutoresizingMaskIntoConstraints" : false,
@@ -58,7 +60,7 @@
                     "targetClass" : "UILabel",
                     "style" : {
                     "numberOfLines" : 0,
-                    "textColor" : "#AAAAAAFF",
+                    "textColor" : "#AAAAAA",
                     "text" : "Default text",
                     "font" : {
                     "size" : 12,
@@ -70,7 +72,7 @@
                     {
                     "name" : "avatar",
                     "style" : {
-                    "backgroundColor" : "#00FF00FF",
+                    "backgroundColor" : "#00FF00",
                     "ratio" : 1.5
                     },
                     "width" : 68.0,
