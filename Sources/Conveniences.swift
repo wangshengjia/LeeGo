@@ -45,18 +45,18 @@ extension Dictionary {
             if let valueWithExpectedType = value as? T {
                 return valueWithExpectedType
             } else {
-                throw JSONParseError.MismatchedTypeError
+                throw JSONParseError.MismatchedTypeError(type: value.dynamicType, expectedType: T.self)
             }
         } else {
-            throw JSONParseError.UnexpectedKeyError
+            throw JSONParseError.UnexpectedKeyError(key: key)
         }
     }
 
-    func parse<T>(key: JSONKeyType, defaultValue: T) -> T {
-        return parse(key.asString, defaultValue: defaultValue)
+    func parse<T>(key: JSONKeyType, _ defaultValue: T) -> T {
+        return parse(key.asString, defaultValue)
     }
 
-    func parse<T>(key: String, defaultValue: T) -> T {
+    func parse<T>(key: String, _ defaultValue: T) -> T {
         if let value = self[key as! Key] as? T {
             return value
         }
@@ -69,47 +69,25 @@ extension Dictionary {
 
 public let kCustomAttributeDefaultText = "kCustomAttributeDefaultText"
 
-private struct AssociatedKeys {
-    static var ArributesArrayAssociatedKey = "ArributesArray_AssociatedKey"
-}
-
-private final class AttributedStringContext {
-    var attributesArray: [Attributes] = []
-}
-
-protocol AttributedStringUpdatable {}
-
 extension UILabel {
     public func updatedAttributedString(with texts: [String?]) -> NSAttributedString? {
-        return UIView.updatedAttributedString(with: texts, attributesArray: context.attributesArray)
+        return UIView.updatedAttributedString(with: texts, attributesArray: attributesArray)
     }
 }
 
 extension UITextField {
     public func updatedAttributedString(with texts: [String?]) -> NSAttributedString? {
-        return UIView.updatedAttributedString(with: texts, attributesArray: context.attributesArray)
+        return UIView.updatedAttributedString(with: texts, attributesArray: attributesArray)
     }
 }
 
 extension UITextView {
     public func updatedAttributedString(with texts: [String?]) -> NSAttributedString? {
-        return UIView.updatedAttributedString(with: texts, attributesArray: context.attributesArray)
+        return UIView.updatedAttributedString(with: texts, attributesArray: attributesArray)
     }
 }
 
-
 extension UIView {
-    private var context: AttributedStringContext {
-        get {
-            if let context = objc_getAssociatedObject(self, &AssociatedKeys.ArributesArrayAssociatedKey) as? AttributedStringContext {
-                return context
-            } else {
-                let context = AttributedStringContext()
-                objc_setAssociatedObject(self, &AssociatedKeys.ArributesArrayAssociatedKey, context as AttributedStringContext?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-                return context
-            }
-        }
-    }
 
     internal func setAttributedString(with attributesArray: [Attributes]) {
         let attributedString = UIView.attributedString(with: attributesArray)
@@ -122,15 +100,7 @@ extension UIView {
             textView.attributedText = attributedString
         }
 
-        self.context.attributesArray = attributesArray
-    }
-
-    internal func setAttributedPlaceholder(with attributesArray: [Attributes]) {
-        let attributedString = UIView.attributedString(with: attributesArray)
-        if let textField = self as? UITextField {
-            textField.attributedPlaceholder = attributedString
-        }
-        self.context.attributesArray = attributesArray
+        self.attributesArray = attributesArray
     }
 
     internal func setAttributedButtonTitle(with attributesArray: [Attributes], state: UIControlState) {
@@ -138,9 +108,11 @@ extension UIView {
         if let button = self as? UIButton {
             button.setAttributedTitle(attributedString, forState: state)
         }
-        self.context.attributesArray = attributesArray
+        self.attributesArray = attributesArray
     }
+}
 
+extension UIView {
     private static func attributedString(with attributesArray: [Attributes]) -> NSAttributedString? {
         let texts = attributesArray.map { (attributes) -> String? in
             return (attributes[kCustomAttributeDefaultText] as? String)
@@ -193,12 +165,11 @@ extension UIView {
     }
 }
 
-func printJSON(json: JSONDictionary) {
+internal func formattedJSON(json: JSONDictionary) -> String? {
     do {
         let data = try NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
-        let jsonStr = String(data: data, encoding: NSUTF8StringEncoding)
-        print(jsonStr)
+        return String(data: data, encoding: NSUTF8StringEncoding)
     } catch {
-        print(error)
+        return nil
     }
 }

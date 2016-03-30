@@ -9,7 +9,7 @@
 import Foundation
 
 enum JSONParseError: ErrorType {
-    case UnexpectedKeyError, MismatchedTypeError
+    case UnexpectedKeyError(key: String), MismatchedTypeError(type: Any.Type, expectedType: Any.Type)
 }
 
 enum JSONConvertibleError: ErrorType {

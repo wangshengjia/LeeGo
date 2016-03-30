@@ -22,7 +22,7 @@ public enum Appearance {
 
     case attributedText([Attributes]) // TODO: handle also NSParagrapheStyle
 
-    case text(String), borderStyle(UITextBorderStyle), defaultTextAttributes(Attributes), placeholder(String), attributedPlaceholder([Attributes]), clearsOnBeginEditing(Bool), background(UIImage), disabledBackground(UIImage), typingAttributes(Attributes), clearButtonMode(UITextFieldViewMode)
+    case text(String), borderStyle(UITextBorderStyle), defaultTextAttributes(Attributes), placeholder(String), clearsOnBeginEditing(Bool), background(UIImage), disabledBackground(UIImage), typingAttributes(Attributes), clearButtonMode(UITextFieldViewMode)
 
     // UIButton
     case buttonType(UIButtonType), buttonTitle(String, UIControlState), buttonTitleColor(UIColor, UIControlState), buttonTitleShadowColor(UIColor, UIControlState), buttonImage(UIImage, UIControlState), buttonBackgroundImage(UIImage, UIControlState), buttonAttributedTitle([Attributes], UIControlState), contentEdgeInsets(UIEdgeInsets), titleEdgeInsets(UIEdgeInsets), reversesTitleShadowWhenHighlighted(Bool), imageEdgeInsets(UIEdgeInsets), adjustsImageWhenHighlighted(Bool), adjustsImageWhenDisabled(Bool), showsTouchWhenHighlighted(Bool)
@@ -200,8 +200,6 @@ public enum Appearance {
             textField.defaultTextAttributes = attributes
         case (let .placeholder(text), let textField as UITextField):
             textField.placeholder = text
-        case (let .attributedPlaceholder(attributes), let textField as UITextField):
-            textField.setAttributedPlaceholder(with: attributes)
         case (let .clearsOnBeginEditing(should), let textField as UITextField):
             textField.clearsOnBeginEditing = should
         case (let .background(image), let textField as UITextField):
@@ -348,7 +346,7 @@ extension Appearance: JSONConvertible {
 
         case attributedText
 
-        case text, borderStyle, defaultTextAttributes, placeholder, attributedPlaceholder, clearsOnBeginEditing, background, disabledBackground, typingAttributes, clearButtonMode
+        case text, borderStyle, defaultTextAttributes, placeholder, clearsOnBeginEditing, background, disabledBackground, typingAttributes, clearButtonMode
 
         // UIButton
         case buttonType, buttonTitle, buttonTitleColor, buttonTitleShadowColor, buttonImage, buttonBackgroundImage, buttonAttributedTitle, contentEdgeInsets, titleEdgeInsets, reversesTitleShadowWhenHighlighted, imageEdgeInsets, adjustsImageWhenHighlighted, adjustsImageWhenDisabled, showsTouchWhenHighlighted
@@ -484,8 +482,6 @@ extension Appearance: JSONConvertible {
             self = .defaultTextAttributes(Appearance.decodeAttributes(value))
         case let (JSONKey.placeholder.asString, value as String):
             self = .placeholder(value)
-        case let (JSONKey.attributedPlaceholder.asString, value as [Attributes]):
-            self = .attributedPlaceholder(Appearance.decodeAttributes(value))
         case let (JSONKey.clearsOnBeginEditing.asString, value as Bool):
             self = .clearsOnBeginEditing(value)
         case let (JSONKey.background.asString, value as JSONDictionary):
@@ -691,8 +687,6 @@ extension Appearance: JSONConvertible {
             return [JSONKey.defaultTextAttributes.asString: Appearance.encodeAttributes(value)]
         case let .placeholder(value):
             return [JSONKey.placeholder.asString: value]
-        case let .attributedPlaceholder(value):
-            return [JSONKey.attributedPlaceholder.asString: Appearance.encodeAttributes(value)]
         case let .clearsOnBeginEditing(value):
             return [JSONKey.clearsOnBeginEditing.asString: value]
         case let .background(value):

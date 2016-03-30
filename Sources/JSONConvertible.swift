@@ -33,22 +33,7 @@ extension JSONKeyType {
 
 extension NSLayoutFormatOptions: JSONConvertible {
     private enum JSONKey: JSONKeyType {
-        case AlignAllLeft
-        case AlignAllRight
-        case AlignAllTop
-        case AlignAllBottom
-        case AlignAllLeading
-        case AlignAllTrailing
-        case AlignAllCenterX
-        case AlignAllCenterY
-        case AlignAllBaseline
-        case AlignAllLastBaseline
-        case AlignAllFirstBaseline
-        case AlignmentMask
-        case DirectionLeadingToTrailing
-        case DirectionLeftToRight
-        case DirectionRightToLeft
-        case DirectionMask
+        case AlignAllLeft, AlignAllRight, AlignAllTop, AlignAllBottom, AlignAllLeading, AlignAllTrailing, AlignAllCenterX, AlignAllCenterY, AlignAllBaseline, AlignAllLastBaseline, AlignAllFirstBaseline, AlignmentMask, DirectionLeadingToTrailing, DirectionLeftToRight, DirectionRightToLeft, DirectionMask
     }
 
     init(rawValue options: [String]) {
@@ -96,39 +81,23 @@ extension NSLayoutFormatOptions: JSONConvertible {
 
         var options: [String] = []
 
-        if self.contains(.AlignAllLeft) {
-            options.append(JSONKey.AlignAllLeft.asString)
-        } else if self.contains(.AlignAllRight) {
-            options.append(JSONKey.AlignAllRight.asString)
-        } else if self.contains(.AlignAllTop) {
-            options.append(JSONKey.AlignAllTop.asString)
-        } else if self.contains(.AlignAllBottom) {
-            options.append(JSONKey.AlignAllBottom.asString)
-        } else if self.contains(.AlignAllLeading) {
-            options.append(JSONKey.AlignAllLeading.asString)
-        } else if self.contains(.AlignAllTrailing) {
-            options.append(JSONKey.AlignAllTrailing.asString)
-        } else if self.contains(.AlignAllCenterX) {
-            options.append(JSONKey.AlignAllCenterX.asString)
-        } else if self.contains(.AlignAllCenterY) {
-            options.append(JSONKey.AlignAllCenterY.asString)
-        } else if self.contains(.AlignAllBaseline) {
-            options.append(JSONKey.AlignAllBaseline.asString)
-        } else if self.contains(.AlignAllLastBaseline) {
-            options.append(JSONKey.AlignAllLastBaseline.asString)
-        } else if self.contains(.AlignAllFirstBaseline) {
-            options.append(JSONKey.AlignAllFirstBaseline.asString)
-        } else if self.contains(.AlignmentMask) {
-            options.append(JSONKey.AlignmentMask.asString)
-        } else if self.contains(.DirectionLeadingToTrailing) {
-            options.append(JSONKey.DirectionLeadingToTrailing.asString)
-        } else if self.contains(.DirectionLeftToRight) {
-            options.append(JSONKey.DirectionLeftToRight.asString)
-        } else if self.contains(.DirectionRightToLeft) {
-            options.append(JSONKey.DirectionRightToLeft.asString)
-        } else if self.contains(.DirectionMask) {
-            options.append(JSONKey.DirectionMask.asString)
-        }
+        if self.contains(.AlignAllLeft) { options.append(JSONKey.AlignAllLeft.asString) }
+        if self.contains(.AlignAllRight) { options.append(JSONKey.AlignAllRight.asString) }
+        if self.contains(.AlignAllTop) { options.append(JSONKey.AlignAllTop.asString) }
+        if self.contains(.AlignAllBottom) { options.append(JSONKey.AlignAllBottom.asString) }
+        if self.contains(.AlignAllLeading) { options.append(JSONKey.AlignAllLeading.asString) }
+        if self.contains(.AlignAllTrailing) { options.append(JSONKey.AlignAllTrailing.asString) }
+        if self.contains(.AlignAllCenterX) { options.append(JSONKey.AlignAllCenterX.asString) }
+        if self.contains(.AlignAllCenterY) { options.append(JSONKey.AlignAllCenterY.asString) }
+        if self.contains(.AlignAllBaseline) { options.append(JSONKey.AlignAllBaseline.asString) }
+        if self.contains(.AlignAllLastBaseline) { options.append(JSONKey.AlignAllLastBaseline.asString) }
+        if self.contains(.AlignAllFirstBaseline) { options.append(JSONKey.AlignAllFirstBaseline.asString) }
+        if self.contains(.AlignmentMask) { options.append(JSONKey.AlignmentMask.asString) }
+
+        if self.contains(.DirectionLeadingToTrailing) { options.append(JSONKey.DirectionLeadingToTrailing.asString) }
+        if self.contains(.DirectionLeftToRight) { options.append(JSONKey.DirectionLeftToRight.asString) }
+        if self.contains(.DirectionRightToLeft) { options.append(JSONKey.DirectionRightToLeft.asString) }
+        if self.contains(.DirectionMask) { options.append(JSONKey.DirectionMask.asString) }
         
         return options
     }
@@ -136,9 +105,7 @@ extension NSLayoutFormatOptions: JSONConvertible {
 
 extension UIScrollViewKeyboardDismissMode: JSONConvertible {
     private enum JSONKey: JSONKeyType {
-        case None
-        case OnDrag // dismisses the keyboard when a drag begins
-        case Interactive // the keyboard follows the dragging touch off screen, and may be pulled upward again to cancel the dismiss
+        case None, OnDrag, Interactive
     }
 
     init(rawValue mode: String) {
@@ -172,9 +139,7 @@ extension UIScrollViewKeyboardDismissMode: JSONConvertible {
 
 extension UIScrollViewIndicatorStyle: JSONConvertible {
     private enum JSONKey: JSONKeyType {
-        case Default // black with white border. good against any background
-        case Black // black only. smaller. good against a white background
-        case White // white only. smaller. good against a black background
+        case Default, Black, White
     }
 
     init(rawValue style: String) {
@@ -209,13 +174,7 @@ extension UIScrollViewIndicatorStyle: JSONConvertible {
 
 extension UIControlState: JSONConvertible {
     private enum JSONKey: JSONKeyType {
-        case Normal
-        case Highlighted
-        case Disabled
-        case Selected
-        case Focused
-        case Application
-        case Reserved
+        case Normal, Highlighted, Disabled, Selected, Focused, Application, Reserved
     }
 
     init(rawValue states: [String]) {
@@ -249,22 +208,14 @@ extension UIControlState: JSONConvertible {
 
         var states: [String] = []
 
-        if self.contains(.Normal) {
-            states.append(JSONKey.Normal.asString)
-        } else if self.contains(.Highlighted) {
-            states.append(JSONKey.Highlighted.asString)
-        } else if self.contains(UIControlState.Disabled) {
-            states.append(JSONKey.Disabled.asString)
-        } else if self.contains(UIControlState.Selected) {
-            states.append(JSONKey.Selected.asString)
-        } else if self.contains(UIControlState.Application) {
-            states.append(JSONKey.Application.asString)
-        } else if self.contains(UIControlState.Reserved) {
-            states.append(JSONKey.Reserved.asString)
-        } else if #available(iOS 9.0, *) {
-            if self.contains(UIControlState.Focused) {
-                states.append(JSONKey.Focused.asString)
-            }
+        if self.contains(.Normal) { states.append(JSONKey.Normal.asString) }
+        if self.contains(.Highlighted) { states.append(JSONKey.Highlighted.asString) }
+        if self.contains(.Disabled) { states.append(JSONKey.Disabled.asString) }
+        if self.contains(.Selected) { states.append(JSONKey.Selected.asString) }
+        if self.contains(.Application) { states.append(JSONKey.Application.asString) }
+        if self.contains(.Reserved) { states.append(JSONKey.Reserved.asString) }
+        if #available(iOS 9.0, *) {
+            if self.contains(.Focused) { states.append(JSONKey.Focused.asString) }
         }
 
         return states
@@ -273,10 +224,7 @@ extension UIControlState: JSONConvertible {
 
 extension UITextFieldViewMode: JSONConvertible {
     private enum JSONKey: JSONKeyType {
-        case Never
-        case WhileEditing
-        case UnlessEditing
-        case Always
+        case Never, WhileEditing, UnlessEditing, Always
     }
 
     init(rawValue mode: String) {
@@ -314,12 +262,7 @@ extension UITextFieldViewMode: JSONConvertible {
 
 extension UIDataDetectorTypes: JSONConvertible {
     private enum JSONKey: JSONKeyType {
-        case PhoneNumber
-        case Link
-        case Address
-        case CalendarEvent
-        case None
-        case All
+        case PhoneNumber, Link, Address, CalendarEvent, None, All
     }
 
     init(rawValue types: [String]) {
@@ -347,19 +290,12 @@ extension UIDataDetectorTypes: JSONConvertible {
         
         var types: [String] = []
 
-        if self.contains(UIDataDetectorTypes.PhoneNumber) {
-            types.append(JSONKey.PhoneNumber.asString)
-        } else if self.contains(UIDataDetectorTypes.Link) {
-            types.append(JSONKey.Link.asString)
-        } else if self.contains(UIDataDetectorTypes.Address) {
-            types.append(JSONKey.Address.asString)
-        } else if self.contains(UIDataDetectorTypes.CalendarEvent) {
-            types.append(JSONKey.CalendarEvent.asString)
-        } else if self.contains(UIDataDetectorTypes.None) {
-            types.append(JSONKey.None.asString)
-        } else if self.contains(UIDataDetectorTypes.All) {
-            types.append(JSONKey.All.asString)
-        }
+        if self.contains(.PhoneNumber) { types.append(JSONKey.PhoneNumber.asString) }
+        if self.contains(.Link) { types.append(JSONKey.Link.asString) }
+        if self.contains(.Address) { types.append(JSONKey.Address.asString) }
+        if self.contains(.CalendarEvent) { types.append(JSONKey.CalendarEvent.asString) }
+        if self.contains(.None) { types.append(JSONKey.None.asString) }
+        if self.contains(.All) { types.append(JSONKey.All.asString) }
 
         return types
     }
@@ -367,9 +303,7 @@ extension UIDataDetectorTypes: JSONConvertible {
 
 extension UIBaselineAdjustment: JSONConvertible {
     private enum JSONKey: JSONKeyType {
-        case AlignBaselines // default. used when shrinking text to position based on the original baseline
-        case AlignCenters
-        case None
+        case AlignBaselines, AlignCenters, None
     }
 
     init(rawValue mode: String) {
@@ -381,7 +315,7 @@ extension UIBaselineAdjustment: JSONConvertible {
         case JSONKey.None.asString:
             self = .None
         default:
-            self = .None
+            self = .AlignBaselines
         }
     }
 
@@ -403,10 +337,7 @@ extension UIBaselineAdjustment: JSONConvertible {
 
 extension UITextBorderStyle: JSONConvertible {
     private enum JSONKey: JSONKeyType {
-        case None
-        case Line
-        case Bezel
-        case RoundedRect
+        case None, Line, Bezel, RoundedRect
     }
 
     init(rawValue style: String) {
@@ -444,12 +375,7 @@ extension UITextBorderStyle: JSONConvertible {
 
 extension NSLineBreakMode: JSONConvertible {
     private enum JSONKey: JSONKeyType {
-        case ByWordWrapping // Wrap at word boundaries, default
-        case ByCharWrapping // Wrap at character boundaries
-        case ByClipping // Simply clip
-        case ByTruncatingHead // Truncate at head of line: "...wxyz"
-        case ByTruncatingTail // Truncate at tail of line: "abcd..."
-        case ByTruncatingMiddle // Truncate middle of line:  "ab...yz"
+        case ByWordWrapping, ByCharWrapping, ByClipping, ByTruncatingHead, ByTruncatingTail, ByTruncatingMiddle
     }
 
     init(rawValue mode: String) {
@@ -496,12 +422,7 @@ extension NSLineBreakMode: JSONConvertible {
 
 extension NSTextAlignment: JSONConvertible {
     private enum JSONKey: JSONKeyType {
-        case Left // Visually left aligned
-
-        case Center // Visually centered
-        case Right // Visually right aligned
-        case Justified // Fully-justified. The last line in a paragraph is natural-aligned.
-        case Natural // Indicates the default alignment for script
+        case Left, Center, Right, Justified, Natural
     }
 
     init(rawValue align: String) {
@@ -517,7 +438,7 @@ extension NSTextAlignment: JSONConvertible {
         case JSONKey.Natural.asString:
             self = .Natural
         default:
-            self = .Natural
+            self = .Left
         }
     }
 
@@ -544,19 +465,7 @@ extension NSTextAlignment: JSONConvertible {
 extension UIViewContentMode: JSONConvertible {
 
     private enum JSONKey: JSONKeyType {
-        case ScaleToFill
-        case ScaleAspectFit // contents scaled to fit with fixed aspect. remainder is transparent
-        case ScaleAspectFill // contents scaled to fill with fixed aspect. some portion of content may be clipped.
-        case Redraw // redraw on bounds change (calls -setNeedsDisplay)
-        case Center // contents remain same size. positioned adjusted.
-        case Top
-        case Bottom
-        case Left
-        case Right
-        case TopLeft
-        case TopRight
-        case BottomLeft
-        case BottomRight
+        case ScaleToFill, ScaleAspectFit, ScaleAspectFill, Redraw, Center, Top, Bottom, Left, Right, TopLeft, TopRight, BottomLeft, BottomRight
     }
 
     init(rawValue mode: String) {
@@ -632,10 +541,7 @@ extension UIViewContentMode: JSONConvertible {
 extension UIViewTintAdjustmentMode: JSONConvertible {
 
     enum JSONKey: JSONKeyType {
-        case Automatic
-
-        case Normal
-        case Dimmed
+        case Automatic, Normal, Dimmed
     }
 
     init(rawValue mode: String) {
@@ -798,6 +704,10 @@ extension UIColor {
         var b: CGFloat = 0
         var a: CGFloat = 0
         self.getRed(&r, green: &g, blue: &b, alpha: &a)
+
+        if a == 1.0 {
+            return String(format: "#%02X%02X%02X", Int(r * 255), Int(g * 255), Int(b * 255))
+        }
 
         return String(format: "#%02X%02X%02X%02X", Int(r * 255), Int(g * 255), Int(b * 255), Int(a * 255))
     }

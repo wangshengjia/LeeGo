@@ -130,6 +130,7 @@ extension UIView {
 private final class ComponentContext {
     var component: ComponentTarget?
     var isRoot = true
+    var attributesArray: [Attributes] = []
 }
 
 private struct AssociatedKeys {
@@ -165,6 +166,15 @@ extension ComponentType where Self: UIView {
         }
         set {
             context.isRoot = newValue
+        }
+    }
+
+    internal var attributesArray: [Attributes] {
+        get {
+            return context.attributesArray
+        }
+        set {
+            context.attributesArray = newValue
         }
     }
 
