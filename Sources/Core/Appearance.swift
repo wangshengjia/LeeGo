@@ -22,7 +22,7 @@ public enum Appearance {
 
     case attributedText([Attributes]) // TODO: handle also NSParagrapheStyle
 
-    case text(String), borderStyle(UITextBorderStyle), defaultTextAttributes(Attributes), placeholder(String), attributedPlaceholder([Attributes]), clearsOnBeginEditing(Bool), background(UIImage), disabledBackground(UIImage), typingAttributes(Attributes), clearButtonMode(UITextFieldViewMode)
+    case text(String), borderStyle(UITextBorderStyle), defaultTextAttributes(Attributes), placeholder(String), clearsOnBeginEditing(Bool), background(UIImage), disabledBackground(UIImage), typingAttributes(Attributes), clearButtonMode(UITextFieldViewMode)
 
     // UIButton
     case buttonType(UIButtonType), buttonTitle(String, UIControlState), buttonTitleColor(UIColor, UIControlState), buttonTitleShadowColor(UIColor, UIControlState), buttonImage(UIImage, UIControlState), buttonBackgroundImage(UIImage, UIControlState), buttonAttributedTitle([Attributes], UIControlState), contentEdgeInsets(UIEdgeInsets), titleEdgeInsets(UIEdgeInsets), reversesTitleShadowWhenHighlighted(Bool), imageEdgeInsets(UIEdgeInsets), adjustsImageWhenHighlighted(Bool), adjustsImageWhenDisabled(Bool), showsTouchWhenHighlighted(Bool)
@@ -45,203 +45,201 @@ public enum Appearance {
 
         // UIView
         case (let .backgroundColor(color), _):
-            component.backgroundColor = useDefaultValue ? nil : color
+            component.backgroundColor = !useDefaultValue ? color : nil
         case (let .userInteractionEnabled(userInteractionEnabled), _):
-            component.userInteractionEnabled = userInteractionEnabled
+            component.userInteractionEnabled = !useDefaultValue ? userInteractionEnabled : !((component is UILabel) || (component is UIImageView))
         case (let .translatesAutoresizingMaskIntoConstraints(should), _):
-            component.translatesAutoresizingMaskIntoConstraints = should
+            component.translatesAutoresizingMaskIntoConstraints = !useDefaultValue ? should : false
         case (let .tintColor(color), _):
-            component.tintColor = color
+            component.tintColor = !useDefaultValue ? color : nil
         case (let .tintAdjustmentMode(mode), _):
-            component.tintAdjustmentMode = mode
+            component.tintAdjustmentMode = !useDefaultValue ? mode : .Automatic
         case (let .cornerRadius(radius), _):
-            component.layer.cornerRadius = radius
+            component.layer.cornerRadius = !useDefaultValue ? radius : 0
         case (let .borderWidth(borderWidth), _):
-            component.layer.borderWidth = borderWidth
+            component.layer.borderWidth = !useDefaultValue ? borderWidth : 0
         case (let .borderColor(borderColor), _):
-            component.layer.borderColor = borderColor.CGColor
+            component.layer.borderColor = !useDefaultValue ? borderColor.CGColor : nil
         case (let .multipleTouchEnabled(multipleTouchEnabled), _):
-            component.multipleTouchEnabled = multipleTouchEnabled
+            component.multipleTouchEnabled = !useDefaultValue ? multipleTouchEnabled : false
         case (let .exclusiveTouch(exclusiveTouch), _):
-            component.exclusiveTouch = exclusiveTouch
+            component.exclusiveTouch = !useDefaultValue ? exclusiveTouch : false
         case (let .clipsToBounds(clipsToBounds), _):
-            component.clipsToBounds = clipsToBounds
+            component.clipsToBounds = !useDefaultValue ? clipsToBounds : false
         case (let .alpha(alpha), _):
-            component.alpha = alpha
+            component.alpha = !useDefaultValue ? alpha : 1.0
         case (let .opaque(opaque), _):
-            component.opaque = opaque
+            component.opaque = !useDefaultValue ? opaque : true
         case (let .hidden(hidden), _):
-            component.hidden = hidden
+            component.hidden = !useDefaultValue ? hidden : false
         case (let .clearsContextBeforeDrawing(clearsContextBeforeDrawing), _):
-            component.clearsContextBeforeDrawing = clearsContextBeforeDrawing
+            component.clearsContextBeforeDrawing = !useDefaultValue ? clearsContextBeforeDrawing : true
         case (let .contentMode(contentMode), _):
-            component.contentMode = contentMode
+            component.contentMode = !useDefaultValue ? contentMode : .ScaleToFill
 
         // UIControl
         case (let .selected(selected), let control as UIControl):
-            control.selected = selected
+            control.selected = !useDefaultValue ? selected : false
 
         // UILabel
         case (let .shadowColor(color), let label as UILabel):
-            label.shadowColor = color
+            label.shadowColor = !useDefaultValue ? color : nil
         case (let .shadowOffset(size), let label as UILabel):
-            label.shadowOffset = size
+            label.shadowOffset = !useDefaultValue ? size : CGSize(width: 0, height: -1)
         case (let .highlightedTextColor(color), let label as UILabel):
-            label.highlightedTextColor = color
+            label.highlightedTextColor = !useDefaultValue ? color : nil
         case (let .minimumScaleFactor(factor), let label as UILabel):
-            label.minimumScaleFactor = factor
+            label.minimumScaleFactor = !useDefaultValue ? factor : 0.0
         case (let .baselineAdjustment(adjustment), let label as UILabel):
-            label.baselineAdjustment = adjustment
+            label.baselineAdjustment = !useDefaultValue ? adjustment : .AlignBaselines
 
         // UILabel & UITextField & UITextView
         case (let .enabled(enabled), let view):
             if let label = view as? UILabel {
-                label.enabled = enabled
+                label.enabled = !useDefaultValue ? enabled : true
             } else if let control = view as? UIControl {
-                control.enabled = enabled
+                control.enabled = !useDefaultValue ? enabled : true
             }
         case (let .highlighted(highlighted), let view):
             if let label = view as? UILabel {
-                label.highlighted = highlighted
+                label.highlighted = !useDefaultValue ? highlighted : false
             } else if let control = view as? UIControl {
-                control.highlighted = highlighted
+                control.highlighted = !useDefaultValue ? highlighted : false
             }
         case (let .adjustsFontSizeToFitWidth(should), let view):
             if let label = view as? UILabel {
-                label.adjustsFontSizeToFitWidth = should
+                label.adjustsFontSizeToFitWidth = !useDefaultValue ? should : false
             } else if let textField = view as? UITextField {
-                textField.adjustsFontSizeToFitWidth = should
+                textField.adjustsFontSizeToFitWidth = !useDefaultValue ? should : false
             }
         case (let .font(font), let view):
             if let label = view as? UILabel {
-                label.font = font
+                label.font = !useDefaultValue ? font : nil
             } else if let textField = view as? UITextField {
-                textField.font = font
+                textField.font = !useDefaultValue ? font : nil
             } else if let textView = view as? UITextView {
-                textView.font = font
+                textView.font = !useDefaultValue ? font : nil
             }
         case (let .textColor(color), let view):
             if let label = view as? UILabel {
-                label.textColor = color
+                label.textColor = !useDefaultValue ? color : nil
             } else if let textField = view as? UITextField {
-                textField.textColor = color
+                textField.textColor = !useDefaultValue ? color : nil
             } else if let textView = view as? UITextView {
-                textView.textColor = color
+                textView.textColor = !useDefaultValue ? color : nil
             }
         case (let .textAlignment(align), let view):
             if let label = view as? UILabel {
-                label.textAlignment = align
+                label.textAlignment = !useDefaultValue ? align : .Left
             } else if let textField = view as? UITextField {
-                textField.textAlignment = align
+                textField.textAlignment = !useDefaultValue ? align : .Left
             } else if let textView = view as? UITextView {
-                textView.textAlignment = align
+                textView.textAlignment = !useDefaultValue ? align : .Left
             }
         case (let .numberOfLines(number), let view):
             if let label = view as? UILabel {
-                label.numberOfLines = number
+                label.numberOfLines = !useDefaultValue ? number : 1
             } else if let textView = view as? UITextView {
-                textView.textContainer.maximumNumberOfLines = number
+                textView.textContainer.maximumNumberOfLines = !useDefaultValue ? number : 0
             }
         case (let .text(text), let view):
             if let label = view as? UILabel {
-                label.text = text
+                label.text = !useDefaultValue ? text : nil
             } else if let textField = view as? UITextField {
-                textField.text = text
+                textField.text = !useDefaultValue ? text : nil
             } else if let textView = view as? UITextView {
-                textView.text = text
+                textView.text = !useDefaultValue ? text : nil
             }
         case (let .attributedText(attributes), let view):
             if let label = view as? UILabel {
-                label.setAttributedString(with: attributes)
+                label.setAttributedString(with: !useDefaultValue ? attributes : [])
             } else if let textField = view as? UITextField {
-                textField.setAttributedString(with: attributes)
+                textField.setAttributedString(with: !useDefaultValue ? attributes : [])
             } else if let textView = view as? UITextView {
-                textView.setAttributedString(with: attributes)
+                textView.setAttributedString(with: !useDefaultValue ? attributes : [])
             }
         case (let .lineBreakMode(mode), let view):
             if let label = view as? UILabel {
-                label.lineBreakMode = mode
+                label.lineBreakMode = !useDefaultValue ? mode : .ByWordWrapping
             } else if let textView = view as? UITextView {
-                textView.textContainer.lineBreakMode = mode
+                textView.textContainer.lineBreakMode = !useDefaultValue ? mode : .ByWordWrapping
             }
         case (let .allowsEditingTextAttributes(allows), let view):
             if let textField = view as? UITextField {
-                textField.allowsEditingTextAttributes = allows
+                textField.allowsEditingTextAttributes = !useDefaultValue ? allows : false
             } else if let textView = view as? UITextView {
-                textView.allowsEditingTextAttributes = allows
+                textView.allowsEditingTextAttributes = !useDefaultValue ? allows : false
             }
         case (let .clearsOnInsertion(clearsOnInsertion), let view):
             if let textField = view as? UITextField {
-                textField.clearsOnInsertion = clearsOnInsertion
+                textField.clearsOnInsertion = !useDefaultValue ? clearsOnInsertion : false
             } else if let textView = view as? UITextView {
-                textView.clearsOnInsertion = clearsOnInsertion
+                textView.clearsOnInsertion = !useDefaultValue ? clearsOnInsertion : false
             }
 
         // UITextView
         case (let .selectedRange(range), let textView as UITextView):
-            textView.selectedRange = range
+            textView.selectedRange = !useDefaultValue ? range : NSRange(location: 0, length: 0)
         case (let .editable(editable), let textView as UITextView):
-            textView.editable = editable
+            textView.editable = !useDefaultValue ? editable : false
         case (let .selectable(selectable), let textView as UITextView):
-            textView.selectable = selectable
+            textView.selectable = !useDefaultValue ? selectable : true
         case (let .dataDetectorTypes(types), let textView as UITextView):
-            textView.dataDetectorTypes = types
+            textView.dataDetectorTypes = !useDefaultValue ? types : .None
         case (let .textContainerInset(inset), let textView as UITextView):
-            textView.textContainerInset = inset
+            textView.textContainerInset = !useDefaultValue ? inset : UIEdgeInsetsZero
         case (let .linkTextAttributes(attrs), let textView as UITextView):
-            textView.linkTextAttributes = attrs
+            textView.linkTextAttributes = !useDefaultValue ? attrs : nil
         case (let .lineFragmentPadding(padding), let textView as UITextView):
-            textView.textContainer.lineFragmentPadding = padding
+            textView.textContainer.lineFragmentPadding = !useDefaultValue ? padding : 5
 
-            // UITextField
+        // UITextField
         case (let .borderStyle(style), let textField as UITextField):
-            textField.borderStyle = style
+            textField.borderStyle = !useDefaultValue ? style : .None
         case (let .defaultTextAttributes(attributes), let textField as UITextField):
-            textField.defaultTextAttributes = attributes
+            textField.defaultTextAttributes = !useDefaultValue ? attributes : [:]
         case (let .placeholder(text), let textField as UITextField):
-            textField.placeholder = text
-        case (let .attributedPlaceholder(attributes), let textField as UITextField):
-            textField.setAttributedPlaceholder(with: attributes)
+            textField.placeholder = !useDefaultValue ? text : nil
         case (let .clearsOnBeginEditing(should), let textField as UITextField):
-            textField.clearsOnBeginEditing = should
+            textField.clearsOnBeginEditing = !useDefaultValue ? should : false
         case (let .background(image), let textField as UITextField):
-            textField.background = image
+            textField.background = !useDefaultValue ? image : nil
         case (let .disabledBackground(image), let textField as UITextField):
-            textField.disabledBackground = image
+            textField.disabledBackground = !useDefaultValue ? image : nil
         case (let .typingAttributes(attributes), let textField as UITextField):
-            textField.typingAttributes = attributes
+            textField.typingAttributes = !useDefaultValue ? attributes : nil
         case (let .clearButtonMode(mode), let textField as UITextField):
-            textField.clearButtonMode = mode
+            textField.clearButtonMode = !useDefaultValue ? mode : .Never
 
         // UIButton
         case (let .buttonType(type), _ as UIButton):
             print(type) //TODO:  button.buttonType = type
         case (let .buttonTitle(title, state), let button as UIButton):
-            button.setTitle(title, forState: state)
+            button.setTitle(!useDefaultValue ? title : nil, forState: state)
         case (let .buttonTitleColor(color, state), let button as UIButton):
-            button.setTitleColor(color, forState: state)
+            button.setTitleColor(!useDefaultValue ? color : nil, forState: state)
         case (let .buttonTitleShadowColor(color, state), let button as UIButton):
-            button.setTitleShadowColor(color, forState: state)
+            button.setTitleShadowColor(!useDefaultValue ? color : nil, forState: state)
         case (let .buttonImage(image, state), let button as UIButton):
-            button.setImage(image, forState: state)
+            button.setImage(!useDefaultValue ? image : nil, forState: state)
         case (let .buttonBackgroundImage(image, state), let button as UIButton):
-            button.setBackgroundImage(image, forState: state)
+            button.setBackgroundImage(!useDefaultValue ? image : nil, forState: state)
         case (let .buttonAttributedTitle(attributes, state), let button as UIButton):
-            button.setAttributedButtonTitle(with: attributes, state: state)
+            button.setAttributedButtonTitle(with: !useDefaultValue ? attributes : [], state: state)
         case (let .contentEdgeInsets(insets), let button as UIButton):
-            button.contentEdgeInsets = insets
+            button.contentEdgeInsets = !useDefaultValue ? insets : UIEdgeInsetsZero
         case (let .titleEdgeInsets(insets), let button as UIButton):
-            button.titleEdgeInsets = insets
+            button.titleEdgeInsets = !useDefaultValue ? insets : UIEdgeInsetsZero
         case (let .imageEdgeInsets(insets), let button as UIButton):
-            button.imageEdgeInsets = insets
+            button.imageEdgeInsets = !useDefaultValue ? insets : UIEdgeInsetsZero
         case (let .reversesTitleShadowWhenHighlighted(should), let button as UIButton):
-            button.reversesTitleShadowWhenHighlighted = should
+            button.reversesTitleShadowWhenHighlighted = !useDefaultValue ? should : false
         case (let .adjustsImageWhenHighlighted(should), let button as UIButton):
-            button.adjustsImageWhenHighlighted = should
+            button.adjustsImageWhenHighlighted = !useDefaultValue ? should : true
         case (let .adjustsImageWhenDisabled(should), let button as UIButton):
-            button.adjustsImageWhenDisabled = should
+            button.adjustsImageWhenDisabled = !useDefaultValue ? should : true
         case (let .showsTouchWhenHighlighted(should), let button as UIButton):
-            button.showsTouchWhenHighlighted = should
+            button.showsTouchWhenHighlighted = !useDefaultValue ? should : false
 
         // UIImageView
         case (let .ratio(ratioValue), let image as UIImageView):
@@ -260,53 +258,53 @@ public enum Appearance {
 
         // UIScrollView
         case (let .scrollEnabled(scrollEnabled), let scrollView as UIScrollView):
-            scrollView.scrollEnabled = scrollEnabled
+            scrollView.scrollEnabled = !useDefaultValue ? scrollEnabled : true
         case (let .contentOffset(offset), let scrollView as UIScrollView):
-            scrollView.contentOffset = offset
+            scrollView.contentOffset = !useDefaultValue ? offset : CGPointZero
         case (let .contentSize(size), let scrollView as UIScrollView):
-            scrollView.contentSize = size
+            scrollView.contentSize = !useDefaultValue ? size : CGSizeZero
         case (let .contentInset(inset), let scrollView as UIScrollView):
-            scrollView.contentInset = inset
+            scrollView.contentInset = !useDefaultValue ? inset : UIEdgeInsetsZero
         case (let .directionalLockEnabled(enabled), let scrollView as UIScrollView):
-            scrollView.directionalLockEnabled = enabled
+            scrollView.directionalLockEnabled = !useDefaultValue ? enabled : false
         case (let .bounces(bounces), let scrollView as UIScrollView):
-            scrollView.bounces = bounces
+            scrollView.bounces = !useDefaultValue ? bounces : true
         case (let .alwaysBounceVertical(alwaysBounceVertical), let scrollView as UIScrollView):
-            scrollView.alwaysBounceVertical = alwaysBounceVertical
+            scrollView.alwaysBounceVertical = !useDefaultValue ? alwaysBounceVertical : false
         case (let .alwaysBounceHorizontal(alwaysBounceHorizontal), let scrollView as UIScrollView):
-            scrollView.alwaysBounceHorizontal = alwaysBounceHorizontal
+            scrollView.alwaysBounceHorizontal = !useDefaultValue ? alwaysBounceHorizontal : false
         case (let .pagingEnabled(pagingEnabled), let scrollView as UIScrollView):
-            scrollView.pagingEnabled = pagingEnabled
+            scrollView.pagingEnabled = !useDefaultValue ? pagingEnabled : false
         case (let .showsHorizontalScrollIndicator(show), let scrollView as UIScrollView):
-            scrollView.showsHorizontalScrollIndicator = show
+            scrollView.showsHorizontalScrollIndicator = !useDefaultValue ? show : true
         case (let .showsVerticalScrollIndicator(show), let scrollView as UIScrollView):
-            scrollView.showsVerticalScrollIndicator = show
+            scrollView.showsVerticalScrollIndicator = !useDefaultValue ? show : true
         case (let .scrollIndicatorInsets(insets), let scrollView as UIScrollView):
-            scrollView.scrollIndicatorInsets = insets
+            scrollView.scrollIndicatorInsets = !useDefaultValue ? insets : UIEdgeInsetsZero
         case (let .indicatorStyle(style), let scrollView as UIScrollView):
-            scrollView.indicatorStyle = style
+            scrollView.indicatorStyle = !useDefaultValue ? style : .Default
         case (let .decelerationRate(rate), let scrollView as UIScrollView):
-            scrollView.decelerationRate = rate
+            scrollView.decelerationRate = !useDefaultValue ? rate : UIScrollViewDecelerationRateNormal
         case (let .delaysContentTouches(delaysContentTouches), let scrollView as UIScrollView):
-            scrollView.delaysContentTouches = delaysContentTouches
+            scrollView.delaysContentTouches = !useDefaultValue ? delaysContentTouches : true
         case (let .canCancelContentTouches(canCancelContentTouches), let scrollView as UIScrollView):
-            scrollView.canCancelContentTouches = canCancelContentTouches
+            scrollView.canCancelContentTouches = !useDefaultValue ? canCancelContentTouches : true
         case (let .minimumZoomScale(minimumZoomScale), let scrollView as UIScrollView):
-            scrollView.minimumZoomScale = minimumZoomScale
+            scrollView.minimumZoomScale = !useDefaultValue ? minimumZoomScale : 1.0
         case (let .maximumZoomScale(maximumZoomScale), let scrollView as UIScrollView):
-            scrollView.maximumZoomScale = maximumZoomScale
+            scrollView.maximumZoomScale = !useDefaultValue ? maximumZoomScale : 1.0
         case (let .zoomScale(zoomScale), let scrollView as UIScrollView):
-            scrollView.zoomScale = zoomScale
+            scrollView.zoomScale = !useDefaultValue ? zoomScale : 1.0
         case (let .bouncesZoom(bouncesZoom), let scrollView as UIScrollView):
-            scrollView.bouncesZoom = bouncesZoom
+            scrollView.bouncesZoom = !useDefaultValue ? bouncesZoom : true
         case (let .scrollsToTop(scrollsToTop), let scrollView as UIScrollView):
-            scrollView.scrollsToTop = scrollsToTop
+            scrollView.scrollsToTop = !useDefaultValue ? scrollsToTop : true
         case (let .keyboardDismissMode(keyboardDismissMode), let scrollView as UIScrollView):
-            scrollView.keyboardDismissMode = keyboardDismissMode
+            scrollView.keyboardDismissMode = !useDefaultValue ? keyboardDismissMode :.None
 
         // Custom
         case (let .custom(dictionary), _):
-            useDefaultValue ? component.removeCustomStyle(dictionary) : component.setupCustomStyle(dictionary)
+            !useDefaultValue ? component.setupCustomStyle(dictionary) : component.removeCustomStyle(dictionary)
 
         default:
             assertionFailure("Unknown appearance \(self) for component \(component)")
@@ -348,7 +346,7 @@ extension Appearance: JSONConvertible {
 
         case attributedText
 
-        case text, borderStyle, defaultTextAttributes, placeholder, attributedPlaceholder, clearsOnBeginEditing, background, disabledBackground, typingAttributes, clearButtonMode
+        case text, borderStyle, defaultTextAttributes, placeholder, clearsOnBeginEditing, background, disabledBackground, typingAttributes, clearButtonMode
 
         // UIButton
         case buttonType, buttonTitle, buttonTitleColor, buttonTitleShadowColor, buttonImage, buttonBackgroundImage, buttonAttributedTitle, contentEdgeInsets, titleEdgeInsets, reversesTitleShadowWhenHighlighted, imageEdgeInsets, adjustsImageWhenHighlighted, adjustsImageWhenDisabled, showsTouchWhenHighlighted
@@ -467,8 +465,6 @@ extension Appearance: JSONConvertible {
             self = .baselineAdjustment(UIBaselineAdjustment(rawValue: value))
         case let (JSONKey.shadowColor.asString, value as String):
             self = .shadowColor(UIColor(rawValue: value))
-        case let (JSONKey.shadowColor.asString, value as String):
-            self = .shadowColor(UIColor(rawValue: value))
         case let (JSONKey.shadowOffset.asString, value as [CGFloat]):
             self = .shadowOffset(CGSize(rawValue: value))
         case let (JSONKey.highlightedTextColor.asString, value as String):
@@ -484,8 +480,6 @@ extension Appearance: JSONConvertible {
             self = .defaultTextAttributes(Appearance.decodeAttributes(value))
         case let (JSONKey.placeholder.asString, value as String):
             self = .placeholder(value)
-        case let (JSONKey.attributedPlaceholder.asString, value as [Attributes]):
-            self = .attributedPlaceholder(Appearance.decodeAttributes(value))
         case let (JSONKey.clearsOnBeginEditing.asString, value as Bool):
             self = .clearsOnBeginEditing(value)
         case let (JSONKey.background.asString, value as JSONDictionary):
@@ -691,8 +685,6 @@ extension Appearance: JSONConvertible {
             return [JSONKey.defaultTextAttributes.asString: Appearance.encodeAttributes(value)]
         case let .placeholder(value):
             return [JSONKey.placeholder.asString: value]
-        case let .attributedPlaceholder(value):
-            return [JSONKey.attributedPlaceholder.asString: Appearance.encodeAttributes(value)]
         case let .clearsOnBeginEditing(value):
             return [JSONKey.clearsOnBeginEditing.asString: value]
         case let .background(value):

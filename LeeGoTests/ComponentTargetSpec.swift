@@ -1,5 +1,6 @@
 
 
+import XCTest
 import Foundation
 import UIKit
 
@@ -165,20 +166,10 @@ class ComponentTargetSpec: QuickSpec {
                 expect(component.targetClass) === UIView.self
                 expect(component.heightResolver!(fittingWidth:0, childrenHeights: [10, 20], metrics: LayoutMetrics())) == 30
             })
-        }
 
-        describe("ComponentTarget encodable tests") {
-            it("should") {
-
-                // Given
-                let component = ComponentBuilder.title.build(UILabel)
-
-                // When
-                let json = component.encode()
-
-                // Then
-                expect(json["name"] as? String) == "title"
-                expect(json["targetClass"] as? String) == "UILabel"
+            it("builder & target should be equals") {
+                XCTAssertTrue(ComponentBuilder.header == ComponentTarget(name: "header"))
+                XCTAssertTrue(ComponentTarget(name: "header") == ComponentBuilder.header)
             }
         }
     }

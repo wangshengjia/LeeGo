@@ -12,23 +12,24 @@
                            4
                            ],
     "canCancelContentTouches" : false,
-    "tintColor" : "#FF0000FF",
+    "tintColor" : "#FF0000",
     "lineFragmentPadding" : 12,
     "cornerRadius" : 5,
     "scrollsToTop" : true,
     "adjustsImageWhenDisabled" : false,
     "linkTextAttributes" : {
-        "NSBackgroundColor" : "#0000FFFF",
+        "NSBackgroundColor" : "#0000FF",
         "NSFont" : {
             "size" : 13,
             "name" : ".SFUIText-Regular"
         },
-        "NSColor" : "#FFFF00FF"
+        "NSColor" : "#FFFF00"
     },
     "buttonTitleShadowColor" : {
-        "color" : "#996633FF",
+        "color" : "#996633",
         "state" : [
-                   "Normal"
+                   "Normal",
+                   "Highlighted"
                    ]
     },
     "placeholder" : "place holder",
@@ -38,7 +39,7 @@
                      3,
                      5
                      ],
-    "borderColor" : "#7F7F7FFF",
+    "borderColor" : "#7F7F7F",
     "font" : {
         "size" : 10,
         "name" : ".SFUIText-Regular"
@@ -56,7 +57,8 @@
             "data" : "iVBORw0KGgoAAAANSUhEUgAAABsAAAAaCAYAAABGiCfwAAAAAXNSR0IArs4c6QAA\r\nAAlwSFlzAAAWJQAAFiUBSVIk8AAAABxpRE9UAAAAAgAAAAAAAAANAAAAKAAAAA0A\r\nAAANAAABTEYdCxsAAAEYSURBVEgNrFO9bsIwEI7aSl3ZW7HDs\/QNyhPAA1QqS16B\r\nqSxMSC3kARhgCBPQ2BVF5CIR+3gKJgbgbDCRIpDsKJZOJ1vfj+\/s87wCiyXyOwLR\r\nKEB1o8zXaY0neGQJbtyYBdBUVVuZqViAqBeQsKeQGTNmDMSnPdMRuViJVzI6ZGYY\r\nOUrYw1ksWsbokg+z\/82LvYIDkgFOcmbHKBZNBwk7aLhcVjjIfd6MfuXYTsEBRXP1\r\nnjfSe7qAuoiVlO\/7DzzGD2pRn37ajw6QA0ZBlQzPgQHl9KaZnjk5zbByqLg6rnrY\r\n+12nb14QBI\/Uiu09odLOQXZ09RywyhP5V5rwZeiNHlX5FYbh07XVo5F4psOuAZSS\r\nAXfqrY3JCQAA\/\/+UNkZsAAABUUlEQVSllL9KxEAQxi9aCNr67wUU9CkU0ZewEhsf\r\nQCzEIuAT+A7apBKLE4uzUA5jdhDDZla8nS1E8B7gRCwMOvE\/m93LRQMp5pvffF92\r\ns0mjYV0J6lVA8wjKvP7rRlIXsjNn2ZfLGPU8MPznMDT7J2k6Vnb2KAXMKzyoF0jP\r\nPLPhsayWefhu4ECkvWpHD3F5fTM7cFDxjnnrPVbVslC0VSuMA2NlZqqdHQSHteuG\r\nJUibDqv+UjulSQ7KnWFILYF07+6Z8\/7Ojq5Qet02E8q8gKIdxgOA23EOPLYZrvOz\r\nKz3hsPRLAs3RbyOuu5DRojURCNTbHw\/x8xNI0KxZnL8EgFE2ePoOQzpNEKd9E0Lq\r\nBWYfvnhe8aGPLekg9crnYJ5ktBtF0XAJsoRYyik++q33OaQetwMLcZdCdpb5JAre\r\njiU34VbDMBwqPhdeWdZs6hGbegMlzi5SA8cDGgAAAABJRU5ErkJggg=="
         },
         "state" : [
-                   "Normal"
+                   "Normal",
+                   "Application"
                    ]
     },
     "typingAttributes" : {
@@ -75,28 +77,28 @@
     "numberOfLines" : 10,
     "editable" : true,
     "keyboardDismissMode" : "OnDrag",
-    "backgroundColor" : "#0000FFFF",
+    "backgroundColor" : "#0000FF",
     "attributedText" : [
                         {
                         "NSFont" : {
                         "size" : 16,
                         "name" : "Helvetica"
                         },
-                        "NSColor" : "#FF0000FF"
+                        "NSColor" : "#FF0000"
                         },
                         {
                         "NSFont" : {
                         "size" : 20,
                         "name" : "HelveticaNeue"
                         },
-                        "NSColor" : "#000000FF"
+                        "NSColor" : "#000000"
                         },
                         {
                         "NSFont" : {
                         "size" : 16,
                         "name" : "HelveticaNeue"
                         },
-                        "NSColor" : "#AAAAAAFF"
+                        "NSColor" : "#AAAAAA"
                         }
                         ],
     "disabledBackground" : {
@@ -119,7 +121,8 @@
                          4
                          ],
     "dataDetectorTypes" : [
-                           "Address"
+                           "Address",
+                           "None"
                            ],
     "alpha" : 0.4,
     "exclusiveTouch" : false,
@@ -135,14 +138,15 @@
             "data" : "iVBORw0KGgoAAAANSUhEUgAAABsAAAAaCAYAAABGiCfwAAAAAXNSR0IArs4c6QAA\r\nAAlwSFlzAAAWJQAAFiUBSVIk8AAAABxpRE9UAAAAAgAAAAAAAAANAAAAKAAAAA0A\r\nAAANAAABTEYdCxsAAAEYSURBVEgNrFO9bsIwEI7aSl3ZW7HDs\/QNyhPAA1QqS16B\r\nqSxMSC3kARhgCBPQ2BVF5CIR+3gKJgbgbDCRIpDsKJZOJ1vfj+\/s87wCiyXyOwLR\r\nKEB1o8zXaY0neGQJbtyYBdBUVVuZqViAqBeQsKeQGTNmDMSnPdMRuViJVzI6ZGYY\r\nOUrYw1ksWsbokg+z\/82LvYIDkgFOcmbHKBZNBwk7aLhcVjjIfd6MfuXYTsEBRXP1\r\nnjfSe7qAuoiVlO\/7DzzGD2pRn37ajw6QA0ZBlQzPgQHl9KaZnjk5zbByqLg6rnrY\r\n+12nb14QBI\/Uiu09odLOQXZ09RywyhP5V5rwZeiNHlX5FYbh07XVo5F4psOuAZSS\r\nAXfqrY3JCQAA\/\/+UNkZsAAABUUlEQVSllL9KxEAQxi9aCNr67wUU9CkU0ZewEhsf\r\nQCzEIuAT+A7apBKLE4uzUA5jdhDDZla8nS1E8B7gRCwMOvE\/m93LRQMp5pvffF92\r\ns0mjYV0J6lVA8wjKvP7rRlIXsjNn2ZfLGPU8MPznMDT7J2k6Vnb2KAXMKzyoF0jP\r\nPLPhsayWefhu4ECkvWpHD3F5fTM7cFDxjnnrPVbVslC0VSuMA2NlZqqdHQSHteuG\r\nJUibDqv+UjulSQ7KnWFILYF07+6Z8\/7Ojq5Qet02E8q8gKIdxgOA23EOPLYZrvOz\r\nKz3hsPRLAs3RbyOuu5DRojURCNTbHw\/x8xNI0KxZnL8EgFE2ePoOQzpNEKd9E0Lq\r\nBWYfvnhe8aGPLekg9crnYJ5ktBtF0XAJsoRYyik++q33OaQetwMLcZdCdpb5JAre\r\njiU34VbDMBwqPhdeWdZs6hGbegMlzi5SA8cDGgAAAABJRU5ErkJggg=="
         },
         "state" : [
-                   "Normal"
+                   "Normal",
+                   "Disabled"
                    ]
     },
     "adjustsImageWhenHighlighted" : true,
     "decelerationRate" : 3,
     "multipleTouchEnabled" : false,
     "borderWidth" : 1,
-    "shadowColor" : "#996633FF",
+    "shadowColor" : "#996633",
     "selectedRange" : [
                        0,
                        4
@@ -152,7 +156,7 @@
     "userInteractionEnabled" : true,
     "contentMode" : "BottomLeft",
     "buttonTitleColor" : {
-        "color" : "#FFFF00FF",
+        "color" : "#FFFF00",
         "state" : [
                    "Normal"
                    ]
@@ -180,11 +184,6 @@
         "data" : "iVBORw0KGgoAAAANSUhEUgAAABsAAAAaCAYAAABGiCfwAAAAAXNSR0IArs4c6QAA\r\nAAlwSFlzAAAWJQAAFiUBSVIk8AAAABxpRE9UAAAAAgAAAAAAAAANAAAAKAAAAA0A\r\nAAANAAABTEYdCxsAAAEYSURBVEgNrFO9bsIwEI7aSl3ZW7HDs\/QNyhPAA1QqS16B\r\nqSxMSC3kARhgCBPQ2BVF5CIR+3gKJgbgbDCRIpDsKJZOJ1vfj+\/s87wCiyXyOwLR\r\nKEB1o8zXaY0neGQJbtyYBdBUVVuZqViAqBeQsKeQGTNmDMSnPdMRuViJVzI6ZGYY\r\nOUrYw1ksWsbokg+z\/82LvYIDkgFOcmbHKBZNBwk7aLhcVjjIfd6MfuXYTsEBRXP1\r\nnjfSe7qAuoiVlO\/7DzzGD2pRn37ajw6QA0ZBlQzPgQHl9KaZnjk5zbByqLg6rnrY\r\n+12nb14QBI\/Uiu09odLOQXZ09RywyhP5V5rwZeiNHlX5FYbh07XVo5F4psOuAZSS\r\nAXfqrY3JCQAA\/\/+UNkZsAAABUUlEQVSllL9KxEAQxi9aCNr67wUU9CkU0ZewEhsf\r\nQCzEIuAT+A7apBKLE4uzUA5jdhDDZla8nS1E8B7gRCwMOvE\/m93LRQMp5pvffF92\r\ns0mjYV0J6lVA8wjKvP7rRlIXsjNn2ZfLGPU8MPznMDT7J2k6Vnb2KAXMKzyoF0jP\r\nPLPhsayWefhu4ECkvWpHD3F5fTM7cFDxjnnrPVbVslC0VSuMA2NlZqqdHQSHteuG\r\nJUibDqv+UjulSQ7KnWFILYF07+6Z8\/7Ojq5Qet02E8q8gKIdxgOA23EOPLYZrvOz\r\nKz3hsPRLAs3RbyOuu5DRojURCNTbHw\/x8xNI0KxZnL8EgFE2ePoOQzpNEKd9E0Lq\r\nBWYfvnhe8aGPLekg9crnYJ5ktBtF0XAJsoRYyik++q33OaQetwMLcZdCdpb5JAre\r\njiU34VbDMBwqPhdeWdZs6hGbegMlzi5SA8cDGgAAAABJRU5ErkJggg=="
     },
     "hidden" : true,
-    "attributedPlaceholder" : [
-    {
-    
-    }
-    ],
     "buttonAttributedTitle" : {
         "state" : [
                    "Normal"
@@ -206,7 +205,7 @@
                       ],
     "pagingEnabled" : false,
     "showsVerticalScrollIndicator" : true,
-    "textColor" : "#FF0000FF",
+    "textColor" : "#FF0000",
     "highlightedTextColor" : "#00000000",
     "clearsOnBeginEditing" : false,
     "zoomScale" : 10,

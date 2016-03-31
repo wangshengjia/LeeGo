@@ -9,13 +9,6 @@
 import Foundation
 @testable import LeeGo
 
-//enum ComponentBuilder: ComponentBuilderType {
-//
-//    case header, title, avatar
-//
-//    static let types: [ComponentBuilder: AnyClass] = [title: UILabel.self]
-//}
-
 struct TestData {
     static let title1 = ComponentBuilder.title.build().style([.font(UIFont(name: "Helvetica", size: 18)!), .text("Text")])
     static let title2 = ComponentBuilder.title.build().style([.font(UIFont(name: "Avenir", size: 12)!), .text("Text")])
@@ -154,17 +147,6 @@ enum Style: String {
 
     // UIButton
     case BasicButton, FavoriteButton
-
-    // Ad View
-    case AdView
-
-    case None
-
-    static let marker = "M"
-    static let customTitle = "title"
-    static let nature = "Nature"
-
-    static let ratio: String = "ratio"
 
     func style() -> [Appearance] {
         switch self {
