@@ -139,12 +139,12 @@ extension UIView {
             return nil
         })
 
-        let attributedText = attributedString(byCombine: attributedStrings)
+        let attributedText = attributedString(combinedWith: attributedStrings)
 
         return attributedText
     }
 
-    private static func attributedString(byCombine attributedStrings: [NSAttributedString]) -> NSAttributedString? {
+    private static func attributedString(combinedWith attributedStrings: [NSAttributedString]) -> NSAttributedString? {
         guard let first = attributedStrings.first else {
             return nil
         }
