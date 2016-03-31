@@ -33,7 +33,7 @@
 		35F520431C7C762E0089FF41 /* AutoLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5203D1C7C762E0089FF41 /* AutoLayoutSpec.swift */; };
 		35F520441C7C762E0089FF41 /* ComponentTargetSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5203E1C7C762E0089FF41 /* ComponentTargetSpec.swift */; };
 		35F520451C7C762E0089FF41 /* ComponentTypeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F5203F1C7C762E0089FF41 /* ComponentTypeSpec.swift */; };
-		35F520461C7C762E0089FF41 /* ConfigurationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520401C7C762E0089FF41 /* ConfigurationSpec.swift */; };
+		35F520461C7C762E0089FF41 /* LayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520401C7C762E0089FF41 /* LayoutSpec.swift */; };
 		35F520471C7C762E0089FF41 /* ConvenienceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520411C7C762E0089FF41 /* ConvenienceSpec.swift */; };
 		35F520481C7C762E0089FF41 /* ViewExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520421C7C762E0089FF41 /* ViewExtensionSpec.swift */; };
 		C8B3E5A116623D363DB779A1 /* Pods_LeeGoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 903FBB7EF8E0836DCE973186 /* Pods_LeeGoTests.framework */; };
@@ -80,7 +80,7 @@
 		35F5203D1C7C762E0089FF41 /* AutoLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutSpec.swift; sourceTree = "<group>"; };
 		35F5203E1C7C762E0089FF41 /* ComponentTargetSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentTargetSpec.swift; sourceTree = "<group>"; };
 		35F5203F1C7C762E0089FF41 /* ComponentTypeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentTypeSpec.swift; sourceTree = "<group>"; };
-		35F520401C7C762E0089FF41 /* ConfigurationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSpec.swift; sourceTree = "<group>"; };
+		35F520401C7C762E0089FF41 /* LayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutSpec.swift; sourceTree = "<group>"; };
 		35F520411C7C762E0089FF41 /* ConvenienceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvenienceSpec.swift; sourceTree = "<group>"; };
 		35F520421C7C762E0089FF41 /* ViewExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensionSpec.swift; sourceTree = "<group>"; };
 		903FBB7EF8E0836DCE973186 /* Pods_LeeGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,7 +163,7 @@
 				35F5203D1C7C762E0089FF41 /* AutoLayoutSpec.swift */,
 				35F5203E1C7C762E0089FF41 /* ComponentTargetSpec.swift */,
 				35F5203F1C7C762E0089FF41 /* ComponentTypeSpec.swift */,
-				35F520401C7C762E0089FF41 /* ConfigurationSpec.swift */,
+				35F520401C7C762E0089FF41 /* LayoutSpec.swift */,
 				35F520411C7C762E0089FF41 /* ConvenienceSpec.swift */,
 				35F520421C7C762E0089FF41 /* ViewExtensionSpec.swift */,
 				3560FEE01CA358F100A400C2 /* ConvertibleSpec.swift */,
@@ -430,7 +430,7 @@
 				354A347A1C7DE9A60081FF89 /* AppearanceSpec.swift in Sources */,
 				35F520451C7C762E0089FF41 /* ComponentTypeSpec.swift in Sources */,
 				35F520431C7C762E0089FF41 /* AutoLayoutSpec.swift in Sources */,
-				35F520461C7C762E0089FF41 /* ConfigurationSpec.swift in Sources */,
+				35F520461C7C762E0089FF41 /* LayoutSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
