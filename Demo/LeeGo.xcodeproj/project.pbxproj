@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350637461C4C1AAC00B5E547 /* ElementViewModel.swift */; };
 		350E0DF01C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */; };
-		350E0DF21C84B0C500DB78FC /* ComponentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DF11C84B0C500DB78FC /* ComponentStore.swift */; };
+		350E0DF21C84B0C500DB78FC /* BrickStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DF11C84B0C500DB78FC /* BrickStore.swift */; };
 		350E0DF41C84C2FF00DB78FC /* TwitterFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DF31C84C2FF00DB78FC /* TwitterFeedViewController.swift */; };
 		350E0DF61C84DD3700DB78FC /* twitter_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 350E0DF51C84DD3700DB78FC /* twitter_sample.json */; };
 		3541CE881C44494B00A3B257 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3541CE871C44494B00A3B257 /* Main.storyboard */; };
@@ -58,7 +58,7 @@
 		1524E6FF067F0774C3E1EE21 /* LeeGo.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LeeGo.podspec; path = ../LeeGo.podspec; sourceTree = "<group>"; };
 		350637461C4C1AAC00B5E547 /* ElementViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementViewModel.swift; sourceTree = "<group>"; };
 		350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeMondeNewsFeedViewController.swift; sourceTree = "<group>"; };
-		350E0DF11C84B0C500DB78FC /* ComponentStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentStore.swift; sourceTree = "<group>"; };
+		350E0DF11C84B0C500DB78FC /* BrickStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickStore.swift; sourceTree = "<group>"; };
 		350E0DF31C84C2FF00DB78FC /* TwitterFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterFeedViewController.swift; sourceTree = "<group>"; };
 		350E0DF51C84DD3700DB78FC /* twitter_sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twitter_sample.json; sourceTree = "<group>"; };
 		3541CE871C44494B00A3B257 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -246,7 +246,7 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* MainViewController.swift */,
-				350E0DF11C84B0C500DB78FC /* ComponentStore.swift */,
+				350E0DF11C84B0C500DB78FC /* BrickStore.swift */,
 				35D7F44A1CC4E5DE008D1AEB /* Samples */,
 				350E0DEE1C81F08B00DB78FC /* Twitter */,
 				350E0DED1C81F08400DB78FC /* LeMonde */,
@@ -532,7 +532,7 @@
 				35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */,
 				350E0DF01C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift in Sources */,
 				35D7F44D1CC4E5EB008D1AEB /* SamplesViewController.swift in Sources */,
-				350E0DF21C84B0C500DB78FC /* ComponentStore.swift in Sources */,
+				350E0DF21C84B0C500DB78FC /* BrickStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

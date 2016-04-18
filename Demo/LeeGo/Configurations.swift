@@ -10,7 +10,7 @@ import Foundation
 import LeeGo
 
 
-enum ComponentBuilder: ComponentBuilderType {
+enum ComponentBuilder: BrickBuilderType {
     // leaf components
     case title, subtitle, date, avatar
     case favoriteButton

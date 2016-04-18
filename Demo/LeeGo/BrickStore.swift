@@ -16,7 +16,7 @@ protocol BrickConvertible {
 
 let defaultMetrics = LayoutMetrics(20, 20, 20, 20, 10, 10)
 
-enum LeeGoShowcase: ComponentBuilderType {
+enum LeeGoShowcase: BrickBuilderType {
     case title, description
     case redBlock, greenBlock, blueBlock
     case showcase, showcase1, showcase2, showcase3, showcase4, showcase5
@@ -107,7 +107,7 @@ extension LeeGoShowcase: BrickConvertible {
     }
 }
 
-enum LeMonde: ComponentBuilderType {
+enum LeMonde: BrickBuilderType {
     case title, subtitle
 
     static let types: [LeMonde: AnyClass] = [
@@ -116,7 +116,7 @@ enum LeMonde: ComponentBuilderType {
         ]
 }
 
-enum Twitter: ComponentBuilderType {
+enum Twitter: BrickBuilderType {
 
     case username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount
     case retweetView, likeView

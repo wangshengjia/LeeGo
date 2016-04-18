@@ -10,12 +10,12 @@ import Foundation
 
 // MARK: Component Builder
 
-public protocol ComponentBuilderType: Hashable, Equatable {
+public protocol BrickBuilderType: Hashable, Equatable {
     // FIXME: do we really need Hashable?
     static var types: [Self: AnyClass] { get }
 }
 
-extension ComponentBuilderType {
+extension BrickBuilderType {
 
     public func buildFromNib(type: AnyObject? = nil, nibName: String) -> ComponentTarget {
         guard nibName != "" else {
@@ -49,7 +49,7 @@ extension ComponentBuilderType {
     }
 }
 
-public func ==<Builder: ComponentBuilderType>(lhs: Builder, rhs: Builder) -> Bool {
+public func ==<Builder: BrickBuilderType>(lhs: Builder, rhs: Builder) -> Bool {
     return lhs.name == rhs.name
 }
 
@@ -261,11 +261,11 @@ extension ComponentTarget {
     }
 }
 
-public func ==<Builder: ComponentBuilderType>(lhs: ComponentTarget, rhs: Builder) -> Bool {
+public func ==<Builder: BrickBuilderType>(lhs: ComponentTarget, rhs: Builder) -> Bool {
     return lhs.name == rhs.name
 }
 
-public func ==<Builder: ComponentBuilderType>(lhs: Builder, rhs: ComponentTarget) -> Bool {
+public func ==<Builder: BrickBuilderType>(lhs: Builder, rhs: ComponentTarget) -> Bool {
     return lhs.name == rhs.name
 }
 
