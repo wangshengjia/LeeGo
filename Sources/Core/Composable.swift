@@ -64,7 +64,10 @@ extension Composable {
         // TODO: apply diff of layout instead of removing all constraints (not sure if possible)
         // Remove constraint with identifier (which means not created by system)
         component.removeConstraints(component.constraints.filter({ (constraint) -> Bool in
-            return constraint.identifier != nil
+            if let identifier: String = constraint.identifier where identifier.hasPrefix("children:") {
+                return true
+            }
+            return false
         }))
 
         // Layout each component view with auto layout visual format language from configuration.
@@ -72,7 +75,7 @@ extension Composable {
             let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: layout.options, metrics: layout.metrics.metrics(), views: viewsDictionary)
             for constraint in constraints {
                 // TODO: need a better constraint identifier solution
-                constraint.identifier = constraint.description
+                constraint.identifier = "children: \(constraint.description)"
                 component.addConstraint(constraint)
             }
         }

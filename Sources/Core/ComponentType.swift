@@ -11,23 +11,22 @@ import Foundation
 protocol ComponentType: class, Configurable, Composable {
     func componentDidAwake()
 
-    func applyDiffTo<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy)
+    func apply<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy)
 }
 
 extension ComponentType {
 
-    func applyDiffTo<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
+    func apply<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
 
-        // TODO: should rebuild only layout or all?
         if shouldRebuild(with: component.configuration, newConfiguration: newConfiguration, updatingStrategy: updatingStrategy) {
-            apply(newConfiguration, to: component)
+            applyDiff(with: newConfiguration, to: component)
         }
 
         // update component's value
         dataSource?.updateComponent(component, with: newConfiguration)
     }
 
-    private func apply<Component where Component: UIView, Component: ComponentType>(newConfiguration: ComponentTarget, to component: Component) {
+    private func applyDiff<Component where Component: UIView, Component: ComponentType>(with newConfiguration: ComponentTarget, to component: Component) {
 
         // setup self, only if component is not initialized from a nib file
         if component.configuration?.nibName == nil {

@@ -9,7 +9,10 @@
 import Foundation
 
 protocol Configurable {
+    ///
     func setup<Component: UIView>(component: Component, currentStyle: [Appearance], newStyle: [Appearance])
+
+    /// methods should be overrided
     func setupCustomStyle(style: [String: AnyObject])
     func removeCustomStyle(style: [String: AnyObject])
 }
