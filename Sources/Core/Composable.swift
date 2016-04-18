@@ -9,11 +9,11 @@
 import Foundation
 
 protocol Composable {
-    func compositeSubcomponents<Component where Component: UIView, Component: ComponentType>(component: Component, components: [ComponentTarget], layout: Layout)
+    func compositeSubcomponents<Component where Component: UIView, Component: ComponentType>(component: Component, components: [Brick], layout: Layout)
 }
 
 extension Composable {
-    func compositeSubcomponents<Component where Component: UIView, Component: ComponentType>(component: Component, components: [ComponentTarget], layout: Layout) {
+    func compositeSubcomponents<Component where Component: UIView, Component: ComponentType>(component: Component, components: [Brick], layout: Layout) {
 
         // remove components which do not exist anymore
         for subview in component.subviews {
@@ -34,18 +34,18 @@ extension Composable {
             return true
         }
 
-        filteredComponents.forEach { componentTarget in
+        filteredComponents.forEach { brick in
             var view: UIView? = nil;
 
-            if let nibName = componentTarget.nibName,
+            if let nibName = brick.nibName,
                 let componentView = NSBundle.mainBundle().loadNibNamed(nibName, owner: nil, options: nil).first as? UIView {
                     view = componentView
-            } else if let targetClass = componentTarget.targetClass as? UIView.Type {
+            } else if let targetClass = brick.targetClass as? UIView.Type {
                 view = targetClass.init()
             }
 
             view?.isRoot = false
-            view?.configuration = ComponentTarget(name: componentTarget.name, targetClass: componentTarget.targetClass, nibName: componentTarget.nibName)
+            view?.configuration = Brick(name: brick.name, targetClass: brick.targetClass, nibName: brick.nibName)
             if let view = view {
                 component.addSubview(view)
                 view.componentDidAwake()

@@ -11,12 +11,12 @@ import Foundation
 protocol ComponentType: class, Configurable, Composable {
     func componentDidAwake()
 
-    func apply<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy)
+    func apply<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: Brick, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy)
 }
 
 extension ComponentType {
 
-    func apply<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: ComponentTarget, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
+    func apply<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: Brick, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
 
         if shouldRebuild(with: component.configuration, newConfiguration: newConfiguration, updatingStrategy: updatingStrategy) {
             applyDiff(with: newConfiguration, to: component)
@@ -26,7 +26,7 @@ extension ComponentType {
         dataSource?.updateComponent(component, with: newConfiguration)
     }
 
-    private func applyDiff<Component where Component: UIView, Component: ComponentType>(with newConfiguration: ComponentTarget, to component: Component) {
+    private func applyDiff<Component where Component: UIView, Component: ComponentType>(with newConfiguration: Brick, to component: Component) {
 
         // setup self, only if component is not initialized from a nib file
         if component.configuration?.nibName == nil {
@@ -42,7 +42,7 @@ extension ComponentType {
         }
     }
 
-    private func shouldRebuild(with currentConfiguration: ComponentTarget?, newConfiguration: ComponentTarget, updatingStrategy: ConfigurationUpdatingStrategy) -> Bool {
+    private func shouldRebuild(with currentConfiguration: Brick?, newConfiguration: Brick, updatingStrategy: ConfigurationUpdatingStrategy) -> Bool {
 
         // TODO: when screen size changed ? (rotation ?)
 
@@ -62,7 +62,7 @@ extension ComponentType {
         return shouldRebuild
     }
 
-    private func applyDimension<Component where Component: UIView, Component: ComponentType>(newConfiguration: ComponentTarget, to component: Component) {
+    private func applyDimension<Component where Component: UIView, Component: ComponentType>(newConfiguration: Brick, to component: Component) {
         if let width = newConfiguration.width {
             component.applyConstraint(.Width, constant: width)
         } else {
@@ -127,7 +127,7 @@ extension UIView {
 // MARK: Component Context
 
 private final class ComponentContext {
-    var component: ComponentTarget?
+    var component: Brick?
     var isRoot = true
     var attributesArray: [Attributes] = []
 }
@@ -150,7 +150,7 @@ extension ComponentType where Self: UIView {
         }
     }
 
-    internal var configuration: ComponentTarget? {
+    internal var configuration: Brick? {
         get {
             return context.component
         }

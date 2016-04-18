@@ -39,12 +39,12 @@ extension ComponentBuilder {
 }
 
 extension ComponentBuilder {
-    func componentTarget() -> ComponentTarget {
+    func brick() -> Brick {
         switch self {
         case .article:
             return self.build().style([.backgroundColor(UIColor.whiteColor())])
                 .components(
-                    title.componentTarget(),
+                    title.brick(),
                     subtitle.build().style(Style.H2.style()),
                     avatar.build().style(Style.I1.style()).width(68).heightResolver({ (fittingWidth, _, _) -> CGFloat in
                         return fittingWidth * 2 / 3
@@ -72,10 +72,10 @@ extension ComponentBuilder {
             }
         case .detailsView:
             return
-                ComponentTarget.container(self.name, within:
-                    ComponentTarget.union("container", components: [
+                Brick.container(self.name, within:
+                    Brick.union("container", components: [
                         avatar.build(Icon).style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
-                        favoriteButton.componentTarget().LGOutlet("favoriteButton"),
+                        favoriteButton.brick().LGOutlet("favoriteButton"),
                         adView.buildFromNib(AdView.self, nibName: "AdView").width(150).height(80)
                         ],
                         axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: LayoutMetrics(120, 20, 20, 20, 10, 10)
@@ -88,7 +88,7 @@ extension ComponentBuilder {
                 .components(
                     avatar.build(Icon).style(Style.I1.style()),
                     title.build().style(Style.H3.style()),
-                    favoriteButton.componentTarget()
+                    favoriteButton.brick()
                     ) { avatar, title, favoriteButton -> Layout in
                         Layout([
                             "H:|-left-[\(avatar)][title]-(>=spaceH)-[\(favoriteButton)]-right-|",

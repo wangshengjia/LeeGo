@@ -59,7 +59,7 @@ class SamplesViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let brick = {_ -> ComponentTarget in
+        let brick = {_ -> Brick in
             switch indexPath.row % 6 {
             case 0: return LeeGoShowcase.showcase.brick()
             case 1: return LeeGoShowcase.showcase1.brick()

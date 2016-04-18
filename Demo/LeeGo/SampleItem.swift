@@ -12,7 +12,7 @@ import LeeGo
 struct SampleItem {}
 
 extension SampleItem: ComponentDataSource {
-    func updateComponent(componentView: UIView, with componentTarget: ComponentTarget) {
+    func updateComponent(componentView: UIView, with brick: Brick) {
         
     }
 }

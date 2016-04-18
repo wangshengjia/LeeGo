@@ -17,7 +17,7 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.configure(ComponentTarget.container(within: ComponentBuilder.detailsView.componentTarget()))
+        self.view.configure(Brick.container(within: ComponentBuilder.detailsView.brick()))
 
         self.button = self.view.viewForOutletKey("favoriteButton") as? UIButton
         self.button?.addTarget(self, action: #selector(DetailsViewController.tap(_:)), forControlEvents: .TouchUpInside)

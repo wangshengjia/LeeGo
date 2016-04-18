@@ -27,13 +27,13 @@ extension ElementViewModel {
 }
 
 extension ElementViewModel: ComponentDataSource {
-    func updateComponent(componentView: UIView, with componentTarget: ComponentTarget) {
+    func updateComponent(componentView: UIView, with brick: Brick) {
         switch componentView {
-        case let titleLabel as UILabel where componentTarget == ComponentBuilder.title:
+        case let titleLabel as UILabel where brick == ComponentBuilder.title:
             titleLabel.attributedText = titleLabel.updatedAttributedString(with: [element.isRestrict ? "󰀀" : nil, element.title, element.natureEdito])
-        case let subtitleLabel as UILabel  where componentTarget == ComponentBuilder.subtitle:
+        case let subtitleLabel as UILabel  where brick == ComponentBuilder.subtitle:
             subtitleLabel.text = element.description
-        case let avatar as UIImageView where componentTarget == ComponentBuilder.avatar:
+        case let avatar as UIImageView where brick == ComponentBuilder.avatar:
             avatar.backgroundColor = UIColor.grayColor()
         default:
             break

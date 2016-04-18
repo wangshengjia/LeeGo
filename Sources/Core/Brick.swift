@@ -1,5 +1,5 @@
 //
-//  ComponentTarget.swift
+//  Brick.swift
 //  Pods
 //
 //  Created by Victor WANG on 20/01/16.
@@ -17,23 +17,23 @@ public protocol BrickBuilderType: Hashable, Equatable {
 
 extension BrickBuilderType {
 
-    public func buildFromNib(type: AnyObject? = nil, nibName: String) -> ComponentTarget {
+    public func buildFromNib(type: AnyObject? = nil, nibName: String) -> Brick {
         guard nibName != "" else {
             assertionFailure("Failed to build component with an empty nibName")
             return target()
         }
 
-        return ComponentTarget(name: self.name, targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: nibName)
+        return Brick(name: self.name, targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: nibName)
     }
 
-    public func build(type: AnyObject? = nil) -> ComponentTarget {
+    public func build(type: AnyObject? = nil) -> Brick {
         guard type != nil else {
             return target()
         }
-        return ComponentTarget(name: self.name, targetClass: type.self as! AnyClass)
+        return Brick(name: self.name, targetClass: type.self as! AnyClass)
     }
 
-    private func target() -> ComponentTarget {
+    private func target() -> Brick {
         guard let targetClass = Self.types[self] else {
             return build(UIView)
         }
@@ -57,14 +57,14 @@ public func ==<Builder: BrickBuilderType>(lhs: Builder, rhs: Builder) -> Bool {
 
 public typealias ManuallyFittingHeightResolver = (fittingWidth: CGFloat, childrenHeights: [CGFloat], metrics: LayoutMetrics) -> CGFloat
 
-public final class ComponentTarget {
+public final class Brick {
     public let name: String
 
     let targetClass: AnyClass
     let nibName: String?
 
     private(set) var style: [Appearance] = []
-    private(set) var components: [ComponentTarget]? = nil {
+    private(set) var components: [Brick]? = nil {
         willSet {
             if let names = newValue?.map({ (component) -> String in
                 return component.name
@@ -97,72 +97,72 @@ public final class ComponentTarget {
 
     }
 
-    public func style(style: [Appearance] = []) -> ComponentTarget {
+    public func style(style: [Appearance] = []) -> Brick {
         self.style = style
         return self
     }
 
-    public func heightResolver(heightResolver: ManuallyFittingHeightResolver?) -> ComponentTarget {
+    public func heightResolver(heightResolver: ManuallyFittingHeightResolver?) -> Brick {
         self.heightResolver = heightResolver
         return self
     }
 
-    public func components(components: [ComponentTarget], layout: Layout) -> ComponentTarget {
+    public func components(components: [Brick], layout: Layout) -> Brick {
         self.components = components
         self.layout = layout
         return self
     }
 
-    public func components(c1: ComponentTarget, layout: (String) -> Layout) -> ComponentTarget {
+    public func components(c1: Brick, layout: (String) -> Layout) -> Brick {
         self.components = [c1]
         self.layout = layout(c1.name)
         return self
     }
 
-    public func components(c1: ComponentTarget, _ c2: ComponentTarget, layout: (String, String) -> Layout) -> ComponentTarget {
+    public func components(c1: Brick, _ c2: Brick, layout: (String, String) -> Layout) -> Brick {
         self.components = [c1, c2]
         self.layout = layout(c1.name, c2.name)
         return self
     }
 
-    public func components(c1: ComponentTarget, _ c2: ComponentTarget, _ c3: ComponentTarget, layout: (String, String, String) -> Layout) -> ComponentTarget {
+    public func components(c1: Brick, _ c2: Brick, _ c3: Brick, layout: (String, String, String) -> Layout) -> Brick {
         self.components = [c1, c2, c3]
         self.layout = layout(c1.name, c2.name, c3.name)
 
         return self
     }
 
-    public func components(c1: ComponentTarget, _ c2: ComponentTarget, _ c3: ComponentTarget, _ c4: ComponentTarget, layout: (String, String, String, String) -> Layout) -> ComponentTarget {
+    public func components(c1: Brick, _ c2: Brick, _ c3: Brick, _ c4: Brick, layout: (String, String, String, String) -> Layout) -> Brick {
         self.components = [c1, c2, c3, c4]
         self.layout = layout(c1.name, c2.name, c3.name, c4.name)
 
         return self
     }
 
-    public func components(c1: ComponentTarget, _ c2: ComponentTarget, _ c3: ComponentTarget, _ c4: ComponentTarget, _ c5: ComponentTarget, layout: (String, String, String, String, String) -> Layout) -> ComponentTarget {
+    public func components(c1: Brick, _ c2: Brick, _ c3: Brick, _ c4: Brick, _ c5: Brick, layout: (String, String, String, String, String) -> Layout) -> Brick {
         self.components = [c1, c2, c3, c4, c5]
         self.layout = layout(c1.name, c2.name, c3.name, c4.name, c5.name)
 
         return self
     }
 
-    public func width(width: CGFloat) -> ComponentTarget {
+    public func width(width: CGFloat) -> Brick {
         self.width = width
         return self
     }
 
-    public func height(height: CGFloat) -> ComponentTarget {
+    public func height(height: CGFloat) -> Brick {
         self.height = height
         return self
     }
 
-    public func LGOutlet(key: String) -> ComponentTarget {
+    public func LGOutlet(key: String) -> Brick {
         self.LGOutletKey = key
         return self
     }
 }
 
-extension ComponentTarget: JSONConvertible {
+extension Brick: JSONConvertible {
 
     private enum JSONKey: JSONKeyType {
         case name, targetClass, nibName, width, height, style, layout, components, outlet
@@ -182,8 +182,8 @@ extension ComponentTarget: JSONConvertible {
         }
 
         if let componentJsons: [JSONDictionary] = try? json.parse(JSONKey.components) {
-            self.components = componentJsons.flatMap({ (json) -> ComponentTarget? in
-                return try? ComponentTarget(rawValue: json)
+            self.components = componentJsons.flatMap({ (json) -> Brick? in
+                return try? Brick(rawValue: json)
             })
         }
 
@@ -239,45 +239,45 @@ extension ComponentTarget: JSONConvertible {
 
 // MARK: Helpers
 
-extension ComponentTarget {
+extension Brick {
     /*
     // TODO: complete these methods
-    func replace(targetChild name: String, by newChild:ComponentTarget) -> ComponentTarget {
+    func replace(targetChild name: String, by newChild:Brick) -> Brick {
 
     }
 
-    func replace(targetChild index: Int, by newChild:ComponentTarget) -> ComponentTarget {
+    func replace(targetChild index: Int, by newChild:Brick) -> Brick {
 
     }*/
 
-    public static func container(name: String = "container", within component: ComponentTarget) -> ComponentTarget {
+    public static func container(name: String = "container", within component: Brick) -> Brick {
         return union(name, components: [component], axis: Axis.Horizontal, align: Alignment.Fill, distribution: Distribution.Fill, metrics: LayoutMetrics())
     }
 
-    public static func union(name: String, components: [ComponentTarget], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics) -> ComponentTarget {
+    public static func union(name: String, components: [Brick], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics) -> Brick {
         let layout = Layout(components: components, axis: axis, align: align, distribution: distribution, metrics: metrics)
 
-        return ComponentTarget(name: name).components(components, layout: layout)
+        return Brick(name: name).components(components, layout: layout)
     }
 }
 
-public func ==<Builder: BrickBuilderType>(lhs: ComponentTarget, rhs: Builder) -> Bool {
+public func ==<Builder: BrickBuilderType>(lhs: Brick, rhs: Builder) -> Bool {
     return lhs.name == rhs.name
 }
 
-public func ==<Builder: BrickBuilderType>(lhs: Builder, rhs: ComponentTarget) -> Bool {
+public func ==<Builder: BrickBuilderType>(lhs: Builder, rhs: Brick) -> Bool {
     return lhs.name == rhs.name
 }
 
 // MARK: Adapt protocols
 
-extension ComponentTarget: Equatable {}
+extension Brick: Equatable {}
 
-public func ==(lhs: ComponentTarget, rhs: ComponentTarget) -> Bool {
+public func ==(lhs: Brick, rhs: Brick) -> Bool {
     return lhs.name == rhs.name
 }
 
-extension ComponentTarget: Hashable {
+extension Brick: Hashable {
     public var hashValue: Int {
         return name.hashValue
     }

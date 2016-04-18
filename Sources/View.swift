@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol ComponentDataSource {
-    func updateComponent(componentView: UIView, with componentTarget: ComponentTarget)
+    func updateComponent(componentView: UIView, with Brick: Brick)
 }
 
 public enum ConfigurationUpdatingStrategy {
@@ -35,37 +35,37 @@ extension UIView {
     /**
      * Configure component with configuration
      *
-     - parameter componentTarget:  configuration
+     - parameter Brick:  configuration
      - parameter dataSource:       data source
      - parameter updatingStrategy: the strategy used to decide if should rebuild a component
      */
-    public func configure(componentTarget: ComponentTarget, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
+    public func configure(brick: Brick, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
         if let cell = self as? UICollectionViewCell {
-            cell.contentView._configure(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            cell.contentView._configure(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else if let cell = self as? UITableViewCell {
-            cell.contentView._configure(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            cell.contentView._configure(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else {
-            _configure(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            _configure(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         }
     }
 
-    private func _configure(componentTarget: ComponentTarget, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
+    private func _configure(brick: Brick, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
 
-        guard self.dynamicType.isSubclassOfClass(componentTarget.targetClass) else {
-            assertionFailure("Component type: \(self.dynamicType) is not compatible with configuration type: \(componentTarget.targetClass)")
+        guard self.dynamicType.isSubclassOfClass(brick.targetClass) else {
+            assertionFailure("Component type: \(self.dynamicType) is not compatible with configuration type: \(brick.targetClass)")
             return
         }
 
-        // apply componentTarget
-        apply(self, newConfiguration:componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+        // apply Brick
+        apply(self, newConfiguration:brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
 
         // if no error, then:
-        self.configuration = componentTarget
+        self.configuration = brick
 
         // TODO: need to imporve this algo, too expensive and too fragile which based only on name.
         // configure sub components recursively
         for subview in self.subviews {
-            if let name = subview.configuration?.name, let components = componentTarget.components {
+            if let name = subview.configuration?.name, let components = brick.components {
                 for child in components where child.name == name {
                     subview.configure(child, dataSource: dataSource, updatingStrategy: updatingStrategy)
                 }

@@ -96,7 +96,7 @@ public struct Layout: Equatable {
     let options: NSLayoutFormatOptions
     let metrics: LayoutMetrics
 
-    public init(components: [ComponentTarget], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) {
+    public init(components: [Brick], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) {
         let names: [String] = components.map { (component) -> String in
             return component.name
         }
