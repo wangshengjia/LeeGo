@@ -9,7 +9,7 @@
 import Foundation
 import LeeGo
 
-class Tweet {
+struct Tweet {
     let id: String
     let favorited: Bool
     let truncated: Bool
@@ -38,7 +38,7 @@ class Tweet {
 }
 
 extension Tweet {
-    class func tweets(jsonArray: [[String: AnyObject]]) -> [Tweet] {
+    static func tweets(jsonArray: [[String: AnyObject]]) -> [Tweet] {
         return jsonArray.map({ (json) -> Tweet in
             return Tweet(json: json)
         })

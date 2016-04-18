@@ -73,7 +73,7 @@ extension ComponentBuilder {
         case .detailsView:
             return
                 ComponentTarget.container(self.name, within:
-                    ComponentTarget.union(components: [
+                    ComponentTarget.union("container", components: [
                         avatar.build(Icon).style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
                         favoriteButton.componentTarget().LGOutlet("favoriteButton"),
                         adView.buildFromNib(AdView.self, nibName: "AdView").width(150).height(80)

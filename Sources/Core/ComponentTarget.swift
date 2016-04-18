@@ -254,7 +254,7 @@ extension ComponentTarget {
         return union(name, components: [component], axis: Axis.Horizontal, align: Alignment.Fill, distribution: Distribution.Fill, metrics: LayoutMetrics())
     }
 
-    public static func union(name: String = "default_component", components: [ComponentTarget], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics) -> ComponentTarget {
+    public static func union(name: String, components: [ComponentTarget], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics) -> ComponentTarget {
         let layout = Layout(components: components, axis: axis, align: align, distribution: distribution, metrics: metrics)
 
         return ComponentTarget(name: name).components(components, layout: layout)

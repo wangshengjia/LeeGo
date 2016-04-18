@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol ComponentDataSource: class {
+public protocol ComponentDataSource {
     func updateComponent(componentView: UIView, with componentTarget: ComponentTarget)
 }
 
@@ -56,17 +56,11 @@ extension UIView {
             return
         }
 
-        // resolve conf based on item?, indexPath? or others ?
-
-        // call willApply delegate method
-
         // apply componentTarget
-        applyDiffTo(self, newConfiguration:componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+        apply(self, newConfiguration:componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
 
         // if no error, then:
         self.configuration = componentTarget
-
-        // call didApply delegate method
 
         // TODO: need to imporve this algo, too expensive and too fragile which based only on name.
         // configure sub components recursively
