@@ -32,6 +32,8 @@
 		35BD85331CA89598005B3E53 /* component.json in Resources */ = {isa = PBXBuildFile; fileRef = 35BD85321CA89598005B3E53 /* component.json */; };
 		35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CC5EAA1C6CDC39005C87C8 /* Icon.swift */; };
 		35CC5EAD1C6CE756005C87C8 /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CC5EAC1C6CE756005C87C8 /* AdView.swift */; };
+		35D7F44D1CC4E5EB008D1AEB /* SamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7F44B1CC4E5EB008D1AEB /* SamplesViewController.swift */; };
+		35D7F44E1CC4E5EB008D1AEB /* SampleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7F44C1CC4E5EB008D1AEB /* SampleItem.swift */; };
 		35F5204A1C7C7BEF0089FF41 /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520491C7C7BEF0089FF41 /* DemoTests.swift */; };
 		35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FFB6A71C7A8C070035EC52 /* Element.swift */; };
 		3B3BE96C4117CB80F9144250 /* Pods_LeeGo_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88078757DDD337BDFDD543E1 /* Pods_LeeGo_Tests.framework */; };
@@ -79,6 +81,8 @@
 		35BD85321CA89598005B3E53 /* component.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = component.json; sourceTree = "<group>"; };
 		35CC5EAA1C6CDC39005C87C8 /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		35CC5EAC1C6CE756005C87C8 /* AdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
+		35D7F44B1CC4E5EB008D1AEB /* SamplesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesViewController.swift; sourceTree = "<group>"; };
+		35D7F44C1CC4E5EB008D1AEB /* SampleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleItem.swift; sourceTree = "<group>"; };
 		35F51FBA1C7C61A40089FF41 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		35F520491C7C7BEF0089FF41 /* DemoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoTests.swift; sourceTree = "<group>"; };
 		35FFB6A71C7A8C070035EC52 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
@@ -189,6 +193,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		35D7F44A1CC4E5DE008D1AEB /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				35D7F44B1CC4E5EB008D1AEB /* SamplesViewController.swift */,
+				35D7F44C1CC4E5EB008D1AEB /* SampleItem.swift */,
+			);
+			name = Samples;
+			sourceTree = "<group>";
+		};
 		35FFB6A61C7A8BF30035EC52 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +247,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* MainViewController.swift */,
 				350E0DF11C84B0C500DB78FC /* ComponentStore.swift */,
+				35D7F44A1CC4E5DE008D1AEB /* Samples */,
 				350E0DEE1C81F08B00DB78FC /* Twitter */,
 				350E0DED1C81F08400DB78FC /* LeMonde */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -513,9 +527,11 @@
 				350E0DF41C84C2FF00DB78FC /* TwitterFeedViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				358507971C626097006D02EF /* Responsive.swift in Sources */,
+				35D7F44E1CC4E5EB008D1AEB /* SampleItem.swift in Sources */,
 				35543A301C694C58000AC50C /* DetailsViewController.swift in Sources */,
 				35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */,
 				350E0DF01C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift in Sources */,
+				35D7F44D1CC4E5EB008D1AEB /* SamplesViewController.swift in Sources */,
 				350E0DF21C84B0C500DB78FC /* ComponentStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

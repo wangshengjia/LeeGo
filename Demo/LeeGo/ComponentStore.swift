@@ -10,6 +10,112 @@ import Foundation
 
 import LeeGo
 
+protocol BrickConvertible {
+    func brick() -> ComponentTarget
+}
+
+let defaultMetrics = LayoutMetrics(20, 20, 20, 20, 10, 10)
+
+enum LeeGoShowcase: ComponentBuilderType {
+    case title, description
+    case redBlock, greenBlock, blueBlock
+    case showcase, showcase1, showcase2, showcase3, showcase4, showcase5
+
+    static let types: [LeeGoShowcase: AnyClass] = [
+        title: UILabel.self,
+        description: UILabel.self,
+        ]
+    
+    static let reuseIdentifiers = [showcase, showcase1, showcase2, showcase3, showcase4, showcase5].map { brick -> String in
+        return brick.name
+    };
+}
+
+extension LeeGoShowcase: BrickConvertible {
+
+    static let descriptionStyle: [Appearance] = [.textColor(UIColor.lightGrayColor()), .numberOfLines(0), .font(UIFont.systemFontOfSize(12))]
+
+    func brick() -> ComponentTarget {
+        switch self {
+        case title:
+            return build().style([.text("title")])
+        case description:
+            return build().style(LeeGoShowcase.descriptionStyle + [.text("description")])
+        case .redBlock:
+            return build().style([.backgroundColor(UIColor.redColor())])
+        case .greenBlock:
+            return build().style([.backgroundColor(UIColor.greenColor())])
+        case .blueBlock:
+            return build().style([.backgroundColor(UIColor.blueColor())])
+        case showcase:
+            return build().components(
+                title.brick(),
+                description.brick(),
+                ComponentTarget.union("blocks", components: [
+                    redBlock.brick(),
+                    greenBlock.brick(),
+                    blueBlock.brick()], axis: .Horizontal, align: .Fill, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())]).height(100.0),
+                layout: { (title, description, blocks) -> Layout in
+                    Layout(components: [title, description, blocks], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
+            })
+        case showcase1:
+            return ComponentTarget.union("showcase1", components: [
+                title.brick().style([.text("Showcase 1")]),
+                description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with top alignment and `FillEqually` distribution")]),
+                ComponentTarget.union("blocks", components: [
+                    redBlock.brick().height(50),
+                    greenBlock.brick().height(80),
+                    blueBlock.brick().height(30)], axis: .Horizontal, align: .Top, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
+                ], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
+        case showcase2:
+            return ComponentTarget.union("showcase2", components: [
+                title.brick(),
+                description.brick(),
+                ComponentTarget.union("blocks", components: [
+                    redBlock.brick().height(50),
+                    greenBlock.brick().height(80),
+                    blueBlock.brick().height(30)], axis: .Horizontal, align: .Center, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
+                ], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
+        case showcase3:
+            return ComponentTarget.union("showcase3", components: [
+                title.brick(),
+                description.brick(),
+                ComponentTarget.union("blocks", components: [
+                    redBlock.brick().height(50),
+                    greenBlock.brick().height(80),
+                    blueBlock.brick().height(30)], axis: .Horizontal, align: .Bottom, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
+                ], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
+        case showcase4:
+            return ComponentTarget.union("showcase4", components: [
+                title.brick(),
+                description.brick(),
+                ComponentTarget.union("blocks", components: [
+                    redBlock.brick().height(50).width(50),
+                    greenBlock.brick().height(80).width(100),
+                    blueBlock.brick().height(30)], axis: .Horizontal, align: .Bottom, distribution: .Fill, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
+                ], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
+        case showcase5:
+            return ComponentTarget.union("showcase5", components: [
+                title.brick(),
+                description.brick(),
+                ComponentTarget.union("blocks", components: [
+                    redBlock.brick().height(50).width(50),
+                    greenBlock.brick().height(80).width(100),
+                    blueBlock.brick().height(30).width(60)], axis: .Horizontal, align: .Bottom, distribution: .Flow(1), metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
+                ], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
+        }
+    }
+}
+
+enum LeMonde: ComponentBuilderType {
+    case title, subtitle
+
+    static let types: [LeMonde: AnyClass] = [
+        title: UILabel.self,
+        subtitle: UILabel.self,
+        ]
+}
+
 enum Twitter: ComponentBuilderType {
 
     case username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount
@@ -121,50 +227,6 @@ extension Twitter {
         }
     }
 }
-
-
-enum Instagram: ComponentBuilderType {
-    case title, subtitle, date, avatar
-    case likeButton, shareButton, moreButton
-    case username
-    case followButton, followTag
-    case instaHeader, instaToolbar, likesNumber, descriptionArea, comments
-
-    static let types: [Instagram: AnyClass] = [:]
-}
-
-extension Instagram {
-    func configuration() -> ComponentTarget {
-        switch self {
-        case .instaHeader:
-            return self.build().components(
-                avatar.configuration(),
-                username.build(),
-                date.configuration(),
-                layout: { (avatar, username, date) -> Layout in
-                    return Layout()
-            })
-        case .instaToolbar:
-            return self.build().components(
-                likeButton.configuration(),
-                shareButton.configuration(),
-                moreButton.configuration(),
-                layout: { (like, share, more) -> Layout in
-                    return Layout()
-            })
-        case .likesNumber:
-            return self.build()
-        case .descriptionArea:
-            return self.build()
-        case .comments:
-            return self.build()
-        default:
-            return self.build()
-        }
-    }
-}
-
-
 
 
 

@@ -20,11 +20,11 @@ class MainViewController: UITableViewController {
 
         switch indexPath.row {
         case 0:
-            cell.textLabel?.text = "Le Monde"
+            cell.textLabel?.text = "Layout Samples"
         case 1:
-            cell.textLabel?.text = "Twitter"
+            cell.textLabel?.text = "Le Monde"
         case 2:
-            cell.textLabel?.text = "New York Times"
+            cell.textLabel?.text = "Twitter"
         default:
             break
         }
@@ -37,10 +37,14 @@ class MainViewController: UITableViewController {
         
         switch indexPath.row {
         case 0:
-            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("LeMondeNewsFeedViewController") as? LeMondeNewsFeedViewController {
+            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("SamplesViewController") as? SamplesViewController {
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
         case 1:
+            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("LeMondeNewsFeedViewController") as? LeMondeNewsFeedViewController {
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        case 2:
             if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("TwitterFeedViewController") as? TwitterFeedViewController {
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
