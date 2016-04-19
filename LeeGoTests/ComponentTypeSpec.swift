@@ -41,7 +41,7 @@ class BrickTypeSpec: QuickSpec {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 // When
-                view.apply(view, newConfiguration: Brick(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenBrickChanged)
+                view.apply(Brick(name: "name").width(50).height(80), to: view, updatingStrategy: .WhenBrickChanged)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()
@@ -60,9 +60,9 @@ class BrickTypeSpec: QuickSpec {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 // When
-                view.apply(view, newConfiguration: Brick(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenBrickChanged)
+                view.apply(Brick(name: "name").width(50).height(80), to: view, with: nil, updatingStrategy: .WhenBrickChanged)
 
-                view.apply(view, newConfiguration: Brick(name: "name").width(60).height(20), dataSource: nil, updatingStrategy: .Always)
+                view.apply(Brick(name: "name").width(60).height(20), to: view, updatingStrategy: .Always)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()
@@ -82,9 +82,9 @@ class BrickTypeSpec: QuickSpec {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 // When
-                view.apply(view, newConfiguration: Brick(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenBrickChanged)
+                view.apply(Brick(name: "name").width(50).height(80), to: view, updatingStrategy: .WhenBrickChanged)
 
-                view.apply(view, newConfiguration: Brick(name: "name"), dataSource: nil, updatingStrategy: .WhenBrickChanged)
+                view.apply(Brick(name: "name"), to: view, updatingStrategy: .WhenBrickChanged)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()

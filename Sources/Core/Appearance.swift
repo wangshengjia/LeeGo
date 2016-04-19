@@ -39,7 +39,7 @@ public enum Appearance {
     case custom([String: AnyObject])
     case none
 
-    func apply<Brick: UIView>(to component: Brick, useDefaultValue: Bool = false) {
+    func apply<B: UIView>(to component: B, useDefaultValue: Bool = false) {
 
         switch (self, component) {
 

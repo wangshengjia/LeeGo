@@ -1,5 +1,5 @@
 //
-//  BrickType.swift
+//  BrickDescribable.swift
 //  Pods
 //
 //  Created by Victor WANG on 20/01/16.
@@ -8,50 +8,50 @@
 
 import Foundation
 
-protocol BrickType: class, Configurable, Composable {
-    func componentDidAwake()
+protocol BrickDescribable: class, Configurable, Composable {
+    func brickDidAwake()
 
-    func apply<B where B: UIView, B: BrickType>(component: B, newConfiguration: Brick, dataSource: BrickDataSource?, updatingStrategy: ConfigurationUpdatingStrategy)
+    func apply<View where View: UIView, View: BrickDescribable>(newBrick: Brick, to view: View, with dataSource: BrickDataSource?, updatingStrategy: UpdatingStrategy)
 }
 
-extension BrickType {
+extension BrickDescribable {
 
-    func apply<B where B: UIView, B: BrickType>(component: B, newConfiguration: Brick, dataSource: BrickDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
+    func apply<View where View: UIView, View: BrickDescribable>(newBrick: Brick, to view: View, with dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy) {
 
-        if shouldRebuild(with: component.configuration, newConfiguration: newConfiguration, updatingStrategy: updatingStrategy) {
-            applyDiff(with: newConfiguration, to: component)
+        if shouldRebuild(view.currentBrick, with: newBrick, updatingStrategy: updatingStrategy) {
+            applyDiff(with: newBrick, to: view)
         }
 
         // update component's value
-        dataSource?.updateBrick(component, with: newConfiguration)
+        dataSource?.update(view, with: newBrick)
     }
 
-    private func applyDiff<B where B: UIView, B: BrickType>(with newConfiguration: Brick, to component: B) {
+    private func applyDiff<View where View: UIView, View: BrickDescribable>(with newBrick: Brick, to view: View) {
 
         // setup self, only if component is not initialized from a nib file
-        if component.configuration?.nibName == nil {
-            setup(component, currentStyle: component.configuration?.style ?? [], newStyle: newConfiguration.style)
+        if view.currentBrick?.nibName == nil {
+            setup(view, currentStyle: view.currentBrick?.style ?? [], newStyle: newBrick.style)
         }
 
         // handle component's width & height constraint
-        applyDimension(newConfiguration, to: component)
+        applyDimension(of: newBrick, to: view)
 
-        // add & layout sub components
-        if let components = newConfiguration.components where !components.isEmpty, let layout = newConfiguration.layout {
-            compositeSubcomponents(component, components: components, layout: layout)
+        // add & layout sub views
+        if let bricks = newBrick.components where !bricks.isEmpty, let layout = newBrick.layout {
+            composite(bricks, to: view, with: layout)
         }
     }
 
-    private func shouldRebuild(with currentConfiguration: Brick?, newConfiguration: Brick, updatingStrategy: ConfigurationUpdatingStrategy) -> Bool {
+    private func shouldRebuild(currentBrick: Brick?, with newBrick: Brick, updatingStrategy: UpdatingStrategy) -> Bool {
 
         // TODO: when screen size changed ? (rotation ?)
 
-        var shouldRebuild = (currentConfiguration == nil)
+        var shouldRebuild = (currentBrick == nil)
 
         switch updatingStrategy {
         case .WhenBrickChanged:
-            if let current = currentConfiguration
-                where current.name != newConfiguration.name
+            if let current = currentBrick
+                where current.name != newBrick.name
                     || (current.style == [] && current.components == nil && current.layout == nil) {
                 shouldRebuild = true
             }
@@ -62,14 +62,14 @@ extension BrickType {
         return shouldRebuild
     }
 
-    private func applyDimension<B where B: UIView, B: BrickType>(newConfiguration: Brick, to component: B) {
-        if let width = newConfiguration.width {
+    private func applyDimension<View where View: UIView, View: BrickDescribable>(of newBrick: Brick, to component: View) {
+        if let width = newBrick.width {
             component.applyConstraint(.Width, constant: width)
         } else {
             component.unapplyConstraint(.Width)
         }
 
-        if let height = newConfiguration.height {
+        if let height = newBrick.height {
             component.applyConstraint(.Height, constant: height)
         } else {
             component.unapplyConstraint(.Height)
@@ -127,7 +127,7 @@ extension UIView {
 // MARK: Brick Context
 
 private final class BrickContext {
-    var component: Brick?
+    var brick: Brick?
     var isRoot = true
     var attributesArray: [Attributes] = []
 }
@@ -136,7 +136,7 @@ private struct AssociatedKeys {
     static var BrickContextAssociatedKey = "BrickContext_AssociatedKey"
 }
 
-extension BrickType where Self: UIView {
+extension BrickDescribable where Self: UIView {
 
     private var context: BrickContext {
         get {
@@ -150,12 +150,12 @@ extension BrickType where Self: UIView {
         }
     }
 
-    internal var configuration: Brick? {
+    internal var currentBrick: Brick? {
         get {
-            return context.component
+            return context.brick
         }
         set {
-            context.component = newValue
+            context.brick = newValue
         }
     }
 

@@ -9,16 +9,16 @@
 import Foundation
 
 public protocol BrickDataSource {
-    func updateBrick(componentView: UIView, with Brick: Brick)
+    func update(targetView: UIView, with brick: Brick)
 }
 
-public enum ConfigurationUpdatingStrategy {
+public enum UpdatingStrategy {
     case WhenBrickChanged
     case Always
 }
 
 extension UIView: BrickType {
-    public func componentDidAwake() {
+    public func brickDidAwake() {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -32,17 +32,17 @@ extension UIView: BrickType {
 
 extension UIView {
     
-    public func configureAs(brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenBrickChanged) {
+    public func configureAs(brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .WhenBrickChanged) {
         if let cell = self as? UICollectionViewCell {
-            cell.contentView._configure(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            cell.contentView._configureAs(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else if let cell = self as? UITableViewCell {
-            cell.contentView._configure(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            cell.contentView._configureAs(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else {
-            _configure(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            _configureAs(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         }
     }
 
-    private func _configure(brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenBrickChanged) {
+    private func _configureAs(brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .WhenBrickChanged) {
 
         guard self.dynamicType.isSubclassOfClass(brick.targetClass) else {
             assertionFailure("Brick type: \(self.dynamicType) is not compatible with configuration type: \(brick.targetClass)")
@@ -50,15 +50,15 @@ extension UIView {
         }
 
         // apply Brick
-        apply(self, newConfiguration: brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
+        apply(brick, to: self, with: dataSource, updatingStrategy: updatingStrategy)
 
         // if no error, then:
-        self.configuration = brick
+        self.currentBrick = brick
 
         // TODO: need to imporve this algo, too expensive and too fragile which based only on name.
         // configure sub components recursively
         for subview in self.subviews {
-            if let name = subview.configuration?.name, let components = brick.components {
+            if let name = subview.currentBrick?.name, let components = brick.components {
                 for childBrick in components where childBrick.name == name {
                     subview.configureAs(childBrick, dataSource: dataSource, updatingStrategy: updatingStrategy)
                 }
@@ -70,7 +70,7 @@ extension UIView {
 extension UIView {
 
     public func viewForOutletKey(key: String) -> UIView? {
-        if let currentKey = self.configuration?.LGOutletKey where currentKey == key {
+        if let currentKey = currentBrick?.LGOutletKey where currentKey == key {
             return self
         }
 
@@ -84,19 +84,19 @@ extension UIView {
     }
 
     internal var componentName: String? {
-        return configuration?.name
+        return currentBrick?.name
     }
 
     internal func fittingHeight() -> CGFloat {
 
         // if height resolver is found
-        if let computeClosure = configuration?.heightResolver {
+        if let computeClosure = currentBrick?.heightResolver {
             //TODO:  should use children component instead of subview ?
             let fittingWidth = self.frame.width
             let childrenHeights = subviews.map { (subview) -> CGFloat in
                 return subview.fittingHeight()
             }
-            let metrics = configuration?.layout?.metrics ?? LayoutMetrics()
+            let metrics = currentBrick?.layout?.metrics ?? LayoutMetrics()
 
             return computeClosure(fittingWidth: fittingWidth, childrenHeights: childrenHeights, metrics: metrics)
         } else if subviews.isEmpty {
