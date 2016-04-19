@@ -13,7 +13,7 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
-            for reuseId in ComponentBuilder.cellReuseIdentifiers {
+            for reuseId in LeMonde.cellReuseIdentifiers {
                 collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseId)
             }
         }
@@ -52,9 +52,13 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let configurationType = indexPath.row % 2 == 0 ? ComponentBuilder.article : .featured
+        var configurationType = indexPath.row % 2 == 0 ? LeMonde.standard : .featured
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(configurationType), forIndexPath: indexPath)
+        if elements[indexPath.row].element.type == "live" {
+            configurationType = .live
+        }
+
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(configurationType.brickName, forIndexPath: indexPath)
 
         cell.configure(configurationType.brick(), dataSource: elements[indexPath.item], updatingStrategy: .Always)
 

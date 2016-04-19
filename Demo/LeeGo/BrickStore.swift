@@ -175,13 +175,93 @@ extension LeeGoShowcase: BrickConvertible {
 }
 
 enum LeMonde: BrickBuilderType {
-    case title, subtitle
+    case title, subtitle, illustration, icon
+    case standard, featured, alert, live
 
     static let types: [LeMonde: AnyClass] = [
         title: UILabel.self,
         subtitle: UILabel.self,
+        illustration: UIImageView.self,
+        icon: UIImageView.self,
         ]
+
+    static let cellReuseIdentifiers = [standard, featured, alert, live].map { (type) -> String in
+        return String(type)
+    }
 }
+
+extension LeMonde: BrickConvertible {
+    func brick() -> Brick {
+        switch self {
+        case .title:
+            return build().style([
+                .attributedText([
+                    [NSFontAttributeName: UIFont(name: "LmfrAppIcon", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
+                    [kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "TheAntiquaB-W7Bold", size: CGFloat(20.responsive([.S: 21, .L: 30])))!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
+                    [NSFontAttributeName: UIFont(name: "FetteEngschrift", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
+                    ]),
+                .numberOfLines(0)
+                ])
+        case .subtitle:
+            return build().style([
+                .font(UIFont.systemFontOfSize(12)),
+                .textColor(UIColor.lightGrayColor()),
+                .numberOfLines(0),
+                .text("Default text")])
+        case .illustration:
+            return build().style([.backgroundColor(UIColor.greenColor()), .ratio(1.5)]).width(68).heightResolver({ (fittingWidth, _, _) -> CGFloat in
+                return fittingWidth * 2 / 3
+            })
+        case .icon:
+            return build().style([.backgroundColor(UIColor.redColor())]).width(24).height(24)
+        case .standard:
+            return build().style([.backgroundColor(UIColor.whiteColor())])
+                .components(
+                    title.brick(),
+                    subtitle.brick(),
+                    illustration.brick()) { title, subtitle, illustration in
+                        Layout([
+                            H(orderedViews: [illustration, title]),
+                            H(fromSuperview: false, orderedViews: [illustration, subtitle]),
+                            V(orderedViews: [title, subtitle], bottom: .bottom(.GreaterThanOrEqual)),
+                            V(orderedViews: [illustration], bottom: .bottom(.GreaterThanOrEqual)),
+                            ], metrics: defaultMetrics)
+                }.heightResolver { (_, childrenHeights, metrics) -> CGFloat in
+                    return childrenHeights[0] + childrenHeights[1] + metrics.top + metrics.bottom + metrics.spaceV
+            }
+        case .featured:
+            return build().components(
+                illustration.brick(),
+                title.brick()
+            ) { (illustration, title) -> Layout in
+                Layout(components: [illustration, title], axis: .Vertical, align: .Fill, distribution: .Fill)
+                }.heightResolver { (_, childrenHeights, _) -> CGFloat in
+                    return childrenHeights[0] + childrenHeights[1]
+            }
+        case .alert:
+            return build()
+        case .live:
+            return build().style([.backgroundColor(UIColor.whiteColor())])
+                .components(
+                    title.brick(),
+                    subtitle.brick(),
+                    illustration.brick().components(icon.brick(), layout: { (icon) -> Layout in
+                        Layout(["H:|-8-[\(icon)]", "V:[\(icon)]-8-|"])
+                    })
+                ) { title, subtitle, illustration in
+                    Layout([
+                        H(orderedViews: [illustration, title]),
+                        H(fromSuperview: false, orderedViews: [illustration, subtitle]),
+                        V(orderedViews: [title, subtitle], bottom: .bottom(.GreaterThanOrEqual)),
+                        V(orderedViews: [illustration], bottom: .bottom(.GreaterThanOrEqual)),
+                        ], metrics: defaultMetrics)
+                }.heightResolver { (_, childrenHeights, metrics) -> CGFloat in
+                    return childrenHeights[0] + childrenHeights[1] + metrics.top + metrics.bottom + metrics.spaceV
+            }
+        }
+    }
+}
+
 
 enum Twitter: BrickBuilderType {
 
