@@ -29,7 +29,7 @@ class SamplesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        for _ in 0...30 {
+        for _ in 1...LeeGoShowcase.reuseIdentifiers.count {
             elements.append(SampleItem())
         }
     }
@@ -49,7 +49,7 @@ class SamplesViewController: UITableViewController {
 //    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return elements.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
