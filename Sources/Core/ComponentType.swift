@@ -97,7 +97,7 @@ extension UIView {
         switch type {
         case .Width, .Height:
             for constraint in self.constraints {
-                if constraint.firstAttribute == type.attribute
+                if constraint.firstAttribute == type.attribute && constraint.identifier?.hasPrefix("dimension:") ?? false
                     && constraint.firstItem === self && constraint.secondItem === nil {
                         return constraint
                 }
@@ -112,13 +112,13 @@ extension UIView {
             constraint.constant = constant
         } else {
             let constraint = NSLayoutConstraint(item: self, attribute: type.attribute, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant)
-            constraint.identifier = constraint.description
+            constraint.identifier = "dimension: \(constraint.description)"
             self.addConstraint(constraint)
         }
     }
 
     func unapplyConstraint(type: Constraint) {
-        if let constraint = self.constraint(type) where constraint.identifier != nil {
+        if let constraint = self.constraint(type) {
             self.removeConstraint(constraint)
         }
     }

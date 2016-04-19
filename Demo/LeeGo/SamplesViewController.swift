@@ -17,19 +17,13 @@ class SamplesViewController: UITableViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        tableView.allowsSelection = false
         tableView?.estimatedRowHeight = 44.0
         tableView?.rowHeight = UITableViewAutomaticDimension
 
-        tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "showcase")
-        tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "showcase1")
-        tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "showcase2")
-        tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "showcase3")
-        tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "showcase4")
-        tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "showcase5")
-//        collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "showcase2")
-//        collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "showcase3")
-//        collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "showcase4")
-//        collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "showcase5")
+        LeeGoShowcase.reuseIdentifiers.forEach { (identifier) in
+            tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: identifier)
+        }
     }
 
     override func viewDidLoad() {
@@ -61,19 +55,19 @@ class SamplesViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let brick = {_ -> Brick in
             switch indexPath.row % 6 {
-            case 0: return LeeGoShowcase.showcase.brick()
-            case 1: return LeeGoShowcase.showcase1.brick()
-            case 2: return LeeGoShowcase.showcase2.brick()
-            case 3: return LeeGoShowcase.showcase3.brick()
-            case 4: return LeeGoShowcase.showcase4.brick()
-            case 5: return LeeGoShowcase.showcase5.brick()
-            default: return LeeGoShowcase.showcase.brick()
+            case 0: return LeeGoShowcase.showcase1.brick()
+            case 1: return LeeGoShowcase.showcase2.brick()
+            case 2: return LeeGoShowcase.showcase3.brick()
+            case 3: return LeeGoShowcase.showcase4.brick()
+            case 4: return LeeGoShowcase.showcase5.brick()
+            case 5: return LeeGoShowcase.showcase6.brick()
+            default: return LeeGoShowcase.showcase1.brick()
             }
         }()
 
         let cell = tableView.dequeueReusableCellWithIdentifier(brick.name, forIndexPath: indexPath)
 
-        cell.configure(brick)
+        cell.configure(brick, dataSource: nil, updatingStrategy: .Always)
 
         return cell
     }
