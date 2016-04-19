@@ -83,15 +83,9 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
-        if indexPath.item % 2 == 0 {
-            if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LeMondeNewsFeedViewController") as? LeMondeNewsFeedViewController {
-                detailsViewController.elements = self.elements
-                self.navigationController?.pushViewController(detailsViewController, animated: true)
-            }
-        } else {
-            if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailsViewController") as? DetailsViewController {
-                self.navigationController?.pushViewController(detailsViewController, animated: true)
-            }
+        if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LeMondeNewsFeedViewController") as? LeMondeNewsFeedViewController {
+            detailsViewController.elements = self.elements
+            self.navigationController?.pushViewController(detailsViewController, animated: true)
         }
     }
 }
