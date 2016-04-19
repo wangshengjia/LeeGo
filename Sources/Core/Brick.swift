@@ -23,14 +23,14 @@ extension BrickBuilderType {
             return target()
         }
 
-        return Brick(name: self.name, targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: nibName)
+        return Brick(name: self.brickName, targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: nibName)
     }
 
     public func build(type: AnyObject? = nil) -> Brick {
         guard type != nil else {
             return target()
         }
-        return Brick(name: self.name, targetClass: type.self as! AnyClass)
+        return Brick(name: self.brickName, targetClass: type.self as! AnyClass)
     }
 
     private func target() -> Brick {
@@ -41,16 +41,16 @@ extension BrickBuilderType {
     }
 
     var hashValue: Int {
-        return self.name.hashValue
+        return self.brickName.hashValue
     }
 
-    public var name: String {
+    public var brickName: String {
         return String(self)
     }
 }
 
 public func ==<Builder: BrickBuilderType>(lhs: Builder, rhs: Builder) -> Bool {
-    return lhs.name == rhs.name
+    return lhs.brickName == rhs.brickName
 }
 
 // MARK: Component Target
@@ -262,11 +262,11 @@ extension Brick {
 }
 
 public func ==<Builder: BrickBuilderType>(lhs: Brick, rhs: Builder) -> Bool {
-    return lhs.name == rhs.name
+    return lhs.name == rhs.brickName
 }
 
 public func ==<Builder: BrickBuilderType>(lhs: Builder, rhs: Brick) -> Bool {
-    return lhs.name == rhs.name
+    return lhs.brickName == rhs.name
 }
 
 // MARK: Adapt protocols

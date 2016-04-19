@@ -72,7 +72,7 @@ extension ComponentBuilder {
             }
         case .detailsView:
             return
-                Brick.container(self.name, within:
+                Brick.container(brickName, within:
                     Brick.union("container", components: [
                         avatar.build(Icon).style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
                         favoriteButton.brick().LGOutlet("favoriteButton"),
