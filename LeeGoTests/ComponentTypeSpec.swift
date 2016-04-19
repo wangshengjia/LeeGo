@@ -41,7 +41,7 @@ class ComponentTypeSpec: QuickSpec {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 // When
-                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+                view.apply(view, newConfiguration: Brick(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()
@@ -60,9 +60,9 @@ class ComponentTypeSpec: QuickSpec {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 // When
-                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+                view.apply(view, newConfiguration: Brick(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
 
-                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(60).height(20), dataSource: nil, updatingStrategy: .Always)
+                view.apply(view, newConfiguration: Brick(name: "name").width(60).height(20), dataSource: nil, updatingStrategy: .Always)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()
@@ -82,9 +82,9 @@ class ComponentTypeSpec: QuickSpec {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 // When
-                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+                view.apply(view, newConfiguration: Brick(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
 
-                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name"), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+                view.apply(view, newConfiguration: Brick(name: "name"), dataSource: nil, updatingStrategy: .WhenComponentChanged)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()

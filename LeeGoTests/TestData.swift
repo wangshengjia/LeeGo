@@ -12,12 +12,12 @@ import Foundation
 struct TestData {
     static let title1 = ComponentBuilder.title.build().style([.font(UIFont(name: "Helvetica", size: 18)!), .text("Text")])
     static let title2 = ComponentBuilder.title.build().style([.font(UIFont(name: "Avenir", size: 12)!), .text("Text")])
-    static let title3 = ComponentTarget(name: "title3", targetClass: UILabel.self).style([.font(UIFont(name: "Arial", size: 14)!)])
+    static let title3 = Brick(name: "title3", targetClass: UILabel.self).style([.font(UIFont(name: "Arial", size: 14)!)])
 
     static let avatar1 = ComponentBuilder.avatar.build(UIImageView).width(50).height(50).heightResolver {childrenHeights in 50}
     static let avatar2 = ComponentBuilder.avatar.build(UIImageView).style([.backgroundColor(UIColor.greenColor())]).width(60).height(80).heightResolver {childrenHeights in 80}
 
-    static let view = ComponentTarget(name: "view").width(70).height(90)
+    static let view = Brick(name: "view").width(70).height(90)
 
     static let header1 = ComponentBuilder.header.build()
         .style([.backgroundColor(UIColor.redColor())])
@@ -29,20 +29,20 @@ struct TestData {
             return childrenHeights[0] + childrenHeights[1]
     }
 
-    static let header2 = ComponentTarget(name: "header2").components(
+    static let header2 = Brick(name: "header2").components(
         title2, avatar2, view
         ) { title, avatar, view in
             Layout(components: [title, avatar, view], axis: .Horizontal, align: .Top, distribution: .Flow(3), metrics: LayoutMetrics(20, 20, 20, 20, 10 ,10))
     }
 
-    static let header3 = ComponentTarget(name: "header3").components(
+    static let header3 = Brick(name: "header3").components(
         title3, view
         ) { title, view in
             Layout(["H:|[\(title)]|", "V:|[\(view)]|"])
     }
 }
 
-enum ComponentBuilder: ComponentBuilderType {
+enum ComponentBuilder: BrickBuilderType {
     // leaf components
     case title, subtitle, date, avatar
     case favoriteButton
@@ -68,12 +68,12 @@ extension ComponentBuilder {
 }
 
 extension ComponentBuilder {
-    func componentTarget() -> ComponentTarget {
+    func brick() -> Brick {
         switch self {
         case .article:
             return self.build().style([.backgroundColor(UIColor.whiteColor())])
                 .components(
-                    title.componentTarget(),
+                    title.brick(),
                     subtitle.build().style(Style.H2.style()),
                     avatar.build().style(Style.I1.style()).width(68).heightResolver({ (fittingWidth, _, _) -> CGFloat in
                         return fittingWidth * 2 / 3
@@ -101,10 +101,10 @@ extension ComponentBuilder {
             }
         case .detailsView:
             return
-                ComponentTarget.container(self.name, within:
-                    ComponentTarget.union(components: [
+                Brick.container("Container", within:
+                    Brick.union(brickName, components: [
                         avatar.build().style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
-                        favoriteButton.componentTarget().LGOutlet("favoriteButton"),
+                        favoriteButton.brick().LGOutlet("favoriteButton"),
                         adView.build().width(150).height(80)
                         ],
                         axis: .Horizontal, align: .Top, distribution: .Flow(2), metrics: LayoutMetrics(120, 20, 20, 20, 10, 10)
@@ -117,7 +117,7 @@ extension ComponentBuilder {
                 .components(
                     avatar.build().style(Style.I1.style()),
                     title.build().style(Style.H3.style()),
-                    favoriteButton.componentTarget()
+                    favoriteButton.brick()
                 ) { avatar, title, favoriteButton -> Layout in
                     Layout([
                         "H:|-left-[\(avatar)][title]-(>=spaceH)-[\(favoriteButton)]-right-|",

@@ -15,16 +15,15 @@
 		354908AF1CA72BD2005ACDA7 /* component.json in Resources */ = {isa = PBXBuildFile; fileRef = 354908AE1CA72BD2005ACDA7 /* component.json */; };
 		354A347A1C7DE9A60081FF89 /* AppearanceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A34791C7DE9A60081FF89 /* AppearanceSpec.swift */; };
 		3560FEE11CA358F100A400C2 /* ConvertibleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3560FEE01CA358F100A400C2 /* ConvertibleSpec.swift */; };
+		3568BC441CC65B920009EB6E /* Brick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3568BC431CC65B920009EB6E /* Brick.swift */; };
 		35AFD9A31CA6F87D009BE224 /* layout.json in Resources */ = {isa = PBXBuildFile; fileRef = 35AFD9A21CA6F87D009BE224 /* layout.json */; };
 		35B70A8E1CA499490021A1ED /* TestMedia.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35B70A8D1CA499490021A1ED /* TestMedia.xcassets */; };
-		35E80FD11CA894D400D06B93 /* Responsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E80FD01CA894D400D06B93 /* Responsive.swift */; };
 		35F4E70C1CA5809400F7BDC9 /* appearances.json in Resources */ = {isa = PBXBuildFile; fileRef = 35F4E70B1CA5809400F7BDC9 /* appearances.json */; };
 		35F5200C1C7C73D40089FF41 /* LeeGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F520011C7C73D40089FF41 /* LeeGo.framework */; };
 		35F5201F1C7C74400089FF41 /* LeeGo.h in Headers */ = {isa = PBXBuildFile; fileRef = 35F5201D1C7C74400089FF41 /* LeeGo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		35F520301C7C74510089FF41 /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520211C7C74510089FF41 /* AutoLayout.swift */; };
 		35F520311C7C74510089FF41 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520221C7C74510089FF41 /* Cell.swift */; };
 		35F520321C7C74510089FF41 /* Conveniences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520231C7C74510089FF41 /* Conveniences.swift */; };
-		35F520341C7C74510089FF41 /* ComponentTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520261C7C74510089FF41 /* ComponentTarget.swift */; };
 		35F520351C7C74510089FF41 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520271C7C74510089FF41 /* ComponentType.swift */; };
 		35F520361C7C74510089FF41 /* Composable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520281C7C74510089FF41 /* Composable.swift */; };
 		35F520371C7C74510089FF41 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520291C7C74510089FF41 /* Configurable.swift */; };
@@ -59,9 +58,9 @@
 		354908AE1CA72BD2005ACDA7 /* component.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = component.json; sourceTree = "<group>"; };
 		354A34791C7DE9A60081FF89 /* AppearanceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceSpec.swift; sourceTree = "<group>"; };
 		3560FEE01CA358F100A400C2 /* ConvertibleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertibleSpec.swift; sourceTree = "<group>"; };
+		3568BC431CC65B920009EB6E /* Brick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brick.swift; sourceTree = "<group>"; };
 		35AFD9A21CA6F87D009BE224 /* layout.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = layout.json; sourceTree = "<group>"; };
 		35B70A8D1CA499490021A1ED /* TestMedia.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestMedia.xcassets; sourceTree = "<group>"; };
-		35E80FD01CA894D400D06B93 /* Responsive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responsive.swift; sourceTree = "<group>"; };
 		35F4E70B1CA5809400F7BDC9 /* appearances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = appearances.json; sourceTree = "<group>"; };
 		35F520011C7C73D40089FF41 /* LeeGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LeeGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35F5200B1C7C73D40089FF41 /* LeeGoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeeGoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,7 +70,6 @@
 		35F520211C7C74510089FF41 /* AutoLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
 		35F520221C7C74510089FF41 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		35F520231C7C74510089FF41 /* Conveniences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conveniences.swift; sourceTree = "<group>"; };
-		35F520261C7C74510089FF41 /* ComponentTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentTarget.swift; sourceTree = "<group>"; };
 		35F520271C7C74510089FF41 /* ComponentType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
 		35F520281C7C74510089FF41 /* Composable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Composable.swift; sourceTree = "<group>"; };
 		35F520291C7C74510089FF41 /* Configurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
@@ -111,7 +109,7 @@
 		3513F70D1C95EC82003B211F /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
-				35F520261C7C74510089FF41 /* ComponentTarget.swift */,
+				3568BC431CC65B920009EB6E /* Brick.swift */,
 				3513F70E1C95EC96003B211F /* Appearance.swift */,
 				3513F7101C95ECA0003B211F /* Layout.swift */,
 			);
@@ -194,7 +192,6 @@
 				35F5202F1C7C74510089FF41 /* View.swift */,
 				3515725A1CA421E000BE68FB /* JSONConvertible.swift */,
 				3515725C1CA421F000BE68FB /* Constraint.swift */,
-				35E80FD01CA894D400D06B93 /* Responsive.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -401,17 +398,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35F520341C7C74510089FF41 /* ComponentTarget.swift in Sources */,
 				35F520361C7C74510089FF41 /* Composable.swift in Sources */,
 				3515725D1CA421F000BE68FB /* Constraint.swift in Sources */,
 				35F520301C7C74510089FF41 /* AutoLayout.swift in Sources */,
-				35E80FD11CA894D400D06B93 /* Responsive.swift in Sources */,
 				3515725B1CA421E000BE68FB /* JSONConvertible.swift in Sources */,
 				35F520351C7C74510089FF41 /* ComponentType.swift in Sources */,
 				3513F7111C95ECA0003B211F /* Layout.swift in Sources */,
 				35F520391C7C74510089FF41 /* Errors.swift in Sources */,
 				3513F70F1C95EC96003B211F /* Appearance.swift in Sources */,
 				35F5203C1C7C74510089FF41 /* View.swift in Sources */,
+				3568BC441CC65B920009EB6E /* Brick.swift in Sources */,
 				35F520311C7C74510089FF41 /* Cell.swift in Sources */,
 				35F520371C7C74510089FF41 /* Configurable.swift in Sources */,
 				35F520321C7C74510089FF41 /* Conveniences.swift in Sources */,

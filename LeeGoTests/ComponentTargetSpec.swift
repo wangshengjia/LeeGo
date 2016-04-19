@@ -8,14 +8,14 @@ import Quick
 import Nimble
 @testable import LeeGo
 
-class ComponentTargetSpec: QuickSpec {
+class BrickSpec: QuickSpec {
     override func spec() {
 
-        describe("ComponentTarget tests") {
+        describe("Brick tests") {
 
             it("should create a new component target instance correctly") {
                 // Given
-                let component = ComponentTarget(name: "title", targetClass: UILabel.self).width(40).height(60).style([.backgroundColor(UIColor.greenColor())])
+                let component = Brick(name: "title", targetClass: UILabel.self).width(40).height(60).style([.backgroundColor(UIColor.greenColor())])
 
                 // Then
                 expect(component.name) == "title"
@@ -33,7 +33,7 @@ class ComponentTargetSpec: QuickSpec {
                 let mockLayout = Layout()
 
                 // When
-                let component = ComponentTarget(name: "header", targetClass: UIView.self).components(ComponentTarget(name: "title", targetClass: UILabel.self), layout: { (title) -> Layout in
+                let component = Brick(name: "header", targetClass: UIView.self).components(Brick(name: "title", targetClass: UILabel.self), layout: { (title) -> Layout in
                     expect(title) == "title"
                     return mockLayout
                 })
@@ -50,7 +50,7 @@ class ComponentTargetSpec: QuickSpec {
                 let mockLayout = Layout()
 
                 // When
-                let component = ComponentTarget(name: "header", targetClass: UIView.self).components(ComponentTarget(name: "title", targetClass: UILabel.self), ComponentTarget(name: "avatar", targetClass: UIImageView.self), layout: { (title, avatar) -> Layout in
+                let component = Brick(name: "header", targetClass: UIView.self).components(Brick(name: "title", targetClass: UILabel.self), Brick(name: "avatar", targetClass: UIImageView.self), layout: { (title, avatar) -> Layout in
                     expect(title) == "title"
                     expect(avatar) == "avatar"
                     return mockLayout
@@ -67,7 +67,7 @@ class ComponentTargetSpec: QuickSpec {
                 let mockLayout = Layout()
 
                 // When
-                let component = ComponentTarget(name: "header", targetClass: UIView.self).components(TestData.title1, TestData.avatar1, TestData.view, layout: { (title, avatar, view) -> Layout in
+                let component = Brick(name: "header", targetClass: UIView.self).components(TestData.title1, TestData.avatar1, TestData.view, layout: { (title, avatar, view) -> Layout in
                     expect(title) == "title"
                     expect(avatar) == "avatar"
                     expect(view) == "view"
@@ -86,7 +86,7 @@ class ComponentTargetSpec: QuickSpec {
                 let mockLayout = Layout()
 
                 // When
-                let component = ComponentTarget(name: "header", targetClass: UIView.self).components(TestData.title1, TestData.avatar1, TestData.view, TestData.title3, layout: { (title, avatar, view, title3) -> Layout in
+                let component = Brick(name: "header", targetClass: UIView.self).components(TestData.title1, TestData.avatar1, TestData.view, TestData.title3, layout: { (title, avatar, view, title3) -> Layout in
                     expect(title) == "title"
                     expect(avatar) == "avatar"
                     expect(view) == "view"
@@ -106,7 +106,7 @@ class ComponentTargetSpec: QuickSpec {
                 let mockLayout = Layout()
 
                 // When
-                let component = ComponentTarget(name: "header", targetClass: UIView.self).components(TestData.title1, TestData.avatar1, TestData.view, TestData.title3, TestData.header2, layout: { (title, avatar, view, title3, header2) -> Layout in
+                let component = Brick(name: "header", targetClass: UIView.self).components(TestData.title1, TestData.avatar1, TestData.view, TestData.title3, TestData.header2, layout: { (title, avatar, view, title3, header2) -> Layout in
                     expect(title) == "title"
                     expect(avatar) == "avatar"
                     expect(view) == "view"
@@ -126,7 +126,7 @@ class ComponentTargetSpec: QuickSpec {
                 let mockLayout = Layout()
 
                 // When
-                let component = ComponentTarget(name: "header", targetClass: UIView.self).components([TestData.title1, TestData.avatar1], layout: mockLayout)
+                let component = Brick(name: "header", targetClass: UIView.self).components([TestData.title1, TestData.avatar1], layout: mockLayout)
 
                 // Then
                 expect(component.components?.count) == 2
@@ -168,8 +168,8 @@ class ComponentTargetSpec: QuickSpec {
             })
 
             it("builder & target should be equals") {
-                XCTAssertTrue(ComponentBuilder.header == ComponentTarget(name: "header"))
-                XCTAssertTrue(ComponentTarget(name: "header") == ComponentBuilder.header)
+                XCTAssertTrue(ComponentBuilder.header == Brick(name: "header"))
+                XCTAssertTrue(Brick(name: "header") == ComponentBuilder.header)
             }
         }
     }

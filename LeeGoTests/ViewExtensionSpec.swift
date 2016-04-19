@@ -22,7 +22,7 @@ class ViewExtensionSpec: QuickSpec {
                 expect(view.configuration).to(beNil())
 
                 // When
-                view.configure(ComponentTarget(name: "article"))
+                view.configure(Brick(name: "article"))
 
                 // Then
                 expect(view.configuration) != nil
@@ -156,7 +156,7 @@ class ViewExtensionSpec: QuickSpec {
             it("should find view with outlet key correctly.") {
                 // Given
                 let cell = UICollectionViewCell(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-                cell.configure(ComponentBuilder.detailsView.componentTarget())
+                cell.configure(ComponentBuilder.detailsView.brick())
 
                 // When
                 let view = cell.viewForOutletKey("favoriteButton")

@@ -198,8 +198,8 @@ class ConvertibleSpec: QuickSpec {
             }
         }
 
-        describe("ComponentTarget is convertible") {
-            it("should convert a JSONDictionary to an ComponentTarget instance correctly.") {
+        describe("Brick is convertible") {
+            it("should convert a JSONDictionary to an Brick instance correctly.") {
                 do {
                     // Given
 
@@ -207,10 +207,10 @@ class ConvertibleSpec: QuickSpec {
                     let json = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as? JSONDictionary
 
                     // When
-                    let component = try ComponentTarget(rawValue: json!)
+                    let component = try Brick(rawValue: json!)
 
                     // Then
-                    let mockComponent = ComponentBuilder.article.componentTarget().height(60).LGOutlet("button")
+                    let mockComponent = ComponentBuilder.article.brick().height(60).LGOutlet("button")
                     expect(component.name) == mockComponent.name
                     expect(component.layout) == mockComponent.layout
                     expect(component.width ?? 0) == mockComponent.width ?? 0
@@ -220,10 +220,10 @@ class ConvertibleSpec: QuickSpec {
                 }
             }
 
-            it("should convert an ComponentTarget instance to JSON correctly.") {
+            it("should convert an Brick instance to JSON correctly.") {
 
                 // Given
-                let component = ComponentBuilder.article.componentTarget().height(60).LGOutlet("button")
+                let component = ComponentBuilder.article.brick().height(60).LGOutlet("button")
 
                 // When
                 let json = component.encode()
