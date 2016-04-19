@@ -22,7 +22,7 @@ class ViewExtensionSpec: QuickSpec {
                 expect(view.configuration).to(beNil())
 
                 // When
-                view.configure(Brick(name: "article"))
+                view.configureAs(Brick(name: "article"))
 
                 // Then
                 expect(view.configuration) != nil
@@ -35,7 +35,7 @@ class ViewExtensionSpec: QuickSpec {
                 let view = UIView()
 
                 // When
-                view.configure(TestData.header1)
+                view.configureAs(TestData.header1)
 
                 // Then
                 expect(view.configuration) != nil
@@ -56,11 +56,11 @@ class ViewExtensionSpec: QuickSpec {
             it("should re-configure a component correctly with .WhenComponentChanged strategy -> component changed") {
                 // Given
                 let cell = UITableViewCell()
-                cell.configure(TestData.header1)
-                cell.configure(TestData.header2, updatingStrategy: .Always)
+                cell.configureAs(TestData.header1)
+                cell.configureAs(TestData.header2, updatingStrategy: .Always)
 
                 // When
-                cell.configure(TestData.header3)
+                cell.configureAs(TestData.header3)
 
                 // Then
                 expect(cell.contentView.configuration) != nil
@@ -81,13 +81,13 @@ class ViewExtensionSpec: QuickSpec {
 
                 // Given
                 let view = UIView()
-                view.configure(TestData.header1)
-                view.configure(TestData.header2, updatingStrategy: .Always)
-                view.configure(TestData.header1)
+                view.configureAs(TestData.header1)
+                view.configureAs(TestData.header2, updatingStrategy: .Always)
+                view.configureAs(TestData.header1)
 
                 // When
                 let emptyHeader = ComponentBuilder.header.build()
-                view.configure(emptyHeader)
+                view.configureAs(emptyHeader)
 
                 // Then
                 expect(view.configuration) != nil
@@ -107,10 +107,10 @@ class ViewExtensionSpec: QuickSpec {
             it("should re-configure a component correctly with .Always strategy.") {
                 // Given
                 let cell = UICollectionViewCell()
-                cell.configure(TestData.header1)
+                cell.configureAs(TestData.header1)
 
                 // When
-                cell.configure(TestData.header2, updatingStrategy: .Always)
+                cell.configureAs(TestData.header2, updatingStrategy: .Always)
 
                 // Then
                 expect(cell.contentView.configuration) != nil
@@ -132,7 +132,7 @@ class ViewExtensionSpec: QuickSpec {
             it("cell should have dynamic fitting height correctly") {
                 // Given
                 let cell = UICollectionViewCell()
-                cell.configure(TestData.header1)
+                cell.configureAs(TestData.header1)
 
                 // When
                 let attributes = cell.fittingHeightLayoutAttributes(UICollectionViewLayoutAttributes())
@@ -144,7 +144,7 @@ class ViewExtensionSpec: QuickSpec {
             it("cell should have dynamic fitting height correctly") {
                 // Given
                 let cell = UICollectionViewCell(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-                cell.configure(TestData.header2)
+                cell.configureAs(TestData.header2)
 
                 // When
                 let attributes = cell.preferredLayoutAttributesFittingAttributes(UICollectionViewLayoutAttributes())
@@ -156,7 +156,7 @@ class ViewExtensionSpec: QuickSpec {
             it("should find view with outlet key correctly.") {
                 // Given
                 let cell = UICollectionViewCell(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-                cell.configure(ComponentBuilder.detailsView.brick())
+                cell.configureAs(ComponentBuilder.detailsView.brick())
 
                 // When
                 let view = cell.viewForOutletKey("favoriteButton")

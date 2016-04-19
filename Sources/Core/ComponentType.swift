@@ -1,5 +1,5 @@
 //
-//  ComponentType.swift
+//  BrickType.swift
 //  Pods
 //
 //  Created by Victor WANG on 20/01/16.
@@ -8,15 +8,15 @@
 
 import Foundation
 
-protocol ComponentType: class, Configurable, Composable {
+protocol BrickType: class, Configurable, Composable {
     func componentDidAwake()
 
-    func apply<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: Brick, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy)
+    func apply<Component where Component: UIView, Component: BrickType>(component: Component, newConfiguration: Brick, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy)
 }
 
-extension ComponentType {
+extension BrickType {
 
-    func apply<Component where Component: UIView, Component: ComponentType>(component: Component, newConfiguration: Brick, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
+    func apply<Component where Component: UIView, Component: BrickType>(component: Component, newConfiguration: Brick, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
 
         if shouldRebuild(with: component.configuration, newConfiguration: newConfiguration, updatingStrategy: updatingStrategy) {
             applyDiff(with: newConfiguration, to: component)
@@ -26,7 +26,7 @@ extension ComponentType {
         dataSource?.updateComponent(component, with: newConfiguration)
     }
 
-    private func applyDiff<Component where Component: UIView, Component: ComponentType>(with newConfiguration: Brick, to component: Component) {
+    private func applyDiff<Component where Component: UIView, Component: BrickType>(with newConfiguration: Brick, to component: Component) {
 
         // setup self, only if component is not initialized from a nib file
         if component.configuration?.nibName == nil {
@@ -62,7 +62,7 @@ extension ComponentType {
         return shouldRebuild
     }
 
-    private func applyDimension<Component where Component: UIView, Component: ComponentType>(newConfiguration: Brick, to component: Component) {
+    private func applyDimension<Component where Component: UIView, Component: BrickType>(newConfiguration: Brick, to component: Component) {
         if let width = newConfiguration.width {
             component.applyConstraint(.Width, constant: width)
         } else {
@@ -136,7 +136,7 @@ private struct AssociatedKeys {
     static var ComponentContextAssociatedKey = "ComponentContext_AssociatedKey"
 }
 
-extension ComponentType where Self: UIView {
+extension BrickType where Self: UIView {
 
     private var context: ComponentContext {
         get {

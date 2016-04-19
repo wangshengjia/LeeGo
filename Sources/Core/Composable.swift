@@ -9,11 +9,11 @@
 import Foundation
 
 protocol Composable {
-    func compositeSubcomponents<Component where Component: UIView, Component: ComponentType>(component: Component, components: [Brick], layout: Layout)
+    func compositeSubcomponents<Component where Component: UIView, Component: BrickType>(component: Component, components: [Brick], layout: Layout)
 }
 
 extension Composable {
-    func compositeSubcomponents<Component where Component: UIView, Component: ComponentType>(component: Component, components: [Brick], layout: Layout) {
+    func compositeSubcomponents<Component where Component: UIView, Component: BrickType>(component: Component, components: [Brick], layout: Layout) {
 
         // remove components which do not exist anymore
         for subview in component.subviews {

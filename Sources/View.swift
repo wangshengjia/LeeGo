@@ -17,7 +17,7 @@ public enum ConfigurationUpdatingStrategy {
     case Always
 }
 
-extension UIView: ComponentType {
+extension UIView: BrickType {
     public func componentDidAwake() {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -32,14 +32,7 @@ extension UIView: ComponentType {
 
 extension UIView {
     
-    /**
-     * Configure component with configuration
-     *
-     - parameter Brick:  configuration
-     - parameter dataSource:       data source
-     - parameter updatingStrategy: the strategy used to decide if should rebuild a component
-     */
-    public func configure(brick: Brick, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
+    public func configureAs(brick: Brick, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
         if let cell = self as? UICollectionViewCell {
             cell.contentView._configure(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else if let cell = self as? UITableViewCell {
@@ -66,8 +59,8 @@ extension UIView {
         // configure sub components recursively
         for subview in self.subviews {
             if let name = subview.configuration?.name, let components = brick.components {
-                for child in components where child.name == name {
-                    subview.configure(child, dataSource: dataSource, updatingStrategy: updatingStrategy)
+                for childBrick in components where childBrick.name == name {
+                    subview.configureAs(childBrick, dataSource: dataSource, updatingStrategy: updatingStrategy)
                 }
             }
         }

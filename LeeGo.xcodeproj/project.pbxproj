@@ -106,14 +106,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3513F70D1C95EC82003B211F /* Configurations */ = {
+		3513F70D1C95EC82003B211F /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
 				3568BC431CC65B920009EB6E /* Brick.swift */,
 				3513F70E1C95EC96003B211F /* Appearance.swift */,
 				3513F7101C95ECA0003B211F /* Layout.swift */,
 			);
-			name = Configurations;
+			name = Configuration;
 			sourceTree = "<group>";
 		};
 		3530E87B1C7CBBEE00ABC8D1 /* Docs */ = {
@@ -202,7 +202,7 @@
 				35F520271C7C74510089FF41 /* ComponentType.swift */,
 				35F520281C7C74510089FF41 /* Composable.swift */,
 				35F520291C7C74510089FF41 /* Configurable.swift */,
-				3513F70D1C95EC82003B211F /* Configurations */,
+				3513F70D1C95EC82003B211F /* Configuration */,
 			);
 			path = Core;
 			sourceTree = "<group>";

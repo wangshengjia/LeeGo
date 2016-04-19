@@ -1,5 +1,5 @@
 //
-//  ComponentTypeSpecs.swift
+//  BrickTypeSpecs.swift
 //  LeeGo
 //
 //  Created by Victor WANG on 20/02/16.
@@ -13,7 +13,7 @@ import Quick
 import Nimble
 @testable import LeeGo
 
-class ComponentTypeSpec: QuickSpec {
+class BrickTypeSpec: QuickSpec {
     override func spec() {
 
         describe("Configurable extension tests") {
@@ -32,7 +32,7 @@ class ComponentTypeSpec: QuickSpec {
             }
         }
 
-        describe("ComponentType") {
+        describe("BrickType") {
             it("should apply diff to view correctly.") {
                 // Given
                 let superview = UIView()
