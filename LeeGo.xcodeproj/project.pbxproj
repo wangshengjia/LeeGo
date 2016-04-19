@@ -12,7 +12,7 @@
 		3515725B1CA421E000BE68FB /* JSONConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3515725A1CA421E000BE68FB /* JSONConvertible.swift */; };
 		3515725D1CA421F000BE68FB /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3515725C1CA421F000BE68FB /* Constraint.swift */; };
 		3540C4C51C7EFC21005CA104 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3540C4C41C7EFC21005CA104 /* TestData.swift */; };
-		354908AF1CA72BD2005ACDA7 /* component.json in Resources */ = {isa = PBXBuildFile; fileRef = 354908AE1CA72BD2005ACDA7 /* component.json */; };
+		354908AF1CA72BD2005ACDA7 /* brick.json in Resources */ = {isa = PBXBuildFile; fileRef = 354908AE1CA72BD2005ACDA7 /* brick.json */; };
 		354A347A1C7DE9A60081FF89 /* AppearanceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A34791C7DE9A60081FF89 /* AppearanceSpec.swift */; };
 		3560FEE11CA358F100A400C2 /* ConvertibleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3560FEE01CA358F100A400C2 /* ConvertibleSpec.swift */; };
 		3568BC441CC65B920009EB6E /* Brick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3568BC431CC65B920009EB6E /* Brick.swift */; };
@@ -55,7 +55,7 @@
 		3515725C1CA421F000BE68FB /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
 		3530E87C1C7CBC6300ABC8D1 /* Layout.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Layout.md; sourceTree = "<group>"; };
 		3540C4C41C7EFC21005CA104 /* TestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
-		354908AE1CA72BD2005ACDA7 /* component.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = component.json; sourceTree = "<group>"; };
+		354908AE1CA72BD2005ACDA7 /* brick.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = brick.json; sourceTree = "<group>"; };
 		354A34791C7DE9A60081FF89 /* AppearanceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceSpec.swift; sourceTree = "<group>"; };
 		3560FEE01CA358F100A400C2 /* ConvertibleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertibleSpec.swift; sourceTree = "<group>"; };
 		3568BC431CC65B920009EB6E /* Brick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brick.swift; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 			children = (
 				35F4E70B1CA5809400F7BDC9 /* appearances.json */,
 				35AFD9A21CA6F87D009BE224 /* layout.json */,
-				354908AE1CA72BD2005ACDA7 /* component.json */,
+				354908AE1CA72BD2005ACDA7 /* brick.json */,
 				3540C4C41C7EFC21005CA104 /* TestData.swift */,
 			);
 			name = Data;
@@ -337,7 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35B70A8E1CA499490021A1ED /* TestMedia.xcassets in Resources */,
-				354908AF1CA72BD2005ACDA7 /* component.json in Resources */,
+				354908AF1CA72BD2005ACDA7 /* brick.json in Resources */,
 				35F4E70C1CA5809400F7BDC9 /* appearances.json in Resources */,
 				35AFD9A31CA6F87D009BE224 /* layout.json in Resources */,
 			);

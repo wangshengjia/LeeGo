@@ -23,7 +23,7 @@ class ConvenienceSpec: QuickSpec {
     override func spec() {
         describe("Convenience methods") {
             // Given
-            let path = NSBundle(forClass: self.dynamicType).pathForResource("component", ofType: "json")!
+            let path = NSBundle(forClass: self.dynamicType).pathForResource("brick", ofType: "json")!
             let json = (try? NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as! JSONDictionary)!
             
             context("when parse value from JSON like structure") {
@@ -31,15 +31,15 @@ class ConvenienceSpec: QuickSpec {
 
                     // When
                     do {
-                        let _: [JSONDictionary] = try json.parse("components")
+                        let _: [JSONDictionary] = try json.parse("bricks")
                     } catch {
                         fail("should not fail")
                     }
 
                     // Then
-                    expect{ try json.parse("components1") }.to(throwError())
+                    expect{ try json.parse("bricks1") }.to(throwError())
                     expect{
-                        let _: String = try json.parse("components")
+                        let _: String = try json.parse("bricks")
                         return ""
                         }.to(throwError())
 

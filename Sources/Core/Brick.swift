@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: Brick Builder
 
-public protocol BrickBuilderType: Hashable, Equatable {
+public protocol BrickBuilderType: Hashable {
     // FIXME: do we really need Hashable?
     static var types: [Self: AnyClass] { get }
 }
@@ -19,7 +19,7 @@ extension BrickBuilderType {
 
     public func buildFromNib(type: AnyObject? = nil, nibName: String) -> Brick {
         guard nibName != "" else {
-            assertionFailure("Failed to build component with an empty nibName")
+            assertionFailure("Failed to build brick with an empty nibName")
             return target()
         }
 
@@ -64,18 +64,18 @@ public final class Brick {
     let nibName: String?
 
     private(set) var style: [Appearance] = []
-    private(set) var components: [Brick]? = nil {
+    private(set) var bricks: [Brick]? = nil {
         willSet {
-            if let names = newValue?.map({ (component) -> String in
-                return component.name
+            if let names = newValue?.map({ (brick) -> String in
+                return brick.name
             }) where Set(names).count != newValue?.count {
-                assertionFailure("Subcomponents share the same ancestor should have different names.")
+                assertionFailure("Subbricks share the same ancestor should have different names.")
             }
         }
     }
     private(set) var layout: Layout? = nil
 
-    // component's width and height
+    // brick width and height
     private(set) var width: CGFloat? = nil
     private(set) var height: CGFloat? = nil
 
@@ -107,40 +107,40 @@ public final class Brick {
         return self
     }
 
-    public func components(components: [Brick], layout: Layout) -> Brick {
-        self.components = components
+    public func bricks(bricks: [Brick], layout: Layout) -> Brick {
+        self.bricks = bricks
         self.layout = layout
         return self
     }
 
-    public func components(c1: Brick, layout: (String) -> Layout) -> Brick {
-        self.components = [c1]
+    public func bricks(c1: Brick, layout: (String) -> Layout) -> Brick {
+        self.bricks = [c1]
         self.layout = layout(c1.name)
         return self
     }
 
-    public func components(c1: Brick, _ c2: Brick, layout: (String, String) -> Layout) -> Brick {
-        self.components = [c1, c2]
+    public func bricks(c1: Brick, _ c2: Brick, layout: (String, String) -> Layout) -> Brick {
+        self.bricks = [c1, c2]
         self.layout = layout(c1.name, c2.name)
         return self
     }
 
-    public func components(c1: Brick, _ c2: Brick, _ c3: Brick, layout: (String, String, String) -> Layout) -> Brick {
-        self.components = [c1, c2, c3]
+    public func bricks(c1: Brick, _ c2: Brick, _ c3: Brick, layout: (String, String, String) -> Layout) -> Brick {
+        self.bricks = [c1, c2, c3]
         self.layout = layout(c1.name, c2.name, c3.name)
 
         return self
     }
 
-    public func components(c1: Brick, _ c2: Brick, _ c3: Brick, _ c4: Brick, layout: (String, String, String, String) -> Layout) -> Brick {
-        self.components = [c1, c2, c3, c4]
+    public func bricks(c1: Brick, _ c2: Brick, _ c3: Brick, _ c4: Brick, layout: (String, String, String, String) -> Layout) -> Brick {
+        self.bricks = [c1, c2, c3, c4]
         self.layout = layout(c1.name, c2.name, c3.name, c4.name)
 
         return self
     }
 
-    public func components(c1: Brick, _ c2: Brick, _ c3: Brick, _ c4: Brick, _ c5: Brick, layout: (String, String, String, String, String) -> Layout) -> Brick {
-        self.components = [c1, c2, c3, c4, c5]
+    public func bricks(c1: Brick, _ c2: Brick, _ c3: Brick, _ c4: Brick, _ c5: Brick, layout: (String, String, String, String, String) -> Layout) -> Brick {
+        self.bricks = [c1, c2, c3, c4, c5]
         self.layout = layout(c1.name, c2.name, c3.name, c4.name, c5.name)
 
         return self
@@ -165,7 +165,7 @@ public final class Brick {
 extension Brick: JSONConvertible {
 
     private enum JSONKey: JSONKeyType {
-        case name, targetClass, nibName, width, height, style, layout, components, outlet
+        case name, targetClass, nibName, width, height, style, layout, bricks, outlet
     }
 
     public convenience init(rawValue json: JSONDictionary) throws {
@@ -181,8 +181,8 @@ extension Brick: JSONConvertible {
             self.style = Appearance.appearancesWithJSON(styleJsons)
         }
 
-        if let componentJsons: [JSONDictionary] = try? json.parse(JSONKey.components) {
-            self.components = componentJsons.flatMap({ (json) -> Brick? in
+        if let brickJsons: [JSONDictionary] = try? json.parse(JSONKey.bricks) {
+            self.bricks = brickJsons.flatMap({ (json) -> Brick? in
                 return try? Brick(rawValue: json)
             })
         }
@@ -219,13 +219,13 @@ extension Brick: JSONConvertible {
             json[JSONKey.style.asString] = Appearance.JSONWithAppearances(self.style)
         }
 
-        if let components = self.components {
-            let componentsJson = components.flatMap({ (component) -> JSONDictionary? in
-                return component.encode()
+        if let bricks = self.bricks {
+            let bricksJson = bricks.flatMap({ (brick) -> JSONDictionary? in
+                return brick.encode()
             })
 
-            if !componentsJson.isEmpty {
-                json[JSONKey.components.asString] = componentsJson
+            if !bricksJson.isEmpty {
+                json[JSONKey.bricks.asString] = bricksJson
             }
         }
 
@@ -250,14 +250,14 @@ extension Brick {
 
     }*/
 
-    public static func container(name: String = "container", within component: Brick) -> Brick {
-        return union(name, components: [component], axis: Axis.Horizontal, align: Alignment.Fill, distribution: Distribution.Fill, metrics: LayoutMetrics())
+    public static func container(name: String = "container", within brick: Brick) -> Brick {
+        return union(name, bricks: [brick], axis: Axis.Horizontal, align: Alignment.Fill, distribution: Distribution.Fill, metrics: LayoutMetrics())
     }
 
-    public static func union(name: String, components: [Brick], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics) -> Brick {
-        let layout = Layout(components: components, axis: axis, align: align, distribution: distribution, metrics: metrics)
+    public static func union(name: String, bricks: [Brick], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics) -> Brick {
+        let layout = Layout(bricks: bricks, axis: axis, align: align, distribution: distribution, metrics: metrics)
 
-        return Brick(name: name).components(components, layout: layout)
+        return Brick(name: name).bricks(bricks, layout: layout)
     }
 }
 

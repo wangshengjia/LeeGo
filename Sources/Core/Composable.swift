@@ -9,24 +9,24 @@
 import Foundation
 
 protocol Composable {
-    func composite<View where View: UIView, View: BrickType>(bricks: [Brick], to targetView: View, with layout: Layout)
+    func composite<View where View: UIView, View: BrickDescribable>(bricks: [Brick], to targetView: View, with layout: Layout)
 }
 
 extension Composable {
-    func composite<View where View: UIView, View: BrickType>(bricks: [Brick], to targetView: View, with layout: Layout) {
+    func composite<View where View: UIView, View: BrickDescribable>(bricks: [Brick], to targetView: View, with layout: Layout) {
 
-        // remove components which do not exist anymore
+        // remove bricks which do not exist anymore
         for subview in targetView.subviews {
             if let oldBrick = subview.currentBrick where !bricks.contains(oldBrick) {
                 subview.removeFromSuperview()
             }
         }
 
-        // filter components already exist
+        // filter bricks already exist
         let filteredBricks = bricks.filter { (subBrick) -> Bool in
-            if let subcomponents = targetView.currentBrick?.components where subcomponents.contains(subBrick) {
+            if let subbricks = targetView.currentBrick?.bricks where subbricks.contains(subBrick) {
                 for subview in targetView.subviews {
-                    if let subcomponent2 = subview.currentBrick where subcomponent2 == subBrick {
+                    if let subbrick2 = subview.currentBrick where subbrick2 == subBrick {
                         return false
                     }
                 }
@@ -38,8 +38,8 @@ extension Composable {
             var view: UIView? = nil;
 
             if let nibName = brick.nibName,
-                let componentView = NSBundle.mainBundle().loadNibNamed(nibName, owner: nil, options: nil).first as? UIView {
-                    view = componentView
+                let brickView = NSBundle.mainBundle().loadNibNamed(nibName, owner: nil, options: nil).first as? UIView {
+                    view = brickView
             } else if let targetClass = brick.targetClass as? UIView.Type {
                 view = targetClass.init()
             }
@@ -52,7 +52,7 @@ extension Composable {
             }
         }
 
-        //TODO: sort component's subviews to have as same order as components
+        //TODO: sort brick's subviews to have as same order as bricks
 
         var viewsDictionary = [String: UIView]()
         for subview in targetView.subviews {
@@ -70,7 +70,7 @@ extension Composable {
             return false
         }))
 
-        // Layout each component view with auto layout visual format language from configuration.
+        // Layout each brick view with auto layout visual format language from configuration.
         for format in layout.formats {
             let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: layout.options, metrics: layout.metrics.metrics(), views: viewsDictionary)
             for constraint in constraints {

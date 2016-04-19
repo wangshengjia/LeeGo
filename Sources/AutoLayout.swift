@@ -68,8 +68,8 @@ public func V(fromSuperview fromSuperview: Bool = true, top: Metrics? = .top(.Eq
 
 // MARK: Internal
 
-internal func formatHorizontal(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
-    guard !components.isEmpty else {
+internal func formatHorizontal(bricks: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
+    guard !bricks.isEmpty else {
         assertionFailure("Bricks should not be empty")
         return []
     }
@@ -77,12 +77,12 @@ internal func formatHorizontal(components: [String], axis: Axis, align: Alignmen
     if axis == .Horizontal {
         switch distribution {
         case .Fill:
-            return [H(orderedViews:components)]
+            return [H(orderedViews:bricks)]
         case .FillEqually:
-            return [H(orderedViews: components)] + equallyLayoutFormats(components, axis: .Horizontal)
+            return [H(orderedViews: bricks)] + equallyLayoutFormats(bricks, axis: .Horizontal)
         case let .Flow(index):
-            let left = Array(components.prefix(min(max(index, 0), components.count)))
-            let right = Array(components.suffix(min(max(components.count - index, 0), components.count)))
+            let left = Array(bricks.prefix(min(max(index, 0), bricks.count)))
+            let right = Array(bricks.suffix(min(max(bricks.count - index, 0), bricks.count)))
 
             if left.isEmpty {
                 return [H(left: .left(.GreaterThanOrEqual), orderedViews:right)]
@@ -95,18 +95,18 @@ internal func formatHorizontal(components: [String], axis: Axis, align: Alignmen
             }
         }
     } else {
-        return components.flatMap { (component) -> String? in
+        return bricks.flatMap { (brick) -> String? in
 
             switch align {
             case .Left:
-                return H(orderedViews:[component], right:.right(.GreaterThanOrEqual))
+                return H(orderedViews:[brick], right:.right(.GreaterThanOrEqual))
             case .Right:
-                return H(left:.left(.GreaterThanOrEqual), orderedViews:[component])
+                return H(left:.left(.GreaterThanOrEqual), orderedViews:[brick])
             case .Fill:
-                return H(orderedViews:[component])
+                return H(orderedViews:[brick])
             case .Center:
                 // TODO: center also with superview
-                return H(left:.left(.GreaterThanOrEqual), orderedViews:[component], right:.right(.GreaterThanOrEqual))
+                return H(left:.left(.GreaterThanOrEqual), orderedViews:[brick], right:.right(.GreaterThanOrEqual))
             default:
                 assertionFailure("Unexpected alignment value \(align) for axis \(axis) and distribution \(distribution)")
                 return nil
@@ -115,25 +115,25 @@ internal func formatHorizontal(components: [String], axis: Axis, align: Alignmen
     }
 }
 
-internal func formatVertical(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
-    guard !components.isEmpty else {
+internal func formatVertical(bricks: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
+    guard !bricks.isEmpty else {
         assertionFailure("Bricks should not be empty")
         return []
     }
 
     if axis == .Horizontal {
-        return components.flatMap { (component) -> String? in
+        return bricks.flatMap { (brick) -> String? in
 
             switch align {
             case .Top:
-                return V(orderedViews:[component], bottom:.bottom(.GreaterThanOrEqual))
+                return V(orderedViews:[brick], bottom:.bottom(.GreaterThanOrEqual))
             case .Bottom:
-                return V(top:.top(.GreaterThanOrEqual), orderedViews:[component])
+                return V(top:.top(.GreaterThanOrEqual), orderedViews:[brick])
             case .Fill:
-                return V(orderedViews:[component])
+                return V(orderedViews:[brick])
             case .Center:
                 // TODO: center also with superview
-                return V(top:.top(.GreaterThanOrEqual), orderedViews:[component], bottom:.bottom(.GreaterThanOrEqual))
+                return V(top:.top(.GreaterThanOrEqual), orderedViews:[brick], bottom:.bottom(.GreaterThanOrEqual))
             default:
                 assertionFailure("Unexpected alignment value \(align) for axis \(axis) and distribution \(distribution)")
                 return nil
@@ -142,12 +142,12 @@ internal func formatVertical(components: [String], axis: Axis, align: Alignment,
     } else {
         switch distribution {
         case .Fill:
-            return [V(orderedViews:components)]
+            return [V(orderedViews:bricks)]
         case .FillEqually:
-            return [V(orderedViews: components)] + equallyLayoutFormats(components, axis: .Vertical)
+            return [V(orderedViews: bricks)] + equallyLayoutFormats(bricks, axis: .Vertical)
         case let .Flow(index):
-            let top = Array(components.prefix(min(max(index, 0), components.count)))
-            let bottom = Array(components.suffix(min(max(components.count - index, 0), components.count)))
+            let top = Array(bricks.prefix(min(max(index, 0), bricks.count)))
+            let bottom = Array(bricks.suffix(min(max(bricks.count - index, 0), bricks.count)))
 
             if top.isEmpty {
                 return [V(top: .top(.GreaterThanOrEqual), orderedViews:bottom)]
@@ -162,7 +162,7 @@ internal func formatVertical(components: [String], axis: Axis, align: Alignment,
     }
 }
 
-internal func layoutOptions(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> NSLayoutFormatOptions {
+internal func layoutOptions(bricks: [String], axis: Axis, align: Alignment, distribution: Distribution) -> NSLayoutFormatOptions {
     if axis == .Horizontal && align == .Center {
         return [.AlignAllCenterY, .DirectionLeadingToTrailing]
     }

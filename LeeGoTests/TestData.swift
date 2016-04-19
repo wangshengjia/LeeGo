@@ -21,21 +21,21 @@ struct TestData {
 
     static let header1 = BrickBuilder.header.build()
         .style([.backgroundColor(UIColor.redColor())])
-        .components(
+        .bricks(
             title1, avatar1
             ) { title, avatar in
-                Layout(components: [title, avatar], axis: .Vertical, align: .Left, distribution: .Fill, metrics: LayoutMetrics(20, 20, 20, 20, 10 ,10))
+                Layout(bricks: [title, avatar], axis: .Vertical, align: .Left, distribution: .Fill, metrics: LayoutMetrics(20, 20, 20, 20, 10 ,10))
         }.heightResolver { (_, childrenHeights, _) in
             return childrenHeights[0] + childrenHeights[1]
     }
 
-    static let header2 = Brick(name: "header2").components(
+    static let header2 = Brick(name: "header2").bricks(
         title2, avatar2, view
         ) { title, avatar, view in
-            Layout(components: [title, avatar, view], axis: .Horizontal, align: .Top, distribution: .Flow(3), metrics: LayoutMetrics(20, 20, 20, 20, 10 ,10))
+            Layout(bricks: [title, avatar, view], axis: .Horizontal, align: .Top, distribution: .Flow(3), metrics: LayoutMetrics(20, 20, 20, 20, 10 ,10))
     }
 
-    static let header3 = Brick(name: "header3").components(
+    static let header3 = Brick(name: "header3").bricks(
         title3, view
         ) { title, view in
             Layout(["H:|[\(title)]|", "V:|[\(view)]|"])
@@ -43,15 +43,15 @@ struct TestData {
 }
 
 enum BrickBuilder: BrickBuilderType {
-    // leaf components
+    // leaf bricks
     case title, subtitle, date, avatar
     case favoriteButton
     case adView
 
-    // child components
+    // child bricks
     case header, footer
 
-    // root components
+    // root bricks
     case zen, article, video, portfolio, alert, detailsView, featured
 }
 
@@ -72,7 +72,7 @@ extension BrickBuilder {
         switch self {
         case .article:
             return self.build().style([.backgroundColor(UIColor.whiteColor())])
-                .components(
+                .bricks(
                     title.brick(),
                     subtitle.build().style(Style.H2.style()),
                     avatar.build().style(Style.I1.style()).width(68).heightResolver({ (fittingWidth, _, _) -> CGFloat in
@@ -89,20 +89,20 @@ extension BrickBuilder {
             }
         case .featured:
             return self.build()
-                .components(
+                .bricks(
                     avatar.build().style(Style.I1.style()).heightResolver({ (fittingWidth, _, _) -> CGFloat in
                         return fittingWidth * 2 / 3
                     }),
                     title.build().style(Style.H3.style())
                 ) { (avatar, title) -> Layout in
-                    Layout(components: [avatar, title], axis: .Vertical, align: .Fill, distribution: .Fill)
+                    Layout(bricks: [avatar, title], axis: .Vertical, align: .Fill, distribution: .Fill)
                 }.heightResolver { (_, childrenHeights, _) -> CGFloat in
                     return childrenHeights[0] + childrenHeights[1]
             }
         case .detailsView:
             return
                 Brick.container("Container", within:
-                    Brick.union(brickName, components: [
+                    Brick.union(brickName, bricks: [
                         avatar.build().style([.backgroundColor(UIColor.redColor())]).width(50).height(100),
                         favoriteButton.brick().LGOutlet("favoriteButton"),
                         adView.build().width(150).height(80)
@@ -114,7 +114,7 @@ extension BrickBuilder {
         case .header:
             return self.build()
                 .style([.backgroundColor(UIColor.yellowColor()), .translatesAutoresizingMaskIntoConstraints(false)])
-                .components(
+                .bricks(
                     avatar.build().style(Style.I1.style()),
                     title.build().style(Style.H3.style()),
                     favoriteButton.brick()
@@ -132,7 +132,7 @@ extension BrickBuilder {
         case .favoriteButton:
             return self.build().style(Style.BasicButton.style() + [.backgroundColor(UIColor.greenColor())])
         default:
-            assertionFailure("Unknown component: \(self)")
+            assertionFailure("Unknown brick: \(self)")
             return self.build()
         }
     }

@@ -1,5 +1,5 @@
 //
-//  BrickTypeSpecs.swift
+//  BrickDescribableSpecs.swift
 //  LeeGo
 //
 //  Created by Victor WANG on 20/02/16.
@@ -13,7 +13,7 @@ import Quick
 import Nimble
 @testable import LeeGo
 
-class BrickTypeSpec: QuickSpec {
+class BrickDescribableSpec: QuickSpec {
     override func spec() {
 
         describe("Configurable extension tests") {
@@ -32,7 +32,7 @@ class BrickTypeSpec: QuickSpec {
             }
         }
 
-        describe("BrickType") {
+        describe("BrickDescribable") {
             it("should apply diff to view correctly.") {
                 // Given
                 let superview = UIView()

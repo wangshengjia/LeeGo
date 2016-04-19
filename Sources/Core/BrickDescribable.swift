@@ -22,22 +22,22 @@ extension BrickDescribable {
             applyDiff(with: newBrick, to: view)
         }
 
-        // update component's value
+        // update brick's value
         dataSource?.update(view, with: newBrick)
     }
 
     private func applyDiff<View where View: UIView, View: BrickDescribable>(with newBrick: Brick, to view: View) {
 
-        // setup self, only if component is not initialized from a nib file
+        // setup self, only if brick is not initialized from a nib file
         if view.currentBrick?.nibName == nil {
             setup(view, currentStyle: view.currentBrick?.style ?? [], newStyle: newBrick.style)
         }
 
-        // handle component's width & height constraint
+        // handle brick's width & height constraint
         applyDimension(of: newBrick, to: view)
 
         // add & layout sub views
-        if let bricks = newBrick.components where !bricks.isEmpty, let layout = newBrick.layout {
+        if let bricks = newBrick.bricks where !bricks.isEmpty, let layout = newBrick.layout {
             composite(bricks, to: view, with: layout)
         }
     }
@@ -52,7 +52,7 @@ extension BrickDescribable {
         case .WhenBrickChanged:
             if let current = currentBrick
                 where current.name != newBrick.name
-                    || (current.style == [] && current.components == nil && current.layout == nil) {
+                    || (current.style == [] && current.bricks == nil && current.layout == nil) {
                 shouldRebuild = true
             }
         case .Always:
@@ -62,17 +62,17 @@ extension BrickDescribable {
         return shouldRebuild
     }
 
-    private func applyDimension<View where View: UIView, View: BrickDescribable>(of newBrick: Brick, to component: View) {
+    private func applyDimension<View where View: UIView, View: BrickDescribable>(of newBrick: Brick, to brick: View) {
         if let width = newBrick.width {
-            component.applyConstraint(.Width, constant: width)
+            brick.applyConstraint(.Width, constant: width)
         } else {
-            component.unapplyConstraint(.Width)
+            brick.unapplyConstraint(.Width)
         }
 
         if let height = newBrick.height {
-            component.applyConstraint(.Height, constant: height)
+            brick.applyConstraint(.Height, constant: height)
         } else {
-            component.unapplyConstraint(.Height)
+            brick.unapplyConstraint(.Height)
         }
     }
 }

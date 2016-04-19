@@ -17,7 +17,7 @@ public enum UpdatingStrategy {
     case Always
 }
 
-extension UIView: BrickType {
+extension UIView: BrickDescribable {
     public func brickDidAwake() {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -56,10 +56,10 @@ extension UIView {
         self.currentBrick = brick
 
         // TODO: need to imporve this algo, too expensive and too fragile which based only on name.
-        // configure sub components recursively
+        // configure sub bricks recursively
         for subview in self.subviews {
-            if let name = subview.currentBrick?.name, let components = brick.components {
-                for childBrick in components where childBrick.name == name {
+            if let name = subview.currentBrick?.name, let bricks = brick.bricks {
+                for childBrick in bricks where childBrick.name == name {
                     subview.configureAs(childBrick, dataSource: dataSource, updatingStrategy: updatingStrategy)
                 }
             }
@@ -83,7 +83,7 @@ extension UIView {
         return nil
     }
 
-    internal var componentName: String? {
+    internal var brickName: String? {
         return currentBrick?.name
     }
 
@@ -91,7 +91,7 @@ extension UIView {
 
         // if height resolver is found
         if let computeClosure = currentBrick?.heightResolver {
-            //TODO:  should use children component instead of subview ?
+            //TODO:  should use children brick instead of subview ?
             let fittingWidth = self.frame.width
             let childrenHeights = subviews.map { (subview) -> CGFloat in
                 return subview.fittingHeight()
@@ -100,7 +100,7 @@ extension UIView {
 
             return computeClosure(fittingWidth: fittingWidth, childrenHeights: childrenHeights, metrics: metrics)
         } else if subviews.isEmpty {
-            // leaf component -> dynamic height
+            // leaf brick -> dynamic height
             return self.sizeThatFits(CGSize(width: self.frame.width, height: CGFloat.max)).height
         } else {
             return self.systemLayoutSizeFittingSize(CGSize(width: self.frame.width, height: 0), withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityFittingSizeLevel).height
