@@ -210,11 +210,11 @@ class ConvertibleSpec: QuickSpec {
                     let component = try Brick(rawValue: json!)
 
                     // Then
-                    let mockComponent = ComponentBuilder.article.brick().height(60).LGOutlet("button")
-                    expect(component.name) == mockComponent.name
-                    expect(component.layout) == mockComponent.layout
-                    expect(component.width ?? 0) == mockComponent.width ?? 0
-                    expect(component.height ?? 0) == mockComponent.height ?? 0
+                    let mockBrick = BrickBuilder.article.brick().height(60).LGOutlet("button")
+                    expect(component.name) == mockBrick.name
+                    expect(component.layout) == mockBrick.layout
+                    expect(component.width ?? 0) == mockBrick.width ?? 0
+                    expect(component.height ?? 0) == mockBrick.height ?? 0
                 } catch {
                     fail("\(error)")
                 }
@@ -223,7 +223,7 @@ class ConvertibleSpec: QuickSpec {
             it("should convert an Brick instance to JSON correctly.") {
 
                 // Given
-                let component = ComponentBuilder.article.brick().height(60).LGOutlet("button")
+                let component = BrickBuilder.article.brick().height(60).LGOutlet("button")
 
                 // When
                 let json = component.encode()

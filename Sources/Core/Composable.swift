@@ -9,24 +9,24 @@
 import Foundation
 
 protocol Composable {
-    func compositeSubcomponents<Component where Component: UIView, Component: BrickType>(component: Component, components: [Brick], layout: Layout)
+    func compositeSubcomponents<B where B: UIView, B: BrickType>(component: B, components: [Brick], layout: Layout)
 }
 
 extension Composable {
-    func compositeSubcomponents<Component where Component: UIView, Component: BrickType>(component: Component, components: [Brick], layout: Layout) {
+    func compositeSubcomponents<B where B: UIView, B: BrickType>(component: B, components: [Brick], layout: Layout) {
 
         // remove components which do not exist anymore
         for subview in component.subviews {
-            if let oldComponent = subview.configuration where !components.contains(oldComponent) {
+            if let oldBrick = subview.configuration where !components.contains(oldBrick) {
                 subview.removeFromSuperview()
             }
         }
 
         // filter components already exist
-        let filteredComponents = components.filter { (subComponent) -> Bool in
-            if let subcomponents = component.configuration?.components where subcomponents.contains(subComponent) {
+        let filteredBricks = components.filter { (subBrick) -> Bool in
+            if let subcomponents = component.configuration?.components where subcomponents.contains(subBrick) {
                 for subview in component.subviews {
-                    if let subcomponent2 = subview.configuration where subcomponent2 == subComponent {
+                    if let subcomponent2 = subview.configuration where subcomponent2 == subBrick {
                         return false
                     }
                 }
@@ -34,7 +34,7 @@ extension Composable {
             return true
         }
 
-        filteredComponents.forEach { brick in
+        filteredBricks.forEach { brick in
             var view: UIView? = nil;
 
             if let nibName = brick.nibName,

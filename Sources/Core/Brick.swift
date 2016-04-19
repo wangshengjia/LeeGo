@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: Component Builder
+// MARK: Brick Builder
 
 public protocol BrickBuilderType: Hashable, Equatable {
     // FIXME: do we really need Hashable?
@@ -53,7 +53,7 @@ public func ==<Builder: BrickBuilderType>(lhs: Builder, rhs: Builder) -> Bool {
     return lhs.brickName == rhs.brickName
 }
 
-// MARK: Component Target
+// MARK: Brick Target
 
 public typealias ManuallyFittingHeightResolver = (fittingWidth: CGFloat, childrenHeights: [CGFloat], metrics: LayoutMetrics) -> CGFloat
 
@@ -174,7 +174,7 @@ extension Brick: JSONConvertible {
             let nibName: String? = try? json.parse(JSONKey.nibName)
             try self.init(name: json.parse(JSONKey.name), targetClass: targetClass, nibName: nibName)
         } catch {
-            throw JSONConvertibleError.UnexpectedComponentNameError(json)
+            throw JSONConvertibleError.UnexpectedBrickNameError(json)
         }
 
         if let styleJsons: JSONDictionary = try? json.parse(JSONKey.style) {

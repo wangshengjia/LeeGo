@@ -136,7 +136,7 @@ class BrickSpec: QuickSpec {
 
             it("should build component target instance", closure: { () -> () in
                 // Given
-                let component = ComponentBuilder.header.build()
+                let component = BrickBuilder.header.build()
 
                 // Then
                 expect(component.name) == "header"
@@ -146,7 +146,7 @@ class BrickSpec: QuickSpec {
             it("should build component target instance from nib", closure: { () -> () in
 
                 // Given
-                let component = ComponentBuilder.title.buildFromNib(UILabel.self, nibName: "nibname")
+                let component = BrickBuilder.title.buildFromNib(UILabel.self, nibName: "nibname")
 
                 // Then
                 expect(component.name) == "title"
@@ -157,7 +157,7 @@ class BrickSpec: QuickSpec {
             it("should build component with cell height resolver", closure: { () -> () in
 
                 // Given
-                let component = ComponentBuilder.header.build().heightResolver { _, childrenHeights, _ in
+                let component = BrickBuilder.header.build().heightResolver { _, childrenHeights, _ in
                     return childrenHeights[0] + childrenHeights[1]
                 }
 
@@ -168,8 +168,8 @@ class BrickSpec: QuickSpec {
             })
 
             it("builder & target should be equals") {
-                XCTAssertTrue(ComponentBuilder.header == Brick(name: "header"))
-                XCTAssertTrue(Brick(name: "header") == ComponentBuilder.header)
+                XCTAssertTrue(BrickBuilder.header == Brick(name: "header"))
+                XCTAssertTrue(Brick(name: "header") == BrickBuilder.header)
             }
         }
     }

@@ -106,7 +106,7 @@ public struct Layout: Equatable {
 
     public init(components: [String], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) {
         guard !components.isEmpty else {
-            assertionFailure("Components should not be empty")
+            assertionFailure("Bricks should not be empty")
             self.init()
             return
         }

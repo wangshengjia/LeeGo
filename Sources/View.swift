@@ -8,12 +8,12 @@
 
 import Foundation
 
-public protocol ComponentDataSource {
-    func updateComponent(componentView: UIView, with Brick: Brick)
+public protocol BrickDataSource {
+    func updateBrick(componentView: UIView, with Brick: Brick)
 }
 
 public enum ConfigurationUpdatingStrategy {
-    case WhenComponentChanged
+    case WhenBrickChanged
     case Always
 }
 
@@ -32,7 +32,7 @@ extension UIView: BrickType {
 
 extension UIView {
     
-    public func configureAs(brick: Brick, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
+    public func configureAs(brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenBrickChanged) {
         if let cell = self as? UICollectionViewCell {
             cell.contentView._configure(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else if let cell = self as? UITableViewCell {
@@ -42,15 +42,15 @@ extension UIView {
         }
     }
 
-    private func _configure(brick: Brick, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
+    private func _configure(brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenBrickChanged) {
 
         guard self.dynamicType.isSubclassOfClass(brick.targetClass) else {
-            assertionFailure("Component type: \(self.dynamicType) is not compatible with configuration type: \(brick.targetClass)")
+            assertionFailure("Brick type: \(self.dynamicType) is not compatible with configuration type: \(brick.targetClass)")
             return
         }
 
         // apply Brick
-        apply(self, newConfiguration:brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
+        apply(self, newConfiguration: brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
 
         // if no error, then:
         self.configuration = brick

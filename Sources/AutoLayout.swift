@@ -70,7 +70,7 @@ public func V(fromSuperview fromSuperview: Bool = true, top: Metrics? = .top(.Eq
 
 internal func formatHorizontal(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
     guard !components.isEmpty else {
-        assertionFailure("Components should not be empty")
+        assertionFailure("Bricks should not be empty")
         return []
     }
 
@@ -117,7 +117,7 @@ internal func formatHorizontal(components: [String], axis: Axis, align: Alignmen
 
 internal func formatVertical(components: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
     guard !components.isEmpty else {
-        assertionFailure("Components should not be empty")
+        assertionFailure("Bricks should not be empty")
         return []
     }
 

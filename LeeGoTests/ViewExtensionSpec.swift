@@ -53,7 +53,7 @@ class ViewExtensionSpec: QuickSpec {
                 expect((view.subviews[1] as! UIImageView).componentName) == "avatar"
             }
 
-            it("should re-configure a component correctly with .WhenComponentChanged strategy -> component changed") {
+            it("should re-configure a component correctly with .WhenBrickChanged strategy -> component changed") {
                 // Given
                 let cell = UITableViewCell()
                 cell.configureAs(TestData.header1)
@@ -76,7 +76,7 @@ class ViewExtensionSpec: QuickSpec {
                 expect((cell.contentView.subviews[0] as UIView).componentName) == "view"
             }
 
-            it("should re-configure a component correctly with .WhenComponentChanged strategy -> component did not change") {
+            it("should re-configure a component correctly with .WhenBrickChanged strategy -> component did not change") {
                 // TODO: Is that what we want ?
 
                 // Given
@@ -86,7 +86,7 @@ class ViewExtensionSpec: QuickSpec {
                 view.configureAs(TestData.header1)
 
                 // When
-                let emptyHeader = ComponentBuilder.header.build()
+                let emptyHeader = BrickBuilder.header.build()
                 view.configureAs(emptyHeader)
 
                 // Then
@@ -156,7 +156,7 @@ class ViewExtensionSpec: QuickSpec {
             it("should find view with outlet key correctly.") {
                 // Given
                 let cell = UICollectionViewCell(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-                cell.configureAs(ComponentBuilder.detailsView.brick())
+                cell.configureAs(BrickBuilder.detailsView.brick())
 
                 // When
                 let view = cell.viewForOutletKey("favoriteButton")

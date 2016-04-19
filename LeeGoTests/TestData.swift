@@ -10,16 +10,16 @@ import Foundation
 @testable import LeeGo
 
 struct TestData {
-    static let title1 = ComponentBuilder.title.build().style([.font(UIFont(name: "Helvetica", size: 18)!), .text("Text")])
-    static let title2 = ComponentBuilder.title.build().style([.font(UIFont(name: "Avenir", size: 12)!), .text("Text")])
+    static let title1 = BrickBuilder.title.build().style([.font(UIFont(name: "Helvetica", size: 18)!), .text("Text")])
+    static let title2 = BrickBuilder.title.build().style([.font(UIFont(name: "Avenir", size: 12)!), .text("Text")])
     static let title3 = Brick(name: "title3", targetClass: UILabel.self).style([.font(UIFont(name: "Arial", size: 14)!)])
 
-    static let avatar1 = ComponentBuilder.avatar.build(UIImageView).width(50).height(50).heightResolver {childrenHeights in 50}
-    static let avatar2 = ComponentBuilder.avatar.build(UIImageView).style([.backgroundColor(UIColor.greenColor())]).width(60).height(80).heightResolver {childrenHeights in 80}
+    static let avatar1 = BrickBuilder.avatar.build(UIImageView).width(50).height(50).heightResolver {childrenHeights in 50}
+    static let avatar2 = BrickBuilder.avatar.build(UIImageView).style([.backgroundColor(UIColor.greenColor())]).width(60).height(80).heightResolver {childrenHeights in 80}
 
     static let view = Brick(name: "view").width(70).height(90)
 
-    static let header1 = ComponentBuilder.header.build()
+    static let header1 = BrickBuilder.header.build()
         .style([.backgroundColor(UIColor.redColor())])
         .components(
             title1, avatar1
@@ -42,7 +42,7 @@ struct TestData {
     }
 }
 
-enum ComponentBuilder: BrickBuilderType {
+enum BrickBuilder: BrickBuilderType {
     // leaf components
     case title, subtitle, date, avatar
     case favoriteButton
@@ -55,8 +55,8 @@ enum ComponentBuilder: BrickBuilderType {
     case zen, article, video, portfolio, alert, detailsView, featured
 }
 
-extension ComponentBuilder {
-    static let types: [ComponentBuilder: AnyClass] = [
+extension BrickBuilder {
+    static let types: [BrickBuilder: AnyClass] = [
         title: UILabel.self,
         subtitle: UILabel.self,
         avatar: UIImageView.self,
@@ -67,7 +67,7 @@ extension ComponentBuilder {
 
 }
 
-extension ComponentBuilder {
+extension BrickBuilder {
     func brick() -> Brick {
         switch self {
         case .article:
@@ -83,7 +83,7 @@ extension ComponentBuilder {
                             H(orderedViews: ["avatar", "subtitle"]),
                             V(orderedViews: ["title", "subtitle"], bottom: .bottom(.GreaterThanOrEqual)),
                             V(orderedViews: ["avatar"], bottom: .bottom(.GreaterThanOrEqual)),
-                            ], metrics: ComponentBuilder.defaultMetrics)
+                            ], metrics: BrickBuilder.defaultMetrics)
                 }.heightResolver { (_, childrenHeights, metrics) -> CGFloat in
                     return childrenHeights[0] + childrenHeights[1] + metrics.top + metrics.bottom + metrics.spaceV
             }
@@ -125,7 +125,7 @@ extension ComponentBuilder {
                         "V:|-top-[\(title)]-bottom-|",
                         "V:|-top-[\(favoriteButton)]-bottom-|",
                         ],
-                           metrics: ComponentBuilder.defaultMetrics)
+                           metrics: BrickBuilder.defaultMetrics)
             }
         case .title:
             return self.build(UILabel).style(Style.H3.style())

@@ -11,22 +11,22 @@ import Foundation
 protocol BrickType: class, Configurable, Composable {
     func componentDidAwake()
 
-    func apply<Component where Component: UIView, Component: BrickType>(component: Component, newConfiguration: Brick, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy)
+    func apply<B where B: UIView, B: BrickType>(component: B, newConfiguration: Brick, dataSource: BrickDataSource?, updatingStrategy: ConfigurationUpdatingStrategy)
 }
 
 extension BrickType {
 
-    func apply<Component where Component: UIView, Component: BrickType>(component: Component, newConfiguration: Brick, dataSource: ComponentDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
+    func apply<B where B: UIView, B: BrickType>(component: B, newConfiguration: Brick, dataSource: BrickDataSource?, updatingStrategy: ConfigurationUpdatingStrategy) {
 
         if shouldRebuild(with: component.configuration, newConfiguration: newConfiguration, updatingStrategy: updatingStrategy) {
             applyDiff(with: newConfiguration, to: component)
         }
 
         // update component's value
-        dataSource?.updateComponent(component, with: newConfiguration)
+        dataSource?.updateBrick(component, with: newConfiguration)
     }
 
-    private func applyDiff<Component where Component: UIView, Component: BrickType>(with newConfiguration: Brick, to component: Component) {
+    private func applyDiff<B where B: UIView, B: BrickType>(with newConfiguration: Brick, to component: B) {
 
         // setup self, only if component is not initialized from a nib file
         if component.configuration?.nibName == nil {
@@ -49,7 +49,7 @@ extension BrickType {
         var shouldRebuild = (currentConfiguration == nil)
 
         switch updatingStrategy {
-        case .WhenComponentChanged:
+        case .WhenBrickChanged:
             if let current = currentConfiguration
                 where current.name != newConfiguration.name
                     || (current.style == [] && current.components == nil && current.layout == nil) {
@@ -62,7 +62,7 @@ extension BrickType {
         return shouldRebuild
     }
 
-    private func applyDimension<Component where Component: UIView, Component: BrickType>(newConfiguration: Brick, to component: Component) {
+    private func applyDimension<B where B: UIView, B: BrickType>(newConfiguration: Brick, to component: B) {
         if let width = newConfiguration.width {
             component.applyConstraint(.Width, constant: width)
         } else {
@@ -124,27 +124,27 @@ extension UIView {
     }
 }
 
-// MARK: Component Context
+// MARK: Brick Context
 
-private final class ComponentContext {
+private final class BrickContext {
     var component: Brick?
     var isRoot = true
     var attributesArray: [Attributes] = []
 }
 
 private struct AssociatedKeys {
-    static var ComponentContextAssociatedKey = "ComponentContext_AssociatedKey"
+    static var BrickContextAssociatedKey = "BrickContext_AssociatedKey"
 }
 
 extension BrickType where Self: UIView {
 
-    private var context: ComponentContext {
+    private var context: BrickContext {
         get {
-            if let context = objc_getAssociatedObject(self, &AssociatedKeys.ComponentContextAssociatedKey) as? ComponentContext {
+            if let context = objc_getAssociatedObject(self, &AssociatedKeys.BrickContextAssociatedKey) as? BrickContext {
                 return context
             } else {
-                let context = ComponentContext()
-                objc_setAssociatedObject(self, &AssociatedKeys.ComponentContextAssociatedKey, context as ComponentContext?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                let context = BrickContext()
+                objc_setAssociatedObject(self, &AssociatedKeys.BrickContextAssociatedKey, context as BrickContext?, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
                 return context
             }
         }
