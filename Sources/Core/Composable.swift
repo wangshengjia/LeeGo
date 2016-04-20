@@ -53,7 +53,6 @@ extension Composable {
         }
 
         //TODO: sort brick's subviews to have as same order as bricks
-
         var viewsDictionary = [String: UIView]()
         for subview in targetView.subviews {
             if let name = subview.currentBrick?.name {
@@ -61,10 +60,10 @@ extension Composable {
             }
         }
 
-        // TODO: apply diff of layout instead of removing all constraints (not sure if possible)
+        // TODO: apply diff of layout instead of removing all constraints
         // Remove constraint with identifier (which means not created by system)
         targetView.removeConstraints(targetView.constraints.filter({ (constraint) -> Bool in
-            if let identifier: String = constraint.identifier where identifier.hasPrefix("children:") {
+            if constraint.mode == .SubviewsLayout {
                 return true
             }
             return false
@@ -74,8 +73,8 @@ extension Composable {
         for format in layout.formats {
             let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: layout.options, metrics: layout.metrics.metrics(), views: viewsDictionary)
             for constraint in constraints {
-                // TODO: need a better constraint identifier solution
                 constraint.identifier = "children: \(constraint.description)"
+                constraint.setIdentifier(with: .SubviewsLayout)
                 targetView.addConstraint(constraint)
             }
         }

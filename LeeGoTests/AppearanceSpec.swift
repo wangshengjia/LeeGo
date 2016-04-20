@@ -385,7 +385,7 @@ class AppearanceSpec: QuickSpec {
 
                 // Then
                 expect(imageView.constraints.count) == 1
-                expect(imageView.constraints.first!.identifier) == "ratio(width == height * 1.5)"
+                expect(imageView.constraints.first!.identifier?.hasPrefix("LG_Ratio")) == true
                 expect(imageView.constraints.first!.multiplier) == 1.5
                 expect(imageView.constraints.first!.priority) == 990
 

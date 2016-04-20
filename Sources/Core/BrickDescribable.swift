@@ -78,53 +78,6 @@ extension BrickDescribable {
     }
 }
 
-extension UIView {
-
-    // TODO: improve later
-    enum Constraint {
-        case Width, Height
-
-        var attribute: NSLayoutAttribute {
-            switch self {
-            case .Width:
-                return .Width
-            case .Height:
-                return .Height
-            }
-        }
-    }
-
-    func constraint(type: Constraint) -> NSLayoutConstraint? {
-        switch type {
-        case .Width, .Height:
-            for constraint in self.constraints {
-                if constraint.firstAttribute == type.attribute && constraint.identifier?.hasPrefix("dimension:") ?? false
-                    && constraint.firstItem === self && constraint.secondItem === nil {
-                        return constraint
-                }
-            }
-        }
-
-        return nil
-    }
-
-    func applyConstraint(type: Constraint, constant: CGFloat) {
-        if let constraint = self.constraint(type) {
-            constraint.constant = constant
-        } else {
-            let constraint = NSLayoutConstraint(item: self, attribute: type.attribute, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant)
-            constraint.identifier = "dimension: \(constraint.description)"
-            self.addConstraint(constraint)
-        }
-    }
-
-    func unapplyConstraint(type: Constraint) {
-        if let constraint = self.constraint(type) {
-            self.removeConstraint(constraint)
-        }
-    }
-}
-
 // MARK: Brick Context
 
 private final class BrickContext {
