@@ -49,6 +49,10 @@ extension BrickBuilderType {
     }
 }
 
+extension String: BrickBuilderType {
+    public static var types: [String: AnyClass] = [:]
+}
+
 public func ==<Builder: BrickBuilderType>(lhs: Builder, rhs: Builder) -> Bool {
     return lhs.brickName == rhs.brickName
 }
@@ -85,7 +89,7 @@ public final class Brick {
     // used only for calculating cell's height manually
     private(set) var heightResolver: ManuallyFittingHeightResolver?
 
-    public init(name: String, targetClass: AnyClass = UIView.self, nibName: String? = nil) {
+    internal init(name: String, targetClass: AnyClass = UIView.self, nibName: String? = nil) {
         self.name = name
         if targetClass is UIView.Type {
             self.targetClass = targetClass
