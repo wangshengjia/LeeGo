@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: Public
+
 extension NSLayoutRelation: CustomStringConvertible {
     public var description: String {
         switch self {
@@ -46,7 +48,7 @@ public enum Metrics: CustomStringConvertible {
     }
 }
 
-// MARK: Public
+// MARK: Public functions
 
 public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.Equal), orderedViews: [String] = [], interspace: Metrics? = .spaceH(.Equal), right: Metrics? = .right(.Equal), toSuperview: Bool = true) -> String {
     guard !orderedViews.isEmpty else {
@@ -68,8 +70,8 @@ public func V(fromSuperview fromSuperview: Bool = true, top: Metrics? = .top(.Eq
 
 // MARK: Internal
 
-internal func formatHorizontal(bricks: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
-    guard !bricks.isEmpty else {
+internal func formatHorizontal(brickNames: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
+    guard !brickNames.isEmpty else {
         assertionFailure("Bricks should not be empty")
         return []
     }
@@ -77,12 +79,12 @@ internal func formatHorizontal(bricks: [String], axis: Axis, align: Alignment, d
     if axis == .Horizontal {
         switch distribution {
         case .Fill:
-            return [H(orderedViews:bricks)]
+            return [H(orderedViews: brickNames)]
         case .FillEqually:
-            return [H(orderedViews: bricks)] + equallyLayoutFormats(bricks, axis: .Horizontal)
+            return [H(orderedViews: brickNames)] + equallyLayoutFormats(brickNames, axis: .Horizontal)
         case let .Flow(index):
-            let left = Array(bricks.prefix(min(max(index, 0), bricks.count)))
-            let right = Array(bricks.suffix(min(max(bricks.count - index, 0), bricks.count)))
+            let left = Array(brickNames.prefix(min(max(index, 0), brickNames.count)))
+            let right = Array(brickNames.suffix(min(max(brickNames.count - index, 0), brickNames.count)))
 
             if left.isEmpty {
                 return [H(left: .left(.GreaterThanOrEqual), orderedViews:right)]
@@ -95,7 +97,7 @@ internal func formatHorizontal(bricks: [String], axis: Axis, align: Alignment, d
             }
         }
     } else {
-        return bricks.flatMap { (brick) -> String? in
+        return brickNames.flatMap { (brick) -> String? in
 
             switch align {
             case .Left:
@@ -115,14 +117,14 @@ internal func formatHorizontal(bricks: [String], axis: Axis, align: Alignment, d
     }
 }
 
-internal func formatVertical(bricks: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
-    guard !bricks.isEmpty else {
+internal func formatVertical(brickNames: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
+    guard !brickNames.isEmpty else {
         assertionFailure("Bricks should not be empty")
         return []
     }
 
     if axis == .Horizontal {
-        return bricks.flatMap { (brick) -> String? in
+        return brickNames.flatMap { (brick) -> String? in
 
             switch align {
             case .Top:
@@ -142,12 +144,12 @@ internal func formatVertical(bricks: [String], axis: Axis, align: Alignment, dis
     } else {
         switch distribution {
         case .Fill:
-            return [V(orderedViews:bricks)]
+            return [V(orderedViews:brickNames)]
         case .FillEqually:
-            return [V(orderedViews: bricks)] + equallyLayoutFormats(bricks, axis: .Vertical)
+            return [V(orderedViews: brickNames)] + equallyLayoutFormats(brickNames, axis: .Vertical)
         case let .Flow(index):
-            let top = Array(bricks.prefix(min(max(index, 0), bricks.count)))
-            let bottom = Array(bricks.suffix(min(max(bricks.count - index, 0), bricks.count)))
+            let top = Array(brickNames.prefix(min(max(index, 0), brickNames.count)))
+            let bottom = Array(brickNames.suffix(min(max(brickNames.count - index, 0), brickNames.count)))
 
             if top.isEmpty {
                 return [V(top: .top(.GreaterThanOrEqual), orderedViews:bottom)]
@@ -162,7 +164,7 @@ internal func formatVertical(bricks: [String], axis: Axis, align: Alignment, dis
     }
 }
 
-internal func layoutOptions(bricks: [String], axis: Axis, align: Alignment, distribution: Distribution) -> NSLayoutFormatOptions {
+internal func layoutOptions(brickNames: [String], axis: Axis, align: Alignment, distribution: Distribution) -> NSLayoutFormatOptions {
     if axis == .Horizontal && align == .Center {
         return [.AlignAllCenterY, .DirectionLeadingToTrailing]
     }
@@ -177,15 +179,15 @@ internal func layoutOptions(bricks: [String], axis: Axis, align: Alignment, dist
 
 // MARK: Private
 
-private func equallyLayoutFormats(views: [String], axis: Axis) -> [String] {
-    guard views.count >= 2 else {
+private func equallyLayoutFormats(brickNames: [String], axis: Axis) -> [String] {
+    guard brickNames.count >= 2 else {
         assertionFailure("Should almost have two views to do a equally layout")
         return []
     }
 
-    return views.enumerate().flatMap { (index: Int, element: String) -> String? in
-        if index < views.count - 1 {
-            return "\(axis == .Horizontal ? "H" : "V"):[\(element)(\(views[index + 1]))]"
+    return brickNames.enumerate().flatMap { (index: Int, element: String) -> String? in
+        if index < brickNames.count - 1 {
+            return "\(axis == .Horizontal ? "H" : "V"):[\(element)(\(brickNames[index + 1]))]"
         }
         return nil
     }

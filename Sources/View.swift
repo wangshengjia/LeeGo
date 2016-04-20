@@ -51,8 +51,6 @@ extension UIView {
 
         // apply Brick
         apply(brick, to: self, with: dataSource, updatingStrategy: updatingStrategy)
-
-        // if no error, then:
         self.currentBrick = brick
 
         // TODO: need to imporve this algo, too expensive and too fragile which based only on name.
@@ -82,7 +80,10 @@ extension UIView {
         
         return nil
     }
+}
 
+extension UIView {
+    
     internal var brickName: String? {
         return currentBrick?.name
     }

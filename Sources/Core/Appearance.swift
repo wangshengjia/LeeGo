@@ -243,17 +243,17 @@ public enum Appearance {
 
         // UIImageView
         case (let .ratio(ratioValue), let image as UIImageView):
-            // TODO: If there is already ratio constraint, should update instead of adding
             let id = "ratio(width == height * \(ratioValue))"
+
+            image.removeConstraints(image.constraints.filter({ (constraint) -> Bool in
+                return constraint.identifier?.hasPrefix("ratio(width") ?? false
+            }))
+
             if !useDefaultValue {
                 let constraint = NSLayoutConstraint(item: image, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: image, attribute: NSLayoutAttribute.Height, multiplier: ratioValue, constant: 0)
                 constraint.identifier = id
                 constraint.priority = 990
                 image.addConstraint(constraint)
-            } else {
-                image.removeConstraints(image.constraints.filter({ (constraint) -> Bool in
-                    return constraint.identifier == id
-                }))
             }
 
         // UIScrollView

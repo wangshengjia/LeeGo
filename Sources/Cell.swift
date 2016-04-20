@@ -19,8 +19,6 @@ extension UICollectionViewCell {
         // TODO: implement a cache mechanisme
         // if cached, return cached value
 
-        // Need a layout action right now (based on current cell's height) to have correct width
-        // TODO: is this cost expensive? is this necessary?
         self.setNeedsLayout()
         self.layoutIfNeeded()
 

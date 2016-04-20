@@ -22,7 +22,7 @@ extension Configurable {
 
     func setup<View: UIView>(view: View, currentStyle: [Appearance] = [], newStyle: [Appearance]) {
 
-        // if current appearance not appeared in new style, then set them to default value
+        // if current appearance do not appeare in new style, then set them to default value
         // TODO: change style from Array to Set to gain some performance
         for old in currentStyle where !newStyle.contains(old) {
             old.apply(to: view, useDefaultValue: true)

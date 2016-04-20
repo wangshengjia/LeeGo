@@ -57,13 +57,13 @@ public struct LayoutMetrics: Equatable {
         })
     }
 
-    func encode() -> JSONDictionary {
+    internal func encode() -> JSONDictionary {
         return customMetrics + standardMetrics.filter { (key, value) -> Bool in
             return value != 0.0
         }
     }
 
-    func metrics() -> [String: CGFloat] {
+    internal func metrics() -> [String: CGFloat] {
         return customMetrics + standardMetrics
     }
 }
@@ -92,9 +92,9 @@ public enum Distribution {
 
 public struct Layout: Equatable {
 
-    let formats: [String]
-    let options: NSLayoutFormatOptions
-    let metrics: LayoutMetrics
+    internal let formats: [String]
+    internal let options: NSLayoutFormatOptions
+    internal let metrics: LayoutMetrics
 
     public init(bricks: [Brick], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) {
         let names: [String] = bricks.map { (brick) -> String in

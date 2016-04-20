@@ -9,9 +9,10 @@
 import Foundation
 
 protocol BrickDescribable: class, Configurable, Composable {
-    func brickDidAwake()
 
-    func apply<View where View: UIView, View: BrickDescribable>(newBrick: Brick, to view: View, with dataSource: BrickDataSource?, updatingStrategy: UpdatingStrategy)
+    func brickDidAwake()
+    func configureAs(brick: Brick, dataSource: BrickDataSource?, updatingStrategy: UpdatingStrategy)
+    
 }
 
 extension BrickDescribable {

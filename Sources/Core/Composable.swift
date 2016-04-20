@@ -15,7 +15,7 @@ protocol Composable {
 extension Composable {
     func composite<View where View: UIView, View: BrickDescribable>(bricks: [Brick], to targetView: View, with layout: Layout) {
 
-        // remove bricks which do not exist anymore
+        // remove subviews which do not exist anymore in bricks
         for subview in targetView.subviews {
             if let oldBrick = subview.currentBrick where !bricks.contains(oldBrick) {
                 subview.removeFromSuperview()
@@ -70,7 +70,7 @@ extension Composable {
             return false
         }))
 
-        // Layout each brick view with auto layout visual format language from configuration.
+        // Layout each view with auto layout visual format language as brick.
         for format in layout.formats {
             let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: layout.options, metrics: layout.metrics.metrics(), views: viewsDictionary)
             for constraint in constraints {
