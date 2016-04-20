@@ -26,9 +26,9 @@ extension ElementViewModel {
     }
 }
 
-extension ElementViewModel: ComponentDataSource {
-    func updateComponent(componentView: UIView, with brick: Brick) {
-        switch componentView {
+extension ElementViewModel: BrickDataSource {
+    func update(targetView: UIView, with brick: Brick) {
+        switch targetView {
         case let titleLabel as UILabel where brick == LeMonde.title:
             titleLabel.attributedText = titleLabel.updatedAttributedString(with: [element.isRestrict ? "󰀀" : nil, element.title, element.natureEdito])
         case let subtitleLabel as UILabel  where brick == LeMonde.subtitle:

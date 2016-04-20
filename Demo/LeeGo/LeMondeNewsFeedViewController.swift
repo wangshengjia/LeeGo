@@ -52,15 +52,15 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        var configurationType = indexPath.row % 2 == 0 ? LeMonde.standard : .featured
+        var brick = indexPath.row % 2 == 0 ? LeMonde.standard.brick() : LeMonde.featured.brick()
 
         if elements[indexPath.row].element.type == "live" {
-            configurationType = .live
+            brick = LeMonde.live.brick()
         }
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(configurationType.brickName, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(brick.name, forIndexPath: indexPath)
 
-        cell.configure(configurationType.brick(), dataSource: elements[indexPath.item], updatingStrategy: .Always)
+        cell.configureAs(brick, dataSource: elements[indexPath.item], updatingStrategy: .Always)
 
         return cell
     }

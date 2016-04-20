@@ -45,9 +45,9 @@ extension Tweet {
     }
 }
 
-extension Tweet: ComponentDataSource {
-    func updateComponent(componentView: UIView, with brick: Brick) {
-        switch componentView {
+extension Tweet: BrickDataSource {
+    func update(targetView: UIView, with brick: Brick) {
+        switch targetView {
         case let textView as UITextView where brick == Twitter.tweetText:
             textView.text = text
         case let label as UILabel where brick == Twitter.username:

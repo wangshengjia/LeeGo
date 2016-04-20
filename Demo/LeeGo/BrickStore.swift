@@ -51,57 +51,57 @@ extension LeeGoShowcase: BrickConvertible {
 
         // Horizontal cases
         case showcase1:
-            return Brick.union(brickName, components: [
+            return Brick.union(brickName, bricks: [
                 title.brick().style([.text("Showcase 1")]),
                 description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Top` alignment and `FillEqually` distribution")]),
-                Brick.union("blocks", components: [
+                Brick.union("blocks", bricks: [
                     redBlock.brick().height(50),
                     greenBlock.brick().height(80),
                     blueBlock.brick().height(30)], axis: .Horizontal, align: .Top, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
                 ], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
         case showcase2:
-            return Brick.union(brickName, components: [
+            return Brick.union(brickName, bricks: [
                 title.brick().style([.text("Showcase 2")]),
                 description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Center` alignment and `FillEqually` distribution")]),
-                Brick.union("blocks", components: [
+                Brick.union("blocks", bricks: [
                     redBlock.brick().height(50),
                     greenBlock.brick().height(80),
                     blueBlock.brick().height(30)], axis: .Horizontal, align: .Center, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
                 ], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
         case showcase3:
-            return Brick.union(brickName, components: [
+            return Brick.union(brickName, bricks: [
                 title.brick().style([.text("Showcase 3")]),
                 description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Bottom` alignment and `FillEqually` distribution")]),
-                Brick.union("blocks", components: [
+                Brick.union("blocks", bricks: [
                     redBlock.brick().height(50),
                     greenBlock.brick().height(80),
                     blueBlock.brick().height(30)], axis: .Horizontal, align: .Bottom, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
                 ], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
         case showcase4:
-            return build().components(
+            return build().bricks(
                 title.brick().style([.text("Showcase 4")]),
                 description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Fill` alignment and `FillEqually` distribution")]),
-                Brick.union("blocks", components: [
+                Brick.union("blocks", bricks: [
                     redBlock.brick(),
                     greenBlock.brick(),
                     blueBlock.brick()], axis: .Horizontal, align: .Fill, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())]).height(100.0),
                 layout: { (title, description, blocks) -> Layout in
-                    Layout(components: [title, description, blocks], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
+                    Layout(bricks: [title, description, blocks], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
             })
         case showcase5:
-            return Brick.union(brickName, components: [
+            return Brick.union(brickName, bricks: [
                 title.brick().style([.text("Showcase 5")]),
                 description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Bottom` alignment and `Fill` distribution. Red block and green block have fixed width")]),
-                Brick.union("blocks", components: [
+                Brick.union("blocks", bricks: [
                     redBlock.brick().height(50).width(50),
                     greenBlock.brick().height(80).width(100),
                     blueBlock.brick().height(30)], axis: .Horizontal, align: .Bottom, distribution: .Fill, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
                 ], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
         case showcase6:
-            return Brick.union(brickName, components: [
+            return Brick.union(brickName, bricks: [
                 title.brick().style([.text("Showcase 6")]),
                 description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Top` alignment and `Flow(1)` distribution. All three blocks have fixed width")]),
-                Brick.union("blocks", components: [
+                Brick.union("blocks", bricks: [
                     redBlock.brick().height(50).width(50),
                     greenBlock.brick().height(80).width(100),
                     blueBlock.brick().height(30).width(60)], axis: .Horizontal, align: .Bottom, distribution: .Flow(1), metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
@@ -109,63 +109,63 @@ extension LeeGoShowcase: BrickConvertible {
 
         // Vertical cases
         case showcase7:
-            return Brick.union(brickName, components: [
-                Brick.union("Comment", components: [
+            return Brick.union(brickName, bricks: [
+                Brick.union("Comment", bricks: [
                     title.brick().style([.text("Showcase 7")]),
                     description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Left` alignment and `FillEqually` distribution")])], axis: .Vertical, align: .Left, distribution: .Flow(2), metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)),
-                Brick.union("blocks", components: [
+                Brick.union("blocks", bricks: [
                     redBlock.brick().width(50),
                     greenBlock.brick().width(80),
                     blueBlock.brick().width(30)], axis: .Vertical, align: .Left, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())]).height(300.0)
                 ], axis: .Horizontal, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
         case showcase8:
-            return Brick.union(brickName, components: [
-                Brick.union("Comment", components: [
+            return Brick.union(brickName, bricks: [
+                Brick.union("Comment", bricks: [
                     title.brick().style([.text("Showcase 8")]),
                     description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Center` alignment and `FillEqually` distribution")])], axis: .Vertical, align: .Left, distribution: .Flow(2), metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)),
-                Brick.union("blocks", components: [
+                Brick.union("blocks", bricks: [
                     redBlock.brick().width(50),
                     greenBlock.brick().width(80),
                     blueBlock.brick().width(30)], axis: .Vertical, align: .Center, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())]).height(300.0)
                 ], axis: .Horizontal, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
         case showcase9:
-            return Brick.union(brickName, components: [
-                Brick.union("Comment", components: [
+            return Brick.union(brickName, bricks: [
+                Brick.union("Comment", bricks: [
                     title.brick().style([.text("Showcase 9")]),
                     description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Right` alignment and `FillEqually` distribution")])], axis: .Vertical, align: .Left, distribution: .Flow(2), metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)),
-                Brick.union("blocks", components: [
+                Brick.union("blocks", bricks: [
                     redBlock.brick().width(50),
                     greenBlock.brick().width(80),
                     blueBlock.brick().width(30)], axis: .Vertical, align: .Right, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())]).height(300.0)
                 ], axis: .Horizontal, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
         case showcase10:
-            return build().components(
-                Brick.union("Comment", components: [
+            return build().bricks(
+                Brick.union("Comment", bricks: [
                     title.brick().style([.text("Showcase 10")]),
                     description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Fill` alignment and `FillEqually` distribution")])], axis: .Vertical, align: .Left, distribution: .Flow(2), metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)),
-                Brick.union("blocks", components: [
+                Brick.union("blocks", bricks: [
                     redBlock.brick(),
                     greenBlock.brick(),
                     blueBlock.brick()], axis: .Vertical, align: .Fill, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())]).height(300.0).width(100.0),
                 layout: { (comment, blocks) -> Layout in
-                    Layout(components: [comment, blocks], axis: .Horizontal, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
+                    Layout(bricks: [comment, blocks], axis: .Horizontal, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
             })
         case showcase11:
-            return Brick.union(brickName, components: [
-                Brick.union("Comment", components: [
+            return Brick.union(brickName, bricks: [
+                Brick.union("Comment", bricks: [
                     title.brick().style([.text("Showcase 11")]),
                     description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Left` alignment and `Fill` distribution")])], axis: .Vertical, align: .Left, distribution: .Flow(2), metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)),
-                Brick.union("blocks", components: [
+                Brick.union("blocks", bricks: [
                     redBlock.brick().height(50).width(50),
                     greenBlock.brick().height(80).width(100),
                     blueBlock.brick().width(30)], axis: .Vertical, align: .Left, distribution: .Fill, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())]).height(300.0)
                 ], axis: .Horizontal, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
         case showcase12:
-            return Brick.union(brickName, components: [
-                Brick.union("Comment", components: [
+            return Brick.union(brickName, bricks: [
+                Brick.union("Comment", bricks: [
                     title.brick().style([.text("Showcase 12")]),
                     description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Left` alignment and `Flow(1)` distribution")])], axis: .Vertical, align: .Left, distribution: .Flow(2), metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)),
-                Brick.union("blocks", components: [
+                Brick.union("blocks", bricks: [
                     redBlock.brick().height(50).width(50),
                     greenBlock.brick().height(80).width(100),
                     blueBlock.brick().height(30).width(60)], axis: .Vertical, align: .Left, distribution: .Flow(1), metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())]).height(300.0)
@@ -216,7 +216,7 @@ extension LeMonde: BrickConvertible {
             return build().style([.backgroundColor(UIColor.redColor())]).width(24).height(24)
         case .standard:
             return build().style([.backgroundColor(UIColor.whiteColor())])
-                .components(
+                .bricks(
                     title.brick(),
                     subtitle.brick(),
                     illustration.brick()) { title, subtitle, illustration in
@@ -230,11 +230,11 @@ extension LeMonde: BrickConvertible {
                     return childrenHeights[0] + childrenHeights[1] + metrics.top + metrics.bottom + metrics.spaceV
             }
         case .featured:
-            return build().components(
+            return build().bricks(
                 illustration.brick(),
                 title.brick()
             ) { (illustration, title) -> Layout in
-                Layout(components: [illustration, title], axis: .Vertical, align: .Fill, distribution: .Fill)
+                Layout(bricks: [illustration, title], axis: .Vertical, align: .Fill, distribution: .Fill)
                 }.heightResolver { (_, childrenHeights, _) -> CGFloat in
                     return childrenHeights[0] + childrenHeights[1]
             }
@@ -242,10 +242,10 @@ extension LeMonde: BrickConvertible {
             return build()
         case .live:
             return build().style([.backgroundColor(UIColor.whiteColor())])
-                .components(
+                .bricks(
                     title.brick(),
                     subtitle.brick(),
-                    illustration.brick().components(icon.brick(), layout: { (icon) -> Layout in
+                    illustration.brick().bricks(icon.brick(), layout: { (icon) -> Layout in
                         Layout(["H:|-8-[\(icon)]", "V:[\(icon)]-8-|"])
                     })
                 ) { title, subtitle, illustration in
@@ -291,7 +291,7 @@ enum Twitter: BrickBuilderType {
 
 extension Twitter {
 
-    func configuration() -> Brick {
+    func brick() -> Brick {
         switch self {
         case .username:
             return build().style([.font(UIFont.boldSystemFontOfSize(14))])
@@ -316,7 +316,7 @@ extension Twitter {
         case .likeCount:
             return build().style([.font(UIFont.systemFontOfSize(14))])
         case .retweetView:
-            return build().components(
+            return build().bricks(
                 retweetButton.configuration(),
                 retweetCount.configuration()
                 ) { (rtButton, rtNumber) -> Layout in
@@ -326,7 +326,7 @@ extension Twitter {
                         ])
             }
         case .likeView:
-            return build().components(
+            return build().bricks(
                 likeButton.configuration(),
                 likeCount.configuration()
                 ) { (likeButton, likeNumber) -> Layout in
@@ -336,7 +336,7 @@ extension Twitter {
                         ])
             }
         case .toolbarFooter:
-            return build().components(
+            return build().bricks(
                 replyButton.configuration(),
                 retweetView.configuration(),
                 likeView.configuration()) { (reply, retweet, like) in
@@ -346,7 +346,7 @@ extension Twitter {
                         ])
             }
         case .accountHeader:
-            return build().components(
+            return build().bricks(
                 username.configuration(),
                 account.configuration(),
                 date.configuration()) { name, account, date in
@@ -356,7 +356,7 @@ extension Twitter {
         case .tweet:
             return build()
                 .style([.backgroundColor(UIColor.whiteColor())])
-                .components(
+                .bricks(
                     avatar.configuration(),
                     accountHeader.configuration(),
                     tweetText.configuration(),

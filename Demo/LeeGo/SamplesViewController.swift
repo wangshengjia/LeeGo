@@ -73,7 +73,7 @@ class SamplesViewController: UITableViewController {
 
         let cell = tableView.dequeueReusableCellWithIdentifier(brick.name, forIndexPath: indexPath)
 
-        cell.configure(brick, dataSource: nil, updatingStrategy: .Always)
+        cell.configureAs(brick, updatingStrategy: .Always)
 
         return cell
     }
