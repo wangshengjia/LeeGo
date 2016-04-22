@@ -17,6 +17,7 @@
 		3560FEE11CA358F100A400C2 /* ConvertibleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3560FEE01CA358F100A400C2 /* ConvertibleSpec.swift */; };
 		3568BC441CC65B920009EB6E /* Brick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3568BC431CC65B920009EB6E /* Brick.swift */; };
 		35AFD9A31CA6F87D009BE224 /* layout.json in Resources */ = {isa = PBXBuildFile; fileRef = 35AFD9A21CA6F87D009BE224 /* layout.json */; };
+		35B3CC8D1CC935E600A2F1D8 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 35B3CC8C1CC935E600A2F1D8 /* README.md */; };
 		35B70A8E1CA499490021A1ED /* TestMedia.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35B70A8D1CA499490021A1ED /* TestMedia.xcassets */; };
 		35F4E70C1CA5809400F7BDC9 /* appearances.json in Resources */ = {isa = PBXBuildFile; fileRef = 35F4E70B1CA5809400F7BDC9 /* appearances.json */; };
 		35F5200C1C7C73D40089FF41 /* LeeGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F520011C7C73D40089FF41 /* LeeGo.framework */; };
@@ -60,6 +61,7 @@
 		3560FEE01CA358F100A400C2 /* ConvertibleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertibleSpec.swift; sourceTree = "<group>"; };
 		3568BC431CC65B920009EB6E /* Brick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brick.swift; sourceTree = "<group>"; };
 		35AFD9A21CA6F87D009BE224 /* layout.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = layout.json; sourceTree = "<group>"; };
+		35B3CC8C1CC935E600A2F1D8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		35B70A8D1CA499490021A1ED /* TestMedia.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestMedia.xcassets; sourceTree = "<group>"; };
 		35F4E70B1CA5809400F7BDC9 /* appearances.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = appearances.json; sourceTree = "<group>"; };
 		35F520011C7C73D40089FF41 /* LeeGo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LeeGo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +121,7 @@
 		3530E87B1C7CBBEE00ABC8D1 /* Docs */ = {
 			isa = PBXGroup;
 			children = (
+				35B3CC8C1CC935E600A2F1D8 /* README.md */,
 				3530E87C1C7CBC6300ABC8D1 /* Layout.md */,
 			);
 			path = Docs;
@@ -408,6 +411,7 @@
 				3513F70F1C95EC96003B211F /* Appearance.swift in Sources */,
 				35F5203C1C7C74510089FF41 /* View.swift in Sources */,
 				3568BC441CC65B920009EB6E /* Brick.swift in Sources */,
+				35B3CC8D1CC935E600A2F1D8 /* README.md in Sources */,
 				35F520311C7C74510089FF41 /* Cell.swift in Sources */,
 				35F520371C7C74510089FF41 /* Configurable.swift in Sources */,
 				35F520321C7C74510089FF41 /* Conveniences.swift in Sources */,

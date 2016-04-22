@@ -34,19 +34,7 @@ class SamplesViewController: UITableViewController {
         }
     }
 
-    override func viewDidAppear(animated: Bool) {
-
-        super.viewDidAppear(animated)
-        tableView.reloadData()
-    }
-
-
-
     // MARK: Datasource
-
-//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return
-//    }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return elements.count

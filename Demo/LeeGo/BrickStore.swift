@@ -22,7 +22,7 @@ enum LeeGoShowcase: BrickBuilderType {
     case showcase1, showcase2, showcase3, showcase4, showcase5, showcase6
     case showcase7, showcase8, showcase9, showcase10, showcase11, showcase12
 
-    static let types: [LeeGoShowcase: AnyClass] = [
+    static let brickClass: [LeeGoShowcase: AnyClass] = [
         title: UILabel.self,
         description: UILabel.self,
         ]
@@ -178,7 +178,7 @@ enum LeMonde: BrickBuilderType {
     case title, subtitle, illustration, icon
     case standard, featured, alert, live
 
-    static let types: [LeMonde: AnyClass] = [
+    static let brickClass: [LeMonde: AnyClass] = [
         title: UILabel.self,
         subtitle: UILabel.self,
         illustration: UIImageView.self,
@@ -274,7 +274,7 @@ enum Twitter: BrickBuilderType {
         return component.brickName
     }
 
-    static let types: [Twitter: AnyClass] = [
+    static let brickClass: [Twitter: AnyClass] = [
         username: UILabel.self,
         account: UILabel.self,
         avatar: UIImageView.self,
@@ -317,8 +317,8 @@ extension Twitter {
             return build().style([.font(UIFont.systemFontOfSize(14))])
         case .retweetView:
             return build().bricks(
-                retweetButton.configuration(),
-                retweetCount.configuration()
+                retweetButton.brick(),
+                retweetCount.brick()
                 ) { (rtButton, rtNumber) -> Layout in
                     Layout([
                         "H:|[\(rtButton)]-spaceH-[\(rtNumber)]|",
@@ -327,8 +327,8 @@ extension Twitter {
             }
         case .likeView:
             return build().bricks(
-                likeButton.configuration(),
-                likeCount.configuration()
+                likeButton.brick(),
+                likeCount.brick()
                 ) { (likeButton, likeNumber) -> Layout in
                     Layout([
                         "H:|[\(likeButton)]-spaceH-[\(likeNumber)]|",
@@ -337,9 +337,9 @@ extension Twitter {
             }
         case .toolbarFooter:
             return build().bricks(
-                replyButton.configuration(),
-                retweetView.configuration(),
-                likeView.configuration()) { (reply, retweet, like) in
+                replyButton.brick(),
+                retweetView.brick(),
+                likeView.brick()) { (reply, retweet, like) in
                     Layout([
                         "H:|[\(reply)]-50-[\(retweet)]-50-[\(like)]-(>=0)-|",
                         "V:|[\(reply)]|", "V:|[\(retweet)]|", "V:|[\(like)]|"
@@ -347,9 +347,9 @@ extension Twitter {
             }
         case .accountHeader:
             return build().bricks(
-                username.configuration(),
-                account.configuration(),
-                date.configuration()) { name, account, date in
+                username.brick(),
+                account.brick(),
+                date.brick()) { name, account, date in
                     Layout(["H:|[\(name)]-10-[\(account)]-(>=10)-[\(date)]|",
                         "V:|[\(name)]|", "V:|[\(account)]|", "V:|[\(date)]|"])
             }
@@ -357,17 +357,18 @@ extension Twitter {
             return build()
                 .style([.backgroundColor(UIColor.whiteColor())])
                 .bricks(
-                    avatar.configuration(),
-                    accountHeader.configuration(),
-                    tweetText.configuration(),
-                    tweetImage.configuration(),
-                    toolbarFooter.configuration()) { (avatar, accountHeader, tweetText, image, toolbarFooter) in
-                        Layout(["H:|-10-[\(avatar)]-10-[\(tweetText)]-10-|",
-                            "H:[\(avatar)]-10-[\(accountHeader)]-10-|",
-                            "H:[\(avatar)]-10-[\(image)]-10-|",
-                            "H:[\(avatar)]-10-[\(toolbarFooter)]-10-|",
-                            "V:|-10-[\(avatar)]-(>=10)-|",
-                            "V:|-10-[\(accountHeader)]-10-[\(tweetText)]-10-[\(image)]-10-[\(toolbarFooter)]-(>=10)-|"])
+                    avatar.brick(),
+                    accountHeader.brick(),
+                    tweetText.brick(),
+                    tweetImage.brick(),
+                    toolbarFooter.brick()
+                ) { (avatar, accountHeader, tweetText, image, toolbarFooter) in
+                    Layout(["H:|-10-[\(avatar)]-10-[\(tweetText)]-10-|",
+                        "H:[\(avatar)]-10-[\(accountHeader)]-10-|",
+                        "H:[\(avatar)]-10-[\(image)]-10-|",
+                        "H:[\(avatar)]-10-[\(toolbarFooter)]-10-|",
+                        "V:|-10-[\(avatar)]-(>=10)-|",
+                        "V:|-10-[\(accountHeader)]-10-[\(tweetText)]-10-[\(image)]-10-[\(toolbarFooter)]-(>=10)-|"])
             }
         default:
             return build()
