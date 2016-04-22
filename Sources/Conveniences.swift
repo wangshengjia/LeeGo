@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: Dictionary
 
-func + <K,V>(left: [K: V], right: [K: V]) -> [K: V] {
+internal func + <K,V>(left: [K: V], right: [K: V]) -> [K: V] {
     var result = [K: V]()
     for (k, v) in left {
         result[k] = v
@@ -23,7 +23,7 @@ func + <K,V>(left: [K: V], right: [K: V]) -> [K: V] {
 
 extension Dictionary {
 
-    func filter(@noescape includeElement: (Key, Value) throws -> Bool) rethrows -> Dictionary {
+    internal func filter(@noescape includeElement: (Key, Value) throws -> Bool) rethrows -> Dictionary {
         var result = self
         for (key, value) in result {
             if try !includeElement(key, value) {
@@ -36,11 +36,11 @@ extension Dictionary {
 
 extension Dictionary {
 
-    func parse<T>(key: JSONKeyType) throws -> T {
+    internal func parse<T>(key: JSONKeyType) throws -> T {
         return try parse(key.asString)
     }
 
-    func parse<T>(key: String) throws -> T {
+    internal func parse<T>(key: String) throws -> T {
         if let value = self[key as! Key] {
             if let valueWithExpectedType = value as? T {
                 return valueWithExpectedType
@@ -52,11 +52,11 @@ extension Dictionary {
         }
     }
 
-    func parse<T>(key: JSONKeyType, _ defaultValue: T) -> T {
+    internal func parse<T>(key: JSONKeyType, _ defaultValue: T) -> T {
         return parse(key.asString, defaultValue)
     }
 
-    func parse<T>(key: String, _ defaultValue: T) -> T {
+    internal func parse<T>(key: String, _ defaultValue: T) -> T {
         if let value = self[key as! Key] as? T {
             return value
         }
@@ -170,6 +170,7 @@ internal func formattedJSON(json: JSONDictionary) -> String? {
         let data = try NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
         return String(data: data, encoding: NSUTF8StringEncoding)
     } catch {
+        print(error)
         return nil
     }
 }

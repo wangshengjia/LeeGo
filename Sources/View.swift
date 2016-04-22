@@ -8,17 +8,17 @@
 
 import Foundation
 
-public protocol ComponentDataSource: class {
-    func updateComponent(componentView: UIView, with componentTarget: ComponentTarget)
+public protocol BrickDataSource {
+    func update(targetView: UIView, with brick: Brick)
 }
 
-public enum ConfigurationUpdatingStrategy {
-    case WhenComponentChanged
+public enum UpdatingStrategy {
+    case WhenBrickChanged
     case Always
 }
 
-extension UIView: ComponentType {
-    public func componentDidAwake() {
+extension UIView: BrickDescribable {
+    public func brickDidAwake() {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -32,48 +32,33 @@ extension UIView: ComponentType {
 
 extension UIView {
     
-    /**
-     * Configure component with configuration
-     *
-     - parameter componentTarget:  configuration
-     - parameter dataSource:       data source
-     - parameter updatingStrategy: the strategy used to decide if should rebuild a component
-     */
-    public func configure(componentTarget: ComponentTarget, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
+    public func configureAs(brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .WhenBrickChanged) {
         if let cell = self as? UICollectionViewCell {
-            cell.contentView._configure(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            cell.contentView._configureAs(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else if let cell = self as? UITableViewCell {
-            cell.contentView._configure(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            cell.contentView._configureAs(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else {
-            _configure(componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            _configureAs(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         }
     }
 
-    private func _configure(componentTarget: ComponentTarget, dataSource: ComponentDataSource? = nil, updatingStrategy: ConfigurationUpdatingStrategy = .WhenComponentChanged) {
+    private func _configureAs(brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .WhenBrickChanged) {
 
-        guard self.dynamicType.isSubclassOfClass(componentTarget.targetClass) else {
-            assertionFailure("Component type: \(self.dynamicType) is not compatible with configuration type: \(componentTarget.targetClass)")
+        guard self.dynamicType.isSubclassOfClass(brick.targetClass) else {
+            assertionFailure("Brick type: \(self.dynamicType) is not compatible with configuration type: \(brick.targetClass)")
             return
         }
 
-        // resolve conf based on item?, indexPath? or others ?
-
-        // call willApply delegate method
-
-        // apply componentTarget
-        applyDiffTo(self, newConfiguration:componentTarget, dataSource: dataSource, updatingStrategy: updatingStrategy)
-
-        // if no error, then:
-        self.configuration = componentTarget
-
-        // call didApply delegate method
+        // apply Brick
+        apply(brick, to: self, with: dataSource, updatingStrategy: updatingStrategy)
+        self.currentBrick = brick
 
         // TODO: need to imporve this algo, too expensive and too fragile which based only on name.
-        // configure sub components recursively
+        // configure sub bricks recursively
         for subview in self.subviews {
-            if let name = subview.configuration?.name, let components = componentTarget.components {
-                for child in components where child.name == name {
-                    subview.configure(child, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            if let name = subview.currentBrick?.name, let bricks = brick.bricks {
+                for childBrick in bricks where childBrick.name == name {
+                    subview.configureAs(childBrick, dataSource: dataSource, updatingStrategy: updatingStrategy)
                 }
             }
         }
@@ -83,7 +68,7 @@ extension UIView {
 extension UIView {
 
     public func viewForOutletKey(key: String) -> UIView? {
-        if let currentKey = self.configuration?.LGOutletKey where currentKey == key {
+        if let currentKey = currentBrick?.LGOutletKey where currentKey == key {
             return self
         }
 
@@ -95,25 +80,28 @@ extension UIView {
         
         return nil
     }
+}
 
-    internal var componentName: String? {
-        return configuration?.name
+extension UIView {
+    
+    internal var brickName: String? {
+        return currentBrick?.name
     }
 
     internal func fittingHeight() -> CGFloat {
 
         // if height resolver is found
-        if let computeClosure = configuration?.heightResolver {
-            //TODO:  should use children component instead of subview ?
+        if let computeClosure = currentBrick?.heightResolver {
+            //TODO:  should use children brick instead of subview ?
             let fittingWidth = self.frame.width
             let childrenHeights = subviews.map { (subview) -> CGFloat in
                 return subview.fittingHeight()
             }
-            let metrics = configuration?.layout?.metrics ?? LayoutMetrics()
+            let metrics = currentBrick?.layout?.metrics ?? LayoutMetrics()
 
             return computeClosure(fittingWidth: fittingWidth, childrenHeights: childrenHeights, metrics: metrics)
         } else if subviews.isEmpty {
-            // leaf component -> dynamic height
+            // leaf brick -> dynamic height
             return self.sizeThatFits(CGSize(width: self.frame.width, height: CGFloat.max)).height
         } else {
             return self.systemLayoutSizeFittingSize(CGSize(width: self.frame.width, height: 0), withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityFittingSizeLevel).height

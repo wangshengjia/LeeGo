@@ -9,7 +9,7 @@
 import Foundation
 import LeeGo
 
-class Tweet {
+struct Tweet {
     let id: String
     let favorited: Bool
     let truncated: Bool
@@ -38,27 +38,27 @@ class Tweet {
 }
 
 extension Tweet {
-    class func tweets(jsonArray: [[String: AnyObject]]) -> [Tweet] {
+    static func tweets(jsonArray: [[String: AnyObject]]) -> [Tweet] {
         return jsonArray.map({ (json) -> Tweet in
             return Tweet(json: json)
         })
     }
 }
 
-extension Tweet: ComponentDataSource {
-    func updateComponent(componentView: UIView, with componentTarget: ComponentTarget) {
-        switch componentView {
-        case let textView as UITextView where componentTarget == Twitter.tweetText:
+extension Tweet: BrickDataSource {
+    func update(targetView: UIView, with brick: Brick) {
+        switch targetView {
+        case let textView as UITextView where brick == Twitter.tweetText:
             textView.text = text
-        case let label as UILabel where componentTarget == Twitter.username:
+        case let label as UILabel where brick == Twitter.username:
             label.text = userName
-        case let label as UILabel where componentTarget == Twitter.account:
+        case let label as UILabel where brick == Twitter.account:
             label.text = "@" + screenName
-        case let label as UILabel where componentTarget == Twitter.date:
+        case let label as UILabel where brick == Twitter.date:
             label.text = "2d"
-        case let label as UILabel where componentTarget == Twitter.retweetCount:
+        case let label as UILabel where brick == Twitter.retweetCount:
             label.text = "\(retweetCount)"
-        case let label as UILabel where componentTarget == Twitter.likeCount:
+        case let label as UILabel where brick == Twitter.likeCount:
             label.text = "\(favouritesCount)"
         default:
             break

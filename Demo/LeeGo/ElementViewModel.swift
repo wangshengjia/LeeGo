@@ -26,15 +26,15 @@ extension ElementViewModel {
     }
 }
 
-extension ElementViewModel: ComponentDataSource {
-    func updateComponent(componentView: UIView, with componentTarget: ComponentTarget) {
-        switch componentView {
-        case let titleLabel as UILabel where componentTarget == ComponentBuilder.title:
+extension ElementViewModel: BrickDataSource {
+    func update(targetView: UIView, with brick: Brick) {
+        switch targetView {
+        case let titleLabel as UILabel where brick == LeMonde.title:
             titleLabel.attributedText = titleLabel.updatedAttributedString(with: [element.isRestrict ? "󰀀" : nil, element.title, element.natureEdito])
-        case let subtitleLabel as UILabel  where componentTarget == ComponentBuilder.subtitle:
+        case let subtitleLabel as UILabel  where brick == LeMonde.subtitle:
             subtitleLabel.text = element.description
-        case let avatar as UIImageView where componentTarget == ComponentBuilder.avatar:
-            avatar.backgroundColor = UIColor.grayColor()
+        case let illustration as UIImageView where brick == LeMonde.illustration:
+            illustration.backgroundColor = UIColor.grayColor()
         default:
             break
         }

@@ -13,5 +13,5 @@ enum JSONParseError: ErrorType {
 }
 
 enum JSONConvertibleError: ErrorType {
-    case UnexpectedComponentNameError(JSONDictionary)
+    case UnexpectedBrickNameError(JSONDictionary)
 }

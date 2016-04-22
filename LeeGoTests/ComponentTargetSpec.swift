@@ -8,66 +8,66 @@ import Quick
 import Nimble
 @testable import LeeGo
 
-class ComponentTargetSpec: QuickSpec {
+class BrickSpec: QuickSpec {
     override func spec() {
 
-        describe("ComponentTarget tests") {
+        describe("Brick tests") {
 
-            it("should create a new component target instance correctly") {
+            it("should create a new brick target instance correctly") {
                 // Given
-                let component = ComponentTarget(name: "title", targetClass: UILabel.self).width(40).height(60).style([.backgroundColor(UIColor.greenColor())])
+                let brick = Brick(name: "title", targetClass: UILabel.self).width(40).height(60).style([.backgroundColor(UIColor.greenColor())])
 
                 // Then
-                expect(component.name) == "title"
-                expect(component.targetClass) === UILabel.self
-                expect(component.width) == 40
-                expect(component.height) == 60
-                expect(component.hashValue) == "title".hashValue
-                if case let .backgroundColor(color) = component.style.first! {
+                expect(brick.name) == "title"
+                expect(brick.targetClass) === UILabel.self
+                expect(brick.width) == 40
+                expect(brick.height) == 60
+                expect(brick.hashValue) == "title".hashValue
+                if case let .backgroundColor(color) = brick.style.first! {
                     expect(color) == UIColor.greenColor()
                 }
             }
 
-            it("should create a new component with subcomponents", closure: { () -> () in
+            it("should create a new brick with subbricks", closure: { () -> () in
                 // Given
                 let mockLayout = Layout()
 
                 // When
-                let component = ComponentTarget(name: "header", targetClass: UIView.self).components(ComponentTarget(name: "title", targetClass: UILabel.self), layout: { (title) -> Layout in
+                let brick = Brick(name: "header", targetClass: UIView.self).bricks(Brick(name: "title", targetClass: UILabel.self), layout: { (title) -> Layout in
                     expect(title) == "title"
                     return mockLayout
                 })
 
                 // Then
-                expect(component.components?.count) == 1
-                expect(component.components?.last?.name) == "title"
-                expect(component.layout) == mockLayout
+                expect(brick.bricks?.count) == 1
+                expect(brick.bricks?.last?.name) == "title"
+                expect(brick.layout) == mockLayout
             })
 
-            it("should create a new component with subcomponents", closure: { () -> () in
+            it("should create a new brick with subbricks", closure: { () -> () in
 
                 // Given
                 let mockLayout = Layout()
 
                 // When
-                let component = ComponentTarget(name: "header", targetClass: UIView.self).components(ComponentTarget(name: "title", targetClass: UILabel.self), ComponentTarget(name: "avatar", targetClass: UIImageView.self), layout: { (title, avatar) -> Layout in
+                let brick = Brick(name: "header", targetClass: UIView.self).bricks(Brick(name: "title", targetClass: UILabel.self), Brick(name: "avatar", targetClass: UIImageView.self), layout: { (title, avatar) -> Layout in
                     expect(title) == "title"
                     expect(avatar) == "avatar"
                     return mockLayout
                 })
 
                 // Then
-                expect(component.components?.count) == 2
-                expect(component.components?.last?.name) == "avatar"
-                expect(component.layout) == mockLayout
+                expect(brick.bricks?.count) == 2
+                expect(brick.bricks?.last?.name) == "avatar"
+                expect(brick.layout) == mockLayout
             })
 
-            it("should create a new component with subcomponents", closure: { () -> () in
+            it("should create a new brick with subbricks", closure: { () -> () in
                 // Given
                 let mockLayout = Layout()
 
                 // When
-                let component = ComponentTarget(name: "header", targetClass: UIView.self).components(TestData.title1, TestData.avatar1, TestData.view, layout: { (title, avatar, view) -> Layout in
+                let brick = Brick(name: "header", targetClass: UIView.self).bricks(TestData.title1, TestData.avatar1, TestData.view, layout: { (title, avatar, view) -> Layout in
                     expect(title) == "title"
                     expect(avatar) == "avatar"
                     expect(view) == "view"
@@ -75,18 +75,18 @@ class ComponentTargetSpec: QuickSpec {
                 })
 
                 // Then
-                expect(component.components?.count) == 3
-                expect(component.components?.last?.name) == "view"
-                expect(component.layout) == mockLayout
+                expect(brick.bricks?.count) == 3
+                expect(brick.bricks?.last?.name) == "view"
+                expect(brick.layout) == mockLayout
             })
 
-            it("should create a new component with subcomponents", closure: { () -> () in
+            it("should create a new brick with subbricks", closure: { () -> () in
 
                 // Given
                 let mockLayout = Layout()
 
                 // When
-                let component = ComponentTarget(name: "header", targetClass: UIView.self).components(TestData.title1, TestData.avatar1, TestData.view, TestData.title3, layout: { (title, avatar, view, title3) -> Layout in
+                let brick = Brick(name: "header", targetClass: UIView.self).bricks(TestData.title1, TestData.avatar1, TestData.view, TestData.title3, layout: { (title, avatar, view, title3) -> Layout in
                     expect(title) == "title"
                     expect(avatar) == "avatar"
                     expect(view) == "view"
@@ -95,18 +95,18 @@ class ComponentTargetSpec: QuickSpec {
                 })
 
                 // Then
-                expect(component.components?.count) == 4
-                expect(component.components?.last?.name) == "title3"
-                expect(component.layout) == mockLayout
+                expect(brick.bricks?.count) == 4
+                expect(brick.bricks?.last?.name) == "title3"
+                expect(brick.layout) == mockLayout
             })
 
-            it("should create a new component with subcomponents", closure: { () -> () in
+            it("should create a new brick with subbricks", closure: { () -> () in
 
                 // Given
                 let mockLayout = Layout()
 
                 // When
-                let component = ComponentTarget(name: "header", targetClass: UIView.self).components(TestData.title1, TestData.avatar1, TestData.view, TestData.title3, TestData.header2, layout: { (title, avatar, view, title3, header2) -> Layout in
+                let brick = Brick(name: "header", targetClass: UIView.self).bricks(TestData.title1, TestData.avatar1, TestData.view, TestData.title3, TestData.header2, layout: { (title, avatar, view, title3, header2) -> Layout in
                     expect(title) == "title"
                     expect(avatar) == "avatar"
                     expect(view) == "view"
@@ -116,60 +116,60 @@ class ComponentTargetSpec: QuickSpec {
                 })
 
                 // Then
-                expect(component.components?.count) == 5
-                expect(component.components?.last?.name) == "header2"
-                expect(component.layout) == mockLayout
+                expect(brick.bricks?.count) == 5
+                expect(brick.bricks?.last?.name) == "header2"
+                expect(brick.layout) == mockLayout
             })
 
-            it("should create a new component with subcomponents", closure: { () -> () in
+            it("should create a new brick with subbricks", closure: { () -> () in
                 // Given
                 let mockLayout = Layout()
 
                 // When
-                let component = ComponentTarget(name: "header", targetClass: UIView.self).components([TestData.title1, TestData.avatar1], layout: mockLayout)
+                let brick = Brick(name: "header", targetClass: UIView.self).bricks([TestData.title1, TestData.avatar1], layout: mockLayout)
 
                 // Then
-                expect(component.components?.count) == 2
-                expect(component.components?.last?.name) == "avatar"
-                expect(component.layout) == mockLayout
+                expect(brick.bricks?.count) == 2
+                expect(brick.bricks?.last?.name) == "avatar"
+                expect(brick.layout) == mockLayout
             })
 
-            it("should build component target instance", closure: { () -> () in
+            it("should build brick target instance", closure: { () -> () in
                 // Given
-                let component = ComponentBuilder.header.build()
+                let brick = BrickBuilder.header.build()
 
                 // Then
-                expect(component.name) == "header"
-                expect(component.targetClass) === UIView.self
+                expect(brick.name) == "header"
+                expect(brick.targetClass) === UIView.self
             })
 
-            it("should build component target instance from nib", closure: { () -> () in
+            it("should build brick target instance from nib", closure: { () -> () in
 
                 // Given
-                let component = ComponentBuilder.title.buildFromNib(UILabel.self, nibName: "nibname")
+                let brick = BrickBuilder.title.buildFromNib(UILabel.self, nibName: "nibname")
 
                 // Then
-                expect(component.name) == "title"
-                expect(component.targetClass) === UILabel.self
-                expect(component.nibName) == "nibname"
+                expect(brick.name) == "title"
+                expect(brick.targetClass) === UILabel.self
+                expect(brick.nibName) == "nibname"
             })
 
-            it("should build component with cell height resolver", closure: { () -> () in
+            it("should build brick with cell height resolver", closure: { () -> () in
 
                 // Given
-                let component = ComponentBuilder.header.build().heightResolver { _, childrenHeights, _ in
+                let brick = BrickBuilder.header.build().heightResolver { _, childrenHeights, _ in
                     return childrenHeights[0] + childrenHeights[1]
                 }
 
                 // Then
-                expect(component.name) == "header"
-                expect(component.targetClass) === UIView.self
-                expect(component.heightResolver!(fittingWidth:0, childrenHeights: [10, 20], metrics: LayoutMetrics())) == 30
+                expect(brick.name) == "header"
+                expect(brick.targetClass) === UIView.self
+                expect(brick.heightResolver!(fittingWidth:0, childrenHeights: [10, 20], metrics: LayoutMetrics())) == 30
             })
 
             it("builder & target should be equals") {
-                XCTAssertTrue(ComponentBuilder.header == ComponentTarget(name: "header"))
-                XCTAssertTrue(ComponentTarget(name: "header") == ComponentBuilder.header)
+                XCTAssertTrue(BrickBuilder.header == Brick(name: "header"))
+                XCTAssertTrue(Brick(name: "header") == BrickBuilder.header)
             }
         }
     }

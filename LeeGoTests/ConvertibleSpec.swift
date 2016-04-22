@@ -198,38 +198,38 @@ class ConvertibleSpec: QuickSpec {
             }
         }
 
-        describe("ComponentTarget is convertible") {
-            it("should convert a JSONDictionary to an ComponentTarget instance correctly.") {
+        describe("Brick is convertible") {
+            it("should convert a JSONDictionary to an Brick instance correctly.") {
                 do {
                     // Given
 
-                    let path = NSBundle(forClass: self.dynamicType).pathForResource("component", ofType: "json")!
+                    let path = NSBundle(forClass: self.dynamicType).pathForResource("brick", ofType: "json")!
                     let json = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as? JSONDictionary
 
                     // When
-                    let component = try ComponentTarget(rawValue: json!)
+                    let brick = try Brick(rawValue: json!)
 
                     // Then
-                    let mockComponent = ComponentBuilder.article.componentTarget().height(60).LGOutlet("button")
-                    expect(component.name) == mockComponent.name
-                    expect(component.layout) == mockComponent.layout
-                    expect(component.width ?? 0) == mockComponent.width ?? 0
-                    expect(component.height ?? 0) == mockComponent.height ?? 0
+                    let mockBrick = BrickBuilder.article.brick().height(60).LGOutlet("button")
+                    expect(brick.name) == mockBrick.name
+                    expect(brick.layout) == mockBrick.layout
+                    expect(brick.width ?? 0) == mockBrick.width ?? 0
+                    expect(brick.height ?? 0) == mockBrick.height ?? 0
                 } catch {
                     fail("\(error)")
                 }
             }
 
-            it("should convert an ComponentTarget instance to JSON correctly.") {
+            it("should convert an Brick instance to JSON correctly.") {
 
                 // Given
-                let component = ComponentBuilder.article.componentTarget().height(60).LGOutlet("button")
+                let brick = BrickBuilder.article.brick().height(60).LGOutlet("button")
 
                 // When
-                let json = component.encode()
+                let json = brick.encode()
 
                 do {
-                    let path = NSBundle(forClass: self.dynamicType).pathForResource("component", ofType: "json")!
+                    let path = NSBundle(forClass: self.dynamicType).pathForResource("brick", ofType: "json")!
                     let mockJson = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as! JSONDictionary
 
                     // Then

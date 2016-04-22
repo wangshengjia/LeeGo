@@ -9,12 +9,10 @@
 /* Begin PBXBuildFile section */
 		350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350637461C4C1AAC00B5E547 /* ElementViewModel.swift */; };
 		350E0DF01C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */; };
-		350E0DF21C84B0C500DB78FC /* ComponentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DF11C84B0C500DB78FC /* ComponentStore.swift */; };
+		350E0DF21C84B0C500DB78FC /* BrickStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DF11C84B0C500DB78FC /* BrickStore.swift */; };
 		350E0DF41C84C2FF00DB78FC /* TwitterFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DF31C84C2FF00DB78FC /* TwitterFeedViewController.swift */; };
 		350E0DF61C84DD3700DB78FC /* twitter_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 350E0DF51C84DD3700DB78FC /* twitter_sample.json */; };
 		3541CE881C44494B00A3B257 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3541CE871C44494B00A3B257 /* Main.storyboard */; };
-		3550E7611C4E5AB8002F5FB4 /* Configurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3550E7601C4E5AB8002F5FB4 /* Configurations.swift */; };
-		35543A301C694C58000AC50C /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35543A2F1C694C58000AC50C /* DetailsViewController.swift */; };
 		3585078B1C622B6C006D02EF /* FetteEngschrift.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507801C622B6A006D02EF /* FetteEngschrift.otf */; };
 		3585078C1C622B6C006D02EF /* LmfrAppIcon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 358507811C622B6A006D02EF /* LmfrAppIcon.ttf */; };
 		3585078D1C622B6C006D02EF /* TheAntiquaB-W5Plain.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507821C622B6A006D02EF /* TheAntiquaB-W5Plain.otf */; };
@@ -26,12 +24,10 @@
 		358507931C622B6C006D02EF /* TheSansOsF-Plain.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507881C622B6A006D02EF /* TheSansOsF-Plain.otf */; };
 		358507941C622B6C006D02EF /* TheSansOsF-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507891C622B6A006D02EF /* TheSansOsF-SemiBold.otf */; };
 		358507951C622B6C006D02EF /* TheSansOsF-SemiLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */; };
-		358507971C626097006D02EF /* Responsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358507961C626097006D02EF /* Responsive.swift */; };
-		3589D4531C7260C00031A890 /* AdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3589D4521C7260C00031A890 /* AdView.xib */; };
 		35B44E361C84E4E60049553F /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B44E351C84E4E60049553F /* Tweet.swift */; };
 		35BD85331CA89598005B3E53 /* component.json in Resources */ = {isa = PBXBuildFile; fileRef = 35BD85321CA89598005B3E53 /* component.json */; };
-		35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CC5EAA1C6CDC39005C87C8 /* Icon.swift */; };
-		35CC5EAD1C6CE756005C87C8 /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35CC5EAC1C6CE756005C87C8 /* AdView.swift */; };
+		35D7F44D1CC4E5EB008D1AEB /* SamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7F44B1CC4E5EB008D1AEB /* SamplesViewController.swift */; };
+		35D7F44E1CC4E5EB008D1AEB /* SampleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7F44C1CC4E5EB008D1AEB /* SampleItem.swift */; };
 		35F5204A1C7C7BEF0089FF41 /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520491C7C7BEF0089FF41 /* DemoTests.swift */; };
 		35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FFB6A71C7A8C070035EC52 /* Element.swift */; };
 		3B3BE96C4117CB80F9144250 /* Pods_LeeGo_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88078757DDD337BDFDD543E1 /* Pods_LeeGo_Tests.framework */; };
@@ -56,12 +52,10 @@
 		1524E6FF067F0774C3E1EE21 /* LeeGo.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LeeGo.podspec; path = ../LeeGo.podspec; sourceTree = "<group>"; };
 		350637461C4C1AAC00B5E547 /* ElementViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementViewModel.swift; sourceTree = "<group>"; };
 		350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeMondeNewsFeedViewController.swift; sourceTree = "<group>"; };
-		350E0DF11C84B0C500DB78FC /* ComponentStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentStore.swift; sourceTree = "<group>"; };
+		350E0DF11C84B0C500DB78FC /* BrickStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickStore.swift; sourceTree = "<group>"; };
 		350E0DF31C84C2FF00DB78FC /* TwitterFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterFeedViewController.swift; sourceTree = "<group>"; };
 		350E0DF51C84DD3700DB78FC /* twitter_sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twitter_sample.json; sourceTree = "<group>"; };
 		3541CE871C44494B00A3B257 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		3550E7601C4E5AB8002F5FB4 /* Configurations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurations.swift; sourceTree = "<group>"; };
-		35543A2F1C694C58000AC50C /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		358507801C622B6A006D02EF /* FetteEngschrift.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FetteEngschrift.otf; sourceTree = "<group>"; };
 		358507811C622B6A006D02EF /* LmfrAppIcon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LmfrAppIcon.ttf; sourceTree = "<group>"; };
 		358507821C622B6A006D02EF /* TheAntiquaB-W5Plain.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheAntiquaB-W5Plain.otf"; sourceTree = "<group>"; };
@@ -73,12 +67,10 @@
 		358507881C622B6A006D02EF /* TheSansOsF-Plain.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-Plain.otf"; sourceTree = "<group>"; };
 		358507891C622B6A006D02EF /* TheSansOsF-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-SemiBold.otf"; sourceTree = "<group>"; };
 		3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-SemiLight.otf"; sourceTree = "<group>"; };
-		358507961C626097006D02EF /* Responsive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responsive.swift; sourceTree = "<group>"; };
-		3589D4521C7260C00031A890 /* AdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdView.xib; sourceTree = "<group>"; };
 		35B44E351C84E4E60049553F /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		35BD85321CA89598005B3E53 /* component.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = component.json; sourceTree = "<group>"; };
-		35CC5EAA1C6CDC39005C87C8 /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
-		35CC5EAC1C6CE756005C87C8 /* AdView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
+		35D7F44B1CC4E5EB008D1AEB /* SamplesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesViewController.swift; sourceTree = "<group>"; };
+		35D7F44C1CC4E5EB008D1AEB /* SampleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleItem.swift; sourceTree = "<group>"; };
 		35F51FBA1C7C61A40089FF41 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		35F520491C7C7BEF0089FF41 /* DemoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoTests.swift; sourceTree = "<group>"; };
 		35FFB6A71C7A8C070035EC52 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
@@ -132,12 +124,10 @@
 		350E0DED1C81F08400DB78FC /* LeMonde */ = {
 			isa = PBXGroup;
 			children = (
-				35543A2F1C694C58000AC50C /* DetailsViewController.swift */,
 				350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */,
+				35FFB6A71C7A8C070035EC52 /* Element.swift */,
+				350637461C4C1AAC00B5E547 /* ElementViewModel.swift */,
 				35BD85321CA89598005B3E53 /* component.json */,
-				35FFB6A61C7A8BF30035EC52 /* Models */,
-				35CC5EA91C6CD942005C87C8 /* Views */,
-				35543A311C6A4B56000AC50C /* Configurations */,
 			);
 			name = LeMonde;
 			sourceTree = "<group>";
@@ -150,15 +140,6 @@
 				35B44E351C84E4E60049553F /* Tweet.swift */,
 			);
 			name = Twitter;
-			sourceTree = "<group>";
-		};
-		35543A311C6A4B56000AC50C /* Configurations */ = {
-			isa = PBXGroup;
-			children = (
-				358507961C626097006D02EF /* Responsive.swift */,
-				3550E7601C4E5AB8002F5FB4 /* Configurations.swift */,
-			);
-			name = Configurations;
 			sourceTree = "<group>";
 		};
 		3585077F1C622B6A006D02EF /* Fonts */ = {
@@ -179,23 +160,13 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		35CC5EA91C6CD942005C87C8 /* Views */ = {
+		35D7F44A1CC4E5DE008D1AEB /* Samples */ = {
 			isa = PBXGroup;
 			children = (
-				35CC5EAA1C6CDC39005C87C8 /* Icon.swift */,
-				35CC5EAC1C6CE756005C87C8 /* AdView.swift */,
-				3589D4521C7260C00031A890 /* AdView.xib */,
+				35D7F44B1CC4E5EB008D1AEB /* SamplesViewController.swift */,
+				35D7F44C1CC4E5EB008D1AEB /* SampleItem.swift */,
 			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		35FFB6A61C7A8BF30035EC52 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				35FFB6A71C7A8C070035EC52 /* Element.swift */,
-				350637461C4C1AAC00B5E547 /* ElementViewModel.swift */,
-			);
-			name = Models;
+			name = Samples;
 			sourceTree = "<group>";
 		};
 		35FFBC7A1C7BD2690035EC52 /* Documentation */ = {
@@ -233,7 +204,8 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* MainViewController.swift */,
-				350E0DF11C84B0C500DB78FC /* ComponentStore.swift */,
+				350E0DF11C84B0C500DB78FC /* BrickStore.swift */,
+				35D7F44A1CC4E5DE008D1AEB /* Samples */,
 				350E0DEE1C81F08B00DB78FC /* Twitter */,
 				350E0DED1C81F08400DB78FC /* LeMonde */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -382,7 +354,6 @@
 				3585078C1C622B6C006D02EF /* LmfrAppIcon.ttf in Resources */,
 				358507941C622B6C006D02EF /* TheSansOsF-SemiBold.otf in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
-				3589D4531C7260C00031A890 /* AdView.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 				358507901C622B6C006D02EF /* TheAntiquaB-W7Bold.otf in Resources */,
 				358507921C622B6C006D02EF /* TheSansOsF-Bold.otf in Resources */,
@@ -504,19 +475,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3550E7611C4E5AB8002F5FB4 /* Configurations.swift in Sources */,
 				607FACD81AFB9204008FA782 /* MainViewController.swift in Sources */,
-				35CC5EAD1C6CE756005C87C8 /* AdView.swift in Sources */,
 				35B44E361C84E4E60049553F /* Tweet.swift in Sources */,
 				350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */,
 				35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */,
 				350E0DF41C84C2FF00DB78FC /* TwitterFeedViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				358507971C626097006D02EF /* Responsive.swift in Sources */,
-				35543A301C694C58000AC50C /* DetailsViewController.swift in Sources */,
-				35CC5EAB1C6CDC39005C87C8 /* Icon.swift in Sources */,
+				35D7F44E1CC4E5EB008D1AEB /* SampleItem.swift in Sources */,
 				350E0DF01C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift in Sources */,
-				350E0DF21C84B0C500DB78FC /* ComponentStore.swift in Sources */,
+				35D7F44D1CC4E5EB008D1AEB /* SamplesViewController.swift in Sources */,
+				350E0DF21C84B0C500DB78FC /* BrickStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

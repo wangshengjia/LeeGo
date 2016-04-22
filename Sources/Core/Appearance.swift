@@ -39,43 +39,43 @@ public enum Appearance {
     case custom([String: AnyObject])
     case none
 
-    func apply<Component: UIView>(to component: Component, useDefaultValue: Bool = false) {
+    func apply<B: UIView>(to brick: B, useDefaultValue: Bool = false) {
 
-        switch (self, component) {
+        switch (self, brick) {
 
         // UIView
         case (let .backgroundColor(color), _):
-            component.backgroundColor = !useDefaultValue ? color : nil
+            brick.backgroundColor = !useDefaultValue ? color : nil
         case (let .userInteractionEnabled(userInteractionEnabled), _):
-            component.userInteractionEnabled = !useDefaultValue ? userInteractionEnabled : !((component is UILabel) || (component is UIImageView))
+            brick.userInteractionEnabled = !useDefaultValue ? userInteractionEnabled : !((brick is UILabel) || (brick is UIImageView))
         case (let .translatesAutoresizingMaskIntoConstraints(should), _):
-            component.translatesAutoresizingMaskIntoConstraints = !useDefaultValue ? should : false
+            brick.translatesAutoresizingMaskIntoConstraints = !useDefaultValue ? should : false
         case (let .tintColor(color), _):
-            component.tintColor = !useDefaultValue ? color : nil
+            brick.tintColor = !useDefaultValue ? color : nil
         case (let .tintAdjustmentMode(mode), _):
-            component.tintAdjustmentMode = !useDefaultValue ? mode : .Automatic
+            brick.tintAdjustmentMode = !useDefaultValue ? mode : .Automatic
         case (let .cornerRadius(radius), _):
-            component.layer.cornerRadius = !useDefaultValue ? radius : 0
+            brick.layer.cornerRadius = !useDefaultValue ? radius : 0
         case (let .borderWidth(borderWidth), _):
-            component.layer.borderWidth = !useDefaultValue ? borderWidth : 0
+            brick.layer.borderWidth = !useDefaultValue ? borderWidth : 0
         case (let .borderColor(borderColor), _):
-            component.layer.borderColor = !useDefaultValue ? borderColor.CGColor : nil
+            brick.layer.borderColor = !useDefaultValue ? borderColor.CGColor : nil
         case (let .multipleTouchEnabled(multipleTouchEnabled), _):
-            component.multipleTouchEnabled = !useDefaultValue ? multipleTouchEnabled : false
+            brick.multipleTouchEnabled = !useDefaultValue ? multipleTouchEnabled : false
         case (let .exclusiveTouch(exclusiveTouch), _):
-            component.exclusiveTouch = !useDefaultValue ? exclusiveTouch : false
+            brick.exclusiveTouch = !useDefaultValue ? exclusiveTouch : false
         case (let .clipsToBounds(clipsToBounds), _):
-            component.clipsToBounds = !useDefaultValue ? clipsToBounds : false
+            brick.clipsToBounds = !useDefaultValue ? clipsToBounds : false
         case (let .alpha(alpha), _):
-            component.alpha = !useDefaultValue ? alpha : 1.0
+            brick.alpha = !useDefaultValue ? alpha : 1.0
         case (let .opaque(opaque), _):
-            component.opaque = !useDefaultValue ? opaque : true
+            brick.opaque = !useDefaultValue ? opaque : true
         case (let .hidden(hidden), _):
-            component.hidden = !useDefaultValue ? hidden : false
+            brick.hidden = !useDefaultValue ? hidden : false
         case (let .clearsContextBeforeDrawing(clearsContextBeforeDrawing), _):
-            component.clearsContextBeforeDrawing = !useDefaultValue ? clearsContextBeforeDrawing : true
+            brick.clearsContextBeforeDrawing = !useDefaultValue ? clearsContextBeforeDrawing : true
         case (let .contentMode(contentMode), _):
-            component.contentMode = !useDefaultValue ? contentMode : .ScaleToFill
+            brick.contentMode = !useDefaultValue ? contentMode : .ScaleToFill
 
         // UIControl
         case (let .selected(selected), let control as UIControl):
@@ -243,17 +243,19 @@ public enum Appearance {
 
         // UIImageView
         case (let .ratio(ratioValue), let image as UIImageView):
-            // TODO: If there is already ratio constraint, should update instead of adding
-            let id = "ratio(width == height * \(ratioValue))"
+
+            image.removeConstraints(image.constraints.filter({ (constraint) -> Bool in
+                if constraint.mode == .Ratio {
+                    return true
+                }
+                return false
+            }))
+
             if !useDefaultValue {
                 let constraint = NSLayoutConstraint(item: image, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: image, attribute: NSLayoutAttribute.Height, multiplier: ratioValue, constant: 0)
-                constraint.identifier = id
+                constraint.setIdentifier(with: .Ratio)
                 constraint.priority = 990
                 image.addConstraint(constraint)
-            } else {
-                image.removeConstraints(image.constraints.filter({ (constraint) -> Bool in
-                    return constraint.identifier == id
-                }))
             }
 
         // UIScrollView
@@ -304,10 +306,10 @@ public enum Appearance {
 
         // Custom
         case (let .custom(dictionary), _):
-            !useDefaultValue ? component.setupCustomStyle(dictionary) : component.removeCustomStyle(dictionary)
+            !useDefaultValue ? brick.setupCustomStyle(dictionary) : brick.removeCustomStyle(dictionary)
 
         default:
-            assertionFailure("Unknown appearance \(self) for component \(component)")
+            assertionFailure("Unknown appearance \(self) for brick \(brick)")
             break
         }
     }

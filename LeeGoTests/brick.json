@@ -24,7 +24,7 @@
     "style" : {
         "backgroundColor" : "#FFFFFF"
     },
-    "components" : [
+    "bricks" : [
                     {
                     "targetClass" : "UILabel",
                     "style" : {

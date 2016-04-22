@@ -44,11 +44,11 @@ class TwitterFeedViewController: UICollectionViewController, UICollectionViewDel
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let configuration = Twitter.tweet.configuration()//indexPath.row % 2 == 0 ? Twitter.tweetText.container() : Twitter.toolbarFooter.configuration()
+        let tweetBrick = Twitter.tweet.brick()
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(configuration.name, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(tweetBrick.name, forIndexPath: indexPath)
 
-        cell.configure(configuration, dataSource: elements[indexPath.item])
+        cell.configureAs(tweetBrick, dataSource: elements[indexPath.item])
 
         return cell
     }

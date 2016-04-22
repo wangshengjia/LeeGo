@@ -13,7 +13,7 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
-            for reuseId in ComponentBuilder.cellReuseIdentifiers {
+            for reuseId in LeMonde.cellReuseIdentifiers {
                 collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseId)
             }
         }
@@ -52,11 +52,15 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let configurationType = indexPath.row % 2 == 0 ? ComponentBuilder.article : .featured
+        var brick = indexPath.row % 2 == 0 ? LeMonde.standard.brick() : LeMonde.featured.brick()
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(String(configurationType), forIndexPath: indexPath)
+        if elements[indexPath.row].element.type == "live" {
+            brick = LeMonde.live.brick()
+        }
 
-        cell.configure(configurationType.componentTarget(), dataSource: elements[indexPath.item], updatingStrategy: .Always)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(brick.name, forIndexPath: indexPath)
+
+        cell.configureAs(brick, dataSource: elements[indexPath.item], updatingStrategy: .Always)
 
         return cell
     }
@@ -79,15 +83,9 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
-        if indexPath.item % 2 == 0 {
-            if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LeMondeNewsFeedViewController") as? LeMondeNewsFeedViewController {
-                detailsViewController.elements = self.elements
-                self.navigationController?.pushViewController(detailsViewController, animated: true)
-            }
-        } else {
-            if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailsViewController") as? DetailsViewController {
-                self.navigationController?.pushViewController(detailsViewController, animated: true)
-            }
+        if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LeMondeNewsFeedViewController") as? LeMondeNewsFeedViewController {
+            detailsViewController.elements = self.elements
+            self.navigationController?.pushViewController(detailsViewController, animated: true)
         }
     }
 }

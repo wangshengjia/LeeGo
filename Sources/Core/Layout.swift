@@ -57,13 +57,13 @@ public struct LayoutMetrics: Equatable {
         })
     }
 
-    func encode() -> JSONDictionary {
+    internal func encode() -> JSONDictionary {
         return customMetrics + standardMetrics.filter { (key, value) -> Bool in
             return value != 0.0
         }
     }
 
-    func metrics() -> [String: CGFloat] {
+    internal func metrics() -> [String: CGFloat] {
         return customMetrics + standardMetrics
     }
 }
@@ -92,27 +92,27 @@ public enum Distribution {
 
 public struct Layout: Equatable {
 
-    let formats: [String]
-    let options: NSLayoutFormatOptions
-    let metrics: LayoutMetrics
+    internal let formats: [String]
+    internal let options: NSLayoutFormatOptions
+    internal let metrics: LayoutMetrics
 
-    public init(components: [ComponentTarget], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) {
-        let names: [String] = components.map { (component) -> String in
-            return component.name
+    public init(bricks: [Brick], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) {
+        let names: [String] = bricks.map { (brick) -> String in
+            return brick.name
         }
 
-        self.init(components: names, axis: axis, align: align, distribution: distribution, metrics: metrics)
+        self.init(bricks: names, axis: axis, align: align, distribution: distribution, metrics: metrics)
     }
 
-    public init(components: [String], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) {
-        guard !components.isEmpty else {
-            assertionFailure("Components should not be empty")
+    public init(bricks: [String], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics = LayoutMetrics()) {
+        guard !bricks.isEmpty else {
+            assertionFailure("Bricks should not be empty")
             self.init()
             return
         }
 
-        let formats = formatHorizontal(components, axis: axis, align: align, distribution: distribution) + formatVertical(components, axis: axis, align: align, distribution: distribution)
-        let options = layoutOptions(components, axis: axis, align: align, distribution: distribution)
+        let formats = formatHorizontal(bricks, axis: axis, align: align, distribution: distribution) + formatVertical(bricks, axis: axis, align: align, distribution: distribution)
+        let options = layoutOptions(bricks, axis: axis, align: align, distribution: distribution)
 
         self.init(formats, options: options, metrics: metrics)
     }

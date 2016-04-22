@@ -1,5 +1,5 @@
 //
-//  ComponentTypeSpecs.swift
+//  BrickDescribableSpecs.swift
 //  LeeGo
 //
 //  Created by Victor WANG on 20/02/16.
@@ -13,7 +13,7 @@ import Quick
 import Nimble
 @testable import LeeGo
 
-class ComponentTypeSpec: QuickSpec {
+class BrickDescribableSpec: QuickSpec {
     override func spec() {
 
         describe("Configurable extension tests") {
@@ -32,7 +32,7 @@ class ComponentTypeSpec: QuickSpec {
             }
         }
 
-        describe("ComponentType") {
+        describe("BrickDescribable") {
             it("should apply diff to view correctly.") {
                 // Given
                 let superview = UIView()
@@ -41,7 +41,7 @@ class ComponentTypeSpec: QuickSpec {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 // When
-                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+                view.apply(Brick(name: "name").width(50).height(80), to: view, updatingStrategy: .WhenBrickChanged)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()
@@ -60,9 +60,9 @@ class ComponentTypeSpec: QuickSpec {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 // When
-                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+                view.apply(Brick(name: "name").width(50).height(80), to: view, with: nil, updatingStrategy: .WhenBrickChanged)
 
-                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(60).height(20), dataSource: nil, updatingStrategy: .Always)
+                view.apply(Brick(name: "name").width(60).height(20), to: view, updatingStrategy: .Always)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()
@@ -82,9 +82,9 @@ class ComponentTypeSpec: QuickSpec {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 // When
-                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name").width(50).height(80), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+                view.apply(Brick(name: "name").width(50).height(80), to: view, updatingStrategy: .WhenBrickChanged)
 
-                view.applyDiffTo(view, newConfiguration: ComponentTarget(name: "name"), dataSource: nil, updatingStrategy: .WhenComponentChanged)
+                view.apply(Brick(name: "name"), to: view, updatingStrategy: .WhenBrickChanged)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()

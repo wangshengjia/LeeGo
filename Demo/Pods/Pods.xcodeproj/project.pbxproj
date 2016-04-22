@@ -11,16 +11,15 @@
 		036B06FE8645010685DF7F791EEAF057 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8579D5C6DF635DD3A17EC230711F6080 /* View.swift */; };
 		09AD19EEB80A7C22E4F4DB95354FF3E8 /* Composable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10155A592E2A340BDFDC58EC0C77CF4C /* Composable.swift */; };
 		22C193B081114FD7914717C448580DA7 /* Conveniences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16184A6FF08B352608A4CDE61DF70922 /* Conveniences.swift */; };
-		2C7EECA597CEA2E7EA268609B2130239 /* ComponentTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E96127666FB19904B5A7D81709C292 /* ComponentTarget.swift */; };
+		2C7EECA597CEA2E7EA268609B2130239 /* Brick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E96127666FB19904B5A7D81709C292 /* Brick.swift */; };
 		2D6BC63451C4C61FDBD1299C90ACFEC7 /* Pods-LeeGo-Demo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC880A635F0CB9DF04E7F08DF17AB65 /* Pods-LeeGo-Demo-dummy.m */; };
 		328FB4A18F6335B46C32450FEC44E792 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AA0691CCF325C3CD5E7CCC353CBFCC /* Configurable.swift */; };
-		35D7945F1CA8949300DAC1A4 /* Responsive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7945E1CA8949300DAC1A4 /* Responsive.swift */; };
+		3575EDFE1CC7CEC2007873CB /* BrickDescribable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3575EDFD1CC7CEC2007873CB /* BrickDescribable.swift */; };
 		384BB9AB2BC1B7F3E71B15335C8CABA1 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B854AB8DB9D6C09112DDFE5DAA9E8E99 /* Constraint.swift */; };
 		4BC20C37FE8A3A457406D1CEB81EA173 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14460E7AC7C0BA9BBDA3E04627382A82 /* Errors.swift */; };
 		4E19B991A2AF9C56910287017577B82A /* LeeGo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AAE8F1C2C73542F5B5A298440E4F9F09 /* LeeGo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		67D8E296C9E1714119149787243D37FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		81BC0EEB5FEA5F86958F208527ABCBFB /* Pods-LeeGo-Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CB1077DEA632B6CF5993E5DB5D8EF5E5 /* Pods-LeeGo-Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84BC4293703B7D3CE9F057765F8B0965 /* ComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57CF57C0EFEC2ABDFDDA50DF21E7E52 /* ComponentType.swift */; };
 		87FB6BE69182D41FAEF0244D0659DB8A /* LeeGo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E7F05890FC6EF2F3715506B1C9F8138 /* LeeGo-dummy.m */; };
 		8FB4AA3E212AF2F0AF0D5552EF4F94DD /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D994F16F2877B291F7ACC2B9DB9CAD8E /* Layout.swift */; };
 		97B8F2AA4FA21CE594D3E6CA8D5E01A6 /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BFD81029BA6A19EFB30391ABD067EDB /* AutoLayout.swift */; };
@@ -56,11 +55,11 @@
 		14460E7AC7C0BA9BBDA3E04627382A82 /* Errors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		16184A6FF08B352608A4CDE61DF70922 /* Conveniences.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Conveniences.swift; sourceTree = "<group>"; };
 		1A8EDB233BF505225F65B6EC1C09EC38 /* Pods-LeeGo-Demo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LeeGo-Demo-resources.sh"; sourceTree = "<group>"; };
-		26E96127666FB19904B5A7D81709C292 /* ComponentTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ComponentTarget.swift; sourceTree = "<group>"; };
+		26E96127666FB19904B5A7D81709C292 /* Brick.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Brick.swift; sourceTree = "<group>"; };
 		28AA0691CCF325C3CD5E7CCC353CBFCC /* Configurable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		2F3387EC1B26F15BDEA6CE8013EC8A94 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32EF7DFAFDEFEB0ED3D09A3EAF29FC75 /* Cell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
-		35D7945E1CA8949300DAC1A4 /* Responsive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responsive.swift; sourceTree = "<group>"; };
+		3575EDFD1CC7CEC2007873CB /* BrickDescribable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickDescribable.swift; sourceTree = "<group>"; };
 		3BFD81029BA6A19EFB30391ABD067EDB /* AutoLayout.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		3E7D41BCE1E154E78344C0747938C05A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,7 +79,6 @@
 		9FB14E78C62FE823B3EDFAC6648682E4 /* Pods-LeeGo-Demo-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LeeGo-Demo-frameworks.sh"; sourceTree = "<group>"; };
 		A2921BDB0C7FD4726653B182E8EC3967 /* Pods-LeeGo-Demo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LeeGo-Demo-acknowledgements.markdown"; sourceTree = "<group>"; };
 		A39C80B3B6D464C936E78752FB906AEA /* Appearance.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
-		A57CF57C0EFEC2ABDFDDA50DF21E7E52 /* ComponentType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ComponentType.swift; sourceTree = "<group>"; };
 		A94192C6BFE9CDCA5975FA6002E42CE9 /* Pods-LeeGo-Demo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-LeeGo-Demo.modulemap"; sourceTree = "<group>"; };
 		AAE8F1C2C73542F5B5A298440E4F9F09 /* LeeGo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LeeGo-umbrella.h"; sourceTree = "<group>"; };
 		AE6294335E02490F173199FA822415A4 /* Pods-LeeGo-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LeeGo-Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,8 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				A39C80B3B6D464C936E78752FB906AEA /* Appearance.swift */,
-				26E96127666FB19904B5A7D81709C292 /* ComponentTarget.swift */,
-				A57CF57C0EFEC2ABDFDDA50DF21E7E52 /* ComponentType.swift */,
+				26E96127666FB19904B5A7D81709C292 /* Brick.swift */,
+				3575EDFD1CC7CEC2007873CB /* BrickDescribable.swift */,
 				10155A592E2A340BDFDC58EC0C77CF4C /* Composable.swift */,
 				28AA0691CCF325C3CD5E7CCC353CBFCC /* Configurable.swift */,
 				D994F16F2877B291F7ACC2B9DB9CAD8E /* Layout.swift */,
@@ -148,7 +146,6 @@
 				14460E7AC7C0BA9BBDA3E04627382A82 /* Errors.swift */,
 				8E400EE07976E3A2CF065F3EA0BA7A8D /* JSONConvertible.swift */,
 				8579D5C6DF635DD3A17EC230711F6080 /* View.swift */,
-				35D7945E1CA8949300DAC1A4 /* Responsive.swift */,
 				2C315F1B22C5E611FC4AF329FA384EC9 /* Core */,
 			);
 			path = Sources;
@@ -402,13 +399,12 @@
 			files = (
 				E254194837A0BA0668886F28BB4ACAF7 /* Appearance.swift in Sources */,
 				97B8F2AA4FA21CE594D3E6CA8D5E01A6 /* AutoLayout.swift in Sources */,
+				3575EDFE1CC7CEC2007873CB /* BrickDescribable.swift in Sources */,
 				B449F3E444ACD08033B00DC6BD14FE2B /* Cell.swift in Sources */,
-				2C7EECA597CEA2E7EA268609B2130239 /* ComponentTarget.swift in Sources */,
-				84BC4293703B7D3CE9F057765F8B0965 /* ComponentType.swift in Sources */,
+				2C7EECA597CEA2E7EA268609B2130239 /* Brick.swift in Sources */,
 				09AD19EEB80A7C22E4F4DB95354FF3E8 /* Composable.swift in Sources */,
 				328FB4A18F6335B46C32450FEC44E792 /* Configurable.swift in Sources */,
 				384BB9AB2BC1B7F3E71B15335C8CABA1 /* Constraint.swift in Sources */,
-				35D7945F1CA8949300DAC1A4 /* Responsive.swift in Sources */,
 				22C193B081114FD7914717C448580DA7 /* Conveniences.swift in Sources */,
 				4BC20C37FE8A3A457406D1CEB81EA173 /* Errors.swift in Sources */,
 				DDD60EA7283A88122F5D3F507030035C /* JSONConvertible.swift in Sources */,
