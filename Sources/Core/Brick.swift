@@ -8,15 +8,39 @@
 
 import Foundation
 
-// MARK: Brick Builder
-
+/// A `BrickBuilderType` protocol provider useful functions to build
+/// a `Brick` instance.
+///
+/// - Warning: You should almost always use an `enum` as the concrete 
+/// implementation of this protocol.
 public protocol BrickBuilderType: Hashable {
-    // FIXME: do we really need Hashable?
-    static var types: [Self: AnyClass] { get }
+    /// Brick's target class. Usually looks like:
+    ///
+    ///     [.title: UILabel.self,
+    ///      .avatar: UIImageView.self,
+    ///      .follow: UIButton.self]
+    ///
+    /// Default value is `UIView.self`
+    static var brickClass: [Self: AnyClass] { get }
 }
 
 extension BrickBuilderType {
+    /// Create a `Brick` instance with the specific class type. Ex:
+    ///
+    ///     let brick = build(UILabel)
+    ///
+    public func build(type: AnyObject? = nil) -> Brick {
+        guard type != nil else {
+            return target()
+        }
+        return Brick(name: self.brickName, targetClass: type.self as! AnyClass)
+    }
 
+    /// Create a `Brick` instance with the specific class type and the 
+    /// name of nib file. Ex:
+    ///
+    ///     let brick = buildFromNib(CustomLabel, nibName: "CustomLabel")
+    ///
     public func buildFromNib(type: AnyObject? = nil, nibName: String) -> Brick {
         guard nibName != "" else {
             assertionFailure("Failed to build brick with an empty nibName")
@@ -26,15 +50,16 @@ extension BrickBuilderType {
         return Brick(name: self.brickName, targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: nibName)
     }
 
-    public func build(type: AnyObject? = nil) -> Brick {
-        guard type != nil else {
-            return target()
-        }
-        return Brick(name: self.brickName, targetClass: type.self as! AnyClass)
+    /// By default, it return `String(self)`.
+    /// Usually `self` would be an enum instance, such as:
+    /// `title`, `subtitle`, `avatar`, etc...
+    /// It can overrided with your own implementation
+    public var brickName: String {
+        return String(self)
     }
 
     private func target() -> Brick {
-        guard let targetClass = Self.types[self] else {
+        guard let targetClass = Self.brickClass[self] else {
             return build(UIView)
         }
         return build(targetClass)
@@ -43,53 +68,65 @@ extension BrickBuilderType {
     var hashValue: Int {
         return self.brickName.hashValue
     }
-
-    public var brickName: String {
-        return String(self)
-    }
 }
 
-extension String: BrickBuilderType {
-    public static var types: [String: AnyClass] = [:]
-}
-
+/// Return true if two `Builder` have same brick name
 public func ==<Builder: BrickBuilderType>(lhs: Builder, rhs: Builder) -> Bool {
     return lhs.brickName == rhs.brickName
 }
 
+/// String conform `BrickBuilderType`, so you can create
+/// a `Brick` instance by a `String` instance. Ex:
+///
+///     let titleBrick = "title".build(UILabel)
+///
+extension String: BrickBuilderType {
+    public static var brickClass: [String: AnyClass] = [:]
+
+    /// The `brickName` would return string itself
+    public var brickName: String {
+        return self
+    }
+}
+
+
 // MARK: Brick Target
 
+/// A closure used to resolve the real cell's height.
+/// The idea of this closure is to calculate cell's height
+/// based on `cell width`, `subviews' height` and `metrics which used in autolayout`
+///
+/// - Note: `childrenHeights` is an array of subviews' heights, values keep the same order as `Brick.bricks`
+/// - SeeAlso: `Brick`, `UIView.fittingHeight()`
 public typealias ManuallyFittingHeightResolver = (fittingWidth: CGFloat, childrenHeights: [CGFloat], metrics: LayoutMetrics) -> CGFloat
 
-public final class Brick {
+/// A `Brick` instance represent
+public struct Brick {
     public let name: String
 
     let targetClass: AnyClass
     let nibName: String?
 
-    private(set) var style: [Appearance] = []
-    private(set) var bricks: [Brick]? = nil {
-        willSet {
-            if let names = newValue?.map({ (brick) -> String in
-                return brick.name
-            }) where Set(names).count != newValue?.count {
-                assertionFailure("Subbricks share the same ancestor should have different names.")
-            }
-        }
-    }
-    private(set) var layout: Layout? = nil
+    let style: [Appearance]?
+    let bricks: [Brick]?
+    let layout: Layout?
 
     // brick width and height
-    private(set) var width: CGFloat? = nil
-    private(set) var height: CGFloat? = nil
+    let width: CGFloat?
+    let height: CGFloat?
 
-    private(set) var LGOutletKey: String? = nil
+    let LGOutletKey: String?
 
     // TODO: need to make this API more clearly
     // used only for calculating cell's height manually
-    private(set) var heightResolver: ManuallyFittingHeightResolver?
+    let heightResolver: ManuallyFittingHeightResolver?
 
     internal init(name: String, targetClass: AnyClass = UIView.self, nibName: String? = nil) {
+        self.init(name: name, targetClass: targetClass, nibName: nibName, width: nil, height: nil, style: nil, bricks: nil, layout: nil, LGOutletKey: nil, heightResolver: nil)
+    }
+
+    init(name: String, targetClass: AnyClass, nibName: String?, width: CGFloat?, height: CGFloat?, style: [Appearance]?, bricks: [Brick]?, layout: Layout?, LGOutletKey: String?, heightResolver: ManuallyFittingHeightResolver?) {
+
         self.name = name
         if targetClass is UIView.Type {
             self.targetClass = targetClass
@@ -98,71 +135,78 @@ public final class Brick {
             self.targetClass = UIView.self
         }
         self.nibName = nibName
+        self.width = width
+        self.height = height
+        self.style = style
+        self.bricks = bricks
+        self.layout = layout
+        self.LGOutletKey = LGOutletKey
+        self.heightResolver = heightResolver
 
+        if let names = self.bricks?.map({ (brick) -> String in
+            return brick.name
+        }) where Set(names).count != self.bricks?.count {
+            assertionFailure("Subbricks share the same ancestor should have different names.")
+        }
     }
 
     public func style(style: [Appearance] = []) -> Brick {
-        self.style = style
-        return self
+        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
     public func heightResolver(heightResolver: ManuallyFittingHeightResolver?) -> Brick {
-        self.heightResolver = heightResolver
-        return self
+        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
     public func bricks(bricks: [Brick], layout: Layout) -> Brick {
-        self.bricks = bricks
-        self.layout = layout
-        return self
+        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
     public func bricks(c1: Brick, layout: (String) -> Layout) -> Brick {
-        self.bricks = [c1]
-        self.layout = layout(c1.name)
-        return self
+        let bricks = [c1]
+        let layout = layout(c1.name)
+
+        return self.bricks(bricks, layout:layout)
     }
 
     public func bricks(c1: Brick, _ c2: Brick, layout: (String, String) -> Layout) -> Brick {
-        self.bricks = [c1, c2]
-        self.layout = layout(c1.name, c2.name)
-        return self
+        let bricks = [c1, c2]
+        let layout = layout(c1.name, c2.name)
+
+        return self.bricks(bricks, layout:layout)
     }
 
     public func bricks(c1: Brick, _ c2: Brick, _ c3: Brick, layout: (String, String, String) -> Layout) -> Brick {
-        self.bricks = [c1, c2, c3]
-        self.layout = layout(c1.name, c2.name, c3.name)
+        let bricks = [c1, c2, c3]
+        let layout = layout(c1.name, c2.name, c3.name)
 
-        return self
+        return self.bricks(bricks, layout:layout)
     }
 
     public func bricks(c1: Brick, _ c2: Brick, _ c3: Brick, _ c4: Brick, layout: (String, String, String, String) -> Layout) -> Brick {
-        self.bricks = [c1, c2, c3, c4]
-        self.layout = layout(c1.name, c2.name, c3.name, c4.name)
+        let bricks = [c1, c2, c3, c4]
+        let layout = layout(c1.name, c2.name, c3.name, c4.name)
 
-        return self
+        return self.bricks(bricks, layout:layout)
     }
 
     public func bricks(c1: Brick, _ c2: Brick, _ c3: Brick, _ c4: Brick, _ c5: Brick, layout: (String, String, String, String, String) -> Layout) -> Brick {
-        self.bricks = [c1, c2, c3, c4, c5]
-        self.layout = layout(c1.name, c2.name, c3.name, c4.name, c5.name)
+        let bricks = [c1, c2, c3, c4, c5]
+        let layout = layout(c1.name, c2.name, c3.name, c4.name, c5.name)
 
-        return self
+        return self.bricks(bricks, layout:layout)
     }
 
     public func width(width: CGFloat) -> Brick {
-        self.width = width
-        return self
+        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
     public func height(height: CGFloat) -> Brick {
-        self.height = height
-        return self
+        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
-    public func LGOutlet(key: String) -> Brick {
-        self.LGOutletKey = key
-        return self
+    public func LGOutlet(LGOutletKey: String) -> Brick {
+        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 }
 
@@ -172,32 +216,41 @@ extension Brick: JSONConvertible {
         case name, targetClass, nibName, width, height, style, layout, bricks, outlet
     }
 
-    public convenience init(rawValue json: JSONDictionary) throws {
+    public init(rawValue json: JSONDictionary) throws {
         do {
-            let targetClass: AnyClass = ((try? NSClassFromString(json.parse(JSONKey.targetClass))) ?? nil) ?? UIView.self
-            let nibName: String? = try? json.parse(JSONKey.nibName)
-            try self.init(name: json.parse(JSONKey.name), targetClass: targetClass, nibName: nibName)
+            self.name = try json.parse(JSONKey.name)
         } catch {
             throw JSONConvertibleError.UnexpectedBrickNameError(json)
         }
 
+        self.targetClass = ((try? NSClassFromString(json.parse(JSONKey.targetClass))) ?? nil) ?? UIView.self
+        self.nibName = try? json.parse(JSONKey.nibName)
+
         if let styleJsons: JSONDictionary = try? json.parse(JSONKey.style) {
             self.style = Appearance.appearancesWithJSON(styleJsons)
+        } else {
+            self.style = nil
         }
 
         if let brickJsons: [JSONDictionary] = try? json.parse(JSONKey.bricks) {
             self.bricks = brickJsons.flatMap({ (json) -> Brick? in
                 return try? Brick(rawValue: json)
             })
+        } else {
+            self.bricks = nil
         }
 
         if let layoutJson: JSONDictionary = try? json.parse(JSONKey.layout) {
             self.layout = Layout(rawValue: layoutJson)
+        } else {
+            self.layout = nil
         }
 
         self.width = try? json.parse(JSONKey.width)
         self.height = try? json.parse(JSONKey.height)
         self.LGOutletKey = try? json.parse(JSONKey.outlet)
+        
+        self.heightResolver = nil
     }
 
     public func encode() -> JSONDictionary {
@@ -219,8 +272,8 @@ extension Brick: JSONConvertible {
             json[JSONKey.layout.asString] = layout.encode()
         }
 
-        if !self.style.isEmpty {
-            json[JSONKey.style.asString] = Appearance.JSONWithAppearances(self.style)
+        if let style = self.style where !style.isEmpty {
+            json[JSONKey.style.asString] = Appearance.JSONWithAppearances(style)
         }
 
         if let bricks = self.bricks {

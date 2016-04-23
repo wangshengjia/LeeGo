@@ -209,7 +209,7 @@ extension LeMonde: BrickConvertible {
                 .numberOfLines(0),
                 .text("Default text")])
         case .illustration:
-            return build().style([.backgroundColor(UIColor.greenColor()), .ratio(1.5)]).width(68).heightResolver({ (fittingWidth, _, _) -> CGFloat in
+            return build().style([.backgroundColor(UIColor.greenColor()), .ratio(1.5)]).heightResolver({ (fittingWidth, _, _) -> CGFloat in
                 return fittingWidth * 2 / 3
             })
         case .icon:
@@ -219,7 +219,7 @@ extension LeMonde: BrickConvertible {
                 .bricks(
                     title.brick(),
                     subtitle.brick(),
-                    illustration.brick()) { title, subtitle, illustration in
+                    illustration.brick().width(68)) { title, subtitle, illustration in
                         Layout([
                             H(orderedViews: [illustration, title]),
                             H(fromSuperview: false, orderedViews: [illustration, subtitle]),
@@ -245,7 +245,7 @@ extension LeMonde: BrickConvertible {
                 .bricks(
                     title.brick(),
                     subtitle.brick(),
-                    illustration.brick().bricks(icon.brick(), layout: { (icon) -> Layout in
+                    illustration.brick().width(68).bricks(icon.brick(), layout: { (icon) -> Layout in
                         Layout(["H:|-8-[\(icon)]", "V:[\(icon)]-8-|"])
                     })
                 ) { title, subtitle, illustration in

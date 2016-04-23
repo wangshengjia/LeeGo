@@ -31,7 +31,7 @@ extension BrickDescribable {
 
         // setup self, only if brick is not initialized from a nib file
         if view.currentBrick?.nibName == nil {
-            setup(view, currentStyle: view.currentBrick?.style ?? [], newStyle: newBrick.style)
+            setup(view, currentStyle: view.currentBrick?.style ?? [], newStyle: newBrick.style ?? [])
         }
 
         // handle brick's width & height constraint
@@ -53,7 +53,7 @@ extension BrickDescribable {
         case .WhenBrickChanged:
             if let current = currentBrick
                 where current.name != newBrick.name
-                    || (current.style == [] && current.bricks == nil && current.layout == nil) {
+                    || (current.style == nil && current.bricks == nil && current.layout == nil) {
                 shouldRebuild = true
             }
         case .Always:
