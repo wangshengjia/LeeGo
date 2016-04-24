@@ -161,7 +161,7 @@ extension UIView {
     }
 }
 
-internal func formattedJSON(json: JSONDictionary) -> String? {
+public func formattedStringFromJSON(json: JSONDictionary) -> String? {
     do {
         let data = try NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
         return String(data: data, encoding: NSUTF8StringEncoding)

@@ -32,7 +32,7 @@ Both:
 
 Pros:
 - Written in Swift, built for Swift. No more Obj-C++ stuff.
-- Lightweight and UIKit friendly: no heritage, dealing with standard UIView directly.
+- Lightweight and UIKit friendly: no heritage, dealing with standard UIView and Auto Layout directly.
 - Totally smooth to begin with integrating only a small part, also free to drop all without any side effect.
 - Possible to update any part of UI which powered by LeeGo remotely via JSON payload
 - Powered by standard auto layout which you probably familiar with already.
@@ -40,30 +40,33 @@ Pros:
 Cons:
 - Lack of high level features for the moment. Such as support of built-in configurable view controller, view animation, auto layout animation or UIControl component’s action.
 - Powered by standard auto layout which may have some potential performance issues in some circumstances.
-- Still requires the basic knowledge of auto layout and [Visual Format Language](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html).
+- Still requires the basic knowledge of standard auto layout and [Visual Format Language](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html).
 
 ## Usages
-#### Basic brick
+#### Basic bricks
 
 ```swift
 import LeeGo
 
-/// create a `Brick` instance from `String`, named "title"
+/// Create a `Brick` instance which named "title" as UILabel, with default text "title" and zero `numberOfLines`
 let titleBrick = "title".build(UILabel).style([.text("title"), .numberOfLines(0)])
-/// create a UILabel instance as title brick
+
+/// Create an `UILabel` instance, then configure it just as title brick
 let titleLabel = UILabel().configureAs(titleBrick)
 
 ```
 
-#### More complex brick
+#### More complex bricks
 
 ```swift
 import LeeGo
 
+/// Create the bricks inside cell brick
 let titleBrick = "title".build(UILabel).style([.text("title"), .numberOfLines(0)])
 let subtitleBrick = "subtitle".build(UILabel)
 let imageBrick = "image".build(UIImageView).style([.ratio(1.5)]).width(68)
 
+/// Create a brick stand for `UIView` which contains a `title`, a `subtitle` and an `image` inside, layout them with standard auto layout VFL.
 let cellBrick = "cell".build().style([.backgroundColor(UIColor.whiteColor())])
     .bricks(titleBrick, subtitleBrick, imageBrick) { title, subtitle, image in
         Layout(["H:|-left-[\(title)]-spaceH-[\(image)]-right-|",
@@ -73,6 +76,7 @@ let cellBrick = "cell".build().style([.backgroundColor(UIColor.whiteColor())])
                 LayoutMetrics(20, 20, 20, 20, 10, 10))
 }
 
+/// Dequeue a standard `UICollectionViewCell` instance, then configure it as cell brick with `element` as data source
 let cell = collectionView.dequeueCell…
 cell.configureAs(cellBrick, dataSource: element[indexPath.item])
 ```
@@ -82,9 +86,11 @@ cell.configureAs(cellBrick, dataSource: element[indexPath.item])
 ```swift
 import LeeGo
 
+/// Create the bricks inside cell brick
 let titleBrick = "title".build(UILabel).style([.text("title"), .numberOfLines(0)])
 let imageBrick = "image".build(UIImageView).style([.ratio(1.5)])
 
+/// Create a brick stand for `UIView` which contains a `title` and an `image` inside, layout them with `UIStackView` inspired layout helper method.
 let cellBrick = "cell".build().bricks(imageBrick, titleBrick) { 
     image, title, in
         Layout(bricks: [image, title], axis: .Vertical, align: .Fill, distribution: .Fill)
@@ -94,18 +100,19 @@ let cell = collectionView.dequeueCell…
 cell.configureAs(cellBrick, dataSource: element[indexPath.item])
 ```
 
-#### Convenience functions for combine brick
+#### Union different bricks
 
 ```swift
 import LeeGo
 
+/// Union different bricks to a new brick with `UIStackView` style’s layout
 let brick = Brick.union(brickName, bricks: [
-                title.brick().style([.text("Showcase 1")]),
-                description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Top` alignment and `FillEqually` distribution")]),
+                title,
+                subtitle,
                 Brick.union("blocks", bricks: [
-                    redBlock.brick().height(50),
-                    greenBlock.brick().height(80),
-                    blueBlock.brick().height(30)], axis: .Horizontal, align: .Top, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
+                    redBlock.height(50),
+                    greenBlock.height(80),
+                    blueBlock.height(30)], axis: .Horizontal, align: .Top, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
                 ], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
                 
 let view = UIView().configureAs(brick)
@@ -116,10 +123,16 @@ let view = UIView().configureAs(brick)
 ```swift
 import LeeGo
 
+/// An enum which implement `BrickBuilderType`, used to centralise all `bricks` design in a single enum file
 enum TwitterBrickSet: BrickBuilderType {
-  case username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount
+    // leaf bricks
+    case username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount
+    
+    // complex bricks
     case retweetView, likeView
     case accountHeader, toolbarFooter, retweetHeader
+    
+    // root bricks
     case standardTweet
 
     static let brickClass: [Twitter: AnyClass] = [username: UILabel.self, account: UILabel.self, avatar: UIImageView.self, tweetText: UITextView.self, …]

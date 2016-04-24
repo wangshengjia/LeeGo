@@ -267,9 +267,14 @@ extension LeMonde: BrickConvertible {
 
 enum Twitter: BrickBuilderType {
 
+    // leaf bricks
     case username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount
+
+    // complex bricks
     case retweetView, likeView
     case accountHeader, toolbarFooter, retweetHeader
+
+    // root bricks
     case tweet
 
     static let reuseIdentifiers = [username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount, retweetView, likeView, accountHeader, toolbarFooter, retweetHeader, tweet].map { (component) -> String in
