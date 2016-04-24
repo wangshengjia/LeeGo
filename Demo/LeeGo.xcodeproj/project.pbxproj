@@ -13,6 +13,7 @@
 		350E0DF41C84C2FF00DB78FC /* TwitterFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E0DF31C84C2FF00DB78FC /* TwitterFeedViewController.swift */; };
 		350E0DF61C84DD3700DB78FC /* twitter_sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 350E0DF51C84DD3700DB78FC /* twitter_sample.json */; };
 		3541CE881C44494B00A3B257 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3541CE871C44494B00A3B257 /* Main.storyboard */; };
+		357956CC1CCCA94A00D27777 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 357956CB1CCCA94A00D27777 /* DetailsViewController.swift */; };
 		3585078B1C622B6C006D02EF /* FetteEngschrift.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507801C622B6A006D02EF /* FetteEngschrift.otf */; };
 		3585078C1C622B6C006D02EF /* LmfrAppIcon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 358507811C622B6A006D02EF /* LmfrAppIcon.ttf */; };
 		3585078D1C622B6C006D02EF /* TheAntiquaB-W5Plain.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507821C622B6A006D02EF /* TheAntiquaB-W5Plain.otf */; };
@@ -56,6 +57,7 @@
 		350E0DF31C84C2FF00DB78FC /* TwitterFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterFeedViewController.swift; sourceTree = "<group>"; };
 		350E0DF51C84DD3700DB78FC /* twitter_sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twitter_sample.json; sourceTree = "<group>"; };
 		3541CE871C44494B00A3B257 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		357956CB1CCCA94A00D27777 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		358507801C622B6A006D02EF /* FetteEngschrift.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FetteEngschrift.otf; sourceTree = "<group>"; };
 		358507811C622B6A006D02EF /* LmfrAppIcon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LmfrAppIcon.ttf; sourceTree = "<group>"; };
 		358507821C622B6A006D02EF /* TheAntiquaB-W5Plain.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheAntiquaB-W5Plain.otf"; sourceTree = "<group>"; };
@@ -142,6 +144,14 @@
 			name = Twitter;
 			sourceTree = "<group>";
 		};
+		357956CA1CCCA92D00D27777 /* DetailsPage */ = {
+			isa = PBXGroup;
+			children = (
+				357956CB1CCCA94A00D27777 /* DetailsViewController.swift */,
+			);
+			name = DetailsPage;
+			sourceTree = "<group>";
+		};
 		3585077F1C622B6A006D02EF /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,8 +216,9 @@
 				607FACD71AFB9204008FA782 /* MainViewController.swift */,
 				350E0DF11C84B0C500DB78FC /* BrickStore.swift */,
 				35D7F44A1CC4E5DE008D1AEB /* Samples */,
-				350E0DEE1C81F08B00DB78FC /* Twitter */,
 				350E0DED1C81F08400DB78FC /* LeMonde */,
+				350E0DEE1C81F08B00DB78FC /* Twitter */,
+				357956CA1CCCA92D00D27777 /* DetailsPage */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				3541CE871C44494B00A3B257 /* Main.storyboard */,
@@ -478,6 +489,7 @@
 				607FACD81AFB9204008FA782 /* MainViewController.swift in Sources */,
 				35B44E361C84E4E60049553F /* Tweet.swift in Sources */,
 				350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */,
+				357956CC1CCCA94A00D27777 /* DetailsViewController.swift in Sources */,
 				35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */,
 				350E0DF41C84C2FF00DB78FC /* TwitterFeedViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,

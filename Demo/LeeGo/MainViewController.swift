@@ -12,7 +12,7 @@ import LeeGo
 class MainViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 4
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -25,6 +25,8 @@ class MainViewController: UITableViewController {
             cell.textLabel?.text = "Le Monde"
         case 2:
             cell.textLabel?.text = "Twitter"
+        case 3:
+            cell.textLabel?.text = "Details Page"
         default:
             break
         }
@@ -46,6 +48,10 @@ class MainViewController: UITableViewController {
             }
         case 2:
             if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("TwitterFeedViewController") as? TwitterFeedViewController {
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        case 3:
+            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailsViewController") as? DetailsViewController {
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
         default:
