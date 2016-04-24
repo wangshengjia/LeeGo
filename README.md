@@ -1,22 +1,25 @@
 # LeeGo
 
 [![CI Status](http://img.shields.io/travis/wangshengjia/LeeGo.svg?style=flat)](https://travis-ci.org/wangshengjia/LeeGo)
-[![Coverage](https://img.shields.io/codecov/c/github/wangshengjia/LeeGo.svg)](https://codecov.io/github/wangshengjia/LeeGo?branch=develop)
 [![Version](https://img.shields.io/cocoapods/v/LeeGo.svg?style=flat)](http://cocoapods.org/pods/LeeGo)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Coverage](https://img.shields.io/codecov/c/github/wangshengjia/LeeGo.svg)](https://codecov.io/github/wangshengjia/LeeGo?branch=develop)
 [![Platform](https://img.shields.io/badge/Platform-iOS-lightgray.svg?style=flat)](http://developer.apple.com)
 [![Swift](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://swift.org)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://tldrlegal.com/license/mit-license)
 
-LeeGo is a lightweight but powerful library which helps you decouple & modularise your UI component into small pieces of LEGO style's bricks, to make UI development declarative, configurable and highly reusable.
+LeeGo is a lightweight Swift framework that helps you decouple & modularise your UI component into small pieces of LEGO style's bricks, to make UI development declarative, configurable and highly reusable.
 
+## Rational behind
+I’ve talked this once in my [blog post](https://medium.com/@victor_wang/build-your-cells-in-a-way-of-lego-fbf6a1133bb1#.ud8o1v5zl) and also on [dotSwift’s talk](http://www.thedotpost.com/2016/01/victor-wang-build-ios-ui-in-the-way-of-lego-bricks). Please checkout through for more details.
 
 ## Features
 
-**What can LeeGo helps you:**
+**What may LeeGo helps you:**
 
 - **Describe** your whole UI into small pieces of Lego style’s bricks. Let you configure your view as a `brick` whenever & wherever you want.
-- No need any more to deal with a bunch of custom UIView’s subclasses. Instead, you only need to deal with different `Brick`s which is **lightweight and totally value type**.
-- Designed to be **UIKit friendly and non-intrusive**. There is no need to inherit from other base class at all.
+- No longer need to deal with a bunch of custom UIView’s subclasses. Instead, you only need to deal with different `Brick`s which is **lightweight** and **pure value type**.
+- Designed to be **UIKit friendly** and **non-intrusive**. There is no need to inherit from other base class at all.
 - Capable to **update remotely** almost everything via your JSON payload.
 - Built-in convenience methods to make **UIStackView like layout** hassle-free.
 - Built-in **self-sizing mechanism** to calculate cell’s height automatically.
@@ -25,7 +28,7 @@ LeeGo is a lightweight but powerful library which helps you decouple & modularis
 **Compare with Facebook ComponentKit**
 
 Both:
-- Declarative, configurable & reusable UI development for iOS.
+- Brings declarative, configurable & reusable UI development for iOS.
 
 Pros:
 - Written in Swift, built for Swift. No more Obj-C++ stuff.
@@ -35,13 +38,16 @@ Pros:
 - Powered by standard auto layout which you probably familiar with already.
 
 Cons:
-- Lack of high level features. Such as support of built-in configurable view controller, animation or action.
+- Lack of high level features for the moment. Such as support of built-in configurable view controller, view animation, auto layout animation or UIControl component’s action.
 - Powered by standard auto layout which may have some potential performance issues in some circumstances.
+- Still requires the basic knowledge of auto layout and [Visual Format Language](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html).
 
 ## Usages
 #### Basic brick
 
 ```swift
+import LeeGo
+
 /// create a `Brick` instance from `String`, named "title"
 let titleBrick = "title".build(UILabel).style([.text("title"), .numberOfLines(0)])
 /// create a UILabel instance as title brick
@@ -52,6 +58,8 @@ let titleLabel = UILabel().configureAs(titleBrick)
 #### More complex brick
 
 ```swift
+import LeeGo
+
 let titleBrick = "title".build(UILabel).style([.text("title"), .numberOfLines(0)])
 let subtitleBrick = "subtitle".build(UILabel)
 let imageBrick = "image".build(UIImageView).style([.ratio(1.5)]).width(68)
@@ -72,6 +80,8 @@ cell.configureAs(cellBrick, dataSource: element[indexPath.item])
 #### UIStackView inspired layout
 
 ```swift
+import LeeGo
+
 let titleBrick = "title".build(UILabel).style([.text("title"), .numberOfLines(0)])
 let imageBrick = "image".build(UIImageView).style([.ratio(1.5)])
 
@@ -87,7 +97,9 @@ cell.configureAs(cellBrick, dataSource: element[indexPath.item])
 #### Convenience functions for combine brick
 
 ```swift
-Brick.union(brickName, bricks: [
+import LeeGo
+
+let brick = Brick.union(brickName, bricks: [
                 title.brick().style([.text("Showcase 1")]),
                 description.brick().style(LeeGoShowcase.descriptionStyle + [.text("Layout 3 blocks with `Top` alignment and `FillEqually` distribution")]),
                 Brick.union("blocks", bricks: [
@@ -95,11 +107,15 @@ Brick.union(brickName, bricks: [
                     greenBlock.brick().height(80),
                     blueBlock.brick().height(30)], axis: .Horizontal, align: .Top, distribution: .FillEqually, metrics: LayoutMetrics(0, 0, 0, 0, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
                 ], axis: .Vertical, align: .Fill, distribution: .Fill, metrics: defaultMetrics)
+                
+let view = UIView().configureAs(brick)
 ```
 
 #### More complex brick and build with an enum
 
 ```swift
+import LeeGo
+
 enum TwitterBrickSet: BrickBuilderType {
   case username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount
     case retweetView, likeView
@@ -138,7 +154,13 @@ enum TwitterBrickSet: BrickBuilderType {
         }
     }
 }
+
+let cell = collectionView.dequeueCell…
+cell.configureAs(TwitterBrickSet.standardTweet.brick(), dataSource: element[indexPath.item])
 ```
+
+## Update UI remotely
+`Brick` is designed to be JSON convertible, which makes possible that you can control your app’s interface, from tweak some UIKit appearances to create view/cell with brand new design **remotely** via JSON payload. Please check out “JSON encodable & decodable” for more details.
 
 ## Best practices
 - Semantic > Reusable
@@ -146,13 +168,31 @@ enum TwitterBrickSet: BrickBuilderType {
 - Brick name convention
 
 ## Installation
-
-LeeGo is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+#### Cocoapods
+LeeGo is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
 pod "LeeGo"
 ```
-## Todo List
+#### Carthage
+To integrate LeeGo into your Xcode project using Carthage, specify it in your Cartfile:
+
+```
+github "wangshengjia/LeeGo"
+```
+
+Then, run the following command to build the LeeGo framework:
+
+```
+$ carthage update
+```
+
+At last, you need to set up your Xcode project manually to add the LeeGo framework.
+
+## Vision & Roadmap
 
 ## References

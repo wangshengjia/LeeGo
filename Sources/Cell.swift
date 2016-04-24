@@ -1,6 +1,6 @@
 //
 //  ReusableCell.swift
-//  Pods
+//  LeeGo
 //
 //  Created by Victor WANG on 10/01/16.
 //

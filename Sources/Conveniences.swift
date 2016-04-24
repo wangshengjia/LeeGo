@@ -1,6 +1,6 @@
 //
 //  Conveniences.swift
-//  Pods
+//  LeeGo
 //
 //  Created by Victor WANG on 03/02/16.
 //

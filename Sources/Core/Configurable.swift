@@ -1,6 +1,6 @@
 //
 //  Configurable.swift
-//  Pods
+//  LeeGo
 //
 //  Created by Victor WANG on 21/02/16.
 //

@@ -1,0 +1,3 @@
+
+## JSON Decodable
+## JSON Encodable

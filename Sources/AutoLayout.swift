@@ -1,6 +1,6 @@
 //
 //  AutoLayout.swift
-//  Pods
+//  LeeGo
 //
 //  Created by Victor WANG on 04/02/16.
 //
@@ -50,6 +50,16 @@ public enum Metrics: CustomStringConvertible {
 
 // MARK: Public functions
 
+///  <#Description#>
+///
+///  - parameter fromSuperview: <#fromSuperview description#>
+///  - parameter left:          <#left description#>
+///  - parameter orderedViews:  <#orderedViews description#>
+///  - parameter interspace:    <#interspace description#>
+///  - parameter right:         <#right description#>
+///  - parameter toSuperview:   <#toSuperview description#>
+///
+///  - returns: <#return value description#>
 public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.Equal), orderedViews: [String] = [], interspace: Metrics? = .spaceH(.Equal), right: Metrics? = .right(.Equal), toSuperview: Bool = true) -> String {
     guard !orderedViews.isEmpty else {
         assertionFailure("Should at least have 1 view name")

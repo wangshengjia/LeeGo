@@ -1,6 +1,6 @@
 //
 //  View.swift
-//  Pods
+//  LeeGo
 //
 //  Created by Victor WANG on 20/01/16.
 //
