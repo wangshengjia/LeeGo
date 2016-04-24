@@ -48,7 +48,8 @@ Cons:
 ```swift
 import LeeGo
 
-/// Create a `Brick` instance which named "title" as UILabel, with default text "title" and zero `numberOfLines`
+/// Create a `Brick` instance which named "title" as UILabel, 
+/// with default text "title" and zero `numberOfLines`
 let titleBrick = "title".build(UILabel).style([.text("title"), .numberOfLines(0)])
 
 /// Create an `UILabel` instance, then configure it just as title brick
@@ -66,7 +67,9 @@ let titleBrick = "title".build(UILabel).style([.text("title"), .numberOfLines(0)
 let subtitleBrick = "subtitle".build(UILabel)
 let imageBrick = "image".build(UIImageView).style([.ratio(1.5)]).width(68)
 
-/// Create a brick stand for `UIView` which contains a `title`, a `subtitle` and an `image` inside, layout them with standard auto layout VFL.
+/// Create a brick stand for `UIView` which contains a `title`, 
+/// a `subtitle` and an `image` inside, layout them with 
+/// standard auto layout VFL.
 let cellBrick = "cell".build().style([.backgroundColor(UIColor.whiteColor())])
     .bricks(titleBrick, subtitleBrick, imageBrick) { title, subtitle, image in
         Layout(["H:|-left-[\(title)]-spaceH-[\(image)]-right-|",
@@ -76,7 +79,8 @@ let cellBrick = "cell".build().style([.backgroundColor(UIColor.whiteColor())])
                 LayoutMetrics(20, 20, 20, 20, 10, 10))
 }
 
-/// Dequeue a standard `UICollectionViewCell` instance, then configure it as cell brick with `element` as data source
+/// Dequeue a standard `UICollectionViewCell` instance, then 
+/// configure it as cell brick with `element` as data source
 let cell = collectionView.dequeueCell…
 cell.configureAs(cellBrick, dataSource: element[indexPath.item])
 ```
@@ -90,7 +94,8 @@ import LeeGo
 let titleBrick = "title".build(UILabel).style([.text("title"), .numberOfLines(0)])
 let imageBrick = "image".build(UIImageView).style([.ratio(1.5)])
 
-/// Create a brick stand for `UIView` which contains a `title` and an `image` inside, layout them with `UIStackView` inspired layout helper method.
+/// Create a brick stand for `UIView` which contains a `title` 
+/// and an `image` inside, layout them with `UIStackView` inspired layout helper method.
 let cellBrick = "cell".build().bricks(imageBrick, titleBrick) { 
     image, title, in
         Layout(bricks: [image, title], axis: .Vertical, align: .Fill, distribution: .Fill)
@@ -123,7 +128,8 @@ let view = UIView().configureAs(brick)
 ```swift
 import LeeGo
 
-/// An enum which implement `BrickBuilderType`, used to centralise all `bricks` design in a single enum file
+/// An enum which implement `BrickBuilderType`, used to 
+/// centralise all `bricks` design in a single enum file
 enum TwitterBrickSet: BrickBuilderType {
     // leaf bricks
     case username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount

@@ -114,7 +114,7 @@ class ConvenienceSpec: QuickSpec {
 
             it("should formatted json to string correctly.") {
                 // When
-                let jsonStr = formattedJSON(json)
+                let jsonStr = formattedStringFromJSON(json)
 
                 // Then
                 expect(jsonStr).notTo(beNil())
