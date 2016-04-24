@@ -117,8 +117,6 @@ public struct Brick {
 
     let LGOutletKey: String?
 
-    // TODO: need to make this API more clearly
-    // used only for calculating cell's height manually
     let heightResolver: ManuallyFittingHeightResolver?
 
     internal init(name: String, targetClass: AnyClass = UIView.self, nibName: String? = nil) {

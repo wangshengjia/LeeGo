@@ -107,7 +107,6 @@ internal func formatHorizontal(brickNames: [String], axis: Axis, align: Alignmen
             case .Fill:
                 return H(orderedViews:[brick])
             case .Center:
-                // TODO: center also with superview
                 return H(left:.left(.GreaterThanOrEqual), orderedViews:[brick], right:.right(.GreaterThanOrEqual))
             default:
                 assertionFailure("Unexpected alignment value \(align) for axis \(axis) and distribution \(distribution)")
@@ -134,7 +133,6 @@ internal func formatVertical(brickNames: [String], axis: Axis, align: Alignment,
             case .Fill:
                 return V(orderedViews:[brick])
             case .Center:
-                // TODO: center also with superview
                 return V(top:.top(.GreaterThanOrEqual), orderedViews:[brick], bottom:.bottom(.GreaterThanOrEqual))
             default:
                 assertionFailure("Unexpected alignment value \(align) for axis \(axis) and distribution \(distribution)")

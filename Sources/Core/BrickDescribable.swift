@@ -45,8 +45,6 @@ extension BrickDescribable {
 
     private func shouldRebuild(currentBrick: Brick?, with newBrick: Brick, updatingStrategy: UpdatingStrategy) -> Bool {
 
-        // TODO: when screen size changed ? (rotation ?)
-
         var shouldRebuild = (currentBrick == nil)
 
         switch updatingStrategy {

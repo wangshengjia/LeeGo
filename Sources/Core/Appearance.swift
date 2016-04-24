@@ -242,7 +242,8 @@ public enum Appearance {
 
         // UIButton
         case (let .buttonType(type), _ as UIButton):
-            print(type) //TODO:  button.buttonType = type
+            print("For the moment, LeeGo only support default button type. Can't handle \(type)")
+            break
         case (let .buttonTitle(title, state), let button as UIButton):
             button.setTitle(!useDefaultValue ? title : nil, forState: state)
         case (let .buttonTitleColor(color, state), let button as UIButton):
@@ -820,8 +821,6 @@ extension Appearance: JSONConvertible {
 }
 
 extension Appearance {
-
-    // TODO: Support NSParagraphStyle later
 
     static func encodeAttributes(attributesArray: [Attributes]) -> [Attributes] {
         return attributesArray.map { (attributes) -> Attributes in

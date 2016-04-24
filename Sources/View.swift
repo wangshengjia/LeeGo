@@ -53,7 +53,6 @@ extension UIView {
         apply(brick, to: self, with: dataSource, updatingStrategy: updatingStrategy)
         self.currentBrick = brick
 
-        // TODO: need to imporve this algo, too expensive and too fragile which based only on name.
         // configure sub bricks recursively
         for subview in self.subviews {
             if let name = subview.currentBrick?.name, let bricks = brick.bricks {
@@ -92,7 +91,6 @@ extension UIView {
 
         // if height resolver is found
         if let computeClosure = currentBrick?.heightResolver {
-            //TODO:  should use children brick instead of subview ?
             let fittingWidth = self.frame.width
             let childrenHeights = subviews.map { (subview) -> CGFloat in
                 return subview.fittingHeight()

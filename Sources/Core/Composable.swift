@@ -60,7 +60,6 @@ extension Composable {
             }
         }
 
-        // TODO: apply diff of layout instead of removing all constraints
         // Remove constraint with identifier (which means not created by system)
         targetView.removeConstraints(targetView.constraints.filter({ (constraint) -> Bool in
             if constraint.mode == .SubviewsLayout {
@@ -68,7 +67,7 @@ extension Composable {
             }
             return false
         }))
-        
+
         // Layout each view with auto layout visual format language as brick.
         for format in layout.formats {
             let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: layout.options, metrics: layout.metrics.metrics(), views: viewsDictionary)

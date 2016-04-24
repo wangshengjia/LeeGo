@@ -77,7 +77,6 @@ class ViewExtensionSpec: QuickSpec {
             }
 
             it("should re-configure a brick correctly with .WhenBrickChanged strategy -> brick did not change") {
-                // TODO: Is that what we want ?
 
                 // Given
                 let view = UIView()

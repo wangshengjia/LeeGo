@@ -129,10 +129,6 @@ extension UIView {
 
         let attributedStrings = attributesArray.enumerate().flatMap({ (index, attribute) -> NSAttributedString? in
             if let idx = Int(String(index)) {
-                // TODO: should use this strategy or not ?
-                // If text == "", set text to empty which will hide the text
-                // If text == nil, set text to default value if there is one
-                // let text = texts[idx] ?? (attribute[kCustomAttributeDefaultText] as? String) ?? ""
                 let text = texts[idx] ?? ""
                 return NSAttributedString(string: text, attributes: attribute)
             }
