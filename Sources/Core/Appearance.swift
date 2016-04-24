@@ -42,43 +42,43 @@ public enum Appearance {
     case custom([String: AnyObject])
     case none
 
-    func apply<B: UIView>(to brick: B, useDefaultValue: Bool = false) {
+    func apply<View: UIView>(to targetView: View, useDefaultValue: Bool = false) {
 
-        switch (self, brick) {
+        switch (self, targetView) {
 
         // UIView
         case (let .backgroundColor(color), _):
-            brick.backgroundColor = !useDefaultValue ? color : nil
+            targetView.backgroundColor = !useDefaultValue ? color : nil
         case (let .userInteractionEnabled(userInteractionEnabled), _):
-            brick.userInteractionEnabled = !useDefaultValue ? userInteractionEnabled : !((brick is UILabel) || (brick is UIImageView))
+            targetView.userInteractionEnabled = !useDefaultValue ? userInteractionEnabled : !((targetView is UILabel) || (targetView is UIImageView))
         case (let .translatesAutoresizingMaskIntoConstraints(should), _):
-            brick.translatesAutoresizingMaskIntoConstraints = !useDefaultValue ? should : false
+            targetView.translatesAutoresizingMaskIntoConstraints = !useDefaultValue ? should : false
         case (let .tintColor(color), _):
-            brick.tintColor = !useDefaultValue ? color : nil
+            targetView.tintColor = !useDefaultValue ? color : nil
         case (let .tintAdjustmentMode(mode), _):
-            brick.tintAdjustmentMode = !useDefaultValue ? mode : .Automatic
+            targetView.tintAdjustmentMode = !useDefaultValue ? mode : .Automatic
         case (let .cornerRadius(radius), _):
-            brick.layer.cornerRadius = !useDefaultValue ? radius : 0
+            targetView.layer.cornerRadius = !useDefaultValue ? radius : 0
         case (let .borderWidth(borderWidth), _):
-            brick.layer.borderWidth = !useDefaultValue ? borderWidth : 0
+            targetView.layer.borderWidth = !useDefaultValue ? borderWidth : 0
         case (let .borderColor(borderColor), _):
-            brick.layer.borderColor = !useDefaultValue ? borderColor.CGColor : nil
+            targetView.layer.borderColor = !useDefaultValue ? borderColor.CGColor : nil
         case (let .multipleTouchEnabled(multipleTouchEnabled), _):
-            brick.multipleTouchEnabled = !useDefaultValue ? multipleTouchEnabled : false
+            targetView.multipleTouchEnabled = !useDefaultValue ? multipleTouchEnabled : false
         case (let .exclusiveTouch(exclusiveTouch), _):
-            brick.exclusiveTouch = !useDefaultValue ? exclusiveTouch : false
+            targetView.exclusiveTouch = !useDefaultValue ? exclusiveTouch : false
         case (let .clipsToBounds(clipsToBounds), _):
-            brick.clipsToBounds = !useDefaultValue ? clipsToBounds : false
+            targetView.clipsToBounds = !useDefaultValue ? clipsToBounds : false
         case (let .alpha(alpha), _):
-            brick.alpha = !useDefaultValue ? alpha : 1.0
+            targetView.alpha = !useDefaultValue ? alpha : 1.0
         case (let .opaque(opaque), _):
-            brick.opaque = !useDefaultValue ? opaque : true
+            targetView.opaque = !useDefaultValue ? opaque : true
         case (let .hidden(hidden), _):
-            brick.hidden = !useDefaultValue ? hidden : false
+            targetView.hidden = !useDefaultValue ? hidden : false
         case (let .clearsContextBeforeDrawing(clearsContextBeforeDrawing), _):
-            brick.clearsContextBeforeDrawing = !useDefaultValue ? clearsContextBeforeDrawing : true
+            targetView.clearsContextBeforeDrawing = !useDefaultValue ? clearsContextBeforeDrawing : true
         case (let .contentMode(contentMode), _):
-            brick.contentMode = !useDefaultValue ? contentMode : .ScaleToFill
+            targetView.contentMode = !useDefaultValue ? contentMode : .ScaleToFill
 
         // UIControl
         case (let .selected(selected), let control as UIControl):
@@ -102,18 +102,24 @@ public enum Appearance {
                 label.enabled = !useDefaultValue ? enabled : true
             } else if let control = view as? UIControl {
                 control.enabled = !useDefaultValue ? enabled : true
+            } else {
+                warningUnknownAppearance(targetView)
             }
         case (let .highlighted(highlighted), let view):
             if let label = view as? UILabel {
                 label.highlighted = !useDefaultValue ? highlighted : false
             } else if let control = view as? UIControl {
                 control.highlighted = !useDefaultValue ? highlighted : false
+            } else {
+                warningUnknownAppearance(targetView)
             }
         case (let .adjustsFontSizeToFitWidth(should), let view):
             if let label = view as? UILabel {
                 label.adjustsFontSizeToFitWidth = !useDefaultValue ? should : false
             } else if let textField = view as? UITextField {
                 textField.adjustsFontSizeToFitWidth = !useDefaultValue ? should : false
+            } else {
+                warningUnknownAppearance(targetView)
             }
         case (let .font(font), let view):
             if let label = view as? UILabel {
@@ -122,6 +128,8 @@ public enum Appearance {
                 textField.font = !useDefaultValue ? font : nil
             } else if let textView = view as? UITextView {
                 textView.font = !useDefaultValue ? font : nil
+            } else {
+                warningUnknownAppearance(targetView)
             }
         case (let .textColor(color), let view):
             if let label = view as? UILabel {
@@ -130,6 +138,8 @@ public enum Appearance {
                 textField.textColor = !useDefaultValue ? color : nil
             } else if let textView = view as? UITextView {
                 textView.textColor = !useDefaultValue ? color : nil
+            } else {
+                warningUnknownAppearance(targetView)
             }
         case (let .textAlignment(align), let view):
             if let label = view as? UILabel {
@@ -138,12 +148,16 @@ public enum Appearance {
                 textField.textAlignment = !useDefaultValue ? align : .Left
             } else if let textView = view as? UITextView {
                 textView.textAlignment = !useDefaultValue ? align : .Left
+            } else {
+                warningUnknownAppearance(targetView)
             }
         case (let .numberOfLines(number), let view):
             if let label = view as? UILabel {
                 label.numberOfLines = !useDefaultValue ? number : 1
             } else if let textView = view as? UITextView {
                 textView.textContainer.maximumNumberOfLines = !useDefaultValue ? number : 0
+            } else {
+                warningUnknownAppearance(targetView)
             }
         case (let .text(text), let view):
             if let label = view as? UILabel {
@@ -152,6 +166,8 @@ public enum Appearance {
                 textField.text = !useDefaultValue ? text : nil
             } else if let textView = view as? UITextView {
                 textView.text = !useDefaultValue ? text : nil
+            } else {
+                warningUnknownAppearance(targetView)
             }
         case (let .attributedText(attributes), let view):
             if let label = view as? UILabel {
@@ -160,24 +176,34 @@ public enum Appearance {
                 textField.setAttributedString(with: !useDefaultValue ? attributes : [])
             } else if let textView = view as? UITextView {
                 textView.setAttributedString(with: !useDefaultValue ? attributes : [])
+            } else {
+                warningUnknownAppearance(targetView)
             }
         case (let .lineBreakMode(mode), let view):
             if let label = view as? UILabel {
                 label.lineBreakMode = !useDefaultValue ? mode : .ByWordWrapping
             } else if let textView = view as? UITextView {
                 textView.textContainer.lineBreakMode = !useDefaultValue ? mode : .ByWordWrapping
+            } else {
+                warningUnknownAppearance(targetView)
             }
+
         case (let .allowsEditingTextAttributes(allows), let view):
             if let textField = view as? UITextField {
                 textField.allowsEditingTextAttributes = !useDefaultValue ? allows : false
             } else if let textView = view as? UITextView {
                 textView.allowsEditingTextAttributes = !useDefaultValue ? allows : false
+            } else {
+                warningUnknownAppearance(targetView)
             }
+
         case (let .clearsOnInsertion(clearsOnInsertion), let view):
             if let textField = view as? UITextField {
                 textField.clearsOnInsertion = !useDefaultValue ? clearsOnInsertion : false
             } else if let textView = view as? UITextView {
                 textView.clearsOnInsertion = !useDefaultValue ? clearsOnInsertion : false
+            } else {
+                warningUnknownAppearance(targetView)
             }
 
         // UITextView
@@ -309,23 +335,25 @@ public enum Appearance {
 
         // Custom
         case (let .custom(dictionary), _):
-            !useDefaultValue ? brick.setupCustomStyle(dictionary) : brick.removeCustomStyle(dictionary)
+            !useDefaultValue ? targetView.setupCustomStyle(dictionary) : targetView.removeCustomStyle(dictionary)
 
         default:
-            assertionFailure("Unknown appearance \(self) for brick \(brick)")
+            warningUnknownAppearance(targetView)
             break
         }
     }
 
-    func toString() -> String {
+    private func warningUnknownAppearance<View: UIView>(targetView: View) {
+        assertionFailure("Unknown appearance \(self) for view \(targetView)")
+    }
+
+    private func toString() -> String {
         let strSelf = String(self)
         if let index = strSelf.characters.indexOf("(") {
             return String(self).substringToIndex(index)
         }
         return strSelf
     }
-
-    
 }
 
 extension Appearance: Hashable {

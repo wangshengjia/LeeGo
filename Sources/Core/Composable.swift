@@ -68,7 +68,7 @@ extension Composable {
             }
             return false
         }))
-        print(targetView.constraints)
+        
         // Layout each view with auto layout visual format language as brick.
         for format in layout.formats {
             let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: layout.options, metrics: layout.metrics.metrics(), views: viewsDictionary)
