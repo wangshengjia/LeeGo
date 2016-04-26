@@ -1,6 +1,6 @@
 //
 //  Composable.swift
-//  Pods
+//  LeeGo
 //
 //  Created by Victor WANG on 21/02/16.
 //
@@ -9,66 +9,73 @@
 import Foundation
 
 protocol Composable {
-    func compositeSubcomponents<Component where Component: UIView, Component: ComponentType>(component: Component, components: [ComponentTarget], layout: Layout)
+    func composite<View where View: UIView, View: BrickDescribable>(bricks: [Brick], to targetView: View, with layout: Layout)
 }
 
 extension Composable {
-    func compositeSubcomponents<Component where Component: UIView, Component: ComponentType>(component: Component, components: [ComponentTarget], layout: Layout) {
+    internal func composite<View where View: UIView, View: BrickDescribable>(bricks: [Brick], to targetView: View, with layout: Layout) {
 
-        // remove components which do not exist anymore
-        for subview in component.subviews {
-            if let oldComponent = subview.configuration where !components.contains(oldComponent) {
-                // subview.cleanUpForReuse() // TODO: clean layout maybe
+        // remove subviews which do not exist anymore in bricks
+        for subview in targetView.subviews {
+            if let oldBrick = subview.currentBrick where !bricks.contains(oldBrick) {
                 subview.removeFromSuperview()
             }
         }
 
-        // filter components already exist
-        let filteredComponents = components.filter { (subComponent) -> Bool in
-            if let subcomponents = component.configuration?.components where !subcomponents.contains(subComponent) {
-                return false
+        // filter bricks already exist
+        let filteredBricks = bricks.filter { (subBrick) -> Bool in
+            if let subbricks = targetView.currentBrick?.bricks where subbricks.contains(subBrick) {
+                for subview in targetView.subviews {
+                    if let subbrick2 = subview.currentBrick where subbrick2 == subBrick {
+                        return false
+                    }
+                }
             }
             return true
         }
 
-        filteredComponents.forEach { componentTarget in
+        filteredBricks.forEach { brick in
             var view: UIView? = nil;
 
-            if let nibName = componentTarget.nibName,
-                let componentView = NSBundle.mainBundle().loadNibNamed(nibName, owner: nil, options: nil).first as? UIView {
-                    view = componentView
-            } else if let componentView = ComponentFactory.componentViewFromClass(componentTarget.targetClass) {
-                view = componentView
+            if let nibName = brick.nibName,
+                let brickView = NSBundle.mainBundle().loadNibNamed(nibName, owner: nil, options: nil).first as? UIView {
+                    view = brickView
+            } else if let targetClass = brick.targetClass as? UIView.Type {
+                view = targetClass.init()
             }
 
             view?.isRoot = false
-            view?.viewName = componentTarget.name
+            view?.currentBrick = Brick(name: brick.name, targetClass: brick.targetClass, nibName: brick.nibName)
             if let view = view {
-                component.addSubview(view)
+                targetView.addSubview(view)
+                view.brickDidAwake()
             }
         }
 
-        
-
+        //TODO: sort brick's subviews to have as same order as bricks
         var viewsDictionary = [String: UIView]()
-        for subview in component.subviews {
-            if let name = subview.name {
+        for subview in targetView.subviews {
+            if let name = subview.currentBrick?.name {
                 viewsDictionary[name] = subview
             }
         }
 
-        // TODO: apply diff of layout instead of removing all constraints
-        component.removeConstraints(component.constraints)
+        // Remove constraint with identifier (which means not created by system)
+        targetView.removeConstraints(targetView.constraints.filter({ (constraint) -> Bool in
+            if constraint.mode == .SubviewsLayout {
+                return true
+            }
+            return false
+        }))
 
-        // Layout each component view with auto layout visual format language from configuration.
+        // Layout each view with auto layout visual format language as brick.
         for format in layout.formats {
-            let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions.DirectionLeadingToTrailing, metrics: layout.metrics, views: viewsDictionary)
+            let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: layout.options, metrics: layout.metrics.metrics(), views: viewsDictionary)
             for constraint in constraints {
-                //constraint.priority = 990
-                //constraint.shouldBeArchived = true
-                constraint.identifier = constraint.description
-                component.addConstraint(constraint)
+                constraint.setIdentifier(with: .SubviewsLayout)
+                targetView.addConstraint(constraint)
             }
         }
     }
 }
+

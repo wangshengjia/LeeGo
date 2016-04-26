@@ -2,62 +2,47 @@
 //  DetailsViewController.swift
 //  LeeGo
 //
-//  Created by Victor WANG on 08/02/16.
-//  Copyright © 2016 CocoaPods. All rights reserved.
+//  Created by Victor WANG on 24/04/16.
+//  Copyright © 2016 LeeGo. All rights reserved.
 //
 
 import Foundation
 import UIKit
+
 import LeeGo
 
 class DetailsViewController: UIViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setup()
+
+        // This requires XcodeInjection to work
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(setup), name: "INJECTION_BUNDLE_NOTIFICATION", object: nil)
+    }
+}
+
+extension DetailsViewController {
+    
+    func setup() {
+        let title = "title".build(UILabel).style([.text("Showcase")])
+        let description = "description".build(UILabel).style(SimpleShowcase.descriptionStyle + [.text("description")])
+        let redBlock = "red".build().style([.backgroundColor(UIColor.redColor())])
+        let greenBlock = "green".build().style([.backgroundColor(UIColor.greenColor())])
+        let blueBlock = "blue".build().style([.backgroundColor(UIColor.blueColor())])
+
+        let blocks = Brick.union("blocks", bricks: [
+            redBlock.height(50),
+            greenBlock.height(80),
+            blueBlock.height(30)],
+            axis: .Horizontal, align: .Top, distribution: .FillEqually, metrics: LayoutMetrics(10, 10, 10, 10, 10, 10)).style([.backgroundColor(UIColor.brownColor())])
+
+        let brick = "details".build().bricks(title, description, blocks) {
+            title, description, blocks in
+            Layout(bricks: [title, description, blocks], axis: .Vertical, align: .Fill, distribution: .Flow(3), metrics: LayoutMetrics(84, 20, 20, 20, 10, 10))
+        }
         
-        self.view.configure(ComponentTarget(name: "details", targetClass: UIView.self)
-            .components(ComponentBuilder.detailsView.componentTarget(), layout: { details -> Layout in
-                Layout(["H:|[detailsView]|", "V:|[detailsView]|"])
-            }))
-    }
-
-}
-
-extension String {
-    func f1(a: String) -> String {
-        return self + a
-    }
-
-    func f2(a: String, _ b: String) -> String {
-        return self + a + b
+        self.view.configureAs(brick, updatingStrategy: .Always)
     }
 }
-
-extension ComponentTarget {
-    func article() {
-        UIView().configure(
-            ComponentBuilder.title.componentTarget()
-                .flowH(ComponentBuilder.subtitle.componentTarget(), metrics: ComponentBuilder.defaultMetrics)
-                .flowV(ComponentBuilder.avatar.componentTarget(), metrics: ComponentBuilder.defaultMetrics)
-        )
-
-    }
-
-    func flowH(c1: ComponentTarget, metrics: MetricsValuesType) -> ComponentTarget {
-        return ComponentTarget(name: "inlineview", targetClass: UIView.self).style([.translatesAutoresizingMaskIntoConstraints(false), .backgroundColor(UIColor.clearColor())]).components(self, c1, layout: { (name1, name2) -> Layout in
-            return Layout([
-                "H:|-left-[\(name1)]-interspaceH-[\(name2)]-right-|",
-                "V:|[\(name1)]-interspaceV-[\(name2)]|"], metrics)
-        })
-    }
-
-    func flowV(c1: ComponentTarget, metrics: MetricsValuesType) -> ComponentTarget {
-        return ComponentTarget(name: "inlineview", targetClass: UIView.self).style([.translatesAutoresizingMaskIntoConstraints(false), .backgroundColor(UIColor.clearColor())]).components(self, c1, layout: { (name1, name2) -> Layout in
-            return Layout([
-                "H:|[\(name1)]-interspaceH-[\(name2)]|",
-                "V:|-top-[\(name1)]-interspaceV-[\(name2)]-bottom-|"], metrics)
-        })
-    }
-}
-
-// print("a".f1("b").f2("c", "d").f1("e"))

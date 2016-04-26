@@ -1,82 +1,46 @@
 //
 //  ReusableCell.swift
-//  Pods
+//  LeeGo
 //
 //  Created by Victor WANG on 10/01/16.
 //
 //
 
 import Foundation
+import UIKit
 
 // Cell
 
-extension UITableViewCell {
-
-//    public override func prepareForReuse() {
-//        super.prepareForReuse()
-//
-//        cleanUpForReuse()
-//    }
-}
-
 extension UICollectionViewCell {
-    
-    public override func prepareForReuse() {
-        super.prepareForReuse()
 
-        cleanUpForReuse()
-    }
-}
+    ///  Helper method used to calculate the fitting height of current cell.
+    ///  Call it directly inside UICollectionViewCell.preferredLayoutAttributesFittingAttributes. Ex:
+    ///  ```
+    ///  override public func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    ///       return fittingHeightLayoutAttributes(layoutAttributes)
+    ///  }
+    ///  ```
+    ///
+    ///  - parameter layoutAttributes: layoutAttributes from `UICollectionViewCell.preferredLayoutAttributesFittingAttributes`
+    ///
+    ///  - returns: UICollectionViewLayoutAttributes instance with fitting height.
+    public func fittingHeightLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        self.frame = layoutAttributes.frame
 
-extension UICollectionViewCell {
-    override public func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        // TODO: implement a cache mechanisme
         // if cached, return cached value
-        
-        // calculate manually
 
-        // calculate auto
-        let attr: UICollectionViewLayoutAttributes = layoutAttributes.copy() as! UICollectionViewLayoutAttributes
-
-        var newFrame = attr.frame
-        self.frame = newFrame
-
-        self.invalidateIntrinsicContentSize()
         self.setNeedsLayout()
         self.layoutIfNeeded()
 
-        let desiredHeight = self.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
-        newFrame.size.height = desiredHeight
-        attr.frame = newFrame
-        return attr
+        layoutAttributes.frame = {
+            var frame = layoutAttributes.frame
+            frame.size.height = contentView.fittingHeight()
+            return frame
+            }()
+
+        // this function get called 4 times everytime
+        return layoutAttributes
     }
 }
-
-//
-//public protocol ConfiguratorDelegate {
-//
-//    func willApply<Component: UIView>(
-//        with Style: [Appearance],
-//        toComponent component: Component,
-//        withItem item: ItemType,
-//        atIndexPath indexPath: NSIndexPath?) -> [Appearance]
-//
-//    func willComposite<Component: UIView>(with
-//        components: [ComponentTarget],
-//        toComponent component: Component,
-//        using layout: Layout,
-//        withItem item: ItemType,
-//        atIndexPath indexPath: NSIndexPath?)
-//
-//    func willApply<Component: UIView>(with
-//        componentTarget: ComponentTarget,
-//        toComponent component: Component,
-//        withItem item: ItemType,
-//        atIndexPath indexPath: NSIndexPath?) -> ComponentTarget
-//
-//    func didApply<Component: UIView>(with componentTarget: ComponentTarget,
-//        toComponent component: Component,
-//        withItem item: ItemType,
-//        atIndexPath indexPath: NSIndexPath?)
-//
-//}
 

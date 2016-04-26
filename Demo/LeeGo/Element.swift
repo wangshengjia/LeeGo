@@ -16,8 +16,9 @@ class Element {
     let description: String?
     let date: String?
     let isRestrict: Bool
+    let type: String?
 
-    // An naive implementation about json to model object
+    // A naive implementation about json to model object
     // Waiting for improving
     init?(dictionary: [String: AnyObject]) {
         self.elementId = dictionary["id"] as? Int
@@ -26,8 +27,9 @@ class Element {
         self.description = dictionary["description"] as? String
         self.date = dictionary["date_publication"] as? String
         self.isRestrict = (dictionary["restreint"] as? Bool) ?? false
+        self.type = dictionary["type"] as? String
 
-        if (self.elementId == nil || self.title == nil || self.description == nil || self.date == nil) {
+        if (self.elementId == nil || self.title == nil || self.description == nil || self.date == nil || self.type == nil) {
             return nil
         }
     }

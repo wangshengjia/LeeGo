@@ -1,0 +1,83 @@
+{
+    "layout" : {
+        "options" : [
+                     "DirectionLeadingToTrailing"
+                     ],
+        "formats" : [
+                     "H:|-left-[avatar]-spaceH-[title]-right-|",
+                     "H:|-left-[avatar]-spaceH-[subtitle]-right-|",
+                     "V:|-top-[title]-spaceV-[subtitle]-(>=bottom)-|",
+                     "V:|-top-[avatar]-(>=bottom)-|"
+                     ],
+        "metrics" : {
+            "left" : 20,
+            "right" : 20,
+            "spaceH" : 10,
+            "bottom" : 20,
+            "top" : 20,
+            "spaceV" : 10
+        }
+    },
+    "name" : "article",
+    "height" : 60.0,
+    "outlet" : "button",
+    "style" : {
+        "backgroundColor" : "#FFFFFF"
+    },
+    "bricks" : [
+                    {
+                    "targetClass" : "UILabel",
+                    "style" : {
+                    "attributedText" : [
+                                        {
+                                        "NSFont" : {
+                                        "size" : 16,
+                                        "name" : "Helvetica"
+                                        },
+                                        "NSColor" : "#FF0000"
+                                        },
+                                        {
+                                        "NSFont" : {
+                                        "size" : 20,
+                                        "name" : "Avenir-Book"
+                                        },
+                                        "NSColor" : "#000000"
+                                        },
+                                        {
+                                        "NSFont" : {
+                                        "size" : 16,
+                                        "name" : "Avenir-Book"
+                                        },
+                                        "NSColor" : "#AAAAAA"
+                                        }
+                                        ],
+                    "translatesAutoresizingMaskIntoConstraints" : false,
+                    "numberOfLines" : 0
+                    },
+                    "name" : "title"
+                    },
+                    {
+                    "targetClass" : "UILabel",
+                    "style" : {
+                    "numberOfLines" : 0,
+                    "textColor" : "#AAAAAA",
+                    "text" : "Default text",
+                    "font" : {
+                    "size" : 12,
+                    "name" : ".SFUIText-Regular"
+                    }
+                    },
+                    "name" : "subtitle"
+                    },
+                    {
+                    "name" : "avatar",
+                    "style" : {
+                    "backgroundColor" : "#00FF00",
+                    "ratio" : 1.5
+                    },
+                    "width" : 68.0,
+                    "targetClass" : "UIImageView"
+                    }
+                    ],
+    "targetClass" : "UIView"
+}

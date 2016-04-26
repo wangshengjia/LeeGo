@@ -3,7 +3,7 @@
 //  LeeGo
 //
 //  Created by Victor WANG on 17/01/16.
-//  Copyright © 2016 CocoaPods. All rights reserved.
+//  Copyright © 2016 LeeGo. All rights reserved.
 //
 
 import Foundation
@@ -26,20 +26,15 @@ extension ElementViewModel {
     }
 }
 
-extension ElementViewModel: ComponentDataSource {
-    func updateComponent(componentView: UIView, with componentTarget: ComponentTarget) {
-        switch componentView {
-        case let titleLabel as UILabel where componentView.name == String(ComponentBuilder.title):
-            titleLabel.setAttributeString(with: [
-                Style.marker: element.isRestrict ? "󰀀" : "",
-                Style.customTitle: element.title ?? "",
-                Style.nature: element.natureEdito ?? ""
-                ])
-
-        case let subtitleLabel as UILabel  where componentView.name == String(ComponentBuilder.subtitle):
+extension ElementViewModel: BrickDataSource {
+    func update(targetView: UIView, with brick: Brick) {
+        switch targetView {
+        case let titleLabel as UILabel where brick == LeMonde.title:
+            titleLabel.attributedText = titleLabel.updatedAttributedString(with: [element.isRestrict ? "󰀀" : nil, element.title, element.natureEdito])
+        case let subtitleLabel as UILabel  where brick == LeMonde.subtitle:
             subtitleLabel.text = element.description
-        case let avatar as UIImageView where componentView.name == String(ComponentBuilder.avatar):
-            avatar.backgroundColor = UIColor.grayColor()
+        case let illustration as UIImageView where brick == LeMonde.illustration:
+            illustration.backgroundColor = UIColor.grayColor()
         default:
             break
         }
