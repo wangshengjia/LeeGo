@@ -1,0 +1,16 @@
+comment:
+  layout: header, changes, diff
+coverage:
+  ignore:
+  - Demo/.*
+  - Pods/.*
+  - LeeGoTests/.*
+  - Carthage/.*
+  - build/.*
+  - .*Tests.m
+  - .*Tests.swift
+  - .*Spec.m
+  - .*Spec.swift
+  status:
+    patch: false
+
