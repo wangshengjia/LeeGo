@@ -1,6 +1,6 @@
 //
 //  Configurable.swift
-//  Pods
+//  LeeGo
 //
 //  Created by Victor WANG on 21/02/16.
 //
@@ -9,10 +9,8 @@
 import Foundation
 
 protocol Configurable {
-    ///
     func setup<View: UIView>(view: View, currentStyle: [Appearance], newStyle: [Appearance])
 
-    /// methods should be overrided
     func setupCustomStyle(style: [String: AnyObject])
     func removeCustomStyle(style: [String: AnyObject])
 }
@@ -20,7 +18,7 @@ protocol Configurable {
 
 extension Configurable {
 
-    func setup<View: UIView>(view: View, currentStyle: [Appearance] = [], newStyle: [Appearance]) {
+    internal func setup<View: UIView>(view: View, currentStyle: [Appearance] = [], newStyle: [Appearance]) {
 
         // if current appearance do not appeare in new style, then set them to default value
         // TODO: change style from Array to Set to gain some performance

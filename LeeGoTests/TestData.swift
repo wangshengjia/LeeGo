@@ -56,7 +56,7 @@ enum BrickBuilder: BrickBuilderType {
 }
 
 extension BrickBuilder {
-    static let types: [BrickBuilder: AnyClass] = [
+    static let brickClass: [BrickBuilder: AnyClass] = [
         title: UILabel.self,
         subtitle: UILabel.self,
         avatar: UIImageView.self,

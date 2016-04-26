@@ -154,10 +154,10 @@
             </objects>
             <point key="canvasLocation" x="-273" y="-108"/>
         </scene>
-        <!--Details View Controller-->
+        <!--Details-->
         <scene sceneID="bgO-YT-xOM">
             <objects>
-                <viewController storyboardIdentifier="DetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7df-QQ-Z2l" customClass="DetailsViewController" customModule="LeeGo_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsViewController" title="Details" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7df-QQ-Z2l" customClass="DetailsViewController" customModule="LeeGo_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lpE-px-vqb"/>
                         <viewControllerLayoutGuide type="bottom" id="N60-5a-aVO"/>
@@ -171,7 +171,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eRW-Ra-v4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1840" y="-108"/>
+            <point key="canvasLocation" x="1836" y="558"/>
         </scene>
     </scenes>
 </document>

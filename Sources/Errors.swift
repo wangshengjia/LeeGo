@@ -1,6 +1,6 @@
 //
 //  Errors.swift
-//  Pods
+//  LeeGo
 //
 //  Created by Victor WANG on 20/01/16.
 //
@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum JSONParseError: ErrorType {
+internal enum JSONParseError: ErrorType {
     case UnexpectedKeyError(key: String), MismatchedTypeError(type: Any.Type, expectedType: Any.Type)
 }
 
-enum JSONConvertibleError: ErrorType {
+internal enum JSONConvertibleError: ErrorType {
     case UnexpectedBrickNameError(JSONDictionary)
 }

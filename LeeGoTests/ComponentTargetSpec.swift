@@ -23,7 +23,7 @@ class BrickSpec: QuickSpec {
                 expect(brick.width) == 40
                 expect(brick.height) == 60
                 expect(brick.hashValue) == "title".hashValue
-                if case let .backgroundColor(color) = brick.style.first! {
+                if case let .backgroundColor(color) = brick.style!.first! {
                     expect(color) == UIColor.greenColor()
                 }
             }

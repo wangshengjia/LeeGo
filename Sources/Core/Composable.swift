@@ -1,6 +1,6 @@
 //
 //  Composable.swift
-//  Pods
+//  LeeGo
 //
 //  Created by Victor WANG on 21/02/16.
 //
@@ -13,7 +13,7 @@ protocol Composable {
 }
 
 extension Composable {
-    func composite<View where View: UIView, View: BrickDescribable>(bricks: [Brick], to targetView: View, with layout: Layout) {
+    internal func composite<View where View: UIView, View: BrickDescribable>(bricks: [Brick], to targetView: View, with layout: Layout) {
 
         // remove subviews which do not exist anymore in bricks
         for subview in targetView.subviews {
@@ -60,7 +60,6 @@ extension Composable {
             }
         }
 
-        // TODO: apply diff of layout instead of removing all constraints
         // Remove constraint with identifier (which means not created by system)
         targetView.removeConstraints(targetView.constraints.filter({ (constraint) -> Bool in
             if constraint.mode == .SubviewsLayout {
@@ -73,7 +72,6 @@ extension Composable {
         for format in layout.formats {
             let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: layout.options, metrics: layout.metrics.metrics(), views: viewsDictionary)
             for constraint in constraints {
-                constraint.identifier = "children: \(constraint.description)"
                 constraint.setIdentifier(with: .SubviewsLayout)
                 targetView.addConstraint(constraint)
             }

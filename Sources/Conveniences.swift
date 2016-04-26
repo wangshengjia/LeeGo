@@ -1,6 +1,6 @@
 //
 //  Conveniences.swift
-//  Pods
+//  LeeGo
 //
 //  Created by Victor WANG on 03/02/16.
 //
@@ -129,10 +129,6 @@ extension UIView {
 
         let attributedStrings = attributesArray.enumerate().flatMap({ (index, attribute) -> NSAttributedString? in
             if let idx = Int(String(index)) {
-                // TODO: should use this strategy or not ?
-                // If text == "", set text to empty which will hide the text
-                // If text == nil, set text to default value if there is one
-                // let text = texts[idx] ?? (attribute[kCustomAttributeDefaultText] as? String) ?? ""
                 let text = texts[idx] ?? ""
                 return NSAttributedString(string: text, attributes: attribute)
             }
@@ -165,7 +161,7 @@ extension UIView {
     }
 }
 
-internal func formattedJSON(json: JSONDictionary) -> String? {
+public func formattedStringFromJSON(json: JSONDictionary) -> String? {
     do {
         let data = try NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
         return String(data: data, encoding: NSUTF8StringEncoding)

@@ -1,6 +1,6 @@
 //
 //  BrickDescribable.swift
-//  Pods
+//  LeeGo
 //
 //  Created by Victor WANG on 20/01/16.
 //
@@ -17,7 +17,7 @@ protocol BrickDescribable: class, Configurable, Composable {
 
 extension BrickDescribable {
 
-    func apply<View where View: UIView, View: BrickDescribable>(newBrick: Brick, to view: View, with dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy) {
+    internal func apply<View where View: UIView, View: BrickDescribable>(newBrick: Brick, to view: View, with dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy) {
 
         if shouldRebuild(view.currentBrick, with: newBrick, updatingStrategy: updatingStrategy) {
             applyDiff(with: newBrick, to: view)
@@ -26,12 +26,15 @@ extension BrickDescribable {
         // update brick's value
         dataSource?.update(view, with: newBrick)
     }
+}
 
+extension BrickDescribable {
+    
     private func applyDiff<View where View: UIView, View: BrickDescribable>(with newBrick: Brick, to view: View) {
 
         // setup self, only if brick is not initialized from a nib file
         if view.currentBrick?.nibName == nil {
-            setup(view, currentStyle: view.currentBrick?.style ?? [], newStyle: newBrick.style)
+            setup(view, currentStyle: view.currentBrick?.style ?? [], newStyle: newBrick.style ?? [])
         }
 
         // handle brick's width & height constraint
@@ -45,15 +48,13 @@ extension BrickDescribable {
 
     private func shouldRebuild(currentBrick: Brick?, with newBrick: Brick, updatingStrategy: UpdatingStrategy) -> Bool {
 
-        // TODO: when screen size changed ? (rotation ?)
-
         var shouldRebuild = (currentBrick == nil)
 
         switch updatingStrategy {
         case .WhenBrickChanged:
             if let current = currentBrick
                 where current.name != newBrick.name
-                    || (current.style == [] && current.bricks == nil && current.layout == nil) {
+                    || (current.style == nil && current.bricks == nil && current.layout == nil) {
                 shouldRebuild = true
             }
         case .Always:

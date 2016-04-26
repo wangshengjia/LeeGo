@@ -29,9 +29,6 @@ class AppearanceSpec: QuickSpec {
         }
 
         describe("Appearacne tests") {
-            it("should convert Appearance to String `none`") {
-                expect(Appearance.none.toString()) == "none"
-            }
 
             it("should apply appearances correctly to given UIView") {
                 // Given
@@ -185,7 +182,6 @@ class AppearanceSpec: QuickSpec {
                     .textColor(UIColor.greenColor()),
                     .textAlignment(.Center),
                     .text("labelText"),
-                    .lineBreakMode(.ByCharWrapping),
                     .adjustsFontSizeToFitWidth(true),
                     .allowsEditingTextAttributes(true),
                     .clearsOnInsertion(true),
