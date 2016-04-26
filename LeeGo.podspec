@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = "LeeGo"
-  s.version          = "0.4.0"
-  s.summary          = "A Swift framework that helps you decouple & modularise your UI component into small pieces of LEGO style's bricks. Try to make iOS UI development declarative, configurable and highly reusable."
+  s.version          = "0.4.1"
+  s.summary          = "A Swift framework that helps you decouple & modularise your UI component into small pieces of LEGO style's bricks."
 
   s.description      = <<-DESC
                         LeeGo is a Swift framework that helps you decouple & modularise your UI component into small pieces of LEGO style's bricks. Try to make iOS UI development declarative, configurable and highly reusable. LeeGo may help  you with:
