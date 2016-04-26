@@ -13,6 +13,17 @@ import UIKit
 
 extension UICollectionViewCell {
 
+    ///  Helper method used to calculate the fitting height of current cell.
+    ///  Call it directly inside UICollectionViewCell.preferredLayoutAttributesFittingAttributes. Ex:
+    ///  ```
+    ///  override public func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    ///       return fittingHeightLayoutAttributes(layoutAttributes)
+    ///  }
+    ///  ```
+    ///
+    ///  - parameter layoutAttributes: layoutAttributes from `UICollectionViewCell.preferredLayoutAttributesFittingAttributes`
+    ///
+    ///  - returns: UICollectionViewLayoutAttributes instance with fitting height.
     public func fittingHeightLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         self.frame = layoutAttributes.frame
 

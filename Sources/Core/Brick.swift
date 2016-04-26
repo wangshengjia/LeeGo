@@ -90,40 +90,92 @@ extension String: BrickBuilderType {
 }
 
 
-// MARK: Brick Target
+// MARK: Brick
 
-/// A closure used to resolve the real cell's height.
-/// The idea of this closure is to calculate cell's height
-/// based on `cell width`, `subviews' height` and `metrics which used in autolayout`
+/// A closure used to resolve the cell's height.
+/// It will be used only if needed when calculate the cell's height for UICollectionView.
 ///
-/// - Note: `childrenHeights` is an array of subviews' heights, values keep the same order as `Brick.bricks`
+/// The idea of this closure is to calculate cell's height
+/// based on `cell width`, `subviews' height` and `metrics which used in autolayout`.
+///
+/// - Note: `childrenHeights` is an array of subviews' heights, values keep the same order as elements in `Brick.bricks`
 /// - SeeAlso: `Brick`, `UIView.fittingHeight()`
 public typealias ManuallyFittingHeightResolver = (fittingWidth: CGFloat, childrenHeights: [CGFloat], metrics: LayoutMetrics) -> CGFloat
 
-/// A `Brick` instance represent
+/// A `Brick` instance represent a piece of Lego's brick,
+/// it could be a simple tiny brick such as:
+/// ```
+/// let brick = Brick(name: "title", targetClass: UILabel.self)
+/// ```
+/// or it can also be some way more complex brick 
+/// which composed by a bunch of simple bricks. And this is
+/// the whole idea of this framework: dealing with `bricks` as play with Lego.
+///
+/// A `brick` tells a view:
+/// - What's the real view type
+/// - How the view looks like
+/// - What's inside
+/// - How to layout them
+///
+/// `Brick` is design to be full value type which is
+/// immutable, functional and thread-safe
 public struct Brick {
+
+    /// `name` stand for a name/type of a `brick`.
+    /// The brick which have same name will be considered as the same brick
+    /// - Warning: Usually you should not have different implementations of brick with same name
+    /// - Note: For the moment, the `name` property is more or less act as an identifier.
+    /// This should be improved later.
     public let name: String
 
+    /// The dynamic type of the target view which will be created.
+    /// So no doute it should a subclass of `UIView`.
     let targetClass: AnyClass
+
+    /// Stand for the name of an IB file. If `nibName` is not
+    /// nil or empty, the target view will be created by `loadNibNamed:`
     let nibName: String?
 
+    /// An array of `Appearance`, which will be applied to view
     let style: [Appearance]?
+
+    /// An array of `Brick` inside, represet for subviews
     let bricks: [Brick]?
+
+    /// The `Layout` property indicate how to layout the `bricks` inside
+    /// - SeeAlso: Brick.bricks
     let layout: Layout?
 
-    // brick width and height
+    /// Width and height
     let width: CGFloat?
     let height: CGFloat?
 
+    /// Outlet key
     let LGOutletKey: String?
 
+    /// A closure used to resolve the cell's height.
+    /// It will be used only if needed when calculate the cell's height for UICollectionView.
+    ///
+    /// The idea of this closure is to calculate cell's height
+    /// based on `cell width`, `subviews' height` and `metrics which used in autolayout`.
+    ///
+    /// - Example:
+    ///
+    /// ```
+    /// heightResolver { (_, childrenHeights, metrics) -> CGFloat in
+    ///   return childrenHeights[0] + childrenHeights[1] + metrics.top + metrics.bottom + metrics.spaceV
+    /// }
+    /// ```
+    ///
+    /// - Note: `childrenHeights` is an array of subviews' heights, values keep the same order as elements in `Brick.bricks`
+    /// - SeeAlso: `Brick.ManuallyFittingHeightResolver`, `UIView.fittingHeight()`
     let heightResolver: ManuallyFittingHeightResolver?
 
     internal init(name: String, targetClass: AnyClass = UIView.self, nibName: String? = nil) {
         self.init(name: name, targetClass: targetClass, nibName: nibName, width: nil, height: nil, style: nil, bricks: nil, layout: nil, LGOutletKey: nil, heightResolver: nil)
     }
 
-    init(name: String, targetClass: AnyClass, nibName: String?, width: CGFloat?, height: CGFloat?, style: [Appearance]?, bricks: [Brick]?, layout: Layout?, LGOutletKey: String?, heightResolver: ManuallyFittingHeightResolver?) {
+    internal init(name: String, targetClass: AnyClass, nibName: String?, width: CGFloat?, height: CGFloat?, style: [Appearance]?, bricks: [Brick]?, layout: Layout?, LGOutletKey: String?, heightResolver: ManuallyFittingHeightResolver?) {
 
         self.name = name
         if targetClass is UIView.Type {
@@ -148,61 +200,168 @@ public struct Brick {
         }
     }
 
-    public func style(style: [Appearance] = []) -> Brick {
+    ///  Return a new `Brick` instance with
+    ///  given `Appearance` array.
+    ///
+    ///  - parameter style: `Appearance` array
+    ///
+    ///  - returns: new `Brick` instance with given array.
+    public func style(style: [Appearance]) -> Brick {
         return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
-    public func heightResolver(heightResolver: ManuallyFittingHeightResolver?) -> Brick {
-        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
-    }
-
+    ///  Return a new `Brick` instance with
+    ///  given sub `Brick` array and `Layout` instance
+    ///  which tells the current brick how to layout
+    ///  the sub-bricks
+    ///
+    ///  - parameter bricks: a `Brick` array represent the sub-bricks inside the current brick
+    ///  - parameter layout: a 'Layout' instance should tell how to layout the sub-bricks which given by `bricks` array
+    ///
+    ///  - returns: new `Brick` instance with given `bricks` and `layout`
     public func bricks(bricks: [Brick], layout: Layout) -> Brick {
         return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
-    public func bricks(c1: Brick, layout: (String) -> Layout) -> Brick {
-        let bricks = [c1]
-        let layout = layout(c1.name)
+    ///  Return a new `Brick` instance with
+    ///  given sub-bricks and closure
+    ///
+    ///  - parameter b1:     a sub-brick
+    ///  - parameter layout: a closure which take 
+    ///  `b1`'s name as parameter and return a `Layout` instance
+    ///
+    ///  - returns: new `Brick` instance with given `bricks` and `layout`
+    public func bricks(b1: Brick, layout: (String) -> Layout) -> Brick {
+        let bricks = [b1]
+        let layout = layout(b1.name)
 
         return self.bricks(bricks, layout:layout)
     }
 
-    public func bricks(c1: Brick, _ c2: Brick, layout: (String, String) -> Layout) -> Brick {
-        let bricks = [c1, c2]
-        let layout = layout(c1.name, c2.name)
+    ///  Return a new `Brick` instance with
+    ///  given sub-bricks and closure
+    ///
+    ///  - parameter b1:     first sub-brick
+    ///  - parameter b2:     second sub-brick
+    ///  - parameter layout: a closure which take
+    ///  sub-bricks' name as parameters with the same order and return a `Layout` instance
+    ///
+    ///  - returns: new `Brick` instance with given `bricks` and `layout`
+    public func bricks(b1: Brick, _ b2: Brick, layout: (String, String) -> Layout) -> Brick {
+        let bricks = [b1, b2]
+        let layout = layout(b1.name, b2.name)
 
         return self.bricks(bricks, layout:layout)
     }
 
-    public func bricks(c1: Brick, _ c2: Brick, _ c3: Brick, layout: (String, String, String) -> Layout) -> Brick {
-        let bricks = [c1, c2, c3]
-        let layout = layout(c1.name, c2.name, c3.name)
+    ///  Return a new `Brick` instance with
+    ///  given sub-bricks and closure
+    ///
+    ///  - parameter b1:     first sub-brick
+    ///  - parameter b2:     second sub-brick
+    ///  - parameter b3:     third sub-brick
+    ///  - parameter layout: a closure which take
+    ///  sub-bricks' name as parameters with the same order and return a `Layout` instance
+    ///
+    ///  - returns: new `Brick` instance with given `bricks` and `layout`
+    public func bricks(b1: Brick, _ b2: Brick, _ b3: Brick, layout: (String, String, String) -> Layout) -> Brick {
+        let bricks = [b1, b2, b3]
+        let layout = layout(b1.name, b2.name, b3.name)
 
         return self.bricks(bricks, layout:layout)
     }
 
-    public func bricks(c1: Brick, _ c2: Brick, _ c3: Brick, _ c4: Brick, layout: (String, String, String, String) -> Layout) -> Brick {
-        let bricks = [c1, c2, c3, c4]
-        let layout = layout(c1.name, c2.name, c3.name, c4.name)
+    ///  Return a new `Brick` instance with
+    ///  given sub-bricks and closure
+    ///
+    ///  - parameter b1:     first sub-brick
+    ///  - parameter b2:     second sub-brick
+    ///  - parameter b3:     third sub-brick
+    ///  - parameter b4:     fouth sub-brick
+    ///  - parameter layout: a closure which take
+    ///  sub-bricks' name as parameters with the same order and return a `Layout` instance
+    ///
+    ///  - returns: new `Brick` instance with given `bricks` and `layout`
+    public func bricks(b1: Brick, _ b2: Brick, _ b3: Brick, _ b4: Brick, layout: (String, String, String, String) -> Layout) -> Brick {
+        let bricks = [b1, b2, b3, b4]
+        let layout = layout(b1.name, b2.name, b3.name, b4.name)
 
         return self.bricks(bricks, layout:layout)
     }
 
-    public func bricks(c1: Brick, _ c2: Brick, _ c3: Brick, _ c4: Brick, _ c5: Brick, layout: (String, String, String, String, String) -> Layout) -> Brick {
-        let bricks = [c1, c2, c3, c4, c5]
-        let layout = layout(c1.name, c2.name, c3.name, c4.name, c5.name)
+    ///  Return a new `Brick` instance with
+    ///  given sub-bricks and closure.
+    ///
+    ///  - parameter b1:     first sub-brick
+    ///  - parameter b2:     second sub-brick
+    ///  - parameter b3:     third sub-brick
+    ///  - parameter b4:     fouth sub-brick
+    ///  - parameter b5:     fifth sub-brick
+    ///  - parameter layout: a closure which take
+    ///  sub-bricks' name as parameters with the same order and return a `Layout` instance
+    ///
+    ///  - returns: new `Brick` instance with given `bricks` and `layout`
+    public func bricks(b1: Brick, _ b2: Brick, _ b3: Brick, _ b4: Brick, _ b5: Brick, layout: (String, String, String, String, String) -> Layout) -> Brick {
+        let bricks = [b1, b2, b3, b4, b5]
+        let layout = layout(b1.name, b2.name, b3.name, b4.name, b5.name)
 
         return self.bricks(bricks, layout:layout)
     }
 
+    ///  Return a new `Brick` instance with the given width.
+    ///
+    ///  - Note: `width` will be considered as a width autolayout 
+    ///  constraint and be added on the view configured by this brick
+    ///
+    ///  - parameter width: the width value in CGFloat
+    ///
+    ///  - returns: new `Brick` instance with given `width`
     public func width(width: CGFloat) -> Brick {
         return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
+    ///  Return a new `Brick` instance with the given height.
+    ///
+    ///  - Note: `height` will be considered as a height autolayout
+    ///  constraint and be added on the view configured by this brick
+    ///
+    ///  - parameter height: the height value in CGFloat
+    ///
+    ///  - returns: new `Brick` instance with given `height`
     public func height(height: CGFloat) -> Brick {
         return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
+    /// Return a new `Brick` instance with the given closure. The closure used to resolve the cell's height.
+    /// It will be used only if needed when calculate the cell's height for UICollectionView.
+    ///
+    /// The idea of this closure is to calculate cell's height
+    /// based on `cell width`, `subviews' height` and `metrics which used in autolayout`.
+    ///
+    /// - Example:
+    ///
+    /// ```
+    /// heightResolver { (_, childrenHeights, metrics) -> CGFloat in
+    ///   return childrenHeights[0] + childrenHeights[1] + metrics.top + metrics.bottom + metrics.spaceV
+    /// }
+    /// ```
+    ///
+    ///  - Note: `childrenHeights` is an array of subviews' heights, values keep the same order as elements in `Brick.bricks`
+    ///  - SeeAlso: `Brick.ManuallyFittingHeightResolver`, `UIView.fittingHeight()`
+    ///
+    ///  - parameter heightResolver: a closure used only if needed when calculate the cell's height for UICollectionView.
+    ///
+    ///  - returns: new `Brick` instance with given closure
+    public func heightResolver(heightResolver: ManuallyFittingHeightResolver?) -> Brick {
+        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
+    }
+
+    ///  Return a new `Brick` instance with the given outlet key. Inspired by IBOutlet.
+    ///
+    ///  - SeeAlso: UIView.viewForOutletKey(key: String)
+    ///  - parameter LGOutletKey: A key used to retrieve the view later.
+    ///
+    ///  - returns: new `Brick` instance with the given key.
     public func LGOutlet(LGOutletKey: String) -> Brick {
         return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
@@ -214,6 +373,13 @@ extension Brick: JSONConvertible {
         case name, targetClass, nibName, width, height, style, layout, bricks, outlet
     }
 
+    ///  Initilaze a `Brick` instance from JSONDictionary.
+    ///
+    ///  - parameter json: a [String: AnyObject] instance. [Here is a sample]()
+    ///
+    ///  - throws: it's possible to throw errors, such as Errors.JSONParseError & Errors.JSONConvertibleError
+    ///
+    ///  - returns: new `Brick` instance converted from given json
     public init(rawValue json: JSONDictionary) throws {
         do {
             self.name = try json.parse(JSONKey.name)
@@ -251,6 +417,9 @@ extension Brick: JSONConvertible {
         self.heightResolver = nil
     }
 
+    ///  Encode `self` into a JSONDictionary object.
+    ///
+    ///  - returns: a `JSONDictionary` instance encoded from `self`
     public func encode() -> JSONDictionary {
         var json: JSONDictionary = [JSONKey.name.asString: self.name, JSONKey.targetClass.asString: String(self.targetClass)]
 
@@ -305,10 +474,26 @@ extension Brick {
 
     }*/
 
+    ///  Helper method to create a `Brick` as a role of the "container" to the given brick.
+    ///
+    ///  - parameter name:  name of the new brick, default is "container"
+    ///  - parameter brick: the child brick
+    ///
+    ///  - returns: new `Brick` instance within the given brick
     public static func container(name: String = "container", within brick: Brick) -> Brick {
         return union(name, bricks: [brick], axis: Axis.Horizontal, align: Alignment.Fill, distribution: Distribution.Fill, metrics: LayoutMetrics())
     }
 
+    ///  Helper method to create a `Brick` by union two or more given bricks.
+    ///
+    ///  - parameter name:         the name of the new brick
+    ///  - parameter bricks:       children bricks
+    ///  - parameter axis:         children bricks layout -> Layout.Axis
+    ///  - parameter align:        children bricks layout -> Layout.Alignement
+    ///  - parameter distribution: children bricks layout -> Layout.Distribution
+    ///  - parameter metrics:      children bricks layout -> LayoutMetrics
+    ///
+    ///  - returns: new `Brick` instance within the given bricks
     public static func union(name: String, bricks: [Brick], axis: Axis, align: Alignment, distribution: Distribution, metrics: LayoutMetrics) -> Brick {
         let layout = Layout(bricks: bricks, axis: axis, align: align, distribution: distribution, metrics: metrics)
 
@@ -316,10 +501,22 @@ extension Brick {
     }
 }
 
+///  Return true if they have the same name
+///
+///  - parameter lhs: a `Brick` instance
+///  - parameter rhs: a brick `Builder` instance
+///
+///  - returns: true if they have the same name
 public func ==<Builder: BrickBuilderType>(lhs: Brick, rhs: Builder) -> Bool {
     return lhs.name == rhs.brickName
 }
 
+///  Return true if they have the same name
+///
+///  - parameter lhs: a brick `Builder` instance
+///  - parameter rhs: a `Brick` instance
+///
+///  - returns: true if they have the same name
 public func ==<Builder: BrickBuilderType>(lhs: Builder, rhs: Brick) -> Bool {
     return lhs.brickName == rhs.name
 }
@@ -328,6 +525,12 @@ public func ==<Builder: BrickBuilderType>(lhs: Builder, rhs: Brick) -> Bool {
 
 extension Brick: Equatable {}
 
+///  Return true if they have the same name
+///
+///  - parameter lhs: a `Brick` instance
+///  - parameter rhs: another `Brick` instance
+///
+///  - returns: true if they have the same name
 public func ==(lhs: Brick, rhs: Brick) -> Bool {
     return lhs.name == rhs.name
 }

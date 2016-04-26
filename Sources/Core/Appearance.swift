@@ -10,9 +10,10 @@ import Foundation
 
 public typealias Attributes = [String: AnyObject]
 
-/// Represent an appearance property of a UIView or it's subclass
-///  
-
+/// Represent an appearance property of a UIView or it's subclass.
+/// For all supported Appearance: 
+/// 
+/// [Please find the reference here](google.com)
 public enum Appearance {
     // UIView
     case userInteractionEnabled(Bool), translatesAutoresizingMaskIntoConstraints(Bool), backgroundColor(UIColor), tintColor(UIColor), tintAdjustmentMode(UIViewTintAdjustmentMode), cornerRadius(CGFloat), borderWidth(CGFloat), borderColor(UIColor), multipleTouchEnabled(Bool), exclusiveTouch(Bool), clipsToBounds(Bool), alpha(CGFloat), opaque(Bool), clearsContextBeforeDrawing(Bool), hidden(Bool), contentMode(UIViewContentMode)
@@ -41,8 +42,32 @@ public enum Appearance {
     // Custom
     case custom([String: AnyObject])
     case none
+}
 
-    func apply<View: UIView>(to targetView: View, useDefaultValue: Bool = false) {
+extension Appearance: Hashable {
+    /// Same name, same hash value
+    public var hashValue: Int {
+        return asString().hashValue
+    }
+}
+
+///  Equatable
+///
+///  - parameter lhs: an `Appearance` instance
+///  - parameter rhs: anther `Appearance` instance
+///
+///  - returns: true if they have same name, even they have different associated value.
+///
+///  Ex:
+///  ``` 
+///  textColor(UIColor.whiteColor()) == textColor(UIColor.blackColor()) 
+///  ```
+public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
+    return lhs.asString() == rhs.asString()
+}
+
+extension Appearance {
+    internal func apply<View: UIView>(to targetView: View, useDefaultValue: Bool = false) {
 
         switch (self, targetView) {
 
@@ -348,23 +373,13 @@ public enum Appearance {
         assertionFailure("Unknown appearance \(self) for view \(targetView)")
     }
 
-    private func toString() -> String {
+    private func asString() -> String {
         let strSelf = String(self)
         if let index = strSelf.characters.indexOf("(") {
             return String(self).substringToIndex(index)
         }
         return strSelf
     }
-}
-
-extension Appearance: Hashable {
-    public var hashValue: Int {
-        return self.toString().hashValue
-    }
-}
-
-public func ==(lhs: Appearance, rhs: Appearance) -> Bool {
-    return lhs.toString() == rhs.toString()
 }
 
 extension Appearance: JSONConvertible {
@@ -392,7 +407,7 @@ extension Appearance: JSONConvertible {
         case scrollEnabled, contentOffset, contentSize, contentInset, directionalLockEnabled, bounces, alwaysBounceVertical, alwaysBounceHorizontal, pagingEnabled, showsHorizontalScrollIndicator, showsVerticalScrollIndicator, scrollIndicatorInsets, indicatorStyle, decelerationRate, delaysContentTouches, canCancelContentTouches, minimumZoomScale, maximumZoomScale, zoomScale, bouncesZoom, scrollsToTop, keyboardDismissMode
     }
 
-    static func JSONWithAppearances(appearances: [Appearance]) -> JSONDictionary {
+    internal static func JSONWithAppearances(appearances: [Appearance]) -> JSONDictionary {
         return appearances.flatMap({
             (appearance) -> JSONDictionary? in
             return appearance.encode()
@@ -402,7 +417,7 @@ extension Appearance: JSONConvertible {
         })
     }
 
-    static func appearancesWithJSON(json: JSONDictionary) -> [Appearance] {
+    internal static func appearancesWithJSON(json: JSONDictionary) -> [Appearance] {
         return json.map({
             (key, value) -> JSONDictionary in
             return [key: value]
@@ -412,7 +427,7 @@ extension Appearance: JSONConvertible {
         })
     }
 
-    init(rawValue json: JSONDictionary?) {
+    internal init(rawValue json: JSONDictionary?) {
 
         self = .none
 
@@ -629,7 +644,7 @@ extension Appearance: JSONConvertible {
         }
     }
 
-    public func encode() -> JSONDictionary? {
+    internal func encode() -> JSONDictionary? {
         switch self {
         case let .userInteractionEnabled(value):
             return [JSONKey.userInteractionEnabled.asString: value]
@@ -822,19 +837,19 @@ extension Appearance: JSONConvertible {
 
 extension Appearance {
 
-    static func encodeAttributes(attributesArray: [Attributes]) -> [Attributes] {
+    internal static func encodeAttributes(attributesArray: [Attributes]) -> [Attributes] {
         return attributesArray.map { (attributes) -> Attributes in
             return encodeAttributes(attributes)
         }
     }
 
-    static func decodeAttributes(attributesArray: [Attributes]) -> [Attributes] {
+    internal static func decodeAttributes(attributesArray: [Attributes]) -> [Attributes] {
         return attributesArray.map { (attributes) -> Attributes in
             return decodeAttributes(attributes)
         }
     }
 
-    static func encodeAttributes(attributes: Attributes) -> Attributes {
+    internal static func encodeAttributes(attributes: Attributes) -> Attributes {
 
         var attributesEncoded: Attributes = [:]
 
@@ -851,7 +866,7 @@ extension Appearance {
         return attributesEncoded
     }
 
-    static func decodeAttributes(attributes: Attributes) -> Attributes {
+    internal static func decodeAttributes(attributes: Attributes) -> Attributes {
 
         var attributesDecoded: Attributes = [:]
 

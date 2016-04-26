@@ -13,7 +13,7 @@ protocol Composable {
 }
 
 extension Composable {
-    func composite<View where View: UIView, View: BrickDescribable>(bricks: [Brick], to targetView: View, with layout: Layout) {
+    internal func composite<View where View: UIView, View: BrickDescribable>(bricks: [Brick], to targetView: View, with layout: Layout) {
 
         // remove subviews which do not exist anymore in bricks
         for subview in targetView.subviews {

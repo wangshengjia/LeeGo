@@ -17,7 +17,7 @@ protocol BrickDescribable: class, Configurable, Composable {
 
 extension BrickDescribable {
 
-    func apply<View where View: UIView, View: BrickDescribable>(newBrick: Brick, to view: View, with dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy) {
+    internal func apply<View where View: UIView, View: BrickDescribable>(newBrick: Brick, to view: View, with dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy) {
 
         if shouldRebuild(view.currentBrick, with: newBrick, updatingStrategy: updatingStrategy) {
             applyDiff(with: newBrick, to: view)
@@ -26,7 +26,10 @@ extension BrickDescribable {
         // update brick's value
         dataSource?.update(view, with: newBrick)
     }
+}
 
+extension BrickDescribable {
+    
     private func applyDiff<View where View: UIView, View: BrickDescribable>(with newBrick: Brick, to view: View) {
 
         // setup self, only if brick is not initialized from a nib file

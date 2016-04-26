@@ -32,7 +32,7 @@ Both:
 
 Pros:
 - Written in Swift, built for Swift. No more Obj-C++ stuff.
-- Lightweight and UIKit friendly: no heritage, dealing with standard UIView and Auto Layout directly.
+- Lightweight and UIKit friendly. No heritage, dealing with standard UIView and Auto Layout directly.
 - Totally smooth to begin with integrating only a small part, also free to drop all without any side effect.
 - Possible to update any part of UI which powered by LeeGo remotely via JSON payload
 - Powered by standard auto layout which you probably familiar with already.
@@ -41,6 +41,11 @@ Cons:
 - Lack of high level features for the moment. Such as support of built-in configurable view controller, view animation, auto layout animation or UIControl component’s action.
 - Powered by standard auto layout which may have some potential performance issues in some circumstances.
 - Still requires the basic knowledge of standard auto layout and [Visual Format Language](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html).
+
+## Full Documentation
+- [Full Documentation]
+- Configurable Appearance
+- Built-in convenience methods for layout
 
 ## Usages
 #### Basic bricks
@@ -182,9 +187,7 @@ cell.configureAs(TwitterBrickSet.standardTweet.brick(), dataSource: element[inde
 `Brick` is designed to be JSON convertible, which makes possible that you can control your app’s interface, from tweak some UIKit appearances to create view/cell with brand new design **remotely** via JSON payload. Please check out “JSON encodable & decodable” for more details.
 
 ## Best practices
-- Semantic > Reusable
-- Maintainable
-- Brick name convention
+For best practices and more design details, please checkout [More Design Details]
 
 ## Installation
 #### Cocoapods

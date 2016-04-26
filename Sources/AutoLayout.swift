@@ -23,6 +23,21 @@ extension NSLayoutRelation: CustomStringConvertible {
     }
 }
 
+///  Represent a metric key could be used in LayoutMetrics.
+///  Ex, `left` & `right`:
+///  ```
+///  let format = "H:|-left-[view]-(>=right)-|"
+///  ```
+///
+///  - top:         "top"
+///  - bottom:      "bottom"
+///  - left:        "left"
+///  - right:       "right"
+///  - spaceH:      "spaceH", horizontal space
+///  - spaceV:      "spaceV", vertical space
+///  - none:        ""
+///  - custom:      custom metric key
+
 public enum Metrics: CustomStringConvertible {
     case top(NSLayoutRelation), bottom(NSLayoutRelation), left(NSLayoutRelation), right(NSLayoutRelation), spaceH(NSLayoutRelation), spaceV(NSLayoutRelation), none, custom(String)
 
@@ -50,16 +65,25 @@ public enum Metrics: CustomStringConvertible {
 
 // MARK: Public functions
 
-///  <#Description#>
+///  Helper method to make create horizontal VFL format easier.
+///  Ex:
+///  ```
+///  Layout([
+///    H(orderedViews: [illustration, title]),
+///    H(fromSuperview: false, orderedViews: [illustration, subtitle]),
+///    V(orderedViews: [title, subtitle], bottom: .bottom(.GreaterThanOrEqual)),
+///    V(orderedViews: [illustration], bottom: .bottom(.GreaterThanOrEqual)),
+///  ], metrics: LayoutMetrics(20, 20, 20 ,20 ,10 ,10))
+///  ```
 ///
-///  - parameter fromSuperview: <#fromSuperview description#>
-///  - parameter left:          <#left description#>
-///  - parameter orderedViews:  <#orderedViews description#>
-///  - parameter interspace:    <#interspace description#>
-///  - parameter right:         <#right description#>
-///  - parameter toSuperview:   <#toSuperview description#>
+///  - parameter fromSuperview: Determine if there is a constraint leading from superview, such as: "H:|-". Default is true.
+///  - parameter left:          Determine the relation of `left` metric. Default is equal.
+///  - parameter orderedViews:  The target views name, they will be added one by one horizontally with interspace.
+///  - parameter interspace:    Determine the relation of `spaceH`. Default is equal.
+///  - parameter right:         Determine the relation of `right` metric. Default is equal.
+///  - parameter toSuperview:   Determine if there is a constraint trailing to superview, such as: "H:...-|". Default is true.
 ///
-///  - returns: <#return value description#>
+///  - returns: the VFL format string
 public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.Equal), orderedViews: [String] = [], interspace: Metrics? = .spaceH(.Equal), right: Metrics? = .right(.Equal), toSuperview: Bool = true) -> String {
     guard !orderedViews.isEmpty else {
         assertionFailure("Should at least have 1 view name")
@@ -69,6 +93,25 @@ public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.
     return "H:" + distribute(fromSuperview: fromSuperview, metric1: left, views: orderedViews, interspace: interspace, metric2: right, toSuperview: toSuperview)
 }
 
+///  Helper method to make create vertical VFL format easier.
+///  Ex:
+///  ```
+///  Layout([
+///    H(orderedViews: [illustration, title]),
+///    H(fromSuperview: false, orderedViews: [illustration, subtitle]),
+///    V(orderedViews: [title, subtitle], bottom: .bottom(.GreaterThanOrEqual)),
+///    V(orderedViews: [illustration], bottom: .bottom(.GreaterThanOrEqual)),
+///  ], metrics: LayoutMetrics(20, 20, 20 ,20 ,10 ,10))
+///  ```
+///
+///  - parameter fromSuperview: Determine if there is a constraint leading from superview, such as: "V:|-". Default is true.
+///  - parameter top:          Determine the relation of `top` metric. Default is equal.
+///  - parameter orderedViews:  The target views name, they will be added one by one vertically with interspace.
+///  - parameter interspace:    Determine the relation of `spaceV`. Default is equal.
+///  - parameter bottom:         Determine the relation of `bottom` metric. Default is equal.
+///  - parameter toSuperview:   Determine if there is a constraint trailing to superview, such as: "V:...-|". Default is true.
+///
+///  - returns: the VFL format string
 public func V(fromSuperview fromSuperview: Bool = true, top: Metrics? = .top(.Equal), orderedViews: [String] = [], interspace: Metrics? = .spaceV(.Equal), bottom: Metrics? = .bottom(.Equal), toSuperview: Bool = true) -> String {
     guard !orderedViews.isEmpty else {
         assertionFailure("Should at least have 1 view name")
@@ -82,7 +125,7 @@ public func V(fromSuperview fromSuperview: Bool = true, top: Metrics? = .top(.Eq
 
 internal func formatHorizontal(brickNames: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
     guard !brickNames.isEmpty else {
-        assertionFailure("Bricks should not be empty")
+        assertionFailure("`brickNames` should not be empty")
         return []
     }
 
