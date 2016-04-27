@@ -14,13 +14,14 @@ import Foundation
 /// - Warning: You should almost always use an `enum` as the concrete 
 /// implementation of this protocol.
 public protocol BrickBuilderType: Hashable {
-    /// Brick's target class. Usually looks like:
+    /// Brick's target class. You need to implment this property. 
+    /// It usually looks like:
     ///
     ///     [.title: UILabel.self,
     ///      .avatar: UIImageView.self,
     ///      .follow: UIButton.self]
     ///
-    /// Default value is `UIView.self`
+    /// If you have nothing to put here, just give an empty dictionary
     static var brickClass: [Self: AnyClass] { get }
 }
 

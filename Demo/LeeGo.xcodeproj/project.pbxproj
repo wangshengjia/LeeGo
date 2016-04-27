@@ -73,6 +73,7 @@
 		358507891C622B6A006D02EF /* TheSansOsF-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-SemiBold.otf"; sourceTree = "<group>"; };
 		3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-SemiLight.otf"; sourceTree = "<group>"; };
 		35B44E351C84E4E60049553F /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		35B7A23D1CD14B6B00E88663 /* LeeGoPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LeeGoPlayground.playground; sourceTree = "<group>"; };
 		35BD85321CA89598005B3E53 /* component.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = component.json; sourceTree = "<group>"; };
 		35D7F44B1CC4E5EB008D1AEB /* SamplesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesViewController.swift; sourceTree = "<group>"; };
 		35D7F44C1CC4E5EB008D1AEB /* SampleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleItem.swift; sourceTree = "<group>"; };
@@ -185,6 +186,7 @@
 		35FFBC7A1C7BD2690035EC52 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
+				35B7A23D1CD14B6B00E88663 /* LeeGoPlayground.playground */,
 				357956D11CCD2D7800D27777 /* Remote.md */,
 				357956D21CCD2D7800D27777 /* Design.md */,
 				357956D31CCD2D7800D27777 /* API_Details.md */,

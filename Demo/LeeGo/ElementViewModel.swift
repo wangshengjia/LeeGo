@@ -9,12 +9,16 @@
 import Foundation
 import LeeGo
 
-final class ElementViewModel<E: Element> {
+struct ElementViewModel<E: Element> {
 
     let element: E
 
     init(element: E) {
         self.element = element
+    }
+
+    var brickDataResolver: (targetView: UIView, brick: Brick) -> () = { (targetView: UIView, brick: Brick) -> () in
+
     }
 }
 

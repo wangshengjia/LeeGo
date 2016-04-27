@@ -46,6 +46,7 @@ extension Tweet {
 }
 
 extension Tweet: BrickDataSource {
+
     func update(targetView: UIView, with brick: Brick) {
         switch targetView {
         case let textView as UITextView where brick == Twitter.tweetText:
@@ -55,7 +56,7 @@ extension Tweet: BrickDataSource {
         case let label as UILabel where brick == Twitter.account:
             label.text = "@" + screenName
         case let label as UILabel where brick == Twitter.date:
-            label.text = "2d"
+            label.text = "2d" // just example
         case let label as UILabel where brick == Twitter.retweetCount:
             label.text = "\(retweetCount)"
         case let label as UILabel where brick == Twitter.likeCount:
