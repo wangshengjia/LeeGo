@@ -1,6 +1,6 @@
 <p align="center">
 
-<img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/more-docs/Medias/leego.jpg" alt="LeeGo" title="LeeGo" width="600"/>
+<img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/leego.jpg" alt="LeeGo" title="LeeGo" width="600"/>
 
 </p>
 
@@ -26,6 +26,12 @@ LeeGo is a lightweight Swift framework that helps you decouple & modularise your
 
 ## Rational behind
 I’ve talked this once in my [blog post](https://medium.com/@victor_wang/build-your-cells-in-a-way-of-lego-fbf6a1133bb1#.ud8o1v5zl) and also on [dotSwift’s talk](http://www.thedotpost.com/2016/01/victor-wang-build-ios-ui-in-the-way-of-lego-bricks). Please checkout through for more details.
+
+<p align="center">
+
+<img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/better-docs/Medias/leego.gif" alt="LeeGo" title="LeeGo" width="600"/>
+
+</p>
 
 ## Features
 
@@ -76,7 +82,7 @@ Configure an `UILabel` instance just as title brick
 let titleLabel = UILabel()
 titleLabel.configureAs(titleBrick)
 ```
-<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/more-docs/Medias/title_sample.png"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/title_sample.png"/></p>
 #### More complex bricks
 Create the bricks inside a cell brick
 
@@ -106,7 +112,7 @@ Dequeue a standard `UICollectionViewCell` instance, then configure it as cell br
 let cell = collectionView.dequeueCell…
 cell.configureAs(cellBrick, dataSource: element[indexPath.item])
 ```
-<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/more-docs/Medias/complex_sample.png" width="320" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/complex_sample.png" width="320" /></p>
 
 #### UIStackView inspired layout
 Create a brick stand for `UIView` which contains the 3 bricks (red, green & blue block), then lay them out with the `UIStackView` inspired layout helper method.
@@ -125,7 +131,7 @@ Configure an `UIView` instance just as the brick
 ```swift
 view.configureAs(viewBrick)
 ```
-<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/more-docs/Medias/blocks_sample.png" width="320" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/blocks_sample.png" width="320" /></p>
 #### Union different bricks
 Union different bricks to a new brick with `UIStackView` style’s layout.
 
@@ -146,7 +152,7 @@ Configure an `UIView` instance just as the brick
 ```swift
 view.configureAs(viewBrick)
 ```
-<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/more-docs/Medias/union_sample.png" width="320" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/union_sample.png" width="320" /></p>
 #### More complex brick and build with an enum
 An enum which implement `BrickBuilderType`, used to centralise all `brick` designs in a single enum file.
 
@@ -201,12 +207,12 @@ enum TwitterBrickSet: BrickBuilderType {
 let cell = collectionView.dequeueCell…
 cell.configureAs(TwitterBrickSet.standardTweet.brick(), dataSource: element[indexPath.item])
 ```
-<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/more-docs/Medias/tweet_sample.png" width="320" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/tweet_sample.png" width="320" /></p>
 ## Update UI remotely
-`Brick` is designed to be JSON convertible, which makes possible that you can control your app’s interface, from tweak some UIKit appearances to create view/cell with brand new design **remotely** via JSON payload. Please check out ["JSON encodable & decodable"](https://github.com/wangshengjia/LeeGo/blob/more-docs/Docs/Remote.md) for more details.
+`Brick` is designed to be JSON convertible, which makes possible that you can control your app’s interface, from tweak some UIKit appearances to create view/cell with brand new design **remotely** via JSON payload. Please check out ["JSON encodable & decodable"](https://github.com/wangshengjia/LeeGo/blob/master/Docs/Remote.md) for more details.
 
 ## Best practices
-For best practices and more design details, please checkout [More Design Details](https://github.com/wangshengjia/LeeGo/blob/more-docs/Docs/Design.md)
+For best practices and more design details, please checkout [More Design Details](https://github.com/wangshengjia/LeeGo/blob/master/Docs/Design.md)
 
 ## Installation
 #### Cocoapods
