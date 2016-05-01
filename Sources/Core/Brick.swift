@@ -100,7 +100,7 @@ extension String: BrickBuilderType {
 /// based on `cell width`, `subviews' height` and `metrics which used in autolayout`.
 ///
 /// - Note: `childrenHeights` is an array of subviews' heights, values keep the same order as elements in `Brick.bricks`
-/// - SeeAlso: `Brick`, `UIView.fittingHeight()`
+/// - SeeAlso: `Brick`, `UIView.lg_fittingHeight()`
 public typealias ManuallyFittingHeightResolver = (fittingWidth: CGFloat, childrenHeights: [CGFloat], metrics: LayoutMetrics) -> CGFloat
 
 /// A `Brick` instance represent a piece of Lego's brick,
@@ -169,7 +169,7 @@ public struct Brick {
     /// ```
     ///
     /// - Note: `childrenHeights` is an array of subviews' heights, values keep the same order as elements in `Brick.bricks`
-    /// - SeeAlso: `Brick.ManuallyFittingHeightResolver`, `UIView.fittingHeight()`
+    /// - SeeAlso: `Brick.ManuallyFittingHeightResolver`, `UIView.lg_fittingHeight()`
     let heightResolver: ManuallyFittingHeightResolver?
 
     internal init(name: String, targetClass: AnyClass = UIView.self, nibName: String? = nil) {
@@ -348,7 +348,7 @@ public struct Brick {
     /// ```
     ///
     ///  - Note: `childrenHeights` is an array of subviews' heights, values keep the same order as elements in `Brick.bricks`
-    ///  - SeeAlso: `Brick.ManuallyFittingHeightResolver`, `UIView.fittingHeight()`
+    ///  - SeeAlso: `Brick.ManuallyFittingHeightResolver`, `UIView.lg_fittingHeight()`
     ///
     ///  - parameter heightResolver: a closure used only if needed when calculate the cell's height for UICollectionView.
     ///
@@ -359,7 +359,7 @@ public struct Brick {
 
     ///  Return a new `Brick` instance with the given outlet key. Inspired by IBOutlet.
     ///
-    ///  - SeeAlso: UIView.viewForOutletKey(key: String)
+    ///  - SeeAlso: UIView.lg_viewForOutletKey(key: String)
     ///  - parameter LGOutletKey: A key used to retrieve the view later.
     ///
     ///  - returns: new `Brick` instance with the given key.

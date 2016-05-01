@@ -652,7 +652,7 @@ extension NSURL {
         }
     }
 
-    func encode() -> JSONDictionary {
+    func lg_encode() -> JSONDictionary {
         return [JSONKey.url.asString: self.absoluteString]
     }
 }
@@ -673,7 +673,7 @@ extension UIFont {
         }
     }
 
-    func encode() -> JSONDictionary {
+    func lg_encode() -> JSONDictionary {
         return [JSONKey.name.asString: self.fontName, JSONKey.size.asString: self.pointSize]
     }
 }
@@ -698,7 +698,7 @@ extension UIColor {
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
 
-    func encode() -> String {
+    func lg_encode() -> String {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
@@ -731,7 +731,7 @@ extension UIImage {
         }
     }
 
-    func encode() -> JSONDictionary? {
+    func lg_encode() -> JSONDictionary? {
         if let data = UIImagePNGRepresentation(self) {
             return [JSONKey.data.asString: data.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)]
         }

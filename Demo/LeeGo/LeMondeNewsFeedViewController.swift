@@ -60,7 +60,7 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(brick.name, forIndexPath: indexPath)
 
-        cell.configureAs(brick, dataSource: elements[indexPath.item], updatingStrategy: .Always)
+        cell.lg_configureAs(brick, dataSource: elements[indexPath.item], updatingStrategy: .Always)
 
         return cell
     }
@@ -93,6 +93,6 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 extension UICollectionViewCell {
     override public func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
 
-        return fittingHeightLayoutAttributes(layoutAttributes)
+        return lg_fittingHeightLayoutAttributes(layoutAttributes)
     }
 }

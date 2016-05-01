@@ -68,10 +68,10 @@ class ConvenienceSpec: QuickSpec {
                 let button = UIButton()
 
                 // When
-                label.setAttributedString(with: attributes)
-                textField.setAttributedString(with: attributes)
-                textView.setAttributedString(with: attributes)
-                button.setAttributedButtonTitle(with: attributes, state: .Normal)
+                label.lg_setAttributedString(with: attributes)
+                textField.lg_setAttributedString(with: attributes)
+                textView.lg_setAttributedString(with: attributes)
+                button.lg_setAttributedButtonTitle(with: attributes, state: .Normal)
 
                 // Then
                 expect(label.attributedText).notTo(beNil())
@@ -97,14 +97,14 @@ class ConvenienceSpec: QuickSpec {
                 let textField = UITextField()
                 let textView = UITextView()
 
-                label.setAttributedString(with: attributes)
-                textField.setAttributedString(with: attributes)
-                textView.setAttributedString(with: attributes)
+                label.lg_setAttributedString(with: attributes)
+                textField.lg_setAttributedString(with: attributes)
+                textView.lg_setAttributedString(with: attributes)
 
                 // When
-                label.attributedText = label.updatedAttributedString(with: ["First", "Second", "Third"])
-                textField.attributedText = textField.updatedAttributedString(with: ["First1", "Second2", "Third3"])
-                textView.attributedText = textView.updatedAttributedString(with: ["FirstA", "SecondB", "ThirdC"])
+                label.attributedText = label.lg_updatedAttributedString(with: ["First", "Second", "Third"])
+                textField.attributedText = textField.lg_updatedAttributedString(with: ["First1", "Second2", "Third3"])
+                textView.attributedText = textView.lg_updatedAttributedString(with: ["FirstA", "SecondB", "ThirdC"])
 
                 // Then
                 expect(label.attributedText?.string) == "FirstSecondThird"

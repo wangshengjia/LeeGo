@@ -11,8 +11,8 @@ import Foundation
 protocol Configurable {
     func setup<View: UIView>(view: View, currentStyle: [Appearance], newStyle: [Appearance])
 
-    func setupCustomStyle(style: [String: AnyObject])
-    func removeCustomStyle(style: [String: AnyObject])
+    func lg_setupCustomStyle(style: [String: AnyObject])
+    func lg_removeCustomStyle(style: [String: AnyObject])
 }
 
 
