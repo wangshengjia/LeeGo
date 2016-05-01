@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "LeeGo"
-  s.version          = "0.4.1"
+  s.version          = "0.5.0"
   s.summary          = "A Swift framework that helps you decouple & modularise your UI component into small pieces of LEGO style's bricks."
 
   s.description      = <<-DESC
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
                         DESC
 
   s.homepage         = "https://github.com/wangshengjia/LeeGo"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.screenshots      = "https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/leego.jpg"
 
   s.license          = { :type => "MIT", :file => "LICENSE" }
 
