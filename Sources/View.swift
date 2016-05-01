@@ -111,7 +111,7 @@ extension UIView: BrickDescribable {
 
 extension UIView {
     
-    internal var brickName: String? {
+    internal var lg_brickName: String? {
         return currentBrick?.name
     }
 
