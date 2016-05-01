@@ -25,6 +25,9 @@
 		358507931C622B6C006D02EF /* TheSansOsF-Plain.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507881C622B6A006D02EF /* TheSansOsF-Plain.otf */; };
 		358507941C622B6C006D02EF /* TheSansOsF-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507891C622B6A006D02EF /* TheSansOsF-SemiBold.otf */; };
 		358507951C622B6C006D02EF /* TheSansOsF-SemiLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */; };
+		359374D61CD5D53A00062912 /* Cell.md in Sources */ = {isa = PBXBuildFile; fileRef = 359374D41CD5D53A00062912 /* Cell.md */; };
+		359374D71CD5D53A00062912 /* Layout.md in Sources */ = {isa = PBXBuildFile; fileRef = 359374D51CD5D53A00062912 /* Layout.md */; };
+		359374E31CD5D85C00062912 /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = 359374E21CD5D85C00062912 /* CHANGELOG.md */; };
 		35B44E361C84E4E60049553F /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B44E351C84E4E60049553F /* Tweet.swift */; };
 		35BD85331CA89598005B3E53 /* component.json in Resources */ = {isa = PBXBuildFile; fileRef = 35BD85321CA89598005B3E53 /* component.json */; };
 		35D7F44D1CC4E5EB008D1AEB /* SamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7F44B1CC4E5EB008D1AEB /* SamplesViewController.swift */; };
@@ -60,7 +63,7 @@
 		357956CB1CCCA94A00D27777 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		357956D11CCD2D7800D27777 /* Remote.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Remote.md; sourceTree = "<group>"; };
 		357956D21CCD2D7800D27777 /* Design.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Design.md; sourceTree = "<group>"; };
-		357956D31CCD2D7800D27777 /* API_Details.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = API_Details.md; sourceTree = "<group>"; };
+		357956D31CCD2D7800D27777 /* Appearance.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Appearance.md; sourceTree = "<group>"; };
 		358507801C622B6A006D02EF /* FetteEngschrift.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FetteEngschrift.otf; sourceTree = "<group>"; };
 		358507811C622B6A006D02EF /* LmfrAppIcon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LmfrAppIcon.ttf; sourceTree = "<group>"; };
 		358507821C622B6A006D02EF /* TheAntiquaB-W5Plain.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheAntiquaB-W5Plain.otf"; sourceTree = "<group>"; };
@@ -72,6 +75,9 @@
 		358507881C622B6A006D02EF /* TheSansOsF-Plain.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-Plain.otf"; sourceTree = "<group>"; };
 		358507891C622B6A006D02EF /* TheSansOsF-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-SemiBold.otf"; sourceTree = "<group>"; };
 		3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TheSansOsF-SemiLight.otf"; sourceTree = "<group>"; };
+		359374D41CD5D53A00062912 /* Cell.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Cell.md; sourceTree = "<group>"; };
+		359374D51CD5D53A00062912 /* Layout.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Layout.md; sourceTree = "<group>"; };
+		359374E21CD5D85C00062912 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		35B44E351C84E4E60049553F /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		35BD85321CA89598005B3E53 /* component.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = component.json; sourceTree = "<group>"; };
 		35D7F44B1CC4E5EB008D1AEB /* SamplesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesViewController.swift; sourceTree = "<group>"; };
@@ -187,8 +193,11 @@
 			children = (
 				357956D11CCD2D7800D27777 /* Remote.md */,
 				357956D21CCD2D7800D27777 /* Design.md */,
-				357956D31CCD2D7800D27777 /* API_Details.md */,
+				357956D31CCD2D7800D27777 /* Appearance.md */,
+				359374D41CD5D53A00062912 /* Cell.md */,
+				359374D51CD5D53A00062912 /* Layout.md */,
 				35F51FBA1C7C61A40089FF41 /* README.md */,
+				359374E21CD5D85C00062912 /* CHANGELOG.md */,
 			);
 			name = Documentation;
 			path = ../Docs;
@@ -492,12 +501,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				359374D71CD5D53A00062912 /* Layout.md in Sources */,
 				607FACD81AFB9204008FA782 /* MainViewController.swift in Sources */,
 				35B44E361C84E4E60049553F /* Tweet.swift in Sources */,
 				350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */,
 				357956CC1CCCA94A00D27777 /* DetailsViewController.swift in Sources */,
+				359374E31CD5D85C00062912 /* CHANGELOG.md in Sources */,
 				35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */,
 				350E0DF41C84C2FF00DB78FC /* TwitterFeedViewController.swift in Sources */,
+				359374D61CD5D53A00062912 /* Cell.md in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				35D7F44E1CC4E5EB008D1AEB /* SampleItem.swift in Sources */,
 				350E0DF01C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift in Sources */,

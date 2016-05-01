@@ -25,11 +25,14 @@
 LeeGo is a lightweight Swift framework that helps you decouple & modularise your UI component into small pieces of LEGO style's bricks, to make UI development declarative, configurable and highly reusable.
 
 ## Rational behind
-I’ve talked this once in my [blog post](https://medium.com/@victor_wang/build-your-cells-in-a-way-of-lego-fbf6a1133bb1#.ud8o1v5zl) and also on [dotSwift’s talk](http://www.thedotpost.com/2016/01/victor-wang-build-ios-ui-in-the-way-of-lego-bricks). Please checkout through for more details.
+We all know that MVC pattern have some serious problems when dealing with a complex iOS project. Fortunately there are also a bunch of approaches that aim to fix the problems, most of them mainly address the `Controller` part, such as MVP, MVVM, MVSM or VIPER. But there is barely a thing which address the `View` part. Is that means we just run out of all the problems in the `View` part ? I think the answer is NO, especially when we need our app to be full responsive.
 
+I’ve talked this once in my [blog post](https://medium.com/@victor_wang/build-your-cells-in-a-way-of-lego-fbf6a1133bb1#.ud8o1v5zl) and also on a [dotSwift’s talk](http://www.thedotpost.com/2016/01/victor-wang-build-ios-ui-in-the-way-of-lego-bricks). Please checkout through for more details.
+
+LeeGo, replace the `View` part of MVC by `Brick`.
 <p align="center">
 
-<img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/better-docs/Medias/leego.gif" alt="LeeGo" title="LeeGo" width="600"/>
+<img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/leego.gif" alt="LeeGo" title="LeeGo" width="600"/>
 
 </p>
 
@@ -240,6 +243,9 @@ $ carthage update
 
 At last, you need to set up your Xcode project manually to add the LeeGo framework.
 
-## Vision & Roadmap
+## Roadmap
+#### Limit for the moment
+
+#### What's the next ?
 
 ## References
