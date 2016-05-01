@@ -10,8 +10,8 @@ import Foundation
 
 protocol BrickDescribable: class, Configurable, Composable {
 
-    func brickDidAwake()
-    func configureAs(brick: Brick, dataSource: BrickDataSource?, updatingStrategy: UpdatingStrategy)
+    func lg_brickDidAwake()
+    func lg_configureAs(brick: Brick, dataSource: BrickDataSource?, updatingStrategy: UpdatingStrategy)
     
 }
 
@@ -66,13 +66,13 @@ extension BrickDescribable {
 
     private func applyDimension<View where View: UIView, View: BrickDescribable>(of newBrick: Brick, to brick: View) {
         if let width = newBrick.width {
-            brick.applyConstraint(.Width, constant: width)
+            brick.lg_applyConstraint(.Width, constant: width)
         } else {
             brick.unapplyConstraint(.Width)
         }
 
         if let height = newBrick.height {
-            brick.applyConstraint(.Height, constant: height)
+            brick.lg_applyConstraint(.Height, constant: height)
         } else {
             brick.unapplyConstraint(.Height)
         }

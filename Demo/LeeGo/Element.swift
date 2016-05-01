@@ -18,8 +18,6 @@ class Element {
     let isRestrict: Bool
     let type: String?
 
-    // A naive implementation about json to model object
-    // Waiting for improving
     init?(dictionary: [String: AnyObject]) {
         self.elementId = dictionary["id"] as? Int
         self.title = dictionary["titre"] as? String

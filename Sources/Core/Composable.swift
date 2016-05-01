@@ -48,7 +48,7 @@ extension Composable {
             view?.currentBrick = Brick(name: brick.name, targetClass: brick.targetClass, nibName: brick.nibName)
             if let view = view {
                 targetView.addSubview(view)
-                view.brickDidAwake()
+                view.lg_brickDidAwake()
             }
         }
 
@@ -72,7 +72,7 @@ extension Composable {
         for format in layout.formats {
             let constraints = NSLayoutConstraint.constraintsWithVisualFormat(format, options: layout.options, metrics: layout.metrics.metrics(), views: viewsDictionary)
             for constraint in constraints {
-                constraint.setIdentifier(with: .SubviewsLayout)
+                constraint.lg_setIdentifier(with: .SubviewsLayout)
                 targetView.addConstraint(constraint)
             }
         }

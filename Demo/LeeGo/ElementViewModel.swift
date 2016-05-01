@@ -9,12 +9,16 @@
 import Foundation
 import LeeGo
 
-final class ElementViewModel<E: Element> {
+struct ElementViewModel<E: Element> {
 
     let element: E
 
     init(element: E) {
         self.element = element
+    }
+
+    var brickDataResolver: (targetView: UIView, brick: Brick) -> () = { (targetView: UIView, brick: Brick) -> () in
+
     }
 }
 
@@ -30,7 +34,7 @@ extension ElementViewModel: BrickDataSource {
     func update(targetView: UIView, with brick: Brick) {
         switch targetView {
         case let titleLabel as UILabel where brick == LeMonde.title:
-            titleLabel.attributedText = titleLabel.updatedAttributedString(with: [element.isRestrict ? "󰀀" : nil, element.title, element.natureEdito])
+            titleLabel.attributedText = titleLabel.lg_updatedAttributedString(with: [element.isRestrict ? "󰀀" : nil, element.title, element.natureEdito])
         case let subtitleLabel as UILabel  where brick == LeMonde.subtitle:
             subtitleLabel.text = element.description
         case let illustration as UIImageView where brick == LeMonde.illustration:

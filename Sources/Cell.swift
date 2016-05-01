@@ -17,14 +17,14 @@ extension UICollectionViewCell {
     ///  Call it directly inside UICollectionViewCell.preferredLayoutAttributesFittingAttributes. Ex:
     ///  ```
     ///  override public func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-    ///       return fittingHeightLayoutAttributes(layoutAttributes)
+    ///       return lg_fittingHeightLayoutAttributes(layoutAttributes)
     ///  }
     ///  ```
     ///
     ///  - parameter layoutAttributes: layoutAttributes from `UICollectionViewCell.preferredLayoutAttributesFittingAttributes`
     ///
     ///  - returns: UICollectionViewLayoutAttributes instance with fitting height.
-    public func fittingHeightLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    public func lg_fittingHeightLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         self.frame = layoutAttributes.frame
 
         // TODO: implement a cache mechanisme
@@ -35,7 +35,7 @@ extension UICollectionViewCell {
 
         layoutAttributes.frame = {
             var frame = layoutAttributes.frame
-            frame.size.height = contentView.fittingHeight()
+            frame.size.height = contentView.lg_fittingHeight()
             return frame
             }()
 

@@ -1,5 +1,7 @@
 
-## Design and philosophy behind
+## API Design and the rational behind
+
+TODO
 
 Why
 How

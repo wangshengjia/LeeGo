@@ -12,7 +12,19 @@ import LeeGo
 
 class SamplesViewController: UITableViewController {
 
-    private var elements = [SampleItem]()
+    private let elements = [
+        SampleItem(title: "Showcase 1", description: "Layout 3 blocks with `Top` alignment and `FillEqually` distribution"),
+        SampleItem(title: "Showcase 2", description: "Layout 3 blocks with `Center` alignment and `FillEqually` distribution"),
+        SampleItem(title: "Showcase 3", description: "Layout 3 blocks with `Bottom` alignment and `FillEqually` distribution"),
+        SampleItem(title: "Showcase 4", description: "Layout 3 blocks with `Fill` alignment and `FillEqually` distribution"),
+        SampleItem(title: "Showcase 5", description: "Layout 3 blocks with `Bottom` alignment and `Fill` distribution. Red block and green block have fixed width"),
+        SampleItem(title: "Showcase 6", description: "Layout 3 blocks with `Top` alignment and `Flow(1)` distribution. All three blocks have fixed width"),
+        SampleItem(title: "Showcase 7", description: "Layout 3 blocks with `Left` alignment and `FillEqually` distribution"),
+        SampleItem(title: "Showcase 8", description: "Layout 3 blocks with `Center` alignment and `FillEqually` distribution"),
+        SampleItem(title: "Showcase 9", description: "Layout 3 blocks with `Right` alignment and `FillEqually` distribution"),
+        SampleItem(title: "Showcase 10", description: "Layout 3 blocks with `Fill` alignment and `FillEqually` distribution"),
+        SampleItem(title: "Showcase 11", description: "Layout 3 blocks with `Left` alignment and `Fill` distribution"),
+        SampleItem(title: "Showcase 12", description: "Layout 3 blocks with `Left` alignment and `Flow(1)` distribution")]
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,10 +40,6 @@ class SamplesViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        for _ in 1...SimpleShowcase.reuseIdentifiers.count {
-            elements.append(SampleItem())
-        }
     }
 
     // MARK: Datasource
@@ -61,7 +69,7 @@ class SamplesViewController: UITableViewController {
 
         let cell = tableView.dequeueReusableCellWithIdentifier(brick.name, forIndexPath: indexPath)
 
-        cell.configureAs(brick, updatingStrategy: .Always)
+        cell.lg_configureAs(brick, dataSource:elements[indexPath.row], updatingStrategy: .Always)
 
         return cell
     }

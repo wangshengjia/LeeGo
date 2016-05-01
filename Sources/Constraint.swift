@@ -13,7 +13,7 @@ extension NSLayoutConstraint {
         case Dimension, SubviewsLayout, Ratio, Unknown
     }
 
-    internal func setIdentifier(with type: Mode) {
+    internal func lg_setIdentifier(with type: Mode) {
         switch type {
         case .Dimension:
             self.identifier = "LG_Dimension: \(self.description)"
@@ -41,7 +41,7 @@ extension NSLayoutConstraint {
 
 extension UIView {
 
-    internal func constraint(type: NSLayoutAttribute) -> NSLayoutConstraint? {
+    internal func lg_constraint(type: NSLayoutAttribute) -> NSLayoutConstraint? {
         switch type {
         case .Width, .Height:
             for constraint in self.constraints where constraint.firstAttribute == type
@@ -57,18 +57,18 @@ extension UIView {
         return nil
     }
 
-    internal func applyConstraint(type: NSLayoutAttribute, constant: CGFloat) {
-        if let constraint = self.constraint(type) {
+    internal func lg_applyConstraint(type: NSLayoutAttribute, constant: CGFloat) {
+        if let constraint = self.lg_constraint(type) {
             constraint.constant = constant
         } else {
             let constraint = NSLayoutConstraint(item: self, attribute: type, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant)
-            constraint.setIdentifier(with: .Dimension)
+            constraint.lg_setIdentifier(with: .Dimension)
             self.addConstraint(constraint)
         }
     }
 
     internal func unapplyConstraint(type: NSLayoutAttribute) {
-        if let constraint = self.constraint(type) {
+        if let constraint = self.lg_constraint(type) {
             self.removeConstraint(constraint)
         }
     }

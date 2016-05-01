@@ -36,7 +36,7 @@ public protocol BrickDataSource {
 ///  You could specify this strategy when configure a target view as a given brick. Ex:
 ///
 /// ```
-/// cell.configureAs(brick, dataSource: elements[indexPath.item], updatingStrategy: .Always)
+/// cell.lg_configureAs(brick, dataSource: elements[indexPath.item], updatingStrategy: .Always)
 /// ```
 ///
 ///  - WhenBrickChanged: If the new brick has the same name as the configured one, the target view will ignored the new brick.
@@ -49,7 +49,7 @@ public enum UpdatingStrategy {
 extension UIView: BrickDescribable {
     ///  A delegate method get called once a target view get created
     ///  You can override this method. You should call `super` implementation when override.
-    public func brickDidAwake() {
+    public func lg_brickDidAwake() {
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -58,8 +58,8 @@ extension UIView: BrickDescribable {
     ///  - Note: You should always override and implement this method if you have a custom style
     ///
     ///  - parameter style: custom style specified in Appearance.custom
-    public func setupCustomStyle(style: [String: AnyObject]) {
-        assertionFailure("Unknown style \(style), should implement `setupCustomStyle:` in extension of UIView or its subclass.")
+    public func lg_setupCustomStyle(style: [String: AnyObject]) {
+        assertionFailure("Unknown style \(style), should implement `lg_setupCustomStyle:` in extension of UIView or its subclass.")
     }
 
     ///  A delegate method used to remove a custom style from a target view.
@@ -67,8 +67,8 @@ extension UIView: BrickDescribable {
     ///  - Note: You should always override and implement this method if you have a custom style
     ///
     ///  - parameter style: custom style specified in Appearance.custom
-    public func removeCustomStyle(style: [String: AnyObject]) {
-        assertionFailure("Unknown style \(style), should implement `removeCustomStyle:` in extension of UIView or its subclass.")
+    public func lg_removeCustomStyle(style: [String: AnyObject]) {
+        assertionFailure("Unknown style \(style), should implement `lg_removeCustomStyle:` in extension of UIView or its subclass.")
     }
 
     ///  This method will go through the whole view hierarchy and 
@@ -79,13 +79,13 @@ extension UIView: BrickDescribable {
     ///  - parameter key: outlet key of `brick`
     ///
     ///  - returns: target view found
-    public func viewForOutletKey(key: String) -> UIView? {
+    public func lg_viewForOutletKey(key: String) -> UIView? {
         if let currentKey = currentBrick?.LGOutletKey where currentKey == key {
             return self
         }
 
         for subview in self.subviews {
-            if let view = subview.viewForOutletKey(key) {
+            if let view = subview.lg_viewForOutletKey(key) {
                 return view
             }
         }
@@ -98,7 +98,7 @@ extension UIView: BrickDescribable {
     ///  - parameter brick:            A `Brick` instance. The target class of brick should as same as `self.dynamicType`.
     ///  - parameter dataSource:       The data source object which implement the `BrickDataSource` protocol.
     ///  - parameter updatingStrategy: The stragegy which determine what to do when brick changed with the same target view.
-    public func configureAs(brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .WhenBrickChanged) {
+    public func lg_configureAs(brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .WhenBrickChanged) {
         if let cell = self as? UICollectionViewCell {
             cell.contentView._configureAs(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else if let cell = self as? UITableViewCell {
@@ -111,17 +111,17 @@ extension UIView: BrickDescribable {
 
 extension UIView {
     
-    internal var brickName: String? {
+    internal var lg_brickName: String? {
         return currentBrick?.name
     }
 
-    internal func fittingHeight() -> CGFloat {
+    internal func lg_fittingHeight() -> CGFloat {
 
         // if height resolver is found
         if let computeClosure = currentBrick?.heightResolver {
             let fittingWidth = self.frame.width
             let childrenHeights = subviews.map { (subview) -> CGFloat in
-                return subview.fittingHeight()
+                return subview.lg_fittingHeight()
             }
             let metrics = currentBrick?.layout?.metrics ?? LayoutMetrics()
 
@@ -149,7 +149,7 @@ extension UIView {
         for subview in self.subviews {
             if let name = subview.currentBrick?.name, let bricks = brick.bricks {
                 for childBrick in bricks where childBrick.name == name {
-                    subview.configureAs(childBrick, dataSource: dataSource, updatingStrategy: updatingStrategy)
+                    subview.lg_configureAs(childBrick, dataSource: dataSource, updatingStrategy: updatingStrategy)
                 }
             }
         }
