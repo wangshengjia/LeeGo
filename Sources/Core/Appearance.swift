@@ -651,9 +651,9 @@ extension Appearance: JSONConvertible {
         case let .translatesAutoresizingMaskIntoConstraints(value):
             return [JSONKey.translatesAutoresizingMaskIntoConstraints.asString: value]
         case let .backgroundColor(value):
-            return [JSONKey.backgroundColor.asString: value.encode()]
+            return [JSONKey.backgroundColor.asString: value.lg_encode()]
         case let .tintColor(value):
-            return [JSONKey.tintColor.asString: value.encode()]
+            return [JSONKey.tintColor.asString: value.lg_encode()]
         case let .tintAdjustmentMode(value):
             return [JSONKey.tintAdjustmentMode.asString: value.encode()]
         case let .cornerRadius(value):
@@ -661,7 +661,7 @@ extension Appearance: JSONConvertible {
         case let .borderWidth(value):
             return [JSONKey.borderWidth.asString: value]
         case let .borderColor(value):
-            return [JSONKey.borderColor.asString: value.encode()]
+            return [JSONKey.borderColor.asString: value.lg_encode()]
         case let .multipleTouchEnabled(value):
             return [JSONKey.multipleTouchEnabled.asString: value]
         case let .exclusiveTouch(value):
@@ -685,9 +685,9 @@ extension Appearance: JSONConvertible {
         case let .highlighted(value):
             return [JSONKey.highlighted.asString: value]
         case let .font(value):
-            return [JSONKey.font.asString: value.encode()]
+            return [JSONKey.font.asString: value.lg_encode()]
         case let .textColor(value):
-            return [JSONKey.textColor.asString: value.encode()]
+            return [JSONKey.textColor.asString: value.lg_encode()]
         case let .textAlignment(value):
             return [JSONKey.textAlignment.asString: value.encode()]
         case let .numberOfLines(value):
@@ -719,11 +719,11 @@ extension Appearance: JSONConvertible {
         case let .baselineAdjustment(value):
             return [JSONKey.baselineAdjustment.asString: value.encode()]
         case let .shadowColor(value):
-            return [JSONKey.shadowColor.asString: value.encode()]
+            return [JSONKey.shadowColor.asString: value.lg_encode()]
         case let .shadowOffset(value):
             return [JSONKey.shadowOffset.asString: value.encode()]
         case let .highlightedTextColor(value):
-            return [JSONKey.highlightedTextColor.asString: value.encode()]
+            return [JSONKey.highlightedTextColor.asString: value.lg_encode()]
         case let .attributedText(value):
             return [JSONKey.attributedText.asString: Appearance.encodeAttributes(value)]
         case let .text(value):
@@ -737,11 +737,11 @@ extension Appearance: JSONConvertible {
         case let .clearsOnBeginEditing(value):
             return [JSONKey.clearsOnBeginEditing.asString: value]
         case let .background(value):
-            if let image = value.encode() {
+            if let image = value.lg_encode() {
                 return [JSONKey.background.asString: image]
             }
         case let .disabledBackground(value):
-            if let image = value.encode() {
+            if let image = value.lg_encode() {
                 return [JSONKey.disabledBackground.asString: image]
             }
         case let .typingAttributes(value):
@@ -751,15 +751,15 @@ extension Appearance: JSONConvertible {
         case let .buttonTitle(title, state):
             return [JSONKey.buttonTitle.asString: ["title": title, "state": state.encode()]]
         case let .buttonTitleColor(color, state):
-            return [JSONKey.buttonTitleColor.asString: ["color": color.encode(), "state": state.encode()]]
+            return [JSONKey.buttonTitleColor.asString: ["color": color.lg_encode(), "state": state.encode()]]
         case let .buttonTitleShadowColor(color, state):
-            return [JSONKey.buttonTitleShadowColor.asString: ["color": color.encode(), "state": state.encode()]]
+            return [JSONKey.buttonTitleShadowColor.asString: ["color": color.lg_encode(), "state": state.encode()]]
         case let .buttonImage(image, state):
-            if let image = image.encode() {
+            if let image = image.lg_encode() {
                 return [JSONKey.buttonImage.asString: ["image": image, "state": state.encode()]]
             }
         case let .buttonBackgroundImage(image, state):
-            if let image = image.encode() {
+            if let image = image.lg_encode() {
                 return [JSONKey.buttonBackgroundImage.asString: ["image": image, "state": state.encode()]]
             }
         case let .buttonAttributedTitle(attributes, state):
@@ -855,11 +855,11 @@ extension Appearance {
 
         for value in attributes.enumerate() {
             if let font = value.element.1 as? UIFont where value.element.0 == NSFontAttributeName {
-                attributesEncoded.updateValue(font.encode(), forKey: value.element.0)
+                attributesEncoded.updateValue(font.lg_encode(), forKey: value.element.0)
             } else if let color = value.element.1 as? UIColor {
-                attributesEncoded.updateValue(color.encode(), forKey: value.element.0)
+                attributesEncoded.updateValue(color.lg_encode(), forKey: value.element.0)
             } else if let url = value.element.1 as? NSURL {
-                attributesEncoded.updateValue(url.encode(), forKey: value.element.0)
+                attributesEncoded.updateValue(url.lg_encode(), forKey: value.element.0)
             }
         }
 

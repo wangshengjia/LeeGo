@@ -516,7 +516,7 @@ class ConvertibleSpec: QuickSpec {
 
             // When
             let convertedValues = NSURL(rawValue: rawValues)!
-            let encodedValues = convertedValues.encode()
+            let encodedValues = convertedValues.lg_encode()
 
             // Then
             expect(convertedValues) == values
@@ -530,7 +530,7 @@ class ConvertibleSpec: QuickSpec {
 
             // When
             let convertedValues = UIColor(rawValue: rawValues)
-            let encodedValues = convertedValues.encode()
+            let encodedValues = convertedValues.lg_encode()
 
             // Then
             expect(convertedValues) == values
@@ -543,7 +543,7 @@ class ConvertibleSpec: QuickSpec {
 
             // When
             // let convertedValues: UIImage? = UIImage(json: nil)
-            let encodedValues = values.encode()!
+            let encodedValues = values.lg_encode()!
 
             // Then
             // expect(convertedValues) == nil
