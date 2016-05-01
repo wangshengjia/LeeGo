@@ -25,9 +25,6 @@
 		358507931C622B6C006D02EF /* TheSansOsF-Plain.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507881C622B6A006D02EF /* TheSansOsF-Plain.otf */; };
 		358507941C622B6C006D02EF /* TheSansOsF-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507891C622B6A006D02EF /* TheSansOsF-SemiBold.otf */; };
 		358507951C622B6C006D02EF /* TheSansOsF-SemiLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */; };
-		359374D61CD5D53A00062912 /* Cell.md in Sources */ = {isa = PBXBuildFile; fileRef = 359374D41CD5D53A00062912 /* Cell.md */; };
-		359374D71CD5D53A00062912 /* Layout.md in Sources */ = {isa = PBXBuildFile; fileRef = 359374D51CD5D53A00062912 /* Layout.md */; };
-		359374E31CD5D85C00062912 /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = 359374E21CD5D85C00062912 /* CHANGELOG.md */; };
 		35B44E361C84E4E60049553F /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B44E351C84E4E60049553F /* Tweet.swift */; };
 		35BD85331CA89598005B3E53 /* component.json in Resources */ = {isa = PBXBuildFile; fileRef = 35BD85321CA89598005B3E53 /* component.json */; };
 		35D7F44D1CC4E5EB008D1AEB /* SamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7F44B1CC4E5EB008D1AEB /* SamplesViewController.swift */; };
@@ -501,15 +498,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				359374D71CD5D53A00062912 /* Layout.md in Sources */,
 				607FACD81AFB9204008FA782 /* MainViewController.swift in Sources */,
 				35B44E361C84E4E60049553F /* Tweet.swift in Sources */,
 				350637471C4C1AAC00B5E547 /* ElementViewModel.swift in Sources */,
 				357956CC1CCCA94A00D27777 /* DetailsViewController.swift in Sources */,
-				359374E31CD5D85C00062912 /* CHANGELOG.md in Sources */,
 				35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */,
 				350E0DF41C84C2FF00DB78FC /* TwitterFeedViewController.swift in Sources */,
-				359374D61CD5D53A00062912 /* Cell.md in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				35D7F44E1CC4E5EB008D1AEB /* SampleItem.swift in Sources */,
 				350E0DF01C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift in Sources */,

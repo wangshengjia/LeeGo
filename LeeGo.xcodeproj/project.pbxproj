@@ -16,10 +16,6 @@
 		354A347A1C7DE9A60081FF89 /* AppearanceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A34791C7DE9A60081FF89 /* AppearanceSpec.swift */; };
 		3560FEE11CA358F100A400C2 /* ConvertibleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3560FEE01CA358F100A400C2 /* ConvertibleSpec.swift */; };
 		3568BC441CC65B920009EB6E /* Brick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3568BC431CC65B920009EB6E /* Brick.swift */; };
-		359374DB1CD5D5FE00062912 /* Appearance.md in Sources */ = {isa = PBXBuildFile; fileRef = 359374D81CD5D5FE00062912 /* Appearance.md */; };
-		359374DC1CD5D5FE00062912 /* Cell.md in Sources */ = {isa = PBXBuildFile; fileRef = 359374D91CD5D5FE00062912 /* Cell.md */; };
-		359374DD1CD5D5FE00062912 /* Layout.md in Sources */ = {isa = PBXBuildFile; fileRef = 359374DA1CD5D5FE00062912 /* Layout.md */; };
-		359374E51CD5D86600062912 /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = 359374E41CD5D86600062912 /* CHANGELOG.md */; };
 		35AFD9A31CA6F87D009BE224 /* layout.json in Resources */ = {isa = PBXBuildFile; fileRef = 35AFD9A21CA6F87D009BE224 /* layout.json */; };
 		35B70A8E1CA499490021A1ED /* TestMedia.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35B70A8D1CA499490021A1ED /* TestMedia.xcassets */; };
 		35F4E70C1CA5809400F7BDC9 /* appearances.json in Resources */ = {isa = PBXBuildFile; fileRef = 35F4E70B1CA5809400F7BDC9 /* appearances.json */; };
@@ -414,20 +410,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				359374DB1CD5D5FE00062912 /* Appearance.md in Sources */,
 				35F520361C7C74510089FF41 /* Composable.swift in Sources */,
 				3515725D1CA421F000BE68FB /* Constraint.swift in Sources */,
 				35F520301C7C74510089FF41 /* AutoLayout.swift in Sources */,
 				3515725B1CA421E000BE68FB /* JSONConvertible.swift in Sources */,
 				35F520351C7C74510089FF41 /* BrickDescribable.swift in Sources */,
-				359374DD1CD5D5FE00062912 /* Layout.md in Sources */,
-				359374DC1CD5D5FE00062912 /* Cell.md in Sources */,
 				3513F7111C95ECA0003B211F /* Layout.swift in Sources */,
 				35F520391C7C74510089FF41 /* Errors.swift in Sources */,
 				3513F70F1C95EC96003B211F /* Appearance.swift in Sources */,
 				35F5203C1C7C74510089FF41 /* View.swift in Sources */,
 				3568BC441CC65B920009EB6E /* Brick.swift in Sources */,
-				359374E51CD5D86600062912 /* CHANGELOG.md in Sources */,
 				35F520311C7C74510089FF41 /* Cell.swift in Sources */,
 				35F520371C7C74510089FF41 /* Configurable.swift in Sources */,
 				35F520321C7C74510089FF41 /* Conveniences.swift in Sources */,
