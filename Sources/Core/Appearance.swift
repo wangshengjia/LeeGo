@@ -196,11 +196,11 @@ extension Appearance {
             }
         case (let .attributedText(attributes), let view):
             if let label = view as? UILabel {
-                label.setAttributedString(with: !useDefaultValue ? attributes : [])
+                label.lg_setAttributedString(with: !useDefaultValue ? attributes : [])
             } else if let textField = view as? UITextField {
-                textField.setAttributedString(with: !useDefaultValue ? attributes : [])
+                textField.lg_setAttributedString(with: !useDefaultValue ? attributes : [])
             } else if let textView = view as? UITextView {
-                textView.setAttributedString(with: !useDefaultValue ? attributes : [])
+                textView.lg_setAttributedString(with: !useDefaultValue ? attributes : [])
             } else {
                 warningUnknownAppearance(targetView)
             }
@@ -280,7 +280,7 @@ extension Appearance {
         case (let .buttonBackgroundImage(image, state), let button as UIButton):
             button.setBackgroundImage(!useDefaultValue ? image : nil, forState: state)
         case (let .buttonAttributedTitle(attributes, state), let button as UIButton):
-            button.setAttributedButtonTitle(with: !useDefaultValue ? attributes : [], state: state)
+            button.lg_setAttributedButtonTitle(with: !useDefaultValue ? attributes : [], state: state)
         case (let .contentEdgeInsets(insets), let button as UIButton):
             button.contentEdgeInsets = !useDefaultValue ? insets : UIEdgeInsetsZero
         case (let .titleEdgeInsets(insets), let button as UIButton):
@@ -308,7 +308,7 @@ extension Appearance {
 
             if !useDefaultValue {
                 let constraint = NSLayoutConstraint(item: image, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: image, attribute: NSLayoutAttribute.Height, multiplier: ratioValue, constant: 0)
-                constraint.setIdentifier(with: .Ratio)
+                constraint.lg_setIdentifier(with: .Ratio)
                 constraint.priority = 990
                 image.addConstraint(constraint)
             }
@@ -361,7 +361,7 @@ extension Appearance {
 
         // Custom
         case (let .custom(dictionary), _):
-            !useDefaultValue ? targetView.setupCustomStyle(dictionary) : targetView.removeCustomStyle(dictionary)
+            !useDefaultValue ? targetView.lg_setupCustomStyle(dictionary) : targetView.lg_removeCustomStyle(dictionary)
 
         default:
             warningUnknownAppearance(targetView)

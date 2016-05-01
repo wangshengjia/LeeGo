@@ -70,27 +70,27 @@ extension Dictionary {
 public let kCustomAttributeDefaultText = "kCustomAttributeDefaultText"
 
 extension UILabel {
-    public func updatedAttributedString(with texts: [String?]) -> NSAttributedString? {
-        return UIView.updatedAttributedString(with: texts, attributesArray: attributesArray)
+    public func lg_updatedAttributedString(with texts: [String?]) -> NSAttributedString? {
+        return UIView.lg_updatedAttributedString(with: texts, attributesArray: attributesArray)
     }
 }
 
 extension UITextField {
-    public func updatedAttributedString(with texts: [String?]) -> NSAttributedString? {
-        return UIView.updatedAttributedString(with: texts, attributesArray: attributesArray)
+    public func lg_updatedAttributedString(with texts: [String?]) -> NSAttributedString? {
+        return UIView.lg_updatedAttributedString(with: texts, attributesArray: attributesArray)
     }
 }
 
 extension UITextView {
-    public func updatedAttributedString(with texts: [String?]) -> NSAttributedString? {
-        return UIView.updatedAttributedString(with: texts, attributesArray: attributesArray)
+    public func lg_updatedAttributedString(with texts: [String?]) -> NSAttributedString? {
+        return UIView.lg_updatedAttributedString(with: texts, attributesArray: attributesArray)
     }
 }
 
 extension UIView {
 
-    internal func setAttributedString(with attributesArray: [Attributes]) {
-        let attributedString = UIView.attributedString(with: attributesArray)
+    internal func lg_setAttributedString(with attributesArray: [Attributes]) {
+        let attributedString = UIView.lg_attributedString(with: attributesArray)
 
         if let label = self as? UILabel {
             label.attributedText = attributedString
@@ -103,8 +103,8 @@ extension UIView {
         self.attributesArray = attributesArray
     }
 
-    internal func setAttributedButtonTitle(with attributesArray: [Attributes], state: UIControlState) {
-        let attributedString = UIView.attributedString(with: attributesArray)
+    internal func lg_setAttributedButtonTitle(with attributesArray: [Attributes], state: UIControlState) {
+        let attributedString = UIView.lg_attributedString(with: attributesArray)
         if let button = self as? UIButton {
             button.setAttributedTitle(attributedString, forState: state)
         }
@@ -113,15 +113,15 @@ extension UIView {
 }
 
 extension UIView {
-    private static func attributedString(with attributesArray: [Attributes]) -> NSAttributedString? {
+    private static func lg_attributedString(with attributesArray: [Attributes]) -> NSAttributedString? {
         let texts = attributesArray.map { (attributes) -> String? in
             return (attributes[kCustomAttributeDefaultText] as? String)
         }
 
-        return updatedAttributedString(with: texts, attributesArray: attributesArray)
+        return lg_updatedAttributedString(with: texts, attributesArray: attributesArray)
     }
 
-    private static func updatedAttributedString(with texts: [String?], attributesArray: [Attributes]) -> NSAttributedString? {
+    private static func lg_updatedAttributedString(with texts: [String?], attributesArray: [Attributes]) -> NSAttributedString? {
         guard texts.count == attributesArray.count else {
             assertionFailure("Failed to call updatedAttributedString: `texts` & `attributesArray` should have same count.")
             return nil
@@ -135,12 +135,12 @@ extension UIView {
             return nil
         })
 
-        let attributedText = attributedString(combinedWith: attributedStrings)
+        let attributedText = lg_attributedString(combinedWith: attributedStrings)
 
         return attributedText
     }
 
-    private static func attributedString(combinedWith attributedStrings: [NSAttributedString]) -> NSAttributedString? {
+    private static func lg_attributedString(combinedWith attributedStrings: [NSAttributedString]) -> NSAttributedString? {
         guard let first = attributedStrings.first else {
             return nil
         }

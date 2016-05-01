@@ -83,7 +83,7 @@ Configure an `UILabel` instance just as title brick
 
 ```swift
 let titleLabel = UILabel()
-titleLabel.configureAs(titleBrick)
+titleLabel.lg_configureAs(titleBrick)
 ```
 <p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/title_sample.png"/></p>
 #### More complex bricks
@@ -113,7 +113,7 @@ Dequeue a standard `UICollectionViewCell` instance, then configure it as cell br
 
 ```swift
 let cell = collectionView.dequeueCell…
-cell.configureAs(cellBrick, dataSource: element[indexPath.item])
+cell.lg_configureAs(cellBrick, dataSource: element[indexPath.item])
 ```
 <p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/complex_sample.png" width="320" /></p>
 
@@ -132,7 +132,7 @@ let viewBrick = "view".build().style(Style.blocksStyle).bricks(bricks, layout: l
 Configure an `UIView` instance just as the brick
 
 ```swift
-view.configureAs(viewBrick)
+view.lg_configureAs(viewBrick)
 ```
 <p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/blocks_sample.png" width="320" /></p>
 #### Union different bricks
@@ -153,7 +153,7 @@ let viewBrick = Brick.union("brickName", bricks: [
 Configure an `UIView` instance just as the brick
 
 ```swift
-view.configureAs(viewBrick)
+view.lg_configureAs(viewBrick)
 ```
 <p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/union_sample.png" width="320" /></p>
 #### More complex brick and build with an enum
@@ -208,7 +208,7 @@ enum TwitterBrickSet: BrickBuilderType {
 
 /// Configure your cell
 let cell = collectionView.dequeueCell…
-cell.configureAs(TwitterBrickSet.standardTweet.brick(), dataSource: element[indexPath.item])
+cell.lg_configureAs(TwitterBrickSet.standardTweet.brick(), dataSource: element[indexPath.item])
 ```
 <p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/tweet_sample.png" width="320" /></p>
 ## Update UI remotely
