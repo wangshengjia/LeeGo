@@ -6,7 +6,7 @@
 
 <p align="center">
 
-<a href="https://travis-ci.org/wangshengjia/LeeGo"><img src="https://img.shields.io/travis/wangshengjia/LeeGo.svg?style=flat"></a>
+<a href="https://travis-ci.org/wangshengjia/LeeGo"><img src="https://img.shields.io/travis/wangshengjia/LeeGo.svg?branch=master"></a>
 
 <a href="http://cocoapods.org/pods/LeeGo"><img src="https://img.shields.io/cocoapods/v/LeeGo.svg?style=flat"></a>
 
@@ -216,7 +216,7 @@ cell.lg_configureAs(TwitterBrickSet.standardTweet.brick(), dataSource: element[i
 `Brick` is designed to be JSON convertible, which makes possible that you can control your app’s interface, from tweak some UIKit appearances to create view/cell with brand new design **remotely** via JSON payload. Please check out ["JSON encodable & decodable"](Docs/Remote.md) for more details.
 
 ## Best practices
-For best practices and more design details, please checkout [More Design Details](Docs/Design.md)
+For best practices and more design details, please checkout [more design details](Docs/Design.md)
 
 ## Installation
 #### Cocoapods

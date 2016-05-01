@@ -17,15 +17,12 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
-
-        // This requires XcodeInjection to work
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(setup), name: "INJECTION_BUNDLE_NOTIFICATION", object: nil)
     }
 }
 
 extension DetailsViewController {
     
-    func setup() {
+    private func setup() {
         let title = "title".build(UILabel).style([.numberOfLines(0), .text("Lorem Ipsum is simply dummy text of the printing industry")])
         let description = "description".build(UILabel).style([.textColor(UIColor.lightGrayColor()), .numberOfLines(0), .font(UIFont.systemFontOfSize(14)), .text("Lorem Ipsum has been the industry's standard dummy text ever since the 1500s")])
         let redBlock = "red".build().style(Style.redBlockStyle)
