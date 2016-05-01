@@ -1,6 +1,6 @@
 <p align="center">
 
-<img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/leego.jpg" alt="LeeGo" title="LeeGo" width="600"/>
+<img src="Medias/leego.jpg" alt="LeeGo" title="LeeGo" width="600"/>
 
 </p>
 
@@ -32,7 +32,7 @@ I’ve talked this once in my [blog post](https://medium.com/@victor_wang/build-
 LeeGo, replace the `View` part of MVC by `Brick`.
 <p align="center">
 
-<img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/leego.gif" alt="LeeGo" title="LeeGo" width="600"/>
+<img src="Medias/leego.gif" alt="LeeGo" title="LeeGo" width="600"/>
 
 </p>
 
@@ -67,8 +67,9 @@ Cons:
 
 ## Full Documentation
 - [Full Documentation](http://cocoadocs.org/docsets/LeeGo/0.4.1/)
-- Configurable Appearance
-- Built-in convenience methods for layout
+- [Configurable appearance](Docs/Appearance.md)
+- [Built-in convenience methods for layout](Docs/Layout.md)
+- [Dynamic cell height](Docs/Cell.md)
 
 ## Usages
 #### Basic bricks
@@ -85,7 +86,7 @@ Configure an `UILabel` instance just as title brick
 let titleLabel = UILabel()
 titleLabel.lg_configureAs(titleBrick)
 ```
-<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/title_sample.png"/></p>
+<p align="center"><img src="Medias/title_sample.png"/></p>
 #### More complex bricks
 Create the bricks inside a cell brick
 
@@ -115,7 +116,7 @@ Dequeue a standard `UICollectionViewCell` instance, then configure it as cell br
 let cell = collectionView.dequeueCell…
 cell.lg_configureAs(cellBrick, dataSource: element[indexPath.item])
 ```
-<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/complex_sample.png" width="320" /></p>
+<p align="center"><img src="Medias/complex_sample.png" width="320" /></p>
 
 #### UIStackView inspired layout
 Create a brick stand for `UIView` which contains the 3 bricks (red, green & blue block), then lay them out with the `UIStackView` inspired layout helper method.
@@ -134,7 +135,7 @@ Configure an `UIView` instance just as the brick
 ```swift
 view.lg_configureAs(viewBrick)
 ```
-<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/blocks_sample.png" width="320" /></p>
+<p align="center"><img src="Medias/blocks_sample.png" width="320" /></p>
 #### Union different bricks
 Union different bricks to a new brick with `UIStackView` style’s layout.
 
@@ -155,7 +156,7 @@ Configure an `UIView` instance just as the brick
 ```swift
 view.lg_configureAs(viewBrick)
 ```
-<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/union_sample.png" width="320" /></p>
+<p align="center"><img src="Medias/union_sample.png" width="320" /></p>
 #### More complex brick and build with an enum
 An enum which implement `BrickBuilderType`, used to centralise all `brick` designs in a single enum file.
 
@@ -210,12 +211,12 @@ enum TwitterBrickSet: BrickBuilderType {
 let cell = collectionView.dequeueCell…
 cell.lg_configureAs(TwitterBrickSet.standardTweet.brick(), dataSource: element[indexPath.item])
 ```
-<p align="center"><img src="https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/tweet_sample.png" width="320" /></p>
+<p align="center"><img src="Medias/tweet_sample.png" width="320" /></p>
 ## Update UI remotely
-`Brick` is designed to be JSON convertible, which makes possible that you can control your app’s interface, from tweak some UIKit appearances to create view/cell with brand new design **remotely** via JSON payload. Please check out ["JSON encodable & decodable"](https://github.com/wangshengjia/LeeGo/blob/master/Docs/Remote.md) for more details.
+`Brick` is designed to be JSON convertible, which makes possible that you can control your app’s interface, from tweak some UIKit appearances to create view/cell with brand new design **remotely** via JSON payload. Please check out ["JSON encodable & decodable"](Docs/Remote.md) for more details.
 
 ## Best practices
-For best practices and more design details, please checkout [More Design Details](https://github.com/wangshengjia/LeeGo/blob/master/Docs/Design.md)
+For best practices and more design details, please checkout [More Design Details](Docs/Design.md)
 
 ## Installation
 #### Cocoapods
