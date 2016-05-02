@@ -25,7 +25,7 @@
 LeeGo is a lightweight Swift framework that helps you decouple & modularise your UI component into small pieces of LEGO style's bricks, to make UI development declarative, configurable and highly reusable.
 
 ## Rational behind
-We all know that MVC pattern have some serious problems when dealing with a complex iOS project. Fortunately there are also a bunch of approaches that aim to fix the problems, most of them mainly address the `Controller` part, such as MVP, MVVM, MVSM or VIPER. But there is barely a thing which address the `View` part. Is that means we just run out of all the problems in the `View` part ? I think the answer is NO, especially when we need our app to be full responsive.
+We all know that MVC pattern has some serious problems when dealing with a complex iOS project. Fortunately there are also a bunch of approaches that aim to fix the problems, most of them mainly address the `Controller` part, such as MVP, MVVM, MVSM or VIPER. But there is barely a thing which addresses the `View` part. Does that mean we just run out of all the problems in the `View` part ? I think the answer is NO, especially when we need our app to be fully responsive.
 
 I’ve talked this once in my [blog post](https://medium.com/@victor_wang/build-your-cells-in-a-way-of-lego-fbf6a1133bb1#.ud8o1v5zl) and also on a [dotSwift’s talk](http://www.thedotpost.com/2016/01/victor-wang-build-ios-ui-in-the-way-of-lego-bricks). Please checkout through for more details.
 
@@ -40,7 +40,7 @@ LeeGo, replace the `View` part of MVC by `Brick`.
 
 **What may LeeGo helps you:**
 
-- **Describe** your whole UI into small pieces of Lego style’s bricks. Let you configure your view as a `brick` whenever & wherever you want.
+- **Describe** your whole UI in small pieces of Lego style’s bricks. Let you configure your view as a `brick` whenever & wherever you want.
 - No longer need to deal with a bunch of custom UIView’s subclasses. Instead, you only need to deal with different `Brick`s which is **lightweight** and **pure value type**.
 - Designed to be **UIKit friendly** and **non-intrusive**. There is no need to inherit from other base class at all.
 - Capable to **update remotely** almost everything via your JSON payload.
@@ -55,9 +55,9 @@ Both:
 
 Pros:
 - Written in Swift, built for Swift. No more Obj-C++ stuff.
-- Lightweight and UIKit friendly. No heritage, dealing with standard UIView and Auto Layout directly.
+- Lightweight and UIKit friendly. No inheritance, dealing with standard UIView and Auto Layout directly.
 - Totally smooth to begin with integrating only a small part, also free to drop all without any side effect.
-- Possible to update any part of UI which powered by LeeGo remotely via JSON payload
+- Possible to update any part of UI which powered by LeeGo remotely via JSON payload.
 - Powered by standard auto layout which you probably familiar with already.
 
 Cons:
@@ -130,7 +130,7 @@ let layout = Layout(bricks: bricks, axis: .Horizontal, align: .Top, distribution
 let viewBrick = "view".build().style(Style.blocksStyle).bricks(bricks, layout: layout).height(100)
 ```
 
-Configure an `UIView` instance just as the brick
+Configure a `UIView` instance just as the brick
 
 ```swift
 view.lg_configureAs(viewBrick)
@@ -151,14 +151,14 @@ let viewBrick = Brick.union("brickName", bricks: [
                 
 ```
 
-Configure an `UIView` instance just as the brick
+Configure a `UIView` instance just as the brick
 
 ```swift
 view.lg_configureAs(viewBrick)
 ```
 <p align="center"><img src="Medias/union_sample.png" width="320" /></p>
 #### More complex brick and build with an enum
-An enum which implement `BrickBuilderType`, used to centralise all `brick` designs in a single enum file.
+An enum which implements `BrickBuilderType`, used to centralize all `brick` designs in a single enum file.
 
 ```swift
 import LeeGo
@@ -253,3 +253,4 @@ If you love this library or you have any thing want to tell me, please ping me o
 I'd like to thank every one who helped me, inspired me and encouraged me. Also thank to my team @LeMonde, especially [Vincent](https://twitter.com/vipom) & Blaise.
 
 Enjoy~ 🎉 🎉 🍻 🍻 
+
