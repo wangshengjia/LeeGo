@@ -25,7 +25,7 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
         super.viewDidLoad()
 
         if elements.isEmpty {
-            let URLRequest =  NSURLRequest(URL: NSURL(string: "http://api-cdn.lemonde.fr/ws/5/mobile/www/ios-phone/en_continu/index.json")!)
+            let URLRequest =  NSURLRequest(URL: NSURL(string: "http://api-cdn.lemonde.fr/ws/6/mobile/www/ios-phone/en_continu/index.json")!)
             let task = NSURLSession.sharedSession().dataTaskWithRequest(URLRequest) {data, response, error in
                 if let data = data,
                     let optionalValue = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)) as? Dictionary<String, AnyObject>,
@@ -79,14 +79,6 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
             }, completion: nil)
 
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-    }
-
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
-        if let detailsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LeMondeNewsFeedViewController") as? LeMondeNewsFeedViewController {
-            detailsViewController.elements = self.elements
-            self.navigationController?.pushViewController(detailsViewController, animated: true)
-        }
     }
 }
 

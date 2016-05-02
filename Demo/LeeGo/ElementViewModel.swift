@@ -16,10 +16,6 @@ struct ElementViewModel<E: Element> {
     init(element: E) {
         self.element = element
     }
-
-    var brickDataResolver: (targetView: UIView, brick: Brick) -> () = { (targetView: UIView, brick: Brick) -> () in
-
-    }
 }
 
 extension ElementViewModel {

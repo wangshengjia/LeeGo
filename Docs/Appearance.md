@@ -86,3 +86,34 @@ zoomScale |  |  |  |  |  |  |  | x
 bouncesZoom |  |  |  |  |  |  |  | x
 scrollsToTop |  |  |  |  |  |  |  | x
 keyboardDismissMode |  |  |  |  |  |  |  | x
+
+## Use custom appearance
+
+You can also implement your self the custom appearance by overriding and implementing `UIView.lg_setupCustomStyle` & `UIView.lg_removeCustomStyle`.
+
+```swift
+let blueBlock = "blue".build(UIImageView).style([.custom(["shadowColor": UIColor.brownColor(), "shadowOpacity": 1.0])])
+
+extension UIView {
+    public func lg_setupCustomStyle(style: [String: AnyObject]) {
+        if let view = self as? UIImageView,
+            let color = style["shadowColor"] as? UIColor,
+            let opacity = style["shadowOpacity"] as? Float {
+            view.layer.shadowColor = color.CGColor
+            view.layer.shadowOpacity = opacity
+        }
+    }
+
+    public func lg_removeCustomStyle(style: [String: AnyObject]) {
+        if let view = self as? UIImageView,
+            let _ = style["shadowColor"] as? UIColor,
+            let _ = style["shadowOpacity"] as? Float {
+            view.layer.shadowColor = UIColor.blackColor().CGColor
+            view.layer.shadowOpacity = 0.0
+        }
+    }
+}
+
+```
+
+Warning: should be careful to implement these two methods as a pair, if you tell the framework how to apply a custom style, you need also to tell how to unapply this custom style. Otherwise you may have some unexpected effects.

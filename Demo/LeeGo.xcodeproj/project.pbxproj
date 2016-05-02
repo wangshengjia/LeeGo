@@ -26,7 +26,7 @@
 		358507941C622B6C006D02EF /* TheSansOsF-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 358507891C622B6A006D02EF /* TheSansOsF-SemiBold.otf */; };
 		358507951C622B6C006D02EF /* TheSansOsF-SemiLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3585078A1C622B6A006D02EF /* TheSansOsF-SemiLight.otf */; };
 		35B44E361C84E4E60049553F /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B44E351C84E4E60049553F /* Tweet.swift */; };
-		35BD85331CA89598005B3E53 /* component.json in Resources */ = {isa = PBXBuildFile; fileRef = 35BD85321CA89598005B3E53 /* component.json */; };
+		35BD85331CA89598005B3E53 /* standard_brick.json in Resources */ = {isa = PBXBuildFile; fileRef = 35BD85321CA89598005B3E53 /* standard_brick.json */; };
 		35D7F44D1CC4E5EB008D1AEB /* SamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7F44B1CC4E5EB008D1AEB /* SamplesViewController.swift */; };
 		35D7F44E1CC4E5EB008D1AEB /* SampleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7F44C1CC4E5EB008D1AEB /* SampleItem.swift */; };
 		35F5204A1C7C7BEF0089FF41 /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520491C7C7BEF0089FF41 /* DemoTests.swift */; };
@@ -76,7 +76,7 @@
 		359374D51CD5D53A00062912 /* Layout.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Layout.md; sourceTree = "<group>"; };
 		359374E21CD5D85C00062912 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		35B44E351C84E4E60049553F /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
-		35BD85321CA89598005B3E53 /* component.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = component.json; sourceTree = "<group>"; };
+		35BD85321CA89598005B3E53 /* standard_brick.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = standard_brick.json; sourceTree = "<group>"; };
 		35D7F44B1CC4E5EB008D1AEB /* SamplesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplesViewController.swift; sourceTree = "<group>"; };
 		35D7F44C1CC4E5EB008D1AEB /* SampleItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleItem.swift; sourceTree = "<group>"; };
 		35F51FBA1C7C61A40089FF41 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 				350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */,
 				35FFB6A71C7A8C070035EC52 /* Element.swift */,
 				350637461C4C1AAC00B5E547 /* ElementViewModel.swift */,
-				35BD85321CA89598005B3E53 /* component.json */,
+				35BD85321CA89598005B3E53 /* standard_brick.json */,
 			);
 			name = LeMonde;
 			sourceTree = "<group>";
@@ -386,7 +386,7 @@
 				3585078B1C622B6C006D02EF /* FetteEngschrift.otf in Resources */,
 				358507931C622B6C006D02EF /* TheSansOsF-Plain.otf in Resources */,
 				3585078E1C622B6C006D02EF /* TheAntiquaB-W5PlainItalic.otf in Resources */,
-				35BD85331CA89598005B3E53 /* component.json in Resources */,
+				35BD85331CA89598005B3E53 /* standard_brick.json in Resources */,
 				350E0DF61C84DD3700DB78FC /* twitter_sample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
