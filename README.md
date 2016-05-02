@@ -245,8 +245,11 @@ $ carthage update
 At last, you need to set up your Xcode project manually to add the LeeGo framework.
 
 ## Roadmap
-#### Limit for the moment
+There are already quite a lot cool stuffs posted in the issue list. Feel free to fire another issue for the new idea.
 
-#### What's the next ?
+## Well...
+If you love this library or you have any thing want to tell me, please ping me on [Twitter](twitter.com/wangshengjia), on [Weibo](http://www.weibo.com/1739447693) or just fire the issue.
 
-## References
+I'd like to thank every one who helped me, inspired me and encouraged me. Also thank to my team @LeMonde, especially [Vincent](https://twitter.com/vipom) & Blaise.
+
+Enjoy~ 🎉 🎉 🍻 🍻 
