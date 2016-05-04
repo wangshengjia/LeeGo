@@ -219,7 +219,7 @@ cell.lg_configureAs(TwitterBrickSet.standardTweet.brick(), dataSource: element[i
 For best practices and more design details, please checkout [more design details](Docs/Design.md)
 
 ## Installation
-#### Cocoapods
+#### CocoaPods
 LeeGo is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
