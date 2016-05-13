@@ -29,7 +29,7 @@ We all know that MVC pattern has some serious problems when dealing with a compl
 
 I’ve talked this idea in this [blog post](https://medium.com/@victor_wang/embrace-component-driven-ui-6405337189f5#.8no01ebrx) and also on a [dotSwift’s talk](http://www.thedotpost.com/2016/01/victor-wang-build-ios-ui-in-the-way-of-lego-bricks). Please checkout through for more details.
 
-LeeGo, replace the `View` part of MVC by `Brick`.
+LeeGo, replaces the `View` part of MVC by `Brick`.
 <p align="center">
 
 <img src="Medias/leego.gif" alt="LeeGo" title="LeeGo" width="600"/>
@@ -46,6 +46,7 @@ LeeGo, replace the `View` part of MVC by `Brick`.
 - Capable to **update remotely** almost everything via your JSON payload.
 - Built-in convenience methods to make **UIStackView like layout** hassle-free.
 - Built-in **self-sizing mechanism** to calculate cell’s height automatically.
+- Method chaining syntax sugar.
 - Benefits from Swift’s enum, let you put the whole UI in a single enum file.
 
 **Compare with Facebook ComponentKit**

@@ -79,6 +79,7 @@ extension BrickDescribable {
     }
 }
 
+
 // MARK: Brick Context
 
 private final class BrickContext {
@@ -91,7 +92,7 @@ private struct AssociatedKeys {
     static var BrickContextAssociatedKey = "BrickContext_AssociatedKey"
 }
 
-extension BrickDescribable where Self: UIView {
+extension UIView {
 
     private var context: BrickContext {
         get {
