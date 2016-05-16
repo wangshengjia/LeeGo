@@ -284,16 +284,16 @@ extension LeMonde: BrickConvertible {
 enum Twitter: BrickBuilderType {
 
     // leaf bricks
-    case username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount
+    case username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, likeButton
 
     // complex bricks
-    case retweetView, likeView
     case accountHeader, toolbarFooter, retweetHeader
 
     // root bricks
     case tweet
 
-    static let reuseIdentifiers = [username, account, avatar, tweetText, tweetImage, date, replyButton, retweetButton, retweetCount, likeButton, likeCount, retweetView, likeView, accountHeader, toolbarFooter, retweetHeader, tweet].map { (component) -> String in
+    // reuseId of collection view
+    static let reuseIdentifiers = [tweet].map { (component) -> String in
         return component.brickName
     }
 
@@ -307,8 +307,6 @@ enum Twitter: BrickBuilderType {
         replyButton: UIButton.self,
         retweetButton: UIButton.self,
         likeButton: UIButton.self,
-        retweetCount: UILabel.self,
-        likeCount: UILabel.self,
     ]
 }
 
@@ -323,7 +321,7 @@ extension Twitter {
         case .avatar:
             return build().style([.ratio(1), .backgroundColor(UIColor(red: 0.204, green: 0.596, blue: 0.859, alpha: 1)), .cornerRadius(3)]).width(50)
         case .tweetText:
-            return build().style([.scrollEnabled(false)])
+            return build().style([.scrollEnabled(false), .lineFragmentPadding(0)])
         case .tweetImage:
             return build().style([.ratio(2), .backgroundColor(UIColor(red: 0.945, green: 0.769, blue: 0.0588, alpha: 1))])
         case .date:
@@ -331,38 +329,14 @@ extension Twitter {
         case .replyButton:
             return build().style([.buttonImage(UIImage(named: "twitter_reply")!, .Normal)])
         case .retweetButton:
-            return build().style([.buttonImage(UIImage(named: "twitter_retweet")!, .Normal)])
+            return build().style([.buttonImage(UIImage(named: "twitter_retweet")!, .Normal), .buttonTitleColor(UIColor.blackColor(), .Normal), .custom(["buttonTitleFont": UIFont.systemFontOfSize(14)])])
         case .likeButton:
-            return build().style([.buttonImage(UIImage(named: "twitter_favorite")!, .Normal)])
-        case .retweetCount:
-            return build().style([.font(UIFont.systemFontOfSize(14))])
-        case .likeCount:
-            return build().style([.font(UIFont.systemFontOfSize(14))])
-        case .retweetView:
-            return build().bricks(
-                retweetButton.brick(),
-                retweetCount.brick()
-                ) { (rtButton, rtNumber) -> Layout in
-                    Layout([
-                        "H:|[\(rtButton)]-spaceH-[\(rtNumber)]|",
-                        "V:|[\(rtButton)]|", "V:|[\(rtNumber)]|"
-                        ])
-            }
-        case .likeView:
-            return build().bricks(
-                likeButton.brick(),
-                likeCount.brick()
-                ) { (likeButton, likeNumber) -> Layout in
-                    Layout([
-                        "H:|[\(likeButton)]-spaceH-[\(likeNumber)]|",
-                        "V:|[\(likeButton)]|", "V:|[\(likeNumber)]|"
-                        ])
-            }
+            return build().style([.buttonImage(UIImage(named: "twitter_favorite")!, .Normal), .buttonTitleColor(UIColor.blackColor(), .Normal), .custom(["buttonTitleFont": UIFont.systemFontOfSize(14)])])
         case .toolbarFooter:
             return build().bricks(
                 replyButton.brick(),
-                retweetView.brick(),
-                likeView.brick()) { (reply, retweet, like) in
+                retweetButton.brick(),
+                likeButton.brick()) { (reply, retweet, like) in
                     Layout([
                         "H:|[\(reply)]-50-[\(retweet)]-50-[\(like)]-(>=0)-|",
                         "V:|[\(reply)]|", "V:|[\(retweet)]|", "V:|[\(like)]|"

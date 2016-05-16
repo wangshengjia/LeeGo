@@ -57,12 +57,26 @@ extension Tweet: BrickDataSource {
             label.text = "@" + screenName
         case let label as UILabel where brick == Twitter.date:
             label.text = "2d" // just example
-        case let label as UILabel where brick == Twitter.retweetCount:
-            label.text = "\(retweetCount)"
-        case let label as UILabel where brick == Twitter.likeCount:
-            label.text = "\(favouritesCount)"
+        case let button as UIButton where brick == Twitter.retweetButton:
+            button.setTitle("\(retweetCount)", forState: .Normal)
+        case let button as UIButton where brick == Twitter.likeButton:
+            button.setTitle("\(favouritesCount)", forState: .Normal)
         default:
             break
+        }
+    }
+}
+
+extension UIButton {
+    public override func lg_setupCustomStyle(style: [String: AnyObject]) {
+        if let font = style["buttonTitleFont"] as? UIFont {
+            self.titleLabel?.font = font
+        }
+    }
+
+    public override func lg_removeCustomStyle(style: [String: AnyObject]) {
+        if let _ = style["buttonTitleFont"] as? UIFont {
+            self.titleLabel?.font = nil
         }
     }
 }
