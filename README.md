@@ -27,7 +27,11 @@ LeeGo is a lightweight Swift framework that helps you decouple & modularise your
 ## Rational behind
 We all know that MVC pattern has some serious problems when dealing with a complex iOS project. Fortunately there are also a bunch of approaches that aim to fix the problems, most of them mainly address the `Controller` part, such as MVP, MVVM, MVSM or VIPER. But there is barely a thing which addresses the `View` part. Does that mean we just run out of all the problems in the `View` part ? I think the answer is NO, especially when we need our app to be fully responsive.
 
-I’ve talked this idea in this [blog post](https://medium.com/@victor_wang/embrace-component-driven-ui-6405337189f5#.8no01ebrx) and also on a [dotSwift’s talk](http://www.thedotpost.com/2016/01/victor-wang-build-ios-ui-in-the-way-of-lego-bricks). Please checkout through for more details.
+I’ve talked this idea on a [dotSwift’s talk](http://www.thedotpost.com/2016/01/victor-wang-build-ios-ui-in-the-way-of-lego-bricks), and also on my blog posts:
+- [Build UI without UIView](http://allblue.me/swift/2016/05/12/reuse-everything-of-your-UI-components/)
+- [Put your whole UI into struct & enum with LeeGo](http://allblue.me/swift/2016/05/25/LeeGo-UI-developpment/)
+
+Please checkout through for more details.
 
 LeeGo, replaces the `View` part of MVC by `Brick`.
 <p align="center">
