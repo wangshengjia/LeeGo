@@ -84,7 +84,7 @@ Create a `Brick` instance which named "title" as UILabel, with default text "Sho
 ```swift
 import LeeGo
 
-let titleBrick: Brick = "title".build(UILabel).style([.text("Showcase"), .backgroundColor(UIColor.lightGrayColor())])
+let titleBrick: Brick = "title".build(UILabel).style([.text("Showcase"), .backgroundColor(.lightGrayColor())])
 ```
 Configure an `UILabel` instance just as title brick
 
@@ -99,8 +99,8 @@ Create the bricks inside a cell brick
 ```swift
 
 let titleBrick = "title".build(UILabel).style([.numberOfLines(0), .text("title")])
-let subtitleBrick = "subtitle".build(UILabel).style([.textColor(UIColor.lightGrayColor()), .numberOfLines(0), .font(UIFont.systemFontOfSize(14)), .text("subtitle")])
-let imageBrick = "image".build(UIImageView).style([.ratio(1.5), .backgroundColor(UIColor.blueColor())]).width(68)
+let subtitleBrick = "subtitle".build(UILabel).style([.textColor(.lightGrayColor()), .numberOfLines(0), .font(.systemFontOfSize(14)), .text("subtitle")])
+let imageBrick = "image".build(UIImageView).style([.ratio(1.5), .backgroundColor(.blueColor())]).width(68)
 
 /// Create a brick stand for `UIView` which contains a `title`,
 /// a `subtitle` and an `image` inside, layout them with
@@ -152,7 +152,7 @@ let viewBrick = Brick.union("brickName", bricks: [
 		            Brick.union("blocks", bricks: [
 		                redBlock.height(50),
 		                greenBlock.height(80),
-		                blueBlock.height(30)], axis: .Horizontal, align: .Top, distribution: .FillEqually, metrics: LayoutMetrics(10, 10, 10, 10, 10, 10)).style([.backgroundColor(UIColor.yellowColor())])
+		                blueBlock.height(30)], axis: .Horizontal, align: .Top, distribution: .FillEqually, metrics: LayoutMetrics(10, 10, 10, 10, 10, 10)).style([.backgroundColor(.yellowColor())])
 		            ], axis: .Vertical, align: .Fill, distribution: .Flow(3), metrics: LayoutMetrics(20, 20, 20, 20, 10, 10))
                 
 ```
@@ -185,16 +185,16 @@ enum TwitterBrickSet: BrickBuilderType {
     func brick() -> Brick {
         switch self {
         case .username:
-            return build().style([.font(UIFont.boldSystemFontOfSize(14))])
+            return build().style([.font(.boldSystemFontOfSize(14))])
         case .account:
-            return build().style([.font(UIFont.systemFontOfSize(14))])
+            return build().style([.font(.systemFontOfSize(14))])
         case .avatar:
-            return build().style([.ratio(1), .backgroundColor(UIColor.lightGrayColor()), .cornerRadius(3)]).width(50)
+            return build().style([.ratio(1), .backgroundColor(.lightGrayColor()), .cornerRadius(3)]).width(50)
         case .tweetText:
             return build().style([.scrollEnabled(false)])
         …
         case .standardTweet:
-            return build().style([.backgroundColor(UIColor.whiteColor())])
+            return build().style([.backgroundColor(.whiteColor())])
                 .bricks(
                     avatar.brick(),
                     accountHeader.brick(),
