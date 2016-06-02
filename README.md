@@ -258,13 +258,9 @@ If you like LeeGo and willing to make it better, you are more than welcomed to s
 - Answering questions on issues.
 - Improving documentation.
 - Reviewing pull requests.
-- Finding (and reporting!) bugs.
-- Fixing bugs
+- Finding, reporting or fixing bugs.
 
 Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by [its terms](Docs/Code of Conduct.md).
-
-## Roadmap
-There are already quite a lot cool stuffs posted in the issue list. Feel free to fire another issue for the new idea.
 
 ## Well...
 If you have any thing want to tell me, please ping me on [Twitter](http://twitter.com/wangshengjia), on [Weibo](http://www.weibo.com/1739447693) or just fire the issue.
