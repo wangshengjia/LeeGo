@@ -250,13 +250,31 @@ $ carthage update
 
 At last, you need to set up your Xcode project manually to add the LeeGo framework.
 
+## Contributing
+
+Hey! Like Moya? Awesome! We could actually really use your help!
+
+Open source isn't just writing code. Moya could use your help with any of the
+following:
+
+If you like LeeGo and willing to make it better, you are more than welcomed to send pull request for:
+
+- Proposing new features.
+- Answering questions on issues.
+- Improving documentation.
+- Reviewing pull requests.
+- Finding (and reporting!) bugs.
+- Fixing bugs
+
+Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by [its terms](Docs/Code of Conduct.md).
+
 ## Roadmap
 There are already quite a lot cool stuffs posted in the issue list. Feel free to fire another issue for the new idea.
 
 ## Well...
-If you love this library or you have any thing want to tell me, please ping me on [Twitter](http://twitter.com/wangshengjia), on [Weibo](http://www.weibo.com/1739447693) or just fire the issue.
+If you have any thing want to tell me, please ping me on [Twitter](http://twitter.com/wangshengjia), on [Weibo](http://www.weibo.com/1739447693) or just fire the issue.
 
-I'd like to thank every one who helped me, inspired me and encouraged me. Also thank to my team @LeMonde, especially [Vincent](https://twitter.com/vipom) & Blaise.
+I'd like to thank every one who helped me, inspired me and encouraged me. Also thank to my team at [Le Monde](http://lemonde.fr/), especially [Vincent](https://twitter.com/vipom) & [Blaise](https://github.com/bsarr007).
 
 Enjoy~ 🎉 🎉 🍻 🍻 
 
