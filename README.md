@@ -252,11 +252,6 @@ At last, you need to set up your Xcode project manually to add the LeeGo framewo
 
 ## Contributing
 
-Hey! Like Moya? Awesome! We could actually really use your help!
-
-Open source isn't just writing code. Moya could use your help with any of the
-following:
-
 If you like LeeGo and willing to make it better, you are more than welcomed to send pull request for:
 
 - Proposing new features.
