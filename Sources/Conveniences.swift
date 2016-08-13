@@ -23,11 +23,11 @@ internal func + <K,V>(left: [K: V], right: [K: V]) -> [K: V] {
 
 extension Dictionary {
 
-    internal func filter(@noescape includeElement: (Key, Value) throws -> Bool) rethrows -> Dictionary {
+    internal func filter(includeElement: @noescape (Key, Value) throws -> Bool) rethrows -> Dictionary {
         var result = self
         for (key, value) in result {
             if try !includeElement(key, value) {
-                result.removeValueForKey(key)
+                result.removeValue(forKey: key)
             }
         }
         return result
@@ -36,27 +36,27 @@ extension Dictionary {
 
 extension Dictionary {
 
-    internal func parse<T>(key: JSONKeyType) throws -> T {
+    internal func parse<T>(_ key: JSONKeyType) throws -> T {
         return try parse(key.asString)
     }
 
-    internal func parse<T>(key: String) throws -> T {
+    internal func parse<T>(_ key: String) throws -> T {
         if let value = self[key as! Key] {
             if let valueWithExpectedType = value as? T {
                 return valueWithExpectedType
             } else {
-                throw JSONParseError.MismatchedTypeError(type: value.dynamicType, expectedType: T.self)
+                throw JSONParseError.mismatchedTypeError(type: value.dynamicType, expectedType: T.self)
             }
         } else {
-            throw JSONParseError.UnexpectedKeyError(key: key)
+            throw JSONParseError.unexpectedKeyError(key: key)
         }
     }
 
-    internal func parse<T>(key: JSONKeyType, _ defaultValue: T) -> T {
+    internal func parse<T>(_ key: JSONKeyType, _ defaultValue: T) -> T {
         return parse(key.asString, defaultValue)
     }
 
-    internal func parse<T>(key: String, _ defaultValue: T) -> T {
+    internal func parse<T>(_ key: String, _ defaultValue: T) -> T {
         if let value = self[key as! Key] as? T {
             return value
         }
@@ -106,7 +106,7 @@ extension UIView {
     internal func lg_setAttributedButtonTitle(with attributesArray: [Attributes], state: UIControlState) {
         let attributedString = UIView.lg_attributedString(with: attributesArray)
         if let button = self as? UIButton {
-            button.setAttributedTitle(attributedString, forState: state)
+            button.setAttributedTitle(attributedString, for: state)
         }
         self.attributesArray = attributesArray
     }
@@ -127,7 +127,7 @@ extension UIView {
             return nil
         }
 
-        let attributedStrings = attributesArray.enumerate().flatMap({ (index, attribute) -> NSAttributedString? in
+        let attributedStrings = attributesArray.enumerated().flatMap({ (index, attribute) -> NSAttributedString? in
             if let idx = Int(String(index)) {
                 let text = texts[idx] ?? ""
                 return NSAttributedString(string: text, attributes: attribute)
@@ -149,22 +149,22 @@ extension UIView {
             return first
         }
 
-        return attributedStrings.reduce(first, combine: { (acc, cur) -> NSAttributedString in
+        return attributedStrings.reduce(first, { (acc, cur) -> NSAttributedString in
             if acc == cur {
                 return acc
             }
 
-            let str = acc.mutableCopy()
-            str.appendAttributedString(cur)
-            return str.copy() as! NSAttributedString
+          let str: AnyObject = acc.mutableCopy()
+            str.append(cur)
+            return str as! NSAttributedString
         })
     }
 }
 
-public func formattedStringFromJSON(json: JSONDictionary) -> String? {
+public func formattedStringFromJSON(_ json: JSONDictionary) -> String? {
     do {
-        let data = try NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
-        return String(data: data, encoding: NSUTF8StringEncoding)
+        let data = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+        return String(data: data, encoding: String.Encoding.utf8)
     } catch {
         print(error)
         return nil

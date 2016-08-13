@@ -34,7 +34,7 @@ class SamplesViewController: UITableViewController {
         tableView?.rowHeight = UITableViewAutomaticDimension
 
         SimpleShowcase.reuseIdentifiers.forEach { (identifier) in
-            tableView?.registerClass(UITableViewCell.self, forCellReuseIdentifier: identifier)
+            tableView?.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
         }
     }
 
@@ -43,12 +43,12 @@ class SamplesViewController: UITableViewController {
     }
 
     // MARK: Datasource
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+ 
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return elements.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let brick = {_ -> Brick in
             switch indexPath.row {
             case 0: return SimpleShowcase.showcase1.brick()
@@ -67,9 +67,9 @@ class SamplesViewController: UITableViewController {
             }
         }()
 
-        let cell = tableView.dequeueReusableCellWithIdentifier(brick.name, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: brick.name, for: indexPath)
 
-        cell.lg_configureAs(brick, dataSource:elements[indexPath.row], updatingStrategy: .Always)
+        cell.lg_configureAs(brick, dataSource:elements[indexPath.row], updatingStrategy: .always)
 
         return cell
     }

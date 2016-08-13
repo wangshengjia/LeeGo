@@ -75,7 +75,7 @@ public struct LayoutMetrics: Equatable {
         self.spaceV = customMetrics[JSONKey.spaceV.asString] ?? spaceV
 
 
-        self.customMetrics = customMetrics.filter({ (key, value) -> Bool in
+        self.customMetrics = customMetrics.filter(includeElement: { (key, value) -> Bool in
             let top = key != JSONKey.top.asString
             let left = key != JSONKey.left.asString
             let bottom = key != JSONKey.bottom.asString
@@ -118,7 +118,7 @@ public func ==(lhs: LayoutMetrics, rhs: LayoutMetrics) -> Bool {
 ///  - Horizontal: Horizontal
 ///  - Vertical:   Vertical
 public enum Axis {
-    case Horizontal, Vertical
+    case horizontal, vertical
 }
 
 ///  Represent the layout alignment of views. Inspired from UIStackView.
@@ -130,7 +130,7 @@ public enum Axis {
 ///  - Center: views will be aligned at the middle
 ///  - Fill:   views will be enlarged to fill the superview
 public enum Alignment {
-    case Top, Left, Bottom, Right, Center, Fill
+    case top, left, bottom, right, center, fill
 }
 
 ///  Represent the layout distribution of views. Inspired from UIStackView.
@@ -146,7 +146,7 @@ public enum Alignment {
 ///  idx <= 0           = 1               = 2 (break)      = 3            = 4          >= 5
 ///  ```
 public enum Distribution {
-    case Fill, FillEqually, Flow(Int)
+    case fill, fillEqually, flow(Int)
 }
 
 ///  Represent the layout of sub-bricks inside the brick.
@@ -206,7 +206,7 @@ public struct Layout: Equatable {
     ///  - parameter metrics: LayoutMetrics
     ///
     ///  - returns: new `Layout` instance
-    public init(_ formats: [String] = [], options: NSLayoutFormatOptions = .DirectionLeadingToTrailing, metrics: LayoutMetrics = LayoutMetrics()) {
+    public init(_ formats: [String] = [], options: NSLayoutFormatOptions = NSLayoutFormatOptions(), metrics: LayoutMetrics = LayoutMetrics()) {
         self.formats = formats
         self.metrics = metrics
         self.options = options
@@ -235,7 +235,7 @@ extension Layout: JSONConvertible {
 
         let metrics: [String: CGFloat] = (try? json.parse(JSONKey.metrics)) ?? [:]
 
-        self.init(formats, options: options ?? .DirectionLeadingToTrailing, metrics: LayoutMetrics(customMetrics: metrics))
+        self.init(formats, options: options ?? NSLayoutFormatOptions(), metrics: LayoutMetrics(customMetrics: metrics))
     }
 
     ///  Convert `self` to JSON

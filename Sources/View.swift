@@ -28,7 +28,7 @@ public protocol BrickDataSource {
     ///
     ///  - Note: You could but not be suggested to change the appearance of the view in this method usually.
     ///
-    func update(targetView: UIView, with brick: Brick)
+    func update(_ targetView: UIView, with brick: Brick)
 }
 
 ///  Specific a strategy to determine what to do
@@ -42,8 +42,8 @@ public protocol BrickDataSource {
 ///  - WhenBrickChanged: If the new brick has the same name as the configured one, the target view will ignored the new brick.
 ///  - Always: The target view will get applied anyway
 public enum UpdatingStrategy {
-    case WhenBrickChanged
-    case Always
+    case whenBrickChanged
+    case always
 }
 
 extension UIView: BrickDescribable {
@@ -58,7 +58,7 @@ extension UIView: BrickDescribable {
     ///  - Note: You should always override and implement this method if you have a custom style
     ///
     ///  - parameter style: custom style specified in Appearance.custom
-    public func lg_setupCustomStyle(style: [String: AnyObject]) {
+    public func lg_setupCustomStyle(_ style: [String: AnyObject]) {
         assertionFailure("Unknown style \(style), should implement `lg_setupCustomStyle:` in extension of UIView or its subclass.")
     }
 
@@ -67,7 +67,7 @@ extension UIView: BrickDescribable {
     ///  - Note: You should always override and implement this method if you have a custom style
     ///
     ///  - parameter style: custom style specified in Appearance.custom
-    public func lg_removeCustomStyle(style: [String: AnyObject]) {
+    public func lg_removeCustomStyle(_ style: [String: AnyObject]) {
         assertionFailure("Unknown style \(style), should implement `lg_removeCustomStyle:` in extension of UIView or its subclass.")
     }
 
@@ -79,8 +79,8 @@ extension UIView: BrickDescribable {
     ///  - parameter key: outlet key of `brick`
     ///
     ///  - returns: target view found
-    public func lg_viewForOutletKey(key: String) -> UIView? {
-        if let currentKey = currentBrick?.LGOutletKey where currentKey == key {
+    public func lg_viewForOutletKey(_ key: String) -> UIView? {
+        if let currentKey = currentBrick?.LGOutletKey, currentKey == key {
             return self
         }
 
@@ -98,7 +98,7 @@ extension UIView: BrickDescribable {
     ///  - parameter brick:            A `Brick` instance. The target class of brick should as same as `self.dynamicType`.
     ///  - parameter dataSource:       The data source object which implement the `BrickDataSource` protocol.
     ///  - parameter updatingStrategy: The stragegy which determine what to do when brick changed with the same target view.
-    public func lg_configureAs(brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .WhenBrickChanged) {
+    public func lg_configureAs(_ brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .whenBrickChanged) {
         if let cell = self as? UICollectionViewCell {
             cell.contentView._configureAs(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else if let cell = self as? UITableViewCell {
@@ -128,15 +128,15 @@ extension UIView {
             return computeClosure(fittingWidth: fittingWidth, childrenHeights: childrenHeights, metrics: metrics)
         } else if subviews.isEmpty {
             // leaf brick -> dynamic height
-            return self.sizeThatFits(CGSize(width: self.frame.width, height: CGFloat.max)).height
+            return self.sizeThatFits(CGSize(width: self.frame.width, height: CGFloat.greatestFiniteMagnitude)).height
         } else {
-            return self.systemLayoutSizeFittingSize(CGSize(width: self.frame.width, height: 0), withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityFittingSizeLevel).height
+            return self.systemLayoutSizeFitting(CGSize(width: self.frame.width, height: 0), withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityFittingSizeLevel).height
         }
     }
 
-    private func _configureAs(brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .WhenBrickChanged) {
+    private func _configureAs(_ brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .whenBrickChanged) {
 
-        guard self.dynamicType.isSubclassOfClass(brick.targetClass) else {
+        guard self.dynamicType.isSubclass(of: brick.targetClass) else {
             assertionFailure("Brick type: \(self.dynamicType) is not compatible with configuration type: \(brick.targetClass)")
             return
         }

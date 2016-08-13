@@ -14,7 +14,7 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             for reuseId in LeMonde.cellReuseIdentifiers {
-                collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseId)
+                collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseId)
             }
         }
     }
@@ -25,14 +25,14 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
         super.viewDidLoad()
 
         if elements.isEmpty {
-            let URLRequest =  NSURLRequest(URL: NSURL(string: "http://api-cdn.lemonde.fr/ws/6/mobile/www/ios-phone/en_continu/index.json")!)
-            let task = NSURLSession.sharedSession().dataTaskWithRequest(URLRequest) {data, response, error in
+            let URLRequest =  NSURLRequest(url: NSURL(string: "http://api-cdn.lemonde.fr/ws/6/mobile/www/ios-phone/en_continu/index.json")! as URL)
+            let task = URLSession.shared.dataTask(with: URLRequest as URLRequest) {data, response, error in
                 if let data = data,
-                    let optionalValue = try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(rawValue: 0)) as? Dictionary<String, AnyObject>,
+                    let optionalValue = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? Dictionary<String, AnyObject>,
                     let value = optionalValue,
                     let elementDictionaries = value["elements"] as? Array<Dictionary<String, AnyObject>> {
-                        self.elements = ElementViewModel.elementViewModelsWithElements(Element.elementsFromDictionaries(elementDictionaries))
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.elements = ElementViewModel.elementViewModelsWithElements(elements: Element.elementsFromDictionaries(dictionaries: elementDictionaries))
+                        DispatchQueue.main.async(execute: { () -> Void in
                             self.collectionView.reloadData()
                         })
                 }
@@ -41,16 +41,15 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
             task.resume()
         }
 
-        (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(self.view.frame.width, 180)
+      (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSize(width: self.view.frame.width, height: 180)
     }
 
     // MARK: Collection View DataSource
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return elements.count
     }
-
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         var brick = indexPath.row % 2 == 0 ? LeMonde.standard.brick() : LeMonde.featured.brick()
 
@@ -58,32 +57,32 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
             brick = LeMonde.live.brick()
         }
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(brick.name, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: brick.name, for: indexPath)
 
-        cell.lg_configureAs(brick, dataSource: elements[indexPath.item], updatingStrategy: .Always)
+        cell.lg_configureAs(brick, dataSource: elements[indexPath.item], updatingStrategy: .always)
 
         return cell
     }
 
     // MARK: Collection View Layout
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0.5
     }
 
     // MARK: size
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animateAlongsideTransition({ (context) -> Void in
-            (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSizeMake(self.view.frame.width, 180)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { (context) -> Void in
+          (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).estimatedItemSize = CGSize(width: self.view.frame.width, height: 180)
             self.collectionView.reloadData()
             }, completion: nil)
 
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        super.viewWillTransition(to: size, with: coordinator)
     }
 }
 
 extension UICollectionViewCell {
-    override public func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    override public func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
 
         return lg_fittingHeightLayoutAttributes(layoutAttributes)
     }

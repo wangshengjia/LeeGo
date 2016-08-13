@@ -75,39 +75,39 @@ extension Appearance {
         case (let .backgroundColor(color), _):
             targetView.backgroundColor = !useDefaultValue ? color : nil
         case (let .userInteractionEnabled(userInteractionEnabled), _):
-            targetView.userInteractionEnabled = !useDefaultValue ? userInteractionEnabled : !((targetView is UILabel) || (targetView is UIImageView))
+            targetView.isUserInteractionEnabled = !useDefaultValue ? userInteractionEnabled : !((targetView is UILabel) || (targetView is UIImageView))
         case (let .translatesAutoresizingMaskIntoConstraints(should), _):
             targetView.translatesAutoresizingMaskIntoConstraints = !useDefaultValue ? should : false
         case (let .tintColor(color), _):
             targetView.tintColor = !useDefaultValue ? color : nil
         case (let .tintAdjustmentMode(mode), _):
-            targetView.tintAdjustmentMode = !useDefaultValue ? mode : .Automatic
+            targetView.tintAdjustmentMode = !useDefaultValue ? mode : .automatic
         case (let .cornerRadius(radius), _):
             targetView.layer.cornerRadius = !useDefaultValue ? radius : 0
         case (let .borderWidth(borderWidth), _):
             targetView.layer.borderWidth = !useDefaultValue ? borderWidth : 0
         case (let .borderColor(borderColor), _):
-            targetView.layer.borderColor = !useDefaultValue ? borderColor.CGColor : nil
+            targetView.layer.borderColor = !useDefaultValue ? borderColor.cgColor : nil
         case (let .multipleTouchEnabled(multipleTouchEnabled), _):
-            targetView.multipleTouchEnabled = !useDefaultValue ? multipleTouchEnabled : false
+            targetView.isMultipleTouchEnabled = !useDefaultValue ? multipleTouchEnabled : false
         case (let .exclusiveTouch(exclusiveTouch), _):
-            targetView.exclusiveTouch = !useDefaultValue ? exclusiveTouch : false
+            targetView.isExclusiveTouch = !useDefaultValue ? exclusiveTouch : false
         case (let .clipsToBounds(clipsToBounds), _):
             targetView.clipsToBounds = !useDefaultValue ? clipsToBounds : false
         case (let .alpha(alpha), _):
             targetView.alpha = !useDefaultValue ? alpha : 1.0
         case (let .opaque(opaque), _):
-            targetView.opaque = !useDefaultValue ? opaque : true
+            targetView.isOpaque = !useDefaultValue ? opaque : true
         case (let .hidden(hidden), _):
-            targetView.hidden = !useDefaultValue ? hidden : false
+            targetView.isHidden = !useDefaultValue ? hidden : false
         case (let .clearsContextBeforeDrawing(clearsContextBeforeDrawing), _):
             targetView.clearsContextBeforeDrawing = !useDefaultValue ? clearsContextBeforeDrawing : true
         case (let .contentMode(contentMode), _):
-            targetView.contentMode = !useDefaultValue ? contentMode : .ScaleToFill
+            targetView.contentMode = !useDefaultValue ? contentMode : .scaleToFill
 
         // UIControl
         case (let .selected(selected), let control as UIControl):
-            control.selected = !useDefaultValue ? selected : false
+            control.isSelected = !useDefaultValue ? selected : false
 
         // UILabel
         case (let .shadowColor(color), let label as UILabel):
@@ -119,22 +119,22 @@ extension Appearance {
         case (let .minimumScaleFactor(factor), let label as UILabel):
             label.minimumScaleFactor = !useDefaultValue ? factor : 0.0
         case (let .baselineAdjustment(adjustment), let label as UILabel):
-            label.baselineAdjustment = !useDefaultValue ? adjustment : .AlignBaselines
+            label.baselineAdjustment = !useDefaultValue ? adjustment : .alignBaselines
 
         // UILabel & UITextField & UITextView
         case (let .enabled(enabled), let view):
             if let label = view as? UILabel {
-                label.enabled = !useDefaultValue ? enabled : true
+                label.isEnabled = !useDefaultValue ? enabled : true
             } else if let control = view as? UIControl {
-                control.enabled = !useDefaultValue ? enabled : true
+                control.isEnabled = !useDefaultValue ? enabled : true
             } else {
                 warningUnknownAppearance(targetView)
             }
         case (let .highlighted(highlighted), let view):
             if let label = view as? UILabel {
-                label.highlighted = !useDefaultValue ? highlighted : false
+                label.isHighlighted = !useDefaultValue ? highlighted : false
             } else if let control = view as? UIControl {
-                control.highlighted = !useDefaultValue ? highlighted : false
+                control.isHighlighted = !useDefaultValue ? highlighted : false
             } else {
                 warningUnknownAppearance(targetView)
             }
@@ -168,11 +168,11 @@ extension Appearance {
             }
         case (let .textAlignment(align), let view):
             if let label = view as? UILabel {
-                label.textAlignment = !useDefaultValue ? align : .Left
+                label.textAlignment = !useDefaultValue ? align : .left
             } else if let textField = view as? UITextField {
-                textField.textAlignment = !useDefaultValue ? align : .Left
+                textField.textAlignment = !useDefaultValue ? align : .left
             } else if let textView = view as? UITextView {
-                textView.textAlignment = !useDefaultValue ? align : .Left
+                textView.textAlignment = !useDefaultValue ? align : .left
             } else {
                 warningUnknownAppearance(targetView)
             }
@@ -206,9 +206,9 @@ extension Appearance {
             }
         case (let .lineBreakMode(mode), let view):
             if let label = view as? UILabel {
-                label.lineBreakMode = !useDefaultValue ? mode : .ByWordWrapping
+                label.lineBreakMode = !useDefaultValue ? mode : .byWordWrapping
             } else if let textView = view as? UITextView {
-                textView.textContainer.lineBreakMode = !useDefaultValue ? mode : .ByWordWrapping
+                textView.textContainer.lineBreakMode = !useDefaultValue ? mode : .byWordWrapping
             } else {
                 warningUnknownAppearance(targetView)
             }
@@ -235,13 +235,13 @@ extension Appearance {
         case (let .selectedRange(range), let textView as UITextView):
             textView.selectedRange = !useDefaultValue ? range : NSRange(location: 0, length: 0)
         case (let .editable(editable), let textView as UITextView):
-            textView.editable = !useDefaultValue ? editable : false
+            textView.isEditable = !useDefaultValue ? editable : false
         case (let .selectable(selectable), let textView as UITextView):
-            textView.selectable = !useDefaultValue ? selectable : true
+            textView.isSelectable = !useDefaultValue ? selectable : true
         case (let .dataDetectorTypes(types), let textView as UITextView):
-            textView.dataDetectorTypes = !useDefaultValue ? types : .None
+            textView.dataDetectorTypes = !useDefaultValue ? types : UIDataDetectorTypes()
         case (let .textContainerInset(inset), let textView as UITextView):
-            textView.textContainerInset = !useDefaultValue ? inset : UIEdgeInsetsZero
+            textView.textContainerInset = !useDefaultValue ? inset : UIEdgeInsets.zero
         case (let .linkTextAttributes(attrs), let textView as UITextView):
             textView.linkTextAttributes = !useDefaultValue ? attrs : nil
         case (let .lineFragmentPadding(padding), let textView as UITextView):
@@ -249,7 +249,7 @@ extension Appearance {
 
         // UITextField
         case (let .borderStyle(style), let textField as UITextField):
-            textField.borderStyle = !useDefaultValue ? style : .None
+            textField.borderStyle = !useDefaultValue ? style : .none
         case (let .defaultTextAttributes(attributes), let textField as UITextField):
             textField.defaultTextAttributes = !useDefaultValue ? attributes : [:]
         case (let .placeholder(text), let textField as UITextField):
@@ -263,30 +263,30 @@ extension Appearance {
         case (let .typingAttributes(attributes), let textField as UITextField):
             textField.typingAttributes = !useDefaultValue ? attributes : nil
         case (let .clearButtonMode(mode), let textField as UITextField):
-            textField.clearButtonMode = !useDefaultValue ? mode : .Never
+            textField.clearButtonMode = !useDefaultValue ? mode : .never
 
         // UIButton
         case (let .buttonType(type), _ as UIButton):
             print("For the moment, LeeGo only support default button type. Can't handle \(type)")
             break
         case (let .buttonTitle(title, state), let button as UIButton):
-            button.setTitle(!useDefaultValue ? title : nil, forState: state)
+            button.setTitle(!useDefaultValue ? title : nil, for: state)
         case (let .buttonTitleColor(color, state), let button as UIButton):
-            button.setTitleColor(!useDefaultValue ? color : nil, forState: state)
+            button.setTitleColor(!useDefaultValue ? color : nil, for: state)
         case (let .buttonTitleShadowColor(color, state), let button as UIButton):
-            button.setTitleShadowColor(!useDefaultValue ? color : nil, forState: state)
+            button.setTitleShadowColor(!useDefaultValue ? color : nil, for: state)
         case (let .buttonImage(image, state), let button as UIButton):
-            button.setImage(!useDefaultValue ? image : nil, forState: state)
+            button.setImage(!useDefaultValue ? image : nil, for: state)
         case (let .buttonBackgroundImage(image, state), let button as UIButton):
-            button.setBackgroundImage(!useDefaultValue ? image : nil, forState: state)
+            button.setBackgroundImage(!useDefaultValue ? image : nil, for: state)
         case (let .buttonAttributedTitle(attributes, state), let button as UIButton):
             button.lg_setAttributedButtonTitle(with: !useDefaultValue ? attributes : [], state: state)
         case (let .contentEdgeInsets(insets), let button as UIButton):
-            button.contentEdgeInsets = !useDefaultValue ? insets : UIEdgeInsetsZero
+            button.contentEdgeInsets = !useDefaultValue ? insets : UIEdgeInsets.zero
         case (let .titleEdgeInsets(insets), let button as UIButton):
-            button.titleEdgeInsets = !useDefaultValue ? insets : UIEdgeInsetsZero
+            button.titleEdgeInsets = !useDefaultValue ? insets : UIEdgeInsets.zero
         case (let .imageEdgeInsets(insets), let button as UIButton):
-            button.imageEdgeInsets = !useDefaultValue ? insets : UIEdgeInsetsZero
+            button.imageEdgeInsets = !useDefaultValue ? insets : UIEdgeInsets.zero
         case (let .reversesTitleShadowWhenHighlighted(should), let button as UIButton):
             button.reversesTitleShadowWhenHighlighted = !useDefaultValue ? should : false
         case (let .adjustsImageWhenHighlighted(should), let button as UIButton):
@@ -300,30 +300,30 @@ extension Appearance {
         case (let .ratio(ratioValue), let image as UIImageView):
 
             image.removeConstraints(image.constraints.filter({ (constraint) -> Bool in
-                if constraint.mode == .Ratio {
+                if constraint.mode == .ratio {
                     return true
                 }
                 return false
             }))
 
             if !useDefaultValue {
-                let constraint = NSLayoutConstraint(item: image, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: image, attribute: NSLayoutAttribute.Height, multiplier: ratioValue, constant: 0)
-                constraint.lg_setIdentifier(with: .Ratio)
+                let constraint = NSLayoutConstraint(item: image, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: image, attribute: NSLayoutAttribute.height, multiplier: ratioValue, constant: 0)
+                constraint.lg_setIdentifier(with: .ratio)
                 constraint.priority = 990
                 image.addConstraint(constraint)
             }
 
         // UIScrollView
         case (let .scrollEnabled(scrollEnabled), let scrollView as UIScrollView):
-            scrollView.scrollEnabled = !useDefaultValue ? scrollEnabled : true
+            scrollView.isScrollEnabled = !useDefaultValue ? scrollEnabled : true
         case (let .contentOffset(offset), let scrollView as UIScrollView):
-            scrollView.contentOffset = !useDefaultValue ? offset : CGPointZero
+            scrollView.contentOffset = !useDefaultValue ? offset : CGPoint.zero
         case (let .contentSize(size), let scrollView as UIScrollView):
-            scrollView.contentSize = !useDefaultValue ? size : CGSizeZero
+            scrollView.contentSize = !useDefaultValue ? size : CGSize.zero
         case (let .contentInset(inset), let scrollView as UIScrollView):
-            scrollView.contentInset = !useDefaultValue ? inset : UIEdgeInsetsZero
+            scrollView.contentInset = !useDefaultValue ? inset : UIEdgeInsets.zero
         case (let .directionalLockEnabled(enabled), let scrollView as UIScrollView):
-            scrollView.directionalLockEnabled = !useDefaultValue ? enabled : false
+            scrollView.isDirectionalLockEnabled = !useDefaultValue ? enabled : false
         case (let .bounces(bounces), let scrollView as UIScrollView):
             scrollView.bounces = !useDefaultValue ? bounces : true
         case (let .alwaysBounceVertical(alwaysBounceVertical), let scrollView as UIScrollView):
@@ -331,15 +331,15 @@ extension Appearance {
         case (let .alwaysBounceHorizontal(alwaysBounceHorizontal), let scrollView as UIScrollView):
             scrollView.alwaysBounceHorizontal = !useDefaultValue ? alwaysBounceHorizontal : false
         case (let .pagingEnabled(pagingEnabled), let scrollView as UIScrollView):
-            scrollView.pagingEnabled = !useDefaultValue ? pagingEnabled : false
+            scrollView.isPagingEnabled = !useDefaultValue ? pagingEnabled : false
         case (let .showsHorizontalScrollIndicator(show), let scrollView as UIScrollView):
             scrollView.showsHorizontalScrollIndicator = !useDefaultValue ? show : true
         case (let .showsVerticalScrollIndicator(show), let scrollView as UIScrollView):
             scrollView.showsVerticalScrollIndicator = !useDefaultValue ? show : true
         case (let .scrollIndicatorInsets(insets), let scrollView as UIScrollView):
-            scrollView.scrollIndicatorInsets = !useDefaultValue ? insets : UIEdgeInsetsZero
+            scrollView.scrollIndicatorInsets = !useDefaultValue ? insets : UIEdgeInsets.zero
         case (let .indicatorStyle(style), let scrollView as UIScrollView):
-            scrollView.indicatorStyle = !useDefaultValue ? style : .Default
+            scrollView.indicatorStyle = !useDefaultValue ? style : .default
         case (let .decelerationRate(rate), let scrollView as UIScrollView):
             scrollView.decelerationRate = !useDefaultValue ? rate : UIScrollViewDecelerationRateNormal
         case (let .delaysContentTouches(delaysContentTouches), let scrollView as UIScrollView):
@@ -357,7 +357,7 @@ extension Appearance {
         case (let .scrollsToTop(scrollsToTop), let scrollView as UIScrollView):
             scrollView.scrollsToTop = !useDefaultValue ? scrollsToTop : true
         case (let .keyboardDismissMode(keyboardDismissMode), let scrollView as UIScrollView):
-            scrollView.keyboardDismissMode = !useDefaultValue ? keyboardDismissMode :.None
+            scrollView.keyboardDismissMode = !useDefaultValue ? keyboardDismissMode :.none
 
         // Custom
         case (let .custom(dictionary), _):
@@ -369,14 +369,14 @@ extension Appearance {
         }
     }
 
-    private func warningUnknownAppearance<View: UIView>(targetView: View) {
+    private func warningUnknownAppearance<View: UIView>(_ targetView: View) {
         assertionFailure("Unknown appearance \(self) for view \(targetView)")
     }
 
     private func asString() -> String {
         let strSelf = String(self)
-        if let index = strSelf.characters.indexOf("(") {
-            return String(self).substringToIndex(index)
+        if let index = strSelf.characters.index(of: "(") {
+            return String(self).substring(to: index)
         }
         return strSelf
     }
@@ -407,17 +407,17 @@ extension Appearance: JSONConvertible {
         case scrollEnabled, contentOffset, contentSize, contentInset, directionalLockEnabled, bounces, alwaysBounceVertical, alwaysBounceHorizontal, pagingEnabled, showsHorizontalScrollIndicator, showsVerticalScrollIndicator, scrollIndicatorInsets, indicatorStyle, decelerationRate, delaysContentTouches, canCancelContentTouches, minimumZoomScale, maximumZoomScale, zoomScale, bouncesZoom, scrollsToTop, keyboardDismissMode
     }
 
-    internal static func JSONWithAppearances(appearances: [Appearance]) -> JSONDictionary {
+    internal static func JSONWithAppearances(_ appearances: [Appearance]) -> JSONDictionary {
         return appearances.flatMap({
             (appearance) -> JSONDictionary? in
             return appearance.encode()
-        }).reduce([:], combine: {
+        }).reduce([:], {
             (result, json) -> JSONDictionary in
             return result + json
         })
     }
 
-    internal static func appearancesWithJSON(json: JSONDictionary) -> [Appearance] {
+    internal static func appearancesWithJSON(_ json: JSONDictionary) -> [Appearance] {
         return json.map({
             (key, value) -> JSONDictionary in
             return [key: value]
@@ -837,28 +837,28 @@ extension Appearance: JSONConvertible {
 
 extension Appearance {
 
-    internal static func encodeAttributes(attributesArray: [Attributes]) -> [Attributes] {
+    internal static func encodeAttributes(_ attributesArray: [Attributes]) -> [Attributes] {
         return attributesArray.map { (attributes) -> Attributes in
             return encodeAttributes(attributes)
         }
     }
 
-    internal static func decodeAttributes(attributesArray: [Attributes]) -> [Attributes] {
+    internal static func decodeAttributes(_ attributesArray: [Attributes]) -> [Attributes] {
         return attributesArray.map { (attributes) -> Attributes in
             return decodeAttributes(attributes)
         }
     }
 
-    internal static func encodeAttributes(attributes: Attributes) -> Attributes {
+    internal static func encodeAttributes(_ attributes: Attributes) -> Attributes {
 
         var attributesEncoded: Attributes = [:]
 
-        for value in attributes.enumerate() {
-            if let font = value.element.1 as? UIFont where value.element.0 == NSFontAttributeName {
+        for value in attributes.enumerated() {
+            if let font = value.element.1 as? UIFont, value.element.0 == NSFontAttributeName {
                 attributesEncoded.updateValue(font.lg_encode(), forKey: value.element.0)
             } else if let color = value.element.1 as? UIColor {
                 attributesEncoded.updateValue(color.lg_encode(), forKey: value.element.0)
-            } else if let url = value.element.1 as? NSURL {
+            } else if let url = value.element.1 as? URL {
                 attributesEncoded.updateValue(url.lg_encode(), forKey: value.element.0)
             }
         }
@@ -866,17 +866,17 @@ extension Appearance {
         return attributesEncoded
     }
 
-    internal static func decodeAttributes(attributes: Attributes) -> Attributes {
+    internal static func decodeAttributes(_ attributes: Attributes) -> Attributes {
 
         var attributesDecoded: Attributes = [:]
 
-        for value in attributes.enumerate() {
-            if let json = value.element.1 as? JSONDictionary where value.element.0 == NSFontAttributeName,
+        for value in attributes.enumerated() {
+            if let json = value.element.1 as? JSONDictionary, value.element.0 == NSFontAttributeName,
                 let font = UIFont(json: json) {
                 attributesDecoded.updateValue(font, forKey: value.element.0)
-            } else if let hexString = value.element.1 as? String where value.element.0 == NSForegroundColorAttributeName || value.element.0 == NSBackgroundColorAttributeName {
+            } else if let hexString = value.element.1 as? String, value.element.0 == NSForegroundColorAttributeName || value.element.0 == NSBackgroundColorAttributeName {
                 attributesDecoded.updateValue(UIColor(rawValue: hexString), forKey: value.element.0)
-            } else if let urlPath = value.element.1 as? String where value.element.0 == NSLinkAttributeName, let url = NSURL(string: urlPath) {
+            } else if let urlPath = value.element.1 as? String, value.element.0 == NSLinkAttributeName, let url = URL(string: urlPath) {
                 attributesDecoded.updateValue(url, forKey: value.element.0)
             }
         }

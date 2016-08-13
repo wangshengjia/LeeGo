@@ -9,16 +9,16 @@
 import Foundation
 
 protocol Configurable {
-    func setup<View: UIView>(view: View, currentStyle: [Appearance], newStyle: [Appearance])
+    func setup<View: UIView>(_ view: View, currentStyle: [Appearance], newStyle: [Appearance])
 
-    func lg_setupCustomStyle(style: [String: AnyObject])
-    func lg_removeCustomStyle(style: [String: AnyObject])
+    func lg_setupCustomStyle(_ style: [String: AnyObject])
+    func lg_removeCustomStyle(_ style: [String: AnyObject])
 }
 
 
 extension Configurable {
 
-    internal func setup<View: UIView>(view: View, currentStyle: [Appearance] = [], newStyle: [Appearance]) {
+    internal func setup<View: UIView>(_ view: View, currentStyle: [Appearance] = [], newStyle: [Appearance]) {
 
         // if current appearance do not appeare in new style, then set them to default value
         // TODO: change style from Array to Set to gain some performance

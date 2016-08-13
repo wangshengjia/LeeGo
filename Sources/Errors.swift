@@ -8,10 +8,10 @@
 
 import Foundation
 
-internal enum JSONParseError: ErrorType {
-    case UnexpectedKeyError(key: String), MismatchedTypeError(type: Any.Type, expectedType: Any.Type)
+internal enum JSONParseError: Error {
+    case unexpectedKeyError(key: String), mismatchedTypeError(type: Any.Type, expectedType: Any.Type)
 }
 
-internal enum JSONConvertibleError: ErrorType {
-    case UnexpectedBrickNameError(JSONDictionary)
+internal enum JSONConvertibleError: Error {
+    case unexpectedBrickNameError(JSONDictionary)
 }
