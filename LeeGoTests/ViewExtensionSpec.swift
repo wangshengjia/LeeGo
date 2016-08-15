@@ -44,7 +44,7 @@ class ViewExtensionSpec: QuickSpec {
                 expect(view.isRoot) == true
                 expect(view.currentBrick) == TestData.header1
                 expect(view.currentBrick!.layout!.formats) == ["H:|-left-[title]-(>=right)-|", "H:|-left-[avatar]-(>=right)-|", "V:|-top-[title]-spaceV-[avatar]-bottom-|"]
-                expect(view.backgroundColor) == UIColor.redColor()
+                expect(view.backgroundColor) == UIColor.red
                 expect(view.subviews.count) == 2
                 expect((view.subviews[0] as! UILabel).currentBrick) == TestData.title1
                 expect((view.subviews[0] as! UILabel).lg_brickName) == "title"
@@ -57,7 +57,7 @@ class ViewExtensionSpec: QuickSpec {
                 // Given
                 let cell = UITableViewCell()
                 cell.lg_configureAs(TestData.header1)
-                cell.lg_configureAs(TestData.header2, updatingStrategy: .Always)
+                cell.lg_configureAs(TestData.header2, updatingStrategy: .always)
 
                 // When
                 cell.lg_configureAs(TestData.header3)
@@ -81,7 +81,7 @@ class ViewExtensionSpec: QuickSpec {
                 // Given
                 let view = UIView()
                 view.lg_configureAs(TestData.header1)
-                view.lg_configureAs(TestData.header2, updatingStrategy: .Always)
+                view.lg_configureAs(TestData.header2, updatingStrategy: .always)
                 view.lg_configureAs(TestData.header1)
 
                 // When
@@ -94,7 +94,7 @@ class ViewExtensionSpec: QuickSpec {
                 expect(view.lg_brickName) == "header"
                 expect(view.isRoot) == true
                 expect(view.currentBrick) == emptyHeader
-                expect(view.backgroundColor) == UIColor.redColor()
+                expect(view.backgroundColor) == UIColor.red
                 expect(view.subviews.count) == 2
                 expect((view.subviews[0] as! UILabel).currentBrick) == TestData.title1
                 expect((view.subviews[0] as! UILabel).lg_brickName) == "title"
@@ -109,7 +109,7 @@ class ViewExtensionSpec: QuickSpec {
                 cell.lg_configureAs(TestData.header1)
 
                 // When
-                cell.lg_configureAs(TestData.header2, updatingStrategy: .Always)
+                cell.lg_configureAs(TestData.header2, updatingStrategy: .always)
 
                 // Then
                 expect(cell.contentView.currentBrick) != nil
@@ -123,7 +123,7 @@ class ViewExtensionSpec: QuickSpec {
                 expect((cell.contentView.subviews[0] as! UILabel).font) == UIFont(name: "Avenir", size: 12)
                 expect((cell.contentView.subviews[1] as! UIImageView).currentBrick) == TestData.avatar2
                 expect((cell.contentView.subviews[1] as! UIImageView).lg_brickName) == "avatar"
-                expect((cell.contentView.subviews[1] as! UIImageView).backgroundColor) == UIColor.greenColor()
+                expect((cell.contentView.subviews[1] as! UIImageView).backgroundColor) == UIColor.green
                 expect((cell.contentView.subviews[2] as UIView).currentBrick) == TestData.view
                 expect((cell.contentView.subviews[2] as UIView).lg_brickName) == "view"
             }
@@ -146,7 +146,7 @@ class ViewExtensionSpec: QuickSpec {
                 cell.lg_configureAs(TestData.header2)
 
                 // When
-                let attributes = cell.preferredLayoutAttributesFittingAttributes(UICollectionViewLayoutAttributes())
+                let attributes = cell.preferredLayoutAttributesFitting(UICollectionViewLayoutAttributes())
 
                 // Then
                 expect(attributes.frame.height) == 130
@@ -163,7 +163,7 @@ class ViewExtensionSpec: QuickSpec {
                 // Then
                 expect(view).notTo(beNil())
                 XCTAssertTrue(view?.dynamicType == UIButton.self)
-                expect(view?.backgroundColor) == UIColor.greenColor()
+                expect(view?.backgroundColor) == UIColor.green
             }
         }
     }

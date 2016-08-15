@@ -21,16 +21,16 @@ class ConvertibleSpec: QuickSpec {
         describe("Appearance is convertible") {
 
             // Given
-            let image = UIImage(named: "twitter_favorite", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
+            let image = UIImage(named: "twitter_favorite", in: Bundle(for: self.dynamicType), compatibleWith: nil)!
 
             let style: [Appearance] = [.userInteractionEnabled(true),
                                        .translatesAutoresizingMaskIntoConstraints(true),
-                                       .backgroundColor(UIColor.blueColor()),
-                                       .tintColor(UIColor.redColor()),
-                                       .tintAdjustmentMode(.Dimmed),
+                                       .backgroundColor(UIColor.blue),
+                                       .tintColor(UIColor.red),
+                                       .tintAdjustmentMode(.dimmed),
                                        .cornerRadius(5),
                                        .borderWidth(1),
-                                       .borderColor(UIColor.grayColor()),
+                                       .borderColor(UIColor.gray),
                                        .multipleTouchEnabled(false),
                                        .exclusiveTouch(false),
                                        .clipsToBounds(true),
@@ -38,54 +38,54 @@ class ConvertibleSpec: QuickSpec {
                                        .opaque(true),
                                        .clearsContextBeforeDrawing(false),
                                        .hidden(true),
-                                       .contentMode(.BottomLeft),
+                                       .contentMode(.bottomLeft),
                                        .enabled(true),
                                        .selected(false),
                                        .highlighted(true),
-                                       .font(UIFont.systemFontOfSize(10)),
-                                       .textColor(UIColor.redColor()),
-                                       .textAlignment(.Center),
+                                       .font(UIFont.systemFont(ofSize: 10)),
+                                       .textColor(UIColor.red),
+                                       .textAlignment(.center),
                                        .numberOfLines(10),
-                                       .lineBreakMode(.ByClipping),
+                                       .lineBreakMode(.byClipping),
                                        .selectedRange(NSRange(location:0, length: 4)),
                                        .editable(true),
                                        .selectable(true),
-                                       .dataDetectorTypes(.Address),
+                                       .dataDetectorTypes(.address),
                                        .allowsEditingTextAttributes(false),
                                        .clearsOnInsertion(true),
                                        .textContainerInset(UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 20)),
                                        .linkTextAttributes([
-                                        NSFontAttributeName: UIFont.systemFontOfSize(13),
-                                        NSForegroundColorAttributeName: UIColor.yellowColor(),
-                                        NSBackgroundColorAttributeName: UIColor.blueColor()
+                                        NSFontAttributeName: UIFont.systemFont(ofSize: 13),
+                                        NSForegroundColorAttributeName: UIColor.yellow,
+                                        NSBackgroundColorAttributeName: UIColor.blue
                                         ]),
-                                       .lineFragmentPadding(12),
+                                       .lineFragmentPadding(12.0),
                                        .minimumScaleFactor(0.3),
                                        .adjustsFontSizeToFitWidth(true),
-                                       .baselineAdjustment(.AlignCenters),
-                                       .shadowColor(UIColor.brownColor()),
+                                       .baselineAdjustment(.alignCenters),
+                                       .shadowColor(UIColor.brown),
                                        .shadowOffset(CGSize(width: 10, height: 20)),
-                                       .highlightedTextColor(UIColor.clearColor()),
+                                       .highlightedTextColor(UIColor.clear),
                                        .attributedText([
-                                        [NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
-                                        [kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 20)!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
-                                        [NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
+                                        [NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.red],
+                                        [kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 20)!, NSForegroundColorAttributeName: UIColor.darkText],
+                                        [NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGray]
                                         ]),
                                        .text("Default Text"),
-                                       .borderStyle(.Bezel),
+                                       .borderStyle(.bezel),
                                        .defaultTextAttributes([:]),
                                        .placeholder("place holder"),
                                        .clearsOnBeginEditing(false),
                                        .background(image),
                                        .disabledBackground(image),
                                        .typingAttributes([:]),
-                                       .clearButtonMode(.Always),
-                                       .buttonTitle("Close", .Normal),
-                                       .buttonTitleColor(UIColor.yellowColor(), .Normal),
-                                       .buttonTitleShadowColor(UIColor.brownColor(), .Highlighted),
-                                       .buttonImage(image, .Disabled),
-                                       .buttonBackgroundImage(image, .Application),
-                                       .buttonAttributedTitle([[:]], UIControlState.Normal),
+                                       .clearButtonMode(.always),
+                                       .buttonTitle("Close", .normal),
+                                       .buttonTitleColor(UIColor.yellow, .normal),
+                                       .buttonTitleShadowColor(UIColor.brown, .highlighted),
+                                       .buttonImage(image, .disabled),
+                                       .buttonBackgroundImage(image, .application),
+                                       .buttonAttributedTitle([[:]], UIControlState.normal),
                                        .contentEdgeInsets(UIEdgeInsets(top: 1, left: 2, bottom: 3, right: 4)),
                                        .titleEdgeInsets(UIEdgeInsets(top: 1, left: 2, bottom: 3, right: 4)),
                                        .reversesTitleShadowWhenHighlighted(false),
@@ -106,7 +106,7 @@ class ConvertibleSpec: QuickSpec {
                                        .showsHorizontalScrollIndicator(true),
                                        .showsVerticalScrollIndicator(true),
                                        .scrollIndicatorInsets(UIEdgeInsets(top: 1, left: 2, bottom: 3, right: 4)),
-                                       .indicatorStyle(.Black),
+                                       .indicatorStyle(.black),
                                        .decelerationRate(3.0),
                                        .delaysContentTouches(true),
                                        .canCancelContentTouches(false),
@@ -115,14 +115,14 @@ class ConvertibleSpec: QuickSpec {
                                        .zoomScale(10),
                                        .bouncesZoom(true),
                                        .scrollsToTop(true),
-                                       .keyboardDismissMode(.OnDrag)]
+                                       .keyboardDismissMode(.onDrag)]
 
             it("should convert a JSONDictionary to an Appearance instance correctly.") {
 
                 do {
                     // Given
-                    let path = NSBundle(forClass: self.dynamicType).pathForResource("appearances", ofType: "json")!
-                    let mockJson = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as? JSONDictionary
+                    let path = Bundle(for: self.dynamicType).path(forResource: "appearances", ofType: "json")!
+                    let mockJson = try JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? JSONDictionary
 
                     // When
                     let appearances = Appearance.appearancesWithJSON(mockJson!)
@@ -140,8 +140,8 @@ class ConvertibleSpec: QuickSpec {
             it("should convert an Appearance instance to JSON correctly.") {
                 do {
                     // Given
-                    let path = NSBundle(forClass: self.dynamicType).pathForResource("appearances", ofType: "json")!
-                    let mockJson = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as! JSONDictionary
+                    let path = Bundle(for: self.dynamicType).path(forResource: "appearances", ofType: "json")!
+                    let mockJson = try JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as! JSONDictionary
 
                     // When
                     let json = Appearance.JSONWithAppearances(style)
@@ -160,11 +160,11 @@ class ConvertibleSpec: QuickSpec {
                 do {
                     // Given
                     let mockLayout = Layout(["H:|-left-[title]-spaceH-[image]-right", "V:|-top-[title]-(>=bottom)|", "V:|-top-[image]-(>=bottom)|"],
-                                            options: .AlignAllCenterX,
+                                            options: .alignAllCenterX,
                                             metrics: LayoutMetrics(top: 20, left: 20, bottom: 20, right: 20, spaceH: 10, spaceV: 10, customMetrics: ["custom_metrics": 13]))
 
-                    let path = NSBundle(forClass: self.dynamicType).pathForResource("layout", ofType: "json")!
-                    let json = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as? JSONDictionary
+                    let path = Bundle(for: self.dynamicType).path(forResource: "layout", ofType: "json")!
+                    let json = try JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? JSONDictionary
 
                     // When
                     let layout = Layout(rawValue: json!)
@@ -180,12 +180,12 @@ class ConvertibleSpec: QuickSpec {
 
                 // Given
                 let layout = Layout(["H:|-left-[title]-spaceH-[image]-right", "V:|-top-[title]-(>=bottom)|", "V:|-top-[image]-(>=bottom)|"],
-                                    options: .AlignAllCenterX,
+                                    options: .alignAllCenterX,
                                     metrics: LayoutMetrics(top: 20, left: 20, bottom: 20, right: 20, spaceH: 10, spaceV: 10, customMetrics: ["custom_metrics": 13]))
 
                 do {
-                    let path = NSBundle(forClass: self.dynamicType).pathForResource("layout", ofType: "json")!
-                    let mockJson = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as! JSONDictionary
+                    let path = Bundle(for: self.dynamicType).path(forResource: "layout", ofType: "json")!
+                    let mockJson = try JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as! JSONDictionary
 
                     // When
                     let json = layout.encode()
@@ -203,8 +203,8 @@ class ConvertibleSpec: QuickSpec {
                 do {
                     // Given
 
-                    let path = NSBundle(forClass: self.dynamicType).pathForResource("brick", ofType: "json")!
-                    let json = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as? JSONDictionary
+                    let path = Bundle(for: self.dynamicType).path(forResource: "brick", ofType: "json")!
+                    let json = try JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? JSONDictionary
 
                     // When
                     let brick = try Brick(rawValue: json!)
@@ -229,8 +229,8 @@ class ConvertibleSpec: QuickSpec {
                 let json = brick.encode()
 
                 do {
-                    let path = NSBundle(forClass: self.dynamicType).pathForResource("brick", ofType: "json")!
-                    let mockJson = try NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as! JSONDictionary
+                    let path = Bundle(for: self.dynamicType).path(forResource: "brick", ofType: "json")!
+                    let mockJson = try JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as! JSONDictionary
 
                     // Then
                     expect(NSDictionary(dictionary: json)) == mockJson
@@ -242,8 +242,8 @@ class ConvertibleSpec: QuickSpec {
 
         it("is convertible with NSLayoutFormatOptions") {
             // Given
-            let rawOptions = ["AlignAllLeft", "AlignAllRight", "AlignAllTop", "AlignAllBottom", "AlignAllLeading", "AlignAllTrailing", "AlignAllCenterX", "AlignAllCenterY", "AlignAllBaseline", "AlignAllLastBaseline", "AlignAllFirstBaseline", "AlignmentMask", "DirectionLeadingToTrailing", "DirectionLeftToRight", "DirectionRightToLeft", "DirectionMask"]
-            let options: NSLayoutFormatOptions = [.AlignAllLeft, .AlignAllRight, .AlignAllTop, .AlignAllBottom, .AlignAllLeading, .AlignAllTrailing, .AlignAllCenterX, .AlignAllCenterY, .AlignAllBaseline, .AlignAllLastBaseline, .AlignAllFirstBaseline, .AlignmentMask, .DirectionLeadingToTrailing, .DirectionLeftToRight, .DirectionRightToLeft, .DirectionMask]
+            let rawOptions = ["AlignAllLeft", "AlignAllRight", "AlignAllTop", "AlignAllBottom", "AlignAllLeading", "AlignAllTrailing", "AlignAllCenterX", "AlignAllCenterY", "AlignAllLastBaseline", "AlignAllFirstBaseline", "AlignmentMask", "DirectionLeadingToTrailing", "DirectionLeftToRight", "DirectionRightToLeft", "DirectionMask"]
+            let options: NSLayoutFormatOptions = [.alignAllLeft, .alignAllRight, .alignAllTop, .alignAllBottom, .alignAllLeading, .alignAllTrailing, .alignAllCenterX, .alignAllCenterY, .alignAllLastBaseline, .alignAllFirstBaseline, .alignmentMask, .directionLeadingToTrailing, .directionLeftToRight, .directionRightToLeft, .directionMask]
 
             // When
             let convertedOptions = NSLayoutFormatOptions(rawValue: rawOptions)
@@ -257,7 +257,7 @@ class ConvertibleSpec: QuickSpec {
         it("is convertible with UIControlState") {
             // Given
             let rawValues = ["Normal", "Highlighted", "Disabled", "Selected", "Application", "Reserved"]
-            let values: UIControlState = [.Normal, .Highlighted, .Disabled, .Selected, .Application, .Reserved]
+            let values: UIControlState = [.normal, .highlighted, .disabled, .selected, .application, .reserved]
 
             // When
             let convertedValues = UIControlState(rawValue: rawValues)
@@ -271,7 +271,7 @@ class ConvertibleSpec: QuickSpec {
         it("is convertible with UIDataDetectorTypes") {
             // Given
             let rawValues = ["PhoneNumber", "Link", "Address", "CalendarEvent", "None", "All"]
-            let values: UIDataDetectorTypes = [.PhoneNumber, .Link, .Address, .CalendarEvent, .None, .All]
+            let values: UIDataDetectorTypes = [.phoneNumber, .link, .address, .calendarEvent, [], .all]
 
             // When
             let convertedValues = UIDataDetectorTypes(rawValue: rawValues)
@@ -286,7 +286,7 @@ class ConvertibleSpec: QuickSpec {
         it("is convertible with UIScrollViewKeyboardDismissMode") {
             // Given
             let rawValues = ["None", "OnDrag", "Interactive"]
-            let values: [UIScrollViewKeyboardDismissMode] = [.None, .OnDrag, .Interactive]
+            let values: [UIScrollViewKeyboardDismissMode] = [.none, .onDrag, .interactive]
 
             // When
             let convertedValues = rawValues.map({ (value) -> UIScrollViewKeyboardDismissMode in
@@ -304,7 +304,7 @@ class ConvertibleSpec: QuickSpec {
         it("is convertible with UIScrollViewIndicatorStyle") {
             // Given
             let rawValues = ["Default", "Black", "White"]
-            let values: [UIScrollViewIndicatorStyle] = [.Default, .Black, .White]
+            let values: [UIScrollViewIndicatorStyle] = [.default, .black, .white]
 
             // When
             let convertedValues = rawValues.map({ (value) -> UIScrollViewIndicatorStyle in
@@ -322,7 +322,7 @@ class ConvertibleSpec: QuickSpec {
         it("is convertible with UITextFieldViewMode") {
             // Given
             let rawValues = ["Never", "WhileEditing", "UnlessEditing", "Always"]
-            let values: [UITextFieldViewMode] = [.Never, .WhileEditing, .UnlessEditing, .Always]
+            let values: [UITextFieldViewMode] = [.never, .whileEditing, .unlessEditing, .always]
 
             // When
             let convertedValues = rawValues.map({ (value) -> UITextFieldViewMode in
@@ -340,7 +340,7 @@ class ConvertibleSpec: QuickSpec {
         it("is convertible with UIBaselineAdjustment") {
             // Given
             let rawValues = ["AlignBaselines", "AlignCenters", "None"]
-            let values: [UIBaselineAdjustment] = [.AlignBaselines, .AlignCenters, .None]
+            let values: [UIBaselineAdjustment] = [.alignBaselines, .alignCenters, .none]
 
             // When
             let convertedValues = rawValues.map({ (value) -> UIBaselineAdjustment in
@@ -358,7 +358,7 @@ class ConvertibleSpec: QuickSpec {
         it("is convertible with UITextBorderStyle") {
             // Given
             let rawValues = ["None", "Line", "Bezel", "RoundedRect"]
-            let values: [UITextBorderStyle] = [.None, .Line, .Bezel, .RoundedRect]
+            let values: [UITextBorderStyle] = [.none, .line, .bezel, .roundedRect]
 
             // When
             let convertedValues = rawValues.map({ (value) -> UITextBorderStyle in
@@ -376,7 +376,7 @@ class ConvertibleSpec: QuickSpec {
         it("is convertible with NSLineBreakMode") {
             // Given
             let rawValues = ["ByWordWrapping", "ByCharWrapping", "ByClipping", "ByTruncatingHead", "ByTruncatingTail", "ByTruncatingMiddle"]
-            let values: [NSLineBreakMode] = [.ByWordWrapping, .ByCharWrapping, .ByClipping, .ByTruncatingHead, .ByTruncatingTail, .ByTruncatingMiddle]
+            let values: [NSLineBreakMode] = [.byWordWrapping, .byCharWrapping, .byClipping, .byTruncatingHead, .byTruncatingTail, .byTruncatingMiddle]
 
             // When
             let convertedValues = rawValues.map({ (value) -> NSLineBreakMode in
@@ -394,7 +394,7 @@ class ConvertibleSpec: QuickSpec {
         it("is convertible with NSTextAlignment") {
             // Given
             let rawValues = ["Left", "Center", "Right", "Justified", "Natural"]
-            let values: [NSTextAlignment] = [.Left, .Center, .Right, .Justified, .Natural]
+            let values: [NSTextAlignment] = [.left, .center, .right, .justified, .natural]
 
             // When
             let convertedValues = rawValues.map({ (value) -> NSTextAlignment in
@@ -412,7 +412,7 @@ class ConvertibleSpec: QuickSpec {
         it("is convertible with UIViewContentMode") {
             // Given
             let rawValues = ["ScaleToFill", "ScaleAspectFit", "ScaleAspectFill", "Redraw", "Center", "Top", "Bottom", "Left", "Right", "TopLeft", "TopRight", "BottomLeft", "BottomRight"]
-            let values: [UIViewContentMode] = [.ScaleToFill, .ScaleAspectFit, .ScaleAspectFill, .Redraw, .Center, .Top, .Bottom, .Left, .Right, .TopLeft, .TopRight, .BottomLeft, .BottomRight]
+            let values: [UIViewContentMode] = [.scaleToFill, .scaleAspectFit, .scaleAspectFill, .redraw, .center, .top, .bottom, .left, .right, .topLeft, .topRight, .bottomLeft, .bottomRight]
 
             // When
             let convertedValues = rawValues.map({ (value) -> UIViewContentMode in
@@ -430,7 +430,7 @@ class ConvertibleSpec: QuickSpec {
         it("is convertible with UIViewTintAdjustmentMode") {
             // Given
             let rawValues = ["Automatic", "Normal", "Dimmed"]
-            let values: [UIViewTintAdjustmentMode] = [.Automatic, .Normal, .Dimmed]
+            let values: [UIViewTintAdjustmentMode] = [.automatic, .normal, .dimmed]
 
             // When
             let convertedValues = rawValues.map({ (value) -> UIViewTintAdjustmentMode in
@@ -471,10 +471,10 @@ class ConvertibleSpec: QuickSpec {
             let encodedValues = convertedValues.encode()
 
             // Then
-            expect(CGSizeEqualToSize(convertedValues, values)) == true
+            expect(convertedValues.equalTo(values)) == true
             expect(encodedValues) == rawValues
 
-            expect(CGSizeEqualToSize(CGSize(rawValue: [2, 10, 10]), CGSizeZero)) == true
+            expect(CGSize(rawValue: [2, 10, 10]).equalTo(CGSize.zero)) == true
         }
 
         it("is convertible with CGPoint") {
@@ -487,10 +487,10 @@ class ConvertibleSpec: QuickSpec {
             let encodedValues = convertedValues.encode()
 
             // Then
-            expect(CGPointEqualToPoint(convertedValues, values)) == true
+            expect(convertedValues.equalTo(values)) == true
             expect(encodedValues) == rawValues
 
-            expect(CGPointEqualToPoint(CGPoint(rawValue: [2, 10, 10]), CGPointZero)) == true
+            expect(CGPoint(rawValue: [2, 10, 10]).equalTo(CGPoint.zero)) == true
         }
 
         it("is convertible with UIEdgeInsets") {
@@ -506,7 +506,7 @@ class ConvertibleSpec: QuickSpec {
             expect(UIEdgeInsetsEqualToEdgeInsets(convertedValues, values)) == true
             expect(encodedValues) == rawValues
 
-            expect(UIEdgeInsetsEqualToEdgeInsets(UIEdgeInsets(rawValue: [2, 10, 10]), UIEdgeInsetsZero)) == true
+            expect(UIEdgeInsetsEqualToEdgeInsets(UIEdgeInsets(rawValue: [2, 10, 10]), UIEdgeInsets.zero)) == true
         }
 
         it("is convertible with NSURL") {
@@ -515,7 +515,7 @@ class ConvertibleSpec: QuickSpec {
             let values = NSURL(string: "www.apple.com")
 
             // When
-            let convertedValues = NSURL(rawValue: rawValues)!
+            let convertedValues = URL(rawValue: rawValues)!
             let encodedValues = convertedValues.lg_encode()
 
             // Then
@@ -526,7 +526,7 @@ class ConvertibleSpec: QuickSpec {
         it("is convertible with UIColor") {
             // Given
             let rawValues = "#0000FF"
-            let values = UIColor.blueColor()
+            let values = UIColor.blue
 
             // When
             let convertedValues = UIColor(rawValue: rawValues)
@@ -539,7 +539,7 @@ class ConvertibleSpec: QuickSpec {
 
         it("is convertible with UIImage") {
             // Given
-            let values = UIImage(named: "twitter_favorite", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!
+            let values = UIImage(named: "twitter_favorite", in: Bundle(for: self.dynamicType), compatibleWith: nil)!
 
             // When
             // let convertedValues: UIImage? = UIImage(json: nil)
