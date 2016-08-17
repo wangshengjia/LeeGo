@@ -125,7 +125,7 @@ extension UIView {
             }
             let metrics = currentBrick?.layout?.metrics ?? LayoutMetrics()
 
-            return computeClosure(fittingWidth: fittingWidth, childrenHeights: childrenHeights, metrics: metrics)
+            return computeClosure(_: fittingWidth, childrenHeights, metrics)
         } else if subviews.isEmpty {
             // leaf brick -> dynamic height
             return self.sizeThatFits(CGSize(width: self.frame.width, height: CGFloat.greatestFiniteMagnitude)).height
@@ -134,10 +134,10 @@ extension UIView {
         }
     }
 
-    private func _configureAs(_ brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .whenBrickChanged) {
+    fileprivate func _configureAs(_ brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .whenBrickChanged) {
 
-        guard self.dynamicType.isSubclass(of: brick.targetClass) else {
-            assertionFailure("Brick type: \(self.dynamicType) is not compatible with configuration type: \(brick.targetClass)")
+        guard type(of: self).isSubclass(of: brick.targetClass) else {
+            assertionFailure("Brick type: \(type(of: self)) is not compatible with configuration type: \(brick.targetClass)")
             return
         }
 

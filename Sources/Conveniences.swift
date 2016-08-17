@@ -23,7 +23,7 @@ internal func + <K,V>(left: [K: V], right: [K: V]) -> [K: V] {
 
 extension Dictionary {
 
-    internal func filter(includeElement: @noescape (Key, Value) throws -> Bool) rethrows -> Dictionary {
+    internal func filter(includeElement: (Key, Value) throws -> Bool) rethrows -> Dictionary {
         var result = self
         for (key, value) in result {
             if try !includeElement(key, value) {
@@ -45,7 +45,7 @@ extension Dictionary {
             if let valueWithExpectedType = value as? T {
                 return valueWithExpectedType
             } else {
-                throw JSONParseError.mismatchedTypeError(type: value.dynamicType, expectedType: T.self)
+                throw JSONParseError.mismatchedTypeError(type: type(of: value), expectedType: T.self)
             }
         } else {
             throw JSONParseError.unexpectedKeyError(key: key)
@@ -113,7 +113,7 @@ extension UIView {
 }
 
 extension UIView {
-    private static func lg_attributedString(with attributesArray: [Attributes]) -> NSAttributedString? {
+    fileprivate static func lg_attributedString(with attributesArray: [Attributes]) -> NSAttributedString? {
         let texts = attributesArray.map { (attributes) -> String? in
             return (attributes[kCustomAttributeDefaultText] as? String)
         }
@@ -121,7 +121,7 @@ extension UIView {
         return lg_updatedAttributedString(with: texts, attributesArray: attributesArray)
     }
 
-    private static func lg_updatedAttributedString(with texts: [String?], attributesArray: [Attributes]) -> NSAttributedString? {
+    fileprivate static func lg_updatedAttributedString(with texts: [String?], attributesArray: [Attributes]) -> NSAttributedString? {
         guard texts.count == attributesArray.count else {
             assertionFailure("Failed to call updatedAttributedString: `texts` & `attributesArray` should have same count.")
             return nil
@@ -154,8 +154,8 @@ extension UIView {
                 return acc
             }
 
-          let str: AnyObject = acc.mutableCopy()
-            str.append(cur)
+          let str = acc.mutableCopy()
+            (str as AnyObject).append(cur)
             return str as! NSAttributedString
         })
     }

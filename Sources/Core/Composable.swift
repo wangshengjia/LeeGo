@@ -9,11 +9,11 @@
 import Foundation
 
 protocol Composable {
-    func composite<View where View: UIView, View: BrickDescribable>(_ bricks: [Brick], to targetView: View, with layout: Layout)
+    func composite<View>(_ bricks: [Brick], to targetView: View, with layout: Layout) where View: UIView, View: BrickDescribable
 }
 
 extension Composable {
-    internal func composite<View where View: UIView, View: BrickDescribable>(_ bricks: [Brick], to targetView: View, with layout: Layout) {
+    internal func composite<View>(_ bricks: [Brick], to targetView: View, with layout: Layout) where View: UIView, View: BrickDescribable {
 
         // remove subviews which do not exist anymore in bricks
         for subview in targetView.subviews {

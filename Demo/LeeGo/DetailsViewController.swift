@@ -22,12 +22,12 @@ class DetailsViewController: UIViewController {
 
 extension DetailsViewController {
     
-    private func setup() {
+    fileprivate func setup() {
         let title = "title".build(UILabel.self).style([.numberOfLines(0), .text("Lorem Ipsum is simply dummy text of the printing industry")])
         let description = "description".build(UILabel.self).style([.textColor(UIColor.lightGray), .numberOfLines(0), .font(UIFont.systemFont(ofSize: 14)), .text("Lorem Ipsum has been the industry's standard dummy text ever since the 1500s")])
         let redBlock = "red".build().style(Style.redBlockStyle)
         let greenBlock = "green".build().style(Style.greenBlockStyle)
-        let blueBlock = "blue".build(UIImageView.self).style(Style.blueBlockStyle + [.custom(["shadowColor": UIColor.brown, "shadowOpacity": 1.0])])
+        let blueBlock = "blue".build(UIImageView.self).style(Style.blueBlockStyle + [Appearance.custom(["shadowColor": UIColor.brown, "shadowOpacity": 1.0 as AnyObject])])
 
         let blocks = Brick.union("blocks", bricks: [
             redBlock.height(50),

@@ -27,7 +27,7 @@ protocol JSONKeyType {
 
 extension JSONKeyType {
     var asString: String {
-        return String(self)
+        return String(describing: self)
     }
 }
 
@@ -651,7 +651,7 @@ extension URL {
     }
 
     func lg_encode() -> JSONDictionary {
-        return [JSONKey.url.asString: self.absoluteString]
+        return [JSONKey.url.asString: self.absoluteString as AnyObject]
     }
 }
 
@@ -672,7 +672,7 @@ extension UIFont {
     }
 
     func lg_encode() -> JSONDictionary {
-        return [JSONKey.name.asString: self.fontName, JSONKey.size.asString: self.pointSize]
+        return [JSONKey.name.asString: self.fontName as AnyObject, JSONKey.size.asString: self.pointSize as AnyObject]
     }
 }
 
@@ -731,7 +731,7 @@ extension UIImage {
 
     func lg_encode() -> JSONDictionary? {
         if let data = UIImagePNGRepresentation(self) {
-            return [JSONKey.data.asString: data.base64EncodedString(options: .lineLength64Characters)]
+            return [JSONKey.data.asString: data.base64EncodedString(options: .lineLength64Characters) as AnyObject]
         }
 
         return nil

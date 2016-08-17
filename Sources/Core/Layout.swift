@@ -87,9 +87,9 @@ public struct LayoutMetrics: Equatable {
     }
 
     internal func encode() -> JSONDictionary {
-        return customMetrics + standardMetrics.filter { (key, value) -> Bool in
+        return (customMetrics + standardMetrics.filter { (key, value) -> Bool in
             return value != 0.0
-        }
+      }) as [String: AnyObject]
     }
 
     internal func metrics() -> [String: CGFloat] {
@@ -242,7 +242,7 @@ extension Layout: JSONConvertible {
     ///
     ///  - returns: [String: AnyObject]
     public func encode() -> JSONDictionary {
-        return [JSONKey.formats.asString: formats, JSONKey.options.asString: options.encode(), JSONKey.metrics.asString: metrics.encode()]
+        return [JSONKey.formats.asString: formats as AnyObject, JSONKey.options.asString: options.encode() as AnyObject, JSONKey.metrics.asString: metrics.encode() as AnyObject]
     }
 }
 

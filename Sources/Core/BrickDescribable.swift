@@ -17,7 +17,7 @@ protocol BrickDescribable: class, Configurable, Composable {
 
 extension BrickDescribable {
 
-    internal func apply<View where View: UIView, View: BrickDescribable>(_ newBrick: Brick, to view: View, with dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy) {
+    internal func apply<View>(_ newBrick: Brick, to view: View, with dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy) where View: UIView, View: BrickDescribable {
 
         if shouldRebuild(view.currentBrick, with: newBrick, updatingStrategy: updatingStrategy) {
             applyDiff(with: newBrick, to: view)
@@ -30,7 +30,7 @@ extension BrickDescribable {
 
 extension BrickDescribable {
     
-    private func applyDiff<View where View: UIView, View: BrickDescribable>(with newBrick: Brick, to view: View) {
+    fileprivate func applyDiff<View>(with newBrick: Brick, to view: View) where View: UIView, View: BrickDescribable {
 
         // setup self, only if brick is not initialized from a nib file
         if view.currentBrick?.nibName == nil {
@@ -46,7 +46,7 @@ extension BrickDescribable {
         }
     }
 
-    private func shouldRebuild(_ currentBrick: Brick?, with newBrick: Brick, updatingStrategy: UpdatingStrategy) -> Bool {
+    fileprivate func shouldRebuild(_ currentBrick: Brick?, with newBrick: Brick, updatingStrategy: UpdatingStrategy) -> Bool {
 
         var shouldRebuild = (currentBrick == nil)
 
@@ -64,7 +64,7 @@ extension BrickDescribable {
         return shouldRebuild
     }
 
-    private func applyDimension<View where View: UIView, View: BrickDescribable>(of newBrick: Brick, to brick: View) {
+    private func applyDimension<View>(of newBrick: Brick, to brick: View) where View: UIView, View: BrickDescribable {
         if let width = newBrick.width {
             brick.lg_applyConstraint(.width, constant: width)
         } else {

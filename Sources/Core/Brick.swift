@@ -56,7 +56,7 @@ extension BrickBuilderType {
     /// `title`, `subtitle`, `avatar`, etc...
     /// It can overrided with your own implementation
     public var brickName: String {
-        return String(self)
+      return String(describing: self)
     }
 
     private func target() -> Brick {
@@ -101,7 +101,7 @@ extension String: BrickBuilderType {
 ///
 /// - Note: `childrenHeights` is an array of subviews' heights, values keep the same order as elements in `Brick.bricks`
 /// - SeeAlso: `Brick`, `UIView.lg_fittingHeight()`
-public typealias ManuallyFittingHeightResolver = (fittingWidth: CGFloat, childrenHeights: [CGFloat], metrics: LayoutMetrics) -> CGFloat
+public typealias ManuallyFittingHeightResolver = (_ fittingWidth: CGFloat, _ childrenHeights: [CGFloat], _ metrics: LayoutMetrics) -> CGFloat
 
 /// A `Brick` instance represent a piece of Lego's brick,
 /// it could be a simple tiny brick such as:
@@ -422,26 +422,27 @@ extension Brick: JSONConvertible {
     ///
     ///  - returns: a `JSONDictionary` instance encoded from `self`
     public func encode() -> JSONDictionary {
-        var json: JSONDictionary = [JSONKey.name.asString: self.name, JSONKey.targetClass.asString: String(self.targetClass)]
+      
+        var json: JSONDictionary = [JSONKey.name.asString: self.name as AnyObject, JSONKey.targetClass.asString: String(describing: self.targetClass) as AnyObject]
 
         if let nibName = self.nibName {
-            json[JSONKey.nibName.asString] = nibName
+            json[JSONKey.nibName.asString] = nibName as AnyObject
         }
 
         if let width = self.width {
-            json[JSONKey.width.asString] = width
+            json[JSONKey.width.asString] = width as AnyObject
         }
 
         if let height = self.height {
-            json[JSONKey.height.asString] = height
+            json[JSONKey.height.asString] = height as AnyObject
         }
 
         if let layout = self.layout {
-            json[JSONKey.layout.asString] = layout.encode()
+            json[JSONKey.layout.asString] = layout.encode() as AnyObject
         }
 
         if let style = self.style, !style.isEmpty {
-            json[JSONKey.style.asString] = Appearance.JSONWithAppearances(style)
+            json[JSONKey.style.asString] = Appearance.JSONWithAppearances(style) as AnyObject
         }
 
         if let bricks = self.bricks {
@@ -450,12 +451,12 @@ extension Brick: JSONConvertible {
             })
 
             if !bricksJson.isEmpty {
-                json[JSONKey.bricks.asString] = bricksJson
+                json[JSONKey.bricks.asString] = bricksJson as AnyObject
             }
         }
 
         if let outlet = self.LGOutletKey {
-            json[JSONKey.outlet.asString] = outlet
+            json[JSONKey.outlet.asString] = outlet as AnyObject
         }
 
         return json

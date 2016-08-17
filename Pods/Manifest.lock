@@ -19,7 +19,7 @@ CHECKOUT OPTIONS:
     :commit: 21371b0f98e761d2f53ddecf93845e833bc5b0c1
     :git: https://github.com/JackieQi/Nimble.git
   Quick:
-    :commit: f5324cdcf51fcd324fe99fcb1277a74c2df77b3b
+    :commit: dd8772a8b6ff749d2fa3b9189ef179177553f156
     :git: https://github.com/JackieQi/Quick.git
 
 SPEC CHECKSUMS:

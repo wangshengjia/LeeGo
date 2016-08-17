@@ -21,7 +21,7 @@ class ConvertibleSpec: QuickSpec {
         describe("Appearance is convertible") {
 
             // Given
-            let image = UIImage(named: "twitter_favorite", in: Bundle(for: self.dynamicType), compatibleWith: nil)!
+            let image = UIImage(named: "twitter_favorite", in: Bundle(for: type(of: self)), compatibleWith: nil)!
 
             let style: [Appearance] = [.userInteractionEnabled(true),
                                        .translatesAutoresizingMaskIntoConstraints(true),
@@ -121,7 +121,7 @@ class ConvertibleSpec: QuickSpec {
 
                 do {
                     // Given
-                    let path = Bundle(for: self.dynamicType).path(forResource: "appearances", ofType: "json")!
+                    let path = Bundle(for: type(of: self)).path(forResource: "appearances", ofType: "json")!
                     let mockJson = try JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? JSONDictionary
 
                     // When
@@ -140,7 +140,7 @@ class ConvertibleSpec: QuickSpec {
             it("should convert an Appearance instance to JSON correctly.") {
                 do {
                     // Given
-                    let path = Bundle(for: self.dynamicType).path(forResource: "appearances", ofType: "json")!
+                    let path = Bundle(for: type(of: self)).path(forResource: "appearances", ofType: "json")!
                     let mockJson = try JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as! JSONDictionary
 
                     // When
@@ -163,7 +163,7 @@ class ConvertibleSpec: QuickSpec {
                                             options: .alignAllCenterX,
                                             metrics: LayoutMetrics(top: 20, left: 20, bottom: 20, right: 20, spaceH: 10, spaceV: 10, customMetrics: ["custom_metrics": 13]))
 
-                    let path = Bundle(for: self.dynamicType).path(forResource: "layout", ofType: "json")!
+                    let path = Bundle(for: type(of: self)).path(forResource: "layout", ofType: "json")!
                     let json = try JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? JSONDictionary
 
                     // When
@@ -184,7 +184,7 @@ class ConvertibleSpec: QuickSpec {
                                     metrics: LayoutMetrics(top: 20, left: 20, bottom: 20, right: 20, spaceH: 10, spaceV: 10, customMetrics: ["custom_metrics": 13]))
 
                 do {
-                    let path = Bundle(for: self.dynamicType).path(forResource: "layout", ofType: "json")!
+                    let path = Bundle(for: type(of: self)).path(forResource: "layout", ofType: "json")!
                     let mockJson = try JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as! JSONDictionary
 
                     // When
@@ -203,7 +203,7 @@ class ConvertibleSpec: QuickSpec {
                 do {
                     // Given
 
-                    let path = Bundle(for: self.dynamicType).path(forResource: "brick", ofType: "json")!
+                    let path = Bundle(for: type(of: self)).path(forResource: "brick", ofType: "json")!
                     let json = try JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? JSONDictionary
 
                     // When
@@ -229,7 +229,7 @@ class ConvertibleSpec: QuickSpec {
                 let json = brick.encode()
 
                 do {
-                    let path = Bundle(for: self.dynamicType).path(forResource: "brick", ofType: "json")!
+                    let path = Bundle(for: type(of: self)).path(forResource: "brick", ofType: "json")!
                     let mockJson = try JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as! JSONDictionary
 
                     // Then
@@ -539,7 +539,7 @@ class ConvertibleSpec: QuickSpec {
 
         it("is convertible with UIImage") {
             // Given
-            let values = UIImage(named: "twitter_favorite", in: Bundle(for: self.dynamicType), compatibleWith: nil)!
+            let values = UIImage(named: "twitter_favorite", in: Bundle(for: type(of: self)), compatibleWith: nil)!
 
             // When
             // let convertedValues: UIImage? = UIImage(json: nil)
