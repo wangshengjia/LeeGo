@@ -23,7 +23,7 @@ class ConvenienceSpec: QuickSpec {
     override func spec() {
         describe("Convenience methods") {
             // Given
-            let path = Bundle(for: self.dynamicType).path(forResource: "brick", ofType: "json")!
+            let path = Bundle(for: type(of: self)).path(forResource: "brick", ofType: "json")!
             let json = (try? JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as! JSONDictionary)!
             
             context("when parse value from JSON like structure") {
