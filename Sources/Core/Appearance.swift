@@ -361,7 +361,6 @@ extension Appearance {
 
         // Custom
         case (let .custom(dictionary), _):
-          print("jackie: \(targetView)")
             !useDefaultValue ? targetView.lg_setupCustomStyle(dictionary) : targetView.lg_removeCustomStyle(dictionary)
 
         default:
