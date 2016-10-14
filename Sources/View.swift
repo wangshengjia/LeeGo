@@ -58,7 +58,7 @@ extension UIView: BrickDescribable {
     ///  - Note: You should always override and implement this method if you have a custom style
     ///
     ///  - parameter style: custom style specified in Appearance.custom
-    public func lg_setupCustomStyle(_ style: [String: AnyObject]) {
+    open func lg_setupCustomStyle(_ style: [String: AnyObject]) {
         assertionFailure("Unknown style \(style), should implement `lg_setupCustomStyle:` in extension of UIView or its subclass.")
     }
 
@@ -67,7 +67,7 @@ extension UIView: BrickDescribable {
     ///  - Note: You should always override and implement this method if you have a custom style
     ///
     ///  - parameter style: custom style specified in Appearance.custom
-    public func lg_removeCustomStyle(_ style: [String: AnyObject]) {
+    open func lg_removeCustomStyle(_ style: [String: AnyObject]) {
         assertionFailure("Unknown style \(style), should implement `lg_removeCustomStyle:` in extension of UIView or its subclass.")
     }
 

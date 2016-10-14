@@ -45,7 +45,7 @@ extension DetailsViewController {
 }
 
 extension UIView {
-    public func lg_setupCustomStyle(style: [String: AnyObject]) {
+    open func lg_setupCustomStyle(_ style: [String: AnyObject]) {
         if let view = self as? UIImageView,
             let color = style["shadowColor"] as? UIColor,
             let opacity = style["shadowOpacity"] as? Float {
@@ -54,7 +54,7 @@ extension UIView {
         }
     }
 
-    public func lg_removeCustomStyle(style: [String: AnyObject]) {
+    open func lg_removeCustomStyle(_ style: [String: AnyObject]) {
         if let view = self as? UIImageView,
             let _ = style["shadowColor"] as? UIColor,
             let _ = style["shadowOpacity"] as? Float {
