@@ -1,4 +1,4 @@
-//
+ //
 //  Appearance.swift
 //  LeeGo
 //
@@ -479,6 +479,8 @@ extension Appearance: JSONConvertible {
         case let (JSONKey.font.asString, value as JSONDictionary):
             if let font = UIFont(json: value) {
                 self = .font(font)
+            } else {
+
             }
         case let (JSONKey.textColor.asString, value as String):
             self = .textColor(UIColor(rawValue: value))
@@ -826,6 +828,8 @@ extension Appearance: JSONConvertible {
             return [JSONKey.scrollsToTop.asString: value as AnyObject]
         case let .keyboardDismissMode(value):
             return [JSONKey.keyboardDismissMode.asString: value.encode() as AnyObject]
+        case .none:
+            return nil
         default:
             break
         }

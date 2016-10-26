@@ -164,7 +164,7 @@ class BrickSpec: QuickSpec {
                 // Then
                 expect(brick.name) == "header"
                 expect(brick.targetClass) === UIView.self
-                expect(brick.heightResolver!(fittingWidth:0, childrenHeights: [10, 20], metrics: LayoutMetrics())) == 30
+                expect(brick.heightResolver!(0, [10, 20], LayoutMetrics())) == 30
             })
 
             it("builder & target should be equals") {

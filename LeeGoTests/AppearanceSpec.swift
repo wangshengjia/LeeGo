@@ -171,7 +171,7 @@ class AppearanceSpec: QuickSpec {
 
             it("should apply appearance correctly to given UITextField") {
                 // Given
-                let image = UIImage(named: "twitter_favorite", in: Bundle(for: self.dynamicType), compatibleWith: nil)!
+                let image = UIImage(named: "twitter_favorite", in: Bundle(for: type(of: self)), compatibleWith: nil)!
                 let attributes:[Attributes] = [[NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]]
                 let textField = UITextField()
 
@@ -190,7 +190,7 @@ class AppearanceSpec: QuickSpec {
                     .clearsOnBeginEditing(true),
                     .background(image),
                     .disabledBackground(image),
-                    .typingAttributes(["c":3]),
+                    .typingAttributes(["c":3 as AnyObject]),
                     .clearButtonMode(UITextFieldViewMode.always),
                 ]
 

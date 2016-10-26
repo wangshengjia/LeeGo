@@ -165,7 +165,7 @@ enum Style: String {
             return [
                 .attributedText([
                     [NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.red],
-                    [kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "Avenir", size: 20)!, NSForegroundColorAttributeName: UIColor.darkText],
+                    [kCustomAttributeDefaultText: "Test" as AnyObject, NSFontAttributeName: UIFont(name: "Avenir", size: 20)!, NSForegroundColorAttributeName: UIColor.darkText],
                     [NSFontAttributeName: UIFont(name: "Avenir", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGray]
                     ]),
                 .numberOfLines(0),

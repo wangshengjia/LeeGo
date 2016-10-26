@@ -56,7 +56,7 @@ class ConvenienceSpec: QuickSpec {
 
             let attributes: [Attributes] = [
                 [NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.red],
-                [kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "Avenir", size: 20)!, NSForegroundColorAttributeName: UIColor.darkText],
+                [kCustomAttributeDefaultText: "Test" as AnyObject, NSFontAttributeName: UIFont(name: "Avenir", size: 20)!, NSForegroundColorAttributeName: UIColor.darkText],
                 [NSFontAttributeName: UIFont(name: "Avenir", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGray]
             ]
 
@@ -79,7 +79,7 @@ class ConvenienceSpec: QuickSpec {
                 expect(textView.attributedText).notTo(beNil())
 
                 var range = NSRange(location: 1, length: 1)
-                expect(NSDictionary(dictionary: (label.attributedText?.attributes(at: 0, effectiveRange: &range))!)) == attributes[1]
+                expect(NSDictionary(dictionary: (label.attributedText?.attributes(at: 0, effectiveRange: &range))!)) == attributes[1] as NSDictionary
                 for (attrKey, attrValue) in attributes[1] {
                     let containsAttr = NSDictionary(dictionary: (textField.attributedText?.attributes(at: 0, effectiveRange: &range))!).contains(where: { (key, value) -> Bool in
                         return attrKey == key as! String && attrValue.isEqual(value)
@@ -87,8 +87,8 @@ class ConvenienceSpec: QuickSpec {
                     expect(containsAttr) == true
                 }
 
-                expect(NSDictionary(dictionary: (textView.attributedText?.attributes(at: 0, effectiveRange: &range))!)) == attributes[1]
-                expect(NSDictionary(dictionary: (button.attributedTitle(for: .normal)?.attributes(at: 0, effectiveRange: &range))!)) == attributes[1]
+                expect(NSDictionary(dictionary: (textView.attributedText?.attributes(at: 0, effectiveRange: &range))!)) == attributes[1] as NSDictionary
+                expect(NSDictionary(dictionary: (button.attributedTitle(for: .normal)?.attributes(at: 0, effectiveRange: &range))!)) == attributes[1] as NSDictionary
             }
 
             it("should update attributed string correctly") {

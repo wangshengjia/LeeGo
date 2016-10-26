@@ -39,7 +39,7 @@ class ViewExtensionSpec: QuickSpec {
 
                 // Then
                 expect(view.currentBrick) != nil
-                XCTAssertTrue(view.dynamicType == UIView.self)
+                XCTAssertTrue(type(of: view) == UIView.self)
                 expect(view.lg_brickName) == "header"
                 expect(view.isRoot) == true
                 expect(view.currentBrick) == TestData.header1
@@ -90,7 +90,7 @@ class ViewExtensionSpec: QuickSpec {
 
                 // Then
                 expect(view.currentBrick) != nil
-                XCTAssertTrue(view.dynamicType == UIView.self)
+                XCTAssertTrue(type(of: view) == UIView.self)
                 expect(view.lg_brickName) == "header"
                 expect(view.isRoot) == true
                 expect(view.currentBrick) == emptyHeader
@@ -162,7 +162,7 @@ class ViewExtensionSpec: QuickSpec {
 
                 // Then
                 expect(view).notTo(beNil())
-                XCTAssertTrue(view?.dynamicType == UIButton.self)
+                XCTAssertTrue(type(of: view!) == UIButton.self)
                 expect(view?.backgroundColor) == UIColor.green
             }
         }

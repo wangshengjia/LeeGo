@@ -1,7 +1,7 @@
 {
     "layout" : {
         "options" : [
-                     "DirectionLeadingToTrailing"
+                     "directionLeadingToTrailing"
                      ],
         "formats" : [
                      "H:|-left-[avatar]-spaceH-[title]-right-|",
@@ -64,7 +64,7 @@
                     "text" : "Default text",
                     "font" : {
                     "size" : 12,
-                    "name" : ".SFUIText-Regular"
+                    "name" : ".SFUIText"
                     }
                     },
                     "name" : "subtitle"
