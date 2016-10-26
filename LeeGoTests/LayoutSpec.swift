@@ -64,8 +64,8 @@ class LayoutSpec: QuickSpec {
             }
 
             it("should compare two layout instances correctly") {
-                let layout1 = Layout(["format1", "format2"], options: NSLayoutFormatOptions.AlignAllBottom, metrics: LayoutMetrics(20, 20, 20, 20 ,10 ,10))
-                let layout2 = Layout(["format1", "format2"], options: NSLayoutFormatOptions.AlignAllBottom, metrics: LayoutMetrics(20, 20, 20, 20 ,10 ,10))
+                let layout1 = Layout(["format1", "format2"], options: NSLayoutFormatOptions.alignAllBottom, metrics: LayoutMetrics(20, 20, 20, 20 ,10 ,10))
+                let layout2 = Layout(["format1", "format2"], options: NSLayoutFormatOptions.alignAllBottom, metrics: LayoutMetrics(20, 20, 20, 20 ,10 ,10))
                 expect(layout1) == layout2
             }
         }

@@ -2,7 +2,7 @@
 # * http://www.objc.io/issue-6/travis-ci.html
 # * https://github.com/supermarin/xcpretty#usage
 
-osx_image: xcode7.3
+osx_image: xcode8
 language: objective-c
 # podfile: Demo/Podfile
 
@@ -24,7 +24,8 @@ after_success:
 # - pod install --project-directory=Example
 before_install:
   - gem install xcpretty -N --no-ri --no-rdoc
+  - pod repo update  
 
 script:
 - set -o pipefail && xcodebuild clean test -workspace LeeGo.xcworkspace -scheme LeeGo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6s,OS=latest' -enableCodeCoverage YES -configuration Debug ONLY_ACTIVE_ARCH=YES | xcpretty
-- pod lib lint
+# - pod lib lint

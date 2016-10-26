@@ -35,7 +35,7 @@
 		35F520461C7C762E0089FF41 /* LayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520401C7C762E0089FF41 /* LayoutSpec.swift */; };
 		35F520471C7C762E0089FF41 /* ConvenienceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520411C7C762E0089FF41 /* ConvenienceSpec.swift */; };
 		35F520481C7C762E0089FF41 /* ViewExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520421C7C762E0089FF41 /* ViewExtensionSpec.swift */; };
-		C8B3E5A116623D363DB779A1 /* Pods_LeeGoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 903FBB7EF8E0836DCE973186 /* Pods_LeeGoTests.framework */; };
+		E3B675618C817D8BAEE74778 /* Pods_LeeGoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF1188827C3B4E8EDC17A2D /* Pods_LeeGoTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,9 +87,9 @@
 		35F520401C7C762E0089FF41 /* LayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutSpec.swift; sourceTree = "<group>"; };
 		35F520411C7C762E0089FF41 /* ConvenienceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvenienceSpec.swift; sourceTree = "<group>"; };
 		35F520421C7C762E0089FF41 /* ViewExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtensionSpec.swift; sourceTree = "<group>"; };
-		903FBB7EF8E0836DCE973186 /* Pods_LeeGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0AA4AD8C3B6A28562DBC65B /* Pods-LeeGoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGoTests/Pods-LeeGoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		F5BB60E616EFC8D1DA779E5B /* Pods-LeeGoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGoTests/Pods-LeeGoTests.release.xcconfig"; sourceTree = "<group>"; };
+		51C2F88922426B6580618930 /* Pods-LeeGoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGoTests/Pods-LeeGoTests.release.xcconfig"; sourceTree = "<group>"; };
+		998246E1CDAE111DE616C11D /* Pods-LeeGoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGoTests/Pods-LeeGoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FCF1188827C3B4E8EDC17A2D /* Pods_LeeGoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +105,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35F5200C1C7C73D40089FF41 /* LeeGo.framework in Frameworks */,
-				C8B3E5A116623D363DB779A1 /* Pods_LeeGoTests.framework in Frameworks */,
+				E3B675618C817D8BAEE74778 /* Pods_LeeGoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,8 +142,8 @@
 				35F520031C7C73D40089FF41 /* LeeGo */,
 				35F5200F1C7C73D40089FF41 /* LeeGoTests */,
 				35F520021C7C73D40089FF41 /* Products */,
-				8843694F7277C5AFEC4D02EF /* Pods */,
-				760ECE35B930D39D861D56EF /* Frameworks */,
+				FBDFB87E4F1FDD1440699EC0 /* Pods */,
+				862F35D3FDB9E6EC2DD2FD75 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -230,19 +230,19 @@
 			name = Data;
 			sourceTree = "<group>";
 		};
-		760ECE35B930D39D861D56EF /* Frameworks */ = {
+		862F35D3FDB9E6EC2DD2FD75 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				903FBB7EF8E0836DCE973186 /* Pods_LeeGoTests.framework */,
+				FCF1188827C3B4E8EDC17A2D /* Pods_LeeGoTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8843694F7277C5AFEC4D02EF /* Pods */ = {
+		FBDFB87E4F1FDD1440699EC0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D0AA4AD8C3B6A28562DBC65B /* Pods-LeeGoTests.debug.xcconfig */,
-				F5BB60E616EFC8D1DA779E5B /* Pods-LeeGoTests.release.xcconfig */,
+				998246E1CDAE111DE616C11D /* Pods-LeeGoTests.debug.xcconfig */,
+				51C2F88922426B6580618930 /* Pods-LeeGoTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -283,12 +283,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 35F520181C7C73D40089FF41 /* Build configuration list for PBXNativeTarget "LeeGoTests" */;
 			buildPhases = (
-				AC2347CC59E2DFB23DF7EE2A /* Check Pods Manifest.lock */,
+				57F7379C3BAB99A907F41594 /* [CP] Check Pods Manifest.lock */,
 				35F520071C7C73D40089FF41 /* Sources */,
 				35F520081C7C73D40089FF41 /* Frameworks */,
 				35F520091C7C73D40089FF41 /* Resources */,
-				B3DF1FA123C1906E6F91F59A /* Embed Pods Frameworks */,
-				EA482C32DF0EF37DFAC4B281 /* Copy Pods Resources */,
+				6B2D5E3E61978A4D366A4F11 /* [CP] Embed Pods Frameworks */,
+				87E0DC07C324744B27AF3F48 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -307,14 +307,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Victor Wang";
 				TargetAttributes = {
 					35F520001C7C73D40089FF41 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 					35F5200A1C7C73D40089FF41 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -358,14 +360,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AC2347CC59E2DFB23DF7EE2A /* Check Pods Manifest.lock */ = {
+		57F7379C3BAB99A907F41594 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,14 +375,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		B3DF1FA123C1906E6F91F59A /* Embed Pods Frameworks */ = {
+		6B2D5E3E61978A4D366A4F11 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,14 +390,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeeGoTests/Pods-LeeGoTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EA482C32DF0EF37DFAC4B281 /* Copy Pods Resources */ = {
+		87E0DC07C324744B27AF3F48 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,8 +468,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -495,6 +499,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -514,8 +519,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -535,6 +542,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -557,6 +565,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.allblue-technology.LeeGo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -575,28 +584,35 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.allblue-technology.LeeGo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		35F520191C7C73D40089FF41 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0AA4AD8C3B6A28562DBC65B /* Pods-LeeGoTests.debug.xcconfig */;
+			baseConfigurationReference = 998246E1CDAE111DE616C11D /* Pods-LeeGoTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = LeeGoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.allblue-technology.LeeGoTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		35F5201A1C7C73D40089FF41 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5BB60E616EFC8D1DA779E5B /* Pods-LeeGoTests.release.xcconfig */;
+			baseConfigurationReference = 51C2F88922426B6580618930 /* Pods-LeeGoTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = LeeGoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.allblue-technology.LeeGoTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

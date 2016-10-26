@@ -47,7 +47,7 @@ extension Tweet {
 
 extension Tweet: BrickDataSource {
 
-    func update(targetView: UIView, with brick: Brick) {
+    func update(_ targetView: UIView, with brick: Brick) {
         switch targetView {
         case let textView as UITextView where brick == Twitter.tweetText:
             textView.text = text
@@ -58,9 +58,9 @@ extension Tweet: BrickDataSource {
         case let label as UILabel where brick == Twitter.date:
             label.text = "2d" // just example
         case let button as UIButton where brick == Twitter.retweetButton:
-            button.setTitle("\(retweetCount)", forState: .Normal)
+            button.setTitle("\(retweetCount)", for: .normal)
         case let button as UIButton where brick == Twitter.likeButton:
-            button.setTitle("\(favouritesCount)", forState: .Normal)
+            button.setTitle("\(favouritesCount)", for: .normal)
         default:
             break
         }
@@ -68,13 +68,13 @@ extension Tweet: BrickDataSource {
 }
 
 extension UIButton {
-    public override func lg_setupCustomStyle(style: [String: AnyObject]) {
+    open override func lg_setupCustomStyle(_ style: [String: AnyObject]) {
         if let font = style["buttonTitleFont"] as? UIFont {
             self.titleLabel?.font = font
         }
     }
 
-    public override func lg_removeCustomStyle(style: [String: AnyObject]) {
+    open override func lg_removeCustomStyle(_ style: [String: AnyObject]) {
         if let _ = style["buttonTitleFont"] as? UIFont {
             self.titleLabel?.font = nil
         }

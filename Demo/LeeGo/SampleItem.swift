@@ -21,7 +21,7 @@ struct SampleItem {
 
 extension SampleItem: BrickDataSource {
 
-    func update(targetView: UIView, with brick: Brick) {
+    func update(_ targetView: UIView, with brick: Brick) {
         switch targetView {
         case let label as UILabel where brick == SimpleShowcase.title:
             label.text = self.title

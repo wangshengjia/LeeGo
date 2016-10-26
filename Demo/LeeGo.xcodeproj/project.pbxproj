@@ -31,12 +31,12 @@
 		35D7F44E1CC4E5EB008D1AEB /* SampleItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D7F44C1CC4E5EB008D1AEB /* SampleItem.swift */; };
 		35F5204A1C7C7BEF0089FF41 /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520491C7C7BEF0089FF41 /* DemoTests.swift */; };
 		35FFB6A81C7A8C070035EC52 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FFB6A71C7A8C070035EC52 /* Element.swift */; };
-		3B3BE96C4117CB80F9144250 /* Pods_LeeGo_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88078757DDD337BDFDD543E1 /* Pods_LeeGo_Tests.framework */; };
+		3C479035213C7FCAE258EE3F /* Pods_LeeGo_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 217C0723BDD87BAF63534EC2 /* Pods_LeeGo_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* MainViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		8BB65EBEFE3C9BD9CDD42C04 /* Pods_LeeGo_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 414F27C911D7E43D8077BCC6 /* Pods_LeeGo_Demo.framework */; };
+		7BB854E0F83888E27FAB295E /* Pods_LeeGo_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0767557E78385460ED7730A8 /* Pods_LeeGo_Demo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +50,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0767557E78385460ED7730A8 /* Pods_LeeGo_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1524E6FF067F0774C3E1EE21 /* LeeGo.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LeeGo.podspec; path = ../LeeGo.podspec; sourceTree = "<group>"; };
+		217C0723BDD87BAF63534EC2 /* Pods_LeeGo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		350637461C4C1AAC00B5E547 /* ElementViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementViewModel.swift; sourceTree = "<group>"; };
 		350E0DEF1C81F16D00DB78FC /* LeMondeNewsFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeMondeNewsFeedViewController.swift; sourceTree = "<group>"; };
 		350E0DF11C84B0C500DB78FC /* BrickStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickStore.swift; sourceTree = "<group>"; };
@@ -82,7 +84,7 @@
 		35F51FBA1C7C61A40089FF41 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		35F520491C7C7BEF0089FF41 /* DemoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoTests.swift; sourceTree = "<group>"; };
 		35FFB6A71C7A8C070035EC52 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
-		414F27C911D7E43D8077BCC6 /* Pods_LeeGo_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F0715B62430ABB7B95471FA /* Pods-LeeGo-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGo-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGo-Demo/Pods-LeeGo-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* LeeGo-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LeeGo-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,11 +93,9 @@
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* LeeGo-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LeeGo-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		615CF4A254DE172FAED17E17 /* Pods-LeeGo-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGo-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGo-Tests/Pods-LeeGo-Tests.release.xcconfig"; sourceTree = "<group>"; };
-		7765EEDA913C283C36AE6990 /* Pods-LeeGo-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGo-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGo-Demo/Pods-LeeGo-Demo.release.xcconfig"; sourceTree = "<group>"; };
-		88078757DDD337BDFDD543E1 /* Pods_LeeGo_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeeGo_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA435C3F552C07FF750E1013 /* Pods-LeeGo-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGo-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGo-Tests/Pods-LeeGo-Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		CA2060E865742FE956506C67 /* Pods-LeeGo-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGo-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGo-Demo/Pods-LeeGo-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		7AD5D1359B2FF654D1A76040 /* Pods-LeeGo-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGo-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGo-Demo/Pods-LeeGo-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		9860CA711D189D13854DB21D /* Pods-LeeGo-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGo-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGo-Tests/Pods-LeeGo-Tests.release.xcconfig"; sourceTree = "<group>"; };
+		EC4EE244431503581D50285E /* Pods-LeeGo-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeeGo-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeeGo-Tests/Pods-LeeGo-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BB65EBEFE3C9BD9CDD42C04 /* Pods_LeeGo_Demo.framework in Frameworks */,
+				7BB854E0F83888E27FAB295E /* Pods_LeeGo_Demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,20 +111,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B3BE96C4117CB80F9144250 /* Pods_LeeGo_Tests.framework in Frameworks */,
+				3C479035213C7FCAE258EE3F /* Pods_LeeGo_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		14F3DCC68066174BE11A19BB /* Pods */ = {
+		0405AC1AE17510705565B928 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CA2060E865742FE956506C67 /* Pods-LeeGo-Demo.debug.xcconfig */,
-				7765EEDA913C283C36AE6990 /* Pods-LeeGo-Demo.release.xcconfig */,
-				BA435C3F552C07FF750E1013 /* Pods-LeeGo-Tests.debug.xcconfig */,
-				615CF4A254DE172FAED17E17 /* Pods-LeeGo-Tests.release.xcconfig */,
+				7AD5D1359B2FF654D1A76040 /* Pods-LeeGo-Demo.debug.xcconfig */,
+				3F0715B62430ABB7B95471FA /* Pods-LeeGo-Demo.release.xcconfig */,
+				EC4EE244431503581D50285E /* Pods-LeeGo-Tests.debug.xcconfig */,
+				9860CA711D189D13854DB21D /* Pods-LeeGo-Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -200,6 +200,15 @@
 			path = ../Docs;
 			sourceTree = "<group>";
 		};
+		3D7941272E4841E800C06717 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0767557E78385460ED7730A8 /* Pods_LeeGo_Demo.framework */,
+				217C0723BDD87BAF63534EC2 /* Pods_LeeGo_Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -207,8 +216,8 @@
 				607FACD21AFB9204008FA782 /* LeeGo-Demo */,
 				607FACE81AFB9204008FA782 /* LeeGo-Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				14F3DCC68066174BE11A19BB /* Pods */,
-				B556EE8B2301272287076802 /* Frameworks */,
+				0405AC1AE17510705565B928 /* Pods */,
+				3D7941272E4841E800C06717 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -276,15 +285,6 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		B556EE8B2301272287076802 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				414F27C911D7E43D8077BCC6 /* Pods_LeeGo_Demo.framework */,
-				88078757DDD337BDFDD543E1 /* Pods_LeeGo_Tests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -292,12 +292,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "LeeGo-Demo" */;
 			buildPhases = (
-				36E6FED8BF65D59ECC07AE5A /* Check Pods Manifest.lock */,
+				094FEF29A7B26E6EFD4893F9 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				478C44F890CB6A637D5632AA /* Embed Pods Frameworks */,
-				D473B597B4EDBD51C33A4F87 /* Copy Pods Resources */,
+				DC5604022A7F6978F1F10D2D /* [CP] Embed Pods Frameworks */,
+				D37A0397B1ED0478A610B962 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -312,12 +312,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "LeeGo-Tests" */;
 			buildPhases = (
-				4B5D44760223669F1535D656 /* Check Pods Manifest.lock */,
+				4DAEB4B10D4562EF11DD4E16 /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
-				92BEC1139CAE6DA7DFFF2363 /* Embed Pods Frameworks */,
-				40B796FC7911C6FC3FE30CFA /* Copy Pods Resources */,
+				6019254C554EACB2A81CCFCE /* [CP] Embed Pods Frameworks */,
+				CAEE9542E7673B16FE886370 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -336,14 +336,18 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = LeeGo;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = MH3P7R7924;
+						LastSwiftMigration = 0800;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = MH3P7R7924;
+						LastSwiftMigration = 0800;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -401,14 +405,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		36E6FED8BF65D59ECC07AE5A /* Check Pods Manifest.lock */ = {
+		094FEF29A7B26E6EFD4893F9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,44 +420,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		40B796FC7911C6FC3FE30CFA /* Copy Pods Resources */ = {
+		4DAEB4B10D4562EF11DD4E16 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeeGo-Tests/Pods-LeeGo-Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		478C44F890CB6A637D5632AA /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeeGo-Demo/Pods-LeeGo-Demo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4B5D44760223669F1535D656 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,14 +435,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		92BEC1139CAE6DA7DFFF2363 /* Embed Pods Frameworks */ = {
+		6019254C554EACB2A81CCFCE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,19 +450,49 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeeGo-Tests/Pods-LeeGo-Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D473B597B4EDBD51C33A4F87 /* Copy Pods Resources */ = {
+		CAEE9542E7673B16FE886370 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeeGo-Tests/Pods-LeeGo-Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D37A0397B1ED0478A610B962 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeeGo-Demo/Pods-LeeGo-Demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC5604022A7F6978F1F10D2D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeeGo-Demo/Pods-LeeGo-Demo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -555,8 +559,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -600,8 +606,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -626,38 +634,47 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA2060E865742FE956506C67 /* Pods-LeeGo-Demo.debug.xcconfig */;
+			baseConfigurationReference = 7AD5D1359B2FF654D1A76040 /* Pods-LeeGo-Demo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MH3P7R7924;
 				INFOPLIST_FILE = LeeGo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = me.allblue.LeeGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7765EEDA913C283C36AE6990 /* Pods-LeeGo-Demo.release.xcconfig */;
+			baseConfigurationReference = 3F0715B62430ABB7B95471FA /* Pods-LeeGo-Demo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MH3P7R7924;
 				INFOPLIST_FILE = LeeGo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = me.allblue.LeeGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA435C3F552C07FF750E1013 /* Pods-LeeGo-Tests.debug.xcconfig */;
+			baseConfigurationReference = EC4EE244431503581D50285E /* Pods-LeeGo-Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = MH3P7R7924;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -667,20 +684,25 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LeeGo-Demo.app/LeeGo-Demo";
 			};
 			name = Debug;
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 615CF4A254DE172FAED17E17 /* Pods-LeeGo-Tests.release.xcconfig */;
+			baseConfigurationReference = 9860CA711D189D13854DB21D /* Pods-LeeGo-Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = MH3P7R7924;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LeeGo-Demo.app/LeeGo-Demo";
 			};
 			name = Release;

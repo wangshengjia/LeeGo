@@ -10,16 +10,16 @@ import Foundation
 
 extension NSLayoutConstraint {
     internal enum Mode {
-        case Dimension, SubviewsLayout, Ratio, Unknown
+        case dimension, subviewsLayout, ratio, unknown
     }
 
     internal func lg_setIdentifier(with type: Mode) {
         switch type {
-        case .Dimension:
+        case .dimension:
             self.identifier = "LG_Dimension: \(self.description)"
-        case .SubviewsLayout:
+        case .subviewsLayout:
             self.identifier = "LG_SubviewsLayout: \(self.description)"
-        case .Ratio:
+        case .ratio:
             self.identifier = "LG_Ratio: \(self.description)"
         default:
             return
@@ -28,24 +28,24 @@ extension NSLayoutConstraint {
 
     internal var mode: Mode {
         if self.identifier?.hasPrefix("LG_Dimension") ?? false {
-            return .Dimension
+            return .dimension
         } else if self.identifier?.hasPrefix("LG_SubviewsLayout") ?? false {
-            return .SubviewsLayout
+            return .subviewsLayout
         } else if self.identifier?.hasPrefix("LG_Ratio") ?? false {
-            return .Ratio
+            return .ratio
         } else {
-            return .Unknown
+            return .unknown
         }
     }
 }
 
 extension UIView {
 
-    internal func lg_constraint(type: NSLayoutAttribute) -> NSLayoutConstraint? {
+    internal func lg_constraint(_ type: NSLayoutAttribute) -> NSLayoutConstraint? {
         switch type {
-        case .Width, .Height:
+        case .width, .height:
             for constraint in self.constraints where constraint.firstAttribute == type
-                && constraint.mode == .Dimension
+                && constraint.mode == .dimension
                 && constraint.firstItem === self
                 && constraint.secondItem === nil {
                     return constraint
@@ -57,17 +57,17 @@ extension UIView {
         return nil
     }
 
-    internal func lg_applyConstraint(type: NSLayoutAttribute, constant: CGFloat) {
+    internal func lg_applyConstraint(_ type: NSLayoutAttribute, constant: CGFloat) {
         if let constraint = self.lg_constraint(type) {
             constraint.constant = constant
         } else {
-            let constraint = NSLayoutConstraint(item: self, attribute: type, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant)
-            constraint.lg_setIdentifier(with: .Dimension)
+            let constraint = NSLayoutConstraint(item: self, attribute: type, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: constant)
+            constraint.lg_setIdentifier(with: .dimension)
             self.addConstraint(constraint)
         }
     }
 
-    internal func unapplyConstraint(type: NSLayoutAttribute) {
+    internal func unapplyConstraint(_ type: NSLayoutAttribute) {
         if let constraint = self.lg_constraint(type) {
             self.removeConstraint(constraint)
         }

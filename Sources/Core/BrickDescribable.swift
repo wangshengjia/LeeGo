@@ -11,13 +11,13 @@ import Foundation
 protocol BrickDescribable: class, Configurable, Composable {
 
     func lg_brickDidAwake()
-    func lg_configureAs(brick: Brick, dataSource: BrickDataSource?, updatingStrategy: UpdatingStrategy)
+    func lg_configureAs(_ brick: Brick, dataSource: BrickDataSource?, updatingStrategy: UpdatingStrategy)
     
 }
 
 extension BrickDescribable {
 
-    internal func apply<View where View: UIView, View: BrickDescribable>(newBrick: Brick, to view: View, with dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy) {
+    internal func apply<View>(_ newBrick: Brick, to view: View, with dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy) where View: UIView, View: BrickDescribable {
 
         if shouldRebuild(view.currentBrick, with: newBrick, updatingStrategy: updatingStrategy) {
             applyDiff(with: newBrick, to: view)
@@ -30,7 +30,7 @@ extension BrickDescribable {
 
 extension BrickDescribable {
     
-    private func applyDiff<View where View: UIView, View: BrickDescribable>(with newBrick: Brick, to view: View) {
+    fileprivate func applyDiff<View>(with newBrick: Brick, to view: View) where View: UIView, View: BrickDescribable {
 
         // setup self, only if brick is not initialized from a nib file
         if view.currentBrick?.nibName == nil {
@@ -41,40 +41,40 @@ extension BrickDescribable {
         applyDimension(of: newBrick, to: view)
 
         // add & layout sub views
-        if let bricks = newBrick.bricks where !bricks.isEmpty, let layout = newBrick.layout {
+        if let bricks = newBrick.bricks, !bricks.isEmpty, let layout = newBrick.layout {
             composite(bricks, to: view, with: layout)
         }
     }
 
-    private func shouldRebuild(currentBrick: Brick?, with newBrick: Brick, updatingStrategy: UpdatingStrategy) -> Bool {
+    fileprivate func shouldRebuild(_ currentBrick: Brick?, with newBrick: Brick, updatingStrategy: UpdatingStrategy) -> Bool {
 
         var shouldRebuild = (currentBrick == nil)
 
         switch updatingStrategy {
-        case .WhenBrickChanged:
-            if let current = currentBrick
-                where current.name != newBrick.name
+        case .whenBrickChanged:
+            if let current = currentBrick,
+              current.name != newBrick.name
                     || (current.style == nil && current.bricks == nil && current.layout == nil) {
                 shouldRebuild = true
             }
-        case .Always:
+        case .always:
             shouldRebuild = true
         }
 
         return shouldRebuild
     }
 
-    private func applyDimension<View where View: UIView, View: BrickDescribable>(of newBrick: Brick, to brick: View) {
+    private func applyDimension<View>(of newBrick: Brick, to brick: View) where View: UIView, View: BrickDescribable {
         if let width = newBrick.width {
-            brick.lg_applyConstraint(.Width, constant: width)
+            brick.lg_applyConstraint(.width, constant: width)
         } else {
-            brick.unapplyConstraint(.Width)
+            brick.unapplyConstraint(.width)
         }
 
         if let height = newBrick.height {
-            brick.lg_applyConstraint(.Height, constant: height)
+            brick.lg_applyConstraint(.height, constant: height)
         } else {
-            brick.unapplyConstraint(.Height)
+            brick.unapplyConstraint(.height)
         }
     }
 }

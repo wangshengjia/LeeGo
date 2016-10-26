@@ -24,7 +24,7 @@ extension UICollectionViewCell {
     ///  - parameter layoutAttributes: layoutAttributes from `UICollectionViewCell.preferredLayoutAttributesFittingAttributes`
     ///
     ///  - returns: UICollectionViewLayoutAttributes instance with fitting height.
-    public func lg_fittingHeightLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    public func lg_fittingHeightLayoutAttributes(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         self.frame = layoutAttributes.frame
 
         // TODO: implement a cache mechanisme

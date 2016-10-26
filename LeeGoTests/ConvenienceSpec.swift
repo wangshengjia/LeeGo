@@ -23,8 +23,8 @@ class ConvenienceSpec: QuickSpec {
     override func spec() {
         describe("Convenience methods") {
             // Given
-            let path = NSBundle(forClass: self.dynamicType).pathForResource("brick", ofType: "json")!
-            let json = (try? NSJSONSerialization.JSONObjectWithData(NSData(contentsOfFile: path)!, options: NSJSONReadingOptions(rawValue: 0)) as! JSONDictionary)!
+            let path = Bundle(for: type(of: self)).path(forResource: "brick", ofType: "json")!
+            let json = (try? JSONSerialization.jsonObject(with: NSData(contentsOfFile: path)! as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as! JSONDictionary)!
             
             context("when parse value from JSON like structure") {
                 it("should get value with a String key correctly.") {
@@ -55,9 +55,9 @@ class ConvenienceSpec: QuickSpec {
             }
 
             let attributes: [Attributes] = [
-                [NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.redColor()],
-                [kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "Avenir", size: 20)!, NSForegroundColorAttributeName: UIColor.darkTextColor()],
-                [NSFontAttributeName: UIFont(name: "Avenir", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGrayColor()]
+                [NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.red],
+                [kCustomAttributeDefaultText: "Test" as AnyObject, NSFontAttributeName: UIFont(name: "Avenir", size: 20)!, NSForegroundColorAttributeName: UIColor.darkText],
+                [NSFontAttributeName: UIFont(name: "Avenir", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGray]
             ]
 
             it("should set attributed string correctly") {
@@ -71,7 +71,7 @@ class ConvenienceSpec: QuickSpec {
                 label.lg_setAttributedString(with: attributes)
                 textField.lg_setAttributedString(with: attributes)
                 textView.lg_setAttributedString(with: attributes)
-                button.lg_setAttributedButtonTitle(with: attributes, state: .Normal)
+                button.lg_setAttributedButtonTitle(with: attributes, state: .normal)
 
                 // Then
                 expect(label.attributedText).notTo(beNil())
@@ -79,16 +79,16 @@ class ConvenienceSpec: QuickSpec {
                 expect(textView.attributedText).notTo(beNil())
 
                 var range = NSRange(location: 1, length: 1)
-                expect(NSDictionary(dictionary: (label.attributedText?.attributesAtIndex(0, effectiveRange: &range))!)) == attributes[1]
+                expect(NSDictionary(dictionary: (label.attributedText?.attributes(at: 0, effectiveRange: &range))!)) == attributes[1] as NSDictionary
                 for (attrKey, attrValue) in attributes[1] {
-                    let containsAttr = NSDictionary(dictionary: (textField.attributedText?.attributesAtIndex(0, effectiveRange: &range))!).contains({ (key, value) -> Bool in
+                    let containsAttr = NSDictionary(dictionary: (textField.attributedText?.attributes(at: 0, effectiveRange: &range))!).contains(where: { (key, value) -> Bool in
                         return attrKey == key as! String && attrValue.isEqual(value)
                     })
                     expect(containsAttr) == true
                 }
 
-                expect(NSDictionary(dictionary: (textView.attributedText?.attributesAtIndex(0, effectiveRange: &range))!)) == attributes[1]
-                expect(NSDictionary(dictionary: (button.attributedTitleForState(.Normal)?.attributesAtIndex(0, effectiveRange: &range))!)) == attributes[1]
+                expect(NSDictionary(dictionary: (textView.attributedText?.attributes(at: 0, effectiveRange: &range))!)) == attributes[1] as NSDictionary
+                expect(NSDictionary(dictionary: (button.attributedTitle(for: .normal)?.attributes(at: 0, effectiveRange: &range))!)) == attributes[1] as NSDictionary
             }
 
             it("should update attributed string correctly") {

@@ -15,7 +15,7 @@ class BrickSpec: QuickSpec {
 
             it("should create a new brick target instance correctly") {
                 // Given
-                let brick = Brick(name: "title", targetClass: UILabel.self).width(40).height(60).style([.backgroundColor(UIColor.greenColor())])
+                let brick = Brick(name: "title", targetClass: UILabel.self).width(40).height(60).style([.backgroundColor(UIColor.green)])
 
                 // Then
                 expect(brick.name) == "title"
@@ -24,7 +24,7 @@ class BrickSpec: QuickSpec {
                 expect(brick.height) == 60
                 expect(brick.hashValue) == "title".hashValue
                 if case let .backgroundColor(color) = brick.style!.first! {
-                    expect(color) == UIColor.greenColor()
+                    expect(color) == UIColor.green
                 }
             }
 
@@ -164,7 +164,7 @@ class BrickSpec: QuickSpec {
                 // Then
                 expect(brick.name) == "header"
                 expect(brick.targetClass) === UIView.self
-                expect(brick.heightResolver!(fittingWidth:0, childrenHeights: [10, 20], metrics: LayoutMetrics())) == 30
+                expect(brick.heightResolver!(0, [10, 20], LayoutMetrics())) == 30
             })
 
             it("builder & target should be equals") {

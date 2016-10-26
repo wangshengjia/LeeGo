@@ -11,12 +11,12 @@ import LeeGo
 
 class MainViewController: UITableViewController {
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+  
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         switch indexPath.row {
         case 0:
@@ -34,24 +34,24 @@ class MainViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         switch indexPath.row {
         case 0:
-            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("SamplesViewController") as? SamplesViewController {
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SamplesViewController") as? SamplesViewController {
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
         case 1:
-            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("LeMondeNewsFeedViewController") as? LeMondeNewsFeedViewController {
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "LeMondeNewsFeedViewController") as? LeMondeNewsFeedViewController {
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
         case 2:
-            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("TwitterFeedViewController") as? TwitterFeedViewController {
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "TwitterFeedViewController") as? TwitterFeedViewController {
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
         case 3:
-            if let viewController = self.storyboard?.instantiateViewControllerWithIdentifier("DetailsViewController") as? DetailsViewController {
+            if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailsViewController") as? DetailsViewController {
                 self.navigationController?.pushViewController(viewController, animated: true)
             }
         default:

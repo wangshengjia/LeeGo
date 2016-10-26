@@ -19,15 +19,15 @@ class BrickDescribableSpec: QuickSpec {
         describe("Configurable extension tests") {
             it("should setup style correctly.") {
                 let view = UIView()
-                view.setup(view, newStyle: [.backgroundColor(UIColor.greenColor())])
-                expect(view.backgroundColor) == UIColor.greenColor()
+                view.setup(view, newStyle: [.backgroundColor(UIColor.green)])
+                expect(view.backgroundColor) == UIColor.green
             }
 
             it("should remove style correctly.") {
                 let view = UIView()
-                view.setup(view, newStyle: [.backgroundColor(UIColor.greenColor())])
-                expect(view.backgroundColor) == UIColor.greenColor()
-                view.setup(view, currentStyle:[.backgroundColor(UIColor.greenColor())], newStyle: [])
+                view.setup(view, newStyle: [.backgroundColor(UIColor.green)])
+                expect(view.backgroundColor) == UIColor.green
+                view.setup(view, currentStyle:[.backgroundColor(UIColor.green)], newStyle: [])
                 expect(view.backgroundColor).to(beNil())
             }
         }
@@ -41,7 +41,7 @@ class BrickDescribableSpec: QuickSpec {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 // When
-                view.apply(Brick(name: "name").width(50).height(80), to: view, updatingStrategy: .WhenBrickChanged)
+                view.apply(Brick(name: "name").width(50).height(80), to: view, updatingStrategy: .whenBrickChanged)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()
@@ -60,9 +60,9 @@ class BrickDescribableSpec: QuickSpec {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 // When
-                view.apply(Brick(name: "name").width(50).height(80), to: view, with: nil, updatingStrategy: .WhenBrickChanged)
+                view.apply(Brick(name: "name").width(50).height(80), to: view, with: nil, updatingStrategy: .whenBrickChanged)
 
-                view.apply(Brick(name: "name").width(60).height(20), to: view, updatingStrategy: .Always)
+                view.apply(Brick(name: "name").width(60).height(20), to: view, updatingStrategy: .always)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()
@@ -82,9 +82,9 @@ class BrickDescribableSpec: QuickSpec {
                 view.translatesAutoresizingMaskIntoConstraints = false
 
                 // When
-                view.apply(Brick(name: "name").width(50).height(80), to: view, updatingStrategy: .WhenBrickChanged)
+                view.apply(Brick(name: "name").width(50).height(80), to: view, updatingStrategy: .whenBrickChanged)
 
-                view.apply(Brick(name: "name"), to: view, updatingStrategy: .WhenBrickChanged)
+                view.apply(Brick(name: "name"), to: view, updatingStrategy: .whenBrickChanged)
 
                 superview.addSubview(view)
                 view.setNeedsLayout()

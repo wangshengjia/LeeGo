@@ -13,11 +13,11 @@ import Foundation
 extension NSLayoutRelation: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Equal:
+        case .equal:
             return ""
-        case .GreaterThanOrEqual:
+        case .greaterThanOrEqual:
             return ">="
-        case .LessThanOrEqual:
+        case .lessThanOrEqual:
             return "<="
         }
     }
@@ -45,17 +45,17 @@ public enum Metrics: CustomStringConvertible {
     public var description: String {
         switch self {
         case let .top(relation):
-            return relation == .Equal ? "-top-" : "-(\(relation)top)-"
+            return relation == .equal ? "-top-" : "-(\(relation)top)-"
         case let .left(relation):
-            return relation == .Equal ? "-left-" : "-(\(relation)left)-"
+            return relation == .equal ? "-left-" : "-(\(relation)left)-"
         case let .bottom(relation):
-            return relation == .Equal ? "-bottom-" : "-(\(relation)bottom)-"
+            return relation == .equal ? "-bottom-" : "-(\(relation)bottom)-"
         case let .right(relation):
-            return relation == .Equal ? "-right-" : "-(\(relation)right)-"
+            return relation == .equal ? "-right-" : "-(\(relation)right)-"
         case let .spaceH(relation):
-            return relation == .Equal ? "-spaceH-" : "-(\(relation)spaceH)-"
+            return relation == .equal ? "-spaceH-" : "-(\(relation)spaceH)-"
         case let .spaceV(relation):
-            return relation == .Equal ? "-spaceV-" : "-(\(relation)spaceV)-"
+            return relation == .equal ? "-spaceV-" : "-(\(relation)spaceV)-"
         default:
             break
         }
@@ -84,7 +84,7 @@ public enum Metrics: CustomStringConvertible {
 ///  - parameter toSuperview:   Determine if there is a constraint trailing to superview, such as: "H:...-|". Default is true.
 ///
 ///  - returns: the VFL format string
-public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.Equal), orderedViews: [String] = [], interspace: Metrics? = .spaceH(.Equal), right: Metrics? = .right(.Equal), toSuperview: Bool = true) -> String {
+public func H(fromSuperview: Bool = true, left: Metrics? = .left(.equal), orderedViews: [String] = [], interspace: Metrics? = .spaceH(.equal), right: Metrics? = .right(.equal), toSuperview: Bool = true) -> String {
     guard !orderedViews.isEmpty else {
         assertionFailure("Should at least have 1 view name")
         return ""
@@ -112,7 +112,7 @@ public func H(fromSuperview fromSuperview: Bool = true, left: Metrics? = .left(.
 ///  - parameter toSuperview:   Determine if there is a constraint trailing to superview, such as: "V:...-|". Default is true.
 ///
 ///  - returns: the VFL format string
-public func V(fromSuperview fromSuperview: Bool = true, top: Metrics? = .top(.Equal), orderedViews: [String] = [], interspace: Metrics? = .spaceV(.Equal), bottom: Metrics? = .bottom(.Equal), toSuperview: Bool = true) -> String {
+public func V(fromSuperview: Bool = true, top: Metrics? = .top(.equal), orderedViews: [String] = [], interspace: Metrics? = .spaceV(.equal), bottom: Metrics? = .bottom(.equal), toSuperview: Bool = true) -> String {
     guard !orderedViews.isEmpty else {
         assertionFailure("Should at least have 1 view name")
         return ""
@@ -123,44 +123,44 @@ public func V(fromSuperview fromSuperview: Bool = true, top: Metrics? = .top(.Eq
 
 // MARK: Internal
 
-internal func formatHorizontal(brickNames: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
+internal func formatHorizontal(_ brickNames: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
     guard !brickNames.isEmpty else {
         assertionFailure("`brickNames` should not be empty")
         return []
     }
 
-    if axis == .Horizontal {
+    if axis == .horizontal {
         switch distribution {
-        case .Fill:
+        case .fill:
             return [H(orderedViews: brickNames)]
-        case .FillEqually:
-            return [H(orderedViews: brickNames)] + equallyLayoutFormats(brickNames, axis: .Horizontal)
-        case let .Flow(index):
+        case .fillEqually:
+            return [H(orderedViews: brickNames)] + equallyLayoutFormats(brickNames, axis: .horizontal)
+        case let .flow(index):
             let left = Array(brickNames.prefix(min(max(index, 0), brickNames.count)))
             let right = Array(brickNames.suffix(min(max(brickNames.count - index, 0), brickNames.count)))
 
             if left.isEmpty {
-                return [H(left: .left(.GreaterThanOrEqual), orderedViews:right)]
+                return [H(left: .left(.greaterThanOrEqual), orderedViews:right)]
             } else if right.isEmpty {
-                return [H(orderedViews:left, right: .right(.GreaterThanOrEqual))]
+                return [H(orderedViews:left, right: .right(.greaterThanOrEqual))]
             } else {
                 let str = H(fromSuperview: false, orderedViews:right)
-                let index = str.startIndex.advancedBy(2)
-                return [H(orderedViews:left, toSuperview: false) + Metrics.spaceH(.GreaterThanOrEqual).description + str.substringFromIndex(index)]
+                let index = str.characters.index(str.startIndex, offsetBy: 2)
+                return [H(orderedViews:left, toSuperview: false) + Metrics.spaceH(.greaterThanOrEqual).description + str.substring(from: index)]
             }
         }
     } else {
         return brickNames.flatMap { (brick) -> String? in
 
             switch align {
-            case .Left:
-                return H(orderedViews:[brick], right:.right(.GreaterThanOrEqual))
-            case .Right:
-                return H(left:.left(.GreaterThanOrEqual), orderedViews:[brick])
-            case .Fill:
+            case .left:
+                return H(orderedViews:[brick], right:.right(.greaterThanOrEqual))
+            case .right:
+                return H(left:.left(.greaterThanOrEqual), orderedViews:[brick])
+            case .fill:
                 return H(orderedViews:[brick])
-            case .Center:
-                return H(left:.left(.GreaterThanOrEqual), orderedViews:[brick], right:.right(.GreaterThanOrEqual))
+            case .center:
+                return H(left:.left(.greaterThanOrEqual), orderedViews:[brick], right:.right(.greaterThanOrEqual))
             default:
                 assertionFailure("Unexpected alignment value \(align) for axis \(axis) and distribution \(distribution)")
                 return nil
@@ -169,24 +169,24 @@ internal func formatHorizontal(brickNames: [String], axis: Axis, align: Alignmen
     }
 }
 
-internal func formatVertical(brickNames: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
+internal func formatVertical(_ brickNames: [String], axis: Axis, align: Alignment, distribution: Distribution) -> [String] {
     guard !brickNames.isEmpty else {
         assertionFailure("Bricks should not be empty")
         return []
     }
 
-    if axis == .Horizontal {
+    if axis == .horizontal {
         return brickNames.flatMap { (brick) -> String? in
 
             switch align {
-            case .Top:
-                return V(orderedViews:[brick], bottom:.bottom(.GreaterThanOrEqual))
-            case .Bottom:
-                return V(top:.top(.GreaterThanOrEqual), orderedViews:[brick])
-            case .Fill:
+            case .top:
+                return V(orderedViews:[brick], bottom:.bottom(.greaterThanOrEqual))
+            case .bottom:
+                return V(top:.top(.greaterThanOrEqual), orderedViews:[brick])
+            case .fill:
                 return V(orderedViews:[brick])
-            case .Center:
-                return V(top:.top(.GreaterThanOrEqual), orderedViews:[brick], bottom:.bottom(.GreaterThanOrEqual))
+            case .center:
+                return V(top:.top(.greaterThanOrEqual), orderedViews:[brick], bottom:.bottom(.greaterThanOrEqual))
             default:
                 assertionFailure("Unexpected alignment value \(align) for axis \(axis) and distribution \(distribution)")
                 return nil
@@ -194,57 +194,57 @@ internal func formatVertical(brickNames: [String], axis: Axis, align: Alignment,
         }
     } else {
         switch distribution {
-        case .Fill:
+        case .fill:
             return [V(orderedViews:brickNames)]
-        case .FillEqually:
-            return [V(orderedViews: brickNames)] + equallyLayoutFormats(brickNames, axis: .Vertical)
-        case let .Flow(index):
+        case .fillEqually:
+            return [V(orderedViews: brickNames)] + equallyLayoutFormats(brickNames, axis: .vertical)
+        case let .flow(index):
             let top = Array(brickNames.prefix(min(max(index, 0), brickNames.count)))
             let bottom = Array(brickNames.suffix(min(max(brickNames.count - index, 0), brickNames.count)))
 
             if top.isEmpty {
-                return [V(top: .top(.GreaterThanOrEqual), orderedViews:bottom)]
+                return [V(top: .top(.greaterThanOrEqual), orderedViews:bottom)]
             } else if bottom.isEmpty {
-                return [V(orderedViews: top, bottom: .bottom(.GreaterThanOrEqual))]
+                return [V(orderedViews: top, bottom: .bottom(.greaterThanOrEqual))]
             } else {
                 let str = V(fromSuperview: false, orderedViews:bottom)
-                let index = str.startIndex.advancedBy(2)
-                return [V(orderedViews: top, toSuperview: false) + Metrics.spaceV(.GreaterThanOrEqual).description + str.substringFromIndex(index)]
+                let index = str.characters.index(str.startIndex, offsetBy: 2)
+                return [V(orderedViews: top, toSuperview: false) + Metrics.spaceV(.greaterThanOrEqual).description + str.substring(from: index)]
             }
         }
     }
 }
 
-internal func layoutOptions(brickNames: [String], axis: Axis, align: Alignment, distribution: Distribution) -> NSLayoutFormatOptions {
-    if axis == .Horizontal && align == .Center {
-        return [.AlignAllCenterY, .DirectionLeadingToTrailing]
+internal func layoutOptions(_ brickNames: [String], axis: Axis, align: Alignment, distribution: Distribution) -> NSLayoutFormatOptions {
+    if axis == .horizontal && align == .center {
+        return [.alignAllCenterY, .directionLeadingToTrailing]
     }
 
-    if axis == .Vertical && align == .Center {
-        return [.AlignAllCenterX, .DirectionLeadingToTrailing]
+    if axis == .vertical && align == .center {
+        return [.alignAllCenterX, .directionLeadingToTrailing]
     }
 
     // Default
-    return .DirectionLeadingToTrailing
+    return NSLayoutFormatOptions()
 }
 
 // MARK: Private
 
-private func equallyLayoutFormats(brickNames: [String], axis: Axis) -> [String] {
+private func equallyLayoutFormats(_ brickNames: [String], axis: Axis) -> [String] {
     guard brickNames.count >= 2 else {
         assertionFailure("Should almost have two views to do a equally layout")
         return []
     }
 
-    return brickNames.enumerate().flatMap { (index: Int, element: String) -> String? in
+    return brickNames.enumerated().flatMap { (index: Int, element: String) -> String? in
         if index < brickNames.count - 1 {
-            return "\(axis == .Horizontal ? "H" : "V"):[\(element)(\(brickNames[index + 1]))]"
+            return "\(axis == .horizontal ? "H" : "V"):[\(element)(\(brickNames[index + 1]))]"
         }
         return nil
     }
 }
 
-private func distribute(fromSuperview fromSuperview: Bool, metric1: Metrics?, views: [String], interspace: Metrics?, metric2: Metrics?, toSuperview: Bool) -> String{
+private func distribute(fromSuperview: Bool, metric1: Metrics?, views: [String], interspace: Metrics?, metric2: Metrics?, toSuperview: Bool) -> String{
 
     var format = ""
 
@@ -259,7 +259,7 @@ private func distribute(fromSuperview fromSuperview: Bool, metric1: Metrics?, vi
     for viewName in views {
         format = format + "[\(viewName)]"
 
-        if let spaceH = interspace where viewName != views.last {
+        if let spaceH = interspace, viewName != views.last {
             format = format + spaceH.description
         }
     }

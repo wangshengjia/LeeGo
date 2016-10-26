@@ -27,14 +27,14 @@ extension ElementViewModel {
 }
 
 extension ElementViewModel: BrickDataSource {
-    func update(targetView: UIView, with brick: Brick) {
+    func update(_ targetView: UIView, with brick: Brick) {
         switch targetView {
         case let titleLabel as UILabel where brick == LeMonde.title:
             titleLabel.attributedText = titleLabel.lg_updatedAttributedString(with: [element.isRestrict ? "󰀀" : nil, element.title, element.natureEdito])
         case let subtitleLabel as UILabel  where brick == LeMonde.subtitle:
             subtitleLabel.text = element.description
         case let illustration as UIImageView where brick == LeMonde.illustration:
-            illustration.backgroundColor = UIColor.grayColor()
+            illustration.backgroundColor = UIColor.gray
         default:
             break
         }
