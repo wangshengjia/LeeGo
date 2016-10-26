@@ -10,7 +10,7 @@ public typealias SharedExampleContext = () -> (NSDictionary)
     A closure that is used to define a group of shared examples. This
     closure may contain any number of example and example groups.
 */
-public typealias SharedExampleClosure = (SharedExampleContext) -> ()
+public typealias SharedExampleClosure = (@escaping SharedExampleContext) -> ()
 
 /**
     A collection of state Quick builds up in order to work its magic.
@@ -44,7 +44,13 @@ final internal class World: NSObject {
         within this test suite. This is only true within the context of Quick
         functional tests.
     */
+#if _runtime(_ObjC)
+    // Convention of generating Objective-C selector has been changed on Swift 3
+    @objc(isRunningAdditionalSuites)
     internal var isRunningAdditionalSuites = false
+#else
+    internal var isRunningAdditionalSuites = false
+#endif
 
     private var specs: Dictionary<String, ExampleGroup> = [:]
     private var sharedExamples: [String: SharedExampleClosure] = [:]
@@ -102,11 +108,7 @@ final internal class World: NSObject {
         - returns: The root example group for the class.
     */
     internal func rootExampleGroupForSpecClass(_ cls: AnyClass) -> ExampleGroup {
-        #if _runtime(_ObjC)
-            let name = NSStringFromClass(cls)
-        #else
-            let name = String(cls)
-        #endif
+        let name = String(describing: cls)
 
         if let group = specs[name] {
             return group
@@ -150,7 +152,7 @@ final internal class World: NSObject {
 
     // MARK: Internal
 
-    internal func registerSharedExample(_ name: String, closure: SharedExampleClosure) {
+    internal func registerSharedExample(_ name: String, closure: @escaping SharedExampleClosure) {
         raiseIfSharedExampleAlreadyRegistered(name)
         sharedExamples[name] = closure
     }

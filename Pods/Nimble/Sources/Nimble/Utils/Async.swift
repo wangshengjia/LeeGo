@@ -29,12 +29,12 @@ internal class AssertionWaitLock: WaitLock {
 
     func acquireWaitingLock(_ fnName: String, file: FileString, line: UInt) {
         let info = WaitingInfo(name: fnName, file: file, lineNumber: line)
-        _ = nimblePrecondition(
+        nimblePrecondition(
             Thread.isMainThread,
             "InvalidNimbleAPIUsage",
             "\(fnName) can only run on the main thread."
         )
-        _ = nimblePrecondition(
+        nimblePrecondition(
             currentWaiter == nil,
             "InvalidNimbleAPIUsage",
             "Nested async expectations are not allowed to avoid creating flaky tests.\n\n" +
@@ -269,14 +269,14 @@ internal class Awaiter {
     }
 
     func performBlock<T>(
-        _ closure: ((T) -> Void) throws -> Void) -> AwaitPromiseBuilder<T> {
+        _ closure: @escaping (@escaping (T) -> Void) throws -> Void) -> AwaitPromiseBuilder<T> {
             let promise = AwaitPromise<T>()
             let timeoutSource = createTimerSource(timeoutQueue)
             var completionCount = 0
             let trigger = AwaitTrigger(timeoutSource: timeoutSource, actionSource: nil) {
                 try closure() {
                     completionCount += 1
-                    _ = nimblePrecondition(
+                    nimblePrecondition(
                         completionCount < 2,
                         "InvalidNimbleAPIUsage",
                         "Done closure's was called multiple times. waitUntil(..) expects its " +
@@ -294,7 +294,7 @@ internal class Awaiter {
                 trigger: trigger)
     }
 
-    func poll<T>(_ pollInterval: TimeInterval, closure: () throws -> T?) -> AwaitPromiseBuilder<T> {
+    func poll<T>(_ pollInterval: TimeInterval, closure: @escaping () throws -> T?) -> AwaitPromiseBuilder<T> {
         let promise = AwaitPromise<T>()
         let timeoutSource = createTimerSource(timeoutQueue)
         let asyncSource = createTimerSource(asyncQueue)
@@ -331,7 +331,7 @@ internal func pollBlock(
     file: FileString,
     line: UInt,
     fnName: String = #function,
-    expression: () throws -> Bool) -> AwaitResult<Bool> {
+    expression: @escaping () throws -> Bool) -> AwaitResult<Bool> {
         let awaiter = NimbleEnvironment.activeInstance.awaiter
         let result = awaiter.poll(pollInterval) { () throws -> Bool? in
             do {

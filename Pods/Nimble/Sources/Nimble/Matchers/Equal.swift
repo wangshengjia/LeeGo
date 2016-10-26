@@ -86,7 +86,7 @@ public func equal<T: Equatable>(_ expectedValue: [T?]) -> NonNilMatcherFunc<[T?]
 
 /// A Nimble matcher that succeeds when the actual set is equal to the expected set.
 public func equal<T>(_ expectedValue: Set<T>?) -> NonNilMatcherFunc<Set<T>> {
-    return equal(expectedValue, stringify: stringify)
+    return equal(expectedValue, stringify: { stringify($0) })
 }
 
 /// A Nimble matcher that succeeds when the actual set is equal to the expected set.
@@ -100,7 +100,7 @@ public func equal<T: Comparable>(_ expectedValue: Set<T>?) -> NonNilMatcherFunc<
     })
 }
 
-private func equal<T>(_ expectedValue: Set<T>?, stringify: (Set<T>?) -> String) -> NonNilMatcherFunc<Set<T>> {
+private func equal<T>(_ expectedValue: Set<T>?, stringify: @escaping (Set<T>?) -> String) -> NonNilMatcherFunc<Set<T>> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal <\(stringify(expectedValue))>"
 

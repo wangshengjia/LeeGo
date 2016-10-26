@@ -41,9 +41,11 @@ internal func errorMatchesExpectedError<T: Error>(
         && actualError._code   == expectedError._code
 }
 
-internal func errorMatchesExpectedError<T: Error where T: Equatable>(
+internal func errorMatchesExpectedError<T: Error>(
     _ actualError: Error,
-    expectedError: T) -> Bool {
+    expectedError: T) -> Bool
+    where T: Equatable
+{
     if let actualError = actualError as? T {
         return actualError == expectedError
     }
@@ -76,7 +78,7 @@ internal func errorMatchesNonNilFieldsOrClosure<T: Error>(
                 }
             }
         } else if errorType != nil && closure != nil {
-            // The closure expects another ErrorType as argument, so this
+            // The closure expects another ErrorProtocol as argument, so this
             // is _supposed_ to fail, so that it becomes more obvious.
             let assertions = gatherExpectations {
                 expect(actualError is T).to(equal(true))

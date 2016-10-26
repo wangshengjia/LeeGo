@@ -1,4 +1,8 @@
 import Foundation
+// `CGFloat` is in Foundation (swift-corelibs-foundation) on Linux.
+#if _runtime(_ObjC)
+    import CoreGraphics
+#endif
 
 /// Implement this protocol to implement a custom matcher for Swift
 public protocol Matcher {
@@ -10,8 +14,8 @@ public protocol Matcher {
 #if _runtime(_ObjC)
 /// Objective-C interface to the Swift variant of Matcher.
 @objc public protocol NMBMatcher {
-    func matches(_ actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
-    func doesNotMatch(_ actualBlock: () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
+    func matches(_ actualBlock: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
+    func doesNotMatch(_ actualBlock: @escaping () -> NSObject!, failureMessage: FailureMessage, location: SourceLocation) -> Bool
 }
 #endif
 
@@ -19,18 +23,14 @@ public protocol Matcher {
 /// Protocol for types that support contain() matcher.
 @objc public protocol NMBContainer {
     @objc(containsObject:)
-    func contains(_ anObject: AnyObject) -> Bool
+    func contains(_ anObject: Any) -> Bool
 }
 
 // FIXME: NSHashTable can not conform to NMBContainer since swift-DEVELOPMENT-SNAPSHOT-2016-04-25-a
 //extension NSHashTable : NMBContainer {} // Corelibs Foundation does not include this class yet
 #else
 public protocol NMBContainer {
-#if !os(Linux)
-    func contains(_ anObject: AnyObject?) -> Bool
-#else
-    func containsObject(_ object: AnyObject) -> Bool
-#endif
+    func contains(_ anObject: Any) -> Bool
 }
 #endif
 
@@ -58,16 +58,12 @@ extension NSDictionary : NMBCollection {}
 #if _runtime(_ObjC)
 /// Protocol for types that support beginWith(), endWith(), beEmpty() matchers
 @objc public protocol NMBOrderedCollection : NMBCollection {
-    @objc(indexOfObject:)
-    func index(of anObject: AnyObject) -> Int
+    @objc(objectAtIndex:)
+    func object(at index: Int) -> Any
 }
 #else
 public protocol NMBOrderedCollection : NMBCollection {
-#if !os(Linux)
-    func index(of anObject: AnyObject) -> Int
-#else
-    func indexOfObject(_ object: AnyObject) -> Int
-#endif
+    func object(at index: Int) -> Any
 }
 #endif
 
@@ -79,17 +75,19 @@ public protocol NMBDoubleConvertible {
 
 extension Double : NMBDoubleConvertible {
     public var doubleValue: CDouble {
-        get {
-            return self
-        }
+        return self
     }
 }
 
 extension Float : NMBDoubleConvertible {
     public var doubleValue: CDouble {
-        get {
-            return CDouble(self)
-        }
+        return CDouble(self)
+    }
+}
+
+extension CGFloat: NMBDoubleConvertible {
+    public var doubleValue: CDouble {
+        return CDouble(self)
     }
 }
 
@@ -106,15 +104,25 @@ private let dateFormatter: DateFormatter = {
 
 extension Date: NMBDoubleConvertible {
     public var doubleValue: CDouble {
-        get {
-            return self.timeIntervalSinceReferenceDate
-        }
+        return self.timeIntervalSinceReferenceDate
+    }
+}
+
+extension NSDate: NMBDoubleConvertible {
+    public var doubleValue: CDouble {
+        return self.timeIntervalSinceReferenceDate
     }
 }
 
 extension Date: TestOutputStringConvertible {
     public var testDescription: String {
-        return dateFormatter.string(from: self as Date)
+        return dateFormatter.string(from: self)
+    }
+}
+
+extension NSDate: TestOutputStringConvertible {
+    public var testDescription: String {
+        return dateFormatter.string(from: Date(timeIntervalSinceReferenceDate: self.timeIntervalSinceReferenceDate))
     }
 }
 
@@ -129,7 +137,7 @@ extension Date: TestOutputStringConvertible {
 #else
 // This should become obsolete once Corelibs Foundation adds Comparable conformance to NSNumber
 public protocol NMBComparable {
-    func NMB_compare(_ otherObject: NMBComparable!) -> NSComparisonResult
+    func NMB_compare(_ otherObject: NMBComparable!) -> ComparisonResult
 }
 #endif
 

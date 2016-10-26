@@ -41,10 +41,8 @@ final public class ExampleGroup: NSObject {
 
     internal var name: String? {
         if let parent = parent {
-            switch(parent.name) {
-            case .some(let name): return "\(name), \(description)"
-            case .none: return description
-            }
+            guard let name = parent.name else { return description }
+            return "\(name), \(description)"
         } else {
             return isInternalRootExampleGroup ? nil : description
         }

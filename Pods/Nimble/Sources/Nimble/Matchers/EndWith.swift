@@ -3,7 +3,9 @@ import Foundation
 
 /// A Nimble matcher that succeeds when the actual sequence's last element
 /// is equal to the expected value.
-public func endWith<S: Sequence, T: Equatable where S.Iterator.Element == T>(_ endingElement: T) -> NonNilMatcherFunc<S> {
+public func endWith<S: Sequence, T: Equatable>(_ endingElement: T) -> NonNilMatcherFunc<S>
+    where S.Iterator.Element == T
+{
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
 
@@ -24,15 +26,20 @@ public func endWith<S: Sequence, T: Equatable where S.Iterator.Element == T>(_ e
 
 /// A Nimble matcher that succeeds when the actual collection's last element
 /// is equal to the expected object.
-public func endWith(_ endingElement: AnyObject) -> NonNilMatcherFunc<NMBOrderedCollection> {
+public func endWith(_ endingElement: Any) -> NonNilMatcherFunc<NMBOrderedCollection> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingElement)>"
-        let collection = try actualExpression.evaluate()
-#if !os(Linux)
-        return collection != nil && collection!.index(of: endingElement) == collection!.count - 1
-#else
-        return collection != nil && collection!.indexOfObject(endingElement) == collection!.count - 1
-#endif
+        guard let collection = try actualExpression.evaluate() else { return false }
+        guard collection.count > 0 else { return false }
+        #if os(Linux)
+            guard let collectionValue = collection.object(at: collection.count - 1) as? NSObject else {
+                return false
+            }
+        #else
+            let collectionValue = collection.object(at: collection.count - 1) as AnyObject
+        #endif
+
+        return collectionValue.isEqual(endingElement)
     }
 }
 
@@ -44,8 +51,7 @@ public func endWith(_ endingSubstring: String) -> NonNilMatcherFunc<String> {
     return NonNilMatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "end with <\(endingSubstring)>"
         if let collection = try actualExpression.evaluate() {
-            let range = collection.range(of: endingSubstring)
-            return range != nil && range!.upperBound == collection.endIndex
+            return collection.hasSuffix(endingSubstring)
         }
         return false
     }
@@ -53,7 +59,7 @@ public func endWith(_ endingSubstring: String) -> NonNilMatcherFunc<String> {
 
 #if _runtime(_ObjC)
 extension NMBObjCMatcher {
-    public class func endWithMatcher(_ expected: AnyObject) -> NMBObjCMatcher {
+    public class func endWithMatcher(_ expected: Any) -> NMBObjCMatcher {
         return NMBObjCMatcher(canMatchNil: false) { actualExpression, failureMessage in
             let actual = try! actualExpression.evaluate()
             if let _ = actual as? String {

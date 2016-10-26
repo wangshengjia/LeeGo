@@ -1,4 +1,5 @@
 #if os(OSX) || os(iOS) || os(watchOS) || os(tvOS)
+import Foundation
 
 /**
  Responsible for building a "Selected tests" suite. This corresponds to a single
@@ -50,14 +51,14 @@ internal class QuickSelectedTestSuiteBuilder: QuickTestSuiteBuilder {
 }
 
 /**
- Searches `NSBundle.allBundles()` for an xctest bundle, then looks up the named
+ Searches `Bundle.allBundles()` for an xctest bundle, then looks up the named
  test case class in that bundle.
 
  Returns `nil` if a bundle or test case class cannot be found.
  */
 private func testCaseClassForTestCaseWithName(_ name: String) -> AnyClass? {
     func extractClassName(_ name: String) -> String? {
-        return name.characters.split(separator: "/").first.map(String.init)
+        return name.components(separatedBy: "/").first
     }
 
     guard let className = extractClassName(name) else { return nil }

@@ -1,8 +1,7 @@
 import Foundation
 
 /// Make an expectation on a given actual value. The value given is lazily evaluated.
-
-public func expect<T>( _ expression: @autoclosure(escaping)() throws -> T?, file: FileString = #file, line: UInt = #line) -> Expectation<T> {
+public func expect<T>(_ expression: @autoclosure @escaping () throws -> T?, file: FileString = #file, line: UInt = #line) -> Expectation<T> {
     return Expectation(
         expression: Expression(
             expression: expression,
@@ -11,8 +10,7 @@ public func expect<T>( _ expression: @autoclosure(escaping)() throws -> T?, file
 }
 
 /// Make an expectation on a given actual value. The closure is lazily invoked.
-
-public func expect<T>(_ file: FileString = #file, line: UInt = #line, expression: () throws -> T?) -> Expectation<T> {
+public func expect<T>(_ file: FileString = #file, line: UInt = #line, expression: @escaping () throws -> T?) -> Expectation<T> {
     return Expectation(
         expression: Expression(
             expression: expression,
@@ -42,12 +40,12 @@ internal func nimblePrecondition(
     _ name: @autoclosure() -> String,
     _ message: @autoclosure() -> String,
     file: StaticString = #file,
-    line: UInt = #line) -> Bool {
+    line: UInt = #line) {
         let result = expr()
         if !result {
 #if _runtime(_ObjC)
             let e = NSException(
-                name: NSExceptionName(rawValue: name()),
+                name: NSExceptionName(name()),
                 reason: message(),
                 userInfo: nil)
             e.raise()
@@ -55,11 +53,9 @@ internal func nimblePrecondition(
             preconditionFailure("\(name()) - \(message())", file: file, line: line)
 #endif
         }
-        return result
 }
 
-@noreturn
-internal func internalError(_ msg: String, file: FileString = #file, line: UInt = #line) {
+internal func internalError(_ msg: String, file: FileString = #file, line: UInt = #line) -> Never {
     fatalError(
         "Nimble Bug Found: \(msg) at \(file):\(line).\n" +
         "Please file a bug to Nimble: https://github.com/Quick/Nimble/issues with the " +

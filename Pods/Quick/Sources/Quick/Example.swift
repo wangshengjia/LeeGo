@@ -46,10 +46,8 @@ final public class Example: NSObject {
         to be displayed in Xcode's test navigator.
     */
     public var name: String {
-        switch group!.name {
-        case .some(let groupName): return "\(groupName), \(description)"
-        case .none: return description
-        }
+        guard let groupName = group?.name else { return description }
+        return "\(groupName), \(description)"
     }
 
     /**
