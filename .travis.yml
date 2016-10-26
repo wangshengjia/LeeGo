@@ -28,4 +28,4 @@ before_install:
 
 script:
 - set -o pipefail && xcodebuild clean test -workspace LeeGo.xcworkspace -scheme LeeGo -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6s,OS=latest' -enableCodeCoverage YES -configuration Debug ONLY_ACTIVE_ARCH=YES | xcpretty
-- pod lib lint
+# - pod lib lint
