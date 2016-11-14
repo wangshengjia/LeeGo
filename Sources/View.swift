@@ -98,7 +98,7 @@ extension UIView: BrickDescribable {
     ///  - parameter brick:            A `Brick` instance. The target class of brick should as same as `self.dynamicType`.
     ///  - parameter dataSource:       The data source object which implement the `BrickDataSource` protocol.
     ///  - parameter updatingStrategy: The stragegy which determine what to do when brick changed with the same target view.
-    public func lg_configureAs(_ brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .whenBrickChanged) {
+    public func lg_configure(as brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .whenBrickChanged) {
         if let cell = self as? UICollectionViewCell {
             cell.contentView._configureAs(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else if let cell = self as? UITableViewCell {
@@ -149,7 +149,7 @@ extension UIView {
         for subview in self.subviews {
             if let name = subview.currentBrick?.name, let bricks = brick.bricks {
                 for childBrick in bricks where childBrick.name == name {
-                    subview.lg_configureAs(childBrick, dataSource: dataSource, updatingStrategy: updatingStrategy)
+                    subview.lg_configure(as:childBrick, dataSource: dataSource, updatingStrategy: updatingStrategy)
                 }
             }
         }

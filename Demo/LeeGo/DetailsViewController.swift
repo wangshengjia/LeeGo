@@ -40,7 +40,7 @@ extension DetailsViewController {
             Layout(bricks: [title, description, blocks], axis: .vertical, align: .fill, distribution: .flow(3), metrics: LayoutMetrics(84, 20, 20, 20, 10, 10))
         }
 
-        self.view.lg_configureAs(brick, updatingStrategy: .always)
+        self.view.lg_configure(as: brick, updatingStrategy: .always)
     }
 }
 

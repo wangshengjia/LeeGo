@@ -59,7 +59,7 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: brick.name, for: indexPath)
 
-        cell.lg_configureAs(brick, dataSource: elements[indexPath.item], updatingStrategy: .always)
+        cell.lg_configure(as: brick, dataSource: elements[indexPath.item], updatingStrategy: .always)
 
         return cell
     }

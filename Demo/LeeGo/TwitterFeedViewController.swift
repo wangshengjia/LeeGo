@@ -48,7 +48,7 @@ class TwitterFeedViewController: UICollectionViewController, UICollectionViewDel
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tweetBrick.name, for: indexPath)
 
-        cell.lg_configureAs(tweetBrick, dataSource: elements[indexPath.item])
+        cell.lg_configure(as: tweetBrick, dataSource: elements[indexPath.item])
 
         return cell
     }
