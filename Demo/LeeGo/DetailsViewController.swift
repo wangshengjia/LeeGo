@@ -44,22 +44,23 @@ extension DetailsViewController {
     }
 }
 
-extension UIView {
-    open func lg_setupCustomStyle(_ style: [String: AnyObject]) {
-        if let view = self as? UIImageView,
-            let color = style["shadowColor"] as? UIColor,
-            let opacity = style["shadowOpacity"] as? Float {
-            view.layer.shadowColor = color.cgColor
-            view.layer.shadowOpacity = opacity
-        }
-    }
-
-    open func lg_removeCustomStyle(_ style: [String: AnyObject]) {
+extension UIView: CustomStyleConfigurable {
+    public func lg_unapply(customStyle style: [String : Any]) {
         if let view = self as? UIImageView,
             let _ = style["shadowColor"] as? UIColor,
             let _ = style["shadowOpacity"] as? Float {
             view.layer.shadowColor = UIColor.black.cgColor
             view.layer.shadowOpacity = 0.0
+        }
+    }
+
+    public func lg_apply(customStyle style: [String : Any]) {
+        if let view = self as? UIImageView,
+            let color = style["shadowColor"] as? UIColor,
+            let opacity = style["shadowOpacity"] as? Float {
+            view.layer.shadowColor = color.cgColor
+            view.layer.shadowOpacity = opacity
+            view.alpha = 0.5
         }
     }
 }

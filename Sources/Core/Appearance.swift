@@ -361,7 +361,11 @@ extension Appearance {
 
         // Custom
         case (let .custom(dictionary), _):
-            !useDefaultValue ? targetView.lg_setupCustomStyle(dictionary) : targetView.lg_removeCustomStyle(dictionary)
+            if let targetView = targetView as? CustomStyleConfigurable {
+                !useDefaultValue ? targetView.lg_apply(customStyle: dictionary) : targetView.lg_unapply(customStyle: dictionary)
+            } else {
+                assertionFailure("Unknown style \(dictionary), should implement `CustomStyleConfigurable:` to the view")
+            }
 
         default:
             warningUnknownAppearance(targetView)

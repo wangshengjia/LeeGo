@@ -67,16 +67,18 @@ extension Tweet: BrickDataSource {
     }
 }
 
+
 extension UIButton {
-    open override func lg_setupCustomStyle(_ style: [String: AnyObject]) {
+    public override func lg_unapply(customStyle style: [String : Any]) {
         if let font = style["buttonTitleFont"] as? UIFont {
             self.titleLabel?.font = font
         }
     }
 
-    open override func lg_removeCustomStyle(_ style: [String: AnyObject]) {
+    public override func lg_apply(customStyle style: [String : Any]) {
         if let _ = style["buttonTitleFont"] as? UIFont {
             self.titleLabel?.font = nil
         }
     }
 }
+

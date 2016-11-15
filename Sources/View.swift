@@ -31,6 +31,11 @@ public protocol BrickDataSource {
     func update(_ targetView: UIView, with brick: Brick)
 }
 
+public protocol CustomStyleConfigurable {
+    func lg_apply(customStyle style: [String: Any])
+    func lg_unapply(customStyle style: [String: Any])
+}
+
 ///  Specific a strategy to determine what to do
 ///  when configure the same target view with changed/different bricks.
 ///  You could specify this strategy when configure a target view as a given brick. Ex:
@@ -51,24 +56,6 @@ extension UIView: BrickDescribable {
     ///  You can override this method. You should call `super` implementation when override.
     public func lg_brickDidAwake() {
         self.translatesAutoresizingMaskIntoConstraints = false
-    }
-
-    ///  A delegate method used to setup a custom style to a target view.
-    ///
-    ///  - Note: You should always override and implement this method if you have a custom style
-    ///
-    ///  - parameter style: custom style specified in Appearance.custom
-    open func lg_setupCustomStyle(_ style: [String: AnyObject]) {
-        assertionFailure("Unknown style \(style), should implement `lg_setupCustomStyle:` in extension of UIView or its subclass.")
-    }
-
-    ///  A delegate method used to remove a custom style from a target view.
-    ///
-    ///  - Note: You should always override and implement this method if you have a custom style
-    ///
-    ///  - parameter style: custom style specified in Appearance.custom
-    open func lg_removeCustomStyle(_ style: [String: AnyObject]) {
-        assertionFailure("Unknown style \(style), should implement `lg_removeCustomStyle:` in extension of UIView or its subclass.")
     }
 
     ///  This method will go through the whole view hierarchy and 
