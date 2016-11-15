@@ -82,7 +82,7 @@ class ConvenienceSpec: QuickSpec {
                 expect(NSDictionary(dictionary: (label.attributedText?.attributes(at: 0, effectiveRange: &range))!)) == attributes[1] as NSDictionary
                 for (attrKey, attrValue) in attributes[1] {
                     let containsAttr = NSDictionary(dictionary: (textField.attributedText?.attributes(at: 0, effectiveRange: &range))!).contains(where: { (key, value) -> Bool in
-                        return attrKey == key as! String && attrValue.isEqual(value)
+                        return attrKey == key as! String && (attrValue as AnyObject).isEqual(value)
                     })
                     expect(containsAttr) == true
                 }

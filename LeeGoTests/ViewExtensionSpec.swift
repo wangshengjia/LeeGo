@@ -22,7 +22,7 @@ class ViewExtensionSpec: QuickSpec {
                 expect(view.currentBrick).to(beNil())
 
                 // When
-                view.lg_configureAs(Brick(name: "article"))
+                view.lg_configure(as: Brick(name: "article"))
 
                 // Then
                 expect(view.currentBrick) != nil
@@ -35,7 +35,7 @@ class ViewExtensionSpec: QuickSpec {
                 let view = UIView()
 
                 // When
-                view.lg_configureAs(TestData.header1)
+                view.lg_configure(as: TestData.header1)
 
                 // Then
                 expect(view.currentBrick) != nil
@@ -56,11 +56,11 @@ class ViewExtensionSpec: QuickSpec {
             it("should re-configure a brick correctly with .WhenBrickChanged strategy -> brick changed") {
                 // Given
                 let cell = UITableViewCell()
-                cell.lg_configureAs(TestData.header1)
-                cell.lg_configureAs(TestData.header2, updatingStrategy: .always)
+                cell.lg_configure(as: TestData.header1)
+                cell.lg_configure(as: TestData.header2, updatingStrategy: .always)
 
                 // When
-                cell.lg_configureAs(TestData.header3)
+                cell.lg_configure(as: TestData.header3)
 
                 // Then
                 expect(cell.contentView.currentBrick) != nil
@@ -80,13 +80,13 @@ class ViewExtensionSpec: QuickSpec {
 
                 // Given
                 let view = UIView()
-                view.lg_configureAs(TestData.header1)
-                view.lg_configureAs(TestData.header2, updatingStrategy: .always)
-                view.lg_configureAs(TestData.header1)
+                view.lg_configure(as: TestData.header1)
+                view.lg_configure(as: TestData.header2, updatingStrategy: .always)
+                view.lg_configure(as: TestData.header1)
 
                 // When
                 let emptyHeader = BrickBuilder.header.build()
-                view.lg_configureAs(emptyHeader)
+                view.lg_configure(as: emptyHeader)
 
                 // Then
                 expect(view.currentBrick) != nil
@@ -106,10 +106,10 @@ class ViewExtensionSpec: QuickSpec {
             it("should re-configure a brick correctly with .Always strategy.") {
                 // Given
                 let cell = UICollectionViewCell()
-                cell.lg_configureAs(TestData.header1)
+                cell.lg_configure(as: TestData.header1)
 
                 // When
-                cell.lg_configureAs(TestData.header2, updatingStrategy: .always)
+                cell.lg_configure(as: TestData.header2, updatingStrategy: .always)
 
                 // Then
                 expect(cell.contentView.currentBrick) != nil
@@ -131,7 +131,7 @@ class ViewExtensionSpec: QuickSpec {
             it("cell should have dynamic fitting height correctly") {
                 // Given
                 let cell = UICollectionViewCell()
-                cell.lg_configureAs(TestData.header1)
+                cell.lg_configure(as: TestData.header1)
 
                 // When
                 let attributes = cell.lg_fittingHeightLayoutAttributes(UICollectionViewLayoutAttributes())
@@ -143,7 +143,7 @@ class ViewExtensionSpec: QuickSpec {
             it("cell should have dynamic fitting height correctly") {
                 // Given
                 let cell = UICollectionViewCell(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-                cell.lg_configureAs(TestData.header2)
+                cell.lg_configure(as: TestData.header2)
 
                 // When
                 let attributes = cell.preferredLayoutAttributesFitting(UICollectionViewLayoutAttributes())
@@ -155,7 +155,7 @@ class ViewExtensionSpec: QuickSpec {
             it("should find view with outlet key correctly.") {
                 // Given
                 let cell = UICollectionViewCell(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-                cell.lg_configureAs(BrickBuilder.detailsView.brick())
+                cell.lg_configure(as: BrickBuilder.detailsView.brick())
 
                 // When
                 let view = cell.lg_viewForOutletKey("favoriteButton")
