@@ -100,11 +100,11 @@ extension UIView: BrickDescribable {
     ///  - parameter updatingStrategy: The stragegy which determine what to do when brick changed with the same target view.
     public func lg_configure(as brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .whenBrickChanged) {
         if let cell = self as? UICollectionViewCell {
-            cell.contentView._configureAs(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            cell.contentView._configure(as: brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else if let cell = self as? UITableViewCell {
-            cell.contentView._configureAs(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            cell.contentView._configure(as: brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         } else {
-            _configureAs(brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
+            _configure(as: brick, dataSource: dataSource, updatingStrategy: updatingStrategy)
         }
     }
 }
@@ -134,7 +134,7 @@ extension UIView {
         }
     }
 
-    fileprivate func _configureAs(_ brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .whenBrickChanged) {
+    fileprivate func _configure(as brick: Brick, dataSource: BrickDataSource? = nil, updatingStrategy: UpdatingStrategy = .whenBrickChanged) {
 
         guard type(of: self).isSubclass(of: brick.targetClass) else {
             assertionFailure("Brick type: \(type(of: self)) is not compatible with configuration type: \(brick.targetClass)")
