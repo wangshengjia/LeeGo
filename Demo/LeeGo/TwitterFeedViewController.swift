@@ -29,9 +29,9 @@ class TwitterFeedViewController: UICollectionViewController, UICollectionViewDel
 
         if let path = Bundle.main.path(forResource: "twitter_sample", ofType: "json"),
             let data = NSData(contentsOfFile: path),
-            let optionalValue = try? JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? Dictionary<String, AnyObject>,
+            let optionalValue = try? JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? Dictionary<String, Any>,
             let value = optionalValue,
-            let elementDictionaries = value["statuses"] as? [[String: AnyObject]], elements.isEmpty {
+            let elementDictionaries = value["statuses"] as? [[String: Any]], elements.isEmpty {
                 elements = Tweet.tweets(jsonArray: elementDictionaries)
         }
     }

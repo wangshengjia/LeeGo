@@ -18,8 +18,8 @@ protocol JSONConvertible {
     init(rawValue: Serializable) throws
 }
 
-public typealias JSONObject = AnyObject
-public typealias JSONDictionary = [String: AnyObject]
+public typealias JSONObject = Any
+public typealias JSONDictionary = [String: Any]
 
 protocol JSONKeyType {
     var asString: String { get }
@@ -651,7 +651,7 @@ extension URL {
     }
 
     func lg_encode() -> JSONDictionary {
-        return [JSONKey.url.asString: self.absoluteString as AnyObject]
+        return [JSONKey.url.asString: self.absoluteString]
     }
 }
 
@@ -672,7 +672,7 @@ extension UIFont {
     }
 
     func lg_encode() -> JSONDictionary {
-        return [JSONKey.name.asString: self.fontName as AnyObject, JSONKey.size.asString: self.pointSize as AnyObject]
+        return [JSONKey.name.asString: self.fontName, JSONKey.size.asString: self.pointSize]
     }
 }
 
@@ -731,7 +731,7 @@ extension UIImage {
 
     func lg_encode() -> JSONDictionary? {
         if let data = UIImagePNGRepresentation(self) {
-            return [JSONKey.data.asString: data.base64EncodedString(options: .lineLength64Characters) as AnyObject]
+            return [JSONKey.data.asString: data.base64EncodedString(options: .lineLength64Characters)]
         }
 
         return nil
