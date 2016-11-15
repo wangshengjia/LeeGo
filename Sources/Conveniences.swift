@@ -154,9 +154,9 @@ extension UIView {
                 return acc
             }
 
-          let str = acc.mutableCopy()
-            (str as AnyObject).append(cur)
-            return str as! NSAttributedString
+            let str = acc.mutableCopy() as? NSMutableAttributedString
+            str?.append(cur)
+            return str?.copy() as! NSAttributedString
         })
     }
 }

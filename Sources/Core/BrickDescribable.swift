@@ -11,7 +11,7 @@ import Foundation
 protocol BrickDescribable: class, Configurable, Composable {
 
     func lg_brickDidAwake()
-    func lg_configureAs(_ brick: Brick, dataSource: BrickDataSource?, updatingStrategy: UpdatingStrategy)
+    func lg_configure(as brick: Brick, dataSource: BrickDataSource?, updatingStrategy: UpdatingStrategy)
     
 }
 

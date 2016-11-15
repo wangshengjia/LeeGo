@@ -23,11 +23,12 @@ class DetailsViewController: UIViewController {
 extension DetailsViewController {
     
     fileprivate func setup() {
+
         let title = "title".build(UILabel.self).style([.numberOfLines(0), .text("Lorem Ipsum is simply dummy text of the printing industry")])
         let description = "description".build(UILabel.self).style([.textColor(UIColor.lightGray), .numberOfLines(0), .font(UIFont.systemFont(ofSize: 14)), .text("Lorem Ipsum has been the industry's standard dummy text ever since the 1500s")])
         let redBlock = "red".build().style(Style.redBlockStyle)
         let greenBlock = "green".build().style(Style.greenBlockStyle)
-        let blueBlock = "blue".build(UIImageView.self).style(Style.blueBlockStyle + [Appearance.custom(["shadowColor": UIColor.brown, "shadowOpacity": 1.0 as AnyObject])])
+        let blueBlock = "blue".build(UIImageView.self).style(Style.blueBlockStyle + [Appearance.custom(["shadowColor": UIColor.brown, "shadowOpacity": Float(1.0)])])
 
         let blocks = Brick.union("blocks", bricks: [
             redBlock.height(50),
@@ -40,26 +41,26 @@ extension DetailsViewController {
             Layout(bricks: [title, description, blocks], axis: .vertical, align: .fill, distribution: .flow(3), metrics: LayoutMetrics(84, 20, 20, 20, 10, 10))
         }
 
-        self.view.lg_configureAs(brick, updatingStrategy: .always)
+        self.view.lg_configure(as: brick, updatingStrategy: .always)
     }
 }
 
-extension UIView {
-    open func lg_setupCustomStyle(_ style: [String: AnyObject]) {
-        if let view = self as? UIImageView,
-            let color = style["shadowColor"] as? UIColor,
-            let opacity = style["shadowOpacity"] as? Float {
-            view.layer.shadowColor = color.cgColor
-            view.layer.shadowOpacity = opacity
-        }
-    }
-
-    open func lg_removeCustomStyle(_ style: [String: AnyObject]) {
+extension UIView: CustomStyleConfigurable {
+    public func lg_unapply(customStyle style: [String : Any]) {
         if let view = self as? UIImageView,
             let _ = style["shadowColor"] as? UIColor,
             let _ = style["shadowOpacity"] as? Float {
             view.layer.shadowColor = UIColor.black.cgColor
             view.layer.shadowOpacity = 0.0
+        }
+    }
+
+    public func lg_apply(customStyle style: [String : Any]) {
+        if let view = self as? UIImageView,
+            let color = style["shadowColor"] as? UIColor,
+            let opacity = style["shadowOpacity"] as? Float {
+            view.layer.shadowColor = color.cgColor
+            view.layer.shadowOpacity = opacity
         }
     }
 }

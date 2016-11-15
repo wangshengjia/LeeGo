@@ -89,31 +89,32 @@ keyboardDismissMode |  |  |  |  |  |  |  | x
 
 ## Use custom appearance
 
-You can also implement your self the custom appearance by overriding and implementing `UIView.lg_setupCustomStyle` & `UIView.lg_removeCustomStyle`.
+You can also implement your self the custom appearance by implementing `CustomStyleConfigurable` protocol. This protocol allow you to handle custom appearance yourself. Basicly you should tell the sdk how to apply the appearances by implementing functions `lg_apply` & `lg_unapply`.
 
 ```swift
 let blueBlock = "blue".build(UIImageView).style([.custom(["shadowColor": UIColor.brownColor(), "shadowOpacity": 1.0])])
 
-extension UIView {
-    public func lg_setupCustomStyle(style: [String: AnyObject]) {
+extension UIView: CustomStyleConfigurable {
+    public func lg_unapply(customStyle style: [String : Any]) {
         if let view = self as? UIImageView,
-            let color = style["shadowColor"] as? UIColor,
-            let opacity = style["shadowOpacity"] as? Float {
-            view.layer.shadowColor = color.CGColor
-            view.layer.shadowOpacity = opacity
+        let _ = style["shadowColor"] as? UIColor,
+        let _ = style["shadowOpacity"] as? Float {
+            view.layer.shadowColor = UIColor.black.cgColor
+            view.layer.shadowOpacity = 0.0
         }
     }
 
-    public func lg_removeCustomStyle(style: [String: AnyObject]) {
+    public func lg_apply(customStyle style: [String : Any]) {
         if let view = self as? UIImageView,
-            let _ = style["shadowColor"] as? UIColor,
-            let _ = style["shadowOpacity"] as? Float {
-            view.layer.shadowColor = UIColor.blackColor().CGColor
-            view.layer.shadowOpacity = 0.0
+        let color = style["shadowColor"] as? UIColor,
+        let opacity = style["shadowOpacity"] as? Float {
+            view.layer.shadowColor = color.cgColor
+            view.layer.shadowOpacity = opacity
         }
     }
 }
 
 ```
 
-Warning: should be careful to implement these two methods as a pair, if you tell the framework how to apply a custom style, you need also to tell how to unapply this custom style. Otherwise you may have some unexpected effects.
+*Warning:* should be careful to implement these two methods as a pair, if you tell the framework how to apply a custom style, you need also to tell how to unapply this custom style. Otherwise you may have some unexpected effects.
+

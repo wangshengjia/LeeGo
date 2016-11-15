@@ -13,7 +13,7 @@ struct Tweet {
     let id: String
     let favorited: Bool
     let truncated: Bool
-    let hashTags: [[String: AnyObject]]
+    let hashTags: [[String: Any]]
     let text: String
     let retweetCount: Int
     let favouritesCount: Int
@@ -22,23 +22,26 @@ struct Tweet {
     let screenName: String
     let avatarUrl: NSURL?
 
-    init(json: [String: AnyObject]) {
+    init(json: [String: Any]) {
         id = json["id_str"] as? String ?? ""
         favorited = json["favorited"] as? Bool ?? false
         truncated = json["truncated"] as? Bool ?? false
-        hashTags = json["hashtags"] as? [[String: AnyObject]] ?? []
+        hashTags = json["hashtags"] as? [[String: Any]] ?? []
         text = json["text"] as? String ?? ""
         retweetCount = json["retweet_count"] as? Int ?? 0
-        favouritesCount = json["user"]!["favourites_count"] as? Int ?? 0
+
+        let user = json["user"] as? [String : Any]
+        
+        favouritesCount = user?["favourites_count"] as? Int ?? 0
         createdAt = NSDate()
-        userName = json["user"]!["name"] as? String ?? ""
-        screenName = json["user"]!["screen_name"] as? String ?? ""
+        userName = user?["name"] as? String ?? ""
+        screenName = user?["screen_name"] as? String ?? ""
         avatarUrl = NSURL(string: (json["profile_image_url_https"] as? String) ?? "")
     }
 }
 
 extension Tweet {
-    static func tweets(jsonArray: [[String: AnyObject]]) -> [Tweet] {
+    static func tweets(jsonArray: [[String: Any]]) -> [Tweet] {
         return jsonArray.map({ (json) -> Tweet in
             return Tweet(json: json)
         })
@@ -67,16 +70,18 @@ extension Tweet: BrickDataSource {
     }
 }
 
+
 extension UIButton {
-    open override func lg_setupCustomStyle(_ style: [String: AnyObject]) {
+    public override func lg_unapply(customStyle style: [String : Any]) {
         if let font = style["buttonTitleFont"] as? UIFont {
             self.titleLabel?.font = font
         }
     }
 
-    open override func lg_removeCustomStyle(_ style: [String: AnyObject]) {
+    public override func lg_apply(customStyle style: [String : Any]) {
         if let _ = style["buttonTitleFont"] as? UIFont {
             self.titleLabel?.font = nil
         }
     }
 }
+

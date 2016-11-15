@@ -30,11 +30,11 @@ extension BrickBuilderType {
     ///
     ///     let brick = build(UILabel)
     ///
-    public func build(_ type: AnyObject? = nil) -> Brick {
-        guard type != nil else {
+    public func build(_ type: AnyClass? = nil) -> Brick {
+        guard let type = type else {
             return target()
         }
-        return Brick(name: self.brickName, targetClass: type.self as! AnyClass)
+        return Brick(name: self.brickName, targetClass: type)
     }
 
     /// Create a `Brick` instance with the specific class type and the 
@@ -42,13 +42,13 @@ extension BrickBuilderType {
     ///
     ///     let brick = buildFromNib(CustomLabel, nibName: "CustomLabel")
     ///
-    public func buildFromNib(_ type: AnyObject? = nil, nibName: String) -> Brick {
+    public func buildFromNib(_ type: AnyClass? = nil, nibName: String) -> Brick {
         guard nibName != "" else {
             assertionFailure("Failed to build brick with an empty nibName")
             return target()
         }
 
-        return Brick(name: self.brickName, targetClass: (type.self ?? UIView.self) as! AnyClass, nibName: nibName)
+        return Brick(name: self.brickName, targetClass: (type ?? UIView.self), nibName: nibName)
     }
 
     /// By default, it return `String(self)`.
@@ -376,7 +376,7 @@ extension Brick: JSONConvertible {
 
     ///  Initilaze a `Brick` instance from JSONDictionary.
     ///
-    ///  - parameter json: a [String: AnyObject] instance. [Here is a sample]()
+    ///  - parameter json: a [String: Any] instance. [Here is a sample]()
     ///
     ///  - throws: it's possible to throw errors, such as Errors.JSONParseError & Errors.JSONConvertibleError
     ///
@@ -423,26 +423,26 @@ extension Brick: JSONConvertible {
     ///  - returns: a `JSONDictionary` instance encoded from `self`
     public func encode() -> JSONDictionary {
       
-        var json: JSONDictionary = [JSONKey.name.asString: self.name as AnyObject, JSONKey.targetClass.asString: String(describing: self.targetClass) as AnyObject]
+        var json: JSONDictionary = [JSONKey.name.asString: self.name, JSONKey.targetClass.asString: String(describing: self.targetClass)]
 
         if let nibName = self.nibName {
-            json[JSONKey.nibName.asString] = nibName as AnyObject
+            json[JSONKey.nibName.asString] = nibName
         }
 
         if let width = self.width {
-            json[JSONKey.width.asString] = width as AnyObject
+            json[JSONKey.width.asString] = width
         }
 
         if let height = self.height {
-            json[JSONKey.height.asString] = height as AnyObject
+            json[JSONKey.height.asString] = height
         }
 
         if let layout = self.layout {
-            json[JSONKey.layout.asString] = layout.encode() as AnyObject
+            json[JSONKey.layout.asString] = layout.encode()
         }
 
         if let style = self.style, !style.isEmpty {
-            json[JSONKey.style.asString] = Appearance.JSONWithAppearances(style) as AnyObject
+            json[JSONKey.style.asString] = Appearance.JSONWithAppearances(style)
         }
 
         if let bricks = self.bricks {
@@ -451,12 +451,12 @@ extension Brick: JSONConvertible {
             })
 
             if !bricksJson.isEmpty {
-                json[JSONKey.bricks.asString] = bricksJson as AnyObject
+                json[JSONKey.bricks.asString] = bricksJson
             }
         }
 
         if let outlet = self.LGOutletKey {
-            json[JSONKey.outlet.asString] = outlet as AnyObject
+            json[JSONKey.outlet.asString] = outlet
         }
 
         return json

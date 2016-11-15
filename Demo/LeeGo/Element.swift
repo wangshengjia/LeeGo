@@ -18,7 +18,7 @@ class Element {
     let isRestrict: Bool
     let type: String?
 
-    init?(dictionary: [String: AnyObject]) {
+    init?(dictionary: [String: Any]) {
         self.elementId = dictionary["id"] as? Int
         self.title = dictionary["titre"] as? String
         self.natureEdito = dictionary["nature_edito"] as? String
@@ -35,7 +35,7 @@ class Element {
 
 extension Element {
 
-    static func elementsFromDictionaries(dictionaries: [[String: AnyObject]]) -> [Element] {
+    static func elementsFromDictionaries(dictionaries: [[String: Any]]) -> [Element] {
         return dictionaries.flatMap({ (dictionary) -> Element? in
             return Element(dictionary: dictionary)
         })

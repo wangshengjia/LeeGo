@@ -214,7 +214,7 @@ extension LeMonde: BrickConvertible {
             return build().style([
                 .attributedText([
                     [NSFontAttributeName: UIFont(name: "LmfrAppIcon", size: 16)!, NSForegroundColorAttributeName: UIColor.red],
-                    [kCustomAttributeDefaultText: "Test" as AnyObject, NSFontAttributeName: UIFont(name: "TheAntiquaB-W7Bold", size: 20)!, NSForegroundColorAttributeName: UIColor.darkText],
+                    [kCustomAttributeDefaultText: "Test", NSFontAttributeName: UIFont(name: "TheAntiquaB-W7Bold", size: 20)!, NSForegroundColorAttributeName: UIColor.darkText],
                     [NSFontAttributeName: UIFont(name: "FetteEngschrift", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGray]
                     ]),
                 .numberOfLines(0)

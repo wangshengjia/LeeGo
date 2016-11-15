@@ -28,9 +28,9 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
             let URLRequest =  NSURLRequest(url: NSURL(string: "http://api-cdn.lemonde.fr/ws/6/mobile/www/ios-phone/en_continu/index.json")! as URL)
             let task = URLSession.shared.dataTask(with: URLRequest as URLRequest) {data, response, error in
                 if let data = data,
-                    let optionalValue = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? Dictionary<String, AnyObject>,
+                    let optionalValue = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as? Dictionary<String, Any>,
                     let value = optionalValue,
-                    let elementDictionaries = value["elements"] as? Array<Dictionary<String, AnyObject>> {
+                    let elementDictionaries = value["elements"] as? Array<Dictionary<String, Any>> {
                         self.elements = ElementViewModel.elementViewModelsWithElements(elements: Element.elementsFromDictionaries(dictionaries: elementDictionaries))
                         DispatchQueue.main.async(execute: { () -> Void in
                             self.collectionView.reloadData()
@@ -59,7 +59,7 @@ class LeMondeNewsFeedViewController: UIViewController, UICollectionViewDelegateF
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: brick.name, for: indexPath)
 
-        cell.lg_configureAs(brick, dataSource: elements[indexPath.item], updatingStrategy: .always)
+        cell.lg_configure(as: brick, dataSource: elements[indexPath.item], updatingStrategy: .always)
 
         return cell
     }

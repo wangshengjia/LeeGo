@@ -10,9 +10,6 @@ import Foundation
 
 protocol Configurable {
     func setup<View: UIView>(_ view: View, currentStyle: [Appearance], newStyle: [Appearance])
-
-    func lg_setupCustomStyle(_ style: [String: AnyObject])
-    func lg_removeCustomStyle(_ style: [String: AnyObject])
 }
 
 
