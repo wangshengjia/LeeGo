@@ -16,7 +16,7 @@
 
 <a href="http://developer.apple.com"><img src="https://img.shields.io/badge/Platform-iOS-lightgray.svg?style=flat"></a>
 
-<a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat"></a>
+<a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat"></a>
 
 <a href="https://tldrlegal.com/license/mit-license"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat" /></a>
 
@@ -71,7 +71,7 @@ Cons:
 - Still requires the basic knowledge of standard auto layout and [Visual Format Language](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html).
 
 ## Full Documentation
-- [Full Documentation](http://cocoadocs.org/docsets/LeeGo/0.4.1/)
+- [Full Documentation](http://cocoadocs.org/docsets/LeeGo/0.5.3/)
 - [Native UI powered by server side](Docs/Remote.md)
 - [Configurable appearance](Docs/Appearance.md)
 - [Built-in convenience methods for layout](Docs/Layout.md)
