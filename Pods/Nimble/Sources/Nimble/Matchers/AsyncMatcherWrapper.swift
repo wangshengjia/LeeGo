@@ -1,7 +1,7 @@
 import Foundation
 
-#if _runtime(_ObjC)
-
+/// If you are running on a slower machine, it could be useful to increase the default timeout value
+/// or slow down poll interval. Default timeout interval is 1, and poll interval is 0.01.
 public struct AsyncDefaults {
     public static var Timeout: TimeInterval = 1
     public static var PollInterval: TimeInterval = 0.01
@@ -144,5 +144,3 @@ extension Expectation {
         return toEventuallyNot(matcher, timeout: timeout, pollInterval: pollInterval, description: description)
     }
 }
-
-#endif

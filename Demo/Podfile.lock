@@ -1,16 +1,16 @@
 PODS:
-  - LeeGo (0.5.2)
+  - LeeGo (0.6.0)
 
 DEPENDENCIES:
   - LeeGo (from `../`)
 
 EXTERNAL SOURCES:
   LeeGo:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  LeeGo: a00c03c051dd49a35f7cedac9fa8b0a6e01875b7
+  LeeGo: 9ea1d9ac954c30c4578ea53674e588e518be8c6d
 
 PODFILE CHECKSUM: 8812de270f13f162bc5149ba7eaf8ae9747bba3a
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1

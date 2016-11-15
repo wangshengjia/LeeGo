@@ -1,3 +1,4 @@
+import Dispatch
 import Foundation
 
 /// "Global" state of Nimble is stored here. Only DSL functions should access / be aware of this
@@ -25,7 +26,7 @@ internal class NimbleEnvironment {
         set { NimbleAssertionHandler = newValue }
     }
 
-#if _runtime(_ObjC)
+    var suppressTVOSAssertionWarning: Bool = false
     var awaiter: Awaiter
 
     init() {
@@ -41,5 +42,4 @@ internal class NimbleEnvironment {
             asyncQueue: .main,
             timeoutQueue: timeoutQueue)
     }
-#endif
 }
