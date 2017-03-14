@@ -60,6 +60,8 @@ extension Composable {
             }
         }
 
+        viewsDictionary["superview"] = targetView
+        
         // Remove constraint with identifier (which means not created by system)
         targetView.removeConstraints(targetView.constraints.filter({ (constraint) -> Bool in
             if constraint.mode == .subviewsLayout {
