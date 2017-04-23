@@ -422,13 +422,7 @@ extension Appearance: JSONConvertible {
     }
 
     internal static func appearancesWithJSON(_ json: JSONDictionary) -> [Appearance] {
-        return json.map({
-            (key, value) -> JSONDictionary in
-            return [key: value]
-        }).map({
-            json -> Appearance in
-            return Appearance(rawValue: json)
-        })
+        return json.lazy.map({ [$0.key: $0.value] }).map({ Appearance(rawValue: $0) })
     }
 
     internal init(rawValue json: JSONDictionary?) {
@@ -646,7 +640,7 @@ extension Appearance: JSONConvertible {
             self = .keyboardDismissMode(UIScrollViewKeyboardDismissMode(rawValue: value))
 
         default:
-            assertionFailure("Can't decode json \(json) to Appearance")
+            assertionFailure("Can't decode json \(String(describing: json)) to Appearance")
         }
     }
 
