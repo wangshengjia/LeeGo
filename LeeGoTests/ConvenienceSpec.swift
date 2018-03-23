@@ -55,9 +55,9 @@ class ConvenienceSpec: QuickSpec {
             }
 
             let attributes: [Attributes] = [
-                [NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.red],
-                [kCustomAttributeDefaultText: "Test" as AnyObject, NSFontAttributeName: UIFont(name: "Avenir", size: 20)!, NSForegroundColorAttributeName: UIColor.darkText],
-                [NSFontAttributeName: UIFont(name: "Avenir", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGray]
+                [NSAttributedStringKey.font.rawValue: UIFont(name: "Helvetica", size: 16)!, NSAttributedStringKey.foregroundColor.rawValue: UIColor.red],
+                [kCustomAttributeDefaultText: "Test" as AnyObject, NSAttributedStringKey.font.rawValue: UIFont(name: "Avenir", size: 20)!, NSAttributedStringKey.foregroundColor.rawValue: UIColor.darkText],
+                [NSAttributedStringKey.font.rawValue: UIFont(name: "Avenir", size: 16)!, NSAttributedStringKey.foregroundColor.rawValue: UIColor.lightGray]
             ]
 
             it("should set attributed string correctly") {

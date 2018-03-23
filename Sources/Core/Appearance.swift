@@ -309,7 +309,7 @@ extension Appearance {
             if !useDefaultValue {
                 let constraint = NSLayoutConstraint(item: image, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: image, attribute: NSLayoutAttribute.height, multiplier: ratioValue, constant: 0)
                 constraint.lg_setIdentifier(with: .ratio)
-                constraint.priority = 990
+                constraint.priority = UILayoutPriority(rawValue: 990)
                 image.addConstraint(constraint)
             }
 
@@ -856,7 +856,7 @@ extension Appearance {
         var attributesEncoded: Attributes = [:]
 
         for value in attributes.enumerated() {
-            if let font = value.element.1 as? UIFont, value.element.0 == NSFontAttributeName {
+            if let font = value.element.1 as? UIFont, value.element.0 == NSAttributedStringKey.font.rawValue {
                 attributesEncoded.updateValue(font.lg_encode(), forKey: value.element.0)
             } else if let color = value.element.1 as? UIColor {
                 attributesEncoded.updateValue(color.lg_encode(), forKey: value.element.0)
@@ -873,12 +873,12 @@ extension Appearance {
         var attributesDecoded: Attributes = [:]
 
         for value in attributes.enumerated() {
-            if let json = value.element.1 as? JSONDictionary, value.element.0 == NSFontAttributeName,
+            if let json = value.element.1 as? JSONDictionary, value.element.0 == NSAttributedStringKey.font.rawValue,
                 let font = UIFont(json: json) {
                 attributesDecoded.updateValue(font, forKey: value.element.0)
-            } else if let hexString = value.element.1 as? String, value.element.0 == NSForegroundColorAttributeName || value.element.0 == NSBackgroundColorAttributeName {
+            } else if let hexString = value.element.1 as? String, value.element.0 == NSAttributedStringKey.foregroundColor.rawValue || value.element.0 == NSAttributedStringKey.backgroundColor.rawValue {
                 attributesDecoded.updateValue(UIColor(rawValue: hexString), forKey: value.element.0)
-            } else if let urlPath = value.element.1 as? String, value.element.0 == NSLinkAttributeName, let url = URL(string: urlPath) {
+            } else if let urlPath = value.element.1 as? String, value.element.0 == NSAttributedStringKey.link.rawValue, let url = URL(string: urlPath) {
                 attributesDecoded.updateValue(url, forKey: value.element.0)
             }
         }

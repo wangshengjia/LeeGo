@@ -140,15 +140,15 @@ class AppearanceSpec: QuickSpec {
                 expect(label.shadowOffset) == CGSize(width: 1.0, height: 3.0)
                 expect(label.highlightedTextColor) == UIColor.clear
 
-                Appearance.attributedText([[NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]]).apply(to: label)
-                expect(label.attributedText) == NSAttributedString(string: "", attributes: [NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!])
+                Appearance.attributedText([[NSAttributedStringKey.font.rawValue: UIFont(name: "Helvetica", size: 12)!]]).apply(to: label)
+                expect(label.attributedText) == NSAttributedString(string: "", attributes: [NSAttributedStringKey.font: UIFont(name: "Helvetica", size: 12)!])
 
                 // When
                 for appearance in appearances {
                     appearance.apply(to: label, useDefaultValue: true)
                 }
 
-                Appearance.attributedText([[NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]]).apply(to: label, useDefaultValue: true)
+                Appearance.attributedText([[NSAttributedStringKey.font.rawValue: UIFont(name: "Helvetica", size: 12)!]]).apply(to: label, useDefaultValue: true)
 
                 // Then
                 expect(label.isEnabled) == true
@@ -172,7 +172,7 @@ class AppearanceSpec: QuickSpec {
             it("should apply appearance correctly to given UITextField") {
                 // Given
                 let image = UIImage(named: "twitter_favorite", in: Bundle(for: type(of: self)), compatibleWith: nil)!
-                let attributes:[Attributes] = [[NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]]
+                let attributes:[Attributes] = [[NSAttributedStringKey.font.rawValue: UIFont(name: "Helvetica", size: 12)!]]
                 let textField = UITextField()
 
                 let appearances: [Appearance] = [
@@ -215,7 +215,7 @@ class AppearanceSpec: QuickSpec {
                 XCTAssert(textField.clearButtonMode == .always)
 
                 Appearance.attributedText(attributes).apply(to: textField)
-                expect(textField.attributedText) == NSAttributedString(string: "", attributes: [NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!])
+                expect(textField.attributedText) == NSAttributedString(string: "", attributes: [NSAttributedStringKey.font: UIFont(name: "Helvetica", size: 12)!])
 
                 // When
                 for appearance in appearances {
@@ -245,7 +245,7 @@ class AppearanceSpec: QuickSpec {
 
             it("should apply appearance correctly to given UITextView") {
                 // Given
-                let attributes: [Attributes] = [[NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]]
+                let attributes: [Attributes] = [[NSAttributedStringKey.font.rawValue: UIFont(name: "Helvetica", size: 12)!]]
                 let textView = UITextView()
               
                 let appearances: [Appearance] = [
