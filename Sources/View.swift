@@ -117,7 +117,7 @@ extension UIView {
             // leaf brick -> dynamic height
             return self.sizeThatFits(CGSize(width: self.frame.width, height: CGFloat.greatestFiniteMagnitude)).height
         } else {
-            return self.systemLayoutSizeFitting(CGSize(width: self.frame.width, height: 0), withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityFittingSizeLevel).height
+            return self.systemLayoutSizeFitting(CGSize(width: self.frame.width, height: 0), withHorizontalFittingPriority: UILayoutPriority.required, verticalFittingPriority: UILayoutPriority.fittingSizeLevel).height
         }
     }
 

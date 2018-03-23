@@ -9,6 +9,7 @@
 import Foundation
 
 protocol Composable {
+	
     func composite<View>(_ bricks: [Brick], to targetView: View, with layout: Layout) where View: UIView, View: BrickDescribable
 }
 

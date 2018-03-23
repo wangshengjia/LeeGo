@@ -55,9 +55,9 @@ class ConvertibleSpec: QuickSpec {
                                        .clearsOnInsertion(true),
                                        .textContainerInset(UIEdgeInsets(top: 10, left: 10, bottom: 20, right: 20)),
                                        .linkTextAttributes([
-                                        NSFontAttributeName: UIFont.systemFont(ofSize: 13),
-                                        NSForegroundColorAttributeName: UIColor.yellow,
-                                        NSBackgroundColorAttributeName: UIColor.blue
+                                        NSAttributedStringKey.font.rawValue: UIFont.systemFont(ofSize: 13),
+                                        NSAttributedStringKey.foregroundColor.rawValue: UIColor.yellow,
+                                        NSAttributedStringKey.backgroundColor.rawValue: UIColor.blue
                                         ]),
                                        .lineFragmentPadding(12.0),
                                        .minimumScaleFactor(0.3),
@@ -67,9 +67,9 @@ class ConvertibleSpec: QuickSpec {
                                        .shadowOffset(CGSize(width: 10, height: 20)),
                                        .highlightedTextColor(UIColor.clear),
                                        .attributedText([
-                                        [NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!, NSForegroundColorAttributeName: UIColor.red],
-                                        [kCustomAttributeDefaultText: "Test" as AnyObject, NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 20)!, NSForegroundColorAttributeName: UIColor.darkText],
-                                        [NSFontAttributeName: UIFont(name: "HelveticaNeue", size: 16)!, NSForegroundColorAttributeName: UIColor.lightGray]
+                                        [NSAttributedStringKey.font.rawValue: UIFont(name: "Helvetica", size: 16)!, NSAttributedStringKey.foregroundColor.rawValue: UIColor.red],
+                                        [kCustomAttributeDefaultText: "Test" as AnyObject, NSAttributedStringKey.font.rawValue: UIFont(name: "HelveticaNeue", size: 20)!, NSAttributedStringKey.foregroundColor.rawValue: UIColor.darkText],
+                                        [NSAttributedStringKey.font: UIFont(name: "HelveticaNeue", size: 16)!, NSAttributedStringKey.foregroundColor: UIColor.lightGray]
                                         ]),
                                        .text("Default Text"),
                                        .borderStyle(.bezel),

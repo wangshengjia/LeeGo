@@ -9,6 +9,7 @@
 import Foundation
 
 protocol Configurable {
+	
     func setup<View: UIView>(_ view: View, currentStyle: [Appearance], newStyle: [Appearance])
 }
 

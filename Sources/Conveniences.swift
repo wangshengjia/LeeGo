@@ -23,15 +23,15 @@ internal func + <K,V>(left: [K: V], right: [K: V]) -> [K: V] {
 
 extension Dictionary {
 
-    internal func filter(includeElement: (Key, Value) throws -> Bool) rethrows -> Dictionary {
-        var result = self
-        for (key, value) in result {
-            if try !includeElement(key, value) {
-                result.removeValue(forKey: key)
-            }
-        }
-        return result
-    }
+//    internal func filter(includeElement: (Key, Value) throws -> Bool) rethrows -> Dictionary {
+//        var result = self
+//        for (key, value) in result {
+//            if try !includeElement(key, value) {
+//                result.removeValue(forKey: key)
+//            }
+//        }
+//        return result
+//    }
 }
 
 extension Dictionary {
@@ -127,10 +127,17 @@ extension UIView {
             return nil
         }
 
-        let attributedStrings = attributesArray.enumerated().flatMap({ (index, attribute) -> NSAttributedString? in
+		let attributedStrings = attributesArray.enumerated().flatMap({ (index, attribute) -> NSAttributedString? in
             if let idx = Int(String(index)) {
                 let text = texts[idx] ?? ""
-                return NSAttributedString(string: text, attributes: attribute)
+
+				var attributes = [NSAttributedStringKey: Any]()
+
+				attribute.forEach { (key, value) in
+					attributes[NSAttributedStringKey(rawValue: key)] = value
+				}
+
+                return NSAttributedString(string: text, attributes: attributes)
             }
             return nil
         })

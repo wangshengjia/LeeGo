@@ -414,7 +414,7 @@ extension Brick: JSONConvertible {
         self.width = try? json.parse(JSONKey.width)
         self.height = try? json.parse(JSONKey.height)
         self.LGOutletKey = try? json.parse(JSONKey.outlet)
-        
+
         self.heightResolver = nil
     }
 
@@ -422,7 +422,7 @@ extension Brick: JSONConvertible {
     ///
     ///  - returns: a `JSONDictionary` instance encoded from `self`
     public func encode() -> JSONDictionary {
-      
+
         var json: JSONDictionary = [JSONKey.name.asString: self.name, JSONKey.targetClass.asString: String(describing: self.targetClass)]
 
         if let nibName = self.nibName {

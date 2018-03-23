@@ -75,7 +75,7 @@ public struct LayoutMetrics: Equatable {
         self.spaceV = customMetrics[JSONKey.spaceV.asString] ?? spaceV
 
 
-        self.customMetrics = customMetrics.filter(includeElement: { (key, value) -> Bool in
+        self.customMetrics = customMetrics.filter( { (key, value) -> Bool in
             let top = key != JSONKey.top.asString
             let left = key != JSONKey.left.asString
             let bottom = key != JSONKey.bottom.asString
@@ -87,7 +87,7 @@ public struct LayoutMetrics: Equatable {
     }
 
     internal func encode() -> JSONDictionary {
-        return (customMetrics + standardMetrics.filter { (key, value) -> Bool in
+		return (customMetrics + standardMetrics.filter { (key: String, value: CGFloat) -> Bool in
             return value != 0.0
       })
     }
