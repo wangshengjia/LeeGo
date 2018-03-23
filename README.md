@@ -16,7 +16,7 @@
 
 <a href="http://developer.apple.com"><img src="https://img.shields.io/badge/Platform-iOS-lightgray.svg?style=flat"></a>
 
-<a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat"></a>
+<a href="https://swift.org"><img src="https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat"></a>
 
 <a href="https://tldrlegal.com/license/mit-license"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat" /></a>
 
