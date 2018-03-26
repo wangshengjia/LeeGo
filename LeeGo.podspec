@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "LeeGo"
-  s.version          = "0.6.0"
+  s.version          = "0.7.0"
   s.summary          = "A Swift framework that helps you decouple & modularise your UI component into small pieces of LEGO style's bricks."
 
   s.description      = <<-DESC
@@ -26,13 +26,13 @@ Pod::Spec.new do |s|
   s.screenshots      = "https://raw.githubusercontent.com/wangshengjia/LeeGo/master/Medias/leego.jpg"
 
   s.license          = { :type => "MIT", :file => "LICENSE" }
-
   s.author           = { "Victor Wang" => "wangshengjia01@gmail.com" }
   s.source           = { :git => "https://github.com/wangshengjia/LeeGo.git", :tag => s.version.to_s }
 
   s.social_media_url = 'https://twitter.com/wangshengjia'
 
   s.platform     = :ios, '8.0'
+  s.swift_version    = '4.0'
   s.requires_arc = true
 
   s.source_files = 'Sources/**/*'
