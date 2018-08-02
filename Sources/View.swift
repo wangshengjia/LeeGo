@@ -134,7 +134,7 @@ extension UIView {
 
         // configure sub bricks recursively
         for subview in self.subviews {
-            if let name = subview.currentBrick?.name, let bricks = brick.bricks {
+            if let name = subview.currentBrick?.name, let bricks = brick.childBricks {
                 for childBrick in bricks where childBrick.name == name {
                     subview.lg_configure(as:childBrick, dataSource: dataSource, updatingStrategy: updatingStrategy)
                 }

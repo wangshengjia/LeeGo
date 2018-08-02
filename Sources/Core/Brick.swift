@@ -141,10 +141,10 @@ public struct Brick {
     let style: [Appearance]?
 
     /// An array of `Brick` inside, represet for subviews
-    let bricks: [Brick]?
+    public let childBricks: [Brick]?
 
     /// The `Layout` property indicate how to layout the `bricks` inside
-    /// - SeeAlso: Brick.bricks
+    /// - SeeAlso: Brick.childBricks
     let layout: Layout?
 
     /// Width and height
@@ -189,14 +189,14 @@ public struct Brick {
         self.width = width
         self.height = height
         self.style = style
-        self.bricks = bricks
+        self.childBricks = bricks
         self.layout = layout
         self.LGOutletKey = LGOutletKey
         self.heightResolver = heightResolver
 
-        if let names = self.bricks?.map({ (brick) -> String in
+        if let names = self.childBricks?.map({ (brick) -> String in
             return brick.name
-        }), Set(names).count != self.bricks?.count {
+        }), Set(names).count != self.childBricks?.count {
             assertionFailure("Subbricks share the same ancestor should have different names.")
         }
     }
@@ -208,7 +208,7 @@ public struct Brick {
     ///
     ///  - returns: new `Brick` instance with given array.
     public func style(_ style: [Appearance]) -> Brick {
-        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
+        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: childBricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
     ///  Return a new `Brick` instance with
@@ -318,7 +318,7 @@ public struct Brick {
     ///
     ///  - returns: new `Brick` instance with given `width`
     public func width(_ width: CGFloat) -> Brick {
-        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
+        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: childBricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
     ///  Return a new `Brick` instance with the given height.
@@ -330,7 +330,7 @@ public struct Brick {
     ///
     ///  - returns: new `Brick` instance with given `height`
     public func height(_ height: CGFloat) -> Brick {
-        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
+        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: childBricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
     /// Return a new `Brick` instance with the given closure. The closure used to resolve the cell's height.
@@ -354,7 +354,7 @@ public struct Brick {
     ///
     ///  - returns: new `Brick` instance with given closure
     public func heightResolver(_ heightResolver: ManuallyFittingHeightResolver?) -> Brick {
-        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
+        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: childBricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 
     ///  Return a new `Brick` instance with the given outlet key. Inspired by IBOutlet.
@@ -364,7 +364,7 @@ public struct Brick {
     ///
     ///  - returns: new `Brick` instance with the given key.
     public func LGOutlet(_ LGOutletKey: String) -> Brick {
-        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: bricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
+        return Brick(name: name, targetClass: targetClass, nibName: nibName, width: width, height: height, style: style, bricks: childBricks, layout: layout, LGOutletKey: LGOutletKey, heightResolver: heightResolver)
     }
 }
 
@@ -398,11 +398,11 @@ extension Brick: JSONConvertible {
         }
 
         if let brickJsons: [JSONDictionary] = try? json.parse(JSONKey.bricks) {
-            self.bricks = brickJsons.flatMap({ (json) -> Brick? in
+            self.childBricks = brickJsons.flatMap({ (json) -> Brick? in
                 return try? Brick(rawValue: json)
             })
         } else {
-            self.bricks = nil
+            self.childBricks = nil
         }
 
         if let layoutJson: JSONDictionary = try? json.parse(JSONKey.layout) {
@@ -445,7 +445,7 @@ extension Brick: JSONConvertible {
             json[JSONKey.style.asString] = Appearance.JSONWithAppearances(style)
         }
 
-        if let bricks = self.bricks {
+        if let bricks = self.childBricks {
             let bricksJson = bricks.flatMap({ (brick) -> JSONDictionary? in
                 return brick.encode()
             })
