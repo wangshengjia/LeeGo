@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "LeeGo"
-  s.version          = "0.7.0"
+  s.version          = "0.7.1"
   s.summary          = "A Swift framework that helps you decouple & modularise your UI component into small pieces of LEGO style's bricks."
 
   s.description      = <<-DESC
