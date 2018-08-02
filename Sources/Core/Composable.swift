@@ -25,7 +25,7 @@ extension Composable {
 
         // filter bricks already exist
         let filteredBricks = bricks.filter { (subBrick) -> Bool in
-            if let subbricks = targetView.currentBrick?.bricks, subbricks.contains(subBrick) {
+            if let subbricks = targetView.currentBrick?.childBricks, subbricks.contains(subBrick) {
                 for subview in targetView.subviews {
                     if let subbrick2 = subview.currentBrick, subbrick2 == subBrick {
                         return false

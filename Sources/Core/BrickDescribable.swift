@@ -41,7 +41,7 @@ extension BrickDescribable {
         applyDimension(of: newBrick, to: view)
 
         // add & layout sub views
-        if let bricks = newBrick.bricks, !bricks.isEmpty, let layout = newBrick.layout {
+        if let bricks = newBrick.childBricks, !bricks.isEmpty, let layout = newBrick.layout {
             composite(bricks, to: view, with: layout)
         }
     }
@@ -54,7 +54,7 @@ extension BrickDescribable {
         case .whenBrickChanged:
             if let current = currentBrick,
               current.name != newBrick.name
-                    || (current.style == nil && current.bricks == nil && current.layout == nil) {
+                    || (current.style == nil && current.childBricks == nil && current.layout == nil) {
                 shouldRebuild = true
             }
         case .always:
